@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -44,6 +43,10 @@ extension TextAnimation on Text {
       // .animate().fade().slideX(duration: 0.5.seconds)
     );
   }
+}
+
+extension BuildContextExt on BuildContext {
+
 }
 
 //remove spaces
@@ -105,25 +108,25 @@ Color colorValue(String? value) {
   }
 }
 
-String dateFormatValue(String? value) {
-  if (value == null || value.isEmpty) {
-    return "";
-  } else {
-    DateTime? dateTime = DateTime.tryParse(value);
-    if (dateTime == null) {
-      return value;
-    } else {
-      String date = "";
-      int day = dateTime.difference(DateTime.now()).inDays;
-      dateTime = dateTime.toLocal();
-      if (day == 0) {
-        date = "${"today".tr()} ${DateFormat("HH:mm").format(dateTime)}";
-      } else if (day == -11) {
-        date = "${"yesterday".tr()} ${DateFormat("HH:mm").format(dateTime)}";
-      } else {
-        date = DateFormat("dd.MM.yyyy HH:mm").format(dateTime);
-      }
-      return date;
-    }
-  }
-}
+// String dateFormatValue(String? value) {
+//   if (value == null || value.isEmpty) {
+//     return "";
+//   } else {
+//     DateTime? dateTime = DateTime.tryParse(value);
+//     if (dateTime == null) {
+//       return value;
+//     } else {
+//       String date = "";
+//       int day = dateTime.difference(DateTime.now()).inDays;
+//       dateTime = dateTime.toLocal();
+//       if (day == 0) {
+//         date = "${"today".tr()} ${DateFormat("HH:mm").format(dateTime)}";
+//       } else if (day == -11) {
+//         date = "${"yesterday".tr()} ${DateFormat("HH:mm").format(dateTime)}";
+//       } else {
+//         date = DateFormat("dd.MM.yyyy HH:mm").format(dateTime);
+//       }
+//       return date;
+//     }
+//   }
+// }

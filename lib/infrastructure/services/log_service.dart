@@ -1,5 +1,5 @@
 import 'package:logger/logger.dart';
-
+typedef Log = LogService;
 class LogService {
   static Logger? _logger;
 
