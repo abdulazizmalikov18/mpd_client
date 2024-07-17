@@ -1,1 +1,0 @@
-enum CustomThemeMode { light, dark }
