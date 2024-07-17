@@ -1,11 +1,9 @@
 import 'dart:io';
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:logging/logging.dart';
 import 'package:mpd_client/infrastructure/services/connectivity.dart';
@@ -30,7 +28,7 @@ class AppInit {
     LogService.create;
 
     /// Easy Localization
-    await EasyLocalization.ensureInitialized();
+    // await EasyLocalization.ensureInitialized();
 
     /// Device Orientation
     await SystemChrome.setPreferredOrientations(
@@ -42,7 +40,7 @@ class AppInit {
       Bloc.observer = LogBlocObserver();
     }
     HttpOverrides.global = MyHttpOverrides();
-    await ScreenUtil.ensureScreenSize();
+    // await ScreenUtil.ensureScreenSize();
   }
 
   static void _setupLogging() => Logger.root

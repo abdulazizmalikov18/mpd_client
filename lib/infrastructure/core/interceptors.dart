@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:chopper/chopper.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 import '../services/connectivity.dart';
 import 'exceptions.dart';
@@ -32,7 +31,7 @@ class CoreInterceptor implements RequestInterceptor {
   @override
   FutureOr<Request> onRequest(Request request) async {
     final headers = Map<String, String>.from(request.headers);
-    headers['Accept-Language'] = 'app_lang'.tr();
+    headers['Accept-Language'] = 'uz';
 
     Request newRequest = request.copyWith(headers: headers);
 
