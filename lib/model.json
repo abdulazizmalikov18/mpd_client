@@ -1,0 +1,48 @@
+{
+  "data": [
+    {
+      "active_work": 0,
+      "id": "string",
+      "lead": {
+        "created_by": "string",
+        "crews": [
+          {
+            "id": "string",
+            "member_names": "string",
+            "members": [
+              "string"
+            ],
+            "name": "string",
+            "status": {
+              "id": "string",
+              "name": "string"
+            },
+            "total_active_works": 0,
+            "total_done_works": 0
+          }
+        ],
+        "email": "string",
+        "exteral_id": "string",
+        "first_name": "string",
+        "id": "string",
+        "last_name": "string",
+        "phone_number": "string",
+        "role": {
+          "id": "string",
+          "name": "string"
+        },
+        "teams": [
+          "string"
+        ]
+      },
+      "members": "string",
+      "name": "string",
+      "number_of_people": 0,
+      "status": {
+        "id": "string",
+        "name": "string"
+      }
+    }
+  ],
+  "total": 0
+}
