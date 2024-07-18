@@ -1,17 +1,13 @@
-import 'package:dwed_client/features/common/controllers/show_pop_up/show_pop_up_bloc.dart';
-import 'package:dwed_client/features/common/view/w_background.dart';
-import 'package:dwed_client/features/common/widgets/custom_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/assets/constants/icons.dart';
-import 'package:dwed_client/assets/themes/theme.dart';
-import 'package:dwed_client/features/auth/presentation/controller/registration_view_model.dart';
-import 'package:dwed_client/features/auth/presentation/widgets/w_error_text_for_text_field.dart';
-import 'package:dwed_client/features/common/navigation/routs_contact.dart';
-import 'package:dwed_client/features/common/widgets/w_button.dart';
-import 'package:dwed_client/features/common/widgets/w_textfield.dart';
+import 'package:mpd_client/application/auth/controller/registration_view_model.dart';
+import 'package:mpd_client/application/show_pop_up/show_pop_up_bloc.dart';
+import 'package:mpd_client/presentation/router/routs_contact.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/presentation/widgets/w_button.dart';
+import 'package:mpd_client/presentation/widgets/w_text_field.dart';
+import 'package:mpd_client/utils/extensions/context_extension.dart';
 
 class CreatePasswordView extends StatefulWidget {
   final String phone;
@@ -56,7 +52,7 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
 
   @override
   Widget build(BuildContext context) {
-    return WBackground(
+    return SizedBox(
       child: Scaffold(
         body: SafeArea(
           child: Padding(
@@ -67,14 +63,14 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
                 Center(
                   child: Text(
                     'Kirish',
-                    style: context.textTheme.displaySmall.copyWith(
+                    style: context.textTheme.displaySmall!.copyWith(
                       fontWeight: FontWeight.w700,
                       color: white,
                     ),
                   ),
                 ),
                 const SizedBox(height: 8),
-                const Text(
+                Text(
                   'Tizimga kiring va barcha xizmatlardan foydalaning',
                   textAlign: TextAlign.center,
                   maxLines: 1,
@@ -88,21 +84,20 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
                       hasError: value != null,
                       controller: passwordController,
                       fillColor: white.withOpacity(0.2),
-
                       hintText: 'Parol',
-                      style: context.textTheme.labelSmall.copyWith(
+                      style: context.textTheme.labelSmall!.copyWith(
                         color: value != null ? red : white,
                       ),
-                      hintStyle: context.textTheme.labelSmall.copyWith(
+                      hintStyle: context.textTheme.labelSmall!.copyWith(
                         color: value != null ? red : greyText,
                       ),
                       borderColor: borderColor,
                       onChanged: (e) {
                         hasError.value = null;
                       },
-                      prefixIcon: AppIcons.lock.svg(
-                        color: value != null ? red : greyText,
-                      ),
+                      // prefixIcon: AppIcons.lock.svg(
+                      //   color: value != null ? red : greyText,
+                      // ),
                     );
                   },
                 ),
@@ -115,19 +110,19 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
                       controller: reTryPasswordController,
                       fillColor: white.withOpacity(0.2),
                       hintText: 'Parolni takrorlang',
-                      style: context.textTheme.labelSmall.copyWith(
+                      style: context.textTheme.labelSmall!.copyWith(
                         color: value != null ? red : white,
                       ),
-                      hintStyle: context.textTheme.labelSmall.copyWith(
+                      hintStyle: context.textTheme.labelSmall!.copyWith(
                         color: value != null ? red : greyText,
                       ),
                       borderColor: borderColor,
                       onChanged: (e) {
                         hasError.value = null;
                       },
-                      prefixIcon: AppIcons.lock.svg(
-                        color: value != null ? red : greyText,
-                      ),
+                      // prefixIcon: AppIcons.lock.svg(
+                      //   color: value != null ? red : greyText,
+                      // ),
                     );
                   },
                 ),
@@ -145,7 +140,7 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
               margin: const EdgeInsets.symmetric(horizontal: 16),
               onTap: () {
                 isLoading.value = true;
-                 $regVM().checkPassword(
+                $regVM().checkPassword(
                   passwordController.text,
                   reTryPasswordController.text,
                   onSuccess: () {
@@ -160,16 +155,16 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
                   onError: (errorMessage) {
                     isLoading.value = false;
                     context.read<ShowPopUpBloc>().add(
-                      ShowPopUp(
-                        message: errorMessage,
-                        status: PopStatus.error,
-                      ),
-                    );
+                          ShowPopUp(
+                            message: errorMessage,
+                            status: PopStatus.error,
+                          ),
+                        );
                     hasError.value = errorMessage;
                   },
                 );
               },
-              textStyle: context.textTheme.bodyLarge.copyWith(
+              textStyle: context.textTheme.bodyLarge!.copyWith(
                 color: white,
               ),
               text: 'Davom etish',

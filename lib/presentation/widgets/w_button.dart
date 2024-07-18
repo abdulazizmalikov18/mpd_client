@@ -74,7 +74,11 @@ class WButton extends StatelessWidget {
               )
             : null,
         decoration: BoxDecoration(
-          color: isDisabled ? primary.withOpacity(0.5) : color ?? primary,
+          color: color != null
+              ? isDisabled
+                  ? primary.withOpacity(0.5)
+                  : color ?? primary
+              : null,
           borderRadius: BorderRadius.circular(isPhone ? borderRadius : 16),
           border: isDisabled ? border ?? Border.all(color: white.withOpacity(0.3)) : border ?? Border.all(color: white.withOpacity(0.3)),
           gradient: color == null ? gradient ?? wgradient : null,
@@ -89,28 +93,19 @@ class WButton extends StatelessWidget {
           //         )
           //     ],
         ),
-        // foregroundDecoration: isDisabled ? BoxDecoration(
-        //   color: white.withOpacity(0.6),
-        // ) : null,
         child: isLoading
-            ? Center(
-                child: Lottie.asset(
-                  'assets/anim/loading_light.json',
-                  height: 32,
-                  width: 32,
-                ),
+            ? const Center(
+                child: CupertinoActivityIndicator(color: white),
               )
             : AnimatedDefaultTextStyle(
                 duration: const Duration(milliseconds: 200),
                 style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                      color:isDisabled ? textColor.withOpacity(0.5) :  textColor,
+                      color: isDisabled ? textColor.withOpacity(0.5) : textColor,
                     ),
                 child: child ??
                     Text(
                       text,
-                      style: isDisabled ? textStyle!.copyWith(
-                        color: textStyle?.color?.withOpacity(0.5)
-                      ) : textStyle,
+                      style: isDisabled ? textStyle!.copyWith(color: textStyle?.color?.withOpacity(0.5)) : textStyle,
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,

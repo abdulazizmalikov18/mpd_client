@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
-import 'package:dwed_client/features/auth/data/models/user.dart';
+import 'package:mpd_client/domain/models/auth/user.dart';
 
 class UserContainer extends Equatable {
   final UserModel user;

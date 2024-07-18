@@ -1,10 +1,9 @@
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/assets/constants/icons.dart';
-import 'package:dwed_client/assets/themes/theme.dart';
-import 'package:dwed_client/features/common/view/w_background.dart';
-import 'package:dwed_client/features/common/widgets/w_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mpd_client/presentation/styles/app_icons.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/presentation/widgets/w_button.dart';
+import 'package:mpd_client/utils/extensions/context_extension.dart';
 
 class WPrivacyPolicyBottomSheet extends StatelessWidget {
   const WPrivacyPolicyBottomSheet({super.key});
@@ -37,7 +36,7 @@ Amet eleifend lectus tempus duis sem nibh lobortis. Facilisi in a lectus sem sed
           onTap: () {
             context.pop();
           },
-          child: AppIcons.close.svg(),
+          // child: AppIcons.close.svg(),
         ),
         const SizedBox(height: 10),
         ClipRRect(
@@ -45,7 +44,7 @@ Amet eleifend lectus tempus duis sem nibh lobortis. Facilisi in a lectus sem sed
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
           ),
-          child: WBackground(
+          child: SizedBox(
             child: SizedBox(
               height: MediaQuery.sizeOf(context).height * 0.9,
               child: Padding(
@@ -60,14 +59,14 @@ Amet eleifend lectus tempus duis sem nibh lobortis. Facilisi in a lectus sem sed
                             children: [
                               Text(
                                 'Ommaviy oferta shartlari',
-                                style: context.textTheme.displaySmall.copyWith(
+                                style: context.textTheme.displaySmall!.copyWith(
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
                               const SizedBox(height: 24),
                               Text(
                                 text,
-                                style: context.textTheme.labelSmall.copyWith(
+                                style: context.textTheme.labelSmall!.copyWith(
                                   color: white,
                                 ),
                               ),

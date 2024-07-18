@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:image_painter/image_painter.dart';
+import 'package:mpd_client/infrastructure/services/log_service.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/presentation/widgets/w_button.dart';
 
 class ErrorDrawView extends StatefulWidget {
   final Uint8List data;
@@ -76,7 +78,7 @@ class _ErrorDrawViewState extends State<ErrorDrawView> {
     if ((result.statusCode ?? 0) > 300) {
       Log.e("Data Jo'natilmadi");
     } else {
-      Log.wtf("Error Jo'natildi !");
+      Log.e("Error Jo'natildi !");
     }
   }
 }

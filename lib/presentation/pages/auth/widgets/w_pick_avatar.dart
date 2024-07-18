@@ -1,12 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/assets/constants/images.dart';
+import 'package:mpd_client/presentation/styles/app_images.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
 
 class WPickAvatar extends StatelessWidget {
   final void Function() pickImage;
   final ValueNotifier avatar;
+
   const WPickAvatar({
     super.key,
     required this.pickImage,
@@ -32,12 +33,12 @@ class WPickAvatar extends StatelessWidget {
                         width: 80,
                         height: 80,
                       )
-                    : Image.asset(
+                    : const SizedBox(), /*Image.asset(
                         AppImages.noUserImg,
                         width: 80,
                         height: 80,
                         fit: BoxFit.cover,
-                      ),
+                      ),*/
               ),
               Align(
                 alignment: Alignment.bottomRight,

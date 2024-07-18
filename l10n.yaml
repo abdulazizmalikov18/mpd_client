@@ -1,0 +1,8 @@
+# l10n.yaml
+arb-dir: lib/utils/l10n
+template-arb-file: app_en.arb
+output-localization-file: app_localizations.dart
+nullable-getter: false
+synthetic-package: false
+preferred-supported-locales: [ en, ru, uz ]
+untranslated-messages-file: desiredFileName.txt

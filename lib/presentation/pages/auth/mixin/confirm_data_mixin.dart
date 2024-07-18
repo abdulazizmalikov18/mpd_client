@@ -94,50 +94,46 @@ mixin ConfirmDataMixin on State<ConfirmAuthDataView> {
             borderRadius: BorderRadius.circular(16),
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxHeight: 400, minHeight: 0),
-              child: WBackground(
-                child: Theme(
-                  data: Theme.of(context).copyWith(
-                    colorScheme: const ColorScheme.dark(
-                      primary: white,
-                      background: Colors.transparent,
-                      onPrimary: white,
-                      onSurface: white,
-                      onBackground: red,
-                      secondary: red,
-                      surface: red,
-                    ),
-                    textButtonTheme: TextButtonThemeData(
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.red,
-                      ),
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  colorScheme: const ColorScheme.dark(
+                    primary: white,
+                    onPrimary: white,
+                    onSurface: white,
+                    secondary: red,
+                    surface: red,
+                  ),
+                  textButtonTheme: TextButtonThemeData(
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.red,
                     ),
                   ),
-                  child: DatePicker(
-                    padding: const EdgeInsets.all(16).copyWith(bottom: 0),
-                    selectedDate: birthdate.value ?? DateTime(2000, 1, 1),
-                    maxDate: DateTime.now(),
-                    minDate: DateTime(1920, 1, 1),
-                    splashColor: Colors.transparent,
-                    daysOfTheWeekTextStyle: context.textTheme.labelSmall.copyWith(
-                      color: gray,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    selectedCellDecoration: BoxDecoration(
-                      gradient: wgradient,
-                      shape: BoxShape.circle,
-                    ),
-                    selectedCellTextStyle: const TextStyle(
-                      color: white,
-                    ),
-                    currentDateDecoration: BoxDecoration(
-                      gradient: wgradient,
-                      shape: BoxShape.circle,
-                    ),
-                    onDateSelected: (newValue) {
-                      birthdate.value = newValue;
-                      context.pop();
-                    },
+                ),
+                child: DatePicker(
+                  padding: const EdgeInsets.all(16).copyWith(bottom: 0),
+                  selectedDate: birthdate.value ?? DateTime(2000, 1, 1),
+                  maxDate: DateTime.now(),
+                  minDate: DateTime(1920, 1, 1),
+                  splashColor: Colors.transparent,
+                  daysOfTheWeekTextStyle: context.textTheme.labelSmall!.copyWith(
+                    color: gray,
+                    overflow: TextOverflow.ellipsis,
                   ),
+                  selectedCellDecoration: BoxDecoration(
+                    gradient: wgradient,
+                    shape: BoxShape.circle,
+                  ),
+                  selectedCellTextStyle: const TextStyle(
+                    color: white,
+                  ),
+                  currentDateDecoration: BoxDecoration(
+                    gradient: wgradient,
+                    shape: BoxShape.circle,
+                  ),
+                  onDateSelected: (newValue) {
+                    birthdate.value = newValue;
+                    context.pop();
+                  },
                 ),
               ),
             ),
@@ -190,7 +186,7 @@ mixin ConfirmDataMixin on State<ConfirmAuthDataView> {
             topRight: Radius.circular(16),
             topLeft: Radius.circular(16),
           ),
-          child: WBackground(
+          child: SizedBox(
             child: WBottomSheet(
               title: 'Upload a picture',
               child: Column(
@@ -198,7 +194,7 @@ mixin ConfirmDataMixin on State<ConfirmAuthDataView> {
                   const SizedBox(height: 24),
                   WShadowedItemContainer(
                     title: 'Сфотографировать',
-                    icon: AppIcons.camera,
+                    icon: '', //AppIcons.camera,
                     onTap: () async {
                       final result = await ImagePicker().pickImage(source: ImageSource.camera);
                       if (result != null) {
@@ -212,7 +208,7 @@ mixin ConfirmDataMixin on State<ConfirmAuthDataView> {
                   const SizedBox(height: 16),
                   WShadowedItemContainer(
                     title: 'Из галареии',
-                    icon: AppIcons.folderAdd,
+                    icon: '', //AppIcons.folderAdd,
                     onTap: () async {
                       final result = await ImagePicker().pickImage(source: ImageSource.gallery);
                       if (result != null) {

@@ -4,7 +4,7 @@ import 'package:mpd_client/domain/entity/account/popular_category_filter.dart';
 import 'package:mpd_client/domain/entity/account/profession_entity.dart';
 import 'package:mpd_client/domain/entity/account/region_entity.dart';
 import 'package:mpd_client/domain/models/generic_pagination.dart';
-import 'package:mpd_client/infrastructure/apis/apis.dart';
+import 'package:mpd_client/infrastructure/apis/account_service.dart';
 import 'package:mpd_client/infrastructure/core/either.dart';
 import 'package:mpd_client/infrastructure/core/exceptions.dart';
 import 'package:mpd_client/infrastructure/core/failures.dart';
@@ -17,7 +17,7 @@ class AccountRepositoryImpl extends AccountRepository {
   @override
   Future<Either<Failure, GenericPagination<RegionEntity>>> getRegion(Filter param) async {
     try {
-      final result = await service.getRegion(param: param);
+      final result = await service.getRegion(param: param.toJson());
       return Right(result);
     } on DioException {
       return Left(const DioFailure());
@@ -34,7 +34,7 @@ class AccountRepositoryImpl extends AccountRepository {
   @override
   Future<Either<Failure, GenericPagination<ProfessionEntity>>> getProfession(Filter id) async {
     try {
-      final result = await service.getProfession(id);
+      final result = await service.getProfession(parent: id.parent, search: id.search);
       return Right(result);
     } on DioException {
       return Left(const DioFailure());

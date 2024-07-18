@@ -1,27 +1,23 @@
-import 'package:dwed_client/features/common/view/w_background.dart';
-import 'package:dwed_client/features/common/widgets/w_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/assets/constants/icons.dart';
-import 'package:dwed_client/assets/constants/storage_keys.dart';
-import 'package:dwed_client/assets/themes/theme.dart';
-import 'package:dwed_client/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:dwed_client/features/auth/presentation/controller/pin_view_model.dart';
-import 'package:dwed_client/features/common/loading/view_scope/loading_wrapper.dart';
-import 'package:dwed_client/features/common/navigation/routs_contact.dart';
-import 'package:dwed_client/features/common/repo/storage_repository.dart';
-import 'package:dwed_client/features/common/widgets/w_main_app_bar.dart';
-import 'package:dwed_client/features/main/presentation/view/main_view.dart';
-import 'package:dwed_client/features/profile/presentation/controller/accounts/accounts_bloc.dart';
-import 'package:dwed_client/features/profile/presentation/widgets/w_not_login_profile.dart';
-import 'package:dwed_client/features/profile/presentation/widgets/w_profile_header.dart';
-import 'package:dwed_client/features/profile/presentation/widgets/w_profile_item.dart';
-import 'presentation/widgets/w_qr_code.dart';
+import 'package:mpd_client/application/accounts/accounts_bloc.dart';
+import 'package:mpd_client/application/auth/auth_bloc.dart';
+import 'package:mpd_client/application/auth/controller/pin_view_model.dart';
+import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
+import 'package:mpd_client/presentation/pages/profile/widgets/w_not_login_profile.dart';
+import 'package:mpd_client/presentation/pages/profile/widgets/w_profile_header.dart';
+import 'package:mpd_client/presentation/pages/profile/widgets/w_profile_item.dart';
+import 'package:mpd_client/presentation/pages/profile/widgets/w_qr_code.dart';
+import 'package:mpd_client/presentation/router/routs_contact.dart';
+import 'package:mpd_client/presentation/styles/app_icons.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/presentation/styles/theme.dart';
+import 'package:mpd_client/presentation/widgets/w_app_bar.dart';
+import 'package:mpd_client/presentation/widgets/w_button.dart';
 
-part 'presentation/mixin/profile_mixin.dart';
+part 'mixin/profile_mixin.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -40,7 +36,7 @@ class _ProfileViewState extends State<ProfileView> with ProfileMixin {
           padding: const EdgeInsets.only(right: 8),
           child: IconButton(
             onPressed: showQrCode,
-            icon: AppIcons.barcode.svg(),
+            icon: SizedBox(), //AppIcons.barcode.svg(),
           ),
         ),
       ),
@@ -56,35 +52,35 @@ class _ProfileViewState extends State<ProfileView> with ProfileMixin {
                   ),
                   const SizedBox(height: 24),
                   WProfileItem(
-                    icon: AppIcons.lock2,
+                    icon: '',//AppIcons.lock2,
                     title: 'Xavfsizlik',
                     onPressed: onPressSecurity,
                     subTitle: '',
                   ),
                   const SizedBox(height: 8),
                   WProfileItem(
-                    icon: AppIcons.icHome,
+                    icon: '',//AppIcons.icHome,
                     title: 'Mening buyurtmalarim',
                     subTitle: '',
                     onPressed: onPressMyOrders,
                   ),
                   const SizedBox(height: 8),
                   WProfileItem(
-                    icon: AppIcons.square,
+                    icon: '',//AppIcons.square,
                     title: 'Payment',
                     subTitle: 'Select a payment method',
                     onPressed: onPressPayment,
                   ),
                   const SizedBox(height: 8),
                   WProfileItem(
-                    icon: AppIcons.icHome,
+                    icon: '',//AppIcons.icHome,
                     title: 'Mening kuponlarim',
                     subTitle: '',
                     onPressed: () {},
                   ),
                   const SizedBox(height: 8),
                   WProfileItem(
-                    icon: AppIcons.setting,
+                    icon: '',//AppIcons.setting,
                     title: 'Bildirishnomalarni sozlash',
                     subTitle: '',
                     onPressed: onPressNotificationSettings,
@@ -98,7 +94,7 @@ class _ProfileViewState extends State<ProfileView> with ProfileMixin {
                   // ),
                   const SizedBox(height: 8),
                   WProfileItem(
-                    icon: AppIcons.question,
+                    icon: '',//AppIcons.question,
                     title: 'My Quiz',
                     subTitle: 'Create question, or dictonary with you student, make a prize',
                     onPressed: () {
@@ -115,7 +111,7 @@ class _ProfileViewState extends State<ProfileView> with ProfileMixin {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        AppIcons.logout.svg(),
+                        // AppIcons.logout.svg(),
                         const SizedBox(width: 8),
                         Text(
                           'Chiqish',

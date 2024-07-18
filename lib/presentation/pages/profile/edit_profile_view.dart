@@ -3,6 +3,24 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:mpd_client/application/accounts/accounts_bloc.dart';
+import 'package:mpd_client/domain/entity/auth/data_entity.dart';
+import 'package:mpd_client/domain/models/auth/user.dart';
+import 'package:mpd_client/presentation/pages/auth/widgets/sheets/w_select_profession.dart';
+import 'package:mpd_client/presentation/pages/auth/widgets/sheets/w_select_region.dart';
+import 'package:mpd_client/presentation/pages/auth/widgets/w_shadowed_container.dart';
+import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_phone.dart';
+import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_select_gender.dart';
+import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_textfield_with_title.dart';
+import 'package:mpd_client/presentation/styles/app_icons.dart';
+import 'package:mpd_client/presentation/styles/app_images.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/presentation/styles/theme.dart';
+import 'package:mpd_client/presentation/widgets/w_app_bar.dart';
+import 'package:mpd_client/presentation/widgets/w_bottom_sheet.dart';
+import 'package:mpd_client/presentation/widgets/w_button.dart';
+import 'package:mpd_client/presentation/widgets/w_button_gradient.dart';
 
 part './mixin/edit_profile_mixin.dart';
 
@@ -52,11 +70,12 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                                       height: 80,
                                       fit: BoxFit.cover,
                                       errorBuilder: (context, error, stackTrace) {
-                                        return AppImages.userImg.imgAsset(
-                                          width: 80,
-                                          height: 80,
-                                          fit: BoxFit.cover,
-                                        );
+                                        return SizedBox();
+                                        // return AppImages.userImg.imgAsset(
+                                        //   width: 80,
+                                        //   height: 80,
+                                        //   fit: BoxFit.cover,
+                                        // );
                                       },
                                     ),
                             );
@@ -68,9 +87,9 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                             onTap: pickImageBottomSheet,
                             child: DecoratedBox(
                               decoration: BoxDecoration(gradient: wgradient, shape: BoxShape.circle),
-                              child: Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: AppIcons.icHome.svg(color: white),
+                              child: const Padding(
+                                padding: EdgeInsets.all(6.0),
+                                child: SizedBox()//AppIcons.icHome.svg(color: white),
                               ),
                             ),
                           ),

@@ -1,22 +1,21 @@
-import 'package:dwed_client/features/common/view/w_background.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/assets/themes/theme.dart';
-import 'package:dwed_client/features/common/widgets/w_button.dart';
-import 'package:dwed_client/features/common/widgets/w_button_border_gradient.dart';
-import 'package:dwed_client/features/common/widgets/w_main_app_bar.dart';
-import 'package:dwed_client/features/profile/presentation/widgets/verification/w_verification_phone.dart';
-import 'package:dwed_client/features/profile/presentation/widgets/verification/w_verification_record_video.dart';
-import 'package:dwed_client/features/profile/presentation/widgets/verification/w_verification_select_gender.dart';
-import 'package:dwed_client/features/profile/presentation/widgets/verification/w_verification_textfield_with_title.dart';
+import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_phone.dart';
+import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_record_video.dart';
+import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_select_gender.dart';
+import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_textfield_with_title.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/presentation/styles/theme.dart';
+import 'package:mpd_client/presentation/widgets/w_app_bar.dart';
+import 'package:mpd_client/presentation/widgets/w_button.dart';
+import 'package:mpd_client/presentation/widgets/w_button_gradient.dart';
 
 class VerificationProfileView extends StatelessWidget {
   const VerificationProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return WBackground(
+    return SizedBox(
       child: Scaffold(
         appBar: const WAppBar(title: Text('Profilni tasdiqlash')),
         body: SingleChildScrollView(

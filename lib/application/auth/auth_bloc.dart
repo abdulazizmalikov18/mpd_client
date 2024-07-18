@@ -5,6 +5,7 @@ import 'package:mpd_client/domain/models/auth/user.dart';
 import 'package:mpd_client/infrastructure/core/failures.dart';
 import 'package:mpd_client/infrastructure/reopsitories/auth_repository.dart';
 import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
+import 'package:mpd_client/utils/extensions/list_extention.dart';
 import 'package:uuid/uuid.dart';
 
 part 'auth_event.dart';

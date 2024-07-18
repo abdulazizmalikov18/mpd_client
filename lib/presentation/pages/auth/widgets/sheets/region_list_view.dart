@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/assets/constants/icons.dart';
-import 'package:dwed_client/features/auth/domain/entity/region_entity.dart';
-import 'package:dwed_client/features/auth/presentation/controller/registration_view_model.dart';
-import 'package:dwed_client/features/common/widgets/w_scale_animation.dart';
+import 'package:mpd_client/application/auth/controller/registration_view_model.dart';
+import 'package:mpd_client/domain/entity/account/region_entity.dart';
+import 'package:mpd_client/presentation/styles/app_icons.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/presentation/widgets/w_scale_animation.dart';
 
 class RegionListView extends StatefulWidget {
   const RegionListView({
@@ -14,6 +14,7 @@ class RegionListView extends StatefulWidget {
     required this.index,
     required this.isLoading,
   });
+
   final List<RegionEntity> regions;
   final PageController controller;
   final int index;
@@ -64,7 +65,8 @@ class _RegionListViewState extends State<RegionListView> {
                         CupertinoIcons.right_chevron,
                         color: gray,
                       )
-                      else AppIcons.icHome.svg(),
+                    else
+                      const SizedBox()//AppIcons.icHome.svg(),
                   ],
                 ),
               ),

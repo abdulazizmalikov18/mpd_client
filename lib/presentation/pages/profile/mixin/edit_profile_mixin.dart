@@ -6,7 +6,7 @@ mixin EditProfileMixin on State<EditProfileView> {
   late final UserModel oldUser = context.read<AccountsBloc>().state.userContainer.user;
 
   void updateUserOnPress() async {
-    $loading.on(context);
+    // $loading.on(context);
     context.read<AccountsBloc>().add(UpdateUserEvent(
           user: UserModel(
             username: user.value.username != oldUser.username ? user.value.username : '',
@@ -34,18 +34,18 @@ mixin EditProfileMixin on State<EditProfileView> {
             print("succes");
             context.read<AccountsBloc>().add(GetAccountUserEvent(
                   onSuccess: () {
-                    $loading.off(context);
+                    // $loading.off(context);
 
                     context.pop();
                   },
                   onError: (errorMessage) {
-                    $loading.off(context);
+                    // $loading.off(context);
                   },
                 ));
           },
           onError: (errorMessage) {
             print("error");
-            $loading.off(context);
+            // $loading.off(context);
           },
         ));
     await Future.delayed(const Duration(seconds: 3));
@@ -64,7 +64,7 @@ mixin EditProfileMixin on State<EditProfileView> {
               const SizedBox(height: 24),
               WShadowedItemContainer(
                 title: 'Сфотографировать',
-                icon: AppIcons.camera,
+                icon: '', //AppIcons.camera,
                 onTap: () async {
                   final result = await ImagePicker().pickImage(source: ImageSource.camera);
                   if (result != null) {
@@ -78,7 +78,7 @@ mixin EditProfileMixin on State<EditProfileView> {
               const SizedBox(height: 16),
               WShadowedItemContainer(
                 title: 'Из галареии',
-                icon: AppIcons.folderAdd,
+                icon: '',//AppIcons.folderAdd,
                 onTap: () async {
                   final result = await ImagePicker().pickImage(source: ImageSource.gallery);
                   if (result != null) {

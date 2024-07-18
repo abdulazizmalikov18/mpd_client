@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/assets/constants/icons.dart';
-import 'package:dwed_client/assets/themes/theme.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/utils/extensions/context_extension.dart';
+import 'package:mpd_client/utils/extensions/string_ext.dart';
 
 class WShadowedItemContainer extends StatelessWidget {
   final String title;
@@ -53,7 +53,7 @@ class WShadowedItemContainer extends StatelessWidget {
             const SizedBox(height: 4),
             Text(
               title,
-              style: context.textTheme.headlineSmall.copyWith(
+              style: context.textTheme.headlineSmall!.copyWith(
                 color: white.withOpacity(0.5),
               ),
             )

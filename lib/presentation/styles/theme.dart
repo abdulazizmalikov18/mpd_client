@@ -3,12 +3,12 @@ import 'package:mpd_client/presentation/styles/colors.dart';
 
 abstract class AppTheme {
   static ThemeData theme() => ThemeData(
-        scaffoldBackgroundColor: Colors.transparent,
+        scaffoldBackgroundColor: Colors.white,
         fontFamily: 'Museo_Sans_Cyrl',
         appBarTheme: AppBarTheme(
-          backgroundColor: Colors.transparent,
-          foregroundColor: Colors.transparent,
-          surfaceTintColor: Colors.transparent,
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
           shadowColor: Colors.transparent,
           // systemOverlayStyle: SystemUiOverlayStyle.light,
           titleTextStyle: displaySmall.copyWith(fontWeight: FontWeight.w600),
@@ -55,74 +55,74 @@ abstract class AppTheme {
   static const displayLarge = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
-    color: white,
+    color: black,
   );
   static const displayMedium = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w500,
-    color: white,
+    color: black,
   );
   static const displaySmall = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.w800,
-    color: white,
+    color: black,
   );
   static const headlineMedium = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w600,
-    color: white,
+    color: black,
   );
   static const headlineSmall = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w400,
-    color: white,
+    color: black,
   );
   static const titleLarge = TextStyle(
     fontSize: 15,
     fontWeight: FontWeight.w500,
-    color: white,
+    color: black,
   );
   static const bodyLarge = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w500,
-    color: white,
+    color: black,
   );
 
   static const bodyMedium = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w600,
-    color: white,
+    color: black,
   );
 
   static const titleMedium = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w600,
-    color: white,
+    color: black,
   );
 
   static const titleSmall = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w700,
-    color: white,
+    color: black,
   );
 
   static const bodySmall = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w500,
-    color: white,
+    color: black,
   );
 
   static const labelLarge = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w400,
-    color: gray,
+    color: black,
     letterSpacing: -0.1,
   );
 
   static const labelSmall = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    color: gray,
+    color: black,
     letterSpacing: -0.1,
   );
 }

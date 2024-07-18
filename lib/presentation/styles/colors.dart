@@ -37,16 +37,57 @@ const mainColor = _main;
 const grayLight = _grayLight;
 const closeButton = _closeButton;
 const cardColor = _cardColor;
+const gradientRedOpacity = _gradientRedOpacity;
+const gradientBlue = _gradientBlue;
+const gradientBlueOpacity = _gradientBlueOpacity;
+const yellow = _yellow;
+const shadow = _shadow;
+const cardShadow = _cardShadow;
+final baseColor = _baseColor;
+final highlightColor = _highlightColor;
+const fillColor = _fillColor;
+const orangeLight = _orangeLight;
+const transparentBorder = _transparentBorder;
+const background = _background;
+const yana = _yana;
+const mainBlue = _mainBlue;
+const border = _border;
+const blueBackground = _blueBackground;
+const trapezia = _trapezia;
+const dividerColor = _dividerColor;
+const gradientRed = _gradientRed;
+const orange = _orange;
 
-const _white = Color(0xffFFFFFF);
-const _black = Color(0xFF000000);
+const _transparentBorder = Color(0xFFD5E5FB);
+const _grey = Color(0xFF677294);
+const _yana = Color(0xFF000000);
+const _black = Color(0xFF222222);
+const _red = Color(0xFFEA0000);
+const _background = Color(0xFFF3F3F3);
+const _mainBlue = Color(0xFF3E80FF);
+const _white = Color(0xFFFFFFFF);
+const _border = Color(0xFFE2E2E2);
+const _blueBackground = Color(0xff3e80ff);
+const _trapezia = Color(0xFFE6E6E6);
+const _dividerColor = Color(0xffF0F0F0);
+const _gradientRed = Color(0xFFF41F1F);
+const _orange = Color(0xffF2994A);
+const _green = Color(0xff27AE60);
+const _gradientRedOpacity = Color(0xFFEB5757);
+const _gradientBlue = Color(0xFF003CC5);
+const _gradientBlueOpacity = Color(0xff00B5D9);
+const _yellow = Color(0xFFF4B208);
+const _shadow = Color.fromARGB(141, 201, 201, 201);
+const _cardShadow = Color(0xff14000000);
+final _baseColor = const Color(0xFF3E80FF).withOpacity(0.15);
+final _highlightColor = const Color(0xFF3E80FF).withOpacity(0.25);
+const _fillColor = Color(0xFFF2F2F2);
+const _orangeLight = Color(0xFFFD9644);
+
 const _dark = Color(0xff0C161D);
 const _darkText = Color(0xFF262626);
-const _red = Color(0xffFA193E);
-const _grey = Color(0xffE7E7E8);
 const _greyText = Color(0xFF7F92A0);
 const _iron = Color(0xffCCCECF);
-const _green = Color(0xff2BCBBA);
 const _whiteSmoke = Color(0xffF7F8FC);
 const _whiteGrey = Color(0xffF2F2F2);
 const _blackGrey = Color(0xff555555);
@@ -79,7 +120,6 @@ const _grayLight = Color(0xFFF3F5F9);
 const _closeButton = Color(0xFF16498F);
 const _cardColor = Color(0xFF2B394C);
 
-
 List<BoxShadow> wboxShadow = [
   BoxShadow(
     offset: const Offset(0, 0),
@@ -100,8 +140,8 @@ LinearGradient wgradient = const LinearGradient(
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,
   colors: [
-    Color(0xFF4D97FF),
-    Color(0xFF1A79FF),
+    Color(0xFF00B5D9),
+    Color(0xFF003CC5),
   ],
 );
 LinearGradient wgradientRed = const LinearGradient(

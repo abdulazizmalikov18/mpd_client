@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/assets/constants/icons.dart';
-import 'package:dwed_client/assets/themes/theme.dart';
-import 'package:dwed_client/features/common/widgets/w_button_border_gradient.dart';
-import 'package:dwed_client/features/common/widgets/w_textfield.dart';
-import 'package:dwed_client/features/edit_number/presentation/view/edit_number_view.dart';
+import 'package:mpd_client/presentation/styles/app_icons.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/presentation/styles/theme.dart';
+import 'package:mpd_client/presentation/widgets/w_button_gradient.dart';
+import 'package:mpd_client/presentation/widgets/w_text_field.dart';
 
 class WVerificationPhone extends StatelessWidget {
   const WVerificationPhone({
     super.key,
   });
+
   void onPressEditNumber(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const EditNumberView(),));
-     // context.pushNamed(AppRouteNames.editNumber);
+    // Navigator.push(context, MaterialPageRoute(builder: (context) => const EditNumberView(),));
+    // context.pushNamed(AppRouteNames.editNumber);
   }
 
   @override
@@ -49,7 +49,7 @@ class WVerificationPhone extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      AppIcons.icHome.svg(),
+                      // AppIcons.icHome.svg(),
                       const SizedBox(width: 8),
                       Text(
                         'O’zgartirish',

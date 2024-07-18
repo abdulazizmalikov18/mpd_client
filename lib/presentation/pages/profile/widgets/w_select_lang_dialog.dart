@@ -1,10 +1,9 @@
 import 'package:circle_flags/circle_flags.dart';
-import 'package:dwed_client/features/common/view/w_background.dart';
 import 'package:flutter/material.dart';
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/assets/constants/icons.dart';
-import 'package:dwed_client/assets/themes/theme.dart';
-import 'package:dwed_client/features/common/widgets/w_button.dart';
+import 'package:mpd_client/presentation/styles/app_icons.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/presentation/styles/theme.dart';
+import 'package:mpd_client/presentation/widgets/w_button.dart';
 
 class WSelectLangDialog extends StatefulWidget {
   const WSelectLangDialog({
@@ -25,7 +24,7 @@ class _WSelectLangDialogState extends State<WSelectLangDialog> {
         topLeft: Radius.circular(12),
         topRight: Radius.circular(12),
       ),
-      child: WBackground(
+      child: SizedBox(
         child: DecoratedBox(
           decoration: const BoxDecoration(
             color: Colors.transparent,
@@ -48,7 +47,6 @@ class _WSelectLangDialogState extends State<WSelectLangDialog> {
                 ),
               ),
               const SizedBox(height: 16),
-
               SelectLangItem(
                 langCode: 'uz',
                 isActive: locale == const Locale('uz'),
@@ -114,9 +112,7 @@ class SelectLangItem extends StatelessWidget {
           decoration: BoxDecoration(
             color: isActive ? white.withOpacity(0.1) : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
-            border: isActive ? Border.all(
-              color: white.withOpacity(0.5)
-            ) : null,
+            border: isActive ? Border.all(color: white.withOpacity(0.5)) : null,
             boxShadow: [
               if (isActive) BoxShadow(color: primary.withOpacity(0.08), blurRadius: 4, offset: const Offset(0, 4)),
             ],
@@ -139,7 +135,7 @@ class SelectLangItem extends StatelessWidget {
                     ),
                   ],
                 ),
-                (isActive ? AppIcons.radioOn : AppIcons.radioOff).svg(),
+                // (isActive ? AppIcons.radioOn : AppIcons.radioOff).svg(),
               ],
             ),
           ),

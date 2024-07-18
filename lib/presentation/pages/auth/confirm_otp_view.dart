@@ -1,18 +1,15 @@
-import 'package:dwed_client/features/common/controllers/show_pop_up/show_pop_up_bloc.dart';
-import 'package:dwed_client/features/common/view/w_background.dart';
-import 'package:dwed_client/features/common/widgets/custom_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mpd_client/application/auth/controller/registration_view_model.dart';
+import 'package:mpd_client/application/show_pop_up/show_pop_up_bloc.dart';
+import 'package:mpd_client/infrastructure/services/log_service.dart';
+import 'package:mpd_client/presentation/pages/auth/widgets/w_resend_button.dart';
+import 'package:mpd_client/presentation/router/routs_contact.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/presentation/widgets/w_button.dart';
+import 'package:mpd_client/utils/extensions/context_extension.dart';
 import 'package:pinput/pinput.dart';
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/assets/themes/theme.dart';
-import 'package:dwed_client/features/auth/presentation/controller/registration_view_model.dart';
-import 'package:dwed_client/features/auth/presentation/widgets/w_error_text_for_text_field.dart';
-import 'package:dwed_client/features/common/navigation/routs_contact.dart';
-import 'package:dwed_client/features/common/widgets/log_service.dart';
-import 'package:dwed_client/features/common/widgets/w_button.dart';
-import 'package:dwed_client/features/edit_number/presentation/widgets/w_resend_text.dart';
 
 class ConfirmOtpView extends StatefulWidget {
   final String phone;
@@ -60,7 +57,7 @@ class _ConfirmOtpViewState extends State<ConfirmOtpView> {
 
   @override
   Widget build(BuildContext context) {
-    return WBackground(
+    return SizedBox(
       child: Scaffold(
         body: SafeArea(
           child: Padding(
@@ -72,7 +69,7 @@ class _ConfirmOtpViewState extends State<ConfirmOtpView> {
                   child: Text(
                     'Tasdiq kodi',
                     textAlign: TextAlign.center,
-                    style: context.textTheme.displaySmall.copyWith(
+                    style: context.textTheme.displaySmall!.copyWith(
                       fontWeight: FontWeight.w600,
                       color: white,
                     ),
@@ -82,14 +79,14 @@ class _ConfirmOtpViewState extends State<ConfirmOtpView> {
                 RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                    style: context.textTheme.headlineSmall.copyWith(
+                    style: context.textTheme.headlineSmall!.copyWith(
                       color: white.withOpacity(0.5),
                     ),
                     children: [
                       const TextSpan(text: 'Iltimos, biz '),
                       TextSpan(
                         text: '(+998) ${widget.phone.substring(3, 5)} ${widget.phone.substring(5, 8)} XX XX ',
-                        style: context.textTheme.headlineSmall.copyWith(
+                        style: context.textTheme.headlineSmall!.copyWith(
                           color: primary,
                         ),
                       ),
@@ -148,7 +145,7 @@ class _ConfirmOtpViewState extends State<ConfirmOtpView> {
                   isDisabled: error != null || controller.text.length <= 5,
                   margin: const EdgeInsets.symmetric(horizontal: 16),
                   onTap: onTapConfirm,
-                  textStyle: context.textTheme.bodyLarge.copyWith(
+                  textStyle: context.textTheme.bodyLarge!.copyWith(
                     color: white,
                   ),
                   text: 'Tasdiqlash',

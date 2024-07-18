@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/assets/themes/theme.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/utils/extensions/context_extension.dart';
 
 class WErrorTextForTextField extends StatelessWidget {
   final ValueNotifier<String?> notifier;
@@ -32,7 +32,7 @@ class WErrorTextForTextField extends StatelessWidget {
                       Flexible(
                         child: Text(
                           value.toString(),
-                          style: context.textTheme.headlineSmall.copyWith(
+                          style: context.textTheme.headlineSmall!.copyWith(
                             fontWeight: FontWeight.w300,
                             color: red,
                           ),

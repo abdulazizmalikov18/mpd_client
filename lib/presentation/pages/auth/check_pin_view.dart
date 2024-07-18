@@ -8,6 +8,7 @@ import 'package:mpd_client/presentation/pages/auth/mixin/biometric_auth_mixin.da
 import 'package:mpd_client/presentation/pages/auth/widgets/w_custom_pin_put.dart';
 import 'package:mpd_client/presentation/pages/auth/widgets/w_keyboard_number.dart';
 import 'package:mpd_client/presentation/router/routs_contact.dart';
+import 'package:mpd_client/presentation/styles/app_images.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/widgets/w_button.dart';
 import 'package:mpd_client/utils/extensions/context_extension.dart';
@@ -87,12 +88,13 @@ class _CheckPinViewState extends State<CheckPinView> with BiometricAuth {
                       height: 56,
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                          color: white.withOpacity(0.1),
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: white.withOpacity(0.2),
-                          )),
-                      child: AppImages.faceId.imgAsset(),
+                        color: white.withOpacity(0.1),
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: white.withOpacity(0.2),
+                        ),
+                      ),
+                      child: const SizedBox()  //AppImages.faceId.imgAsset(),
                     ),
                   ),
                   WButton(

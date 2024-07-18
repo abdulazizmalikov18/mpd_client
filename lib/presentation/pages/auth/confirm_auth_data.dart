@@ -1,8 +1,24 @@
+import 'package:date_picker_plus/date_picker_plus.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:mpd_client/application/accounts/accounts_bloc.dart';
+import 'package:mpd_client/application/auth/auth_bloc.dart';
 import 'package:mpd_client/application/auth/controller/registration_view_model.dart';
+import 'package:mpd_client/application/show_pop_up/show_pop_up_bloc.dart';
 import 'package:mpd_client/domain/models/auth/create_user_model.dart';
+import 'package:mpd_client/presentation/pages/auth/widgets/sheets/w_select_profession.dart';
+import 'package:mpd_client/presentation/pages/auth/widgets/sheets/w_select_region.dart';
 import 'package:mpd_client/presentation/pages/auth/widgets/w_pick_avatar.dart';
+import 'package:mpd_client/presentation/pages/auth/widgets/w_shadowed_container.dart';
+import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_select_gender.dart';
+import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_textfield_with_title.dart';
+import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/presentation/widgets/w_bottom_sheet.dart';
+import 'package:mpd_client/presentation/widgets/w_button.dart';
 import 'package:mpd_client/utils/extensions/context_extension.dart';
 
 part './mixin/confirm_data_mixin.dart';
@@ -90,7 +106,8 @@ class _ConfirmAuthDataViewState extends State<ConfirmAuthDataView> with ConfirmD
                       hintText: value != null ? '${value.day.toString().padLeft(2, "0")}.${value.month.toString().padLeft(2, "0")}.${value.year}' : "Sana tanlang !",
                       isRequired: true,
                       isReadOnly: true,
-                      rightIcon: AppIcons.icHome.svg(),
+                      rightIcon: const SizedBox(),
+                      //AppIcons.icHome.svg(),
                       onTap: onPressedDateTime,
                     );
                   },

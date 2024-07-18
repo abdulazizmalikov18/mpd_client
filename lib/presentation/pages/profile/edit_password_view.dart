@@ -1,15 +1,12 @@
-import 'package:dwed_client/features/common/view/w_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/assets/constants/icons.dart';
-import 'package:dwed_client/assets/themes/theme.dart';
-import 'package:dwed_client/features/auth/presentation/controller/registration_view_model.dart';
-import 'package:dwed_client/features/common/controllers/show_pop_up/show_pop_up_bloc.dart';
-import 'package:dwed_client/features/common/loading/view_scope/loading_wrapper.dart';
-import 'package:dwed_client/features/common/widgets/w_button.dart';
-import 'package:dwed_client/features/common/widgets/w_main_app_bar.dart';
-import 'package:dwed_client/features/common/widgets/w_textfield.dart';
+import 'package:mpd_client/application/auth/controller/registration_view_model.dart';
+import 'package:mpd_client/application/show_pop_up/show_pop_up_bloc.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/presentation/styles/theme.dart';
+import 'package:mpd_client/presentation/widgets/w_app_bar.dart';
+import 'package:mpd_client/presentation/widgets/w_button.dart';
+import 'package:mpd_client/presentation/widgets/w_text_field.dart';
 
 class EditPasswordView extends StatefulWidget {
   const EditPasswordView({super.key});
@@ -27,7 +24,7 @@ class _EditPasswordViewState extends State<EditPasswordView> {
 
   @override
   Widget build(BuildContext context) {
-    return WBackground(
+    return SizedBox(
       child: Scaffold(
         appBar: const WAppBar(
           title: Text('Parolni o’zgartirish'),
@@ -53,7 +50,7 @@ class _EditPasswordViewState extends State<EditPasswordView> {
                     ),
                     borderColor: grayLight,
                     hintText: 'Current Password',
-                    prefixIcon: AppIcons.lock.svg(),
+                    // prefixIcon: AppIcons.lock.svg(),
                   ),
                   const SizedBox(height: 32),
                   WTextField(
@@ -70,7 +67,7 @@ class _EditPasswordViewState extends State<EditPasswordView> {
                     ),
                     borderColor: grayLight,
                     hintText: 'New Password',
-                    prefixIcon: AppIcons.lock.svg(),
+                    // prefixIcon: AppIcons.lock.svg(),
                   ),
                   const SizedBox(height: 16),
                   WTextField(
@@ -87,7 +84,7 @@ class _EditPasswordViewState extends State<EditPasswordView> {
                     ),
                     borderColor: grayLight,
                     hintText: 'Repeat Password',
-                    prefixIcon: AppIcons.lock.svg(),
+                    // prefixIcon: AppIcons.lock.svg(),
                   ),
                 ],
               );
@@ -117,19 +114,19 @@ class _EditPasswordViewState extends State<EditPasswordView> {
   }
 
   void onPressChangePassword() {
-    $loading.on(context);
+    // $loading.on(context);
     $regVM().changePassword(
       currentPassword.text,
       newPassword.text,
       newReTryPassword.text,
       onSuccess: () {
-        $loading.off(context);
+        // $loading.off(context);
         context.read<ShowPopUpBloc>().add(ShowPopUp(message: "Muvaffaqiyatli Almashtirildi !", status: PopStatus.success));
       },
       onError: (errorMessage) {
         context.read<ShowPopUpBloc>().add(ShowPopUp(message: errorMessage, status: PopStatus.error));
         hasError.value = errorMessage;
-        $loading.off(context);
+        // $loading.off(context);
       },
     );
   }

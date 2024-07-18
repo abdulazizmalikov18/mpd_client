@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:pinput/pinput.dart';
-import 'package:dwed_client/assets/colors/colors.dart';
 
 class WCustomPinPut extends StatelessWidget {
   final void Function(String pin) onComplete;

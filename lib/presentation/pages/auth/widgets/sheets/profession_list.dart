@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/features/auth/presentation/controller/registration_view_model.dart';
-import 'package:dwed_client/features/common/widgets/log_service.dart';
-import 'package:dwed_client/features/common/widgets/w_scale_animation.dart';
-import 'package:dwed_client/features/profile/domain/entity/profession_entity.dart';
+import 'package:mpd_client/application/auth/controller/registration_view_model.dart';
+import 'package:mpd_client/domain/entity/account/profession_entity.dart';
+import 'package:mpd_client/infrastructure/services/log_service.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/presentation/widgets/w_scale_animation.dart';
 
 class ProfessionListView extends StatefulWidget {
   const ProfessionListView({
@@ -14,6 +14,7 @@ class ProfessionListView extends StatefulWidget {
     required this.index,
     required this.isLoading,
   });
+
   final List<ProfessionEntity> profession;
   final PageController controller;
   final int index;
@@ -34,7 +35,7 @@ class _ProfessionListViewState extends State<ProfessionListView> {
             itemBuilder: (context, index) => WScaleAnimation(
               onTap: () {
                 if (widget.profession[index].isParent) {
-                  Log.w(widget.profession[index].isParent);
+                  Log.w(widget.profession[index].isParent.toString());
                   if (widget.controller.hasClients) {
                     widget.controller.animateToPage(
                       widget.index,
@@ -66,8 +67,7 @@ class _ProfessionListViewState extends State<ProfessionListView> {
                           ? const SizedBox()
                           : Image.network(
                               widget.profession[index].image,
-                              errorBuilder: (context, error, stackTrace) =>
-                                  const SizedBox(),
+                              errorBuilder: (context, error, stackTrace) => const SizedBox(),
                             ),
                     ),
                     Expanded(child: Text(widget.profession[index].name)),
@@ -75,8 +75,7 @@ class _ProfessionListViewState extends State<ProfessionListView> {
                       const Icon(
                         CupertinoIcons.right_chevron,
                         color: gray,
-                      )
-                   ,
+                      ),
                   ],
                 ),
               ),

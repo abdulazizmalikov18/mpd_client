@@ -1,17 +1,15 @@
-import 'package:dwed_client/core/utils/debouncer.dart';
-import 'package:dwed_client/features/common/view/w_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/assets/constants/icons.dart';
-import 'package:dwed_client/assets/themes/theme.dart';
-import 'package:dwed_client/features/auth/presentation/controller/registration_view_model.dart';
-import 'package:dwed_client/features/auth/presentation/widgets/sheets/profession_list.dart';
-import 'package:dwed_client/features/common/widgets/dialog_title.dart';
-import 'package:dwed_client/features/common/widgets/w_textfield.dart';
-import 'package:dwed_client/features/profile/presentation/controller/accounts/accounts_bloc.dart';
+import 'package:mpd_client/application/accounts/accounts_bloc.dart';
+import 'package:mpd_client/application/auth/controller/registration_view_model.dart';
+import 'package:mpd_client/presentation/pages/auth/widgets/dialog_title.dart';
+import 'package:mpd_client/presentation/pages/auth/widgets/sheets/profession_list.dart';
+import 'package:mpd_client/presentation/styles/app_icons.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/presentation/widgets/w_text_field.dart';
+import 'package:mpd_client/utils/debounce.dart';
+import 'package:mpd_client/utils/extensions/context_extension.dart';
 
 class WSelectProfessionSheet extends StatefulWidget {
   const WSelectProfessionSheet({super.key});
@@ -38,7 +36,7 @@ class _WSelectProfessionSheetState extends State<WSelectProfessionSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return WBackground(
+    return SizedBox(
       child: SizedBox(
         width: double.infinity,
         child: BlocBuilder<AccountsBloc, AccountsState>(
@@ -58,23 +56,21 @@ class _WSelectProfessionSheetState extends State<WSelectProfessionSheet> {
                           const DialogTitle(title: "Mutaxasligingizni tanlang "),
                           const SizedBox(height: 16),
                           WTextField(
-                            style: context.textTheme.bodyLarge.copyWith(
+                            style: context.textTheme.bodyLarge!.copyWith(
                               color: white,
                             ),
                             onChanged: (value) {
-                              Debouncer(milliseconds: 300).run(
-                                () {
-                                  context.read<AccountsBloc>().add(GetProfession(search: value));
-                                },
-                              );
+                              onDebounce(() {
+                                context.read<AccountsBloc>().add(GetProfession(search: value));
+                              });
                             },
                             hintText: "Search",
                             borderColor: borderColor,
                             fillColor: white.withOpacity(0.2),
-                            prefixIcon: Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: AppIcons.icHome.svg(color: gray),
-                            ),
+                            // prefixIcon: Padding(
+                            //   padding: const EdgeInsets.only(right: 8),
+                            //   child: AppIcons.icHome.svg(color: gray),
+                            // ),
                           ),
                           const SizedBox(height: 16),
                           if ($regVM().professionList.isNotEmpty)

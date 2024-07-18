@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:mpd_client/application/auth/auth_bloc.dart';
+import 'package:mpd_client/infrastructure/apis/account_service.dart';
 import 'package:mpd_client/infrastructure/services/api_service.dart';
 
 final serviceLocator = GetIt.I;
@@ -9,6 +10,7 @@ void setupLocator() {
   serviceLocator.registerFactory(DioSettings.new);
   // Auth Objects
   serviceLocator.registerSingleton(AuthBloc());
+  serviceLocator.registerSingleton<AccountService>(AccountService.create());
   // // serviceLocator.registerSingleton(Debouncer(milliseconds: 300));
   //
   // // Chat Objects

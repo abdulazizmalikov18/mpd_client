@@ -1,8 +1,8 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
-import 'package:dwed_client/features/auth/domain/entity/region_entity.dart';
-import 'package:dwed_client/features/profile/domain/entity/profession_entity.dart';
+import 'package:mpd_client/domain/entity/account/profession_entity.dart';
+import 'package:mpd_client/domain/entity/account/region_entity.dart';
 
 class RegionAndProfessionContainer extends Equatable {
   final FormzSubmissionStatus statusd;

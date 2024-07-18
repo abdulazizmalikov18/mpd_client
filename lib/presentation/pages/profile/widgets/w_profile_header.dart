@@ -1,16 +1,15 @@
-import 'package:dwed_client/assets/constants/icons.dart';
-import 'package:dwed_client/features/common/widgets/w_container_blur.dart';
-import 'package:dwed_client/features/common/widgets/w_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/assets/constants/images.dart';
-import 'package:dwed_client/assets/themes/theme.dart';
-import 'package:dwed_client/features/common/widgets/w_box_shadowed.dart';
-import 'package:dwed_client/features/common/widgets/w_button.dart';
-import 'package:dwed_client/features/common/widgets/w_shimmer.dart';
-import 'package:dwed_client/features/profile/presentation/controller/accounts/accounts_bloc.dart';
+import 'package:mpd_client/application/accounts/accounts_bloc.dart';
+import 'package:mpd_client/presentation/styles/app_icons.dart';
+import 'package:mpd_client/presentation/styles/app_images.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/presentation/styles/theme.dart';
+import 'package:mpd_client/presentation/widgets/w_button.dart';
+import 'package:mpd_client/presentation/widgets/w_network_image.dart';
+import 'package:mpd_client/presentation/widgets/w_shimmer.dart';
+import 'package:mpd_client/utils/extensions/string_ext.dart';
 
 class WProfileHeader extends StatelessWidget {
   final void Function() onPressEditProfile;
@@ -24,7 +23,7 @@ class WProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WBoxShadowed(
+    return SizedBox(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Stack(
@@ -39,16 +38,18 @@ class WProfileHeader extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           WNetworkImage(
-                            image: state.userContainer.user.avatar,
-                            height: 60,
-                            width: 60,
-                            borderRadius: 100,
-                            defaultWidget: AppImages.profileImg.imgAsset(
+                              image: state.userContainer.user.avatar,
+                              height: 60,
+                              width: 60,
+                              borderRadius: 100,
+                              defaultWidget: Container(
+                                color: black,
+                              ) /*AppImages.profileImg.imgAsset(
                               width: 60,
                               height: 60,
                               fit: BoxFit.cover,
-                            ),
-                          ),
+                            ),*/
+                              ),
                           const SizedBox(width: 8),
                           Center(
                             child: Column(
@@ -94,7 +95,7 @@ class WProfileHeader extends StatelessWidget {
                   children: [
                     Expanded(
                       child: WProfileHeaderItem(
-                        icon: AppIcons.briefcaseLeft,
+                        icon: '',// AppIcons.briefcaseLeft,
                         label: 'Tajriba',
                         title: '8 level',
                       ),
@@ -102,7 +103,7 @@ class WProfileHeader extends StatelessWidget {
                     SizedBox(width: 8),
                     Expanded(
                       child: WProfileHeaderItem(
-                        icon: AppIcons.briefcaseCenter,
+                        icon: '',// AppIcons.briefcaseCenter,
                         label: 'Bilim',
                         title: '6 level',
                       ),
@@ -110,7 +111,7 @@ class WProfileHeader extends StatelessWidget {
                     SizedBox(width: 8),
                     Expanded(
                       child: WProfileHeaderItem(
-                        icon: AppIcons.briefcaseRight,
+                        icon: '',// AppIcons.briefcaseRight,
                         label: 'Muomala',
                         title: '24 level',
                       ),
@@ -130,12 +131,12 @@ class WProfileHeader extends StatelessWidget {
               right: 0,
               child: Row(
                 children: [
-                  WContainerBlur(
+                  Container(
                     height: 28,
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                     child: Row(
                       children: [
-                        AppIcons.like.svg(),
+                        // AppIcons.like.svg(),
                         const SizedBox(width: 2),
                         Text(
                           '563',
@@ -148,12 +149,12 @@ class WProfileHeader extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 4),
-                  WContainerBlur(
+                  Container(
                     height: 28,
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                     child: Row(
                       children: [
-                        AppIcons.unLike.svg(),
+                        // AppIcons.unLike.svg(),
                         const SizedBox(width: 2),
                         Text(
                           '563',

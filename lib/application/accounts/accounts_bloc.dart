@@ -1,7 +1,15 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:mpd_client/application/accounts/region_and_profession_container.dart';
+import 'package:mpd_client/application/accounts/user_container.dart';
+import 'package:mpd_client/domain/abstract_repo/account_repository.dart';
+import 'package:mpd_client/domain/entity/account/popular_category_filter.dart';
+import 'package:mpd_client/domain/models/auth/user.dart';
+import 'package:mpd_client/infrastructure/apis/account_service.dart';
+import 'package:mpd_client/infrastructure/reopsitories/account_repository_impl.dart';
 import 'package:mpd_client/infrastructure/reopsitories/auth_repository.dart';
+import 'package:mpd_client/infrastructure/services/service_locator.dart';
 
 part 'accounts_event.dart';
 
@@ -9,8 +17,7 @@ part 'accounts_state.dart';
 
 class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   final AuthRepository _repo = const AuthRepository();
-  RegionUseCase regionUse = RegionUseCase();
-  ProfessionUseCase professionUse = ProfessionUseCase();
+  final AccountRepository _accountRepo = AccountRepositoryImpl(serviceLocator<AccountService>());
 
   AccountsBloc() : super(const AccountsState()) {
     on<GetRegion>(_getRegion);
@@ -26,7 +33,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
         parent: (event.search != null) ? null : event.id,
         search: event.search,
       );
-      final result = await regionUse.call(param);
+      final result = await _accountRepo.getRegion(param);
       if (result.isRight) {
         if (event.index == 1) {
           emit(state.copyWith(regionAndProfessionContainer: state.regionAndProfessionContainer.copyWith(regions1: result.right.results)));
@@ -50,7 +57,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
         parent: (event.search != null) ? null : event.id,
         search: event.search,
       );
-      final result = await professionUse.call(param);
+      final result = await _accountRepo.getProfession(param);
       if (result.isRight) {
         if (event.index == 1) {
           emit(state.copyWith(regionAndProfessionContainer: state.regionAndProfessionContainer.copyWith(profession2: result.right.results)));

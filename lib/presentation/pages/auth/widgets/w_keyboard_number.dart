@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/assets/themes/theme.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/utils/extensions/context_extension.dart';
 
 class WCustomKeyboardNumber extends StatelessWidget {
   final void Function(int index) enteredNumber;
@@ -31,7 +31,7 @@ class WCustomKeyboardNumber extends StatelessWidget {
               onPressed: () => enteredNumber(index),
               child: Text(
                 "0",
-                style: context.textTheme.displayLarge.copyWith(fontSize: 32, color: white),
+                style: context.textTheme.displayLarge!.copyWith(fontSize: 32, color: white),
               ),
             );
           } else if (index == 11) {
@@ -44,7 +44,7 @@ class WCustomKeyboardNumber extends StatelessWidget {
               onPressed: () => enteredNumber(index),
               child: Text(
                 "${index + 1}",
-                style: context.textTheme.displayLarge.copyWith(fontSize: 32, color: white),
+                style: context.textTheme.displayLarge!.copyWith(fontSize: 32, color: white),
               ),
             );
           }

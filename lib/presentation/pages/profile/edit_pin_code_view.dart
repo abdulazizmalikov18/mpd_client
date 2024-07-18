@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/assets/themes/theme.dart';
-import 'package:dwed_client/features/auth/presentation/controller/pin_view_model.dart';
-import 'package:dwed_client/features/auth/presentation/widgets/w_custom_pin_put.dart';
-import 'package:dwed_client/features/auth/presentation/widgets/w_keyboard_number.dart';
-import 'package:dwed_client/features/common/controllers/show_pop_up/show_pop_up_bloc.dart';
-import 'package:dwed_client/features/common/widgets/custom_screen.dart';
-import 'package:dwed_client/features/common/widgets/w_button.dart';
-import 'package:dwed_client/features/common/widgets/w_button_border_gradient.dart';
-import 'package:dwed_client/features/common/widgets/w_main_app_bar.dart';
+import 'package:mpd_client/application/auth/controller/pin_view_model.dart';
+import 'package:mpd_client/application/show_pop_up/show_pop_up_bloc.dart';
+import 'package:mpd_client/presentation/pages/auth/widgets/w_custom_pin_put.dart';
+import 'package:mpd_client/presentation/pages/auth/widgets/w_keyboard_number.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/presentation/styles/theme.dart';
+import 'package:mpd_client/presentation/widgets/w_app_bar.dart';
+import 'package:mpd_client/presentation/widgets/w_button.dart';
+import 'package:mpd_client/presentation/widgets/w_button_gradient.dart';
 
 class EditPinCodeView extends StatefulWidget {
   const EditPinCodeView({super.key});
@@ -26,7 +25,7 @@ class _EditPinCodeViewState extends State<EditPinCodeView> {
   ValueNotifier<String?> hasError = ValueNotifier(null);
 
   void onPressSave() {
-    if(isDisable) return;
+    if (isDisable) return;
     $pinVM().updatePin(
       pinController.text.trim(),
       isVerified,
@@ -51,7 +50,7 @@ class _EditPinCodeViewState extends State<EditPinCodeView> {
   }
 
   void onPressCancel() {
-    if(isDisable) return;
+    if (isDisable) return;
     context.pop();
   }
 

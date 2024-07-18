@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:dwed_client/assets/constants/icons.dart';
-import 'package:dwed_client/assets/constants/images.dart';
-import 'package:dwed_client/assets/themes/theme.dart';
-import 'package:dwed_client/features/common/navigation/routs_contact.dart';
-import 'package:dwed_client/features/common/widgets/w_button.dart';
-import 'package:dwed_client/features/profile/presentation/widgets/w_profile_item.dart';
+import 'package:mpd_client/presentation/pages/profile/widgets/w_profile_item.dart';
+import 'package:mpd_client/presentation/router/routs_contact.dart';
+import 'package:mpd_client/presentation/styles/app_images.dart';
+import 'package:mpd_client/presentation/styles/theme.dart';
+import 'package:mpd_client/presentation/widgets/w_button.dart';
 
 class WNotLoginProfile extends StatelessWidget {
   const WNotLoginProfile({super.key});
@@ -22,7 +21,7 @@ class WNotLoginProfile extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const SizedBox(height: 16),
-                AppImages.appLogoBlue.imgAsset(height: 80),
+                // AppImages.appLogoBlue.imgAsset(height: 80),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   child: Center(
@@ -43,7 +42,7 @@ class WNotLoginProfile extends StatelessWidget {
                 // ),
                 const SizedBox(height: 8),
                 WProfileItem(
-                  icon: AppIcons.icHome,
+                  icon: '', // AppIcons.icHome,
                   title: 'Bildirishnomalarni sozlash',
                   subTitle: '',
                   onPressed: () {

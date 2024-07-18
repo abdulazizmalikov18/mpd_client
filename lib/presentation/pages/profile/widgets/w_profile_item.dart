@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/assets/constants/icons.dart';
-import 'package:dwed_client/assets/themes/theme.dart';
-import 'package:dwed_client/features/common/widgets/w_box_shadowed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mpd_client/presentation/styles/app_icons.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/presentation/styles/theme.dart';
+import 'package:mpd_client/presentation/widgets/w_button.dart';
+import 'package:mpd_client/utils/extensions/string_ext.dart';
 
 class WProfileItem extends StatelessWidget {
   final String icon;
@@ -26,8 +27,9 @@ class WProfileItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPressed,
-      child: WBoxShadowed(
+      child: WButton(
         borderRadius: 12,
+        onTap: () {},
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Row(
@@ -72,7 +74,7 @@ class WProfileItem extends StatelessWidget {
                   ],
                 ),
               ),
-              AppIcons.arrowRightMenu.svg(),
+              // AppIcons.arrowRightMenu.svg(),
             ],
           ),
         ),

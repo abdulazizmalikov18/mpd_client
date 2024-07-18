@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/assets/constants/icons.dart';
-import 'package:dwed_client/assets/themes/theme.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/presentation/styles/theme.dart';
 
 class WVerificationSelectGender extends StatefulWidget {
   final bool isMale;
@@ -55,7 +54,7 @@ class _WVerificationSelectGenderState extends State<WVerificationSelectGender> {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          (isActiveMale ? AppIcons.radioOn.svg() : AppIcons.radioOff.svg()),
+                          // (isActiveMale ? AppIcons.radioOn.svg() : AppIcons.radioOff.svg()),
                           const SizedBox(width: 8),
                           Text(
                             'Erkak',
@@ -85,7 +84,7 @@ class _WVerificationSelectGenderState extends State<WVerificationSelectGender> {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          (!isActiveMale ? AppIcons.radioOn.svg() : AppIcons.radioOff.svg()),
+                          // (!isActiveMale ? AppIcons.radioOn.svg() : AppIcons.radioOff.svg()),
                           const SizedBox(width: 8),
                           Text(
                             'Ayol',

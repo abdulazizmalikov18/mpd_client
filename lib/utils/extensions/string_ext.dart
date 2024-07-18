@@ -1,4 +1,19 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 extension StringExt on String {
+  SvgPicture svg({
+    Color? color,
+    double? width,
+    double? height,
+  }) {
+    return SvgPicture.asset(
+      this,
+      colorFilter: color != null ? ColorFilter.mode(color, BlendMode.srcIn) : null,
+      width: width,
+      height: height,
+    );
+  }
   String get phoneFormatter {
     if (isEmpty || length <= 11) {
       return "";

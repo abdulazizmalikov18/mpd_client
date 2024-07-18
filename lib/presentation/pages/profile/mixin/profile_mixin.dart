@@ -1,18 +1,18 @@
-part of '../../profile_view.dart';
+part of '../profile_view.dart';
 
-mixin ProfileMixin on State<ProfileView>{
+mixin ProfileMixin on State<ProfileView> {
   void verificationProfile() {
-    $loading.on(context);
+    // $loading.on(context);
     context.read<AccountsBloc>().add(GetAccountUserEvent(onSuccess: () {
-      $loading.off(context);
+      // $loading.off(context);
       context.pushNamed(AppRouteNames.verificationProfile);
     }));
   }
 
   void onPressEditProfile() {
-    $loading.on(context);
+    // $loading.on(context);
     context.read<AccountsBloc>().add(GetAccountUserEvent(onSuccess: () {
-      $loading.off(context);
+      // $loading.off(context);
       context.pushNamed(AppRouteNames.editProfile);
     }));
   }
@@ -26,21 +26,22 @@ mixin ProfileMixin on State<ProfileView>{
   }
 
   void onPressLogOut() {
-      $pinVM().clearPin();
-      context.read<AuthBloc>().add(const Logout());
-      context.pushNamed(AppRouteNames.login);
+    $pinVM().clearPin();
+    context.read<AuthBloc>().add(const Logout());
+    context.pushNamed(AppRouteNames.login);
   }
 
   void onPressMyOrders() {
     context.pushNamed(AppRouteNames.myOrders);
   }
+
   void onPressPayment() {
     context.pushNamed(AppRouteNames.payment);
   }
 
   void showQrCode() {
     showModalBottomSheet(
-      context: MainView.of(context).context,
+      context: context,//MainView.of(context).context,
       builder: (ctx) {
         return Column(
           mainAxisSize: MainAxisSize.min,
@@ -56,14 +57,14 @@ mixin ProfileMixin on State<ProfileView>{
                     onPressed: () {
                       context.pop();
                     },
-                    icon: AppIcons.close.svg(),
+                    icon: const SizedBox(), // AppIcons.close.svg(),
                   ),
                 ),
               ),
             ),
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: WBackground(
+              child: SizedBox(
                 child: Container(
                   padding: const EdgeInsets.all(24),
                   width: double.infinity,
@@ -88,12 +89,7 @@ mixin ProfileMixin on State<ProfileView>{
                               padding: const EdgeInsets.all(8.0),
                               child: Center(
                                 child: CreateQRCode(
-                                  text: context
-                                      .read<AccountsBloc>()
-                                      .state
-                                      .userContainer
-                                      .user
-                                      .qrcode,
+                                  text: context.read<AccountsBloc>().state.userContainer.user.qrcode,
                                 ),
                               ),
                             ),
@@ -116,5 +112,4 @@ mixin ProfileMixin on State<ProfileView>{
     context.read<AccountsBloc>().add(const GetAccountUserEvent());
     super.initState();
   }
-
 }

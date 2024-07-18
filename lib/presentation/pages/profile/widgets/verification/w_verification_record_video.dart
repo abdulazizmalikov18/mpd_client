@@ -1,14 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:formz/formz.dart';
-import 'package:dwed_client/assets/colors/colors.dart';
-import 'package:dwed_client/assets/constants/icons.dart';
-import 'package:dwed_client/assets/themes/theme.dart';
-import 'package:dwed_client/features/common/face_recognizer/view/face_recognizer_camera.dart';
-import 'package:dwed_client/features/common/widgets/w_button.dart';
-import 'package:dwed_client/features/common/widgets/w_gradient_circular_progress_indicator.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
+import 'package:mpd_client/presentation/styles/theme.dart';
+import 'package:mpd_client/presentation/widgets/w_button.dart';
 
 class WVerificationVideRecorder extends StatefulWidget {
   const WVerificationVideRecorder({super.key});
@@ -68,25 +64,25 @@ class _WVerificationVideRecorderState extends State<WVerificationVideRecorder> {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: SizedBox(
-                  width: MediaQuery.sizeOf(context).width * 0.5,
-                  height: MediaQuery.sizeOf(context).width * 0.5,
-                  child: const WFaceRegocnizerCamera(),
-                ),
-              ),
-              ValueListenableBuilder(
-                valueListenable: milliseconds,
-                builder: (BuildContext context, dynamic value, Widget? child) {
-                  return GradientCircularProgressIndicator(
-                    radius: 100,
-                    gradientColors: wgradient.colors,
-                    strokeWidth: 2,
-                    value: value / 3600,
-                  );
-                },
-              ),
+              // ClipRRect(
+              //   borderRadius: BorderRadius.circular(100),
+              //   child: SizedBox(
+              //     width: MediaQuery.sizeOf(context).width * 0.5,
+              //     height: MediaQuery.sizeOf(context).width * 0.5,
+              //     child: const WFaceRegocnizerCamera(),
+              //   ),
+              // ),
+              // ValueListenableBuilder(
+              //   valueListenable: milliseconds,
+              //   builder: (BuildContext context, dynamic value, Widget? child) {
+              //     return GradientCircularProgressIndicator(
+              //       radius: 100,
+              //       gradientColors: wgradient.colors,
+              //       strokeWidth: 2,
+              //       value: value / 3600,
+              //     );
+              //   },
+              // ),
             ],
           ),
         ),
@@ -106,7 +102,7 @@ class _WVerificationVideRecorderState extends State<WVerificationVideRecorder> {
                     ? Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          AppIcons.icHome.svg(),
+                          // AppIcons.icHome.svg(),
                           const SizedBox(width: 8),
                           Text(
                             'Boshlash',
@@ -133,10 +129,13 @@ class _WVerificationVideRecorderState extends State<WVerificationVideRecorder> {
                               )
                             ],
                           )
-                        : const SpinKitCircle(
+                        : Container(
+                            color: black,
+                          ) /*const SpinKitCircle(
                             size: 30,
                             color: black,
-                          )),
+                          )*/
+                    ),
               );
             },
           ),

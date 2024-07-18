@@ -17,7 +17,7 @@ dependencies:
     sdk: flutter
   flutter_animate: ^4.5.0
   flutter_svg: ^2.0.10+1
-  chopper: ^7.0.6
+  chopper: ^8.0.0
   logger: ^2.4.0
   flutter_bloc: ^8.1.6
   logging: ^1.2.0
@@ -35,6 +35,15 @@ dependencies:
   local_auth: ^2.2.0
   image_painter: ^0.7.1
   lottie: ^3.1.2
+  pretty_chopper_logger: ^1.0.11
+  date_picker_plus: ^4.1.0
+  image_picker: ^1.1.2
+  mask_text_input_formatter: ^2.9.0
+  pinput: ^5.0.0
+  shimmer: ^3.0.0
+  circle_flags: ^5.0.0
+  qr_flutter: ^4.1.0
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:
@@ -42,6 +51,9 @@ dev_dependencies:
 
   flutter_lints: ^3.0.0
   json_annotation: ^4.9.0
+  build_runner: ^2.4.9
+  json_serializable: ^6.8.0
+  chopper_generator: ^8.0.0
 
 flutter:
   uses-material-design: true

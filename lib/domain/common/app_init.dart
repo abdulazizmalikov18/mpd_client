@@ -2,12 +2,16 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:logging/logging.dart';
+import 'package:media_kit/media_kit.dart';
 import 'package:mpd_client/infrastructure/services/connectivity.dart';
 import 'package:mpd_client/infrastructure/services/log_service.dart';
+import 'package:mpd_client/infrastructure/services/service_locator.dart';
+import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
 
 class AppInit {
   static bool? connectivityX;
@@ -17,7 +21,10 @@ class AppInit {
   static Future<AppInit> get create async {
     await appInitialized();
     connectivityX ??= await ConnectivityX().create();
-
+    setupLocator();
+    await StorageRepository.getInstance();
+    debugRepaintRainbowEnabled = false;
+    MediaKit.ensureInitialized();
     return AppInit._();
   }
 
@@ -31,8 +38,7 @@ class AppInit {
     // await EasyLocalization.ensureInitialized();
 
     /// Device Orientation
-    await SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
     _setupLogging();
@@ -108,7 +114,6 @@ class LogBlocObserver extends BlocObserver {
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback = (cert, host, port) => true;
+    return super.createHttpClient(context)..badCertificateCallback = (cert, host, port) => true;
   }
 }
