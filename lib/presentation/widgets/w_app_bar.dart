@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:mpd_client/presentation/router/routs_contact.dart';
-import 'package:mpd_client/presentation/styles/app_icons.dart';
 
 class WAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget title;

@@ -60,7 +60,7 @@ class _WVerificationVideRecorderState extends State<WVerificationVideRecorder> {
           ),
         ),
         const SizedBox(height: 8),
-        Center(
+        const Center(
           child: Stack(
             alignment: Alignment.center,
             children: [

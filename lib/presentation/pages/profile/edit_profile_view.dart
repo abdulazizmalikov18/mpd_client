@@ -13,8 +13,6 @@ import 'package:mpd_client/presentation/pages/auth/widgets/w_shadowed_container.
 import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_phone.dart';
 import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_select_gender.dart';
 import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_textfield_with_title.dart';
-import 'package:mpd_client/presentation/styles/app_icons.dart';
-import 'package:mpd_client/presentation/styles/app_images.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/presentation/widgets/w_app_bar.dart';
@@ -31,7 +29,8 @@ class EditProfileView extends StatefulWidget {
   State<EditProfileView> createState() => _EditProfileViewState();
 }
 
-class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin {
+class _EditProfileViewState extends State<EditProfileView>
+    with EditProfileMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +53,8 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                       children: [
                         ValueListenableBuilder(
                           valueListenable: avatar,
-                          builder: (BuildContext context, avatar, Widget? child) {
+                          builder:
+                              (BuildContext context, avatar, Widget? child) {
                             return ClipRRect(
                               borderRadius: BorderRadius.circular(100),
                               child: avatar != null
@@ -65,12 +65,13 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                                       fit: BoxFit.cover,
                                     )
                                   : Image.network(
-                                      user!.avatar,
+                                      user.avatar,
                                       width: 80,
                                       height: 80,
                                       fit: BoxFit.cover,
-                                      errorBuilder: (context, error, stackTrace) {
-                                        return SizedBox();
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
+                                        return const SizedBox();
                                         // return AppImages.userImg.imgAsset(
                                         //   width: 80,
                                         //   height: 80,
@@ -86,11 +87,13 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                           child: InkWell(
                             onTap: pickImageBottomSheet,
                             child: DecoratedBox(
-                              decoration: BoxDecoration(gradient: wgradient, shape: BoxShape.circle),
+                              decoration: BoxDecoration(
+                                  gradient: wgradient, shape: BoxShape.circle),
                               child: const Padding(
-                                padding: EdgeInsets.all(6.0),
-                                child: SizedBox()//AppIcons.icHome.svg(color: white),
-                              ),
+                                  padding: EdgeInsets.all(6.0),
+                                  child:
+                                      SizedBox() //AppIcons.icHome.svg(color: white),
+                                  ),
                             ),
                           ),
                         ),
@@ -169,7 +172,9 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                   const SizedBox(height: 24),
                   WVerificationTextFieldWithTitle(
                     title: 'Mutaxasisligi',
-                    hintText: user.mainCat.name.isNotEmpty ? user.mainCat.name : "Kiritilmagan",
+                    hintText: user.mainCat.name.isNotEmpty
+                        ? user.mainCat.name
+                        : "Kiritilmagan",
                     isRequired: true,
                     isReadOnly: true,
                     onTap: onPressedSelectSpecialist,
@@ -177,7 +182,8 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                   const SizedBox(height: 24),
                   WVerificationTextFieldWithTitle(
                     title: 'Login',
-                    hintText: user.login.isNotEmpty ? user.login : "Kiritilmagan",
+                    hintText:
+                        user.login.isNotEmpty ? user.login : "Kiritilmagan",
                     isRequired: true,
                     onChange: (login) {
                       if (login.isEmpty) {
@@ -200,7 +206,8 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                   const SizedBox(height: 24),
                   WVerificationTextFieldWithTitle(
                     title: 'PINFL',
-                    hintText: user.pinfl.isNotEmpty ? user.pinfl : "Kiritilmagan",
+                    hintText:
+                        user.pinfl.isNotEmpty ? user.pinfl : "Kiritilmagan",
                     isRequired: true,
                     onChange: (pinfl) {
                       if (pinfl.isEmpty) {

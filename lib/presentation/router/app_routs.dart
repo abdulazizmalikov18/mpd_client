@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mpd_client/presentation/pages/auth/check_pin_view.dart';
 import 'package:mpd_client/presentation/pages/auth/confirm_auth_data.dart';

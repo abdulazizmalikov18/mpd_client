@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mpd_client/presentation/pages/profile/widgets/w_profile_item.dart';
 import 'package:mpd_client/presentation/router/routs_contact.dart';
-import 'package:mpd_client/presentation/styles/app_images.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/presentation/widgets/w_button.dart';
 
