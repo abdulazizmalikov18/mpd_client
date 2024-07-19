@@ -105,7 +105,7 @@ class WButton extends StatelessWidget {
                 child: child ??
                     Text(
                       text,
-                      style: isDisabled ? textStyle!.copyWith(color: textStyle?.color?.withOpacity(0.5)) : textStyle,
+                      style: isDisabled ? textStyle?.copyWith(color: textStyle?.color?.withOpacity(0.5)) : textStyle,
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,

@@ -175,56 +175,63 @@ mixin ConfirmDataMixin on State<ConfirmAuthDataView> {
     });
   }
 
-  void pickImageBottomSheet() {
-    showModalBottomSheet(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      context: context,
-      builder: (context) {
-        return ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topRight: Radius.circular(16),
-            topLeft: Radius.circular(16),
-          ),
-          child: SizedBox(
-            child: WBottomSheet(
-              title: 'Upload a picture',
-              child: Column(
-                children: [
-                  const SizedBox(height: 24),
-                  WShadowedItemContainer(
-                    title: 'Сфотографировать',
-                    icon: '', //AppIcons.camera,
-                    onTap: () async {
-                      final result = await ImagePicker().pickImage(source: ImageSource.camera);
-                      if (result != null) {
-                        avatar.value = result.path;
-                        if (context.mounted) {
-                          context.pop();
-                        }
-                      }
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  WShadowedItemContainer(
-                    title: 'Из галареии',
-                    icon: '', //AppIcons.folderAdd,
-                    onTap: () async {
-                      final result = await ImagePicker().pickImage(source: ImageSource.gallery);
-                      if (result != null) {
-                        avatar.value = result.path;
-                        if (context.mounted) {
-                          context.pop();
-                        }
-                      }
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
+  void pickImageBottomSheet() async {
+    final result = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (result != null) {
+      avatar.value = result.path;
+      if (context.mounted) {
+        context.pop();
+      }
+    }
+    // showModalBottomSheet(
+    //   backgroundColor: Colors.transparent,
+    //   elevation: 0,
+    //   context: context,
+    //   builder: (context) {
+    //     return ClipRRect(
+    //       borderRadius: const BorderRadius.only(
+    //         topRight: Radius.circular(16),
+    //         topLeft: Radius.circular(16),
+    //       ),
+    //       child: SizedBox(
+    //         child: WBottomSheet(
+    //           title: 'Upload a picture',
+    //           child: Column(
+    //             children: [
+    //               const SizedBox(height: 24),
+    //               WShadowedItemContainer(
+    //                 title: 'Сфотографировать',
+    //                 icon: '', //AppIcons.camera,
+    //                 onTap: () async {
+    //                   final result = await ImagePicker().pickImage(source: ImageSource.camera);
+    //                   if (result != null) {
+    //                     avatar.value = result.path;
+    //                     if (context.mounted) {
+    //                       context.pop();
+    //                     }
+    //                   }
+    //                 },
+    //               ),
+    //               const SizedBox(height: 16),
+    //               WShadowedItemContainer(
+    //                 title: 'Из галареии',
+    //                 icon: '', //AppIcons.folderAdd,
+    //                 onTap: () async {
+    //                   final result = await ImagePicker().pickImage(source: ImageSource.gallery);
+    //                   if (result != null) {
+    //                     avatar.value = result.path;
+    //                     if (context.mounted) {
+    //                       context.pop();
+    //                     }
+    //                   }
+    //                 },
+    //               ),
+    //             ],
+    //           ),
+    //         ),
+    //       ),
+    //     );
+    //   },
+    // );
   }
 }

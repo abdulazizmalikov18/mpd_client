@@ -32,11 +32,11 @@ class WVerificationTextFieldWithTitle extends StatelessWidget {
       children: [
         RichText(
           text: TextSpan(
-            style: AppTheme.bodySmall.copyWith(color: white),
+            style: AppTheme.bodySmall,
             children: [
               TextSpan(
                 text: title,
-                style: AppTheme.bodySmall.copyWith(color: white),
+                style: AppTheme.bodySmall,
               ),
               if (isRequired)
                 const TextSpan(
@@ -53,10 +53,8 @@ class WVerificationTextFieldWithTitle extends StatelessWidget {
           onTap: onTap,
           controller: controller,
           onChanged: onChange ?? (e) {},
-          style: AppTheme.labelSmall.copyWith(
-            color: white,
-          ),
-          borderColor: borderColor,
+          style: AppTheme.labelSmall,
+          borderColor: border,
           hintText: hintText,
           hintStyle: AppTheme.labelSmall.copyWith(
             color: gray,
