@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -12,10 +11,7 @@ import 'package:mpd_client/presentation/pages/profile/widgets/w_profile_item.dar
 import 'package:mpd_client/presentation/pages/profile/widgets/w_qr_code.dart';
 import 'package:mpd_client/presentation/router/routs_contact.dart';
 import 'package:mpd_client/presentation/styles/app_icons.dart';
-import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
-import 'package:mpd_client/presentation/widgets/w_app_bar.dart';
-import 'package:mpd_client/presentation/widgets/w_button.dart';
 import 'package:mpd_client/utils/extensions/context_extension.dart';
 
 part 'mixin/profile_mixin.dart';

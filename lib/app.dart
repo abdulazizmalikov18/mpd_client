@@ -8,7 +8,6 @@ import 'package:mpd_client/infrastructure/services/service_locator.dart';
 import 'package:mpd_client/presentation/router/app_routs.dart';
 import 'package:mpd_client/presentation/router/routs_contact.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
-import 'package:mpd_client/presentation/widgets/w_custom_screen.dart';
 import 'package:mpd_client/utils/l10n/app_localizations.dart';
 
 class MyApp extends StatefulWidget {

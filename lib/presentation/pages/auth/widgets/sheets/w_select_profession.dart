@@ -5,7 +5,6 @@ import 'package:mpd_client/application/accounts/accounts_bloc.dart';
 import 'package:mpd_client/application/auth/controller/registration_view_model.dart';
 import 'package:mpd_client/presentation/pages/auth/widgets/dialog_title.dart';
 import 'package:mpd_client/presentation/pages/auth/widgets/sheets/profession_list.dart';
-import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/widgets/w_text_field.dart';
 import 'package:mpd_client/utils/debounce.dart';

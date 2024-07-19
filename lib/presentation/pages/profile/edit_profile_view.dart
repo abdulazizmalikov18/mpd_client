@@ -11,10 +11,8 @@ import 'package:mpd_client/domain/models/auth/user.dart';
 import 'package:mpd_client/presentation/pages/auth/widgets/sheets/w_select_profession.dart';
 import 'package:mpd_client/presentation/pages/auth/widgets/sheets/w_select_region.dart';
 import 'package:mpd_client/presentation/pages/auth/widgets/w_shadowed_container.dart';
-import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_phone.dart';
 import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_select_gender.dart';
 import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_textfield_with_title.dart';
-import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/app_images.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
@@ -36,7 +34,8 @@ class EditProfileView extends StatefulWidget {
   State<EditProfileView> createState() => _EditProfileViewState();
 }
 
-class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin {
+class _EditProfileViewState extends State<EditProfileView>
+    with EditProfileMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +56,8 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                       children: [
                         ValueListenableBuilder(
                           valueListenable: avatar,
-                          builder: (BuildContext context, avatar, Widget? child) {
+                          builder:
+                              (BuildContext context, avatar, Widget? child) {
                             return ClipRRect(
                               borderRadius: BorderRadius.circular(100),
                               child: avatar != null
@@ -183,7 +183,9 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                   const SizedBox(height: 24),
                   WVerificationTextFieldWithTitle(
                     title: 'Mutaxasisligi',
-                    hintText: user.mainCat.name.isNotEmpty ? user.mainCat.name : "Kiritilmagan",
+                    hintText: user.mainCat.name.isNotEmpty
+                        ? user.mainCat.name
+                        : "Kiritilmagan",
                     isRequired: true,
                     isReadOnly: true,
                     onTap: onPressedSelectSpecialist,
@@ -191,7 +193,8 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                   const SizedBox(height: 24),
                   WVerificationTextFieldWithTitle(
                     title: 'Login',
-                    hintText: user.login.isNotEmpty ? user.login : "Kiritilmagan",
+                    hintText:
+                        user.login.isNotEmpty ? user.login : "Kiritilmagan",
                     isRequired: true,
                     onChange: (login) {
                       if (login.isEmpty) {
@@ -214,7 +217,8 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                   const SizedBox(height: 24),
                   WVerificationTextFieldWithTitle(
                     title: 'PINFL',
-                    hintText: user.pinfl.isNotEmpty ? user.pinfl : "Kiritilmagan",
+                    hintText:
+                        user.pinfl.isNotEmpty ? user.pinfl : "Kiritilmagan",
                     isRequired: true,
                     onChange: (pinfl) {
                       if (pinfl.isEmpty) {

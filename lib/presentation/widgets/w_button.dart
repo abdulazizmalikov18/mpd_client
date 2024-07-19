@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 
 class WButton extends StatelessWidget {

@@ -15,7 +15,6 @@ import 'package:mpd_client/presentation/pages/auth/widgets/w_pick_avatar.dart';
 import 'package:mpd_client/presentation/pages/auth/widgets/w_shadowed_container.dart';
 import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_select_gender.dart';
 import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_textfield_with_title.dart';
-import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/widgets/w_bottom_sheet.dart';
 import 'package:mpd_client/presentation/widgets/w_button.dart';

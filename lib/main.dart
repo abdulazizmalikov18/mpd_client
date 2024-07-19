@@ -1,9 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:media_kit/media_kit.dart';
 import 'package:mpd_client/app.dart';
 import 'package:mpd_client/domain/common/app_init.dart';
 import 'package:mpd_client/infrastructure/services/log_service.dart';
