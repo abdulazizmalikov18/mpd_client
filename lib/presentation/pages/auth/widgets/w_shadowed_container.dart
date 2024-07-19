@@ -25,7 +25,7 @@ class WShadowedItemContainer extends StatelessWidget {
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(vertical: 15),
         decoration: BoxDecoration(
-          color: white.withOpacity(0.2),
+          color: black,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: borderColor,

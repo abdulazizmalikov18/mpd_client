@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -19,6 +20,10 @@ import 'package:mpd_client/presentation/widgets/w_app_bar.dart';
 import 'package:mpd_client/presentation/widgets/w_bottom_sheet.dart';
 import 'package:mpd_client/presentation/widgets/w_button.dart';
 import 'package:mpd_client/presentation/widgets/w_button_gradient.dart';
+import 'package:mpd_client/presentation/widgets/w_long_button.dart';
+import 'package:mpd_client/presentation/widgets/w_network_image.dart';
+import 'package:mpd_client/utils/extensions/context_extension.dart';
+import 'package:mpd_client/utils/extensions/date_time_ext.dart';
 
 part './mixin/edit_profile_mixin.dart';
 
@@ -46,10 +51,8 @@ class _EditProfileViewState extends State<EditProfileView>
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    width: 88,
-                    height: 88,
-                    child: Stack(
+                  Center(
+                    child: Column(
                       children: [
                         ValueListenableBuilder(
                           valueListenable: avatar,
@@ -64,43 +67,36 @@ class _EditProfileViewState extends State<EditProfileView>
                                       height: 80,
                                       fit: BoxFit.cover,
                                     )
-                                  : Image.network(
-                                      user.avatar,
+                                  : WNetworkImage(
+                                      image: user.avatar,
+                                      borderRadius: 100,
                                       width: 80,
                                       height: 80,
-                                      fit: BoxFit.cover,
-                                      errorBuilder:
-                                          (context, error, stackTrace) {
-                                        return const SizedBox();
-                                        // return AppImages.userImg.imgAsset(
-                                        //   width: 80,
-                                        //   height: 80,
-                                        //   fit: BoxFit.cover,
-                                        // );
-                                      },
+                                      defaultWidget: Image.asset(
+                                        AppImages.doctor,
+                                        width: 80,
+                                        height: 80,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                             );
                           },
                         ),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: InkWell(
-                            onTap: pickImageBottomSheet,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                  gradient: wgradient, shape: BoxShape.circle),
-                              child: const Padding(
-                                  padding: EdgeInsets.all(6.0),
-                                  child:
-                                      SizedBox() //AppIcons.icHome.svg(color: white),
-                                  ),
+                        const SizedBox(height: 8),
+                        GestureDetector(
+                          onTap: pickImageBottomSheet,
+                          child: Text(
+                            context.l10n.profile_edit_photo,
+                            style: AppTheme.displaySmall.copyWith(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: mainBlue,
                             ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const WVerificationPhone(),
                   const SizedBox(height: 24),
                   WVerificationTextFieldWithTitle(
                     title: 'ism',
@@ -139,14 +135,29 @@ class _EditProfileViewState extends State<EditProfileView>
                   WVerificationTextFieldWithTitle(
                     title: 'Tug’ilgan sana',
                     hintText: user.birthday,
-                    onChange: (surname) {
-                      if (surname.isEmpty) {
+                    onTap: () {
+                      showCupertinoModalPopup(
+                          context: context,
+                          builder: (ctx) {
+                            return _builtCupertinoDatePicker(context);
+                          }).then(
+                        (value) {
+                          if (value is Map) {
+                            this.user.value = user.copyWith(
+                              birthday: value['date'],
+                            );
+                          }
+                        },
+                      );
+                    },
+                    onChange: (birthday) {
+                      if (birthday.isEmpty) {
                         this.user.value = user.copyWith(
-                          surname: oldUser.surname,
+                          birthday: oldUser.surname,
                         );
                       } else {
                         this.user.value = user.copyWith(
-                          surname: surname,
+                          birthday: birthday,
                         );
                       }
                     },
@@ -246,6 +257,59 @@ class _EditProfileViewState extends State<EditProfileView>
                 ],
               );
             },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Container _builtCupertinoDatePicker(BuildContext context) {
+    DateTime dateTime = DateTime.now();
+    return Container(
+      margin: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      decoration: BoxDecoration(
+        color: CupertinoColors.systemBackground.resolveFrom(context),
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(24),
+          topRight: Radius.circular(24),
+        ),
+      ),
+      height: 300,
+      padding: const EdgeInsets.only(top: 6.0),
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 32, top: 24),
+          child: Column(
+            children: [
+              Expanded(
+                child: CupertinoDatePicker(
+                  mode: CupertinoDatePickerMode.date,
+                  onDateTimeChanged: (date) {
+                    dateTime = date;
+                  },
+                  initialDateTime: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+                  minimumYear: 1940,
+                  maximumYear: DateTime.now().year,
+                  minimumDate: DateTime(1940),
+                  maximumDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: LongButton(
+                  buttonName: 'Saqlash',
+                  onPress: () {
+                    Navigator.pop(context, {
+                      'date': dateTime.toView,
+                    });
+                  },
+                ),
+              )
+            ],
           ),
         ),
       ),

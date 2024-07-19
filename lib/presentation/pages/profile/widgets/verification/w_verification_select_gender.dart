@@ -1,6 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
+import 'package:mpd_client/utils/extensions/context_extension.dart';
+import 'package:mpd_client/utils/extensions/string_ext.dart';
 
 class WVerificationSelectGender extends StatefulWidget {
   final bool isMale;
@@ -40,27 +44,46 @@ class _WVerificationSelectGenderState extends State<WVerificationSelectGender> {
         const SizedBox(height: 4),
         Row(
           children: [
-            Expanded(
-              child: InkWell(
-                onTap: () => selectGender(true),
-                child: SizedBox(
-                  height: 44,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: isActiveMale ? primary : white.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Center(
+            InkWell(
+              onTap: () => selectGender(true),
+              child: SizedBox(
+                width: 112,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: background,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          // (isActiveMale ? AppIcons.radioOn.svg() : AppIcons.radioOff.svg()),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 22,
+                            width: 22,
+                            decoration: ShapeDecoration(
+                              shape: CircleBorder(
+                                side: BorderSide(
+                                  color: isActiveMale
+                                      ? mainBlue
+                                      : grey,
+                                  width: 1.5,
+                                ),
+                              ),
+                            ),
+                            child: CircleAvatar(
+                              backgroundColor: isActiveMale
+                                  ? mainBlue
+                                  : background,
+                              radius: 7,
+                            ),
+                          ),
                           const SizedBox(width: 8),
                           Text(
-                            'Erkak',
-                            style: AppTheme.bodySmall.copyWith(
-                              color: white,
-                            ),
+                            context.l10n.register_gender_man,
+                            style: AppTheme.bodySmall,
                           ),
                         ],
                       ),
@@ -70,27 +93,47 @@ class _WVerificationSelectGenderState extends State<WVerificationSelectGender> {
               ),
             ),
             const SizedBox(width: 12),
-            Expanded(
-              child: InkWell(
-                onTap: () => selectGender(false),
-                child: SizedBox(
-                  height: 44,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: !isActiveMale ? primary : white.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Center(
+            InkWell(
+              onTap: () => selectGender(false),
+              child: SizedBox(
+                width: 112,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: background,
+                    borderRadius: BorderRadius.circular(100),
+
+                  ),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          // (!isActiveMale ? AppIcons.radioOn.svg() : AppIcons.radioOff.svg()),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 22,
+                            width: 22,
+                            decoration: ShapeDecoration(
+                              shape: CircleBorder(
+                                side: BorderSide(
+                                  color: !isActiveMale
+                                      ? mainBlue
+                                      : grey,
+                                  width: 1.5,
+                                ),
+                              ),
+                            ),
+                            child: CircleAvatar(
+                              backgroundColor: !isActiveMale
+                                  ? mainBlue
+                                  : background,
+                              radius: 7,
+                            ),
+                          ),
                           const SizedBox(width: 8),
                           Text(
-                            'Ayol',
-                            style: AppTheme.bodySmall.copyWith(
-                              color: white,
-                            ),
+                            context.l10n.register_gender_woman,
+                            style: AppTheme.bodySmall,
                           ),
                         ],
                       ),
