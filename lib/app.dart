@@ -19,7 +19,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
@@ -41,7 +40,7 @@ class _MyAppState extends State<MyApp> {
             AppRouts.router.pushReplacementNamed(AppRouteNames.login);
           }
           if (state.authStatus == AuthStatus.authenticated) {
-            AppRouts.router.goNamed(AppRouteNames.checkPin);
+            AppRouts.router.goNamed(AppRouteNames.home);
           }
         },
         child: MaterialApp.router(
@@ -52,11 +51,11 @@ class _MyAppState extends State<MyApp> {
           themeMode: ThemeMode.light,
           debugShowCheckedModeBanner: false,
           theme: AppTheme.theme(),
-          builder: (context, child) {
-            return CustomScreen(
-              child: child!,
-            );
-          },
+          // builder: (context, child) {
+          //   return CustomScreen(
+          //     child: child!,
+          //   );
+          // },
           routerConfig: AppRouts.router,
         ),
       ),

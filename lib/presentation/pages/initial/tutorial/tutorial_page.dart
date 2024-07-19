@@ -84,7 +84,7 @@ class _TutorialPageState extends State<TutorialPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: List<Widget>.generate(
                   pageViewPages.length,
-                      (index) => Padding(
+                  (index) => Padding(
                     padding: EdgeInsets.symmetric(horizontal: 5.w),
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 300),
@@ -94,9 +94,9 @@ class _TutorialPageState extends State<TutorialPage> {
                         color: background,
                         gradient: value == index
                             ? const LinearGradient(colors: [
-                          gradientBlueOpacity,
-                          gradientBlue,
-                        ])
+                                gradientBlueOpacity,
+                                gradientBlue,
+                              ])
                             : null,
                         borderRadius: BorderRadius.circular(12.r),
                       ),

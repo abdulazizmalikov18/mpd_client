@@ -16,6 +16,7 @@ import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/presentation/widgets/w_app_bar.dart';
 import 'package:mpd_client/presentation/widgets/w_button.dart';
+import 'package:mpd_client/utils/extensions/context_extension.dart';
 
 part 'mixin/profile_mixin.dart';
 
@@ -30,97 +31,50 @@ class _ProfileViewState extends State<ProfileView> with ProfileMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: WAppBar(
-        title: const Text("Profile"),
-        action: Padding(
-          padding: const EdgeInsets.only(right: 8),
-          child: IconButton(
-            onPressed: showQrCode,
-            icon: SizedBox(), //AppIcons.barcode.svg(),
-          ),
-        ),
-      ),
       body: StorageRepository.getBool(StorageKeys.ISLOGGED)
           ? SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
-                  const SizedBox(height: 16),
-                  WProfileHeader(
-                    onPressEditProfile: onPressEditProfile,
-                    verificationProfile: verificationProfile,
-                  ),
+                  const WProfileHeader(),
                   const SizedBox(height: 24),
-                  WProfileItem(
-                    icon: '',//AppIcons.lock2,
-                    title: 'Xavfsizlik',
-                    onPressed: onPressSecurity,
-                    subTitle: '',
-                  ),
-                  const SizedBox(height: 8),
-                  WProfileItem(
-                    icon: '',//AppIcons.icHome,
-                    title: 'Mening buyurtmalarim',
-                    subTitle: '',
-                    onPressed: onPressMyOrders,
-                  ),
-                  const SizedBox(height: 8),
-                  WProfileItem(
-                    icon: '',//AppIcons.square,
-                    title: 'Payment',
-                    subTitle: 'Select a payment method',
-                    onPressed: onPressPayment,
-                  ),
-                  const SizedBox(height: 8),
-                  WProfileItem(
-                    icon: '',//AppIcons.icHome,
-                    title: 'Mening kuponlarim',
-                    subTitle: '',
-                    onPressed: () {},
-                  ),
-                  const SizedBox(height: 8),
-                  WProfileItem(
-                    icon: '',//AppIcons.setting,
-                    title: 'Bildirishnomalarni sozlash',
-                    subTitle: '',
-                    onPressed: onPressNotificationSettings,
-                  ),
-
-                  // WProfileItem(
-                  //   icon: AppIcons.icHome,
-                  //   title: 'Ilova tili',
-                  //   subTitle: '',
-                  //   onPressed: MainView.of(context).showLanguageBottomSheet,
-                  // ),
-                  const SizedBox(height: 8),
-                  WProfileItem(
-                    icon: '',//AppIcons.question,
-                    title: 'My Quiz',
-                    subTitle: 'Create question, or dictonary with you student, make a prize',
-                    onPressed: () {
-                      context.push(AppRoutePath.quizCreate);
-                    },
-                  ),
-                  const SizedBox(height: 8),
-                  WButton(
-                    onTap: onPressLogOut,
-                    height: 56,
-                    color: const Color(0xFFFA193E).withOpacity(.2),
-                    shadow: wboxShadowRed,
-                    border: Border.all(color: const Color(0xFFFA193E)),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
                       children: [
-                        // AppIcons.logout.svg(),
-                        const SizedBox(width: 8),
-                        Text(
-                          'Chiqish',
-                          style: AppTheme.headlineSmall.copyWith(color: white),
-                        )
+                        WProfileItem(
+                          icon: AppIcons.user,
+                          title: context.l10n.profile_personal_info,
+                          onPressed: onPressEditProfile,
+                        ),
+                        const SizedBox(height: 8),
+                        WProfileItem(
+                          icon: AppIcons.userAdd,
+                          subTitle: '5 ${context.l10n.profile_following_doctors_doctor.toLowerCase()}',
+                          title: context.l10n.profile_following_doctors,
+                          onPressed: onPressMyOrders,
+                        ),
+                        const SizedBox(height: 8),
+                        WProfileItem(
+                          icon: AppIcons.languageCircle,
+                          title: context.l10n.profile_language,
+                          onPressed: onPressPayment,
+                        ),
+                        const SizedBox(height: 8),
+                        WProfileItem(
+                          icon: AppIcons.receipt,
+                          title: context.l10n.records_title,
+                          onPressed: () {},
+                        ),
+                        const SizedBox(height: 8),
+                        WProfileItem(
+                          icon: AppIcons.logOut,
+                          isRed: true,
+                          title: context.l10n.profile_logout,
+                          onPressed: onPressLogOut,
+                        ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 120),
                 ],
               ),
             )

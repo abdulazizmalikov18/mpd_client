@@ -10,8 +10,8 @@ import 'package:mpd_client/utils/extensions/string_ext.dart';
 class WProfileItem extends StatelessWidget {
   final String icon;
   final String title;
-  final String subTitle;
   final void Function() onPressed;
+  final String? subTitle;
   final bool isRed;
 
   const WProfileItem({
@@ -20,63 +20,51 @@ class WProfileItem extends StatelessWidget {
     required this.title,
     required this.onPressed,
     this.isRed = false,
-    required this.subTitle,
+    this.subTitle,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return WButton(
+      color: Colors.transparent,
+      border: Border.all(
+        color: Colors.transparent,
+      ),
       onTap: onPressed,
-      child: WButton(
-        borderRadius: 12,
-        onTap: () {},
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  gradient: wgradient,
-                  border: Border.all(color: white.withOpacity(0.3)),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                foregroundDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: white.withOpacity(0.1),
-                    width: 2,
-                    strokeAlign: -2,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: Row(
+          children: [
+            icon.svg(
+              color: isRed ? red : black,
+              width: 20,
+              height: 20,
+            ),
+            const SizedBox(width: 10),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: AppTheme.displayLarge.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: isRed ? red : null,
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(6),
-                  child: icon.svg(
-                    color: white,
-                    width: 20,
-                    height: 20,
+                if (subTitle != null)
+                  Text(
+                    subTitle!,
+                    style: AppTheme.displayLarge.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: mainBlue,
+                    ),
                   ),
-                ),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: AppTheme.displayLarge,
-                    ),
-                    Text(
-                      subTitle,
-                      style: AppTheme.labelLarge,
-                    ),
-                  ],
-                ),
-              ),
-              // AppIcons.arrowRightMenu.svg(),
-            ],
-          ),
+              ],
+            ),
+            // AppIcons.arrowRightMenu.svg(),
+          ],
         ),
       ),
     );

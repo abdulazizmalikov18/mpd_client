@@ -10,14 +10,16 @@ import 'package:mpd_client/presentation/pages/auth/create_login_view.dart';
 import 'package:mpd_client/presentation/pages/auth/create_password_view.dart';
 import 'package:mpd_client/presentation/pages/auth/login_view.dart';
 import 'package:mpd_client/presentation/pages/auth/registration_view.dart';
+import 'package:mpd_client/presentation/pages/doctor/doctor_view.dart';
 import 'package:mpd_client/presentation/pages/error/error_view.dart';
+import 'package:mpd_client/presentation/pages/home/home_view.dart';
 import 'package:mpd_client/presentation/pages/initial/language/language_page.dart';
 import 'package:mpd_client/presentation/pages/initial/splash/splash_page.dart';
 import 'package:mpd_client/presentation/pages/initial/tutorial/tutorial_page.dart';
-import 'package:mpd_client/presentation/pages/profile/edit_password_view.dart';
+import 'package:mpd_client/presentation/pages/main/main_view.dart';
 import 'package:mpd_client/presentation/pages/profile/edit_profile_view.dart';
 import 'package:mpd_client/presentation/pages/profile/profile_view.dart';
-import 'package:mpd_client/presentation/pages/profile/verification_profile_view.dart';
+import 'package:mpd_client/presentation/pages/record/record_view.dart';
 import 'package:mpd_client/presentation/router/routs_contact.dart';
 
 sealed class AppRouts {
@@ -66,21 +68,11 @@ sealed class AppRouts {
       ),
       GoRoute(
         parentNavigatorKey: navigatorKey,
-        path: AppRoutePath.verificationProfile,
-        name: AppRouteNames.verificationProfile,
-        builder: (context, state) => const VerificationProfileView(),
-      ),
-      GoRoute(
-        parentNavigatorKey: navigatorKey,
         path: AppRoutePath.editProfile,
         name: AppRouteNames.editProfile,
         builder: (context, state) => const EditProfileView(),
       ),
-      GoRoute(
-        path: AppRoutePath.editPinCode,
-        name: AppRouteNames.editPinCode,
-        builder: (context, state) => const EditPasswordView(),
-      ),
+
       GoRoute(
         path: AppRoutePath.authConfirmOtp,
         name: AppRouteNames.authConfirmOtp,
@@ -112,54 +104,60 @@ sealed class AppRouts {
           password: (state.extra as Map)["password"],
         ),
       ),
-      // mainView,
+      mainView,
     ],
   );
 
-  // static final mainView = StatefulShellRoute.indexedStack(
-  //   builder: (context, state, navigationShell) {
-  //     return MainView(navigationShell: navigationShell);
-  //   },
-  //   branches: <StatefulShellBranch>[
-  //     StatefulShellBranch(
-  //       routes: [
-  //         GoRoute(
-  //           path: AppRoutePath.home,
-  //           name: AppRouteNames.home,
-  //           builder: (context, state) => const HomeView(),
-  //         )
-  //       ],
-  //     ),
-  //     StatefulShellBranch(
-  //       routes: [],
-  //     ),
-  //     StatefulShellBranch(
-  //       routes: [
-  //         GoRoute(
-  //           path: AppRoutePath.chat,
-  //           name: AppRouteNames.chat,
-  //           builder: (context, state) => const ChatView(),
-  //         ),
-  //       ],
-  //     ),
-  //     StatefulShellBranch(
-  //       routes: [
-  //         GoRoute(
-  //           path: AppRoutePath.cart,
-  //           name: AppRouteNames.cart,
-  //           builder: (context, state) => const CartView(),
-  //         ),
-  //       ],
-  //     ),
-  //     StatefulShellBranch(
-  //       routes: <RouteBase>[
-  //         GoRoute(
-  //           path: AppRoutePath.profile,
-  //           name: AppRouteNames.profile,
-  //           builder: (context, state) => const ProfileView(),
-  //         ),
-  //       ],
-  //     ),
-  //   ],
-  // );
+  static final mainView = StatefulShellRoute.indexedStack(
+    builder: (context, state, navigationShell) {
+      return MainView(navigationShell: navigationShell);
+    },
+    branches: <StatefulShellBranch>[
+      StatefulShellBranch(
+        routes: [
+          GoRoute(
+            path: AppRoutePath.home,
+            name: AppRouteNames.home,
+            builder: (context, state) => const HomeView(),
+          )
+        ],
+      ),
+      StatefulShellBranch(
+        routes: [
+          GoRoute(
+            path: AppRoutePath.doctor,
+            name: AppRouteNames.doctor,
+            builder: (context, state) => const DoctorView(),
+          ),
+        ],
+      ),
+      // StatefulShellBranch(
+      //   routes: [
+      //     GoRoute(
+      //       path: AppRoutePath.chat,
+      //       name: AppRouteNames.chat,
+      //       builder: (context, state) => const ChatView(),
+      //     ),
+      //   ],
+      // ),
+      StatefulShellBranch(
+        routes: [
+          GoRoute(
+            path: AppRoutePath.record,
+            name: AppRouteNames.record,
+            builder: (context, state) => const RecordView(),
+          ),
+        ],
+      ),
+      StatefulShellBranch(
+        routes: <RouteBase>[
+          GoRoute(
+            path: AppRoutePath.profile,
+            name: AppRouteNames.profile,
+            builder: (context, state) => const ProfileView(),
+          ),
+        ],
+      ),
+    ],
+  );
 }

@@ -20,11 +20,11 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   @override
   void initState() {
     Timer(const Duration(milliseconds: 1600), () async {
-      // if (StorageRepository.getString(StorageKeys.REFRESH).isNotEmpty && StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) {
-      //   context.goNamed(AppRouteNames.home);
-      // } else {
+      if (StorageRepository.getString(StorageKeys.REFRESH).isNotEmpty && StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) {
+        context.goNamed(AppRouteNames.home);
+      } else {
         context.goNamed(AppRouteNames.selectLang);
-      // }
+      }
     });
     super.initState();
   }

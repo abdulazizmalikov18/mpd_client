@@ -44,7 +44,6 @@ class WNotLoginProfile extends StatelessWidget {
                 WProfileItem(
                   icon: '', // AppIcons.icHome,
                   title: 'Bildirishnomalarni sozlash',
-                  subTitle: '',
                   onPressed: () {
                     context.pushNamed(AppRouteNames.notificationSettings);
                   },

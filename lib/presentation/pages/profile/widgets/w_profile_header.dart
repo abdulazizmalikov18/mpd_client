@@ -2,176 +2,94 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:mpd_client/application/accounts/accounts_bloc.dart';
-import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/app_images.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
-import 'package:mpd_client/presentation/widgets/w_button.dart';
 import 'package:mpd_client/presentation/widgets/w_network_image.dart';
 import 'package:mpd_client/presentation/widgets/w_shimmer.dart';
 import 'package:mpd_client/utils/extensions/string_ext.dart';
 
 class WProfileHeader extends StatelessWidget {
-  final void Function() onPressEditProfile;
-  final void Function() verificationProfile;
 
   const WProfileHeader({
-    super.key,
-    required this.onPressEditProfile,
-    required this.verificationProfile,
+    super.key
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                GestureDetector(
-                  onTap: onPressEditProfile,
-                  child: BlocBuilder<AccountsBloc, AccountsState>(
-                    builder: (context, state) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          WNetworkImage(
-                              image: state.userContainer.user.avatar,
-                              height: 60,
-                              width: 60,
-                              borderRadius: 100,
-                              defaultWidget: Container(
-                                color: black,
-                              ) /*AppImages.profileImg.imgAsset(
-                              width: 60,
-                              height: 60,
-                              fit: BoxFit.cover,
-                            ),*/
-                              ),
-                          const SizedBox(width: 8),
-                          Center(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: state.userContainer.status.isInProgress
-                                  ? [
-                                      const WShimmer(
-                                        height: 20,
-                                        width: 200,
-                                      ),
-                                      const SizedBox(height: 10),
-                                      const WShimmer(
-                                        height: 20,
-                                        width: 150,
-                                      ),
-                                    ]
-                                  : [
-                                      Text(
-                                        '${state.userContainer.user.name} ${state.userContainer.user.lastname}',
-                                        textAlign: TextAlign.center,
-                                        style: AppTheme.displayLarge.copyWith(
-                                          color: white,
-                                        ),
-                                      ),
-                                      Text(
-                                        state.userContainer.user.mainCat.name,
-                                        textAlign: TextAlign.center,
-                                        style: AppTheme.labelSmall.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          color: white.withOpacity(0.5),
-                                        ),
-                                      ),
-                                    ],
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 12),
-                const Row(
-                  children: [
-                    Expanded(
-                      child: WProfileHeaderItem(
-                        icon: '',// AppIcons.briefcaseLeft,
-                        label: 'Tajriba',
-                        title: '8 level',
-                      ),
-                    ),
-                    SizedBox(width: 8),
-                    Expanded(
-                      child: WProfileHeaderItem(
-                        icon: '',// AppIcons.briefcaseCenter,
-                        label: 'Bilim',
-                        title: '6 level',
-                      ),
-                    ),
-                    SizedBox(width: 8),
-                    Expanded(
-                      child: WProfileHeaderItem(
-                        icon: '',// AppIcons.briefcaseRight,
-                        label: 'Muomala',
-                        title: '24 level',
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                WButton(
-                  onTap: verificationProfile,
-                  height: 56,
-                  textStyle: AppTheme.bodyLarge.copyWith(color: white),
-                  text: 'Profilni tasdiqlash',
-                ),
-              ],
-            ),
-            Positioned(
-              right: 0,
-              child: Row(
+    return Stack(
+      children: [
+        Container(
+          width: double.infinity,
+          height: MediaQuery.sizeOf(context).height * 0.15,
+          decoration: BoxDecoration(
+            gradient: wgradient,
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(100),
+              bottomRight: Radius.circular(100),
+            )
+          ),
+        ),
+        Padding(
+          padding:  EdgeInsets.only(top: MediaQuery.sizeOf(context).height * 0.1),
+          child: BlocBuilder<AccountsBloc, AccountsState>(
+            builder: (context, state) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
-                    height: 28,
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                    child: Row(
-                      children: [
-                        // AppIcons.like.svg(),
-                        const SizedBox(width: 2),
+                  WNetworkImage(
+                    image: state.userContainer.user.avatar,
+                    height: 60,
+                    width: 60,
+                    borderRadius: 100,
+                    defaultWidget: Image.asset(
+                      AppImages.doctor,
+                      width: 60,
+                      height: 60,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: state.userContainer.status.isInProgress
+                          ? [
+                        const WShimmer(
+                          height: 20,
+                          width: 200,
+                        ),
+                        const SizedBox(height: 10),
+                        const WShimmer(
+                          height: 20,
+                          width: 150,
+                        ),
+                      ]
+                          : [
                         Text(
-                          '563',
-                          style: AppTheme.labelSmall.copyWith(
-                            fontSize: 9,
-                            color: white,
+                          '${state.userContainer.user.name} ${state.userContainer.user.lastname}',
+                          textAlign: TextAlign.center,
+                          style: AppTheme.displayLarge.copyWith(
+                            // color: white,
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 4),
-                  Container(
-                    height: 28,
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                    child: Row(
-                      children: [
-                        // AppIcons.unLike.svg(),
-                        const SizedBox(width: 2),
                         Text(
-                          '563',
+                          "+${state.userContainer.user.phone}",
+                          textAlign: TextAlign.center,
                           style: AppTheme.labelSmall.copyWith(
-                            fontSize: 9,
-                            color: white,
+                            fontWeight: FontWeight.w600,
+                            // color: white.withOpacity(0.5),
                           ),
                         ),
                       ],
                     ),
                   ),
                 ],
-              ),
-            ),
-          ],
+              );
+            },
+          ),
         ),
-      ),
+      ],
     );
   }
 }
