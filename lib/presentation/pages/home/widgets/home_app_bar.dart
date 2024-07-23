@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:formz/formz.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mpd_client/application/accounts/accounts_bloc.dart';
+import 'package:mpd_client/presentation/router/routs_contact.dart';
 import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
@@ -65,7 +67,9 @@ class HomeAppbarComponent extends StatelessWidget implements PreferredSize {
           splashRadius: 26,
           padding: const EdgeInsets.symmetric(horizontal: 9),
           constraints: const BoxConstraints(),
-          onPressed: () {},
+          onPressed: () {
+            context.pushNamed(AppRouteNames.createPost);
+          },
           icon: SvgPicture.asset(
             AppIcons.plusCircle,
             colorFilter: const ColorFilter.mode(black, BlendMode.srcIn),

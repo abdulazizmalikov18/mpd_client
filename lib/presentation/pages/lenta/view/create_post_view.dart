@@ -11,6 +11,7 @@ import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/presentation/widgets/w_app_bar.dart';
+import 'package:mpd_client/presentation/widgets/w_button.dart';
 import 'package:mpd_client/presentation/widgets/w_text_field.dart';
 import 'package:mpd_client/utils/extensions/string_ext.dart';
 
@@ -29,90 +30,58 @@ class _CreatePostViewState extends State<CreatePostView> with CreatePostMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const WAppBar(
-          title: Text('Create Post'),
-          action: SizedBox(),
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 16),
-                const WUserDetail(),
-                const SizedBox(height: 16),
-                const WPostAddPhotoItem(),
-                const SizedBox(height: 8),
-                RichText(
-                  text: TextSpan(
-                    style: AppTheme.headlineSmall.copyWith(
-                      fontSize: 10,
-                      color: white.withOpacity(0.5),
-                    ),
-                    children: [
-                      TextSpan(
-                        text: 'Sizes: ',
-                        style: AppTheme.headlineSmall.copyWith(
-                          fontSize: 10,
-                          color: orang,
-                        ),
-                      ),
-                      const TextSpan(text: '1080 x 1080 px | 1080 x 1920 px | 1200 x 315 px'),
-                    ],
-                  ),
+      // backgroundColor: black,
+      appBar: const WAppBar(
+        title: Text('Create Post'),
+        action: SizedBox(),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 16),
+              const WPostAddPhotoItem(),
+              const SizedBox(height: 16),
+              const Text(
+                'Share your thoughts',
+                style: AppTheme.labelSmall,
+              ),
+              const SizedBox(height: 8),
+              WTextField(
+                onChanged: (_) {},
+                maxLines: 4,
+                controller: descriptionController,
+                height: 88,
+                hintText: 'Write your description',
+                fillColor: white.withOpacity(0.1),
+                borderColor: border,
+                style: AppTheme.labelLarge.copyWith(
+                  color: black,
                 ),
-                const SizedBox(height: 16),
-                Text(
-                  'Share your thoughts',
-                  style: AppTheme.labelSmall.copyWith(
-                    color: white,
-                  ),
+                hintStyle: AppTheme.labelLarge.copyWith(
+                  color: black.withOpacity(0.5),
                 ),
-                const SizedBox(height: 8),
-                WTextField(
-                  onChanged: (_) {},
-                  maxLines: 4,
-                  controller: descriptionController,
-                  height: 88,
-                  hintText: 'Type...',
-                  fillColor: white.withOpacity(0.1),
-                  borderColor: borderColor,
-                  style: AppTheme.labelLarge.copyWith(
-                    color: white,
-                  ),
-                  hintStyle: AppTheme.labelLarge.copyWith(
-                    color: white.withOpacity(0.5),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-        bottomSheet: BlocBuilder<PostBloc, PostState>(
-          builder: (context, state) {
-            return WButtonBottomSheet(
-              onTap: onPressCreate,
-              isLoading: state.status.isInProgress,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  AppIcons.plus.svg(
-                    width: 24,
-                    height: 24,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Publish',
-                    style: AppTheme.headlineSmall.copyWith(
-                      color: white,
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-      );
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: BlocBuilder<PostBloc, PostState>(
+        builder: (context, state) {
+          return WButton(
+            onTap: onPressCreate,
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            isLoading: state.status.isInProgress,
+            text: 'Publish',
+            textStyle: AppTheme.headlineSmall.copyWith(
+              color: white,
+            ),
+          );
+        },
+      ),
+    );
   }
 }

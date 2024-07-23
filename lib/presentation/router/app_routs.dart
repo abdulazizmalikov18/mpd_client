@@ -13,6 +13,8 @@ import 'package:mpd_client/presentation/pages/auth/create_password_view.dart';
 import 'package:mpd_client/presentation/pages/auth/login_view.dart';
 import 'package:mpd_client/presentation/pages/auth/registration_view.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/views/chat_view.dart';
+import 'package:mpd_client/presentation/pages/chat/presentation/views/create_new_chat_view.dart';
+import 'package:mpd_client/presentation/pages/chat/presentation/views/in_app_chat.dart';
 import 'package:mpd_client/presentation/pages/doctor/doctor_view.dart';
 import 'package:mpd_client/presentation/pages/error/error_view.dart';
 import 'package:mpd_client/presentation/pages/home/home_view.dart';
@@ -20,6 +22,7 @@ import 'package:mpd_client/presentation/pages/initial/language/language_page.dar
 import 'package:mpd_client/presentation/pages/initial/splash/splash_page.dart';
 import 'package:mpd_client/presentation/pages/initial/tutorial/tutorial_page.dart';
 import 'package:mpd_client/presentation/pages/lenta/view/comment_view.dart';
+import 'package:mpd_client/presentation/pages/lenta/view/create_post_view.dart';
 import 'package:mpd_client/presentation/pages/main/main_view.dart';
 import 'package:mpd_client/presentation/pages/profile/edit_profile_view.dart';
 import 'package:mpd_client/presentation/pages/profile/profile_view.dart';
@@ -107,6 +110,16 @@ sealed class AppRouts {
           password: (state.extra as Map)["password"],
         ),
       ),
+      GoRoute(
+        path: AppRoutePath.inChats,
+        name: AppRouteNames.inChats,
+        builder: (context, state) => InChatView(parentContext: state.extra as BuildContext),
+      ),
+      GoRoute(
+        path: AppRoutePath.createChat,
+        name: AppRouteNames.createChat,
+        builder: (context, state) => const CreateNewChatView(),
+      ),
       mainView,
     ],
   );
@@ -118,20 +131,31 @@ sealed class AppRouts {
     branches: <StatefulShellBranch>[
       StatefulShellBranch(
         routes: [
-          GoRoute(path: AppRoutePath.home, name: AppRouteNames.home, builder: (context, state) => const HomeView(), routes: [
-            GoRoute(
-              parentNavigatorKey: navigatorKey,
-              path: AppRoutePath.comment,
-              name: AppRouteNames.comment,
-              builder: (context, state) => BlocProvider(
-                create: (context) => serviceLocator<CommentBloc>(),
-                child: CommentView(
-                  post: (state.extra as Map)['post'],
-                  message: (state.extra as Map)['message'],
+          GoRoute(
+            path: AppRoutePath.home,
+            name: AppRouteNames.home,
+            builder: (context, state) => const HomeView(),
+            routes: [
+              GoRoute(
+                parentNavigatorKey: navigatorKey,
+                path: AppRoutePath.comment,
+                name: AppRouteNames.comment,
+                builder: (context, state) => BlocProvider(
+                  create: (context) => serviceLocator<CommentBloc>(),
+                  child: CommentView(
+                    post: (state.extra as Map)['post'],
+                    message: (state.extra as Map)['message'],
+                  ),
                 ),
               ),
-            ),
-          ]),
+              GoRoute(
+                      parentNavigatorKey: navigatorKey,
+                path: AppRoutePath.createPost,
+                name: AppRouteNames.createPost,
+                builder: (context, state) => const CreatePostView(),
+              ),
+            ],
+          ),
         ],
       ),
       StatefulShellBranch(

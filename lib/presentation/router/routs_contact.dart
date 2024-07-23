@@ -95,7 +95,7 @@ sealed class AppRoutePath {
   static const createChat = '/createNewChat';
   static const viewerLiveStream = '/viewer_live_stream';
   static const conference = '/conference';
-  static const createPost = '/create_post';
+  static const createPost = 'create_post';
   static const settings = '/settings';
   static const doctor = '/doctor';
   static const record = '/record';

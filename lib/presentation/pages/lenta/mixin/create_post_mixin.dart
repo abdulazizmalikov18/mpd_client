@@ -43,12 +43,13 @@ mixin CreatePostMixin on State<CreatePostView> {
   }
 
   bool isVideo(String path) {
-    final name = path.toUpperCase();
-    return name.endsWith("MP4") || name.endsWith("MOV") || name.endsWith("AVI") || name.endsWith("WMV") || name.endsWith("AVCHD");
+    final name = path.toLowerCase();
+
+    return name.endsWith("mp4") || name.endsWith("mov") || name.endsWith("avi") || name.endsWith("wmv") || name.endsWith("avchd");
   }
 
   bool isPhoto(String path) {
-    final name = path.toUpperCase();
-    return name.endsWith("JPG") || name.endsWith("JPEG") || name.endsWith("PNG") || name.endsWith("RAW") || name.endsWith("WEBP");
+    final name = path.toLowerCase();
+    return name.endsWith("jpg") || name.endsWith("png");
   }
 }
