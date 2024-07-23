@@ -10,28 +10,34 @@ import 'package:mpd_client/presentation/widgets/w_shimmer.dart';
 import 'package:mpd_client/utils/extensions/string_ext.dart';
 
 class WProfileHeader extends StatelessWidget {
-
-  const WProfileHeader({
-    super.key
-  });
+  const WProfileHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          width: double.infinity,
-          height: MediaQuery.sizeOf(context).height * 0.15,
-          decoration: BoxDecoration(
-            gradient: wgradient,
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(100),
-              bottomRight: Radius.circular(100),
-            )
+        Align(
+          heightFactor: 0,
+          child: Image.asset(
+            "assets/images/topimage.png",
+            width: double.infinity,
+            // height: 300,
+            fit: BoxFit.cover,
           ),
         ),
+        // Container(
+        //   width: double.infinity,
+          // height: MediaQuery.sizeOf(context).height * 0.15,
+        //   decoration: BoxDecoration(
+        //     gradient: wgradient,
+        //     borderRadius: const BorderRadius.only(
+        //       bottomLeft: Radius.circular(100),
+        //       bottomRight: Radius.circular(100),
+        //     )
+        //   ),
+        // ),
         Padding(
-          padding:  EdgeInsets.only(top: MediaQuery.sizeOf(context).height * 0.1),
+          padding: EdgeInsets.only(top: MediaQuery.sizeOf(context).height * 0.1),
           child: BlocBuilder<AccountsBloc, AccountsState>(
             builder: (context, state) {
               return Column(
@@ -39,13 +45,13 @@ class WProfileHeader extends StatelessWidget {
                 children: [
                   WNetworkImage(
                     image: state.userContainer.user.avatar,
-                    height: 60,
-                    width: 60,
+                    height: 96,
+                    width: 96,
                     borderRadius: 100,
                     defaultWidget: Image.asset(
                       AppImages.doctor,
-                      width: 60,
-                      height: 60,
+                      width: 96,
+                      height: 96,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -55,33 +61,33 @@ class WProfileHeader extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: state.userContainer.status.isInProgress
                           ? [
-                        const WShimmer(
-                          height: 20,
-                          width: 200,
-                        ),
-                        const SizedBox(height: 10),
-                        const WShimmer(
-                          height: 20,
-                          width: 150,
-                        ),
-                      ]
+                              const WShimmer(
+                                height: 20,
+                                width: 200,
+                              ),
+                              const SizedBox(height: 10),
+                              const WShimmer(
+                                height: 20,
+                                width: 150,
+                              ),
+                            ]
                           : [
-                        Text(
-                          '${state.userContainer.user.name} ${state.userContainer.user.lastname}',
-                          textAlign: TextAlign.center,
-                          style: AppTheme.displayLarge.copyWith(
-                            // color: white,
-                          ),
-                        ),
-                        Text(
-                          "+${state.userContainer.user.phone}",
-                          textAlign: TextAlign.center,
-                          style: AppTheme.labelSmall.copyWith(
-                            fontWeight: FontWeight.w600,
-                            // color: white.withOpacity(0.5),
-                          ),
-                        ),
-                      ],
+                              Text(
+                                '${state.userContainer.user.name} ${state.userContainer.user.lastname}',
+                                textAlign: TextAlign.center,
+                                style: AppTheme.displayLarge.copyWith(
+                                    // color: white,
+                                    ),
+                              ),
+                              Text(
+                                "+${state.userContainer.user.phone}",
+                                textAlign: TextAlign.center,
+                                style: AppTheme.labelSmall.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  // color: white.withOpacity(0.5),
+                                ),
+                              ),
+                            ],
                     ),
                   ),
                 ],

@@ -35,7 +35,7 @@ class AccountRepositoryImpl extends AccountRepository {
   Future<Either<Failure, GenericPagination<ProfessionEntity>>> getProfession(Filter id) async {
     try {
       final result = await service.getProfession(parent: id.parent, search: id.search);
-      return Right(result);
+      return Right(result as GenericPagination<ProfessionEntity>);
     } on DioException {
       return Left(const DioFailure());
     } on ParsingException catch (e) {

@@ -47,6 +47,7 @@ sealed class AppRouteNames {
   static const settings = 'settings';
   static const doctor = 'doctor';
   static const record = 'record';
+  static const comment = 'comment';
 }
 
 sealed class AppRoutePath {
@@ -98,4 +99,5 @@ sealed class AppRoutePath {
   static const settings = '/settings';
   static const doctor = '/doctor';
   static const record = '/record';
+  static const comment = 'comment';
 }

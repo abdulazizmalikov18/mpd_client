@@ -1,11 +1,29 @@
 import 'dart:async';
 import 'package:chopper/chopper.dart';
+import 'package:mpd_client/domain/entity/lenta/post_entity.dart';
+import 'package:mpd_client/domain/models/account/profession_model.dart';
+import 'package:mpd_client/domain/models/account/region_model.dart';
+import 'package:mpd_client/domain/models/generic_pagination.dart';
+import 'package:mpd_client/domain/models/lenta/post_model.dart';
 import 'package:mpd_client/infrastructure/reopsitories/auth_repository.dart';
 import 'package:mpd_client/infrastructure/serializers/json_serializable_converter.dart';
 import 'package:mpd_client/infrastructure/services/log_service.dart';
 import 'package:pretty_chopper_logger/pretty_chopper_logger.dart';
 
-const converter = JsonSerializableConverter({});
+sealed class ReadGeneric {
+  // AccountService
+  static GenericPagination<ProfessionModel> professionGeneric(Map<String, dynamic> json) => GenericPagination.fromJson(json, (p0) => ProfessionModel.fromJson(p0 as Map<String, dynamic>));
+  static GenericPagination<RegionModel> regionsGeneric(Map<String, dynamic> json) => GenericPagination.fromJson(json, (p0) => RegionModel.fromJson(p0 as Map<String, dynamic>));
+  static GenericPagination<PostModel> genericLenta(Map<String, dynamic> json) => GenericPagination.fromJson(json, (p0) => PostModel.fromJson(p0 as Map<String, dynamic>));
+
+  // 
+}
+
+const converter = JsonSerializableConverter({
+  GenericPagination<RegionModel>: ReadGeneric.regionsGeneric,
+  GenericPagination<ProfessionModel>: ReadGeneric.professionGeneric,
+  GenericPagination<PostModel>: ReadGeneric.genericLenta,
+});
 final clientChopper = _Client("http://82.215.78.34", true);
 
 // AccountService

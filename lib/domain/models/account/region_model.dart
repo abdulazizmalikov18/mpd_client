@@ -18,6 +18,7 @@ class RegionModel extends RegionEntity {
   static List<RegionModel> fromList(List<Map<String, dynamic>> json) => json.map((e) => RegionModel.fromJson(e)).toList();
 
   factory RegionModel.fromJson(Map<String, dynamic> json) => _$RegionModelFromJson(json);
+  static RegionModel fromJsonT(Map<String, dynamic> json) => _$RegionModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$RegionModelToJson(this);
 }

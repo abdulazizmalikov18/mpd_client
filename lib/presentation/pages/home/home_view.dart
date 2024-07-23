@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mpd_client/presentation/pages/home/widgets/home_app_bar.dart';
+import 'package:mpd_client/presentation/pages/lenta/view/lenta_view.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -10,8 +13,10 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    return  const Scaffold(
-      body: Placeholder(),
+    return const Scaffold(
+      backgroundColor: scaffoldSecondaryBackground,
+      appBar: HomeAppbarComponent(),
+      body: LentaView(),
     );
   }
 }

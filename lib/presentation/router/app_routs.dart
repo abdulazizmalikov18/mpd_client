@@ -3,6 +3,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mpd_client/application/comment/comment_bloc.dart';
+import 'package:mpd_client/infrastructure/services/service_locator.dart';
 import 'package:mpd_client/presentation/pages/auth/check_pin_view.dart';
 import 'package:mpd_client/presentation/pages/auth/confirm_auth_data.dart';
 import 'package:mpd_client/presentation/pages/auth/confirm_otp_view.dart';
@@ -10,12 +12,14 @@ import 'package:mpd_client/presentation/pages/auth/create_login_view.dart';
 import 'package:mpd_client/presentation/pages/auth/create_password_view.dart';
 import 'package:mpd_client/presentation/pages/auth/login_view.dart';
 import 'package:mpd_client/presentation/pages/auth/registration_view.dart';
+import 'package:mpd_client/presentation/pages/chat/presentation/views/chat_view.dart';
 import 'package:mpd_client/presentation/pages/doctor/doctor_view.dart';
 import 'package:mpd_client/presentation/pages/error/error_view.dart';
 import 'package:mpd_client/presentation/pages/home/home_view.dart';
 import 'package:mpd_client/presentation/pages/initial/language/language_page.dart';
 import 'package:mpd_client/presentation/pages/initial/splash/splash_page.dart';
 import 'package:mpd_client/presentation/pages/initial/tutorial/tutorial_page.dart';
+import 'package:mpd_client/presentation/pages/lenta/view/comment_view.dart';
 import 'package:mpd_client/presentation/pages/main/main_view.dart';
 import 'package:mpd_client/presentation/pages/profile/edit_profile_view.dart';
 import 'package:mpd_client/presentation/pages/profile/profile_view.dart';
@@ -72,7 +76,6 @@ sealed class AppRouts {
         name: AppRouteNames.editProfile,
         builder: (context, state) => const EditProfileView(),
       ),
-
       GoRoute(
         path: AppRoutePath.authConfirmOtp,
         name: AppRouteNames.authConfirmOtp,
@@ -115,11 +118,20 @@ sealed class AppRouts {
     branches: <StatefulShellBranch>[
       StatefulShellBranch(
         routes: [
-          GoRoute(
-            path: AppRoutePath.home,
-            name: AppRouteNames.home,
-            builder: (context, state) => const HomeView(),
-          )
+          GoRoute(path: AppRoutePath.home, name: AppRouteNames.home, builder: (context, state) => const HomeView(), routes: [
+            GoRoute(
+              parentNavigatorKey: navigatorKey,
+              path: AppRoutePath.comment,
+              name: AppRouteNames.comment,
+              builder: (context, state) => BlocProvider(
+                create: (context) => serviceLocator<CommentBloc>(),
+                child: CommentView(
+                  post: (state.extra as Map)['post'],
+                  message: (state.extra as Map)['message'],
+                ),
+              ),
+            ),
+          ]),
         ],
       ),
       StatefulShellBranch(
@@ -131,21 +143,21 @@ sealed class AppRouts {
           ),
         ],
       ),
-      // StatefulShellBranch(
-      //   routes: [
-      //     GoRoute(
-      //       path: AppRoutePath.chat,
-      //       name: AppRouteNames.chat,
-      //       builder: (context, state) => const ChatView(),
-      //     ),
-      //   ],
-      // ),
       StatefulShellBranch(
         routes: [
           GoRoute(
             path: AppRoutePath.record,
             name: AppRouteNames.record,
             builder: (context, state) => const RecordView(),
+          ),
+        ],
+      ),
+      StatefulShellBranch(
+        routes: [
+          GoRoute(
+            path: AppRoutePath.chat,
+            name: AppRouteNames.chat,
+            builder: (context, state) => const ChatView(),
           ),
         ],
       ),

@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 
 import 'package:flutter/foundation.dart';
+import 'package:mpd_client/domain/models/auth/token_model.dart';
+import 'package:mpd_client/infrastructure/reopsitories/global_request_repo.dart';
+import 'package:mpd_client/infrastructure/services/service_locator.dart';
 import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
 import 'package:mpd_client/main.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -90,14 +93,14 @@ class DioSettings {
     ]);
 }
 //
-// class ErrorHandlerInterceptor implements Interceptor {
-//   ErrorHandlerInterceptor._();
-//
-//   static final _instance = ErrorHandlerInterceptor._();
-//
-//   factory ErrorHandlerInterceptor() => _instance;
-//   static String appName = "#TMED_WORK";
-//
+class ErrorHandlerInterceptor implements Interceptor {
+  ErrorHandlerInterceptor._();
+
+  static final _instance = ErrorHandlerInterceptor._();
+
+  factory ErrorHandlerInterceptor() => _instance;
+  static String appName = "#TMED_WORK";
+
 //   static void sendMessage(Response response) async {
 //     if ((response.statusCode ?? 0) >= 400) {
 //       String a = """
@@ -115,9 +118,9 @@ class DioSettings {
 //       TelegramSender.sendMessage(TelegramChannel.logChannel, a);
 //     }
 //   }
-//
-//   @override
-//   void onError(DioException err, ErrorInterceptorHandler handler) async {
+
+  @override
+  void onError(DioException err, ErrorInterceptorHandler handler) async {
 //     TelegramSender.sendMessage(TelegramChannel.logChannel, """
 // #error
 // Error ##################
@@ -128,37 +131,37 @@ class DioSettings {
 // error => ${err.error},
 // Message => ${err.message},
 // """);
-//     handler.next(err);
-//   }
-//
-//   @override
-//   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-//     handler.next(options);
-//   }
-//
-//   @override
-//   void onResponse(Response response, ResponseInterceptorHandler handler) async {
-//     if (response.statusCode == 401 && (response.data as List).isNotEmpty && (response.data as List)[0]['"field"'] != 'refresh') {
-//       final result = await GlobalRequestRepository().postAndSingle(
-//         endpoint: 'UMS/api/v1.0/account/refresh-token/',
-//         fromJson: TokenModel.fromJson,
-//         sendToken: false,
-//         data: {
-//           'refresh': StorageRepository.getString(StorageKeys.REFRESH, defValue: ''),
-//         },
-//       );
-//       if (result.isRight) {
-//         await StorageRepository.putString(StorageKeys.TOKEN, result.right.access);
-//         await StorageRepository.putString(StorageKeys.REFRESH, result.right.refresh);
-//         return handler.resolve(await serviceLocator<DioSettings>().dio.fetch(response.requestOptions
-//           ..headers = {
-//             "Authorization": "Bearer ${result.right.access}",
-//           }));
-//       } else {
-//         return handler.next(response);
-//       }
-//     }
-//     sendMessage(response);
-//     handler.next(response);
-//   }
-// }
+    handler.next(err);
+  }
+
+  @override
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    handler.next(options);
+  }
+
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) async {
+    if (response.statusCode == 401 && (response.data as List).isNotEmpty && (response.data as List)[0]['"field"'] != 'refresh') {
+      final result = await GlobalRequestRepository().postAndSingle(
+        endpoint: 'UMS/api/v1.0/account/refresh-token/',
+        fromJson: TokenModel.fromJson,
+        sendToken: false,
+        data: {
+          'refresh': StorageRepository.getString(StorageKeys.REFRESH, defValue: ''),
+        },
+      );
+      if (result.isRight) {
+        await StorageRepository.putString(StorageKeys.TOKEN, result.right.access);
+        await StorageRepository.putString(StorageKeys.REFRESH, result.right.refresh);
+        return handler.resolve(await serviceLocator<DioSettings>().dio.fetch(response.requestOptions
+          ..headers = {
+            "Authorization": "Bearer ${result.right.access}",
+          }));
+      } else {
+        return handler.next(response);
+      }
+    }
+    // sendMessage(response);
+    handler.next(response);
+  }
+}

@@ -55,10 +55,7 @@ class _CreateLoginViewState extends State<CreateLoginView> {
                 Center(
                   child: Text(
                     'Kirish',
-                    style: context.textTheme.displaySmall!.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: white,
-                    ),
+                    style: context.textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w700),
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -78,12 +75,12 @@ class _CreateLoginViewState extends State<CreateLoginView> {
                       fillColor: value == null ? white.withOpacity(0.2) : error.withOpacity(0.2),
                       hintText: 'Login',
                       style: context.textTheme.labelSmall!.copyWith(
-                        color: white,
+                        color: black,
                       ),
                       hintStyle: context.textTheme.labelSmall!.copyWith(
                         color: greyText,
                       ),
-                      borderColor: borderColor,
+                      borderColor: border,
                       onChanged: (e) {
                         hasError.value = null;
                       },

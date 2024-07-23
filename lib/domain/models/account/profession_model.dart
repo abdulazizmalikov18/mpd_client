@@ -20,8 +20,7 @@ class ProfessionModel extends ProfessionEntity {
     super.parent,
   });
 
-  factory ProfessionModel.fromJson(Map<String, dynamic> json) =>
-      _$ProfessionModelFromJson(json);
+  factory ProfessionModel.fromJson(Map<String, dynamic> json) => _$ProfessionModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProfessionModelToJson(this);
 }

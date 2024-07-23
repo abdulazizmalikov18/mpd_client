@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
+import 'package:mpd_client/utils/extensions/string_ext.dart';
 
 class WResendButton extends StatefulWidget {
   final void Function()? resentOtp;
@@ -27,7 +28,7 @@ class _WResendButtonState extends State<WResendButton> {
     time = widget.resentSMSSecond;
     timer = Timer.periodic(
       const Duration(seconds: 1),
-          (timer) {
+      (timer) {
         if (time <= 1) {
           stopTimer();
         }
@@ -71,15 +72,11 @@ class _WResendButtonState extends State<WResendButton> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // AppIcons.refresh.svg(),
+                  // AppIcons.plusCircle.svg(),
                   const SizedBox(width: 8),
                   Text(
                     "SMS qaytadan yuborish",
-                    style: AppTheme.headlineSmall.copyWith(
-                      fontWeight: FontWeight.w500,
-
-                      color: white,
-                    ),
+                    style: AppTheme.headlineSmall.copyWith(fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
@@ -87,18 +84,14 @@ class _WResendButtonState extends State<WResendButton> {
           if (timer!.isActive)
             Text.rich(
               TextSpan(
-                style: AppTheme.labelSmall.copyWith(
-                  fontWeight: FontWeight.w500,
-                  color: white,
-                ),
+                style: AppTheme.labelSmall.copyWith(fontWeight: FontWeight.w500),
                 children: [
                   const TextSpan(text: 'Kod '),
                   TextSpan(
                     text: '0:${time.toString().padLeft(2, '0')}',
                     style: AppTheme.labelSmall.copyWith(
                       fontWeight: FontWeight.w500,
-
-                      color: primary,
+                      color: mainBlue,
                     ),
                   ),
                   const TextSpan(text: ' keyin qayta yuboriladi'),

@@ -8,6 +8,8 @@ part 'account_service.chopper.dart';
 
 @ChopperApi()
 abstract class AccountService extends ChopperService {
+
+
   @Get(path: 'GMS/api/v1.0/public/region/')
   Future<GenericPagination<RegionModel>> getRegion({
     @Header('Authorization') String? token,

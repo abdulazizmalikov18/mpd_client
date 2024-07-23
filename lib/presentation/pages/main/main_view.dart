@@ -32,20 +32,19 @@ class _MainViewState extends State<MainView> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     final bottomNavigationItems = {
       context.l10n.navbar_home: {'inactive': AppIcons.mainComponentUnfill, 'active': AppIcons.mainComponent},
       context.l10n.navbar_Doctor: {'inactive': AppIcons.searchStatus, 'active': AppIcons.searchStatusFilled},
-      // 'Market': {'inactive': shop, 'active': shop_filled},
       context.l10n.navbar_Appointment: {'inactive': AppIcons.calendar, 'active': AppIcons.calendarFilled},
+      'Chat': {'inactive': AppIcons.calendar, 'active': AppIcons.calendarFilled},
       context.l10n.navbar_profile: {'inactive': AppIcons.user, 'active': AppIcons.userFilled}
     };
     return Scaffold(
       body: widget.navigationShell,
       bottomNavigationBar: Padding(
-        padding: Platform.isIOS ? const EdgeInsets.only(bottom: 24) : EdgeInsets.zero,
+        padding: Platform.isIOS ? const EdgeInsets.only(bottom: 0) : EdgeInsets.zero,
         child: BottomNavigationBar(
           elevation: 10,
           selectedItemColor: mainBlue,
@@ -54,8 +53,16 @@ class _MainViewState extends State<MainView> {
           onTap: (value) {
             _onTap(context, value);
           },
-          selectedLabelStyle: AppTheme.headlineMedium.copyWith(color: mainBlue),
-          unselectedLabelStyle: AppTheme.headlineMedium.copyWith(color: grey),
+          selectedLabelStyle: AppTheme.headlineMedium.copyWith(
+            color: mainBlue,
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+          ),
+          unselectedLabelStyle: AppTheme.headlineMedium.copyWith(
+            color: grey,
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+          ),
           type: BottomNavigationBarType.fixed,
           iconSize: 24,
           currentIndex: widget.navigationShell.currentIndex,

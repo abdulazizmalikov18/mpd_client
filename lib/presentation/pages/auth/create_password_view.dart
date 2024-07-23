@@ -63,10 +63,7 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
                 Center(
                   child: Text(
                     'Kirish',
-                    style: context.textTheme.displaySmall!.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: white,
-                    ),
+                    style: context.textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w700),
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -83,15 +80,15 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
                     return WTextField(
                       hasError: value != null,
                       controller: passwordController,
-                      fillColor: white.withOpacity(0.2),
+                      // fillColor: white.withOpacity(0.2),
                       hintText: 'Parol',
                       style: context.textTheme.labelSmall!.copyWith(
-                        color: value != null ? red : white,
+                        color: value != null ? red : black,
                       ),
                       hintStyle: context.textTheme.labelSmall!.copyWith(
                         color: value != null ? red : greyText,
                       ),
-                      borderColor: borderColor,
+                      borderColor: border,
                       onChanged: (e) {
                         hasError.value = null;
                       },
@@ -108,15 +105,15 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
                     return WTextField(
                       hasError: value != null,
                       controller: reTryPasswordController,
-                      fillColor: white.withOpacity(0.2),
+                      // fillColor: white.withOpacity(0.2),
                       hintText: 'Parolni takrorlang',
                       style: context.textTheme.labelSmall!.copyWith(
-                        color: value != null ? red : white,
+                        color: value != null ? red : black,
                       ),
                       hintStyle: context.textTheme.labelSmall!.copyWith(
                         color: value != null ? red : greyText,
                       ),
-                      borderColor: borderColor,
+                      borderColor: border,
                       onChanged: (e) {
                         hasError.value = null;
                       },
