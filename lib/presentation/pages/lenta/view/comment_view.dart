@@ -37,6 +37,7 @@ class _CommentViewState extends State<CommentView> with CommentMixin {
     return Scaffold(
       backgroundColor: scaffoldSecondaryBackground,
       appBar: const WAppBar(
+        back: true,
         title: Text('Comment View'),
       ),
       body: GestureDetector(

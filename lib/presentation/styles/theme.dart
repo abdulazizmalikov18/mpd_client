@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 
 abstract class AppTheme {
@@ -10,7 +11,15 @@ abstract class AppTheme {
           foregroundColor: Colors.white,
           surfaceTintColor: Colors.white,
           shadowColor: Colors.transparent,
-          // systemOverlayStyle: SystemUiOverlayStyle.light,
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            systemNavigationBarColor: Colors.transparent,
+            // ios
+            statusBarBrightness: Brightness.dark,
+            // android
+            statusBarIconBrightness: Brightness.light,
+            systemNavigationBarIconBrightness: Brightness.light,
+          ),
           titleTextStyle: displaySmall.copyWith(fontWeight: FontWeight.w600),
           centerTitle: false,
           iconTheme: const IconThemeData(color: white),

@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/widgets/message_widgets/w_chat_file_view.dart';
+import 'package:mpd_client/presentation/widgets/w_app_bar.dart';
+import 'package:pinch_to_zoom_scrollable/pinch_to_zoom_scrollable.dart';
 
 class WChatMediaView extends StatelessWidget {
   final String file;
@@ -86,28 +88,27 @@ class ChatImageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: const Icon(Icons.arrow_back),
-        ),
+      appBar: WAppBar(
+        back: true,
+        title: SizedBox(),
       ),
-      body: Center(
-        child: switch (isLocalFile) {
-          true => Image.file(
-              File(file),
-              fit: BoxFit.cover,
-              width: MediaQuery.of(context).size.width * 0.7,
-              height: MediaQuery.of(context).size.height * 0.7,
-            ),
-          false => Image.network(
-              file,
-              fit: BoxFit.cover,
-              width: double.infinity,
-            ),
-        },
+      body: PinchToZoomScrollableWidget(
+        maxScale: 2.5,
+        child: Center(
+          child: switch (isLocalFile) {
+            true => Image.file(
+                File(file),
+                fit: BoxFit.cover,
+                width: MediaQuery.of(context).size.width * 0.7,
+                height: MediaQuery.of(context).size.height * 0.7,
+              ),
+            false => Image.network(
+                file,
+                fit: BoxFit.cover,
+                width: double.infinity,
+              ),
+          },
+        ),
       ),
     );
   }

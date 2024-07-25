@@ -23,118 +23,114 @@ class _WSelectRegionBottomSheetState extends State<WSelectRegionBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.only(
-        topRight: Radius.circular(16),
-        topLeft: Radius.circular(16),
+    return Container(
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: white,
+        borderRadius: BorderRadius.only(
+      topRight: Radius.circular(12),
+      topLeft: Radius.circular(12),
+    ),
       ),
-      child: SizedBox(
-        child: SizedBox(
-          width: double.infinity,
-          child: BlocBuilder<AccountsBloc, AccountsState>(
-            builder: (context, state) {
-              return SizedBox(
-                width: 400,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Column(
-                          children: [
-                            const DialogTitle(title: "Tug'ilgan joyingizni tanlang"),
-                            const SizedBox(height: 16),
-                            WTextField(
-                              style: context.textTheme.bodyLarge!.copyWith(
-                                color: white,
-                              ),
-                              onChanged: (value) {
-                                context.read<AccountsBloc>().add(GetRegion(search: value));
-                              },
-                              hintText: "Search",
-                              borderColor: borderColor,
-                              fillColor: white.withOpacity(0.2),
-                              // prefixIcon: Padding(
-                              //   padding: const EdgeInsets.only(right: 8),
-                              //   child: AppIcons.icHome.svg(color: gray),
-                              // ),
-                            ),
-                            const SizedBox(height: 24),
-                          ],
+      child: BlocBuilder<AccountsBloc, AccountsState>(
+        builder: (context, state) {
+          return SizedBox(
+            width: 400,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      children: [
+                        const DialogTitle(title: "Tug'ilgan joyingizni tanlang"),
+                        const SizedBox(height: 16),
+                        WTextField(
+                          style: context.textTheme.bodyLarge,
+                          hintStyle: context.textTheme.bodyLarge!.copyWith(
+                          color: greyText
+                          ),
+                          onChanged: (value) {
+                            context.read<AccountsBloc>().add(GetRegion(search: value));
+                          },
+                          hintText: "Search",
+                          borderColor: border,
+                          fillColor: background,
+                        ),
+                        const SizedBox(height: 24),
+                      ],
+                    ),
+                  ),
+                  if ($regVM().pageInTitle.isNotEmpty)
+                    WScaleAnimation(
+                      onTap: () {
+                        if ($regVM().pageInTitle.length > 1) {
+                          if (controller.hasClients) {
+                            controller.animateToPage(
+                              controller.page!.toInt() - 1,
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.easeInOut,
+                            );
+                          }
+                          $regVM().selectPag(
+                            context,
+                            controller.page!.toInt() - 1,
+                            "",
+                            $regVM().pageInTitle[controller.page!.toInt()].id,
+                          );
+                        } else if (controller.hasClients) {
+                          controller.animateToPage(
+                            controller.page!.toInt() - 1,
+                            duration: const Duration(milliseconds: 400),
+                            curve: Curves.easeInOut,
+                          );
+                          $regVM().selectPag(context, 0, "", 0);
+                        }
+                        setState(() {});
+                      },
+                      child: Container(
+                        height: 24,
+                        margin: const EdgeInsets.only(bottom: 16),
+                        child: const Icon(
+                          Icons.arrow_left,
+                          color: white,
                         ),
                       ),
-                      if ($regVM().pageInTitle.isNotEmpty)
-                        WScaleAnimation(
-                          onTap: () {
-                            if ($regVM().pageInTitle.length > 1) {
-                              if (controller.hasClients) {
-                                controller.animateToPage(
-                                  controller.page!.toInt() - 1,
-                                  duration: const Duration(milliseconds: 400),
-                                  curve: Curves.easeInOut,
-                                );
-                              }
-                              $regVM().selectPag(
-                                context,
-                                controller.page!.toInt() - 1,
-                                "",
-                                $regVM().pageInTitle[controller.page!.toInt()].id,
-                              );
-                            } else if (controller.hasClients) {
-                              controller.animateToPage(
-                                controller.page!.toInt() - 1,
-                                duration: const Duration(milliseconds: 400),
-                                curve: Curves.easeInOut,
-                              );
-                              $regVM().selectPag(context, 0, "", 0);
-                            }
-                            setState(() {});
-                          },
-                          child: Container(
-                            height: 24,
-                            margin: const EdgeInsets.only(bottom: 16),
-                            child: const Icon(
-                              Icons.arrow_left,
-                              color: white,
-                            ),
-                          ),
-                        ),
-                      SizedBox(
-                        height: 460,
-                        child: PageView(
+                    ),
+                  SizedBox(
+                    height: 460,
+                    child: PageView(
+                      controller: controller,
+                      children: [
+                        RegionListView(
+                          regions: state.regionAndProfessionContainer.regions,
                           controller: controller,
-                          children: [
-                            RegionListView(
-                              regions: state.regionAndProfessionContainer.regions,
-                              controller: controller,
-                              index: 1,
-                              isLoading: state.regionAndProfessionContainer.statusd.isInProgress,
-                            ),
-                            RegionListView(
-                              regions: state.regionAndProfessionContainer.regions1,
-                              controller: controller,
-                              index: 2,
-                              isLoading: state.regionAndProfessionContainer.statusd.isInProgress,
-                            ),
-                            RegionListView(
-                              regions: state.regionAndProfessionContainer.regions2,
-                              controller: controller,
-                              index: 2,
-                              isLoading: state.regionAndProfessionContainer.statusd.isInProgress,
-                            ),
-                          ],
+                          index: 1,
+                          isLoading: state.regionAndProfessionContainer.statusd.isInProgress,
                         ),
-                      )
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
+                        RegionListView(
+                          regions: state.regionAndProfessionContainer.regions1,
+                          controller: controller,
+                          index: 2,
+                          isLoading: state.regionAndProfessionContainer.statusd.isInProgress,
+                        ),
+                        RegionListView(
+                          regions: state.regionAndProfessionContainer.regions2,
+                          controller: controller,
+                          index: 2,
+                          isLoading: state.regionAndProfessionContainer.statusd.isInProgress,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }

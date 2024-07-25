@@ -150,10 +150,6 @@ class LentaServiceImpl implements LentaService {
   Future<ResponseHandler<PostEntity>> createPost(CreatePostParam post) async {
     return await _handle.apiCantrol(
       request: (Dio client) async {
-        // final body = (await post.body);
-        // print(body.fields.length);
-        // print(body.files.length);
-        
         return await client.post(
           "/SMMS/api/v1.0/public/post/",
           data: await post.body,

@@ -13,6 +13,7 @@ import 'package:mpd_client/presentation/pages/auth/widgets/sheets/w_select_profe
 import 'package:mpd_client/presentation/pages/auth/widgets/sheets/w_select_region.dart';
 import 'package:mpd_client/presentation/pages/auth/widgets/w_pick_avatar.dart';
 import 'package:mpd_client/presentation/pages/auth/widgets/w_shadowed_container.dart';
+import 'package:mpd_client/presentation/pages/profile/edit_profile_view.dart';
 import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_select_gender.dart';
 import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_textfield_with_title.dart';
 import 'package:mpd_client/presentation/styles/app_icons.dart';

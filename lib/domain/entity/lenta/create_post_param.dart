@@ -1,9 +1,5 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
-import 'package:mpd_client/infrastructure/services/media_comperesser.dart';
-import 'package:path/path.dart';
-import 'package:video_thumbnail/video_thumbnail.dart';
+import 'package:mpd_client/infrastructure/services/log_service.dart';
 
 class CreatePostParam {
   List<String>? images;
@@ -18,6 +14,14 @@ class CreatePostParam {
   String? repost;
 
   Future<FormData> get body async {
+    try {
+    Log.e(images!.length.toString());
+    Log.e(screenshots!.length.toString());
+    Log.e(files!.length.toString());
+    final imagesPart = images == null ? [] : images!.map((image) => MultipartFile.fromFileSync(image)).toList();
+    final filesPart = images == null ? [] : files!.map((files) => MultipartFile.fromFileSync(files)).toList();
+    final screenshotsPart = images == null ? [] : screenshots!.map((screenshots) => MultipartFile.fromFileSync(screenshots)).toList();
+
     final formData = FormData.fromMap({
       if (aspectRatio != null) 'aspect_ratio': aspectRatio,
       if (action != null) 'action': action!.name,
@@ -26,63 +30,16 @@ class CreatePostParam {
       if (phone != null) 'phone': phone,
       if (link != null) 'link': link,
       if (repost != null) 'repost': repost,
+      if (images != null) 'images': imagesPart,
+      if (screenshots != null) 'screenshots': screenshotsPart,
+      if (files != null) 'files': filesPart,
     });
-
-    if (images != null) {
-      formData.files.addAll([
-        for (var image in images!) MapEntry('images', await MultipartFile.fromFile(image)),
-      ]);
-    }
-    if (files != null) {
-      formData.files.addAll([
-        for (var file in files!) MapEntry('files', await MultipartFile.fromFile(file)),
-      ]);
-    }
-    if (screenshots != null) {
-      formData.files.addAll([
-        for (var screenshot in screenshots!) MapEntry('screenshots', await MultipartFile.fromFile(screenshot)),
-      ]);
-    }
     return formData;
-  }
-
-  Future<Map<String, Object?>> newToJson() async {
-    final List<MultipartFile> postImages = [];
-    final List<MultipartFile> postVideos = [];
-    final List<MultipartFile> postVideosScreenshot = [];
-    if (images != null) {
-      for (var image in images!) {
-        final compressedImage = await MediaCompresser.compressAndTryCatchImage(image);
-
-        postImages.add(MultipartFile.fromBytes(compressedImage, filename: basename(image)));
-      }
+    }catch(e, s) {
+      Log.e(e.toString());
+      Log.e(s.toString());
+      return  FormData.fromMap({});
     }
-    if (files != null) {
-      for (var file in files!) {
-        // final length = file.file.lengthSync();
-
-        // final compressedVideo =
-        //     await MediaCompresser.compressVideo(file.file.path);
-        final uint8list = await VideoThumbnail.thumbnailFile(
-          video: file,
-          imageFormat: ImageFormat.JPEG,
-          maxWidth: 400, // specify the width of the thumbnail, let the height auto-scaled to keep the source aspect ratio
-          quality: 75,
-        );
-        final noCompressed = await File(file).readAsBytes();
-
-        postVideosScreenshot.add(await MultipartFile.fromFile(uint8list!, filename: uint8list));
-
-        postVideos.add(MultipartFile.fromBytes(noCompressed, filename: basename(file)));
-      }
-    }
-
-    return {
-      "images": List<MultipartFile>.from(postImages.map((x) => x)),
-      "files": List<MultipartFile>.from(postVideos.map((x) => x)),
-      "screenshots": List<MultipartFile>.from(postVideosScreenshot.map((e) => e)),
-      "text": text,
-    };
   }
 
   CreatePostParam({

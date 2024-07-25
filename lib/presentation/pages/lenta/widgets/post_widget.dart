@@ -8,7 +8,6 @@ import 'package:mpd_client/application/post/post_bloc.dart';
 import 'package:mpd_client/domain/entity/lenta/post_entity.dart';
 import 'package:mpd_client/presentation/pages/lenta/widgets/w_activity_dot.dart';
 import 'package:mpd_client/presentation/pages/lenta/widgets/w_post_media.dart';
-import 'package:mpd_client/presentation/pages/main/main_view.dart';
 import 'package:mpd_client/presentation/router/routs_contact.dart';
 import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/app_images.dart';
@@ -17,7 +16,6 @@ import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/presentation/widgets/w_network_image.dart';
 import 'package:mpd_client/utils/extensions/string_ext.dart';
 
-import '../view/comment_bottom_sheet.dart';
 
 class PostWidget extends StatefulWidget {
   final PostEntity post;
@@ -235,7 +233,7 @@ class WPostButton extends StatelessWidget {
               const SizedBox(width: 8),
               Text(
                 label,
-                // overflow: TextOverflow.ellipsis,
+                overflow: TextOverflow.ellipsis,
                 style: AppTheme.labelLarge.copyWith(
                   fontWeight: FontWeight.w300,
                 ),

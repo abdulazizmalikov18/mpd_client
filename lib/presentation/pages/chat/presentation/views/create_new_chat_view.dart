@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:formz/formz.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat/chat_bloc.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/controller/vm_controller.dart';
@@ -26,9 +25,9 @@ class _CreateNewChatViewState extends State<CreateNewChatView> {
   Widget build(BuildContext context) {
     return SizedBox(
       child: Scaffold(
-        backgroundColor: Colors.transparent,
         appBar: const WAppBar(
-          title: Text('Add'),
+          back: true,
+          title: Text('New chat'),
           action: SizedBox(),
         ),
         body: Column(
@@ -37,9 +36,12 @@ class _CreateNewChatViewState extends State<CreateNewChatView> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: WTextField(
-                onChanged: (_) {},
-                fillColor: white.withOpacity(0.1),
-                borderColor: white.withOpacity(0.2),
+                onChanged: (e) {
+                  $chatController.of(context).search(context, value: e);
+                },
+                fillColor: background,
+                
+                borderColor: border,
                 prefixIcon: AppIcons.search.svg(),
                 hintStyle: AppTheme.bodyLarge,
                 style: AppTheme.bodyLarge,

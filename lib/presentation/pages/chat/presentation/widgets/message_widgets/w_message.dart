@@ -34,7 +34,8 @@ class _WMessageState extends State<WMessage> {
               ),
               margin: const EdgeInsets.only(bottom: 12),
               decoration: BoxDecoration(
-                color: isMe ? white.withOpacity(0.2) : primary.withOpacity(0.2),
+                gradient: isMe ? wgradient : null,
+                color: isMe ? null : white,
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(20),
                   topRight: const Radius.circular(20),
@@ -65,7 +66,7 @@ class _WMessageState extends State<WMessage> {
                                 SelectableText(
                                   widget.message?.text ?? "-",
                                   style: AppTheme.labelSmall.copyWith(
-                                    color: white,
+                                    color: isMe ? white : black,
                                   ),
                                 ),
                               ],
@@ -79,11 +80,10 @@ class _WMessageState extends State<WMessage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              widget.message?.date != null ? '=='/*MyFunctions.parseDateToTime(widget.message!.date!)*/ : "-",
+                              widget.message?.date != null ? parseDateToTime(widget.message!.date!) : "-",
                               style: AppTheme.labelLarge.copyWith(
-                                color: isMe ? secondary : white,
+                                color: isMe ? white : black,
                                 fontSize: 11,
-                                fontStyle: FontStyle.italic,
                               ),
                             ),
                             if (isMe) const SizedBox(width: 3),
@@ -102,5 +102,10 @@ class _WMessageState extends State<WMessage> {
               ),
             ),
     );
+  }
+
+    String parseDateToTime(String date) {
+    var myDate = DateTime.parse(date);
+    return "${myDate.hour.toString().padLeft(2, "0")}:${myDate.minute.toString().padLeft(2, "0")}";
   }
 }

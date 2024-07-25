@@ -12,6 +12,7 @@ import 'package:mpd_client/presentation/pages/chat/presentation/controller/vm_co
 import 'package:mpd_client/presentation/router/app_routs.dart';
 import 'package:mpd_client/presentation/router/routs_contact.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
+import 'package:mpd_client/presentation/widgets/w_custom_screen.dart';
 import 'package:mpd_client/utils/l10n/app_localizations.dart';
 
 class MyApp extends StatefulWidget {
@@ -31,8 +32,8 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<AuthBloc>(create: (context) => serviceLocator<AuthBloc>()),
         BlocProvider<ShowPopUpBloc>(create: (context) => ShowPopUpBloc()),
         // BlocProvider<ConnectionCubit>(create: (context) => ConnectionCubit()),
-        BlocProvider<ChatBloc>(create: (context) => serviceLocator<ChatBloc>()..add(const GetGroupChat())),
-        BlocProvider<PostBloc>(create: (context) => serviceLocator<PostBloc>()..add(const PostFetched())),
+        BlocProvider<ChatBloc>(create: (context) => serviceLocator<ChatBloc>()),
+        BlocProvider<PostBloc>(create: (context) => serviceLocator<PostBloc>()),
         // BlocProvider<CommentBloc>(create: (context) => serviceLocator<CommentBloc>()),
       ],
       child: BlocListener<AuthBloc, AuthState>(
@@ -57,11 +58,11 @@ class _MyAppState extends State<MyApp> {
             themeMode: ThemeMode.light,
             debugShowCheckedModeBanner: false,
             theme: AppTheme.theme(),
-            // builder: (context, child) {
-            //   return CustomScreen(
-            //     child: child!,
-            //   );
-            // },
+            builder: (context, child) {
+              return CustomScreen(
+                child: child!,
+              );
+            },
             routerConfig: AppRouts.router,
           ),
         ),

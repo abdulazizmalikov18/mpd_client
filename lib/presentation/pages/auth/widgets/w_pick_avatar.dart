@@ -33,12 +33,12 @@ class WPickAvatar extends StatelessWidget {
                         width: 80,
                         height: 80,
                       )
-                    : const SizedBox(), /*Image.asset(
-                        AppImages.noUserImg,
+                    : Image.asset(
+                        AppImages.userAvatar,
                         width: 80,
                         height: 80,
                         fit: BoxFit.cover,
-                      ),*/
+                      ),
               ),
               Align(
                 alignment: Alignment.bottomRight,

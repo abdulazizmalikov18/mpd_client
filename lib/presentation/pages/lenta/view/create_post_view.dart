@@ -30,8 +30,9 @@ class _CreatePostViewState extends State<CreatePostView> with CreatePostMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: black,
       appBar: const WAppBar(
+        
+        back: true,
         title: Text('Create Post'),
         action: SizedBox(),
       ),

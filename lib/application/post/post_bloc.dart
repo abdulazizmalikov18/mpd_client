@@ -81,7 +81,10 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     final result = await _repo.createPost(event.param);
     if (result.isRight) {
-      emit(state.copyWith(status: FormzSubmissionStatus.success, posts: [result.right, ...state.posts]));
+      emit(state.copyWith(status: FormzSubmissionStatus.success, posts: [
+        result.right,
+        ...state.posts,
+      ]));
       event.onSuccess();
       return;
     }

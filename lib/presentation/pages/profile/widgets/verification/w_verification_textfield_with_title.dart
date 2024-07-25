@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/presentation/widgets/w_text_field.dart';
@@ -51,6 +52,12 @@ class WVerificationTextFieldWithTitle extends StatelessWidget {
           textCapitalization: TextCapitalization.words,
           readOnly: isReadOnly,
           onTap: onTap,
+          inputFormatters: [
+            MaskTextInputFormatter(
+              mask: '#################################',
+              filter: {"#": RegExp(r'[0-9 a-z A-Z]')},
+            ),
+          ],
           controller: controller,
           onChanged: onChange ?? (e) {},
           style: AppTheme.labelSmall,

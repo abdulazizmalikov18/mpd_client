@@ -36,7 +36,7 @@ class _WLiveAndMeetingItemState extends State<WLiveAndMeetingItem> {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                AppIcons.home.svg(),
+                AppIcons.home.svg(color: white),
                 const SizedBox(width: 8),
                 SizedBox(
                   width: 145,

@@ -80,67 +80,80 @@ mixin ConfirmDataMixin on State<ConfirmAuthDataView> {
   }
 
   void onPressedDateTime() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return Dialog(
-          backgroundColor: Colors.transparent,
-          surfaceTintColor: Colors.transparent,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          insetPadding: const EdgeInsets.symmetric(horizontal: 32),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxHeight: 400, minHeight: 0),
-              child: Theme(
-                data: Theme.of(context).copyWith(
-                  colorScheme: const ColorScheme.dark(
-                    primary: white,
-                    onPrimary: white,
-                    onSurface: white,
-                    secondary: red,
-                    surface: red,
-                  ),
-                  textButtonTheme: TextButtonThemeData(
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.red,
-                    ),
-                  ),
-                ),
-                child: DatePicker(
-                  padding: const EdgeInsets.all(16).copyWith(bottom: 0),
-                  selectedDate: birthdate.value ?? DateTime(2000, 1, 1),
-                  maxDate: DateTime.now(),
-                  minDate: DateTime(1920, 1, 1),
-                  splashColor: Colors.transparent,
-                  daysOfTheWeekTextStyle: context.textTheme.labelSmall!.copyWith(
-                    color: gray,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  selectedCellDecoration: BoxDecoration(
-                    gradient: wgradient,
-                    shape: BoxShape.circle,
-                  ),
-                  selectedCellTextStyle: const TextStyle(
-                    color: white,
-                  ),
-                  currentDateDecoration: BoxDecoration(
-                    gradient: wgradient,
-                    shape: BoxShape.circle,
-                  ),
-                  onDateSelected: (newValue) {
-                    birthdate.value = newValue;
-                    context.pop();
-                  },
-                ),
-              ),
-            ),
-          ),
-        );
+    showCupertinoModalPopup(
+        context: context,
+        builder: (ctx) {
+          return builtCupertinoDatePicker(context);
+        }).then(
+      (value) {
+        if (value is Map) {
+          final newDate = value['date'].toString().replaceAll('.', '-').split('-').reversed.join();
+
+          birthdate.value = DateTime.tryParse(newDate) ?? DateTime(2000, 1, 1);
+        }
       },
     );
+    // showDialog(
+    //   context: context,
+    //   builder: (context) {
+    //     return Dialog(
+    //       backgroundColor: Colors.transparent,
+    //       surfaceTintColor: Colors.transparent,
+    //       shape: RoundedRectangleBorder(
+    //         borderRadius: BorderRadius.circular(8),
+    //       ),
+    //       insetPadding: const EdgeInsets.symmetric(horizontal: 32),
+    //       child: ClipRRect(
+    //         borderRadius: BorderRadius.circular(16),
+    //         child: ConstrainedBox(
+    //           constraints: const BoxConstraints(maxHeight: 400, minHeight: 0),
+    //           child: Theme(
+    //             data: Theme.of(context).copyWith(
+    //               colorScheme: const ColorScheme.dark(
+    //                 primary: white,
+    //                 onPrimary: white,
+    //                 onSurface: white,
+    //                 secondary: red,
+    //                 surface: red,
+    //               ),
+    //               textButtonTheme: TextButtonThemeData(
+    //                 style: TextButton.styleFrom(
+    //                   foregroundColor: Colors.red,
+    //                 ),
+    //               ),
+    //             ),
+    //             child: DatePicker(
+    //               padding: const EdgeInsets.all(16).copyWith(bottom: 0),
+    //               selectedDate: birthdate.value ?? DateTime(2000, 1, 1),
+    //               maxDate: DateTime.now(),
+    //               minDate: DateTime(1920, 1, 1),
+    //               splashColor: Colors.transparent,
+    //               daysOfTheWeekTextStyle: context.textTheme.labelSmall!.copyWith(
+    //                 color: gray,
+    //                 overflow: TextOverflow.ellipsis,
+    //               ),
+    //               selectedCellDecoration: BoxDecoration(
+    //                 gradient: wgradient,
+    //                 shape: BoxShape.circle,
+    //               ),
+    //               selectedCellTextStyle: const TextStyle(
+    //                 color: white,
+    //               ),
+    //               currentDateDecoration: BoxDecoration(
+    //                 gradient: wgradient,
+    //                 shape: BoxShape.circle,
+    //               ),
+    //               onDateSelected: (newValue) {
+    //                 birthdate.value = newValue;
+    //                 context.pop();
+    //               },
+    //             ),
+    //           ),
+    //         ),
+    //       ),
+    //     );
+    //   },
+    // );
   }
 
   void onPressedSelectSpecialist() {

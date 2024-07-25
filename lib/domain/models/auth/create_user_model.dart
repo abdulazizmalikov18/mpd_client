@@ -9,8 +9,7 @@ class CreateUserModel {
   String? refresh;
   CreateUser? user;
 
-  factory CreateUserModel.fromJson(Map<String, dynamic> json) =>
-      CreateUserModel(
+  factory CreateUserModel.fromJson(Map<String, dynamic> json) => CreateUserModel(
         access: json["access"],
         refresh: json["refresh"],
         user: CreateUser.fromJson(json["user"]),
@@ -66,11 +65,7 @@ class CreateUser {
 
   Map<String, dynamic> toJson() {
     final birthDayFormated = birthday!.split('.').reversed.join('-');
-    final phoneFormatted = phone!
-        .replaceAll('-', '')
-        .replaceAll('(', '')
-        .replaceAll(')', '')
-        .replaceAll(' ', '');
+    final phoneFormatted = phone!.replaceAll('-', '').replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '');
     return {
       "password": password,
       "name": name,
@@ -80,7 +75,8 @@ class CreateUser {
       "gender": gender,
       "birthday": birthDayFormated,
       "region": region,
-      "specialist": specialist,
+      "main_cat": specialist,
+      "login": login,
     };
   }
 

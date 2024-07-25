@@ -9,6 +9,7 @@ import 'package:mpd_client/infrastructure/core/either.dart';
 import 'package:mpd_client/infrastructure/core/exceptions.dart';
 import 'package:mpd_client/infrastructure/core/failures.dart';
 import 'package:mpd_client/infrastructure/reopsitories/global_request_repo.dart';
+import 'package:mpd_client/infrastructure/services/log_service.dart';
 import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
 
 class AuthRepository {
@@ -52,20 +53,26 @@ class AuthRepository {
   }
 
   Future<Either<Failure, TokenModel>> refreshToken() async {
-    final result = await _repo.postAndSingle(
-      endpoint: 'UMS/api/v1.0/account/refresh-token/',
-      fromJson: TokenModel.fromJson,
-      sendToken: false,
-      data: {
-        'refresh': StorageRepository.getString(StorageKeys.REFRESH, defValue: ''),
-      },
-    );
-    if (result.isRight) {
-      await StorageRepository.putString(StorageKeys.TOKEN, result.right.access);
-      await StorageRepository.putString(StorageKeys.REFRESH, result.right.refresh);
-      return Right(result.right);
-    } else {
-      return Left(result.left);
+    try {
+      final result = await _repo.postAndSingle(
+        endpoint: 'UMS/api/v1.0/account/refresh-token/',
+        fromJson: TokenModel.fromJson,
+        sendToken: false,
+        data: {
+          'refresh': StorageRepository.getString(StorageKeys.REFRESH, defValue: ''),
+        },
+      );
+      if (result.isRight) {
+        await StorageRepository.putString(StorageKeys.TOKEN, result.right.access);
+        await StorageRepository.putString(StorageKeys.REFRESH, result.right.refresh);
+        return Right(result.right);
+      } else {
+        return Left(result.left);
+      }
+    } catch (e, s) {
+      Log.e(e.toString());
+      Log.e(s.toString());
+      return Left(const DioFailure());
     }
   }
 

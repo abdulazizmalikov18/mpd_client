@@ -84,6 +84,7 @@ class _WChatFileViewState extends State<WChatFileView> {
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               fontSize: 16,
+              color: white,
               fontWeight: FontWeight.w500,
             ),
           ),

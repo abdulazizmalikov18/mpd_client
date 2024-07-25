@@ -21,7 +21,6 @@ class DialogTitle extends StatelessWidget {
               style: AppTheme.bodyMedium.copyWith(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: white,
               ),
             ),
             WScaleAnimation(

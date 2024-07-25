@@ -17,7 +17,7 @@ class AccountRepositoryImpl extends AccountRepository {
   @override
   Future<Either<Failure, GenericPagination<RegionEntity>>> getRegion(Filter param) async {
     try {
-      final result = await service.getRegion(param: param.toJson());
+      final result = await service.getRegion(param);
       return Right(result);
     } on DioException {
       return Left(const DioFailure());
@@ -34,7 +34,7 @@ class AccountRepositoryImpl extends AccountRepository {
   @override
   Future<Either<Failure, GenericPagination<ProfessionEntity>>> getProfession(Filter id) async {
     try {
-      final result = await service.getProfession(parent: id.parent, search: id.search);
+      final result = await service.getProfession(id);
       return Right(result as GenericPagination<ProfessionEntity>);
     } on DioException {
       return Left(const DioFailure());

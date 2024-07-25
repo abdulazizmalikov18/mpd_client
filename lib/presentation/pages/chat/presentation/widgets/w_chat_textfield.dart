@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat/chat_bloc.dart';
@@ -21,32 +22,33 @@ class WChatTextField extends StatelessWidget {
               child: TextField(
                 controller: $chatController.of(context).messageController,
                 onEditingComplete: () => $chatController.of(context).sendMessage(context),
-                style: AppTheme.headlineSmall.copyWith(
-                  color: white,
-                ),
+                style: AppTheme.headlineSmall,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.only(top: 14, left: 16),
                   filled: true,
-                  fillColor: white.withOpacity(0.1),
+                  fillColor: background,
                   prefixIcon: WButton(
                     width: 30,
                     color: Colors.transparent,
                     padding: EdgeInsets.zero,
                     border: const Border(),
                     onTap: () => $chatController.of(context).sendMedia(context),
-                    child: AppIcons.back.svg(),
+                    child: Icon(
+                      CupertinoIcons.paperclip,
+                      color: gray,
+                    ),
                   ),
                   hintText: "Type....",
                   hintStyle: AppTheme.headlineSmall.copyWith(
-                    color: greyText,
+                    color: gray,
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: white.withOpacity(0.2)),
+                    borderSide: const BorderSide(color: border),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: white.withOpacity(0.2)),
+                    borderSide: const BorderSide(color: border),
                   ),
                   border: UnderlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -60,7 +62,7 @@ class WChatTextField extends StatelessWidget {
               onTap: () => $chatController.of(context).sendMessage(context),
               width: 48,
               height: 48,
-              child: AppIcons.send.svg(),
+              child: AppIcons.send.svg(color: white),
             ),
           ],
         );

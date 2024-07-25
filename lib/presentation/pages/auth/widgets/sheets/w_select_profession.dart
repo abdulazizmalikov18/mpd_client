@@ -36,95 +36,101 @@ class _WSelectProfessionSheetState extends State<WSelectProfessionSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: SizedBox(
-        width: double.infinity,
-        child: BlocBuilder<AccountsBloc, AccountsState>(
-          builder: (context, state) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 24),
-              child: SizedBox(
-                width: 400,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Column(
-                        children: [
-                          const DialogTitle(title: "Mutaxasligingizni tanlang "),
-                          const SizedBox(height: 16),
-                          WTextField(
-                            style: context.textTheme.bodyLarge!.copyWith(
-                              color: white,
-                            ),
-                            onChanged: (value) {
-                              onDebounce(() {
-                                context.read<AccountsBloc>().add(GetProfession(search: value));
-                              });
-                            },
-                            hintText: "Search",
-                            borderColor: borderColor,
-                            fillColor: white.withOpacity(0.2),
-                            // prefixIcon: Padding(
-                            //   padding: const EdgeInsets.only(right: 8),
-                            //   child: AppIcons.icHome.svg(color: gray),
-                            // ),
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(12),
+          topRight: Radius.circular(12),
+        ),
+      ),
+      child: BlocBuilder<AccountsBloc, AccountsState>(
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24),
+            child: SizedBox(
+              width: 400,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      children: [
+                        const DialogTitle(title: "Mutaxasligingizni tanlang "),
+                        const SizedBox(height: 16),
+                        WTextField(
+                          style: context.textTheme.bodyLarge,
+                          hintStyle: context.textTheme.bodyLarge?.copyWith(
+                            color: greyText
                           ),
-                          const SizedBox(height: 16),
-                          if ($regVM().professionList.isNotEmpty)
-                            InkWell(
-                              onTap: () {
-                                if (controller.hasClients) {
-                                  controller.animateToPage(
-                                    0,
-                                    duration: const Duration(milliseconds: 400),
-                                    curve: Curves.easeInOut,
-                                  );
-                                }
-                                $regVM().selectPagProffesion(context, 0, "", 0);
-                                setState(() {});
-                              },
-                              child: Container(
-                                height: 24,
-                                margin: const EdgeInsets.only(bottom: 16),
-                                child: const Icon(
-                                  Icons.arrow_left,
-                                  color: black,
-                                ),
+                          onChanged: (value) {
+                            onDebounce(() {
+                              context.read<AccountsBloc>().add(GetProfession(search: value));
+                            });
+                          },
+                          hintText: "Search",
+                          borderColor: border,
+                          fillColor: background,
+                          // prefixIcon: Padding(
+                          //   padding: const EdgeInsets.only(right: 8),
+                          //   child: AppIcons.icHome.svg(color: gray),
+                          // ),
+                        ),
+                        const SizedBox(height: 16),
+                        if ($regVM().professionList.isNotEmpty)
+                          InkWell(
+                            onTap: () {
+                              if (controller.hasClients) {
+                                controller.animateToPage(
+                                  0,
+                                  duration: const Duration(milliseconds: 400),
+                                  curve: Curves.easeInOut,
+                                );
+                              }
+                              $regVM().selectPagProffesion(context, 0, "", 0);
+                              setState(() {});
+                            },
+                            child: Container(
+                              height: 24,
+                              margin: const EdgeInsets.only(bottom: 16),
+                              child: const Icon(
+                                Icons.arrow_left,
+                                color: black,
                               ),
                             ),
-                        ],
-                      ),
+                          ),
+                      ],
                     ),
-                    SizedBox(
-                      height: 460,
-                      child: PageView(
-                        controller: controller,
-                        physics: const NeverScrollableScrollPhysics(),
-                        children: [
-                          ProfessionListView(
-                            profession: state.regionAndProfessionContainer.profession,
-                            controller: controller,
-                            index: 1,
-                            isLoading: state.regionAndProfessionContainer.statusd.isInProgress,
-                          ),
-                          ProfessionListView(
-                            profession: state.regionAndProfessionContainer.profession2,
-                            controller: controller,
-                            index: 2,
-                            isLoading: state.regionAndProfessionContainer.statusd.isInProgress,
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: 460,
+                    child: PageView(
+                      controller: controller,
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: [
+                        ProfessionListView(
+                          profession: state.regionAndProfessionContainer.profession,
+                          controller: controller,
+                          index: 1,
+                          isLoading: state.regionAndProfessionContainer.statusd.isInProgress,
+                        ),
+                        ProfessionListView(
+                          profession: state.regionAndProfessionContainer.profession2,
+                          controller: controller,
+                          index: 2,
+                          isLoading: state.regionAndProfessionContainer.statusd.isInProgress,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

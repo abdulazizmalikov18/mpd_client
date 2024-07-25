@@ -40,4 +40,11 @@ sealed class AppImages {
 
   // Entry doctor image
   static const String doctorEntry = 'assets/images/doctor_entry.png';
+  
+  
+  
+  
+  
+  
+  static const String chatNotFound = 'assets/images/chat_not_found.png';
 }

@@ -5,7 +5,7 @@ import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/widgets/w_shimmer.dart';
 import 'package:pinch_to_zoom_scrollable/pinch_to_zoom_scrollable.dart';
 
-class WPostMedia extends StatelessWidget {
+class WPostMedia extends StatefulWidget {
   final MediaEntity media;
 
   const WPostMedia({
@@ -14,16 +14,21 @@ class WPostMedia extends StatelessWidget {
   });
 
   @override
+  State<WPostMedia> createState() => _WPostMediaState();
+}
+
+class _WPostMediaState extends State<WPostMedia> {
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       height: 400,
-      child: switch (media.type) {
+      child: switch (widget.media.type) {
         "image" => PinchToZoomScrollableWidget(
             maxScale: 2.5,
-            // zoomEnabled: true,
+            rootOverlay: true,
             child: Image.network(
-              media.image,
+              widget.media.image,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return Container(
@@ -43,7 +48,7 @@ class WPostMedia extends StatelessWidget {
             ),
           ),
         "video" => WVideoUrlPlayer(
-            url: media.file,
+            url: widget.media.file,
           ),
         _ => Container(
             color: black,

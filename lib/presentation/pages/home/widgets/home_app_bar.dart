@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mpd_client/application/accounts/accounts_bloc.dart';
 import 'package:mpd_client/presentation/router/routs_contact.dart';
 import 'package:mpd_client/presentation/styles/app_icons.dart';
+import 'package:mpd_client/presentation/styles/app_images.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/presentation/widgets/w_network_image.dart';
@@ -94,7 +95,12 @@ class HomeAppbarComponent extends StatelessWidget implements PreferredSize {
               height: 40,
               width: 40,
               borderRadius: 100,
-              defaultWidget: ColoredBox(color: black),
+              defaultWidget: Image.asset(
+                AppImages.userAvatar,
+                width: 40,
+                height: 40,
+                fit: BoxFit.cover,
+              ),
             ),
             const SizedBox(width: 8),
             Column(

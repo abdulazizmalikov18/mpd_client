@@ -19,14 +19,22 @@ class WAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: Center(
-        child: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: AppIcons.back.svg(width: 24, height: 24),
-        ),
-      ),
+      leadingWidth: 40,
+
+      titleSpacing: back ? 0 : null,
+      leading: back ?  Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(width: 8),
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: AppIcons.back.svg(width: 24, height: 24),
+          ),
+        ],
+      ) : null,
       title: title,
       actions: action == null
           ? null

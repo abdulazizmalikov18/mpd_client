@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
+import 'package:pinch_to_zoom_scrollable/pinch_to_zoom_scrollable.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class WVideoUrlPlayer extends StatefulWidget {
@@ -12,7 +13,7 @@ class WVideoUrlPlayer extends StatefulWidget {
   State<WVideoUrlPlayer> createState() => _WVideoUrlPlayerState();
 }
 
-class _WVideoUrlPlayerState extends State<WVideoUrlPlayer> {
+class _WVideoUrlPlayerState extends State<WVideoUrlPlayer> with AutomaticKeepAliveClientMixin{
   late final player = Player(configuration: const PlayerConfiguration());
 
   late final controller = VideoController(player, configuration: const VideoControllerConfiguration());
@@ -41,12 +42,19 @@ class _WVideoUrlPlayerState extends State<WVideoUrlPlayer> {
           player.pause();
         }
       },
-      child: Video(
-        width: double.infinity,
-        height: double.infinity,
-        controller: controller,
-        fit: BoxFit.cover,
+      child: PinchToZoomScrollableWidget(
+        maxScale: 2.5,
+        rootOverlay: true,
+        child: Video(
+          width: double.infinity,
+          height: double.infinity,
+          controller: controller,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
+  
+  @override
+  bool get wantKeepAlive => true;
 }

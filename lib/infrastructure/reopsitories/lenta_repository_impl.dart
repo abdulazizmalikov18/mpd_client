@@ -10,6 +10,7 @@ import 'package:mpd_client/domain/models/lenta/specialist_product_model.dart';
 import 'package:mpd_client/infrastructure/apis/lenta_service.dart';
 import 'package:mpd_client/infrastructure/core/either.dart';
 import 'package:mpd_client/infrastructure/core/failures.dart';
+import 'package:mpd_client/infrastructure/services/log_service.dart';
 import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
 
 class LentaRepositoryImpl implements LentaRepository {
@@ -40,7 +41,9 @@ class LentaRepositoryImpl implements LentaRepository {
       } else {
         return Left(response.getException()!.getErrorFailure());
       }
-    } catch (e) {
+    } catch (e, s) {
+      Log.e(e.toString());
+      Log.e(s.toString());
       return Left(DioFailure(errorMessage: e.toString()));
     }
   }

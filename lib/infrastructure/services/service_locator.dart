@@ -8,6 +8,7 @@ import 'package:mpd_client/domain/abstract_repo/lenta_repository.dart';
 import 'package:mpd_client/infrastructure/apis/account_service.dart';
 import 'package:mpd_client/infrastructure/apis/chat_service.dart';
 import 'package:mpd_client/infrastructure/apis/lenta_service.dart';
+import 'package:mpd_client/infrastructure/reopsitories/auth_repository.dart';
 import 'package:mpd_client/infrastructure/reopsitories/chat_repository_impl.dart';
 import 'package:mpd_client/infrastructure/reopsitories/lenta_repository_impl.dart';
 import 'package:mpd_client/infrastructure/services/api_service.dart';
@@ -22,6 +23,7 @@ void setupLocator() {
   serviceLocator.registerSingleton(AuthBloc());
   serviceLocator.registerFactory(() => AccountsBloc());
   serviceLocator.registerSingleton<AccountService>(AccountService.create());
+  serviceLocator.registerSingleton<AuthRepository>(const AuthRepository());
   // // serviceLocator.registerSingleton(Debouncer(milliseconds: 300));
   //
   // // Chat Objects
