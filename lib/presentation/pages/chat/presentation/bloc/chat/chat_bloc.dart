@@ -482,86 +482,9 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
   // Group ---------------------------------------------------------------------
   void _searchGroupEvent(GroupSearchEvent event, Emitter emit) async {
-    //   if (state.screenStatus == ChatScreenStatus.createChat) {
-    //     emit(
-    //       state.copyWith(
-    //         usersContainer: state.usersContainer.copyWith(
-    //           status: FormzSubmissionStatus.inProgress,
-    //         ),
-    //       ),
-    //     );
-    //     final result = await getAllUsers.call(GetChatUserEntity(search: event.search.isNotEmpty ? event.search : null));
-    //     if (result.isRight) {
-    //       emit(
-    //         state.copyWith(
-    //           usersContainer: state.usersContainer.copyWith(
-    //             users: filterUser(result.right.results),
-    //             status: FormzSubmissionStatus.success,
-    //           ),
-    //         ),
-    //       );
-    //       return;
-    //     }
-    //     emit(
-    //       state.copyWith(
-    //         usersContainer: state.usersContainer.copyWith(
-    //           status: FormzSubmissionStatus.failure,
-    //         ),
-    //       ),
-    //     );
-    //     return;
-    //   }
-    //   if (state.screenStatus == ChatScreenStatus.createGroup) {
-    //     emit(
-    //       state.copyWith(
-    //         createGroupContainer: state.createGroupContainer.copyWith(
-    //           status: FormzSubmissionStatus.inProgress,
-    //         ),
-    //       ),
-    //     );
-    //     final result = await getAllUsers.call(GetChatUserEntity(search: event.search.isNotEmpty ? event.search : null, limit: 100));
-    //     if (result.isRight) {
-    //       emit(
-    //         state.copyWith(
-    //           usersContainer: state.usersContainer.copyWith(
-    //             status: FormzSubmissionStatus.success,
-    //             users: result.right.results,
-    //           ),
-    //         ),
-    //       );
-    //     }
-    //     emit(
-    //       state.copyWith(
-    //         usersContainer: state.usersContainer.copyWith(
-    //           status: FormzSubmissionStatus.success,
-    //           users: [],
-    //         ),
-    //       ),
-    //     );
-    //     return;
-    //   }
-    //   if (event.search.isEmpty) {
-    //     emit(
-    //       state.copyWith(
-    //         dataStatus: FormzSubmissionStatus.success,
-    //         groupContainer: state.groupContainer.copyWith(
-    //           groups: state.groupContainer.groups,
-    //         ),
-    //         textForUpdate: const Uuid().v4(),
-    //       ),
-    //     );
-    //   }
-    //
-    //   emit(
-    //     state.copyWith(
-    //       dataStatus: FormzSubmissionStatus.success,
-    //       groupContainer: state.groupContainer.copyWith(
-    //         groups: state.groupContainer.groups,
-    //       ),
-    //       textForUpdate: const Uuid().v4(),
-    //     ),
-    //   );
-    //   return;
+    emit(state.copyWith(groupContainer: state.groupContainer.copyWith(
+      status: FormzSubmissionStatus.inProgress,
+    )));
   }
 
   void _userSelected(GroupUsersSelectionEvent event, Emitter emit) {

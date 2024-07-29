@@ -51,49 +51,53 @@ mixin EditProfileMixin on State<EditProfileView> {
     await Future.delayed(const Duration(seconds: 3));
   }
 
-  void pickImageBottomSheet() {
-    showModalBottomSheet(
-      backgroundColor: white,
-      elevation: 0,
-      context: context,
-      builder: (context) {
-        return WBottomSheet(
-          title: 'Avatar yuk-lash',
-          child: Column(
-            children: [
-              const SizedBox(height: 24),
-              WShadowedItemContainer(
-                title: 'Сфотографировать',
-                icon: '', //AppIcons.camera,
-                onTap: () async {
-                  final result = await ImagePicker().pickImage(source: ImageSource.camera);
-                  if (result != null) {
-                    avatar.value = result.path;
-                    if (context.mounted) {
-                      context.pop();
-                    }
-                  }
-                },
-              ),
-              const SizedBox(height: 16),
-              WShadowedItemContainer(
-                title: 'Из галареии',
-                icon: '',//AppIcons.folderAdd,
-                onTap: () async {
-                  final result = await ImagePicker().pickImage(source: ImageSource.gallery);
-                  if (result != null) {
-                    avatar.value = result.path;
-                    if (context.mounted) {
-                      context.pop();
-                    }
-                  }
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
+  void pickImageBottomSheet() async {
+    final result = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (result != null) {
+      avatar.value = result.path;
+    }
+    // showModalBottomSheet(
+    //   backgroundColor: white,
+    //   elevation: 0,
+    //   context: context,
+    //   builder: (context) {
+    //     return WBottomSheet(
+    //       title: 'Avatar yuk-lash',
+    //       child: Column(
+    //         children: [
+    //           const SizedBox(height: 24),
+    //           WShadowedItemContainer(
+    //             title: 'Сфотографировать',
+    //             icon: '', //AppIcons.camera,
+    //             onTap: () async {
+    //               final result = await ImagePicker().pickImage(source: ImageSource.camera);
+    //               if (result != null) {
+    //                 avatar.value = result.path;
+    //                 if (context.mounted) {
+    //                   context.pop();
+    //                 }
+    //               }
+    //             },
+    //           ),
+    //           const SizedBox(height: 16),
+    //           WShadowedItemContainer(
+    //             title: 'Из галареии',
+    //             icon: '',//AppIcons.folderAdd,
+    //             onTap: () async {
+    //               final result = await ImagePicker().pickImage(source: ImageSource.gallery);
+    //               if (result != null) {
+    //                 avatar.value = result.path;
+    //                 if (context.mounted) {
+    //                   context.pop();
+    //                 }
+    //               }
+    //             },
+    //           ),
+    //         ],
+    //       ),
+    //     );
+    //   },
+    // );
   }
 
   void onPressedSelectSpecialist() {

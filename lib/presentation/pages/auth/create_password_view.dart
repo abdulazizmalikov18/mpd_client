@@ -62,16 +62,9 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
               children: [
                 Center(
                   child: Text(
-                    'Kirish',
+                    context.l10n.register_create_password,
                     style: context.textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w700),
                   ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Tizimga kiring va barcha xizmatlardan foydalaning',
-                  textAlign: TextAlign.center,
-                  maxLines: 1,
-                  style: context.textTheme.headlineSmall,
                 ),
                 const SizedBox(height: 32),
                 ValueListenableBuilder(

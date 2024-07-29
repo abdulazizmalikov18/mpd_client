@@ -16,7 +16,6 @@ import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/presentation/widgets/w_network_image.dart';
 import 'package:mpd_client/utils/extensions/string_ext.dart';
 
-
 class PostWidget extends StatefulWidget {
   final PostEntity post;
   final bool isLentaView;
@@ -183,7 +182,7 @@ class _PostWidgetState extends State<PostWidget> with AutomaticKeepAliveClientMi
   }
 
   void onPressGoComment({String? text}) {
-       if (widget.isLentaView) {
+    if (widget.isLentaView) {
       context.pushNamed(AppRouteNames.comment, extra: {
         'post': widget.post,
         'message': text,

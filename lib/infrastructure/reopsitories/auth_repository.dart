@@ -162,6 +162,10 @@ class AuthRepository {
 
   Future<Either<Failure, CreateUserModel>> createUser(CreateUser user, String? avatar) async {
     final data = FormData.fromMap(user.toJson());
+    Future.delayed(Duration(seconds: 3)).whenComplete(() {
+    print(user.toJson());
+
+    });
     if (avatar != null) {
       data.files.add(
         MapEntry(

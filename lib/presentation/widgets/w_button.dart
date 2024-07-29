@@ -74,14 +74,15 @@ class WButton extends StatelessWidget {
               )
             : null,
         decoration: BoxDecoration(
-          color: color != null
-              ? isDisabled
-                  ? primary.withOpacity(0.5)
-                  : color ?? primary
-              : null,
+          color: isDisabled ? gray : color ?? primary,
           borderRadius: BorderRadius.circular(isPhone ? borderRadius : 16),
-          border: isDisabled ? border ?? Border.all(color: white.withOpacity(0.3)) : border ?? Border.all(color: white.withOpacity(0.3)),
-          gradient: color == null ? gradient ?? wgradient : null,
+          border: isDisabled
+              ? border ?? Border.all(color: white.withOpacity(0.3))
+              : border ??
+                  Border.all(
+                    color: white.withOpacity(0.3),
+                  ),
+          gradient: isDisabled ? null : color == null ? gradient ?? wgradient : null,
           // boxShadow: shadow,
           // boxShadow: shadow ??
           //     [
@@ -100,12 +101,12 @@ class WButton extends StatelessWidget {
             : AnimatedDefaultTextStyle(
                 duration: const Duration(milliseconds: 200),
                 style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                      color: isDisabled ? textColor.withOpacity(0.5) : textColor,
+                      color:  white,
                     ),
                 child: child ??
                     Text(
                       text,
-                      style: isDisabled ? textStyle?.copyWith(color: textStyle?.color?.withOpacity(0.5)) : textStyle,
+                      style: isDisabled ? textStyle?.copyWith(color: white) : textStyle,
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,

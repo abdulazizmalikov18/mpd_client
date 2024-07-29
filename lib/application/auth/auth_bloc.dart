@@ -4,6 +4,7 @@ import 'package:formz/formz.dart';
 import 'package:mpd_client/domain/models/auth/user.dart';
 import 'package:mpd_client/infrastructure/core/failures.dart';
 import 'package:mpd_client/infrastructure/reopsitories/auth_repository.dart';
+import 'package:mpd_client/infrastructure/services/log_service.dart';
 import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
 import 'package:mpd_client/utils/extensions/list_extention.dart';
 import 'package:uuid/uuid.dart';
@@ -77,7 +78,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   void getUser(GetUserAuthEvent event, Emitter emit) async {
     final user = await _repo.getUser();
     if (user.isRight) {
-      emit(state.copyWith(userModel: user.right));
+      Log.i("Authenticated");
+      emit(state.copyWith(
+        userModel: user.right,
+        authStatus: AuthStatus.authenticated,
+      ));
     }
   }
 

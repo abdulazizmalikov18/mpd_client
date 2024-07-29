@@ -67,16 +67,16 @@ class CreateUser {
     final birthDayFormated = birthday!.split('.').reversed.join('-');
     final phoneFormatted = phone!.replaceAll('-', '').replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '');
     return {
-      "password": password,
-      "name": name,
-      "lastname": lastname,
-      "surname": surname,
+      if(password!= null)"password": password,
+      if(name!= null)"name": name,
+      if(lastname!= null)"lastname": lastname,
+      if(surname!= null)"surname": surname,
       "phone": phoneFormatted,
-      "gender": gender,
+      if(gender!= null)"gender": gender,
       "birthday": birthDayFormated,
-      "region": region,
-      "main_cat": specialist,
-      "login": login,
+      if(region!= null)"region": region,
+      if(specialist!= null)"main_cat": specialist,
+      if(login!= null)"login": login,
     };
   }
 

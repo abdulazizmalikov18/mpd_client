@@ -6,7 +6,12 @@ import 'package:mpd_client/application/auth/auth_bloc.dart';
 import 'package:mpd_client/application/comment/comment_bloc.dart';
 import 'package:mpd_client/application/post/post_bloc.dart';
 import 'package:mpd_client/application/show_pop_up/show_pop_up_bloc.dart';
+import 'package:mpd_client/application/yandex/filter_category/filter_category_bloc.dart';
+import 'package:mpd_client/application/yandex/popular_categories/popular_categories_bloc.dart';
+import 'package:mpd_client/application/yandex/yandex_doctor/yandex_doctor_bloc.dart';
+import 'package:mpd_client/infrastructure/reopsitories/yandex_doctor_repository.dart';
 import 'package:mpd_client/infrastructure/services/service_locator.dart';
+import 'package:mpd_client/infrastructure/services/yandex_service.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat/chat_bloc.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/controller/vm_controller.dart';
 import 'package:mpd_client/presentation/router/app_routs.dart';
@@ -29,12 +34,18 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AccountsBloc>(create: (context) => serviceLocator<AccountsBloc>()),
-        BlocProvider<AuthBloc>(create: (context) => serviceLocator<AuthBloc>()),
+        BlocProvider<AuthBloc>(create: (context) => serviceLocator<AuthBloc>()..add(const GetUserAuthEvent())),
         BlocProvider<ShowPopUpBloc>(create: (context) => ShowPopUpBloc()),
         // BlocProvider<ConnectionCubit>(create: (context) => ConnectionCubit()),
         BlocProvider<ChatBloc>(create: (context) => serviceLocator<ChatBloc>()),
         BlocProvider<PostBloc>(create: (context) => serviceLocator<PostBloc>()),
-        // BlocProvider<CommentBloc>(create: (context) => serviceLocator<CommentBloc>()),
+        BlocProvider<CommentBloc>(create: (context) => serviceLocator<CommentBloc>()),
+
+        BlocProvider<FilterCategoryBloc>(create: (context) => FilterCategoryBloc(serviceLocator<YandexDoctorRepository>(), TextEditingController())),
+        BlocProvider<YandexDoctorBloc>(create: (context) => YandexDoctorBloc(YandexService())),
+        BlocProvider<PopularCategoriesBloc>(
+          create: (context) => PopularCategoriesBloc(serviceLocator<YandexDoctorRepository>())..add(const GetPopularCategoriesEvent('uz')),
+        ),
       ],
       child: BlocListener<AuthBloc, AuthState>(
         bloc: serviceLocator<AuthBloc>(),

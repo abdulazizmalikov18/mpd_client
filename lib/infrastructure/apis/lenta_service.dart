@@ -156,7 +156,7 @@ class LentaServiceImpl implements LentaService {
         );
       },
       body: (response) {
-        return ResponseHandler()..data = const PostConverter().fromJson(response);
+        return ResponseHandler()..setData(const PostConverter().fromJson(response));
       },
     );
   }

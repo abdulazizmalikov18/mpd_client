@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:formz/formz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat/chat_bloc.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/controller/vm_controller.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/widgets/message_widgets/w_message.dart';
@@ -31,7 +30,7 @@ class _InChatViewState extends State<InChatView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-  backgroundColor: background,
+      backgroundColor: background,
       appBar: WAppBar(
         back: true,
         title: BlocBuilder<ChatBloc, ChatState>(
@@ -52,11 +51,21 @@ class _InChatViewState extends State<InChatView> {
                 ),
                 const SizedBox(width: 8),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       state.groupContainer.activeGroup?.name ?? "-",
                       overflow: TextOverflow.ellipsis,
-                      style: AppTheme.displayLarge.copyWith(),
+                      style: AppTheme.displayLarge,
+                    ),
+                    Text(
+                      "1 min ago",
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTheme.displayLarge.copyWith(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w300,
+                        color: gray,
+                      ),
                     ),
                   ],
                 ),
@@ -66,7 +75,7 @@ class _InChatViewState extends State<InChatView> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.only(right: 8, left: 8, bottom: MediaQuery.of(context).size.height * 0.1),
+        padding: EdgeInsets.only(right: 8, left: 8, bottom: MediaQuery.viewInsetsOf(context).bottom > 0 ? 80 : 106),
         child: BlocBuilder<ChatBloc, ChatState>(
           builder: (context, state) => switch (state.dataStatus) {
             FormzSubmissionStatus.inProgress => const Center(
@@ -93,12 +102,16 @@ class _InChatViewState extends State<InChatView> {
           },
         ),
       ),
-      bottomSheet: Container(
+      bottomSheet: AnimatedContainer(
         width: double.infinity,
-        height: 106,
-        color: white,
+        height: MediaQuery.viewInsetsOf(context).bottom > 0 ? 80 : 106,
+        decoration: BoxDecoration(
+          color: white,
+          boxShadow: [BoxShadow(color: black.withOpacity(.15), offset: const Offset(0, -4), blurRadius: 12)],
+        ),
+        duration: const Duration(milliseconds: 400),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: MediaQuery.sizeOf(context).width * 0.05),
+          padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: MediaQuery.viewInsetsOf(context).bottom > 0 ? 0 : MediaQuery.sizeOf(context).width * 0.05),
           child: const WChatTextField(),
         ),
       ),

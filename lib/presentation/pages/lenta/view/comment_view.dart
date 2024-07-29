@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:mpd_client/application/comment/comment_bloc.dart';
 import 'package:mpd_client/domain/entity/lenta/comment_entity.dart';
+import 'package:mpd_client/domain/entity/lenta/post_entity.dart';
 import 'package:mpd_client/domain/models/lenta/post_model.dart';
 import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
 import 'package:mpd_client/presentation/pages/lenta/view/comment_bottom_sheet.dart';
@@ -16,7 +17,7 @@ import 'package:mpd_client/presentation/widgets/w_app_bar.dart';
 part '../mixin/comment_mixin.dart';
 
 class CommentView extends StatefulWidget {
-  final PostModel post;
+  final PostEntity post;
   final String? message;
 
   const CommentView({

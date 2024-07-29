@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mpd_client/presentation/pages/yandex_doctor/doctor_page.dart';
 
 class DoctorView extends StatefulWidget {
   const DoctorView({super.key});
@@ -10,8 +11,6 @@ class DoctorView extends StatefulWidget {
 class _DoctorViewState extends State<DoctorView> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Placeholder(),
-    );
+    return const DoctorPage();
   }
 }

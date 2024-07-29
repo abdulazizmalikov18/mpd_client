@@ -11,7 +11,6 @@ import 'package:mpd_client/infrastructure/apis/lenta_service.dart';
 import 'package:mpd_client/infrastructure/core/either.dart';
 import 'package:mpd_client/infrastructure/core/failures.dart';
 import 'package:mpd_client/infrastructure/services/log_service.dart';
-import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
 
 class LentaRepositoryImpl implements LentaRepository {
   final LentaService _remoteDataSource;
