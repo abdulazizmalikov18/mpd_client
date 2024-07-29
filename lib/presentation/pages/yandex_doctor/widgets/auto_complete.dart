@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mpd_client/application/yandex/search_by_specialist/search_by_specialist_bloc.dart';
+import 'package:mpd_client/application/yandex/yandex_doctor/yandex_doctor_bloc.dart';
 import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
@@ -8,8 +10,6 @@ import 'package:mpd_client/presentation/widgets/grandient_icon.dart';
 import 'package:mpd_client/presentation/widgets/loading_platform.dart';
 import 'package:mpd_client/utils/extensions/context_extension.dart';
 
-import '../../../../application/yandex/search_by_specialist/search_by_specialist_bloc.dart';
-import '../../../../application/yandex/yandex_doctor/yandex_doctor_bloc.dart';
 
 class AutoComplete extends StatelessWidget {
   final SearchBySpecialistState state;

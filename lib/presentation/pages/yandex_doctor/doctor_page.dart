@@ -11,7 +11,6 @@ import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/utils/extensions/context_extension.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 import '../../../application/yandex/popular_categories/popular_categories_bloc.dart';
 import '../../../application/yandex/search_by_category/search_by_category_bloc.dart';
