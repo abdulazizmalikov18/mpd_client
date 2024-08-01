@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/application/accounts/accounts_bloc.dart';
+import 'package:mpd_client/application/appointment/cancel_appointment/cancel_appointment_bloc.dart';
+import 'package:mpd_client/application/appointment/canceled_appointment/canceled_appointment_bloc.dart';
+import 'package:mpd_client/application/appointment/completed_appointment/completed_appointment_bloc.dart';
+import 'package:mpd_client/application/appointment/upcoming_appointment/upcoming_appoinment_bloc.dart';
 import 'package:mpd_client/application/auth/auth_bloc.dart';
 import 'package:mpd_client/application/comment/comment_bloc.dart';
 import 'package:mpd_client/application/post/post_bloc.dart';
@@ -11,6 +15,7 @@ import 'package:mpd_client/application/yandex/popular_categories/popular_categor
 import 'package:mpd_client/application/yandex/search_by_category/search_by_category_bloc.dart';
 import 'package:mpd_client/application/yandex/search_by_specialist/search_by_specialist_bloc.dart';
 import 'package:mpd_client/application/yandex/yandex_doctor/yandex_doctor_bloc.dart';
+import 'package:mpd_client/infrastructure/reopsitories/appoinment_repository.dart';
 import 'package:mpd_client/infrastructure/reopsitories/yandex_doctor_repository.dart';
 import 'package:mpd_client/infrastructure/services/service_locator.dart';
 import 'package:mpd_client/infrastructure/services/yandex_service.dart';
@@ -42,17 +47,18 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<ChatBloc>(create: (context) => serviceLocator<ChatBloc>()),
         BlocProvider<PostBloc>(create: (context) => serviceLocator<PostBloc>()),
         BlocProvider<CommentBloc>(create: (context) => serviceLocator<CommentBloc>()),
-
+        // Doctor
         BlocProvider<FilterCategoryBloc>(create: (context) => FilterCategoryBloc(serviceLocator<YandexDoctorRepository>(), TextEditingController())),
         BlocProvider<YandexDoctorBloc>(create: (context) => YandexDoctorBloc(YandexService())),
         BlocProvider<PopularCategoriesBloc>(create: (context) => PopularCategoriesBloc(serviceLocator<YandexDoctorRepository>())..add(const GetPopularCategoriesEvent('uz'))),
         BlocProvider<SearchByCategoryBloc>(create: (context) => SearchByCategoryBloc(serviceLocator<YandexDoctorRepository>())),
-        BlocProvider<SearchBySpecialistBloc>(
-          create: (context) => SearchBySpecialistBloc(
-            serviceLocator<YandexDoctorRepository>(),
-            FocusNode(),
-          ),
-        ),
+        BlocProvider<SearchBySpecialistBloc>(create: (context) => SearchBySpecialistBloc(serviceLocator<YandexDoctorRepository>(), FocusNode())),
+
+        // Appointment
+        BlocProvider<UpcomingAppoinmentsBloc>(create: (context) => UpcomingAppoinmentsBloc(serviceLocator<AppoinmentRepository>())),
+        BlocProvider<CompletedAppointmentBloc>(create: (context) => CompletedAppointmentBloc(serviceLocator<AppoinmentRepository>())),
+        BlocProvider<CanceledAppointmentBloc>(create: (context) => CanceledAppointmentBloc(serviceLocator<AppoinmentRepository>())),
+        BlocProvider<CancelAppointmentBloc>(create: (context) => CancelAppointmentBloc(serviceLocator<AppoinmentRepository>())),
       ],
       child: BlocListener<AuthBloc, AuthState>(
         bloc: serviceLocator<AuthBloc>(),

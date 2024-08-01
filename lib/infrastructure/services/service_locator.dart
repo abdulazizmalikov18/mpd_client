@@ -6,9 +6,11 @@ import 'package:mpd_client/application/post/post_bloc.dart';
 import 'package:mpd_client/domain/abstract_repo/chat_repository.dart';
 import 'package:mpd_client/domain/abstract_repo/lenta_repository.dart';
 import 'package:mpd_client/infrastructure/apis/account_service.dart';
+import 'package:mpd_client/infrastructure/apis/appoinment_remote_datasource.dart';
 import 'package:mpd_client/infrastructure/apis/chat_service.dart';
 import 'package:mpd_client/infrastructure/apis/lenta_service.dart';
 import 'package:mpd_client/infrastructure/apis/yandex_doctor_remote_datasources.dart';
+import 'package:mpd_client/infrastructure/reopsitories/appoinment_repository.dart';
 import 'package:mpd_client/infrastructure/reopsitories/auth_repository.dart';
 import 'package:mpd_client/infrastructure/reopsitories/chat_repository_impl.dart';
 import 'package:mpd_client/infrastructure/reopsitories/lenta_repository_impl.dart';
@@ -31,12 +33,14 @@ void setupLocator() {
   // // Lenta Objects
   _lenta();
 
-  //Doctor Yande
-
+  //Doctor Yandex
   _doctor();
 
   // // Chat Objects
   _chatRegister();
+
+  // Appointment Objects
+  _appointment();
 }
 
 //
@@ -65,4 +69,9 @@ void _lenta() {
 
 void _doctor() {
   serviceLocator.registerSingleton<YandexDoctorRepository>(YandexDoctorRepository(remoteDataSource: YandexDoctorRemoteDataSource()));
+}
+
+
+void _appointment() {
+  serviceLocator.registerSingleton(AppoinmentRepository(appoinmentRemoteDataSource: AppoinmentRemoteDataSource()));
 }

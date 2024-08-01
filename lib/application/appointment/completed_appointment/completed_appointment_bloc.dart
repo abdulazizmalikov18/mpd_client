@@ -9,12 +9,9 @@ import 'package:mpd_client/infrastructure/reopsitories/appoinment_repository.dar
 part 'completed_appointment_event.dart';
 part 'completed_appointment_state.dart';
 
-class CompletedAppointmentBloc
-    extends Bloc<CompletedAppointmentEvent, CompletedAppointmentState> {
-  CompletedAppointmentBloc(this._profileRepository)
-      : super(CompletedAppointmentInitial()) {
-    on<GetCompletedAppoinmentsEvent>(_onGetAppoinmentsEvent,
-        transformer: droppable());
+class CompletedAppointmentBloc extends Bloc<CompletedAppointmentEvent, CompletedAppointmentState> {
+  CompletedAppointmentBloc(this._profileRepository) : super(CompletedAppointmentInitial()) {
+    on<GetCompletedAppoinmentsEvent>(_onGetAppoinmentsEvent, transformer: droppable());
   }
 
   final AppoinmentRepository _profileRepository;
@@ -22,8 +19,7 @@ class CompletedAppointmentBloc
   int _offset = 0;
 
   //get records
-  Future<void> _onGetAppoinmentsEvent(GetCompletedAppoinmentsEvent event,
-      Emitter<CompletedAppointmentState> emit) async {
+  Future<void> _onGetAppoinmentsEvent(GetCompletedAppoinmentsEvent event, Emitter<CompletedAppointmentState> emit) async {
     if (state.hasReachedMax && !event.isRefresh) return;
 
     if (event.isRefresh) _offset = 0;
@@ -34,31 +30,21 @@ class CompletedAppointmentBloc
 
     // Here, Getting appointments first time and refreshed all appointments
     if (state is CompletedAppointmentInitial) {
-      final result = await _profileRepository
-          .getUserAppoinments(PaginationModel(limit: _limit, status: 5));
+      final result = await _profileRepository.getUserAppoinments(PaginationModel(limit: _limit, status: 5));
       if (result.isRight) {
         _offset += 10;
-        emit(CompletedAppoinmentSuccess(
-            appoinments: result.right.results,
-            hasReachedMax: result.right.results.length < _offset));
+        emit(CompletedAppoinmentSuccess(appoinments: result.right.results, hasReachedMax: result.right.results.length < _offset));
       } else {
         errorChecker(result.left, emit);
       }
     }
 
     // Here, Getting upcoming appointments with pagination
-    final result = await _profileRepository.getUserAppoinments(
-        PaginationModel(limit: _limit, status: 5, offset: _offset));
+    final result = await _profileRepository.getUserAppoinments(PaginationModel(limit: _limit, status: 5, offset: _offset));
     if (result.isRight) {
       _offset += 10;
-      final completedAppointments = [
-        ...state.appoinments,
-        ...result.right.results
-      ];
-      emit(CompletedAppoinmentSuccess(
-          appoinments:
-              event.isRefresh ? result.right.results : completedAppointments,
-          hasReachedMax: completedAppointments.length < _offset));
+      final completedAppointments = [...state.appoinments, ...result.right.results];
+      emit(CompletedAppoinmentSuccess(appoinments: event.isRefresh ? result.right.results : completedAppointments, hasReachedMax: completedAppointments.length < _offset));
     } else {
       errorChecker(result.left, emit);
     }
@@ -66,11 +52,9 @@ class CompletedAppointmentBloc
 
   void errorChecker(Failure failure, Emitter<CompletedAppointmentState> emit) {
     if (failure is NetworkFailure) {
-      emit(CompletedAppoinmentsFailure(
-          appoinments: state.appoinments, failure: failure.errorMessage));
+      emit(CompletedAppoinmentsFailure(appoinments: state.appoinments, failure: failure.errorMessage));
     } else {
-      emit(CompletedAppoinmentsFailure(
-          appoinments: state.appoinments, failure: 'Server failure'));
+      emit(CompletedAppoinmentsFailure(appoinments: state.appoinments, failure: 'Server failure'));
     }
   }
 }
