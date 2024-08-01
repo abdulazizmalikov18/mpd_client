@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mpd_client/domain/models/yandex/searched_specialist_model.dart';
 import 'package:mpd_client/domain/models/yandex/yandex_map_object_model.dart';
+import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/app_images.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
@@ -193,29 +194,29 @@ class YandexService extends IYandexService {
     return singlePlaceMark;
   }
 
-  // Future<PlacemarkMapObject> getMyImagePlaceMark({required Point point, Uint8List? imageBytes}) async {
-  //   if (imageBytes == null) {
-  //     final placemark = PlacemarkMapObject(
-  //         mapId: userLocation,
-  //         point: point,
-  //         icon: PlacemarkIcon.single(
-  //             PlacemarkIconStyle(image: BitmapDescriptor.fromAssetImage(AppIcons.mapProfileDefault))));
+  Future<PlacemarkMapObject> getMyImagePlaceMark({required Point point, Uint8List? imageBytes}) async {
+    if (imageBytes == null) {
+      final placemark = PlacemarkMapObject(
+          mapId: userLocation,
+          point: point,
+          icon: PlacemarkIcon.single(
+              PlacemarkIconStyle(image: BitmapDescriptor.fromAssetImage(AppIcons.mapProfileDefault))));
 
-  //     return placemark;
-  //   }
-  //   Uint8List? resizedImage;
-  //   if (_userImageBytes != imageBytes || _userImageBytes == null) {
-  //     _userImageBytes = imageBytes;
-  //     resizedImage = await ImageCropper().resizeAndCircleFromMemory(_userImageBytes!, 120);
-  //   }
-  //   final placemark = PlacemarkMapObject(
-  //       mapId: userLocation,
-  //       point: point,
-  //       opacity: 0.7,
-  //       icon: PlacemarkIcon.single(PlacemarkIconStyle(image: BitmapDescriptor.fromBytes(resizedImage!))));
+      return placemark;
+    }
+    Uint8List? resizedImage;
+    // if (_userImageBytes != imageBytes || _userImageBytes == null) {
+    //   _userImageBytes = imageBytes;
+    //   resizedImage = await ImageCropper().resizeAndCircleFromMemory(_userImageBytes!, 120);
+    // }
+    final placemark = PlacemarkMapObject(
+        mapId: userLocation,
+        point: point,
+        opacity: 0.7,
+        icon: PlacemarkIcon.single(PlacemarkIconStyle(image: BitmapDescriptor.fromBytes(resizedImage!))));
 
-  //   return placemark;
-  // }
+    return placemark;
+  }
 
   // Future<PlacemarkMapObject> getUrlImagePlaceMark(Point point, String imageUrl) async {
   //   Uint8List? imageBytes;

@@ -19,40 +19,43 @@ class WChatTextField extends StatelessWidget {
         return Row(
           children: [
             Expanded(
-              child: TextField(
-                controller: $chatController.of(context).messageController,
-                onEditingComplete: () => $chatController.of(context).sendMessage(context),
-                style: AppTheme.headlineSmall,
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.only(top: 14, left: 16),
-                  filled: true,
-                  fillColor: background,
-                  prefixIcon: WButton(
-                    width: 30,
-                    color: Colors.transparent,
-                    padding: EdgeInsets.zero,
-                    border: const Border(),
-                    onTap: () => $chatController.of(context).sendMedia(context),
-                    child: Icon(
-                      CupertinoIcons.paperclip,
+              child: SizedBox(
+                height: 48,
+                child: TextField(
+                  controller: $chatController.of(context).messageController,
+                  onEditingComplete: () => $chatController.of(context).sendMessage(context),
+                  style: AppTheme.headlineSmall,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.only(top: 14, left: 16),
+                    filled: true,
+                    fillColor: background,
+                    prefixIcon: WButton(
+                      width: 30,
+                      color: Colors.transparent,
+                      padding: EdgeInsets.zero,
+                      border: const Border(),
+                      onTap: () => $chatController.of(context).sendMedia(context),
+                      child: const Icon(
+                        CupertinoIcons.paperclip,
+                        color: gray,
+                      ),
+                    ),
+                    hintText: "Type....",
+                    hintStyle: AppTheme.headlineSmall.copyWith(
                       color: gray,
                     ),
-                  ),
-                  hintText: "Type....",
-                  hintStyle: AppTheme.headlineSmall.copyWith(
-                    color: gray,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: border),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: border),
-                  ),
-                  border: UnderlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: border),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: border),
+                    ),
+                    border: UnderlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
                   ),
                 ),
               ),

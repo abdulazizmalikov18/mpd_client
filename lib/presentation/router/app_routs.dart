@@ -27,6 +27,7 @@ import 'package:mpd_client/presentation/pages/main/main_view.dart';
 import 'package:mpd_client/presentation/pages/profile/edit_profile_view.dart';
 import 'package:mpd_client/presentation/pages/profile/profile_view.dart';
 import 'package:mpd_client/presentation/pages/record/record_view.dart';
+import 'package:mpd_client/presentation/pages/yandex_doctor/doctor_page.dart';
 import 'package:mpd_client/presentation/router/routs_contact.dart';
 
 sealed class AppRouts {
@@ -163,7 +164,7 @@ sealed class AppRouts {
           GoRoute(
             path: AppRoutePath.doctor,
             name: AppRouteNames.doctor,
-            builder: (context, state) => const DoctorView(),
+            builder: (context, state) => const DoctorPage(),
           ),
         ],
       ),

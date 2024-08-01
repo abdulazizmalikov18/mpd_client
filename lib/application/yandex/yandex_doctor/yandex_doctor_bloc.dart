@@ -100,21 +100,21 @@ class YandexDoctorBloc extends Bloc<YandexDoctorEvent, YandexDoctorState> {
   }
 
   Future<void> _onPlaceImagetoLocation(PlaceImagetoLocationEvent event, Emitter<YandexDoctorState> emit) async {
-    // for (var map in mapObjects) {
-    //   if (map.mapId == const MapObjectId('me_${0}')) {
-    //     await _addMyImageAndPlacemark((map as CircleMapObject).circle.center, event.imageMemory);
-    //     break;
-    //   }
-    // }
+    for (var map in mapObjects) {
+      if (map.mapId == const MapObjectId('me_${0}')) {
+        await _addMyImageAndPlacemark((map as CircleMapObject).circle.center, event.imageMemory);
+        break;
+      }
+    }
 
     emit(state.copyWith(state.location, mapObjects, isMoved: false));
   }
 
-  // Future<void> _addMyImageAndPlacemark(Point point, Uint8List? imageMemory) async {
-  // final imagePlaceMark = await _yandexService.getMyImagePlaceMark(point: point, imageBytes: imageMemory);
-  //   mapObjects.removeWhere((element) => element.mapId == _yandexService.userLocation);
-  // mapObjects.add(imagePlaceMark);
-  // }
+  Future<void> _addMyImageAndPlacemark(Point point, Uint8List? imageMemory) async {
+  final imagePlaceMark = await _yandexService.getMyImagePlaceMark(point: point, imageBytes: imageMemory);
+    mapObjects.removeWhere((element) => element.mapId == _yandexService.userLocation);
+  mapObjects.add(imagePlaceMark);
+  }
 }
 
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mpd_client/presentation/pages/appointment/appointment/appoinment.dart';
 
 class RecordView extends StatefulWidget {
   const RecordView({super.key});
@@ -10,6 +11,7 @@ class RecordView extends StatefulWidget {
 class _RecordViewState extends State<RecordView> {
   @override
   Widget build(BuildContext context) {
+    return AppointmentPage();
     return const Scaffold(
       body: Placeholder(),
     );

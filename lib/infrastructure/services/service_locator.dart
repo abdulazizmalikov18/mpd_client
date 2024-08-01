@@ -64,7 +64,5 @@ void _lenta() {
 }
 
 void _doctor() {
-  serviceLocator.registerSingletonAsync<YandexDoctorRepository>(
-    () async => YandexDoctorRepository(remoteDataSource: YandexDoctorRemoteDataSource()),
-  );
+  serviceLocator.registerSingleton<YandexDoctorRepository>(YandexDoctorRepository(remoteDataSource: YandexDoctorRemoteDataSource()));
 }

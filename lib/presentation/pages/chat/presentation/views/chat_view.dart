@@ -54,9 +54,7 @@ class _ChatViewState extends State<ChatView> {
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                         child: WTextField(
                           onChanged: (searchText) {
-                            onDebounce(() {
-                              context.read<ChatBloc>().add(GroupSearchEvent(search: searchText));
-                            });
+                            context.read<ChatBloc>().add(GroupSearchEvent(search: searchText));
                           },
                           fillColor: background,
                           borderColor: Colors.transparent,

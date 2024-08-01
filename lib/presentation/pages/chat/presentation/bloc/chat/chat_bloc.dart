@@ -482,9 +482,22 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
   // Group ---------------------------------------------------------------------
   void _searchGroupEvent(GroupSearchEvent event, Emitter emit) async {
-    emit(state.copyWith(groupContainer: state.groupContainer.copyWith(
-      status: FormzSubmissionStatus.inProgress,
-    )));
+    emit(state.copyWith(
+      groupContainer: state.groupContainer.copyWith(
+        status: FormzSubmissionStatus.inProgress,
+      ),
+      textForUpdate: const Uuid().v4(),
+    ));
+
+    final result = await _repo.getMyChat(GetGroupChatEntity(search: event.search));
+    emit(state.copyWith(
+      groupContainer: state.groupContainer.copyWith(
+        status: FormzSubmissionStatus.success,
+        groups: result.right.results,
+      ),
+      textForUpdate: const Uuid().v4(),
+
+    ));
   }
 
   void _userSelected(GroupUsersSelectionEvent event, Emitter emit) {

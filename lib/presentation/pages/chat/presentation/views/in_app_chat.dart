@@ -24,7 +24,7 @@ class InChatView extends StatefulWidget {
   static _InChatViewState? of(BuildContext context) => context.findAncestorStateOfType<_InChatViewState>();
 }
 
-class _InChatViewState extends State<InChatView> {
+class _InChatViewState extends State<InChatView> with AutomaticKeepAliveClientMixin {
   bool isLoading = false;
 
   @override
@@ -75,7 +75,11 @@ class _InChatViewState extends State<InChatView> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.only(right: 8, left: 8, bottom: MediaQuery.viewInsetsOf(context).bottom > 0 ? 80 : 106),
+        padding:  EdgeInsets.only(
+          right: 8,
+          left: 8,
+          bottom: MediaQuery.viewInsetsOf(context).bottom > 0 ? kBottomNavigationBarHeight : kBottomNavigationBarHeight + 24,
+        ),
         child: BlocBuilder<ChatBloc, ChatState>(
           builder: (context, state) => switch (state.dataStatus) {
             FormzSubmissionStatus.inProgress => const Center(
@@ -104,17 +108,23 @@ class _InChatViewState extends State<InChatView> {
       ),
       bottomSheet: AnimatedContainer(
         width: double.infinity,
-        height: MediaQuery.viewInsetsOf(context).bottom > 0 ? 80 : 106,
+        // height: kBottomNavigationBarHeight,
+        padding: EdgeInsets.only(
+          top: 8,
+          bottom: MediaQuery.viewInsetsOf(context).bottom > 0 ? 8 : 32,
+          left: 16,
+          right: 16,
+        ),
         decoration: BoxDecoration(
           color: white,
           boxShadow: [BoxShadow(color: black.withOpacity(.15), offset: const Offset(0, -4), blurRadius: 12)],
         ),
-        duration: const Duration(milliseconds: 400),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: MediaQuery.viewInsetsOf(context).bottom > 0 ? 0 : MediaQuery.sizeOf(context).width * 0.05),
-          child: const WChatTextField(),
-        ),
+        duration: const Duration(milliseconds: 200),
+        child: const WChatTextField(),
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

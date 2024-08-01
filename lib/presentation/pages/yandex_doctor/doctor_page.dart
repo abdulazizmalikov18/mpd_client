@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:formz/formz.dart';
+import 'package:mpd_client/application/accounts/accounts_bloc.dart';
 import 'package:mpd_client/application/yandex/filter_category/filter_category_bloc.dart';
 import 'package:mpd_client/infrastructure/services/yandex_service.dart';
 import 'package:mpd_client/presentation/pages/yandex_doctor/doctor_list_page.dart';
@@ -11,6 +13,7 @@ import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/utils/extensions/context_extension.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 import '../../../application/yandex/popular_categories/popular_categories_bloc.dart';
 import '../../../application/yandex/search_by_category/search_by_category_bloc.dart';
@@ -58,49 +61,53 @@ class _DoctorPageState extends State<DoctorPage> with AutomaticKeepAliveClientMi
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          // BlocConsumer<UserInfoBloc, UserInfoState>(
-          //   listener: (context, state) {
-          //     if (state.userLocalInfo != null && state.status.isInitial) {
-          //       final yandexState = context.read<YandexDoctorBloc>().state;
-          //       if (yandexState.location != null) {
-          //         context.read<YandexDoctorBloc>().add(PlaceImagetoLocationEvent(imageMemory: state.userLocalInfo!.image));
-          //       }
-          //     }
-          //   },
-          //   builder: (context, userstate) {
-          //     return BlocConsumer<YandexDoctorBloc, YandexDoctorState>(
-          //       listener: (context, state) {
-          //         if (state.location != null) {
-          //           _yandexService.moveCameraPosition(state.location!, zoom: state.zoom);
-          //         }
-          //         // if (userstate.userLocalInfo != null) {
-          //         //   if (state.isMoved && state.location != null) {
-          //         //     context.read<YandexDoctorBloc>().add(PlaceImagetoLocationEvent(imageMemory: userstate.userLocalInfo!.image));
-          //         //   }
-          //         // }
-          //       },
-          //       builder: (context, state) {
-          //         return YandexMap(
-          //           key: _yandexService.mapKey,
-          //           mapObjects: state.mapObjects,
-          //           onMapTap: (argument) {
-          //             context.read<SearchBySpecialistBloc>().add(CloseSuggessionsEvent());
-          //           },
-          //           onCameraPositionChanged: (cameraPosition, reason, finished) {
-          //             if (finished) {
-          //               debugPrint('Placemarks ------------------- ${state.mapObjects.length}');
-          //             }
-          //           },
-          //           onMapCreated: (YandexMapController yandexMapController) {
-          //             _yandexService.yandexController.complete(yandexMapController);
-          //           },
-          //         );
-          //       },
-          //     );
-          //   },
-          // ),
-         
-         
+          BlocConsumer<AccountsBloc, AccountsState>(
+            listener: (context, user) {
+              // if (state.userLocalInfo != null && state.status.isInitial) {
+              final yandexState = context.read<YandexDoctorBloc>().state;
+              if (yandexState.location != null) {
+                context.read<YandexDoctorBloc>().add(const PlaceImagetoLocationEvent(imageMemory: null)); //user.userContainer.user.avatar
+              }
+              // }
+            },
+            builder: (context, userstate) {
+              return BlocConsumer<YandexDoctorBloc, YandexDoctorState>(
+                listener: (context, state) {
+                  if (state.location != null) {
+                    _yandexService.moveCameraPosition(state.location!, zoom: state.zoom);
+                  }
+                  if (state.isMoved && state.location != null) {
+                    context.read<YandexDoctorBloc>().add(const PlaceImagetoLocationEvent(imageMemory: null));//user.userContainer.user.avatar
+                  }
+                },
+                builder: (context, state) {
+                  if (userstate.userContainer.status.isInProgress) {
+                    return Container(
+                      width: 100,
+                      height: 100,
+                      color: black,
+                    );
+                  }
+                  return YandexMap(
+                    key: _yandexService.mapKey,
+                    mapObjects: state.mapObjects,
+                    onMapTap: (argument) {
+                      context.read<SearchBySpecialistBloc>().add(CloseSuggessionsEvent());
+                    },
+                    onCameraPositionChanged: (cameraPosition, reason, finished) {
+                      if (finished) {
+                        debugPrint('Placemarks ------------------- ${state.mapObjects.length}');
+                      }
+                    },
+                    onMapCreated: (YandexMapController yandexMapController) {
+                      _yandexService.yandexController.complete(yandexMapController);
+                    },
+                  );
+                },
+              );
+            },
+          ),
+
           //? My location part
           BlocSelector<YandexDoctorBloc, YandexDoctorState, bool>(
             selector: (state) => state.showDoctorInfo,
