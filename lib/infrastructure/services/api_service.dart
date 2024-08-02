@@ -100,7 +100,6 @@ class DioSettings {
 //
 class ErrorHandlerInterceptor implements Interceptor {
   ErrorHandlerInterceptor._();
-  static bool refreshIsActive = true;
 
   static final _instance = ErrorHandlerInterceptor._();
 
@@ -111,7 +110,6 @@ class ErrorHandlerInterceptor implements Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     if ((err.response?.statusCode ?? 500) == 401) {
       Log.e("refresh Error");
-
     }
     handler.next(err);
   }
@@ -123,23 +121,19 @@ class ErrorHandlerInterceptor implements Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) async {
-    if (!refreshIsActive) {
-       Log.e("refresh Response IS Not Active");
-      AppRouts.router.goNamed(AppRouteNames.login);
-    }
-    if (response.statusCode == 401 && refreshIsActive) {
-       Log.e("refresh Response");
+    // if (!response.realUri.path.endsWith("refresh")) {
+    //   handler.next(response);
+    // }
+    if (response.statusCode == 401) {
+      Log.e("refresh Response");
       final result = await serviceLocator<AuthRepository>().refreshToken();
       if (result.isRight) {
-        refreshIsActive = false;
         return handler.resolve(await _retry(response.requestOptions));
-
       } else {
-       Log.e("refresh Response IS LEFT");
+        Log.e("refresh Response IS LEFT");
 
         AppRouts.router.goNamed(AppRouteNames.login);
 
-        refreshIsActive = false;
         return handler.next(response);
       }
     }

@@ -19,7 +19,10 @@ class AppointmentBottomInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        isPending ? _buildTime(context) : _buildPrice(context),
+        SizedBox(
+          width: MediaQuery.sizeOf(context).width * 0.45,
+          child: isPending ? _buildTime(context) : _buildPrice(context),
+        ),
         const Spacer(),
         IconGradientButton(
           height: 34,
@@ -27,23 +30,29 @@ class AppointmentBottomInfo extends StatelessWidget {
           icon: AppIcons.unfilledLocation,
           onPressed: onLocationPressed,
         ),
-        ScreenUtil().setHorizontalSpacing(16.w),
+        const Spacer(),
         Container(
           height: 34.h,
           decoration: BoxDecoration(
-              gradient: const LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
+            gradient: const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
                 gradientBlueOpacity,
                 gradientBlue,
-              ]),
-              borderRadius: BorderRadius.circular(8.r)),
+              ],
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
           child: ElevatedButton(
             onPressed: onDetailPressed,
             style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                shadowColor: Colors.transparent,
-                elevation: 0,
-                padding: EdgeInsets.symmetric(horizontal: 25.w),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r))),
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+              elevation: 0,
+              padding: EdgeInsets.symmetric(horizontal: 25.w),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
+            ),
             child: Text(
               context.l10n.appointment_detail,
               style: Styles.boldHeadline6.copyWith(
@@ -66,14 +75,18 @@ class AppointmentBottomInfo extends StatelessWidget {
         children: [
           SvgPicture.asset(
             AppIcons.clockTransparent,
-            height: 18.h,
-            width: 18.h,
-            colorFilter: ColorFilter.mode(mainBlue, BlendMode.srcIn),
+            height: 18,
+            width: 18,
+            colorFilter: const ColorFilter.mode(mainBlue, BlendMode.srcIn),
           ),
-          ScreenUtil().setHorizontalSpacing(4.w),
+          const SizedBox(width: 4),
           Text(
             meetDate.isEmpty ? "--" : Utils.appointMentDateFormat(meetDate, context),
-            style: Styles.descSubtitle.copyWith(color: mainBlue, fontSize: 14.sp),
+            overflow: TextOverflow.ellipsis,
+            style: Styles.descSubtitle.copyWith(
+              color: mainBlue,
+              fontSize: 14,
+            ),
           )
         ],
       ),

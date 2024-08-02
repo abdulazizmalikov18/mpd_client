@@ -3,8 +3,11 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mpd_client/application/appointment/cancel_appointment/cancel_appointment_bloc.dart';
 import 'package:mpd_client/application/comment/comment_bloc.dart';
+import 'package:mpd_client/infrastructure/reopsitories/appoinment_repository.dart';
 import 'package:mpd_client/infrastructure/services/service_locator.dart';
+import 'package:mpd_client/presentation/pages/appointment/book_appoinment/book_appoinment.dart';
 import 'package:mpd_client/presentation/pages/auth/check_pin_view.dart';
 import 'package:mpd_client/presentation/pages/auth/confirm_auth_data.dart';
 import 'package:mpd_client/presentation/pages/auth/confirm_otp_view.dart';
@@ -150,7 +153,7 @@ sealed class AppRouts {
                 ),
               ),
               GoRoute(
-                      parentNavigatorKey: navigatorKey,
+                parentNavigatorKey: navigatorKey,
                 path: AppRoutePath.createPost,
                 name: AppRouteNames.createPost,
                 builder: (context, state) => const CreatePostView(),
@@ -165,6 +168,20 @@ sealed class AppRouts {
             path: AppRoutePath.doctor,
             name: AppRouteNames.doctor,
             builder: (context, state) => const DoctorPage(),
+            routes: [
+              GoRoute(
+                parentNavigatorKey: navigatorKey,
+                path: AppRoutePath.appointment,
+                name: AppRouteNames.appointment,
+                builder: (context, state) => BlocProvider(
+                  create: (context) => CancelAppointmentBloc(serviceLocator<AppoinmentRepository>()),
+                  child: BookAppoinment(
+                    appoinmentInfo: (state.extra as Map)['appoinmentInfo'],
+                    appointment: (state.extra as Map)['appointment'],
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

@@ -28,11 +28,11 @@ class BottomSheetWidget extends StatelessWidget {
           ClipPath(
             clipper: MyClip(),
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20.r),
-                  topRight: Radius.circular(20.r),
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
                 ),
               ),
               child: Column(

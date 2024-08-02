@@ -36,7 +36,7 @@ class TransparentLongButton extends StatelessWidget {
                   AppIcons.cartUnfilled,
                   height: 18.h,
                   width: 18.h,
-                  colorFilter: ColorFilter.mode(mainBlue, BlendMode.srcIn),
+                  colorFilter: const ColorFilter.mode(mainBlue, BlendMode.srcIn),
                 ),
               ScreenUtil().setHorizontalSpacing(6.w),
               Text(

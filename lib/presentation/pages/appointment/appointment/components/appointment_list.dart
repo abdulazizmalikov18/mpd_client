@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mpd_client/domain/models/appointment/appoinment_model.dart';
 import 'package:mpd_client/domain/models/appointment/appointment_arg_model.dart';
 import 'package:mpd_client/domain/models/appointment/appointment_info_models.dart';
 import 'package:mpd_client/domain/models/appointment/specialist_info_model.dart';
 import 'package:mpd_client/presentation/pages/appointment/appointment/appoinment.dart';
+import 'package:mpd_client/presentation/router/routs_contact.dart';
 import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/widgets/loading_platform.dart';
@@ -96,11 +98,15 @@ class AppointmentList extends StatelessWidget {
           isPending: true,
           meetDate: appointment.meetDate ?? "",
           onDetailPressed: () {
+            context.pushNamed(AppRouteNames.appointment, extra: {
+              'appoinmentInfo': infos[infoIndex],
+              'appointment': appointment,
+            });
             // FIXME: PushTo Navigatge
             // Navigator.pushNamed(
             //   context,
             //   AppRoutes.appointment,
-            //   arguments: AppointmentArgModel(appoinmentInfo: infos[infoIndex], appointment: appointment),
+            //   arguments: AppointmentArgModel(appoinmentInfo: , ),
             // );
           },
           onLocationPressed: () => UiTools.openMapsSheet(
