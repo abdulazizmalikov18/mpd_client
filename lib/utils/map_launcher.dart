@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:mpd_client/utils/appointment_tools.dart';
 import 'package:mpd_client/utils/utils.dart';
 
-class MapLauncher {
+class  MapLauncher {
   static const MethodChannel _channel = MethodChannel('map_launcher');
 
   /// Returns list of installed map apps on the device.

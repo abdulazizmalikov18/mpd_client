@@ -18,8 +18,8 @@ abstract class AppTheme {
             // ios
             statusBarBrightness: Brightness.dark,
             // android
-            statusBarIconBrightness: Brightness.light,
-            systemNavigationBarIconBrightness: Brightness.light,
+            statusBarIconBrightness: Brightness.dark,
+            systemNavigationBarIconBrightness: Brightness.dark,
           ),
           titleTextStyle: displaySmall.copyWith(fontWeight: FontWeight.w600),
           centerTitle: false,

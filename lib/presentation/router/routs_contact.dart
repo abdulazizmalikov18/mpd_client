@@ -49,6 +49,11 @@ sealed class AppRouteNames {
   static const record = 'record';
   static const comment = 'comment';
   static const appointment = 'appointment';
+  static const drProfilebyid = 'drProfilebyid';
+  static const appointmentPage = 'appointment_page';
+  static const conclusionHistory = 'conclusion_history';
+  static const doctorInfo = 'doctorInfo';
+
 }
 
 sealed class AppRoutePath {
@@ -100,6 +105,10 @@ sealed class AppRoutePath {
   static const settings = '/settings';
   static const doctor = '/doctor';
   static const record = '/record';
+  static const conclusionHistory = '/conclusion_history';
   static const comment = 'comment';
   static const appointment = 'appointment';
+  static const drProfilebyid = '/drProfilebyid';
+  static const appointmentPage = '/appointment_page';
+  static const doctorInfo = '/doctorInfo';
 }

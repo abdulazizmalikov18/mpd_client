@@ -38,7 +38,7 @@ class _MainViewState extends State<MainView> {
       context.l10n.navbar_home: {'inactive': AppIcons.mainComponentUnfill, 'active': AppIcons.mainComponent},
       context.l10n.navbar_Doctor: {'inactive': AppIcons.searchStatus, 'active': AppIcons.searchStatusFilled},
       context.l10n.navbar_Appointment: {'inactive': AppIcons.calendar, 'active': AppIcons.calendarFilled},
-      'Chat': {'inactive': AppIcons.calendar, 'active': AppIcons.calendarFilled},
+      'Chat': {'inactive': AppIcons.message, 'active': AppIcons.message},
       context.l10n.navbar_profile: {'inactive': AppIcons.user, 'active': AppIcons.userFilled}
     };
     return Scaffold(

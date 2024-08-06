@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:chuck_interceptor/chuck.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +8,7 @@ import 'package:mpd_client/application/appointment/cancel_appointment/cancel_app
 import 'package:mpd_client/application/comment/comment_bloc.dart';
 import 'package:mpd_client/infrastructure/reopsitories/appoinment_repository.dart';
 import 'package:mpd_client/infrastructure/services/service_locator.dart';
+import 'package:mpd_client/presentation/pages/appointment/appointment/appoinment.dart';
 import 'package:mpd_client/presentation/pages/appointment/book_appoinment/book_appoinment.dart';
 import 'package:mpd_client/presentation/pages/auth/check_pin_view.dart';
 import 'package:mpd_client/presentation/pages/auth/confirm_auth_data.dart';
@@ -18,7 +20,8 @@ import 'package:mpd_client/presentation/pages/auth/registration_view.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/views/chat_view.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/views/create_new_chat_view.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/views/in_app_chat.dart';
-import 'package:mpd_client/presentation/pages/doctor/doctor_view.dart';
+import 'package:mpd_client/presentation/pages/doctor_profile_booking/presentation/pages/doctor_info_iteam.dart';
+import 'package:mpd_client/presentation/pages/doctor_profile_booking/presentation/pages/dr_profile_byid.dart';
 import 'package:mpd_client/presentation/pages/error/error_view.dart';
 import 'package:mpd_client/presentation/pages/home/home_view.dart';
 import 'package:mpd_client/presentation/pages/initial/language/language_page.dart';
@@ -29,9 +32,12 @@ import 'package:mpd_client/presentation/pages/lenta/view/create_post_view.dart';
 import 'package:mpd_client/presentation/pages/main/main_view.dart';
 import 'package:mpd_client/presentation/pages/profile/edit_profile_view.dart';
 import 'package:mpd_client/presentation/pages/profile/profile_view.dart';
-import 'package:mpd_client/presentation/pages/record/record_view.dart';
+import 'package:mpd_client/presentation/pages/record/record.dart';
+import 'package:mpd_client/presentation/pages/record/records_page.dart';
 import 'package:mpd_client/presentation/pages/yandex_doctor/doctor_page.dart';
 import 'package:mpd_client/presentation/router/routs_contact.dart';
+
+final chuckI = Chuck(showNotification: true, navigatorKey: AppRouts.navigatorKey);
 
 sealed class AppRouts {
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -124,6 +130,39 @@ sealed class AppRouts {
         name: AppRouteNames.createChat,
         builder: (context, state) => const CreateNewChatView(),
       ),
+      GoRoute(
+        parentNavigatorKey: navigatorKey,
+        path: AppRoutePath.conclusionHistory,
+        name: AppRouteNames.conclusionHistory,
+        builder: (context, state) => Record(
+          record: (state.extra as Map)['arguments'],
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: navigatorKey,
+        path: AppRoutePath.record,
+        name: AppRouteNames.record,
+        builder: (context, state) => const RecordsPage(),
+      ),
+      GoRoute(
+        parentNavigatorKey: navigatorKey,
+        path: AppRoutePath.doctorInfo,
+        name: AppRouteNames.doctorInfo,
+        builder: (context, state) => DoctorInfoItem(
+          doctor: (state.extra as Map)['doctor'],
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: navigatorKey,
+        path: AppRoutePath.drProfilebyid,
+        name: AppRouteNames.drProfilebyid,
+        builder: (context, state) => BlocProvider(
+          create: (context) => CancelAppointmentBloc(serviceLocator<AppoinmentRepository>()),
+          child: DrProfileByid(
+            specialist: (state.extra as Map)['specialist'],
+          ),
+        ),
+      ),
       mainView,
     ],
   );
@@ -168,6 +207,15 @@ sealed class AppRouts {
             path: AppRoutePath.doctor,
             name: AppRouteNames.doctor,
             builder: (context, state) => const DoctorPage(),
+          ),
+        ],
+      ),
+      StatefulShellBranch(
+        routes: [
+          GoRoute(
+            path: AppRoutePath.appointmentPage,
+            name: AppRouteNames.appointmentPage,
+            builder: (context, state) => const AppointmentPage(),
             routes: [
               GoRoute(
                 parentNavigatorKey: navigatorKey,
@@ -182,15 +230,6 @@ sealed class AppRouts {
                 ),
               ),
             ],
-          ),
-        ],
-      ),
-      StatefulShellBranch(
-        routes: [
-          GoRoute(
-            path: AppRoutePath.record,
-            name: AppRouteNames.record,
-            builder: (context, state) => const RecordView(),
           ),
         ],
       ),

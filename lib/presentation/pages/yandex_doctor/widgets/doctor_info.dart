@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mpd_client/domain/models/appointment/specialist_info_model.dart';
 import 'package:mpd_client/domain/models/yandex/searched_specialist_model.dart';
+import 'package:mpd_client/presentation/router/routs_contact.dart';
 import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
@@ -43,18 +46,15 @@ class DoctorInfo extends StatelessWidget {
           ScreenUtil().setVerticalSpacing(13.h),
           MapDoctorCard(
             onPressed: () {
-              // FIXME : Navigate to =>
-              // Navigator.pushNamed(
-              //   context,
-              //   AppRoutes.drProfilebyid,
-              //   arguments: SpecialistInfoModel(
-              //     avatar: specialist!.avatar,
-              //     fullname: '${specialist!.name} ${specialist!.lastname!}',
-              //     username: specialist!.user,
-              //     id: specialist?.id ?? 0,
-              //     job: specialist?.job?.name ?? "-- --",
-              //   ),
-              // );
+              context.pushNamed(AppRouteNames.drProfilebyid, extra: {
+                'specialist': SpecialistInfoModel(
+                  avatar: specialist!.avatar,
+                  fullname: '${specialist!.name} ${specialist!.lastname!}',
+                  username: specialist!.user,
+                  id: specialist?.id ?? 0,
+                  job: specialist?.job?.name ?? "-- --",
+                )
+              });
             },
             job: job,
             specialist: specialist,

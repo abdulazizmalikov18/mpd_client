@@ -123,11 +123,15 @@ class AppointmentList extends StatelessWidget {
           price: appointment.cost!,
           meetDate: appointment.meetDate ?? "",
           onDetailPressed: () {
-            // FIXME: PushTo Navigate
+            context.pushNamed(AppRouteNames.appointment, extra: {
+              'appoinmentInfo': infos[infoIndex],
+              'appointment': appointment,
+            });
+            // // FIXME: PushTo Navigate
             //   Navigator.pushNamed(
             //   context,
             //   AppRoutes.appointment,
-            //   arguments: AppointmentArgModel(appoinmentInfo: infos[infoIndex], appointment: appointment),
+            //   arguments: AppointmentArgModel(),
             // );
           },
           onLocationPressed: () => UiTools.openMapsSheet(
@@ -144,6 +148,13 @@ class AppointmentList extends StatelessWidget {
           price: appointment.cost!,
           meetDate: appointment.meetDate ?? "",
           onDetailPressed: () {
+            context.pushNamed(
+              AppRouteNames.appointment,
+              extra: {
+                'appoinmentInfo': infos[infoIndex],
+                'appointment': appointment,
+              },
+            );
             // FIXME: Push To Navigate
             // Navigator.pushNamed(
             //   context,

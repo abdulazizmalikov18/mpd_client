@@ -1,9 +1,7 @@
 import 'package:dio/dio.dart';
 
 import 'package:flutter/foundation.dart';
-import 'package:mpd_client/domain/models/auth/token_model.dart';
 import 'package:mpd_client/infrastructure/reopsitories/auth_repository.dart';
-import 'package:mpd_client/infrastructure/reopsitories/global_request_repo.dart';
 import 'package:mpd_client/infrastructure/services/log_service.dart';
 import 'package:mpd_client/infrastructure/services/service_locator.dart';
 import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
@@ -79,7 +77,8 @@ class DioSettings {
         responseHeader: kDebugMode,
         error: kDebugMode,
       ),
-      ErrorHandlerInterceptor()
+      ErrorHandlerInterceptor(),
+      chuckI.getDioInterceptor(),
     ]);
 
   Dio get dioForAuth => Dio(_dioBaseOptionsForAuth)
@@ -93,6 +92,8 @@ class DioSettings {
         error: kDebugMode,
       ),
       ErrorHandlerInterceptor(),
+      chuckI.getDioInterceptor(),
+
       // CustomInterceptor()
     ]);
 }

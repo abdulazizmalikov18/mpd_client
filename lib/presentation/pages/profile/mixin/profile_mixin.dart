@@ -41,7 +41,7 @@ mixin ProfileMixin on State<ProfileView> {
 
   void showQrCode() {
     showModalBottomSheet(
-      context: context,//MainView.of(context).context,
+      context: context, //MainView.of(context).context,
       builder: (ctx) {
         return Column(
           mainAxisSize: MainAxisSize.min,
@@ -104,6 +104,15 @@ mixin ProfileMixin on State<ProfileView> {
           ],
         );
       },
+    );
+  }
+
+  void onPressLanguage() {
+    
+    showModalBottomSheet(
+      backgroundColor: Colors.transparent,
+      context: MainView.of(context).context,
+      builder: (_) => const LanguageSheet(),
     );
   }
 

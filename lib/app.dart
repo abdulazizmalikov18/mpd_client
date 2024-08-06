@@ -8,7 +8,10 @@ import 'package:mpd_client/application/appointment/completed_appointment/complet
 import 'package:mpd_client/application/appointment/upcoming_appointment/upcoming_appoinment_bloc.dart';
 import 'package:mpd_client/application/auth/auth_bloc.dart';
 import 'package:mpd_client/application/comment/comment_bloc.dart';
+import 'package:mpd_client/application/doctor_booking/doctor_profile/doctor_profile_bloc.dart';
+import 'package:mpd_client/application/doctor_booking/subscripption/subscription_bloc.dart';
 import 'package:mpd_client/application/post/post_bloc.dart';
+import 'package:mpd_client/application/profile/user_records/records_bloc.dart';
 import 'package:mpd_client/application/show_pop_up/show_pop_up_bloc.dart';
 import 'package:mpd_client/application/yandex/filter_category/filter_category_bloc.dart';
 import 'package:mpd_client/application/yandex/popular_categories/popular_categories_bloc.dart';
@@ -16,6 +19,8 @@ import 'package:mpd_client/application/yandex/search_by_category/search_by_categ
 import 'package:mpd_client/application/yandex/search_by_specialist/search_by_specialist_bloc.dart';
 import 'package:mpd_client/application/yandex/yandex_doctor/yandex_doctor_bloc.dart';
 import 'package:mpd_client/infrastructure/reopsitories/appoinment_repository.dart';
+import 'package:mpd_client/infrastructure/reopsitories/doctor_profile_repository.dart';
+import 'package:mpd_client/infrastructure/reopsitories/user_repository.dart';
 import 'package:mpd_client/infrastructure/reopsitories/yandex_doctor_repository.dart';
 import 'package:mpd_client/infrastructure/services/service_locator.dart';
 import 'package:mpd_client/infrastructure/services/yandex_service.dart';
@@ -59,6 +64,10 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<CompletedAppointmentBloc>(create: (context) => CompletedAppointmentBloc(serviceLocator<AppoinmentRepository>())),
         BlocProvider<CanceledAppointmentBloc>(create: (context) => CanceledAppointmentBloc(serviceLocator<AppoinmentRepository>())),
         BlocProvider<CancelAppointmentBloc>(create: (context) => CancelAppointmentBloc(serviceLocator<AppoinmentRepository>())),
+        BlocProvider<DoctorProfileBloc>(create: (context) => DoctorProfileBloc(serviceLocator<DoctorProfileRepository>())),
+        // Profile
+        BlocProvider<RecordsBloc>(create: (context) => RecordsBloc(serviceLocator<UserRepository>(), TextEditingController())),
+        BlocProvider<SubscriptionBloc>(create: (context) => SubscriptionBloc(serviceLocator<DoctorProfileRepository>())),
       ],
       child: BlocListener<AuthBloc, AuthState>(
         bloc: serviceLocator<AuthBloc>(),

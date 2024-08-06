@@ -109,4 +109,12 @@ sealed class AppIcons {
   static const String filter = 'assets/icons/setting-4.svg';
 
   static const qrCodeBorder = 'assets/icons/qr_code_border.svg';
+
+
+  static const scanBarcode = "assets/icons/scan-barcode.svg";
+  static const files = "assets/icons/files.svg";
+  static const warning = "assets/icons/warning.svg";
+  static const briefcaseLite = "assets/icons/briefcase_lite.svg";
+  static const trash = "assets/icons/trash.svg";
+
 }

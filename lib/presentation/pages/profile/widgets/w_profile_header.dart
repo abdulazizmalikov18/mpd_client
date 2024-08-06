@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:mpd_client/application/accounts/accounts_bloc.dart';
+import 'package:mpd_client/application/auth/auth_bloc.dart';
+import 'package:mpd_client/presentation/pages/profile/widgets/w_qr_code.dart';
+import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/app_images.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
+import 'package:mpd_client/presentation/widgets/w_bottom_sheet_clipper.dart';
 import 'package:mpd_client/presentation/widgets/w_network_image.dart';
 import 'package:mpd_client/presentation/widgets/w_shimmer.dart';
 import 'package:mpd_client/utils/extensions/string_ext.dart';
@@ -18,8 +23,8 @@ class WProfileHeader extends StatelessWidget {
       children: [
         Align(
           heightFactor: 0,
-          child: Image.asset(
-            "assets/images/topimage.png",
+          child: Image.network(
+            "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
             width: double.infinity,
             // height: 300,
             fit: BoxFit.cover,
@@ -27,7 +32,7 @@ class WProfileHeader extends StatelessWidget {
         ),
         // Container(
         //   width: double.infinity,
-          // height: MediaQuery.sizeOf(context).height * 0.15,
+        // height: MediaQuery.sizeOf(context).height * 0.15,
         //   decoration: BoxDecoration(
         //     gradient: wgradient,
         //     borderRadius: const BorderRadius.only(
@@ -93,6 +98,58 @@ class WProfileHeader extends StatelessWidget {
                 ],
               );
             },
+          ),
+        ),
+        Positioned(
+          right: 16,
+          top: MediaQuery.sizeOf(context).height * 0.1,
+          child: GestureDetector(
+            onTap: () {
+              final qrCode = context.read<AccountsBloc>().state.userContainer.user.qrcode;
+              showModalBottomSheet(
+                backgroundColor: Colors.transparent,
+                context: context,
+                builder: (_) => BottomSheetWidget(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'My QR code',
+                            style: Styles.emptyboldTitle,
+                          ),
+                          const CloseButton(
+                            color: black,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    SizedBox(
+                      width: MediaQuery.sizeOf(context).width * 0.8,
+                      height: MediaQuery.sizeOf(context).width * 0.8,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: ColoredBox(
+                            color: Colors.black,
+                            child: CreateQRCode(text: qrCode),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 32),
+                  ],
+                ),
+              );
+            },
+            child: CircleAvatar(
+              backgroundColor: Colors.white,
+              radius: 36,
+              child: AppIcons.scanBarcode.svg(color: const Color(0xFF677294)),
+            ),
           ),
         ),
       ],

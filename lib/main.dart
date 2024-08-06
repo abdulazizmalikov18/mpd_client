@@ -7,6 +7,7 @@ import 'package:mpd_client/infrastructure/services/log_service.dart';
 
 const String $baseUrlHttp = "http://82.215.78.34/";
 const String $baseUrlSocket = "ws://82.215.78.34";
+
 Future<void> main() async {
   await runZonedGuarded(() async {
     await AppInit.create;

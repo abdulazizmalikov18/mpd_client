@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:mpd_client/utils/appointment_tools.dart';
 import 'package:mpd_client/utils/extensions/context_extension.dart';
 import 'package:mpd_client/utils/extensions/string_ext.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class Utils {
   static String commentDateFormat(DateTime date, BuildContext context) {
@@ -94,10 +96,18 @@ class Utils {
     return currency.toUpperCase();
   }
 
-  // static String weekDayFormatObrevation(String dayObrevation) {
-  //   final fullWeekDayString = Constants.weekDays.where((element) => element.toLowerCase().startsWith(dayObrevation)).first;
-  //   return fullWeekDayString;
-  // }
+  static String weekDayFormatObrevation(String dayObrevation) {
+    final fullWeekDayString = <String>[
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ].where((element) => element.toLowerCase().startsWith(dayObrevation)).first;
+    return fullWeekDayString;
+  }
 
   static String formatPostDate(DateTime dateTime, BuildContext context) {
     if (DateTime.now().difference(dateTime).inSeconds == 0 || DateTime.now().difference(dateTime).inSeconds == 1) {
@@ -265,4 +275,28 @@ class Utils {
   }
 
 
+}
+
+
+
+enum Status { initial, loading, success, failure }
+
+class Ticker {
+  const Ticker();
+  Stream<int> tick({required int ticks}) {
+    return Stream.periodic(const Duration(seconds: 1), (x) => ticks - x - 1)
+        .take(ticks);
+  }
+}
+
+
+
+class Caller {
+  static Future<void> makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
+  }
 }

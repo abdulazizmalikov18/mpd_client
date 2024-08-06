@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,20 +40,20 @@ class _CancelSheetState extends State<CancelSheet> {
   @override
   Widget build(BuildContext context) {
     return BottomSheetWidget(children: [
-      ScreenUtil().setVerticalSpacing(32.h),
+      const SizedBox(height: 32),
       Center(
         child: Text(
           context.l10n.cancel_appointment,
           style: Styles.boldTitle.copyWith(color: black, fontSize: 24, fontFamily: Styles.gilroyMedium),
         ),
       ),
-      ScreenUtil().setVerticalSpacing(12.h),
+      const SizedBox(height: 12),
       Text(
         context.l10n.cancel_appointment_are_you_sure,
         textAlign: TextAlign.center,
         style: Styles.descSubtitle.copyWith(color: grey),
       ),
-      ScreenUtil().setVerticalSpacing(12.h),
+      const SizedBox(height: 12),
       Text(
         context.l10n.cancel_appointment_desctiption,
         style: Styles.expTitle.copyWith(color: black),
@@ -82,11 +83,15 @@ class _CancelSheetState extends State<CancelSheet> {
           ],
         );
       }),
-      ScreenUtil().setVerticalSpacing(20.h),
+      const SizedBox(height: 20),
       BlocListener<CancelAppointmentBloc, CancelAppointmentState>(
         listener: (context, state) {
           if (state is CancelAppointmentLoading) {
-            showDialog(context: context, barrierDismissible: false, builder: (context) => const LoadingDialogWidget());
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) => const CupertinoActivityIndicator(),
+            );
           } else if (state is CancelAppointmentSuccess) {
             Navigator.pop(context);
             Future.delayed(const Duration(milliseconds: 200)).then((value) => Navigator.pop(context));
@@ -112,12 +117,12 @@ class _CancelSheetState extends State<CancelSheet> {
               }),
         ),
       ),
-      ScreenUtil().setVerticalSpacing(12.h),
+      const SizedBox(height: 12),
       Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: TransparentLongButton(buttonName: context.l10n.cancel_appointment_not_want, onPress: () => Navigator.pop(context)),
       ),
-      ScreenUtil().setVerticalSpacing(32.h),
+      const SizedBox(height: 32),
     ]);
   }
 

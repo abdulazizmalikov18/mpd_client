@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mpd_client/domain/models/appointment/specialist_info_model.dart';
 import 'package:mpd_client/domain/models/yandex/searched_specialist_model.dart';
+import 'package:mpd_client/presentation/router/routs_contact.dart';
 import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
@@ -135,22 +138,21 @@ class _DoctorListPageState extends State<DoctorListPage> {
                   const Spacer(),
                   FilledGradientButton(
                     onPressed: () {
-                      // TODO : Navigation
-                      // Navigator.pushNamed(
-                      //   context,
-                      //   AppRoutes.drProfilebyid,
-                      //   arguments: SpecialistInfoModel(
-                      //     avatar: widget.specialists[index].avatar,
-                      //     fullname: '${widget.specialists[index].name} ${widget.specialists[index].lastname!}',
-                      //     username: widget.specialists[index].user,
-                      //     id: widget.specialists[index].id ?? 0,
-                      //     job: widget.specialists[index].job?.name ?? "-- --",
-                      //   ),
-                      // );
+                      context.pushNamed(AppRouteNames.drProfilebyid, extra: {
+                        'specialist': SpecialistInfoModel(
+                          avatar: widget.specialists[index].avatar,
+                          fullname: '${widget.specialists[index].name} ${widget.specialists[index].lastname!}',
+                          username: widget.specialists[index].user,
+                          id: widget.specialists[index].id ?? 0,
+                          job: widget.specialists[index].job?.name ?? "-- --",
+                        )
+                      });
+                     
                     },
                     text: Text(
                       context.l10n.search_doctor_service_book_now,
                       style: AppTheme.titleLarge.copyWith(
+                        color: white,
                         fontWeight: FontWeight.w400,
                         fontSize: 14,
                       ),

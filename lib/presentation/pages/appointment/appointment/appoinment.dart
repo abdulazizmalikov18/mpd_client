@@ -28,6 +28,8 @@ class _AppointmentPageState extends State<AppointmentPage> with AutomaticKeepAli
   @override
   void initState() {
     context.read<UpcomingAppoinmentsBloc>().add(const GetUpcomingAppoinmentsEvent());
+    context.read<CompletedAppointmentBloc>().add(const GetCompletedAppoinmentsEvent());
+    context.read<CanceledAppointmentBloc>().add(const GetCanceledAppoinmentsEvent());
     super.initState();
   }
 
@@ -54,17 +56,28 @@ class _AppointmentPageState extends State<AppointmentPage> with AutomaticKeepAli
               child: Container(
                 height: 50.h,
                 width: double.maxFinite,
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.r), color: background),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.r),
+                  color: background,
+                ),
                 margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
                 child: TabBar(
-                  isScrollable: true, //context.read<LocalProvider>().locale == const Locale('en') ? false : true,
-                  padding: const EdgeInsets.all(4),
-                  indicator: BoxDecoration(borderRadius: BorderRadius.circular(8.r), color: white),
+                  // isScrollable: context.locale == const Locale('en') ? false : true,
+                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                  labelPadding: EdgeInsets.zero,
+                  indicatorPadding: EdgeInsets.zero,
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: white,
+                  ),
                   indicatorColor: Colors.transparent,
                   tabs: [
                     Tab(
                       child: Text(
                         context.l10n.appointment_upcoming,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
                         style: Styles.descSubtitle.copyWith(
                           color: black,
                         ),
@@ -84,7 +97,13 @@ class _AppointmentPageState extends State<AppointmentPage> with AutomaticKeepAli
                 ),
               )),
         ),
-        body: TabBarView(children: [_buildUpcomingAppointments(), _buildCompletedAppointments(), _buildCanceledAppointments()]),
+        body: TabBarView(
+          children: [
+            _buildUpcomingAppointments(),
+            _buildCompletedAppointments(),
+            _buildCanceledAppointments(),
+          ],
+        ),
       ),
     );
   }
@@ -218,48 +237,3 @@ class _AppointmentPageState extends State<AppointmentPage> with AutomaticKeepAli
   @override
   bool get wantKeepAlive => true;
 }
-
-
-
-
-//! Filteration appointment UI
-/*
-                     Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 16.w,
-                              vertical: 12.h,
-                            ),
-                            child: Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '6 appointment',
-                                  style: Styles.boldTopHint
-                                      .copyWith(fontSize: 18),
-                                ),
-                                InkWell(
-                                  borderRadius: BorderRadius.circular(100.r),
-                                  onTap: () {},
-                                  child: Row(
-                                    children: [
-                                      SvgPicture.asset(
-                                        AppIcons.sort,
-                                        color: mainBlue,
-                                        height: 24.h,
-                                        width: 24.h,
-                                      ),
-                                      ScreenUtil().setHorizontalSpacing(8),
-                                      Text(
-                                        'Filter',
-                                        style: Styles.boldTopHint.copyWith(
-                                            color: mainBlue,
-                                            fontSize: 16),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          */

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mpd_client/application/appointment/cancel_appointment/cancel_appointment_bloc.dart';
 import 'package:mpd_client/application/appointment/upcoming_appointment/upcoming_appoinment_bloc.dart';
 import 'package:mpd_client/domain/models/appointment/appoinment_model.dart';
@@ -15,6 +16,7 @@ import 'package:mpd_client/presentation/pages/appointment/widgets/appoinment_pay
 import 'package:mpd_client/presentation/pages/appointment/widgets/appointment_place_date.dart';
 import 'package:mpd_client/presentation/pages/appointment/widgets/pinned_sheet.dart';
 import 'package:mpd_client/presentation/pages/appointment/widgets/transparent_long_button.dart';
+import 'package:mpd_client/presentation/router/routs_contact.dart';
 import 'package:mpd_client/presentation/styles/app_images.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/widgets/w_long_button.dart';
@@ -125,8 +127,7 @@ class BookAppoinment extends StatelessWidget {
                     child: LongButton(
                       buttonName: context.l10n.appointment_book_again,
                       onPress: () {
-                        controller.animateToPage(1, duration: const Duration(milliseconds: 600), curve: Curves.fastOutSlowIn);
-                        Navigator.popUntil(context, (route) => route.isFirst);
+                        context.goNamed(AppRouteNames.doctor);
                       },
                     ),
                   ),
