@@ -33,6 +33,7 @@ class _WVideoUrlPlayerState extends State<WVideoUrlPlayer> with AutomaticKeepAli
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return VisibilityDetector(
       key: Key('my-widget-${widget.url}'),
       onVisibilityChanged: (VisibilityInfo info) async {

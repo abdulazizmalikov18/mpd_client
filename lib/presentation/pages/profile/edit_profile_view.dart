@@ -10,14 +10,12 @@ import 'package:mpd_client/domain/entity/auth/data_entity.dart';
 import 'package:mpd_client/domain/models/auth/user.dart';
 import 'package:mpd_client/presentation/pages/auth/widgets/sheets/w_select_profession.dart';
 import 'package:mpd_client/presentation/pages/auth/widgets/sheets/w_select_region.dart';
-import 'package:mpd_client/presentation/pages/auth/widgets/w_shadowed_container.dart';
 import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_select_gender.dart';
 import 'package:mpd_client/presentation/pages/profile/widgets/verification/w_verification_textfield_with_title.dart';
 import 'package:mpd_client/presentation/styles/app_images.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/presentation/widgets/w_app_bar.dart';
-import 'package:mpd_client/presentation/widgets/w_bottom_sheet.dart';
 import 'package:mpd_client/presentation/widgets/w_button.dart';
 import 'package:mpd_client/presentation/widgets/w_button_gradient.dart';
 import 'package:mpd_client/presentation/widgets/w_long_button.dart';
@@ -99,11 +97,11 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                 hintText: user.value.name,
                 onChange: (newName) {
                   if (newName.isEmpty) {
-                    this.user.value = user.value.copyWith(
+                    user.value = user.value.copyWith(
                       name: oldUser.name,
                     );
                   } else {
-                    this.user.value = user.value.copyWith(
+                    user.value = user.value.copyWith(
                       name: newName,
                     );
                   }
@@ -116,11 +114,11 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                 hintText: user.value.lastname,
                 onChange: (lastName) {
                   if (lastName.isEmpty) {
-                    this.user.value = user.value.copyWith(
+                    user.value = user.value.copyWith(
                       lastname: oldUser.lastname,
                     );
                   } else {
-                    this.user.value = user.value.copyWith(
+                    user.value = user.value.copyWith(
                       lastname: lastName,
                     );
                   }
@@ -139,7 +137,7 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                       }).then(
                     (value) {
                       if (value is Map) {
-                        this.user.value = user.value.copyWith(
+                        user.value = user.value.copyWith(
                           birthday: value['date'].toString().replaceAll('.', '-'),
                         );
                       }
@@ -148,11 +146,11 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                 },
                 onChange: (birthday) {
                   if (birthday.isEmpty) {
-                    this.user.value = user.value.copyWith(
+                    user.value = user.value.copyWith(
                       birthday: oldUser.surname,
                     );
                   } else {
-                    this.user.value = user.value.copyWith(
+                    user.value = user.value.copyWith(
                       birthday: birthday,
                     );
                   }
@@ -163,7 +161,7 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
               WVerificationSelectGender(
                 isMale: user.value.gender.startsWith("m"),
                 onChange: (bool newValue) {
-                  this.user.value = user.value.copyWith(
+                  user.value = user.value.copyWith(
                     gender: newValue ? "m" : "f",
                   );
                 },
@@ -191,11 +189,11 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                 isRequired: true,
                 onChange: (pinfl) {
                   if (pinfl.isEmpty) {
-                    this.user.value = user.value.copyWith(
+                    user.value = user.value.copyWith(
                       pinfl: oldUser.pinfl,
                     );
                   } else {
-                    this.user.value = user.value.copyWith(
+                    user.value = user.value.copyWith(
                       pinfl: pinfl,
                     );
                   }

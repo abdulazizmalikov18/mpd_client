@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mpd_client/domain/models/appointment/appoinment_model.dart';
-import 'package:mpd_client/domain/models/appointment/appointment_arg_model.dart';
 import 'package:mpd_client/domain/models/appointment/appointment_info_models.dart';
 import 'package:mpd_client/domain/models/appointment/specialist_info_model.dart';
 import 'package:mpd_client/presentation/pages/appointment/appointment/appoinment.dart';

@@ -21,7 +21,37 @@ class AppointmentBottomInfo extends StatelessWidget {
       children: [
         SizedBox(
           width: MediaQuery.sizeOf(context).width * 0.45,
-          child: isPending ? _buildTime(context) : _buildPrice(context),
+          child: isPending
+              ? Container(
+                  height: 34.h,
+                  padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
+                  decoration: BoxDecoration(color: mainBlue.withOpacity(0.1), borderRadius: BorderRadius.circular(10.r)),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        AppIcons.clockTransparent,
+                        height: 18,
+                        width: 18,
+                        colorFilter: const ColorFilter.mode(mainBlue, BlendMode.srcIn),
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        meetDate.isEmpty ? "--" : Utils.appointMentDateFormat(meetDate, context),
+                        overflow: TextOverflow.ellipsis,
+                        style: Styles.descSubtitle.copyWith(
+                          color: mainBlue,
+                          fontSize: 14,
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              : RichText(
+                  text: TextSpan(children: [
+                    TextSpan(text: '${Utils.priceFormat(price)} UZS\n', style: Styles.descSubtitle.copyWith(color: black, fontWeight: FontWeight.w600)),
+                    TextSpan(text: meetDate.isEmpty ? "--" : Utils.appointMentDateFormat(meetDate, context), style: Styles.cardReview.copyWith(color: grey, fontSize: 10.sp)),
+                  ]),
+                ),
         ),
         const Spacer(),
         IconGradientButton(
@@ -63,43 +93,6 @@ class AppointmentBottomInfo extends StatelessWidget {
           ),
         )
       ],
-    );
-  }
-
-  Container _buildTime(BuildContext context) {
-    return Container(
-      height: 34.h,
-      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
-      decoration: BoxDecoration(color: mainBlue.withOpacity(0.1), borderRadius: BorderRadius.circular(10.r)),
-      child: Row(
-        children: [
-          SvgPicture.asset(
-            AppIcons.clockTransparent,
-            height: 18,
-            width: 18,
-            colorFilter: const ColorFilter.mode(mainBlue, BlendMode.srcIn),
-          ),
-          const SizedBox(width: 4),
-          Text(
-            meetDate.isEmpty ? "--" : Utils.appointMentDateFormat(meetDate, context),
-            overflow: TextOverflow.ellipsis,
-            style: Styles.descSubtitle.copyWith(
-              color: mainBlue,
-              fontSize: 14,
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  //method price
-  RichText _buildPrice(BuildContext context) {
-    return RichText(
-      text: TextSpan(children: [
-        TextSpan(text: '${Utils.priceFormat(price)} UZS\n', style: Styles.descSubtitle.copyWith(color: black, fontWeight: FontWeight.w600)),
-        TextSpan(text: meetDate.isEmpty ? "--" : Utils.appointMentDateFormat(meetDate, context), style: Styles.cardReview.copyWith(color: grey, fontSize: 10.sp)),
-      ]),
     );
   }
 }

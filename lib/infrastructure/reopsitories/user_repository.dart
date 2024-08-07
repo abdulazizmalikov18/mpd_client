@@ -26,10 +26,8 @@ class UserRepository implements IUserRepository {
     }
   }
 
-  @override
   Future<Either<Failure, Subscription>> subscribeToDoctor(String username) async {
     final response = await _userRemoteDataSource.subscribeToDr(username);
-    print('Response ------------------------ ${response}');
     if (response != null) {
       return Right(response);
     } else {

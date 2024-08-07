@@ -30,7 +30,7 @@ class ChatRepositoryImpl implements ChatRepository {
       } else {
         return Left(response.getException()!.getErrorFailure());
       }
-    } catch (e, s) {
+    } catch (e) {
       return Left(ServerNotFoundFailure(errorMessage: e.toString()));
     }
   }

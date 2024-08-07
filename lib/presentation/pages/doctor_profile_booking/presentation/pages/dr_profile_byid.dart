@@ -35,6 +35,7 @@ class DrProfileByid extends StatefulWidget {
 
 class _DrProfileByidState extends State<DrProfileByid> {
   bool isNull = false;
+  
   @override
   void initState() {
     if (widget.specialist.id == 0) {

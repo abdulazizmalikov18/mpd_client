@@ -4,16 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:mpd_client/application/post/post_bloc.dart';
 import 'package:mpd_client/domain/entity/lenta/create_post_param.dart';
-import 'package:mpd_client/presentation/pages/lenta/widgets/w_bottom_sheet.dart';
 import 'package:mpd_client/presentation/pages/lenta/widgets/w_post_add_media_item.dart';
-import 'package:mpd_client/presentation/pages/lenta/widgets/w_user_detail.dart';
-import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/presentation/widgets/w_app_bar.dart';
 import 'package:mpd_client/presentation/widgets/w_button.dart';
 import 'package:mpd_client/presentation/widgets/w_text_field.dart';
-import 'package:mpd_client/utils/extensions/string_ext.dart';
 
 part '../mixin/create_post_mixin.dart';
 

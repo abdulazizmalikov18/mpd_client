@@ -84,7 +84,6 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    - assets/anim/
 
   fonts:
     - family: Gilroy Light

@@ -61,7 +61,6 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
   @override
   Future<Subscription?> subscribeToDr(String username) async {
     final map = FormData.fromMap({"to_user": username});
-    Subscription? subscription;
     return _handle.apiCantrol(
       request: (client) {
         return client.post("/SMMS/api/v1.0/public/subscriptions/", data: map);

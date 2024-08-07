@@ -4,9 +4,7 @@ import 'package:formz/formz.dart';
 import 'package:mpd_client/application/comment/comment_bloc.dart';
 import 'package:mpd_client/domain/entity/lenta/comment_entity.dart';
 import 'package:mpd_client/domain/entity/lenta/post_entity.dart';
-import 'package:mpd_client/domain/models/lenta/post_model.dart';
 import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
-import 'package:mpd_client/presentation/pages/lenta/view/comment_bottom_sheet.dart';
 import 'package:mpd_client/presentation/pages/lenta/widgets/post_widget.dart';
 import 'package:mpd_client/presentation/pages/lenta/widgets/w_comment.dart';
 import 'package:mpd_client/presentation/pages/lenta/widgets/w_comment_bottom_sheet.dart';
@@ -29,6 +27,7 @@ class CommentView extends StatefulWidget {
   @override
   State<CommentView> createState() => _CommentViewState();
 
+  // ignore: library_private_types_in_public_api
   static _CommentViewState? maybeOf(BuildContext context) => context.findAncestorStateOfType<_CommentViewState>();
 }
 

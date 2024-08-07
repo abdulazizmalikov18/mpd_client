@@ -1,10 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
-import 'package:mpd_client/utils/extensions/string_ext.dart';
 
 class WResendButton extends StatefulWidget {
   final void Function()? resentOtp;

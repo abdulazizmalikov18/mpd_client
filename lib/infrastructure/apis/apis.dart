@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:chopper/chopper.dart';
-import 'package:mpd_client/domain/entity/lenta/post_entity.dart';
 import 'package:mpd_client/domain/models/account/profession_model.dart';
 import 'package:mpd_client/domain/models/account/region_model.dart';
 import 'package:mpd_client/domain/models/generic_pagination.dart';

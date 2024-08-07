@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+// ignore: depend_on_referenced_packages
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mpd_client/domain/entity/lenta/media_entity.dart';
 import 'package:mpd_client/domain/models/lenta/post_model.dart';
@@ -73,7 +74,7 @@ class PostEntity extends Equatable {
     bool? isMine,
     String? date,
     List<MediaEntity>? medias,
-    dynamic? repost,
+    dynamic repost,
     List<dynamic>? products,
     String? authorUser,
     String? username,

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:mpd_client/application/accounts/accounts_bloc.dart';
-import 'package:mpd_client/application/auth/auth_bloc.dart';
 import 'package:mpd_client/presentation/pages/profile/widgets/w_qr_code.dart';
 import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/app_images.dart';

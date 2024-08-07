@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:lottie/lottie.dart';
 import 'package:mpd_client/application/post/post_bloc.dart';
 import 'package:mpd_client/presentation/pages/lenta/widgets/post_widget.dart';
 import 'package:mpd_client/presentation/pages/lenta/widgets/w_post_shimmer.dart';
@@ -95,8 +94,6 @@ class _LentaViewState extends State<LentaView> {
             },
             paginatorStatus: state.refreshStatus,
             fetchMoreFunction: () {
-              print(state.count);
-              print(state.posts.length);
               context.read<PostBloc>().add(const PostMoreFetched());
             },
             hasMoreToFetch: state.count != state.posts.length,

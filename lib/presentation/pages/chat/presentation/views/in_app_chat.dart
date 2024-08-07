@@ -21,6 +21,7 @@ class InChatView extends StatefulWidget {
   @override
   State<InChatView> createState() => _InChatViewState();
 
+  // ignore: library_private_types_in_public_api
   static _InChatViewState? of(BuildContext context) => context.findAncestorStateOfType<_InChatViewState>();
 }
 
@@ -29,6 +30,7 @@ class _InChatViewState extends State<InChatView> with AutomaticKeepAliveClientMi
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       backgroundColor: background,
       appBar: WAppBar(

@@ -12,7 +12,6 @@ import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/presentation/widgets/w_app_bar.dart';
 import 'package:mpd_client/presentation/widgets/w_text_field.dart';
-import 'package:mpd_client/utils/debounce.dart';
 import 'package:mpd_client/utils/extensions/string_ext.dart';
 
 class ChatView extends StatefulWidget {

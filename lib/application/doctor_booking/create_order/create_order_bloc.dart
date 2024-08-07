@@ -15,14 +15,12 @@ class CreateOrderBloc extends Bloc<CreateOrderEvent, CreateOrderState> {
 
   Future<void> _onCreateOrder(CreateOrderProcess event, Emitter<CreateOrderState> emit) async {
     emit(CreateOrderLoading());
-    print("request");
     final result = await _profileRepository.createOrder(
       action: event.action,
       carts: event.carts,
       payment: event.payment,
     );
     if (result.isRight) {
-      print(result.right);
 
       emit(CreateOrderSuccess(result.right));
     } else {

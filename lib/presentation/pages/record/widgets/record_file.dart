@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mpd_client/domain/models/doctor_booking/pdf_viewer_model.dart';
 import 'package:mpd_client/presentation/pages/doctor_profile_booking/presentation/widgets/dr_profile_document.dart';
 import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';

@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:mpd_client/application/auth/controller/registration_view_model.dart';
 import 'package:mpd_client/application/show_pop_up/show_pop_up_bloc.dart';
 import 'package:mpd_client/presentation/router/routs_contact.dart';
-import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/widgets/w_button.dart';
 import 'package:mpd_client/presentation/widgets/w_text_field.dart';
