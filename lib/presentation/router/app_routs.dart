@@ -20,8 +20,11 @@ import 'package:mpd_client/presentation/pages/auth/registration_view.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/views/chat_view.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/views/create_new_chat_view.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/views/in_app_chat.dart';
+import 'package:mpd_client/presentation/pages/doctor_profile_booking/presentation/pages/appointment_date_time/appoinment_date_time.dart';
 import 'package:mpd_client/presentation/pages/doctor_profile_booking/presentation/pages/doctor_info_iteam.dart';
 import 'package:mpd_client/presentation/pages/doctor_profile_booking/presentation/pages/dr_profile_byid.dart';
+import 'package:mpd_client/presentation/pages/doctor_profile_booking/presentation/pages/review_appoinment/review_appoinment.dart';
+import 'package:mpd_client/presentation/pages/doctor_profile_booking/presentation/pages/services/services_page.dart';
 import 'package:mpd_client/presentation/pages/error/error_view.dart';
 import 'package:mpd_client/presentation/pages/home/home_view.dart';
 import 'package:mpd_client/presentation/pages/initial/language/language_page.dart';
@@ -29,6 +32,7 @@ import 'package:mpd_client/presentation/pages/initial/splash/splash_page.dart';
 import 'package:mpd_client/presentation/pages/initial/tutorial/tutorial_page.dart';
 import 'package:mpd_client/presentation/pages/lenta/view/comment_view.dart';
 import 'package:mpd_client/presentation/pages/lenta/view/create_post_view.dart';
+import 'package:mpd_client/presentation/pages/lenta/view/my_post_view.dart';
 import 'package:mpd_client/presentation/pages/main/main_view.dart';
 import 'package:mpd_client/presentation/pages/profile/edit_profile_view.dart';
 import 'package:mpd_client/presentation/pages/profile/profile_view.dart';
@@ -161,6 +165,37 @@ sealed class AppRouts {
           child: DrProfileByid(
             specialist: (state.extra as Map)['specialist'],
           ),
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: navigatorKey,
+        path: AppRoutePath.myPost,
+        name: AppRouteNames.myPost,
+        builder: (context, state) => const MyPostView(),
+      ),
+      GoRoute(
+        parentNavigatorKey: navigatorKey,
+        path: AppRoutePath.service,
+        name: AppRouteNames.service,
+        builder: (context, state) => ServicesPage(
+          specialistId: (state.extra as Map)['specialistId'],
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: navigatorKey,
+        path: AppRoutePath.appointmentdt,
+        name: AppRouteNames.appointmentdt,
+        builder: (context, state) => AppoinmentDateTimePage(
+          id: (state.extra as Map)['id'],
+          localProducts: (state.extra as Map)['product'],
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: navigatorKey,
+        path: AppRoutePath.appointmentReview,
+        name: AppRouteNames.appointmentReview,
+        builder: (context, state) => ReviewAppoinmentDetail(
+          localProducts: (state.extra as Map)['product'],
         ),
       ),
       mainView,

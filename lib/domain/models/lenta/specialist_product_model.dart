@@ -18,7 +18,7 @@ class SpecialistProductModel {
   factory SpecialistProductModel.fromJson(Map<String, dynamic> json) =>
       SpecialistProductModel(
         count: json["count"],
-        next: json["next"],
+        next: json["next"] ?? "",
         nextOffset: json["next_offset"],
         previousOffset: json["previous_offset"],
         previous: json["previous"],
@@ -27,13 +27,13 @@ class SpecialistProductModel {
       );
 
   Map<String, dynamic> toJson() => {
-    "count": count,
-    "next": next,
-    "next_offset": nextOffset,
-    "previous_offset": previousOffset,
-    "previous": previous,
-    "results": List<dynamic>.from(results.map((x) => x.toJson())),
-  };
+        "count": count,
+        "next": next,
+        "next_offset": nextOffset,
+        "previous_offset": previousOffset,
+        "previous": previous,
+        "results": List<dynamic>.from(results.map((x) => x.toJson())),
+      };
 }
 
 class SpecialistProduct {
@@ -81,13 +81,13 @@ class SpecialistProduct {
         remains: json["remains"] ?? 0,
         createDate: json["create_date"],
         updateDate: json["update_date"],
-        cashback: json["cashback"],
-        cancelFine: json["cancel_fine"],
-        recCashback: json["rec_cashback"],
+        cashback: json["cashback"] ?? 0,
+        cancelFine: json["cancel_fine"] ?? 0,
+        recCashback: json["rec_cashback"] ?? 0,
         org: json["org"],
         price: List<Price>.from(json["price"].map((x) => Price.fromJson(x))),
         duration: json["duration"],
-        description: json["description"],
+        description: json["description"] ?? "",
         placeDesc: json["place_desc"],
         vat: json["vat"],
         specialists: List<Specialist>.from(
@@ -95,23 +95,23 @@ class SpecialistProduct {
       );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "product": product.toJson(),
-    "status": status,
-    "remains": remains,
-    "create_date": createDate,
-    "update_date": updateDate,
-    "cashback": cashback,
-    "cancel_fine": cancelFine,
-    "rec_cashback": recCashback,
-    "org": org,
-    "price": List<dynamic>.from(price.map((x) => x.toJson())),
-    "duration": duration,
-    "description": description,
-    "place_desc": placeDesc,
-    "vat": vat,
-    "specialists": List<dynamic>.from(specialists.map((x) => x.toJson())),
-  };
+        "id": id,
+        "product": product.toJson(),
+        "status": status,
+        "remains": remains,
+        "create_date": createDate,
+        "update_date": updateDate,
+        "cashback": cashback,
+        "cancel_fine": cancelFine,
+        "rec_cashback": recCashback,
+        "org": org,
+        "price": List<dynamic>.from(price.map((x) => x.toJson())),
+        "duration": duration,
+        "description": description,
+        "place_desc": placeDesc,
+        "vat": vat,
+        "specialists": List<dynamic>.from(specialists.map((x) => x.toJson())),
+      };
 }
 
 class Price {
@@ -138,28 +138,28 @@ class Price {
   });
 
   factory Price.fromJson(Map<String, dynamic> json) => Price(
-    id: json["id"],
-    value: json["value"],
-    currency: json["currency"],
-    discount: json["discount"],
-    active: json["active"],
-    createDate: json["create_date"],
-    updateDate: json["update_date"],
-    maxQty: json["max_qty"],
-    minQty: json["min_qty"],
-  );
+        id: json["id"],
+        value: json["value"],
+        currency: json["currency"],
+        discount: json["discount"],
+        active: json["active"],
+        createDate: json["create_date"],
+        updateDate: json["update_date"],
+        maxQty: json["max_qty"],
+        minQty: json["min_qty"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "value": value,
-    "currency": currency,
-    "discount": discount,
-    "active": active,
-    "create_date": createDate,
-    "update_date": updateDate,
-    "max_qty": maxQty,
-    "min_qty": minQty,
-  };
+        "id": id,
+        "value": value,
+        "currency": currency,
+        "discount": discount,
+        "active": active,
+        "create_date": createDate,
+        "update_date": updateDate,
+        "max_qty": maxQty,
+        "min_qty": minQty,
+      };
 }
 
 class Product {
@@ -169,11 +169,11 @@ class Product {
   final String description;
   final int status;
   final dynamic manufacturer;
-  final TypeModel type;
+  final Type type;
   final Category category;
   final String createDate;
   final String updateDate;
-  final TypeModel unit;
+  final Type unit;
   final dynamic barCode;
 
   const Product({
@@ -183,50 +183,50 @@ class Product {
     this.description = '',
     this.status = 0,
     this.manufacturer = '',
-    this.type = const TypeModel(),
+    this.type = const Type(),
     this.category = const Category(),
     this.createDate = '',
     this.updateDate = '',
-    this.unit = const TypeModel(),
+    this.unit = const Type(),
     this.barCode = '',
   });
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
-    id: json["id"],
-    code: json["code"],
-    name: json["name"],
-    description: json["description"],
-    status: json["status"],
-    manufacturer: json["manufacturer"],
-    type: TypeModel.fromJson(json["type"]),
-    category: Category.fromJson(json["category"]),
-    createDate: json["create_date"],
-    updateDate: json["update_date"],
-    unit: TypeModel.fromJson(json["unit"]),
-    barCode: json["bar_code"],
-  );
+        id: json["id"],
+        code: json["code"],
+        name: json["name"],
+        description: json["description"],
+        status: json["status"],
+        manufacturer: json["manufacturer"],
+        type: Type.fromJson(json["type"]),
+        category: Category.fromJson(json["category"]),
+        createDate: json["create_date"],
+        updateDate: json["update_date"],
+        unit: Type.fromJson(json["unit"]),
+        barCode: json["bar_code"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "code": code,
-    "name": name,
-    "description": description,
-    "status": status,
-    "manufacturer": manufacturer,
-    "type": type.toJson(),
-    "category": category.toJson(),
-    "create_date": createDate,
-    "update_date": updateDate,
-    "unit": unit.toJson(),
-    "bar_code": barCode,
-  };
+        "id": id,
+        "code": code,
+        "name": name,
+        "description": description,
+        "status": status,
+        "manufacturer": manufacturer,
+        "type": type.toJson(),
+        "category": category.toJson(),
+        "create_date": createDate,
+        "update_date": updateDate,
+        "unit": unit.toJson(),
+        "bar_code": barCode,
+      };
 }
 
 class Category {
   final int id;
   final String name;
-  final List<TypeModel> units;
-  final List<TypeModel> productTypes;
+  final List<Type> units;
+  final List<Type> productTypes;
 
   const Category({
     this.id = 0,
@@ -236,40 +236,40 @@ class Category {
   });
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
-    id: json["id"],
-    name: json["name"],
-    units: List<TypeModel>.from(json["units"].map((x) => TypeModel.fromJson(x))),
-    productTypes:
-    List<TypeModel>.from(json["product_types"].map((x) => TypeModel.fromJson(x))),
-  );
+        id: json["id"],
+        name: json["name"],
+        units: List<Type>.from(json["units"].map((x) => Type.fromJson(x))),
+        productTypes:
+            List<Type>.from(json["product_types"].map((x) => Type.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "units": List<dynamic>.from(units.map((x) => x.toJson())),
-    "product_types":
-    List<dynamic>.from(productTypes.map((x) => x.toJson())),
-  };
+        "id": id,
+        "name": name,
+        "units": List<dynamic>.from(units.map((x) => x.toJson())),
+        "product_types":
+            List<dynamic>.from(productTypes.map((x) => x.toJson())),
+      };
 }
 
-class TypeModel {
+class Type {
   final String name;
   final int id;
 
-  const TypeModel({
+  const Type({
     this.name = "",
     this.id = 0,
   });
 
-  factory TypeModel.fromJson(Map<String, dynamic> json) => TypeModel(
-    name: json["name"],
-    id: json["id"],
-  );
+  factory Type.fromJson(Map<String, dynamic> json) => Type(
+        name: json["name"],
+        id: json["id"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "name": name,
-    "id": id,
-  };
+        "name": name,
+        "id": id,
+      };
 }
 
 class Specialist {
@@ -292,22 +292,22 @@ class Specialist {
   });
 
   factory Specialist.fromJson(Map<String, dynamic> json) => Specialist(
-    id: json["id"],
-    firstName: json["first_name"],
-    lastName: json["last_name"],
-    avatar: json["avatar"],
-    orgSlug: json["org_slug"],
-    category: json["category"],
-    job: json["job"],
-  );
+        id: json["id"],
+        firstName: json["first_name"],
+        lastName: json["last_name"],
+        avatar: json["avatar"],
+        orgSlug: json["org_slug"],
+        category: json["category"],
+        job: json["job"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "first_name": firstName,
-    "last_name": lastName,
-    "avatar": avatar,
-    "org_slug": orgSlug,
-    "category": category,
-    "job": job,
-  };
+        "id": id,
+        "first_name": firstName,
+        "last_name": lastName,
+        "avatar": avatar,
+        "org_slug": orgSlug,
+        "category": category,
+        "job": job,
+      };
 }

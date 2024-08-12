@@ -46,8 +46,7 @@ class DoctorProfileRemoteDataSource implements IDoctorProfileRemoteDataSource {
     return _handle.apiCantrol(
       request: (Dio client) {
         return client.get(
-          "/BMS/api/v1.0/public/cluster/mpd/specialist/$username/",
-          options: Options(headers: {if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'}),
+          "/BMS/api/v1.0/public/cluster/mpd/specialist/$username/?all=true",
         );
       },
       body: (response) {
@@ -62,7 +61,6 @@ class DoctorProfileRemoteDataSource implements IDoctorProfileRemoteDataSource {
       request: (Dio client) {
         return client.get(
           "/BMS/api/v1.0/public/org/mpd/specialist/$id/timetable/$date/",
-          options: Options(headers: {if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'}),
         );
       },
       body: (response) {

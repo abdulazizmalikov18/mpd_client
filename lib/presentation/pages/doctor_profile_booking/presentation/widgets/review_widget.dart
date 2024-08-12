@@ -61,10 +61,12 @@ class ReviewWidget extends StatelessWidget {
           ),
         ),
         ScreenUtil().setVerticalSpacing(8.h),
+        const SizedBox(width: 10),
         ReadMoreText(
           coment != null
               ? coment!.text
               : 'Lorem ipsum dolor sit amet consectetur. Risus faucibus euismod turpis faucibus euismod elit augue interdum lacus. Dictum urna tempus dui interdum elementum dui dui  dui dui  dui duisadasdasd  dui dui',
+              // "Izoh yo'q"
           style: Styles.headline7.copyWith(color: grey, fontSize: 14),
           moreStyle: Styles.headline7.copyWith(color: mainBlue, fontSize: 14),
           lessStyle: Styles.headline7.copyWith(color: mainBlue, fontSize: 14),

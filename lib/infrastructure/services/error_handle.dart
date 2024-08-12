@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:mpd_client/infrastructure/core/exceptions.dart';
 import 'package:mpd_client/infrastructure/core/failures.dart';
@@ -6,11 +5,9 @@ import 'package:mpd_client/infrastructure/services/api_service.dart';
 import 'package:mpd_client/infrastructure/services/service_locator.dart';
 
 class ErrorHandle {
-   ErrorHandle();
+  ErrorHandle();
   final DioSettings dioSettings = serviceLocator<DioSettings>();
-  Future<R> apiCantrol<T, R>(
-      {required Future<Response<T>?> Function(Dio client) request,
-      required R Function(T response) body}) async {
+  Future<R> apiCantrol<T, R>({required Future<Response<T>?> Function(Dio client) request, required R Function(T response) body}) async {
     dioSettings.setBaseOptions();
     try {
       final response = await request(dioSettings.dio);

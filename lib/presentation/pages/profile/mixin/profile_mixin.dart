@@ -31,8 +31,9 @@ mixin ProfileMixin on State<ProfileView> {
     context.pushNamed(AppRouteNames.login);
   }
 
-  void onPressMyOrders() {
-    context.pushNamed(AppRouteNames.myOrders);
+  void onPressMyPosts() {
+    context.read<PostBloc>().add(GetMyPostEvent());
+    context.pushNamed(AppRouteNames.myPost);
   }
 
   void onPressPayment() {
@@ -108,7 +109,6 @@ mixin ProfileMixin on State<ProfileView> {
   }
 
   void onPressLanguage() {
-    
     showModalBottomSheet(
       backgroundColor: Colors.transparent,
       context: MainView.of(context).context,
@@ -120,5 +120,132 @@ mixin ProfileMixin on State<ProfileView> {
   void initState() {
     context.read<AccountsBloc>().add(const GetAccountUserEvent());
     super.initState();
+  }
+
+  void onPressSOS() {
+    showModalBottomSheet(
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (context) => BottomSheetWidget(
+        padding: const EdgeInsets.symmetric(
+          vertical: 20,
+          horizontal: 16,
+        ),
+        children: [
+          const SizedBox(height: 12),
+          const Text(
+            "Tez yordam so’rash!",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+          ),
+          const Text(
+            "Iltimos faqat favqulotda xolatda murojat qiling!",
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: grey,
+            ),
+          ),
+          const SizedBox(height: 24),
+          Container(
+            decoration: BoxDecoration(
+              color: white,
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: const [
+                BoxShadow(
+                  color: cardShadow,
+                  blurRadius: 8,
+                )
+              ],
+            ),
+            child: const ListTile(
+              title: const Text(
+                "Avariya",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: mainBlue,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Container(
+            decoration: BoxDecoration(
+              color: white,
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: const [
+                BoxShadow(
+                  color: cardShadow,
+                  blurRadius: 8,
+                )
+              ],
+            ),
+            child: const ListTile(
+              title: Text(
+                "DTP",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Container(
+            decoration: BoxDecoration(
+              color: white,
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: const [
+                BoxShadow(
+                  color: cardShadow,
+                  blurRadius: 8,
+                )
+              ],
+            ),
+            child: const ListTile(
+              title: Text(
+                "Birinchi erdam",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Container(
+            decoration: BoxDecoration(
+              color: white,
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: const [
+                BoxShadow(
+                  color: cardShadow,
+                  blurRadius: 8,
+                )
+              ],
+            ),
+            child: const ListTile(
+              title: Text(
+                "xushi ketdi",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          LongButton(
+            height: 52,
+            buttonName: "SOS",
+            color: red,
+            onPress: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          const SizedBox(height: 16),
+        ],
+      ),
+    );
   }
 }

@@ -116,5 +116,6 @@ sealed class AppIcons {
   static const warning = "assets/icons/warning.svg";
   static const briefcaseLite = "assets/icons/briefcase_lite.svg";
   static const trash = "assets/icons/trash.svg";
+  static const likeDislike = "assets/icons/like-dislike.svg";
 
 }

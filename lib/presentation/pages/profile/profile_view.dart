@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mpd_client/application/accounts/accounts_bloc.dart';
 import 'package:mpd_client/application/auth/auth_bloc.dart';
 import 'package:mpd_client/application/auth/controller/pin_view_model.dart';
+import 'package:mpd_client/application/post/post_bloc.dart';
 import 'package:mpd_client/application/profile/user_records/records_bloc.dart';
 import 'package:mpd_client/presentation/pages/main/main_view.dart';
 import 'package:mpd_client/presentation/pages/profile/widgets/w_language_sheet.dart';
@@ -29,6 +30,11 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> with ProfileMixin {
+  Map<String, dynamic> languages = {
+    'uz': 'Uzbek',
+    'ru': 'Russian',
+    'en': 'English',
+  };
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +44,7 @@ class _ProfileViewState extends State<ProfileView> with ProfileMixin {
             const WProfileHeader(),
             const SizedBox(height: 24),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 0),
               child: Column(
                 children: [
                   WProfileItem(
@@ -48,21 +54,24 @@ class _ProfileViewState extends State<ProfileView> with ProfileMixin {
                   ),
                   const SizedBox(height: 8),
                   WProfileItem(
-                    icon: AppIcons.userAdd,
+                    icon: AppIcons.likeDislike,
                     title: "Shaxsiy postlar",
-                    onPressed: onPressMyOrders,
+                    onPressed: onPressMyPosts,
                   ),
                   const SizedBox(height: 8),
                   WProfileItem(
                     icon: AppIcons.userAdd,
                     subTitle: '5 ${context.l10n.profile_following_doctors_doctor.toLowerCase()}',
                     title: context.l10n.profile_following_doctors,
-                    onPressed: onPressMyOrders,
+                    onPressed: () {
+                      
+                    },
                   ),
                   const SizedBox(height: 8),
                   WProfileItem(
                     icon: AppIcons.languageCircle,
                     title: context.l10n.profile_language,
+                    subTitle: languages[context.l10n.localeName],
                     onPressed: onPressLanguage,
                   ),
                   const SizedBox(height: 8),
@@ -76,7 +85,7 @@ class _ProfileViewState extends State<ProfileView> with ProfileMixin {
                   ),
                   const SizedBox(height: 8),
                   WProfileItem(
-                    icon: AppIcons.receipt,
+                    icon: AppIcons.briefcaseLite,
                     title: "Shifokor profiliga kirish",
                     onPressed: () {
                       showModalBottomSheet(
@@ -138,7 +147,7 @@ class _ProfileViewState extends State<ProfileView> with ProfileMixin {
                     icon: AppIcons.warning,
                     isRed: true,
                     title: "SOS",
-                    onPressed: onPressLogOut,
+                    onPressed: onPressSOS,
                   ),
                   const SizedBox(height: 8),
                   WProfileItem(

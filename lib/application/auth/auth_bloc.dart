@@ -40,9 +40,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void logOut(Logout event, Emitter emit) async {
     clearStorage();
-    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     add(const AuthStatusChanged(AuthStatus.unauthenticated));
-    emit(state.copyWith(status: FormzSubmissionStatus.success));
   }
 
   void authStatusChanged(AuthStatusChanged event, Emitter emit) async {
@@ -63,6 +61,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             StorageKeys.USERNAME,
             user.right.username,
           );
+
           emit(state.copyWith(authStatus: AuthStatus.authenticated, text: const Uuid().v4()));
         } else {
           emit(state.copyWith(authStatus: AuthStatus.unauthenticated, text: const Uuid().v4()));

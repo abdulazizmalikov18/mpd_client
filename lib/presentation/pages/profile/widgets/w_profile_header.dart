@@ -25,7 +25,7 @@ class WProfileHeader extends StatelessWidget {
           child: Image.network(
             "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
             width: double.infinity,
-            // height: 300,
+            // height: MediaQuery.sizeOf(context).height * 0.5,
             fit: BoxFit.cover,
           ),
         ),
@@ -41,22 +41,31 @@ class WProfileHeader extends StatelessWidget {
         //   ),
         // ),
         Padding(
-          padding: EdgeInsets.only(top: MediaQuery.sizeOf(context).height * 0.1),
+          padding: EdgeInsets.only(top: (MediaQuery.sizeOf(context).height * 0.1)- 6),
           child: BlocBuilder<AccountsBloc, AccountsState>(
             builder: (context, state) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  WNetworkImage(
-                    image: state.userContainer.user.avatar,
-                    height: 96,
-                    width: 96,
-                    borderRadius: 100,
-                    defaultWidget: Image.asset(
-                      AppImages.doctor,
-                      width: 96,
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: white,
+                        width: 3,
+                      ),
+                      shape: BoxShape.circle
+                    ),
+                    child: WNetworkImage(
+                      image: state.userContainer.user.avatar,
                       height: 96,
-                      fit: BoxFit.cover,
+                      width: 96,
+                      borderRadius: 100,
+                      defaultWidget: Image.asset(
+                        AppImages.doctor,
+                        width: 96,
+                        height: 96,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -100,8 +109,8 @@ class WProfileHeader extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: 16,
-          top: MediaQuery.sizeOf(context).height * 0.1,
+          right: 32,
+          top: MediaQuery.sizeOf(context).height * 0.11,
           child: GestureDetector(
             onTap: () {
               final qrCode = context.read<AccountsBloc>().state.userContainer.user.qrcode;
@@ -146,7 +155,7 @@ class WProfileHeader extends StatelessWidget {
             },
             child: CircleAvatar(
               backgroundColor: Colors.white,
-              radius: 36,
+              radius: 30,
               child: AppIcons.scanBarcode.svg(color: const Color(0xFF677294)),
             ),
           ),

@@ -51,9 +51,9 @@ class BookAppoinment extends StatelessWidget {
                 appointmentName: appointment.name,
                 avatar: appointment.currentWorkState?.specialist.avatar ?? appointment.responsible?.avatar,
                 fullname: appointment.currentWorkState != null
-                    ? '${appointment.currentWorkState?.specialist.name ?? "__"} ${appointment.currentWorkState?.specialist.lastname ?? "__"}'
-                    : '${appointment.responsible?.name ?? "__"} ${appointment.responsible?.lastname ?? "__"}',
-                job: appointment.currentWorkState?.specialist.job ?? appointment.responsible?.job ?? "__",
+                    ? '${appointment.currentWorkState?.specialist.name ?? "--"} ${appointment.currentWorkState?.specialist.lastname ?? "--"}'
+                    : '${appointment.responsible?.name ?? "--"} ${appointment.responsible?.lastname ?? "--"}',
+                job: appointment.currentWorkState?.specialist.job ?? appointment.responsible?.job ?? "--",
                 id: appointment.currentWorkState?.specialist.id ?? appointment.responsible?.id ?? 0,
               ),
               appoinmentInfo: appoinmentInfo,
@@ -80,7 +80,7 @@ class BookAppoinment extends StatelessWidget {
                   name: appointment.name ?? "",
                   image: appointment.image,
                   count: appointment.qty ?? 0,
-                )
+                ),
               ],
               appointmentInfo: DrCardInfo.pending,
             ),
@@ -104,17 +104,16 @@ class BookAppoinment extends StatelessWidget {
                 width: double.maxFinite,
                 onPress: () {
                   showModalBottomSheet(
-                      backgroundColor: Colors.transparent,
-                      context: context,
-                      builder: (_) => MultiBlocProvider(
-                            providers: [
-                              BlocProvider.value(
-                                value: BlocProvider.of<CancelAppointmentBloc>(context, listen: false),
-                              ),
-                              BlocProvider.value(value: BlocProvider.of<UpcomingAppoinmentsBloc>(context, listen: false))
-                            ],
-                            child: CancelSheet(appointment: appointment),
-                          ));
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (_) => MultiBlocProvider(
+                      providers: [
+                        BlocProvider.value(value: BlocProvider.of<CancelAppointmentBloc>(context, listen: false)),
+                        BlocProvider.value(value: BlocProvider.of<UpcomingAppoinmentsBloc>(context, listen: false)),
+                      ],
+                      child: CancelSheet(appointment: appointment),
+                    ),
+                  );
                 },
                 buttonName: context.l10n.appointment_cancel,
                 borderColor: gradientRedOpacity,

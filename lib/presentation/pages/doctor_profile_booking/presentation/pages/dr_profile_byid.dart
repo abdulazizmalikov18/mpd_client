@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mpd_client/application/doctor_booking/doctor_profile/doctor_profile_bloc.dart';
 import 'package:mpd_client/application/doctor_booking/subscripption/subscription_bloc.dart';
 import 'package:mpd_client/domain/models/appointment/specialist_info_model.dart';
@@ -11,6 +12,7 @@ import 'package:mpd_client/presentation/pages/appointment/widgets/w_icon_gradien
 import 'package:mpd_client/presentation/pages/doctor_profile_booking/presentation/pages/components/follow_button.dart';
 import 'package:mpd_client/presentation/pages/doctor_profile_booking/presentation/pages/doctor_info_iteam.dart';
 import 'package:mpd_client/presentation/pages/doctor_profile_booking/presentation/widgets/loading_doctor_info.dart';
+import 'package:mpd_client/presentation/router/routs_contact.dart';
 import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
@@ -35,7 +37,7 @@ class DrProfileByid extends StatefulWidget {
 
 class _DrProfileByidState extends State<DrProfileByid> {
   bool isNull = false;
-  
+
   @override
   void initState() {
     if (widget.specialist.id == 0) {
@@ -166,8 +168,7 @@ class _DrProfileByidState extends State<DrProfileByid> {
                     child: LongButton(
                       buttonName: context.l10n.book_doctor_book,
                       onPress: () {
-                        // FIXME:
-                        // Navigator.of(context).pushNamed(AppRoutes.services, arguments: state.doctor?.id ?? "_");
+                        context.pushNamed(AppRouteNames.service, extra: {'specialistId': state.doctor?.id ?? "_"});
                       },
                     ),
                   ),

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:mpd_client/application/accounts/accounts_bloc.dart';
 import 'package:mpd_client/application/auth/auth_bloc.dart';
 import 'package:mpd_client/application/show_pop_up/show_pop_up_bloc.dart';
 import 'package:mpd_client/presentation/router/routs_contact.dart';
@@ -231,7 +232,7 @@ class _LoginViewState extends State<LoginView> {
           password: passwordController.text.trim(),
           onSuccess: () {
             isLoading.value = false;
-            // hasError.value = "Error";
+            context.read<AccountsBloc>().add(const GetAccountUserEvent());
 
             debugPrint("Success");
           },

@@ -26,12 +26,15 @@ class DioSettings {
     validateStatus: (status) => status != null && status <= 500,
   );
 
-  void setBaseOptions({String? lang}) {
+  void setBaseOptions() {
     _dioBaseOptions = BaseOptions(
       baseUrl: $baseUrlHttp,
       connectTimeout: const Duration(milliseconds: 35000),
       receiveTimeout: const Duration(milliseconds: 35000),
-      headers: <String, dynamic>{'Accept-Language': lang, if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'},
+      headers: <String, dynamic>{
+        'Accept-Language':  StorageRepository.getString(StorageKeys.LANGUAGE, defValue: 'uz'),
+        if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+      },
       followRedirects: false,
       validateStatus: (status) => status != null && status <= 500,
     );
@@ -54,7 +57,7 @@ class DioSettings {
       connectTimeout: const Duration(milliseconds: 35000),
       receiveTimeout: const Duration(milliseconds: 35000),
       headers: <String, dynamic>{
-        'Accept-Language': lang,
+        'Accept-Language': StorageRepository.getString(StorageKeys.LANGUAGE, defValue: 'uz'),
       },
       followRedirects: false,
       validateStatus: (status) => status != null && status <= 500,

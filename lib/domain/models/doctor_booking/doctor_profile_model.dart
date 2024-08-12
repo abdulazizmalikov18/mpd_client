@@ -63,7 +63,7 @@ class DoctorProfileModel {
             json["specialist_orders"].map((x) => SpecialistOrder.fromMap(x))),
         isWorking: json["is_working"],
         isCatHead: json["is_cat_head"],
-        operatingMode: json["operating_mode"],
+        operatingMode: json["operating_mode"] ?? "",
         position: json["position"],
         autoMode: json["auto_mode"],
         accepted: json["accepted"],

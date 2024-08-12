@@ -40,17 +40,11 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
   Future<UserRecordModel> getUserRecords({int? limit, int? offset, String? query}) async {
     return _handle.apiCantrol(
       request: (Dio client) {
-        return client.get(
-          "/OMS/api/v1.0/public/order_conclusions/",
-          queryParameters: {
-            if (query == null) "limit": limit,
-            if (query == null) "offset": offset,
-            if (query != null) "search": query,
-          },
-          options: Options(
-            headers: <String, dynamic>{if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'},
-          ),
-        );
+        return client.get("/OMS/api/v1.0/public/order_conclusions/", queryParameters: {
+          if (query == null) "limit": limit,
+          if (query == null) "offset": offset,
+          if (query != null) "search": query,
+        });
       },
       body: (response) {
         return UserRecordModel.fromJson(response);
@@ -63,7 +57,10 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
     final map = FormData.fromMap({"to_user": username});
     return _handle.apiCantrol(
       request: (client) {
-        return client.post("/SMMS/api/v1.0/public/subscriptions/", data: map);
+        return client.post(
+          "/SMMS/api/v1.0/public/subscriptions/",
+          data: map,
+        );
       },
       body: (response) {
         if (response is! List) {

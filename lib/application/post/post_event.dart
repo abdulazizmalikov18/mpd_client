@@ -11,6 +11,10 @@ class PostFetched extends PostEvent {
   const PostFetched();
 }
 
+class GetMyPostEvent extends PostEvent {
+  
+}
+
 class PostMoreFetched extends PostEvent {
   const PostMoreFetched();
 }

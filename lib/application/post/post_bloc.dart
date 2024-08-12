@@ -7,6 +7,7 @@ import 'package:mpd_client/domain/abstract_repo/lenta_repository.dart';
 import 'package:mpd_client/domain/entity/generic_entity.dart';
 import 'package:mpd_client/domain/entity/lenta/create_post_param.dart';
 import 'package:mpd_client/domain/entity/lenta/post_entity.dart';
+import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
 
 part 'post_event.dart';
 
@@ -18,6 +19,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     on<PostMoreFetched>(_onPostMoreFetched);
     on<PostLikeEvent>(_onLikePost);
     on<PostCreateEvent>(_onCreatePost);
+    on<GetMyPostEvent>(_onMyPostFetched);
   }
 
   final LentaRepository _repo;
@@ -33,6 +35,24 @@ class PostBloc extends Bloc<PostEvent, PostState> {
           hasReachedMax: result.right.nextOffset != null,
           offset: result.right.nextOffset,
           count: result.right.count,
+        ),
+      );
+      return;
+    }
+    emit(state.copyWith(status: FormzSubmissionStatus.failure));
+  }
+
+  Future<void> _onMyPostFetched(GetMyPostEvent event, Emitter<PostState> emit) async {
+    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+    final result = await _repo.getBanners(GenericEntity(limit: 4, offset: 0, authorUser: StorageRepository.getString(StorageKeys.USERNAME)));
+    if (result.isRight) {
+      emit(
+        state.copyWith(
+          status: FormzSubmissionStatus.success,
+          myPost: result.right.results,
+          hasReachedMax: result.right.nextOffset != null,
+          myPostoffset: result.right.nextOffset,
+          myPostCount: result.right.count,
         ),
       );
       return;

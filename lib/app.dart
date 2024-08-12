@@ -8,9 +8,13 @@ import 'package:mpd_client/application/appointment/completed_appointment/complet
 import 'package:mpd_client/application/appointment/upcoming_appointment/upcoming_appoinment_bloc.dart';
 import 'package:mpd_client/application/auth/auth_bloc.dart';
 import 'package:mpd_client/application/comment/comment_bloc.dart';
+import 'package:mpd_client/application/doctor_booking/add_to_cart/add_to_cart_bloc.dart';
+import 'package:mpd_client/application/doctor_booking/create_order/create_order_bloc.dart';
 import 'package:mpd_client/application/doctor_booking/doctor_profile/doctor_profile_bloc.dart';
 import 'package:mpd_client/application/doctor_booking/subscripption/subscription_bloc.dart';
+import 'package:mpd_client/application/doctor_booking/timetable_bloc/timetable_bloc.dart';
 import 'package:mpd_client/application/post/post_bloc.dart';
+import 'package:mpd_client/application/product_specalist/product_specalist_bloc.dart';
 import 'package:mpd_client/application/profile/user_records/records_bloc.dart';
 import 'package:mpd_client/application/show_pop_up/show_pop_up_bloc.dart';
 import 'package:mpd_client/application/yandex/filter_category/filter_category_bloc.dart';
@@ -18,6 +22,8 @@ import 'package:mpd_client/application/yandex/popular_categories/popular_categor
 import 'package:mpd_client/application/yandex/search_by_category/search_by_category_bloc.dart';
 import 'package:mpd_client/application/yandex/search_by_specialist/search_by_specialist_bloc.dart';
 import 'package:mpd_client/application/yandex/yandex_doctor/yandex_doctor_bloc.dart';
+import 'package:mpd_client/domain/abstract_repo/lenta_repository.dart';
+import 'package:mpd_client/infrastructure/core/scope.dart';
 import 'package:mpd_client/infrastructure/reopsitories/appoinment_repository.dart';
 import 'package:mpd_client/infrastructure/reopsitories/doctor_profile_repository.dart';
 import 'package:mpd_client/infrastructure/reopsitories/user_repository.dart';
@@ -55,7 +61,7 @@ class _MyAppState extends State<MyApp> {
         // Doctor
         BlocProvider<FilterCategoryBloc>(create: (context) => FilterCategoryBloc(serviceLocator<YandexDoctorRepository>(), TextEditingController())),
         BlocProvider<YandexDoctorBloc>(create: (context) => YandexDoctorBloc(YandexService())),
-        BlocProvider<PopularCategoriesBloc>(create: (context) => PopularCategoriesBloc(serviceLocator<YandexDoctorRepository>())..add(const GetPopularCategoriesEvent('uz'))),
+        BlocProvider<PopularCategoriesBloc>(create: (context) => PopularCategoriesBloc(serviceLocator<YandexDoctorRepository>())..add( GetPopularCategoriesEvent('uz'))),
         BlocProvider<SearchByCategoryBloc>(create: (context) => SearchByCategoryBloc(serviceLocator<YandexDoctorRepository>())),
         BlocProvider<SearchBySpecialistBloc>(create: (context) => SearchBySpecialistBloc(serviceLocator<YandexDoctorRepository>(), FocusNode())),
 
@@ -68,6 +74,10 @@ class _MyAppState extends State<MyApp> {
         // Profile
         BlocProvider<RecordsBloc>(create: (context) => RecordsBloc(serviceLocator<UserRepository>(), TextEditingController())),
         BlocProvider<SubscriptionBloc>(create: (context) => SubscriptionBloc(serviceLocator<DoctorProfileRepository>())),
+        BlocProvider<ProductSpecalistBloc>(create: (context) => ProductSpecalistBloc(serviceLocator<LentaRepository>())),
+        BlocProvider<AddToCartBloc>(create: (context) => AddToCartBloc(serviceLocator<DoctorProfileRepository>())),
+        BlocProvider<TimetableBloc>(create: (context) => TimetableBloc(serviceLocator<DoctorProfileRepository>())),
+        BlocProvider<CreateOrderBloc>(create: (context) => CreateOrderBloc(serviceLocator<DoctorProfileRepository>())),
       ],
       child: BlocListener<AuthBloc, AuthState>(
         bloc: serviceLocator<AuthBloc>(),
@@ -86,7 +96,7 @@ class _MyAppState extends State<MyApp> {
           child: MaterialApp.router(
             supportedLocales: AppLocalizations.supportedLocales,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
-            locale: const Locale("uz"),
+            locale: AppScope.of(context).locale,
             title: 'T-MED Client',
             themeMode: ThemeMode.light,
             debugShowCheckedModeBanner: false,
