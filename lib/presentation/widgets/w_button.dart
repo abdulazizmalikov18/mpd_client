@@ -73,7 +73,7 @@ class WButton extends StatelessWidget {
               )
             : null,
         decoration: BoxDecoration(
-          color: isDisabled ? gray : color ?? primary,
+          color: isDisabled ? gray : color ?? mainBlue,
           borderRadius: BorderRadius.circular(isPhone ? borderRadius : 16),
           border: isDisabled
               ? border ?? Border.all(color: white.withOpacity(0.3))
@@ -81,17 +81,7 @@ class WButton extends StatelessWidget {
                   Border.all(
                     color: white.withOpacity(0.3),
                   ),
-          gradient: isDisabled ? null : color == null ? gradient ?? wgradient : null,
-          // boxShadow: shadow,
-          // boxShadow: shadow ??
-          //     [
-          //       if (!isDisabled)
-          //         BoxShadow(
-          //           color: primary.withOpacity(0.5),
-          //           blurRadius: 8,
-          //           spreadRadius: 3,
-          //         )
-          //     ],
+
         ),
         child: isLoading
             ? const Center(

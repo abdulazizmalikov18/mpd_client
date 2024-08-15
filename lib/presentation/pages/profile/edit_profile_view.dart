@@ -221,6 +221,7 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                 onTap: () {
                   context.pop();
                 },
+                color: mainBlue,
                 text: "Bekor qilish",
                 textStyle: AppTheme.bodyLarge.copyWith(
                   color: black,

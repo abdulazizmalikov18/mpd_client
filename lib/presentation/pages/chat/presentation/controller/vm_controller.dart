@@ -1,145 +1,118 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:formz/formz.dart';
-import 'package:go_router/go_router.dart';
-import 'package:mpd_client/domain/models/chat/chat_user.dart';
+import 'package:mpd_client/domain/models/chat/chat_group.dart';
+import 'package:mpd_client/domain/models/chat/chat_user_state.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
+
+import 'package:mpd_client/domain/models/chat/message.dart';
 import 'package:mpd_client/infrastructure/services/log_service.dart';
-import 'dart:async';
-import 'dart:io';
-
-import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat/chat_bloc.dart';
-import 'package:mpd_client/presentation/router/routs_contact.dart';
-
+import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
+import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat_message/bloc/chat_message_bloc.dart';
 
 typedef $chatController = ChatVMController;
 
-class ChatVMController extends InheritedWidget {
+class ChatVMController {
+  WebSocketChannel? channel;
+  factory ChatVMController() => instance;
+  static final instance = ChatVMController._();
+  ChatVMController._()
+      : messageController = TextEditingController(),
+        scrollController = ScrollController();
+
   static final ValueNotifier<String?> chatNotifier = ValueNotifier(null);
-
-  // Fields
   final TextEditingController messageController;
-
   bool get isMobile => Platform.isAndroid || Platform.isIOS;
   final ScrollController scrollController;
 
-  // Methods
-  void createChatAndPush(BuildContext context, {required ChatUserModel user}) {
-    // $loading.on(context);
-    getBloc(context).add(CreateChatEvent(
-      user: user,
-      onSuccess: () {
-        // $loading.off(context);
-        context.pushNamed(AppRouteNames.inChats, extra: context);
-      },
-      onError: () {
-        // $loading.off(context);
-      },
-    ));
-  }
-
-  void pushToGroup(BuildContext context) {
-    if (isMobile) {
-      getBloc(context).add(const PushToGroupEvent());
-    }
-    getBloc(context).add(const PushToGroupEvent());
-  }
-
-  void pushToGroupChat(BuildContext context) {
-    if (isMobile) {
-      context.pop();
-    }
-    getBloc(context).add(const PushToGroupEvent());
-  }
-
-  void pushToChat(BuildContext context, {required String? slugName}) {
-    Log.i(slugName.toString());
-    if (slugName == null) return;
-    context.pushNamed(AppRouteNames.inChats, extra: context);
-    getBloc(context).add(
-      PushToChatEvent(
-        slugName: slugName,
-      ),
-    );
-  }
-
-  void getGroups(BuildContext context) {
-    context.read<ChatBloc>().add(const GetGroupChat());
-  }
-
-  void getMoreGroups() {}
-
-  void sendMessage(BuildContext context) {
-    if (messageController.text.trim().isEmpty) return;
-    final chatBloc = getBloc(context);
-    if (!chatBloc.state.dataStatus.isInProgress) {
-      context.read<ChatBloc>().add(
-            SendMessageEvent(
-              slugName:
-                  chatBloc.state.groupContainer.activeGroup?.slugName ?? "-",
-              text: messageController.text,
-            ),
-          );
-      messageController.clear();
-    }
-  }
-
-  void sendMedia(BuildContext context) async {
-    final chatBloc = getBloc(context);
+  void sendMedia(BuildContext context, String slugName) async {
     final result = await FilePicker.platform.pickFiles();
     if (result?.files[0].path != null) {
       File file = File(result!.files[0].path!);
-      if (context.mounted &&
-          chatBloc.state.groupContainer.activeGroup?.slugName != null) {
-        chatBloc.add(
-          SendMessageEvent(
-            slugName: chatBloc.state.groupContainer.activeGroup!.slugName,
-            file: file,
-            text: messageController.text,
-          ),
-        );
+      if (context.mounted) {
+        context.read<ChatMessageBloc>().add(
+              ChatSendMessageEvent(
+                groupSlug: slugName,
+                file: file,
+                text: messageController.text,
+              ),
+            );
       }
     }
   }
 
-  void search(BuildContext context, {required String value}) {
-    DebounceSearchChat.run(() {
-      getBloc(context).add(GroupSearchEvent(search: value));
-    });
-  }
-
-  ChatBloc getBloc(BuildContext context) => context.read<ChatBloc>();
-
-  const ChatVMController({
-    super.key,
-    required super.child,
-    required this.scrollController,
-    required this.messageController,
-  });
-
-  static ChatVMController of(BuildContext context) {
-    final ChatVMController? result =
-        context.dependOnInheritedWidgetOfExactType<ChatVMController>();
-    assert(result != null, 'No ChatVMController found in context');
-    return result!;
-  }
-
-  @override
-  bool updateShouldNotify(ChatVMController oldWidget) {
-    return true;
-  }
-}
-
-class DebounceSearchChat {
-  DebounceSearchChat();
-
-  static int milliseconds = 300;
-  static Timer? _timer;
-
-  static void run(VoidCallback action) {
-    if (_timer?.isActive ?? false) {
-      _timer?.cancel();
+  static ChatVMController of(BuildContext context) => ChatVMController();
+  Future<void> connectSocket({required void Function(String errorMessage) onError}) async {
+    try {
+      final wsUrl = Uri.parse("ws://82.215.78.34:80/SMMS/ws/chat/?token=${StorageRepository.getString(StorageKeys.TOKEN)}");
+      channel = WebSocketChannel.connect(wsUrl);
+      await channel!.ready;
+      channel!.stream.asBroadcastStream();
+    } catch (e, s) {
+      Log.e("ChatSocket Error ------------------------");
+      print(e);
+      print(s);
+      onError(e.toString());
     }
-    _timer = Timer(Duration(milliseconds: milliseconds), action);
   }
+
+  Stream get getStream => channel!.stream;
+
+  void onComingNewMessage(void Function(MessageModel message) onMessage) {
+    try {
+      channel!.stream.listen(
+        (event) {
+          Log.i("New Chat Message $event \nType${event.runtimeType}");
+          final eventData = (jsonDecode(event));
+          if (eventData is Map<String, dynamic> && eventData.containsValue("notify_about_message")) {
+            Log.i("Message  Keldi");
+            onMessage(MessageModel.fromSocket(eventData));
+          }
+        },
+      );
+    } catch (e, s) {
+      Log.e("error $e Stack $s");
+      throw Exception("Modelga o'tkasa olmadi Message");
+    }
+  }
+
+  void onOnlineOrOffline(void Function(ChatUserState state) onMessage) {
+    try {
+      channel!.stream.listen(
+        (event) {
+          Log.i("New Chat Message $event \nType${event.runtimeType}");
+          final eventData = (jsonDecode(event));
+          if (eventData is Map<String, dynamic> && eventData.containsValue("type") && event['type'] == "online_status") {
+            Log.i("Message  Keldi");
+            onMessage(ChatUserState.fromJson(eventData));
+          }
+        },
+      );
+    } catch (e, s) {
+      Log.e("error $e Stack $s");
+      throw Exception("Modelga o'tkasa olmadi Message");
+    }
+  }
+
+  // void onComingNewGroup(void Function(ChatGroupModel grouponMessage) onGroup) {
+  //   try {
+  //     channel!.stream.listen(
+  //       (event) {
+  //         Log.i("New Chat Message $event \nType${event.runtimeType}");
+  //         final eventData = (jsonDecode(event));
+  //         if (eventData is Map<String, dynamic> && eventData.containsValue("notify_about_message")) {
+  //           // onMessage(MessageModel.fromSocket(eventData));
+  //         }
+  //       },
+  //     );
+  //   } catch (e, s) {
+  //     Log.e("error $e Stack $s");
+  //     throw Exception("Modelga o'tkasa olmadi Message");
+  //   }
+  // }
 }

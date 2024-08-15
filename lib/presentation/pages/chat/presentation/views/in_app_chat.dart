@@ -1,8 +1,11 @@
+import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:formz/formz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat/chat_bloc.dart';
+import 'package:mpd_client/domain/models/chat/chat_group.dart';
+import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat_message/bloc/chat_message_bloc.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/controller/vm_controller.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/widgets/message_widgets/w_message.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/widgets/w_chat_textfield.dart';
@@ -14,9 +17,12 @@ import 'package:mpd_client/presentation/widgets/w_network_image.dart';
 import 'package:mpd_client/presentation/widgets/w_paginator.dart';
 
 class InChatView extends StatefulWidget {
-  final BuildContext parentContext;
+  final ChatGroupModel group;
 
-  const InChatView({super.key, required this.parentContext});
+  const InChatView({
+    super.key,
+    required this.group,
+  });
 
   @override
   State<InChatView> createState() => _InChatViewState();
@@ -25,23 +31,30 @@ class InChatView extends StatefulWidget {
   static _InChatViewState? of(BuildContext context) => context.findAncestorStateOfType<_InChatViewState>();
 }
 
-class _InChatViewState extends State<InChatView> with AutomaticKeepAliveClientMixin {
+class _InChatViewState extends State<InChatView> {
   bool isLoading = false;
 
   @override
+  void initState() {
+    context.read<ChatMessageBloc>().add(ChatGetMessages(widget.group));
+    context.read<ChatMessageBloc>().add(ChatReadAllMessage(widget.group.slugName));
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Scaffold(
       backgroundColor: background,
       appBar: WAppBar(
         back: true,
-        title: BlocBuilder<ChatBloc, ChatState>(
+        title: BlocBuilder<ChatMessageBloc, ChatMessageState>(
           builder: (context, state) {
             return Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 WNetworkImage(
-                  image: state.groupContainer.activeGroup?.avatar,
+                  image: widget.group.avatar,
                   height: 40,
                   width: 40,
                   borderRadius: 12,
@@ -56,7 +69,7 @@ class _InChatViewState extends State<InChatView> with AutomaticKeepAliveClientMi
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      state.groupContainer.activeGroup?.name ?? "-",
+                      widget.group.name,
                       overflow: TextOverflow.ellipsis,
                       style: AppTheme.displayLarge,
                     ),
@@ -77,40 +90,39 @@ class _InChatViewState extends State<InChatView> with AutomaticKeepAliveClientMi
         ),
       ),
       body: Padding(
-        padding:  EdgeInsets.only(
+        padding: EdgeInsets.only(
           right: 8,
           left: 8,
           bottom: MediaQuery.viewInsetsOf(context).bottom > 0 ? kBottomNavigationBarHeight : kBottomNavigationBarHeight + 24,
         ),
-        child: BlocBuilder<ChatBloc, ChatState>(
-          builder: (context, state) => switch (state.dataStatus) {
+        child: BlocBuilder<ChatMessageBloc, ChatMessageState>(
+          builder: (context, state) => switch (state.status) {
             FormzSubmissionStatus.inProgress => const Center(
                 child: CupertinoActivityIndicator(),
               ),
             _ => Align(
-                alignment: Alignment.bottomCenter,
-                child: PaginatorList(
-                  controller: $chatController.of(context).scrollController,
-                  itemCount: state.chatContainer.chats.length,
-                  reverse: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    return WMessage(
-                      message: state.chatContainer.chats[index],
-                    );
-                  },
-                  paginatorStatus: state.dataStatus,
-                  fetchMoreFunction: () {
-                    context.read<ChatBloc>().add(const GetMoreChatEvent());
-                  },
-                  hasMoreToFetch: (state.chatContainer.count ?? 0) > state.chatContainer.chats.length,
-                ),
+              alignment: Alignment.bottomCenter,
+              child: PaginatorList(
+                controller: $chatController.of(context).scrollController,
+                itemCount: state.messages.length,
+                reverse: true,
+                itemBuilder: (BuildContext context, int index) {
+                  return WMessage(
+                    message: state.messages[index],
+                  );
+                },
+                paginatorStatus: state.status,
+                fetchMoreFunction: () {
+                  context.read<ChatMessageBloc>().add(ChatGetMoreMessages(widget.group));
+                },
+                hasMoreToFetch: (state.count) > state.messages.length,
               ),
+            ),
           },
         ),
       ),
       bottomSheet: AnimatedContainer(
         width: double.infinity,
-        // height: kBottomNavigationBarHeight,
         padding: EdgeInsets.only(
           top: 8,
           bottom: MediaQuery.viewInsetsOf(context).bottom > 0 ? 8 : 32,
@@ -126,7 +138,4 @@ class _InChatViewState extends State<InChatView> with AutomaticKeepAliveClientMi
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

@@ -20,7 +20,8 @@ import 'package:mpd_client/infrastructure/reopsitories/lenta_repository_impl.dar
 import 'package:mpd_client/infrastructure/reopsitories/user_repository.dart';
 import 'package:mpd_client/infrastructure/reopsitories/yandex_doctor_repository.dart';
 import 'package:mpd_client/infrastructure/services/api_service.dart';
-import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat/chat_bloc.dart';
+import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat_group/chat_group_bloc.dart';
+import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat_message/bloc/chat_message_bloc.dart';
 
 final serviceLocator = GetIt.I;
 
@@ -56,7 +57,9 @@ void _chatRegister() {
   //Repo
   serviceLocator.registerSingleton<ChatRepository>(ChatRepositoryImpl(remote: serviceLocator<ChatService>()));
   // Bloc
-  serviceLocator.registerFactory(() => ChatBloc(serviceLocator<ChatRepository>()));
+  // serviceLocator.registerFactory(() => ChatBloc(serviceLocator<ChatRepository>()));
+  serviceLocator.registerFactory(() => ChatGroupBloc(serviceLocator<ChatRepository>()));
+  serviceLocator.registerFactory(() => ChatMessageBloc(serviceLocator<ChatRepository>()));
 }
 
 //

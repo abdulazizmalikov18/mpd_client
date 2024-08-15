@@ -1,7 +1,5 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mpd_client/application/post/post_bloc.dart';
@@ -13,17 +11,22 @@ import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/app_images.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
+import 'package:mpd_client/presentation/widgets/w_bottom_sheet_clipper.dart';
+import 'package:mpd_client/presentation/widgets/w_long_button.dart';
 import 'package:mpd_client/presentation/widgets/w_network_image.dart';
 import 'package:mpd_client/utils/extensions/string_ext.dart';
+import 'package:share_plus/share_plus.dart';
 
 class PostWidget extends StatefulWidget {
   final PostEntity post;
   final bool isLentaView;
+  final bool isMyPost;
 
   const PostWidget({
     super.key,
     required this.post,
     this.isLentaView = true,
+    this.isMyPost = false,
   });
 
   @override
@@ -82,7 +85,122 @@ class _PostWidgetState extends State<PostWidget> with AutomaticKeepAliveClientMi
                       ],
                     ),
                     const Spacer(),
-                    AppIcons.moreIcon.svg(),
+                    GestureDetector(
+                      onTap: () {
+                        if (widget.isMyPost) {
+                          final bloc = context.read<PostBloc>();
+                          showModalBottomSheet(
+                            backgroundColor: Colors.transparent,
+                            context: context,
+                            builder: (context) => BottomSheetWidget(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 20,
+                                horizontal: 16,
+                              ),
+                              children: [
+                                const SizedBox(height: 12),
+                                const Text(
+                                  "Опции",
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w700,
+                                    color: black,
+                                  ),
+                                ),
+                                const SizedBox(height: 12),
+                                LongButton(
+                                  onPress: () {
+                                    Share.share(
+                                      '${widget.post.authorFullname} \n\n${widget.post.text} \n\n${widget.post.medias.first.image} \n\n${widget.post.medias.first.file} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
+                                      subject: 'Look what I made!',
+                                    );
+                                  },
+                                  widget: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      AppIcons.share.svg(), // share,
+                                      const SizedBox(width: 12),
+                                      const Text(
+                                        "Share",
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: white,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 12),
+                                LongButton(
+                                  onPress: () {},
+                                  color: white,
+                                  border: Border.all(color: mainBlue),
+                                  widget: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      AppIcons.edit.svg(),
+                                      const SizedBox(width: 12),
+                                      const Text(
+                                        "Edit",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: black,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 12),
+                                BlocBuilder<PostBloc, PostState>(
+                                  bloc: bloc,
+                                  builder: (context, state) {
+                                    return LongButton(
+                                      color: const Color(0xFFEB5757),
+                                      // loading: bloc.state.deleteStatus == PostStatus.inProgress,
+                                      onPress: () {
+                                        // bloc.add(DeletePostEvent(
+                                        //   id: widget.post.id ?? 0,
+                                        //   index: widget.baseIndex,
+                                        //   onSucces: () {
+                                        //     Navigator.pop(context);
+                                        //   },
+                                        // ));
+                                      },
+                                      widget: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          AppIcons.trash.svg(),
+                                          const SizedBox(width: 12),
+                                          const Text(
+                                            "Delete",
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              color: white,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                                const SizedBox(height: 12),
+                              ],
+                            ),
+                          );
+                        } else {
+                          Share.share(
+                            '${widget.post.authorFullname} \n\n${widget.post.text} \n\n${widget.post.medias.first.image} \n\n${widget.post.medias.first.file} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
+                            subject: 'Look what I made!',
+                          );
+                        }
+                      },
+                      child: AppIcons.share.svg(
+                        color: black
+                      ),
+                    ),
                   ],
                 ),
               ),

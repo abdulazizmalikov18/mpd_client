@@ -8,6 +8,7 @@ class WNetworkImage extends StatelessWidget {
   final double borderRadius;
   final Widget defaultWidget;
   final Widget Function(BuildContext, Object, StackTrace?)? errorBuilder;
+  final BoxFit fit;
 
   const WNetworkImage({
     super.key,
@@ -17,6 +18,7 @@ class WNetworkImage extends StatelessWidget {
     required this.borderRadius,
     this.errorBuilder,
     required this.defaultWidget,
+     this.fit = BoxFit.cover,
   });
 
   @override
@@ -28,7 +30,7 @@ class WNetworkImage extends StatelessWidget {
         image!,
         height: height,
         width: width,
-        fit: BoxFit.cover,
+        fit: fit,
         errorBuilder: errorBuilder ??
                 (_, __, ___) {
               return defaultWidget;

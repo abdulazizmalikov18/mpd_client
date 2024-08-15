@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:mpd_client/app.dart';
 import 'package:mpd_client/domain/common/app_init.dart';
@@ -13,13 +12,10 @@ const String $baseUrlSocket = "ws://82.215.78.34";
 Future<void> main() async {
   await runZonedGuarded(() async {
     await AppInit.create;
-
     runApp(
       DependencyScope(
         initialModel: AppScope(
-          locale: Locale(
-            StorageRepository.getString(StorageKeys.LANGUAGE, defValue: 'uz'),
-          ),
+          locale: Locale(StorageRepository.getString(StorageKeys.LANGUAGE, defValue: 'uz')),
         ),
         child: const MyApp(),
       ),

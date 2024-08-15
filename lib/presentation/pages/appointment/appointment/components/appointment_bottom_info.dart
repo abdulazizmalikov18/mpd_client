@@ -19,8 +19,8 @@ class AppointmentBottomInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(
-          width: MediaQuery.sizeOf(context).width * 0.45,
+        Expanded(
+          flex: 16,
           child: isPending
               ? Container(
                   height: 34.h,
@@ -35,22 +35,26 @@ class AppointmentBottomInfo extends StatelessWidget {
                         colorFilter: const ColorFilter.mode(mainBlue, BlendMode.srcIn),
                       ),
                       const SizedBox(width: 4),
-                      Text(
-                        meetDate.isEmpty ? "--" : Utils.appointMentDateFormat(meetDate, context),
-                        overflow: TextOverflow.ellipsis,
-                        style: Styles.descSubtitle.copyWith(
-                          color: mainBlue,
-                          fontSize: 14,
+                      Flexible(
+                        child: Text(
+                          meetDate.isEmpty ? "--" : Utils.appointMentDateFormat(meetDate, context),
+                          overflow: TextOverflow.ellipsis,
+                          style: context.textTheme.headlineSmall!.copyWith(
+                            color: mainBlue,
+                            fontSize: 12,
+                          ),
                         ),
                       )
                     ],
                   ),
                 )
               : RichText(
-                  text: TextSpan(children: [
-                    TextSpan(text: '${Utils.priceFormat(price)} UZS\n', style: Styles.descSubtitle.copyWith(color: black, fontWeight: FontWeight.w600)),
-                    TextSpan(text: meetDate.isEmpty ? "--" : Utils.appointMentDateFormat(meetDate, context), style: Styles.cardReview.copyWith(color: grey, fontSize: 10.sp)),
-                  ]),
+                  text: TextSpan(
+                    children: [
+                      TextSpan(text: '${Utils.priceFormat(price)} UZS\n', style: Styles.descSubtitle.copyWith(color: black, fontWeight: FontWeight.w600)),
+                      TextSpan(text: meetDate.isEmpty ? "--" : Utils.appointMentDateFormat(meetDate, context), style: Styles.cardReview.copyWith(color: grey, fontSize: 10.sp)),
+                    ],
+                  ),
                 ),
         ),
         const Spacer(),

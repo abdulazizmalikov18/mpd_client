@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:equatable/equatable.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:mpd_client/domain/abstract_repo/chat_repository.dart';
@@ -24,6 +22,7 @@ import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat/contai
 import 'package:mpd_client/presentation/pages/chat/presentation/controller/vm_controller.dart';
 import 'package:mpd_client/utils/extensions/list_extention.dart';
 import 'package:uuid/uuid.dart';
+// ignore: depend_on_referenced_packages
 import 'package:web_socket_channel/io.dart';
 
 part 'chat_event.dart';
@@ -218,7 +217,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             chats: [],
           )),
     );
-    final result = await _repo.getMyChat(const GetGroupChatEntity());
+    final result = await _repo.getGroups(const GetGroupChatEntity());
     if (result.isRight) {
       emit(
         state.copyWith(
@@ -244,7 +243,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       ),
     );
 
-    final result = await _repo.getChats(GetChatEntity(groupSlug: event.slugName, limit: 20));
+    final result = await _repo.getMessages(GetChatEntity(groupSlug: event.slugName, limit: 20));
     if (result.isRight) {
       final activeGroup = state.groupContainer.groups[foundIndex];
       state.groupContainer.groups[foundIndex] = activeGroup.copyWith();
@@ -370,7 +369,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
   void _getMoreChats(GetMoreChatEvent event, Emitter emit) async {
     if (state.chatContainer.next != null) {
-      final result = await _repo.getChats(GetChatEntity(
+      final result = await _repo.getMessages(GetChatEntity(
         groupSlug: state.groupContainer.activeGroup!.slugName,
         limit: 10,
         offset: state.chatContainer.nextOffset,
@@ -407,7 +406,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         ),
       ),
     );
-    final result = await _repo.getMyChat(const GetGroupChatEntity());
+    final result = await _repo.getGroups(const GetGroupChatEntity());
     if (result.isRight) {
       print("right");
       print(result.right);
@@ -489,14 +488,13 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       textForUpdate: const Uuid().v4(),
     ));
 
-    final result = await _repo.getMyChat(GetGroupChatEntity(search: event.search));
+    final result = await _repo.getGroups(GetGroupChatEntity(search: event.search));
     emit(state.copyWith(
       groupContainer: state.groupContainer.copyWith(
         status: FormzSubmissionStatus.success,
         groups: result.right.results,
       ),
       textForUpdate: const Uuid().v4(),
-
     ));
   }
 

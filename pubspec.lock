@@ -1462,7 +1462,7 @@ packages:
     source: hosted
     version: "0.1.3"
   share_plus:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: share_plus
       sha256: ef3489a969683c4f3d0239010cc8b7a2a46543a8d139e111c06c558875083544
@@ -2003,7 +2003,7 @@ packages:
     source: hosted
     version: "0.1.6"
   web_socket_channel:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: web_socket_channel
       sha256: "9f187088ed104edd8662ca07af4b124465893caf063ba29758f97af57e61da8f"

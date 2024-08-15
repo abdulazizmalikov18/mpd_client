@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat/chat_bloc.dart';
+import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat_message/bloc/chat_message_bloc.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/controller/vm_controller.dart';
+import 'package:mpd_client/presentation/pages/chat/presentation/views/in_app_chat.dart';
 import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
@@ -14,7 +15,7 @@ class WChatTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ChatBloc, ChatState>(
+    return BlocBuilder<ChatMessageBloc, ChatMessageState>(
       builder: (context, state) {
         return Row(
           children: [
@@ -22,8 +23,13 @@ class WChatTextField extends StatelessWidget {
               child: SizedBox(
                 height: 48,
                 child: TextField(
-                  controller: $chatController.of(context).messageController,
-                  onEditingComplete: () => $chatController.of(context).sendMessage(context),
+                  controller: ChatVMController().messageController,
+                  onEditingComplete: () => context.read<ChatMessageBloc>().add(
+                        ChatSendMessageEvent(
+                          text: ChatVMController().messageController.text,
+                          groupSlug: InChatView.of(context)!.widget.group.slugName,
+                        ),
+                      ),
                   style: AppTheme.headlineSmall,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.only(top: 14, left: 16),
@@ -34,7 +40,7 @@ class WChatTextField extends StatelessWidget {
                       color: Colors.transparent,
                       padding: EdgeInsets.zero,
                       border: const Border(),
-                      onTap: () => $chatController.of(context).sendMedia(context),
+                      onTap: () => ChatVMController().sendMedia(context, InChatView.of(context)!.widget.group.slugName),
                       child: const Icon(
                         CupertinoIcons.paperclip,
                         color: gray,
@@ -62,7 +68,12 @@ class WChatTextField extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             WButton(
-              onTap: () => $chatController.of(context).sendMessage(context),
+              onTap: () => context.read<ChatMessageBloc>().add(
+                    ChatSendMessageEvent(
+                      text: ChatVMController().messageController.text,
+                      groupSlug: InChatView.of(context)!.widget.group.slugName,
+                    ),
+                  ),
               width: 48,
               height: 48,
               child: AppIcons.send.svg(color: white),

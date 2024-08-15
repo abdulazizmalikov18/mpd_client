@@ -27,6 +27,8 @@ class WProfileItem extends StatelessWidget {
       border: Border.all(
         color: Colors.transparent,
       ),
+      padding: EdgeInsets.zero,
+      margin: EdgeInsets.zero,
       onTap: onPressed,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -35,7 +37,7 @@ class WProfileItem extends StatelessWidget {
             icon.svg(
               color: isRed ? red : black,
               width: 20,
-              height: 20,
+              // height: 20,
             ),
             const SizedBox(width: 10),
             Column(

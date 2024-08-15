@@ -75,9 +75,6 @@ class _WMessageState extends State<WMessage> {
                         const SizedBox(width: 12),
                         if ((widget.message?.file?.endsWith(".jpg") ?? false) || (widget.message?.file?.endsWith(".png") ?? false)) const Spacer(),
                         Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
                               widget.message?.date != null ? parseDateToTime(widget.message!.date!) : "-",
@@ -104,7 +101,7 @@ class _WMessageState extends State<WMessage> {
     );
   }
 
-    String parseDateToTime(String date) {
+  String parseDateToTime(String date) {
     var myDate = DateTime.parse(date);
     return "${myDate.hour.toString().padLeft(2, "0")}:${myDate.minute.toString().padLeft(2, "0")}";
   }

@@ -45,5 +45,43 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+		<string>MPD CLIENT uses your location to allow browsing doctor based on nearby doctor venues
+			or doctor stores. This helps you discover new doctor experiences in your area.</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>Need to upload image MY PERSONAL DOCTOR</string>
+		<key>NSCameraUsageDescription</key>
+		<string>Need to upload image MY PERSONAL DOCTOR</string>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>Need to upload image MY PERSONAL DOCTOR</string>
+		<key>NSMotionUsageDescription</key>
+		<string>MY PERSONAL DOCTOR uses your motion data to track your physical activity and provide
+			personalized health insights.</string>
+		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+		<string>MY PERSONAL DOCTOR uses your location to help you find nearby doctors and clinics.
+			You can choose to allow access only while using the app or allow access even when the
+			app is closed for better results.</string>
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+			<string>comgooglemaps</string>
+			<string>baidumap</string>
+			<string>iosamap</string>
+			<string>waze</string>
+			<string>yandexmaps</string>
+			<string>yandexnavi</string>
+			<string>citymapper</string>
+			<string>mapswithme</string>
+			<string>osmandmaps</string>
+			<string>dgis</string>
+			<string>qqmap</string>
+			<string>here-location</string>
+			<string>tomtomgo</string>
+			<string>copilot</string>
+			<string>com.sygic.aura</string>
+			<string>nmap</string>
+			<string>kakaomap</string>
+			<string>tmap</string>
+			<string>szn-mapy</string>
+		</array>
 </dict>
 </plist>

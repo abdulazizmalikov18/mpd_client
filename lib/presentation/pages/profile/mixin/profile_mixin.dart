@@ -42,7 +42,8 @@ mixin ProfileMixin on State<ProfileView> {
 
   void showQrCode() {
     showModalBottomSheet(
-      context: context, //MainView.of(context).context,
+      context: context,
+      useRootNavigator: true,
       builder: (ctx) {
         return Column(
           mainAxisSize: MainAxisSize.min,
@@ -108,10 +109,67 @@ mixin ProfileMixin on State<ProfileView> {
     );
   }
 
+  void onPressGoToDoctorProfile() {
+    showModalBottomSheet(
+      backgroundColor: Colors.transparent,
+      context: context,
+      useRootNavigator: true,
+      builder: (context) => BottomSheetWidget(
+        padding: const EdgeInsets.symmetric(
+          vertical: 20,
+          horizontal: 16,
+        ),
+        children: [
+          const SizedBox(height: 12),
+          const Text(
+            "Ma’lumotlaringiz saqlanishiga rozimisiz?",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const Text(
+            "Agar rozi bo’lsangiz bla bla bla, agar rozi bo’lmasangiz bla bla bla.",
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: grey,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 24),
+          LongButton(
+            height: 52,
+            buttonName: "Xa, roziman",
+            onPress: () {
+              Navigator.of(context)
+                ..pop()
+                ..push(MaterialPageRoute(
+                  builder: (context) => const SpecialistRegisterPage(),
+                ));
+            },
+          ),
+          const SizedBox(height: 12),
+          LongButton(
+            height: 52,
+            buttonName: "Yo’q, rozi emasman",
+            color: red,
+            onPress: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          const SizedBox(height: 16),
+        ],
+      ),
+    );
+  }
+
   void onPressLanguage() {
     showModalBottomSheet(
       backgroundColor: Colors.transparent,
-      context: MainView.of(context).context,
+      context: context,
+      useRootNavigator: true,
       builder: (_) => const LanguageSheet(),
     );
   }
@@ -126,6 +184,8 @@ mixin ProfileMixin on State<ProfileView> {
     showModalBottomSheet(
       backgroundColor: Colors.transparent,
       context: context,
+      useRootNavigator: true,
+      useSafeArea: true,
       builder: (context) => BottomSheetWidget(
         padding: const EdgeInsets.symmetric(
           vertical: 20,
@@ -135,7 +195,10 @@ mixin ProfileMixin on State<ProfileView> {
           const SizedBox(height: 12),
           const Text(
             "Tez yordam so’rash!",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w700,
+            ),
           ),
           const Text(
             "Iltimos faqat favqulotda xolatda murojat qiling!",
@@ -158,7 +221,7 @@ mixin ProfileMixin on State<ProfileView> {
               ],
             ),
             child: const ListTile(
-              title: const Text(
+              title: Text(
                 "Avariya",
                 style: TextStyle(
                   fontSize: 14,

@@ -40,7 +40,7 @@ class _AppointmentPageState extends State<AppointmentPage> with AutomaticKeepAli
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          elevation: .0,
+          elevation: 0,
           backgroundColor: white,
           automaticallyImplyLeading: false,
           toolbarHeight: 56.h,
@@ -52,9 +52,9 @@ class _AppointmentPageState extends State<AppointmentPage> with AutomaticKeepAli
             ),
           ),
           bottom: PreferredSize(
-              preferredSize: Size(double.maxFinite, 56.h),
+              preferredSize: const Size(double.maxFinite, 56),
               child: Container(
-                height: 50.h,
+                height: 50,
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.r),

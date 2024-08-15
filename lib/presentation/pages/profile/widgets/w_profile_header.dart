@@ -20,28 +20,19 @@ class WProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Align(
-          heightFactor: 0,
-          child: Image.network(
-            "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
+        WNetworkImage(
+          image: "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
+          width: double.maxFinite,
+          height: MediaQuery.sizeOf(context).height * 0.2,
+          borderRadius: 0,
+          defaultWidget: Container(
             width: double.infinity,
-            // height: MediaQuery.sizeOf(context).height * 0.5,
-            fit: BoxFit.cover,
+            height: MediaQuery.sizeOf(context).height * 0.2,
+            color: black,
           ),
         ),
-        // Container(
-        //   width: double.infinity,
-        // height: MediaQuery.sizeOf(context).height * 0.15,
-        //   decoration: BoxDecoration(
-        //     gradient: wgradient,
-        //     borderRadius: const BorderRadius.only(
-        //       bottomLeft: Radius.circular(100),
-        //       bottomRight: Radius.circular(100),
-        //     )
-        //   ),
-        // ),
         Padding(
-          padding: EdgeInsets.only(top: (MediaQuery.sizeOf(context).height * 0.1)- 6),
+          padding: EdgeInsets.only(top: (MediaQuery.sizeOf(context).height * 0.2) - 48),
           child: BlocBuilder<AccountsBloc, AccountsState>(
             builder: (context, state) {
               return Column(
@@ -53,7 +44,7 @@ class WProfileHeader extends StatelessWidget {
                         color: white,
                         width: 3,
                       ),
-                      shape: BoxShape.circle
+                      shape: BoxShape.circle,
                     ),
                     child: WNetworkImage(
                       image: state.userContainer.user.avatar,
@@ -110,7 +101,7 @@ class WProfileHeader extends StatelessWidget {
         ),
         Positioned(
           right: 32,
-          top: MediaQuery.sizeOf(context).height * 0.11,
+          top: (MediaQuery.sizeOf(context).height * 0.2) - 32,
           child: GestureDetector(
             onTap: () {
               final qrCode = context.read<AccountsBloc>().state.userContainer.user.qrcode;
@@ -156,7 +147,11 @@ class WProfileHeader extends StatelessWidget {
             child: CircleAvatar(
               backgroundColor: Colors.white,
               radius: 30,
-              child: AppIcons.scanBarcode.svg(color: const Color(0xFF677294)),
+              child: AppIcons.scanBarcode.svg(
+                color: const Color(0xFF677294),
+                width: 42,
+                height: 42,
+              ),
             ),
           ),
         ),

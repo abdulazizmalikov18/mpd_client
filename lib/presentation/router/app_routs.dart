@@ -18,7 +18,6 @@ import 'package:mpd_client/presentation/pages/auth/create_password_view.dart';
 import 'package:mpd_client/presentation/pages/auth/login_view.dart';
 import 'package:mpd_client/presentation/pages/auth/registration_view.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/views/chat_view.dart';
-import 'package:mpd_client/presentation/pages/chat/presentation/views/create_new_chat_view.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/views/in_app_chat.dart';
 import 'package:mpd_client/presentation/pages/doctor_profile_booking/presentation/pages/appointment_date_time/appoinment_date_time.dart';
 import 'package:mpd_client/presentation/pages/doctor_profile_booking/presentation/pages/doctor_info_iteam.dart';
@@ -127,12 +126,9 @@ sealed class AppRouts {
       GoRoute(
         path: AppRoutePath.inChats,
         name: AppRouteNames.inChats,
-        builder: (context, state) => InChatView(parentContext: state.extra as BuildContext),
-      ),
-      GoRoute(
-        path: AppRoutePath.createChat,
-        name: AppRouteNames.createChat,
-        builder: (context, state) => const CreateNewChatView(),
+        builder: (context, state) => InChatView(
+          group: (state.extra as Map)['group'],
+        ),
       ),
       GoRoute(
         parentNavigatorKey: navigatorKey,

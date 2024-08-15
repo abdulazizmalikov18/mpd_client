@@ -17,10 +17,12 @@ class LongButton extends StatelessWidget {
   final double height;
   final double width;
   final double fontsize;
+  final Widget? widget;
+  final BoxBorder? border;
 
   const LongButton({
     super.key,
-    required this.buttonName,
+    this.buttonName = "",
     required this.onPress,
     this.fontsize = 16,
     this.shadowColor,
@@ -31,6 +33,8 @@ class LongButton extends StatelessWidget {
     this.isDisable = false,
     this.height = 48,
     this.width = double.maxFinite,
+    this.widget,
+    this.border,
   });
 
   @override
@@ -39,19 +43,17 @@ class LongButton extends StatelessWidget {
       height: height.h,
       width: width,
       decoration: BoxDecoration(
-        boxShadow: [BoxShadow(blurRadius: 10, offset: const Offset(0, 6), color: (shadowColor ?? mainBlue).withOpacity(0.1))],
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 10,
+            offset: const Offset(0, 6),
+            color: (shadowColor ?? mainBlue).withOpacity(0.1),
+          )
+        ],
         borderRadius: BorderRadius.circular(10.r),
-        color: color,
-        gradient: color == null
-            ? LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  !isDisable ? (gradientOpacity ?? gradientBlueOpacity) : grey,
-                  !isDisable ? (gradient ?? gradientBlue) : grey,
-                ],
-              )
-            : null,
+        border: border,
+        color: color ?? mainBlue,
+      
       ),
       child: TextButton(
         onPressed: isDisable ? null : onPress,
@@ -70,11 +72,14 @@ class LongButton extends StatelessWidget {
 
   Widget _widget(BuildContext context) {
     if (!loading) {
-      return Text(buttonName,
-          style: AppTheme.headlineSmall.copyWith(
-            color: white,
-            fontSize: fontsize,
-          ));
+      return widget ??
+          Text(
+            buttonName,
+            style: Styles.boldHeadline6.copyWith(
+              color: white,
+              fontSize: fontsize,
+            ),
+          );
     }
     if (Platform.isIOS) {
       return Transform.scale(
@@ -87,7 +92,7 @@ class LongButton extends StatelessWidget {
     }
     return Transform.scale(
       scale: 0.6,
-      child: const CircularProgressIndicator(
+      child: CircularProgressIndicator(
         color: white,
       ),
     );

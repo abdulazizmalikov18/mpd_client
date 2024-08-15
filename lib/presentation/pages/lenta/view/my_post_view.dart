@@ -35,16 +35,14 @@ class _MyPostViewState extends State<MyPostView> {
         back: true,
         title: Text(
           "Shaxsiy postlar",
-          style: AppTheme.headlineSmall.copyWith(
-            fontSize: 16
-          ),
+          style: AppTheme.headlineSmall.copyWith(fontSize: 16),
         ),
       ),
       body: Expanded(
         child: CustomMaterialIndicator(
           backgroundColor: Colors.transparent,
           // leadingScrollIndicatorVisible: true,
-        
+
           elevation: 0,
           onRefresh: () async {
             // context.read<PostBloc>().add(const PostFetched());
@@ -89,7 +87,7 @@ class _MyPostViewState extends State<MyPostView> {
                   ),
                 );
               }
-        
+
               // Post Viewer
               return PaginatorList(
                 physics: const AlwaysScrollableScrollPhysics(),
@@ -97,7 +95,10 @@ class _MyPostViewState extends State<MyPostView> {
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: EdgeInsets.only(bottom: index + 1 == state.posts.length ? 30 : 0),
-                    child: PostWidget(post: state.myPost[index]),
+                    child: PostWidget(
+                      post: state.myPost[index],
+                      isMyPost: true,
+                    ),
                   );
                 },
                 paginatorStatus: FormzSubmissionStatus.initial, // state.refreshStatus,

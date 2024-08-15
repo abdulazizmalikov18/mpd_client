@@ -37,6 +37,7 @@ sealed class AppIcons {
   // Specialist order statistics icons
   static const String order = 'assets/icons/order.svg';
   static const String message = 'assets/icons/message.svg';
+  static const String noActiveMessage = 'assets/icons/no_active_messages.svg';
   static const String patient = 'assets/icons/patient.svg';
   static const String briefcase = 'assets/icons/briefcase.svg';
 
@@ -117,5 +118,7 @@ sealed class AppIcons {
   static const briefcaseLite = "assets/icons/briefcase_lite.svg";
   static const trash = "assets/icons/trash.svg";
   static const likeDislike = "assets/icons/like-dislike.svg";
+  static const share = "assets/icons/share.svg";
+  static const edit = "assets/icons/edit.svg";
 
 }

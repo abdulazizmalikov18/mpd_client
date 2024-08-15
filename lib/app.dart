@@ -31,7 +31,8 @@ import 'package:mpd_client/infrastructure/reopsitories/yandex_doctor_repository.
 import 'package:mpd_client/infrastructure/services/service_locator.dart';
 import 'package:mpd_client/infrastructure/services/yandex_service.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat/chat_bloc.dart';
-import 'package:mpd_client/presentation/pages/chat/presentation/controller/vm_controller.dart';
+import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat_group/chat_group_bloc.dart';
+import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat_message/bloc/chat_message_bloc.dart';
 import 'package:mpd_client/presentation/router/app_routs.dart';
 import 'package:mpd_client/presentation/router/routs_contact.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
@@ -55,13 +56,15 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<AuthBloc>(create: (context) => serviceLocator<AuthBloc>()..add(const GetUserAuthEvent())),
         BlocProvider<ShowPopUpBloc>(create: (context) => ShowPopUpBloc()),
         // BlocProvider<ConnectionCubit>(create: (context) => ConnectionCubit()),
-        BlocProvider<ChatBloc>(create: (context) => serviceLocator<ChatBloc>()),
+        // BlocProvider<ChatBloc>(create: (context) => serviceLocator<ChatBloc>()),
+        BlocProvider<ChatGroupBloc>(create: (context) => serviceLocator<ChatGroupBloc>()),
+        BlocProvider<ChatMessageBloc>(create: (context) => serviceLocator<ChatMessageBloc>()),
         BlocProvider<PostBloc>(create: (context) => serviceLocator<PostBloc>()),
         BlocProvider<CommentBloc>(create: (context) => serviceLocator<CommentBloc>()),
         // Doctor
         BlocProvider<FilterCategoryBloc>(create: (context) => FilterCategoryBloc(serviceLocator<YandexDoctorRepository>(), TextEditingController())),
         BlocProvider<YandexDoctorBloc>(create: (context) => YandexDoctorBloc(YandexService())),
-        BlocProvider<PopularCategoriesBloc>(create: (context) => PopularCategoriesBloc(serviceLocator<YandexDoctorRepository>())..add( GetPopularCategoriesEvent('uz'))),
+        BlocProvider<PopularCategoriesBloc>(create: (context) => PopularCategoriesBloc(serviceLocator<YandexDoctorRepository>())..add(GetPopularCategoriesEvent('uz'))),
         BlocProvider<SearchByCategoryBloc>(create: (context) => SearchByCategoryBloc(serviceLocator<YandexDoctorRepository>())),
         BlocProvider<SearchBySpecialistBloc>(create: (context) => SearchBySpecialistBloc(serviceLocator<YandexDoctorRepository>(), FocusNode())),
 
@@ -90,24 +93,20 @@ class _MyAppState extends State<MyApp> {
             AppRouts.router.goNamed(AppRouteNames.home);
           }
         },
-        child: ChatVMController(
-          scrollController: ScrollController(),
-          messageController: TextEditingController(),
-          child: MaterialApp.router(
-            supportedLocales: AppLocalizations.supportedLocales,
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            locale: AppScope.of(context).locale,
-            title: 'T-MED Client',
-            themeMode: ThemeMode.light,
-            debugShowCheckedModeBanner: false,
-            theme: AppTheme.theme(),
-            builder: (context, child) {
-              return CustomScreen(
-                child: child!,
-              );
-            },
-            routerConfig: AppRouts.router,
-          ),
+        child: MaterialApp.router(
+          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          locale: AppScope.of(context).locale,
+          title: 'T-MED Client',
+          themeMode: ThemeMode.light,
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.theme(),
+          builder: (context, child) {
+            return CustomScreen(
+              child: child!,
+            );
+          },
+          routerConfig: AppRouts.router,
         ),
       ),
     );

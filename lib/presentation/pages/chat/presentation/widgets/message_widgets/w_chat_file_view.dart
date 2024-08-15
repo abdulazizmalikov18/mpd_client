@@ -45,7 +45,7 @@ class _WChatFileViewState extends State<WChatFileView> {
           child: _downloadFile.fileExists
               ? const Icon(
                   Icons.save,
-                  color: white,
+                  color: black,
                 )
               : _downloadFile.dowloading
                   ? Stack(
@@ -54,7 +54,7 @@ class _WChatFileViewState extends State<WChatFileView> {
                         CircularProgressIndicator(
                           value: _downloadFile.progress,
                           strokeWidth: 3,
-                          backgroundColor: white,
+                          backgroundColor: black,
                           valueColor: const AlwaysStoppedAnimation<Color>(
                             blue,
                           ),
@@ -84,7 +84,7 @@ class _WChatFileViewState extends State<WChatFileView> {
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               fontSize: 16,
-              color: white,
+              color: black,
               fontWeight: FontWeight.w500,
             ),
           ),

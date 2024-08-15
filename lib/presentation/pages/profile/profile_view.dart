@@ -52,29 +52,23 @@ class _ProfileViewState extends State<ProfileView> with ProfileMixin {
                     title: context.l10n.profile_personal_info,
                     onPressed: onPressEditProfile,
                   ),
-                  const SizedBox(height: 8),
                   WProfileItem(
                     icon: AppIcons.likeDislike,
                     title: "Shaxsiy postlar",
                     onPressed: onPressMyPosts,
                   ),
-                  const SizedBox(height: 8),
                   WProfileItem(
                     icon: AppIcons.userAdd,
                     subTitle: '5 ${context.l10n.profile_following_doctors_doctor.toLowerCase()}',
                     title: context.l10n.profile_following_doctors,
-                    onPressed: () {
-                      
-                    },
+                    onPressed: () {},
                   ),
-                  const SizedBox(height: 8),
                   WProfileItem(
                     icon: AppIcons.languageCircle,
                     title: context.l10n.profile_language,
                     subTitle: languages[context.l10n.localeName],
                     onPressed: onPressLanguage,
                   ),
-                  const SizedBox(height: 8),
                   WProfileItem(
                     icon: AppIcons.receipt,
                     title: context.l10n.records_title,
@@ -83,73 +77,17 @@ class _ProfileViewState extends State<ProfileView> with ProfileMixin {
                       context.pushNamed(AppRouteNames.record);
                     },
                   ),
-                  const SizedBox(height: 8),
                   WProfileItem(
                     icon: AppIcons.briefcaseLite,
                     title: "Shifokor profiliga kirish",
-                    onPressed: () {
-                      showModalBottomSheet(
-                        backgroundColor: Colors.transparent,
-                        context: context,
-                        builder: (context) => BottomSheetWidget(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 20,
-                            horizontal: 16,
-                          ),
-                          children: [
-                            const SizedBox(height: 12),
-                            const Text(
-                              "Ma’lumotlaringiz saqlanishiga rozimisiz?",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            const Text(
-                              "Agar rozi bo’lsangiz bla bla bla, agar rozi bo’lmasangiz bla bla bla.",
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: grey,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 24),
-                            LongButton(
-                              height: 52,
-                              buttonName: "Xa, roziman",
-                              onPress: () {
-                                Navigator.of(context)
-                                  ..pop()
-                                  ..push(MaterialPageRoute(
-                                    builder: (context) => const SpecialistRegisterPage(),
-                                  ));
-                              },
-                            ),
-                            const SizedBox(height: 12),
-                            LongButton(
-                              height: 52,
-                              buttonName: "Yo’q, rozi emasman",
-                              color: red,
-                              onPress: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                            const SizedBox(height: 16),
-                          ],
-                        ),
-                      );
-                    },
+                    onPressed: onPressGoToDoctorProfile,
                   ),
-                  const SizedBox(height: 8),
                   WProfileItem(
                     icon: AppIcons.warning,
                     isRed: true,
                     title: "SOS",
                     onPressed: onPressSOS,
                   ),
-                  const SizedBox(height: 8),
                   WProfileItem(
                     icon: AppIcons.logOut,
                     isRed: true,
