@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mpd_client/application/post/post_bloc.dart';
 import 'package:mpd_client/domain/entity/lenta/post_entity.dart';
+import 'package:mpd_client/domain/models/appointment/specialist_info_model.dart';
 import 'package:mpd_client/presentation/pages/lenta/widgets/w_activity_dot.dart';
 import 'package:mpd_client/presentation/pages/lenta/widgets/w_post_media.dart';
 import 'package:mpd_client/presentation/router/routs_contact.dart';
@@ -55,153 +56,163 @@ class _PostWidgetState extends State<PostWidget> with AutomaticKeepAliveClientMi
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Row(
-                  children: [
-                    WNetworkImage(
-                      image: widget.post.authorAvatar,
-                      height: 40,
-                      width: 40,
-                      borderRadius: 12,
-                      defaultWidget: Image.asset(
-                        AppImages.userAvatar,
+                child: GestureDetector(
+                  onTap: () {
+                    context.pushNamed(AppRouteNames.drProfilebyid, extra: {
+                      "specialist": SpecialistInfoModel(
+                        id: widget.post.id,
+                        username: widget.post.username,
+                        avatar: widget.post.authorAvatar,
+                        fullname: widget.post.authorFullname,
+                      ),
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      WNetworkImage(
+                        image: widget.post.authorAvatar,
                         height: 40,
                         width: 40,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.post.authorFullname,
-                          style: AppTheme.displayLarge,
+                        borderRadius: 12,
+                        defaultWidget: Image.asset(
+                          AppImages.userAvatar,
+                          height: 40,
+                          width: 40,
                         ),
-                        Text(
-                          widget.post.date.differentCurrentDate,
-                          style: AppTheme.labelLarge.copyWith(
-                            color: black.withOpacity(0.5),
+                      ),
+                      const SizedBox(width: 8),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.post.authorFullname,
+                            style: AppTheme.displayLarge,
                           ),
-                        ),
-                      ],
-                    ),
-                    const Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        if (widget.isMyPost) {
-                          final bloc = context.read<PostBloc>();
-                          showModalBottomSheet(
-                            backgroundColor: Colors.transparent,
-                            context: context,
-                            builder: (context) => BottomSheetWidget(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 20,
-                                horizontal: 16,
-                              ),
-                              children: [
-                                const SizedBox(height: 12),
-                                const Text(
-                                  "Опции",
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w700,
-                                    color: black,
-                                  ),
-                                ),
-                                const SizedBox(height: 12),
-                                LongButton(
-                                  onPress: () {
-                                    Share.share(
-                                      '${widget.post.authorFullname} \n\n${widget.post.text} \n\n${widget.post.medias.first.image} \n\n${widget.post.medias.first.file} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
-                                      subject: 'Look what I made!',
-                                    );
-                                  },
-                                  widget: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      AppIcons.share.svg(), // share,
-                                      const SizedBox(width: 12),
-                                      const Text(
-                                        "Share",
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color: white,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(height: 12),
-                                LongButton(
-                                  onPress: () {},
-                                  color: white,
-                                  border: Border.all(color: mainBlue),
-                                  widget: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      AppIcons.edit.svg(),
-                                      const SizedBox(width: 12),
-                                      const Text(
-                                        "Edit",
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color: black,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(height: 12),
-                                BlocBuilder<PostBloc, PostState>(
-                                  bloc: bloc,
-                                  builder: (context, state) {
-                                    return LongButton(
-                                      color: const Color(0xFFEB5757),
-                                      // loading: bloc.state.deleteStatus == PostStatus.inProgress,
-                                      onPress: () {
-                                        // bloc.add(DeletePostEvent(
-                                        //   id: widget.post.id ?? 0,
-                                        //   index: widget.baseIndex,
-                                        //   onSucces: () {
-                                        //     Navigator.pop(context);
-                                        //   },
-                                        // ));
-                                      },
-                                      widget: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          AppIcons.trash.svg(),
-                                          const SizedBox(width: 12),
-                                          const Text(
-                                            "Delete",
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                              color: white,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
-                                const SizedBox(height: 12),
-                              ],
+                          Text(
+                            widget.post.date.differentCurrentDate,
+                            style: AppTheme.labelLarge.copyWith(
+                              color: black.withOpacity(0.5),
                             ),
-                          );
-                        } else {
-                          Share.share(
-                            '${widget.post.authorFullname} \n\n${widget.post.text} \n\n${widget.post.medias.first.image} \n\n${widget.post.medias.first.file} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
-                            subject: 'Look what I made!',
-                          );
-                        }
-                      },
-                      child: AppIcons.share.svg(
-                        color: black
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+                      const Spacer(),
+                      GestureDetector(
+                        onTap: () {
+                          if (widget.isMyPost) {
+                            final bloc = context.read<PostBloc>();
+                            showModalBottomSheet(
+                              backgroundColor: Colors.transparent,
+                              context: context,
+                              builder: (context) => BottomSheetWidget(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 20,
+                                  horizontal: 16,
+                                ),
+                                children: [
+                                  const SizedBox(height: 12),
+                                  const Text(
+                                    "Опции",
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w700,
+                                      color: black,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  LongButton(
+                                    onPress: () {
+                                      Share.share(
+                                        '${widget.post.authorFullname} \n\n${widget.post.text} \n\n${widget.post.medias.first.image} \n\n${widget.post.medias.first.file} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
+                                        subject: 'Look what I made!',
+                                      );
+                                    },
+                                    widget: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        AppIcons.share.svg(), // share,
+                                        const SizedBox(width: 12),
+                                        const Text(
+                                          "Share",
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                            color: white,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  LongButton(
+                                    onPress: () {},
+                                    color: white,
+                                    border: Border.all(color: mainBlue),
+                                    widget: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        AppIcons.edit.svg(),
+                                        const SizedBox(width: 12),
+                                        const Text(
+                                          "Edit",
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                            color: black,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  BlocBuilder<PostBloc, PostState>(
+                                    bloc: bloc,
+                                    builder: (context, state) {
+                                      return LongButton(
+                                        color: const Color(0xFFEB5757),
+                                        // loading: bloc.state.deleteStatus == PostStatus.inProgress,
+                                        onPress: () {
+                                          // bloc.add(DeletePostEvent(
+                                          //   id: widget.post.id ?? 0,
+                                          //   index: widget.baseIndex,
+                                          //   onSucces: () {
+                                          //     Navigator.pop(context);
+                                          //   },
+                                          // ));
+                                        },
+                                        widget: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            AppIcons.trash.svg(),
+                                            const SizedBox(width: 12),
+                                            const Text(
+                                              "Delete",
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: white,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  const SizedBox(height: 12),
+                                ],
+                              ),
+                            );
+                          } else {
+                            Share.share(
+                              '${widget.post.authorFullname} \n\n${widget.post.text} \n\n${widget.post.medias.first.image} \n\n${widget.post.medias.first.file} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
+                              subject: 'Look what I made!',
+                            );
+                          }
+                        },
+                        child: AppIcons.share.svg(color: black),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 12),

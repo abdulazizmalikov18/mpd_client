@@ -60,7 +60,7 @@ class DrProfileInfoLoading extends StatelessWidget {
             alignment: Alignment.center,
             height: 64.h,
             width: 64.h,
-            decoration: BoxDecoration(shape: BoxShape.circle, color: white),
+            decoration: const BoxDecoration(shape: BoxShape.circle, color: white),
           ),
           ScreenUtil().setVerticalSpacing(10.h),
           Container(

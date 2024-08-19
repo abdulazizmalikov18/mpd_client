@@ -10,6 +10,7 @@ import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/presentation/widgets/cached_image_widget.dart';
 import 'package:mpd_client/presentation/widgets/grandient_icon.dart';
 import 'package:mpd_client/presentation/widgets/widget_defaul_avatar.dart';
+import 'package:mpd_client/utils/extensions/string_ext.dart';
 
 class AppointmentItem extends StatelessWidget {
   final SpecialistInfoModel specialist;
@@ -47,7 +48,7 @@ class AppointmentItem extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(36),
-                  child: specialist.avatar != null ? CachedImageWidget(url: specialist.avatar!, size: 72) : const DefaultAvatar(containerSize: 72, imageSize: 60),
+                  child: specialist.avatar != null ? CachedImageWidget(url: specialist.avatar!, size: 40) : const DefaultAvatar(containerSize: 60, imageSize: 40),
                 ),
                 ScreenUtil().setHorizontalSpacing(16),
                 Expanded(
@@ -73,11 +74,10 @@ class AppointmentItem extends StatelessWidget {
                               decoration: BoxDecoration(borderRadius: BorderRadius.circular(100.r), color: appoinmentInfo.color!.withOpacity(0.1)),
                               child: Row(
                                 children: [
-                                  SvgPicture.asset(
-                                    appoinmentInfo.statusIcon!,
-                                    colorFilter: ColorFilter.mode(appoinmentInfo.color!, BlendMode.srcIn),
+                                  appoinmentInfo.statusIcon!.svg(
                                     height: 12.h,
                                     width: 12.h,
+                                    color: appoinmentInfo.color!,
                                   ),
                                   ScreenUtil().setHorizontalSpacing(2.w),
                                   Text(
@@ -92,7 +92,7 @@ class AppointmentItem extends StatelessWidget {
                             ),
                         ],
                       ),
-                      ScreenUtil().setVerticalSpacing(2.h),
+                      const SizedBox(height: 4),
                       Container(
                         constraints: BoxConstraints(maxWidth: 140.w),
                         child: Text(
@@ -102,7 +102,7 @@ class AppointmentItem extends StatelessWidget {
                           maxLines: 1,
                         ),
                       ),
-                      ScreenUtil().setVerticalSpacing(3.h),
+                      const SizedBox(height: 4),
                       if (appoinmentInfo.drCardInfo != DrCardInfo.following)
                         ConstrainedBox(
                           constraints: const BoxConstraints(maxWidth: 220),
@@ -123,24 +123,25 @@ class AppointmentItem extends StatelessWidget {
                             ),
                           ],
                         ),
-                      ScreenUtil().setVerticalSpacing(12.h),
+                      const SizedBox(height: 12),
                     ],
                   ),
                 ),
               ],
             ),
           ),
-          ScreenUtil().setVerticalSpacing(16.h),
+          const SizedBox(height: 16),
           Divider(
             height: 1.h,
             color: dividerColor,
           ),
-          ScreenUtil().setVerticalSpacing(12.h),
+                       const SizedBox(height: 12),
+
           Padding(
-            padding: EdgeInsets.only(left: 16.w, right: 16.w),
+            padding: const EdgeInsets.only(left: 16, right: 16),
             child: bottomInfo,
           ),
-          ScreenUtil().setVerticalSpacing(16.h),
+          const SizedBox(height: 16),
         ],
       ),
     );

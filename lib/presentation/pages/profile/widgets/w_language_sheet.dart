@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/infrastructure/core/scope.dart';
-import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
 import 'package:mpd_client/presentation/pages/initial/widgets/language_button.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
@@ -53,7 +52,11 @@ class LanguageSheet extends StatelessWidget {
                   context,
                   AppScope(locale: locales[index]),
                 );
-                Future.delayed(const Duration(milliseconds: 300)).then((value) => Navigator.of(context).pop());
+                Future.delayed(const Duration(milliseconds: 300)).then((value) {
+                  if(context.mounted) {
+                     Navigator.of(context).pop();
+                  }
+                });
               },
             ),
           ),

@@ -81,10 +81,6 @@ class _MainViewState extends State<MainView> {
             ),
           ),
         ),
-        // child: WBottomNavigationBar(
-        //   onTap: (index) => _onTap(context, index),
-        //   currentIndex: widget.navigationShell.currentIndex,
-        // ),
       ),
     );
   }

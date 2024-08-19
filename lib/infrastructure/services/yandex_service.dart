@@ -185,22 +185,27 @@ class YandexService extends IYandexService {
 
   PlacemarkMapObject getSinglePlacemark(Point point, String specialistId, {required BuildContext context, required List<MapSpecialist> specialists}) {
     final singlePlaceMark = PlacemarkMapObject(
-        mapId: MapObjectId(specialistId),
-        point: point,
-        onTap: (mapObject, point) {
-          context.read<YandexDoctorBloc>().add(PressedMapObjectEvent(mapObject.point, specialists: specialists));
-        },
-        icon: PlacemarkIcon.single(PlacemarkIconStyle(image: BitmapDescriptor.fromAssetImage(AppImages.placeMark), scale: 0.7)));
+      mapId: MapObjectId(specialistId),
+      point: point,
+      onTap: (mapObject, point) {
+        context.read<YandexDoctorBloc>().add(PressedMapObjectEvent(mapObject.point, specialists: specialists));
+      },
+      icon: PlacemarkIcon.single(PlacemarkIconStyle(image: BitmapDescriptor.fromAssetImage(AppImages.placeMark), scale: 0.7)),
+    );
     return singlePlaceMark;
   }
 
   Future<PlacemarkMapObject> getMyImagePlaceMark({required Point point, Uint8List? imageBytes}) async {
     if (imageBytes == null) {
       final placemark = PlacemarkMapObject(
-          mapId: userLocation,
-          point: point,
-          icon: PlacemarkIcon.single(
-              PlacemarkIconStyle(image: BitmapDescriptor.fromAssetImage(AppIcons.mapProfileDefault))));
+        mapId: userLocation,
+        point: point,
+        // icon: PlacemarkIcon.single(
+        //   PlacemarkIconStyle(
+        //     image: BitmapDescriptor.fromAssetImage(AppIcons.mapProfileDefault),
+        //   ),
+        // ),
+      );
 
       return placemark;
     }
@@ -209,11 +214,7 @@ class YandexService extends IYandexService {
     //   _userImageBytes = imageBytes;
     //   resizedImage = await ImageCropper().resizeAndCircleFromMemory(_userImageBytes!, 120);
     // }
-    final placemark = PlacemarkMapObject(
-        mapId: userLocation,
-        point: point,
-        opacity: 0.7,
-        icon: PlacemarkIcon.single(PlacemarkIconStyle(image: BitmapDescriptor.fromBytes(resizedImage!))));
+    final placemark = PlacemarkMapObject(mapId: userLocation, point: point, opacity: 0.7, icon: PlacemarkIcon.single(PlacemarkIconStyle(image: BitmapDescriptor.fromBytes(resizedImage!))));
 
     return placemark;
   }

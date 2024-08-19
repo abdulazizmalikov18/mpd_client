@@ -2,14 +2,11 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mpd_client/domain/models/chat/chat_group.dart';
 import 'package:mpd_client/domain/models/chat/chat_user_state.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
-
 import 'package:mpd_client/domain/models/chat/message.dart';
 import 'package:mpd_client/infrastructure/services/log_service.dart';
 import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
@@ -54,9 +51,7 @@ class ChatVMController {
       await channel!.ready;
       channel!.stream.asBroadcastStream();
     } catch (e, s) {
-      Log.e("ChatSocket Error ------------------------");
-      print(e);
-      print(s);
+      Log.e("ChatSocket Error ------------------------ $e  Stack: $s");
       onError(e.toString());
     }
   }

@@ -79,20 +79,24 @@ class _AppointmentPageState extends State<AppointmentPage> with AutomaticKeepAli
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
-                        style: Styles.descSubtitle.copyWith(
-                          color: black,
-                        ),
+                        style:AppTheme.headlineSmall.copyWith(
+                        color: black,
+                      ),
                       ),
                     ),
                     Tab(
                         child: Text(
                       context.l10n.appointment_complited,
-                      style: Styles.descSubtitle.copyWith(color: black),
+                      style:AppTheme.headlineSmall.copyWith(
+                        color: black,
+                      ),
                     )),
                     Tab(
                         child: Text(
                       context.l10n.appointment_canceled,
-                      style: Styles.descSubtitle.copyWith(color: black),
+                      style: AppTheme.headlineSmall.copyWith(
+                        color: black,
+                      ),
                     ))
                   ],
                 ),

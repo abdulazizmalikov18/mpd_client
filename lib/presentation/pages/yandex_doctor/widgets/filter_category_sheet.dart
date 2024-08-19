@@ -73,7 +73,7 @@ class _FilterCategorySheetState extends State<FilterCategorySheet> {
                                   },
                                 ),
                               ),
-                              ScreenUtil().setVerticalSpacing(10.h),
+                              const SizedBox(height: 24),
                             ],
                           ),
                         ),

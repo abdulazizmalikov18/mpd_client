@@ -1,44 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mpd_client/domain/entity/lenta/media_entity.dart';
-import 'package:mpd_client/domain/models/lenta/media_model.dart';
 import 'package:mpd_client/utils/appointment_tools.dart';
 import 'package:mpd_client/utils/extensions/context_extension.dart';
 import 'package:mpd_client/utils/extensions/string_ext.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 class Utils {
   static String imageMedieaType(MediaEntity? media) {
-    const defaultImage =
-        "https://avatars.mds.yandex.net/i?id=69aba87029e7a462032b445ab234e3db_l-9095341-images-thumbs&n=13";
+    const defaultImage = "https://avatars.mds.yandex.net/i?id=69aba87029e7a462032b445ab234e3db_l-9095341-images-thumbs&n=13";
     if (media != null) {
       if (media.type == 'video') {
-        return media.screenshot ?? defaultImage;
+        return media.screenshot.isEmpty ? defaultImage : media.screenshot;
       } else {
-        return media.image ?? defaultImage;
+        return media.image.isEmpty ? defaultImage : media.image;
       }
     } else {
       return defaultImage;
     }
   }
-    static String imageMediea(List<MediaEntity>? media) {
-    const defaultImage =
-        "https://avatars.mds.yandex.net/i?id=69aba87029e7a462032b445ab234e3db_l-9095341-images-thumbs&n=13";
+
+  static String imageMediea(List<MediaEntity>? media) {
+    const defaultImage = "https://avatars.mds.yandex.net/i?id=69aba87029e7a462032b445ab234e3db_l-9095341-images-thumbs&n=13";
     if (media != null) {
       if (media.isEmpty) {
         return defaultImage;
       } else {
         if (media.first.type == 'video') {
-          return media.first.screenshot ?? defaultImage;
+          return media.first.screenshot.isEmpty ? defaultImage : media.first.screenshot ;
         } else {
-          return media.first.image ?? defaultImage;
+          return media.first.image.isEmpty ? defaultImage : media.first.image;
         }
       }
     } else {
       return defaultImage;
     }
   }
+
   static String commentDateFormat(DateTime date, BuildContext context) {
     String locale = Localizations.localeOf(context).languageCode;
     final formattedDate = DateFormat('d MMM yyyy', locale).format(date);
@@ -129,15 +127,7 @@ class Utils {
   }
 
   static String weekDayFormatObrevation(String dayObrevation) {
-    final fullWeekDayString = <String>[
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday'
-  ].where((element) => element.toLowerCase().startsWith(dayObrevation)).first;
+    final fullWeekDayString = <String>['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].where((element) => element.toLowerCase().startsWith(dayObrevation)).first;
     return fullWeekDayString;
   }
 
@@ -174,8 +164,7 @@ class Utils {
 
   /// Returns an [Enum] from [String]
   static T enumFromString<T>(Iterable<T> values, String? value) {
-    return values
-        .firstWhere((type) => type.toString().split('.').last == value);
+    return values.firstWhere((type) => type.toString().split('.').last == value);
   }
 
   static String? nullOrValue(dynamic nullable, String value) {
@@ -305,23 +294,16 @@ class Utils {
         return 'd';
     }
   }
-
-
 }
-
-
 
 enum Status { initial, loading, success, failure }
 
 class Ticker {
   const Ticker();
   Stream<int> tick({required int ticks}) {
-    return Stream.periodic(const Duration(seconds: 1), (x) => ticks - x - 1)
-        .take(ticks);
+    return Stream.periodic(const Duration(seconds: 1), (x) => ticks - x - 1).take(ticks);
   }
 }
-
-
 
 class Caller {
   static Future<void> makePhoneCall(String phoneNumber) async {

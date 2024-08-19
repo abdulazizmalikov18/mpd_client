@@ -33,7 +33,7 @@ class RecordReview extends StatelessWidget {
         children: [
           Text(
             title,
-            style: Styles.boldTopHint.copyWith(fontSize: 16.sp, color: black),
+            style: Styles.boldTopHint.copyWith(fontSize: 16, color: black),
           ),
           ScreenUtil().setVerticalSpacing(4.h),
           if (subtitle.isNotEmpty && subtitle[0] == '{')
@@ -51,7 +51,7 @@ class RecordReview extends StatelessWidget {
               subtitle,
               style: Styles.descSubtitle.copyWith(
                 color: grey,
-                fontSize: 14.sp,
+                fontSize: 14,
               ),
             )
         ],

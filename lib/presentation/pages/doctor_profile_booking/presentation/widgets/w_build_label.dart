@@ -18,7 +18,7 @@ class BuildLabel extends StatelessWidget {
           padding: EdgeInsets.only(left: 16.w),
           child: Text(
             label,
-            style: Styles.boldTopHint.copyWith(fontSize: 18.sp, color: black),
+            style: Styles.boldTopHint.copyWith(fontSize: 18, color: black),
           ),
         ),
       ],

@@ -76,7 +76,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     // emit(state.copyWith(messages: [message, ...state.messages]));
     ChatVMController().messageController.clear();
 
-    final result = await _repo.sendMessage(SendMessageEntity(text: event.text, slugName: event.groupSlug, file: event.file));
+    await _repo.sendMessage(SendMessageEntity(text: event.text, slugName: event.groupSlug, file: event.file));
   }
 
   void _onReadAllMessage(ChatReadAllMessage event, Emitter emit) async {

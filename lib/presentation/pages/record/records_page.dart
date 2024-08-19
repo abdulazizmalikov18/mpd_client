@@ -22,7 +22,7 @@ class RecordsPage extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             child: SearchFieldWidget(
               controller: context.read<RecordsBloc>().searchController,
               searchHint: context.l10n.records_seach,

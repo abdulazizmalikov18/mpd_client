@@ -107,9 +107,9 @@ class WProfileHeader extends StatelessWidget {
         ),
         Positioned(
           right: 32,
-          top: (MediaQuery.sizeOf(context).height * 0.2) - 32,
+          top: (MediaQuery.sizeOf(context).height * 0.25) - 32,
           child: GestureDetector(
-            onTap: () {
+            onTap: () { 
               final qrCode = context.read<AccountsBloc>().state.userContainer.user.qrcode;
               showModalBottomSheet(
                 backgroundColor: Colors.transparent,

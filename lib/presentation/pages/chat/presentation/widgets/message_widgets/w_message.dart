@@ -34,8 +34,8 @@ class _WMessageState extends State<WMessage> {
               ),
               margin: const EdgeInsets.only(bottom: 12),
               decoration: BoxDecoration(
-                gradient: isMe ? wgradient : null,
-                color: isMe ? null : white,
+                // gradient: isMe ? wgradient : null,
+                color: isMe ? mainBlue : white,
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(20),
                   topRight: const Radius.circular(20),

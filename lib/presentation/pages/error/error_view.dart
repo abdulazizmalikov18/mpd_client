@@ -42,11 +42,13 @@ class _ErrorDrawViewState extends State<ErrorDrawView> {
         onTap: () async {
           final picture = await _imageController.exportImage();
           if (picture == null) {
-            print("Image Null");
             return;
           }
           sendPhotoToTelegram(picture).whenComplete(() {
+            if(context.mounted) {
+
             context.pop();
+            }
           });
         },
         text: "Send",

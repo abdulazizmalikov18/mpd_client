@@ -33,7 +33,7 @@ class ServicesCheckBoxTile extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 6.h),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.r),
-        boxShadow: [BoxShadow(blurRadius: 15, color: cardShadow)],
+        boxShadow: const [BoxShadow(blurRadius: 15, color: cardShadow)],
       ),
       child: Material(
         borderRadius: BorderRadius.circular(12.r),
@@ -99,7 +99,7 @@ class ServicesCheckBoxTile extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       icon: SvgPicture.asset(
                         AppIcons.minus,
-                        colorFilter: ColorFilter.mode(mainBlue, BlendMode.srcIn),
+                        colorFilter: const ColorFilter.mode(mainBlue, BlendMode.srcIn),
                       ),
                     ),
                     ScreenUtil().setHorizontalSpacing(8.w),
@@ -115,7 +115,7 @@ class ServicesCheckBoxTile extends StatelessWidget {
                       onPressed: onPlus,
                       icon: SvgPicture.asset(
                         AppIcons.plus,
-                        colorFilter: ColorFilter.mode(mainBlue, BlendMode.srcIn),
+                        colorFilter: const ColorFilter.mode(mainBlue, BlendMode.srcIn),
                       ),
                     ),
                   ],

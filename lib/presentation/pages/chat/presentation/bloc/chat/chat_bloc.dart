@@ -408,21 +408,17 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     );
     final result = await _repo.getGroups(const GetGroupChatEntity());
     if (result.isRight) {
-      print("right");
-      print(result.right);
       emit(
         state.copyWith(
           textForUpdate: const Uuid().v4(),
           groupContainer: state.groupContainer.copyWith(
             status: FormzSubmissionStatus.success,
-            groups: [...?result.right.results],
+            groups: [...result.right.results],
           ),
         ),
       );
       return;
     }
-    print("left");
-    print(result.left);
     emit(
       state.copyWith(
         groupContainer: state.groupContainer.copyWith(
@@ -476,7 +472,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         ),
       );
     }
-    print(StorageRepository.getString(StorageKeys.USERNAME));
   }
 
   // Group ---------------------------------------------------------------------

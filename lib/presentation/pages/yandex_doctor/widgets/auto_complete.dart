@@ -46,6 +46,7 @@ class AutoComplete extends StatelessWidget {
         itemBuilder: (_, index) {
           final specialist = state.searchedSpecialists[index];
           return ListTile(
+            tileColor: white,
             onTap: () {
               FocusScope.of(context).unfocus();
               context.read<SearchBySpecialistBloc>().add(CloseSuggessionsEvent());

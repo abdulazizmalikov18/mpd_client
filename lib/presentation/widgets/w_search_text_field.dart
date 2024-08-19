@@ -32,8 +32,9 @@ class SearchFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 48,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.r),
+        borderRadius: BorderRadius.circular(12),
         color: hasFocus ? blueBackground : background,
       ),
       child: TextField(
@@ -74,7 +75,7 @@ class SearchFieldWidget extends StatelessWidget {
                 ),
           enabledBorder: InputBorder.none,
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(12),
             borderSide: const BorderSide(color: grey),
           ),
           alignLabelWithHint: false,

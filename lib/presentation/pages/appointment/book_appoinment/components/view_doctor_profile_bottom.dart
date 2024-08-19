@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mpd_client/domain/models/appointment/appoinment_model.dart';
 import 'package:mpd_client/domain/models/appointment/specialist_info_model.dart';
@@ -9,6 +8,7 @@ import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/utils/extensions/context_extension.dart';
+import 'package:mpd_client/utils/extensions/string_ext.dart';
 
 class ViewDoctorProfileBottom extends StatelessWidget {
   const ViewDoctorProfileBottom({
@@ -36,21 +36,20 @@ class ViewDoctorProfileBottom extends StatelessWidget {
          
         },
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.r)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Text(
               context.l10n.appointment_view_doctor_profile,
-              style: Styles.headline7.copyWith(color: mainBlue, fontSize: 14.sp),
+              style: Styles.headline7.copyWith(color: mainBlue, fontSize: 14),
             ),
-            SvgPicture.asset(
-              AppIcons.forward,
-              colorFilter: const ColorFilter.mode(mainBlue, BlendMode.srcIn),
-              height: 18.h,
-              width: 18.h,
-            )
+            AppIcons.forward.svg(
+              height: 18,
+              width: 18,
+              color:  mainBlue,
+            ),
           ],
         ),
       ),

@@ -79,7 +79,7 @@ class _UserPostsViewState extends State<UserPostsView> {
                 trailing: IconButton(
                   onPressed: () async {
                     Share.share(
-                      '${widget.postsUser[index].authorFullname} \n\n${widget.postsUser[index].text} \n\n${widget.postsUser[index].medias?.first.image ?? ""} \n\n${widget.postsUser[index].medias?.first.file ?? ""} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
+                      '${widget.postsUser[index].authorFullname} \n\n${widget.postsUser[index].text} \n\n${widget.postsUser[index].medias.first.image} \n\n${widget.postsUser[index].medias.first.file} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
                       subject: 'Look what I made!',
                     );
                   },
@@ -119,12 +119,12 @@ class _UserPostsViewState extends State<UserPostsView> {
                 ),
               ],
             ),
-            if (widget.postsUser[index].text == null || widget.postsUser[index].text!.isEmpty) ScreenUtil().setVerticalSpacing(10.h),
-            if (widget.postsUser[index].text != null && widget.postsUser[index].text!.isNotEmpty)
+            if (widget.postsUser[index].text.isEmpty) ScreenUtil().setVerticalSpacing(10.h),
+            if (widget.postsUser[index].text.isNotEmpty)
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
                 child: ReadMoreText(
-                  widget.postsUser[index].text!,
+                  widget.postsUser[index].text,
                   style: Styles.postTitle.copyWith(
                     fontFeatures: [],
                     color: black,

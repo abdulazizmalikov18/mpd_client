@@ -66,14 +66,6 @@ class ServicePinnedSheet extends StatelessWidget {
                             "product": state.localProducts,
                           },
                         );
-                        // FIXME: NavigateTo
-                        // Navigator.of(context).pushNamed(
-                        //   AppRoutes.appointmentdt,
-                        //   arguments: {
-                        //     "id": specialistId,
-                        //     "product": state.localProducts,
-                        //   },
-                        // );
                       },
                     ),
                   ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 
 
@@ -18,9 +17,9 @@ class DrProfileDocument extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onPressed,
-      horizontalTitleGap: 10.w,
-      contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
-      leading: Image.asset(iconName, height: 48.h, width: 48.h),
+      horizontalTitleGap: 10,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+      leading: Image.asset(iconName, height: 48, width: 48),
       title: Text(title, style: Styles.boldHeadline6),
     );
   }

@@ -6,6 +6,7 @@ import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/utils/extensions/context_extension.dart';
+import 'package:mpd_client/utils/extensions/string_ext.dart';
 import 'package:mpd_client/utils/utils.dart';
 
 class AppointmentBottomInfo extends StatelessWidget {
@@ -23,16 +24,15 @@ class AppointmentBottomInfo extends StatelessWidget {
           flex: 16,
           child: isPending
               ? Container(
-                  height: 34.h,
-                  padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
-                  decoration: BoxDecoration(color: mainBlue.withOpacity(0.1), borderRadius: BorderRadius.circular(10.r)),
+                  height: 40,
+                  padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                  decoration: BoxDecoration(color: mainBlue.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
                   child: Row(
                     children: [
-                      SvgPicture.asset(
-                        AppIcons.clockTransparent,
+                      AppIcons.clockTransparent.svg(
                         height: 18,
                         width: 18,
-                        colorFilter: const ColorFilter.mode(mainBlue, BlendMode.srcIn),
+                        color: mainBlue,
                       ),
                       const SizedBox(width: 4),
                       Flexible(
@@ -57,25 +57,18 @@ class AppointmentBottomInfo extends StatelessWidget {
                   ),
                 ),
         ),
-        const Spacer(),
+        const Spacer(flex: 4,),
         IconGradientButton(
-          height: 34,
-          width: 34,
+          height: 40,
+          width: 40,
           icon: AppIcons.unfilledLocation,
           onPressed: onLocationPressed,
         ),
         const Spacer(),
         Container(
-          height: 34.h,
+          height: 40,
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                gradientBlueOpacity,
-                gradientBlue,
-              ],
-            ),
+            color: mainBlue,
             borderRadius: BorderRadius.circular(8),
           ),
           child: ElevatedButton(
@@ -84,7 +77,7 @@ class AppointmentBottomInfo extends StatelessWidget {
               backgroundColor: Colors.transparent,
               shadowColor: Colors.transparent,
               elevation: 0,
-              padding: EdgeInsets.symmetric(horizontal: 25.w),
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
             ),
             child: Text(

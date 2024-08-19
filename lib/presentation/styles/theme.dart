@@ -148,98 +148,98 @@ class Styles {
   static const String gilroyRegular = 'Gilroy Regular';
   static const String gilroyMedium = 'Gilroy Medium';
 
-  static TextStyle postTitle = TextStyle(
-    fontSize: 14.sp,
+  static TextStyle postTitle = const TextStyle(
+    fontSize: 14,
     fontWeight: FontWeight.w400,
     fontFamily: gilroyMedium,
   );
-  static TextStyle postSubtitle = TextStyle(
-    fontSize: 12.sp,
+  static TextStyle postSubtitle = const TextStyle(
+    fontSize: 12,
     fontWeight: FontWeight.w300,
     fontFamily: gilroyMedium,
   );
-  static TextStyle expTitle = TextStyle(
-    fontSize: 18.sp,
+  static TextStyle expTitle = const TextStyle(
+    fontSize: 18,
     fontWeight: FontWeight.w500,
     fontFamily: gilroyMedium,
     height: 1.3,
   );
 
-  static TextStyle boldTitle = TextStyle(
-    fontSize: 28.sp,
+  static TextStyle boldTitle = const TextStyle(
+    fontSize: 28,
     fontWeight: FontWeight.w700,
     height: 1.4,
     fontFamily: gilroyMedium,
   );
 
-  static TextStyle boldHeadline6 = TextStyle(
+  static TextStyle boldHeadline6 = const TextStyle(
     fontFamily: gilroyMedium,
     fontWeight: FontWeight.w400,
-    fontSize: 16.sp,
+    fontSize: 16,
   );
 
-  static TextStyle descSubtitle = TextStyle(
-    fontSize: 16.sp,
+  static TextStyle descSubtitle = const TextStyle(
+    fontSize: 16,
     fontWeight: FontWeight.w400,
     fontFamily: gilroyMedium,
     height: 1.3,
   );
-  static TextStyle boldTopHint = TextStyle(
+  static TextStyle boldTopHint = const TextStyle(
     fontFamily: gilroyMedium,
     fontWeight: FontWeight.w500,
-    fontSize: 15.sp,
+    fontSize: 15,
   );
 
-  static TextStyle headline7 = TextStyle(
-    fontSize: 15.sp,
+  static TextStyle headline7 = const TextStyle(
+    fontSize: 15,
     fontWeight: FontWeight.w400,
     fontFamily: gilroyMedium,
   );
 
-  static TextStyle headline7Bold = TextStyle(
-    fontSize: 15.sp,
+  static TextStyle headline7Bold = const TextStyle(
+    fontSize: 15,
     fontWeight: FontWeight.w500,
     fontFamily: gilroyMedium,
   );
 
-  static TextStyle title = TextStyle(
-    fontSize: 23.sp,
+  static TextStyle title = const TextStyle(
+    fontSize: 23,
     fontWeight: FontWeight.w700,
     fontFamily: gilroyMedium,
   );
 
-  static TextStyle headline6 = TextStyle(
-    fontSize: 17.sp,
+  static TextStyle headline6 = const TextStyle(
+    fontSize: 17,
     fontWeight: FontWeight.w400,
     fontFamily: gilroyMedium,
   );
 
-  static TextStyle headline5 = TextStyle(
-    fontSize: 18.sp,
+  static TextStyle headline5 = const TextStyle(
+    fontSize: 18,
     fontWeight: FontWeight.w500,
     fontFamily: gilroyMedium,
   );
 
-  static TextStyle headline8 = TextStyle(
-    fontSize: 10.sp,
+  static TextStyle headline8 = const TextStyle(
+    fontSize: 10,
     fontWeight: FontWeight.w300,
     fontFamily: gilroyMedium,
   );
 
-  static TextStyle semiboldTitle = TextStyle(
-    fontSize: 16.sp,
+  static TextStyle semiboldTitle = const TextStyle(
+    fontSize: 16,
     fontWeight: FontWeight.w600,
     fontFamily: gilroyMedium,
   );
 
-  static TextStyle emptyboldTitle = TextStyle(
-    fontSize: 22.sp,
+  static TextStyle emptyboldTitle = const TextStyle(
+    fontSize: 22,
     fontWeight: FontWeight.w600,
     fontFamily: gilroyMedium,
   );
 
-  static TextStyle headline4 = TextStyle(
-    fontSize: 20.sp,
+  static TextStyle headline4 = const TextStyle(
+    fontSize: 20,
     fontWeight: FontWeight.w500,
     fontFamily: gilroyMedium,
     // color: context.color.black,

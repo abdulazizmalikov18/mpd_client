@@ -62,7 +62,7 @@ class DoctorInfoItem extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Text(
             doctor.bio != null ? doctor.bio.toString() : "Malumot yoq",
-            style: Styles.descSubtitle.copyWith(fontSize: 14.sp, color: grey),
+            style: Styles.descSubtitle.copyWith(fontSize: 14, color: grey),
           ),
         ),
         ScreenUtil().setVerticalSpacing(20.h),
@@ -82,7 +82,7 @@ class DoctorInfoItem extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Text(
             doctor.job.description.isNotEmpty ? doctor.job.description : "Malumot yoq",
-            style: Styles.descSubtitle.copyWith(fontSize: 14.sp, color: grey),
+            style: Styles.descSubtitle.copyWith(fontSize: 14, color: grey),
           ),
         ),
 
@@ -123,7 +123,7 @@ class DoctorInfoItem extends StatelessWidget {
                         Center(
                           child: Text(
                             context.l10n.book_doctor_reviews,
-                            style: Styles.boldTitle.copyWith(color: black, fontSize: 24.sp, fontFamily: Styles.gilroyMedium),
+                            style: Styles.boldTitle.copyWith(color: black, fontSize: 24, fontFamily: Styles.gilroyMedium),
                           ),
                         ),
                         ScreenUtil().setVerticalSpacing(28.h),

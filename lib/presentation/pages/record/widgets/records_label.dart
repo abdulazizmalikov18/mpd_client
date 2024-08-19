@@ -22,14 +22,14 @@ class RecordsLabelPart extends StatelessWidget {
         children: [
           if (isNew)
             Container(
-              height: 8.h,
-              width: 8.h,
+              height: 8,
+              width: 8,
               decoration: const BoxDecoration(shape: BoxShape.circle, color: gradientRedOpacity),
             ),
-          ScreenUtil().setHorizontalSpacing(8),
+          const SizedBox(height: 8),
           Text(
             dateTime,
-            style: Styles.boldTopHint.copyWith(fontSize: 18.sp),
+            style: Styles.boldTopHint.copyWith(fontSize: 18),
           ),
         ],
       ),

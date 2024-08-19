@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mpd_client/presentation/styles/app_icons.dart';
-import 'package:mpd_client/utils/extensions/string_ext.dart';
+import 'package:mpd_client/presentation/styles/colors.dart';
 
 class WAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget title;
+  final Color? backgroundColor;
+  final Color? backIconColor;
   final bool isShowNotification;
   final Widget? action;
   final bool back;
@@ -14,27 +15,16 @@ class WAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.isShowNotification = true,
     this.action,
     this.back = false,
+    this.backgroundColor, this.backIconColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: backgroundColor,
       leadingWidth: 40,
-
       titleSpacing: back ? 0 : null,
-      leading: back ?  Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const SizedBox(width: 8),
-          GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: AppIcons.back.svg(width: 24, height: 24),
-          ),
-        ],
-      ) : null,
+      leading: back ? BackButton(color: backIconColor ?? black) : null,
       title: title,
       actions: action == null
           ? null

@@ -23,13 +23,13 @@ class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: EdgeInsets.symmetric(vertical: 10.h),
+      minimum: const EdgeInsets.symmetric(vertical: 10),
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16.w),
-        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
+        margin: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
         decoration: BoxDecoration(
           color: white,
-          borderRadius: BorderRadius.circular(10.r),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,9 +54,9 @@ class _SearchFieldState extends State<SearchField> {
                 ),
               ),
             ),
-            ScreenUtil().setHorizontalSpacing(8.w),
+            ScreenUtil().setHorizontalSpacing(8),
             ClipRRect(
-              borderRadius: BorderRadius.circular(10.r),
+              borderRadius: BorderRadius.circular(10),
               child: Material(
                 color: background,
                 child: InkWell(
@@ -80,12 +80,12 @@ class _SearchFieldState extends State<SearchField> {
                     );
                   },
                   child: Container(
-                    height: 48.h,
-                    width: 48.h,
+                    height: 48,
+                    width: 48,
                     alignment: Alignment.center,
                     child: SvgPicture.asset(
                       AppIcons.filter,
-                      colorFilter: ColorFilter.mode(black, BlendMode.srcIn),
+                      colorFilter: const ColorFilter.mode(black, BlendMode.srcIn),
                     ),
                   ),
                 ),

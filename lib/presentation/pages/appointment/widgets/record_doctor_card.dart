@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mpd_client/domain/models/appointment/record_model.dart';
 import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/presentation/widgets/cached_image_widget.dart';
 import 'package:mpd_client/presentation/widgets/widget_defaul_avatar.dart';
+import 'package:mpd_client/utils/extensions/string_ext.dart';
 
 class RecordDoctorCard extends StatelessWidget {
   final VoidCallback onPress;
@@ -23,9 +23,9 @@ class RecordDoctorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(16.w, 0, 16.w, 12.h),
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.r),
+        borderRadius: BorderRadius.circular(12),
         color: white,
       ),
       child: Column(
@@ -33,12 +33,12 @@ class RecordDoctorCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: EdgeInsets.only(left: 16.w, top: 16.h, right: 16.w),
+            padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildDrImage(),
-                ScreenUtil().setHorizontalSpacing(16.w),
+                ScreenUtil().setHorizontalSpacing(16),
                 Expanded(
                   child: _buildDrInfo(context),
                 ),
@@ -46,13 +46,13 @@ class RecordDoctorCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Divider(
               height: 1.h,
               color: dividerColor,
             ),
           ),
-          Padding(padding: EdgeInsets.only(left: 16.w, right: 0), child: _buildViewDrProfile(context)),
+          Padding(padding: const EdgeInsets.only(left: 16, right: 0), child: _buildViewDrProfile(context)),
         ],
       ),
     );
@@ -65,21 +65,16 @@ class RecordDoctorCard extends StatelessWidget {
       children: [
         MaterialButton(
           onPressed: onPress,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.r)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
                 buttonName,
-                style: Styles.headline7.copyWith(color: mainBlue, fontSize: 14.sp),
+                style: Styles.headline7.copyWith(color: mainBlue, fontSize: 14),
               ),
-              SvgPicture.asset(
-                AppIcons.forward,
-                colorFilter: ColorFilter.mode(mainBlue, BlendMode.srcIn),
-                height: 18.h,
-                width: 18.h,
-              )
+              AppIcons.forward.svg(height: 18, width: 18, color: mainBlue),
             ],
           ),
         ),
@@ -121,8 +116,8 @@ class RecordDoctorCard extends StatelessWidget {
 //doctor image method
   ClipRRect _buildDrImage() {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(100.r),
-      child: record.writer?.avatar != null ? CachedImageWidget(size: 72, url: record.writer!.avatar!) : const DefaultAvatar(containerSize: 72, imageSize: 54),
+      borderRadius: BorderRadius.circular(100),
+      child: record.writer?.avatar != null ? CachedImageWidget(size: 40, url: record.writer!.avatar!) : const DefaultAvatar(containerSize: 40, imageSize: 30),
     );
   }
 }

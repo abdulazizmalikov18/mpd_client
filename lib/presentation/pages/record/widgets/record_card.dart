@@ -26,30 +26,26 @@ class RecordsCard extends StatelessWidget {
             children: [
               Container(
                 alignment: Alignment.center,
-                height: 64.h,
-                width: 56.w,
-                margin: EdgeInsets.symmetric(
-                  vertical: 16.h,
-                  horizontal: 16.w,
+                height: 64,
+                width: 56,
+                margin: const EdgeInsets.symmetric(
+                  vertical: 16,
+                  horizontal: 16,
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6.r),
-                  gradient: const LinearGradient(
-                    colors: [gradientBlueOpacity, gradientBlue],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
+                  color: mainBlue,
                 ),
                 child: RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(children: [
                       TextSpan(
                         text: '${record.date!.day}\n',
-                        style: Styles.boldTopHint.copyWith(fontSize: 16.sp),
+                        style: Styles.boldTopHint.copyWith(fontSize: 16),
                       ),
                       TextSpan(
                         text: Utils.shortMonthName(record.date!, context).toUpperCase(),
-                        style: Styles.boldTopHint.copyWith(fontSize: 16.sp),
+                        style: Styles.boldTopHint.copyWith(fontSize: 16),
                       )
                     ])),
               ),
@@ -59,18 +55,19 @@ class RecordsCard extends StatelessWidget {
                 children: [
                   Text(
                     record.product ?? "--",
-                    style: Styles.boldTopHint.copyWith(fontSize: 18.sp),
+                    style: Styles.boldTopHint.copyWith(fontSize: 18),
                   ),
-                  ScreenUtil().setVerticalSpacing(6.h),
+                                   const SizedBox(height: 4),
+
                   Text(
                     record.writer != null ? 'Written by ${record.writer!.name!}${record.writer!.lastname!}' : 'Written by Dr. Watamaniuk',
-                    style: Styles.descSubtitle.copyWith(color: mainBlue, fontSize: 14.sp),
+                    style: Styles.descSubtitle.copyWith(color: mainBlue, fontSize: 14),
                   ),
-                  ScreenUtil().setVerticalSpacing(6.h),
+                  const SizedBox(height: 4),
                   Text(
                     '${record.conclusionFile ?? ''} Prescription',
                     overflow: TextOverflow.ellipsis,
-                    style: Styles.cardReview.copyWith(color: grey, fontSize: 12.sp),
+                    style: Styles.cardReview.copyWith(color: grey, fontSize: 12),
                   )
                 ],
               ))

@@ -16,6 +16,7 @@ import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/app_images.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
+import 'package:mpd_client/presentation/widgets/w_app_bar.dart';
 import 'package:mpd_client/presentation/widgets/w_button.dart';
 import 'package:mpd_client/presentation/widgets/w_button_gradient.dart';
 import 'package:mpd_client/presentation/widgets/w_long_button.dart';
@@ -37,6 +38,15 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: WAppBar(
+        back: true,
+        backIconColor: white,
+        backgroundColor: Colors.transparent,
+        title: Text("", style: TextStyle(
+          color: white,
+        )),
+      ),
       body: SingleChildScrollView(
         child: Stack(
           children: [

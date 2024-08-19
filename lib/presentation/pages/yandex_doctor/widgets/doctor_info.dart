@@ -43,7 +43,7 @@ class DoctorInfo extends StatelessWidget {
                 },
                 icon: AppIcons.arrowLeft),
           ),
-          ScreenUtil().setVerticalSpacing(13.h),
+          const SizedBox(height: 12),
           MapDoctorCard(
             onPressed: () {
               context.pushNamed(AppRouteNames.drProfilebyid, extra: {
@@ -159,6 +159,7 @@ class MapDoctorCard extends StatelessWidget {
                 text: Text(
                   context.l10n.search_doctor_service_book_now,
                   style: AppTheme.headlineSmall.copyWith(
+                    color: white,
                     fontSize: 14,
                   ),
                 ),

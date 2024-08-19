@@ -24,7 +24,7 @@ class AppointmentPlaceDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(16.w, 0, 16.w, 12.h),
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.r),
         color: white,
@@ -32,7 +32,7 @@ class AppointmentPlaceDate extends StatelessWidget {
       child: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -43,7 +43,7 @@ class AppointmentPlaceDate extends StatelessWidget {
                     color: black,
                   ),
                 ),
-                ScreenUtil().setVerticalSpacing(12.h),
+                const SizedBox(height: 12),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -51,14 +51,14 @@ class AppointmentPlaceDate extends StatelessWidget {
                       iconName: AppIcons.dateCalendar,
                       size: 18,
                     ),
-                    ScreenUtil().setHorizontalSpacing(8.w),
+                    const SizedBox(width: 8),
                     Text(
                       date,
-                      style: Styles.boldHeadline6.copyWith(fontSize: 14.sp, color: grey),
+                      style: Styles.boldHeadline6.copyWith(fontSize: 14, color: grey),
                     ),
                   ],
                 ),
-                ScreenUtil().setVerticalSpacing(12.h),
+                const SizedBox(height: 12),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -66,14 +66,14 @@ class AppointmentPlaceDate extends StatelessWidget {
                       iconName: AppIcons.clock,
                       size: 18,
                     ),
-                    ScreenUtil().setHorizontalSpacing(8.w),
+                    const SizedBox(width: 8),
                     Text(
                       time,
-                      style: Styles.descSubtitle.copyWith(fontSize: 14.sp, color: grey),
+                      style: Styles.descSubtitle.copyWith(fontSize: 14, color: grey),
                     ),
                   ],
                 ),
-                ScreenUtil().setVerticalSpacing(12.h),
+                const SizedBox(height: 12),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -81,10 +81,10 @@ class AppointmentPlaceDate extends StatelessWidget {
                       iconName: AppIcons.location,
                       size: 18,
                     ),
-                    ScreenUtil().setHorizontalSpacing(8.w),
+                    const SizedBox(width: 8),
                     Text(
                       placeName,
-                      style: Styles.descSubtitle.copyWith(fontSize: 14.sp, color: grey),
+                      style: Styles.descSubtitle.copyWith(fontSize: 14, color: grey),
                     ),
                   ],
                 ),
@@ -95,11 +95,11 @@ class AppointmentPlaceDate extends StatelessWidget {
               bottom: 0,
               right: 0,
               child: MaterialButton(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.r)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
                 onPressed: onPress,
                 child: Text(
                   context.l10n.appointment_get_direction,
-                  style: Styles.descSubtitle.copyWith(color: mainBlue, fontSize: 14.sp),
+                  style: Styles.descSubtitle.copyWith(color: mainBlue, fontSize: 14),
                 ),
               ))
         ],
