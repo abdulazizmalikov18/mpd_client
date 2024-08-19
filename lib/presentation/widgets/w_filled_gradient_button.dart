@@ -14,19 +14,12 @@ class FilledGradientButton extends StatelessWidget {
     return Container(
       height: height.h,
       decoration: BoxDecoration(
-          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
-            isDisable ? grey : gradientBlueOpacity,
-            isDisable ? grey : gradientBlue,
-          ]),
-          borderRadius: BorderRadius.circular(8.r)),
+        color: mainBlue,
+        borderRadius: BorderRadius.circular(8),
+      ),
       child: ElevatedButton(
         onPressed: isDisable ? null : onPressed,
-        style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
-            elevation: 0,
-            padding: EdgeInsets.symmetric(horizontal: 25.w),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r))),
+        style: ElevatedButton.styleFrom(backgroundColor: Colors.transparent, shadowColor: Colors.transparent, elevation: 0, padding: EdgeInsets.symmetric(horizontal: 25.w), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r))),
         child: text,
       ),
     );

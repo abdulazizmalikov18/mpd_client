@@ -71,6 +71,7 @@ class _AppointmentPageState extends State<AppointmentPage> with AutomaticKeepAli
                     color: white,
                   ),
                   indicatorColor: Colors.transparent,
+                  indicatorSize: TabBarIndicatorSize.tab,
                   tabs: [
                     Tab(
                       child: Text(

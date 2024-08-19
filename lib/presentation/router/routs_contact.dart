@@ -57,6 +57,7 @@ sealed class AppRouteNames {
   static const service = 'service';
   static const appointmentdt = 'appointmentdt';
   static const appointmentReview = 'appointmentReview';
+  static const userFollowing = 'userFollowing';
 
 }
 
@@ -119,4 +120,5 @@ sealed class AppRoutePath {
   static const service = '/service';
   static const appointmentdt = '/appointmentdt';
   static const appointmentReview = '/appointmentReview';
+  static const userFollowing = '/userFollowing';
 }

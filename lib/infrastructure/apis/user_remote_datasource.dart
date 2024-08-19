@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:mpd_client/domain/models/appointment/record_model.dart';
 import 'package:mpd_client/domain/models/doctor_booking/user_subscription_model.dart';
 import 'package:mpd_client/infrastructure/services/error_handle.dart';
-import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
 
 abstract class IUserRemoteDataSource {
   Future<UserSubscriptionsModel> getUserSubscriptions({required int limit, required int offset, String? query});
@@ -22,7 +21,6 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
       request: (Dio client) {
         return client.get(
           "/SMMS/api/v1.0/public/subscriptions/",
-          options: Options(headers: {if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'}),
           queryParameters: {
             if (query == null) "limit": limit,
             if (query == null) "offset": offset,

@@ -2,6 +2,7 @@ part of '../edit_profile_view.dart';
 
 mixin EditProfileMixin on State<EditProfileView> {
   final ValueNotifier<String?> avatar = ValueNotifier(null);
+  final ValueNotifier<String?> backgroundImage =  ValueNotifier(null);
   late final ValueNotifier<UserModel> user = ValueNotifier(context.read<AccountsBloc>().state.userContainer.user);
   late final UserModel oldUser = context.read<AccountsBloc>().state.userContainer.user;
 
@@ -23,6 +24,7 @@ mixin EditProfileMixin on State<EditProfileView> {
             lang: user.value.lang != oldUser.lang ? user.value.lang : '',
             status: user.value.status != oldUser.status ? user.value.status : -10,
             isRelated: oldUser.isRelated,
+          
             login: user.value.login != oldUser.login ? user.value.login : '',
             region: user.value.region.id != oldUser.region.id ? user.value.region : const DataEntity(),
             mainCat: user.value.mainCat != oldUser.mainCat ? user.value.mainCat : const DataEntity(),
@@ -30,6 +32,7 @@ mixin EditProfileMixin on State<EditProfileView> {
             backgroundImage: user.value.backgroundImage != oldUser.backgroundImage ? user.value.backgroundImage : '',
           ),
           avatar: avatar.value,
+          backgroundImage: backgroundImage.value,
           onSuccess: () {
             print("succes");
             context.read<AccountsBloc>().add(GetAccountUserEvent(
@@ -56,48 +59,12 @@ mixin EditProfileMixin on State<EditProfileView> {
     if (result != null) {
       avatar.value = result.path;
     }
-    // showModalBottomSheet(
-    //   backgroundColor: white,
-    //   elevation: 0,
-    //   context: context,
-    //   builder: (context) {
-    //     return WBottomSheet(
-    //       title: 'Avatar yuk-lash',
-    //       child: Column(
-    //         children: [
-    //           const SizedBox(height: 24),
-    //           WShadowedItemContainer(
-    //             title: 'Сфотографировать',
-    //             icon: '', //AppIcons.camera,
-    //             onTap: () async {
-    //               final result = await ImagePicker().pickImage(source: ImageSource.camera);
-    //               if (result != null) {
-    //                 avatar.value = result.path;
-    //                 if (context.mounted) {
-    //                   context.pop();
-    //                 }
-    //               }
-    //             },
-    //           ),
-    //           const SizedBox(height: 16),
-    //           WShadowedItemContainer(
-    //             title: 'Из галареии',
-    //             icon: '',//AppIcons.folderAdd,
-    //             onTap: () async {
-    //               final result = await ImagePicker().pickImage(source: ImageSource.gallery);
-    //               if (result != null) {
-    //                 avatar.value = result.path;
-    //                 if (context.mounted) {
-    //                   context.pop();
-    //                 }
-    //               }
-    //             },
-    //           ),
-    //         ],
-    //       ),
-    //     );
-    //   },
-    // );
+  }
+  void pickImageBackgroudnBottomSheet() async {
+    final result = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (result != null) {
+      backgroundImage.value = result.path;
+    }
   }
 
   void onPressedSelectSpecialist() {

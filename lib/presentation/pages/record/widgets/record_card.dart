@@ -69,6 +69,7 @@ class RecordsCard extends StatelessWidget {
                   ScreenUtil().setVerticalSpacing(6.h),
                   Text(
                     '${record.conclusionFile ?? ''} Prescription',
+                    overflow: TextOverflow.ellipsis,
                     style: Styles.cardReview.copyWith(color: grey, fontSize: 12.sp),
                   )
                 ],

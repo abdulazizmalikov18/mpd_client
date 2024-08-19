@@ -37,3 +37,8 @@ class PostCreateEvent extends PostEvent {
     required this.param,
   });
 }
+
+class GetUserPostsEvent extends PostEvent {
+  final String username;
+  const GetUserPostsEvent(this.username);
+}

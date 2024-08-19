@@ -20,42 +20,48 @@ class WProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        WNetworkImage(
-          image: "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
-          width: double.maxFinite,
-          height: MediaQuery.sizeOf(context).height * 0.2,
-          borderRadius: 0,
-          defaultWidget: Container(
-            width: double.infinity,
-            height: MediaQuery.sizeOf(context).height * 0.2,
-            color: black,
+        Hero(
+          tag: 'profile_background',
+          child: WNetworkImage(
+            image: "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
+            width: double.maxFinite,
+            height: MediaQuery.sizeOf(context).height * 0.25,
+            borderRadius: 0,
+            defaultWidget: Container(
+              width: double.infinity,
+              height: MediaQuery.sizeOf(context).height * 0.25,
+              color: black,
+            ),
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(top: (MediaQuery.sizeOf(context).height * 0.2) - 48),
+          padding: EdgeInsets.only(top: (MediaQuery.sizeOf(context).height * 0.25) - 48),
           child: BlocBuilder<AccountsBloc, AccountsState>(
             builder: (context, state) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: white,
-                        width: 3,
+                  Hero(
+                    tag: 'profile_image',
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: white,
+                          width: 3,
+                        ),
+                        shape: BoxShape.circle,
                       ),
-                      shape: BoxShape.circle,
-                    ),
-                    child: WNetworkImage(
-                      image: state.userContainer.user.avatar,
-                      height: 96,
-                      width: 96,
-                      borderRadius: 100,
-                      defaultWidget: Image.asset(
-                        AppImages.doctor,
-                        width: 96,
+                      child: WNetworkImage(
+                        image: state.userContainer.user.avatar,
                         height: 96,
-                        fit: BoxFit.cover,
+                        width: 96,
+                        borderRadius: 100,
+                        defaultWidget: Image.asset(
+                          AppImages.doctor,
+                          width: 96,
+                          height: 96,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),

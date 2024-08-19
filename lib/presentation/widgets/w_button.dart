@@ -62,25 +62,12 @@ class WButton extends StatelessWidget {
         margin: margin,
         padding: padding ?? EdgeInsets.zero,
         alignment: Alignment.center,
-        foregroundDecoration: color == null
-            ? BoxDecoration(
-                borderRadius: BorderRadius.circular(isPhone ? borderRadius : 16),
-                border: Border.all(
-                  color: white.withOpacity(0.1),
-                  width: 2,
-                  strokeAlign: -2,
-                ),
-              )
-            : null,
         decoration: BoxDecoration(
           color: isDisabled ? gray : color ?? mainBlue,
           borderRadius: BorderRadius.circular(isPhone ? borderRadius : 16),
           border: isDisabled
               ? border ?? Border.all(color: white.withOpacity(0.3))
-              : border ??
-                  Border.all(
-                    color: white.withOpacity(0.3),
-                  ),
+              : border ,
 
         ),
         child: isLoading

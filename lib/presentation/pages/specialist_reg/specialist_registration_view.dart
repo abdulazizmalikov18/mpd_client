@@ -142,7 +142,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                                   name,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w600,
                                     color: black,
@@ -158,7 +158,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                                   }
                                   setState(() {});
                                 },
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.delete_outline,
                                   color: red,
                                 ),

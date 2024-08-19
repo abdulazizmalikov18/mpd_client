@@ -10,7 +10,7 @@ class WNetworkImage extends StatelessWidget {
   final Widget Function(BuildContext, Object, StackTrace?)? errorBuilder;
   final BoxFit fit;
 
-  const WNetworkImage({
+  const WNetworkImage( {
     super.key,
     required this.image,
     required this.height,

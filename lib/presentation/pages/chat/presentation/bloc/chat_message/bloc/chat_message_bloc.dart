@@ -9,9 +9,7 @@ import 'package:mpd_client/domain/entity/chat/send_message_entity.dart';
 import 'package:mpd_client/domain/models/chat/chat_group.dart';
 import 'package:mpd_client/domain/models/chat/message.dart';
 import 'package:mpd_client/infrastructure/services/log_service.dart';
-import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/controller/vm_controller.dart';
-import 'package:uuid/uuid.dart';
 
 part 'chat_message_event.dart';
 part 'chat_message_state.dart';

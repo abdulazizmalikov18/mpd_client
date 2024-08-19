@@ -16,10 +16,10 @@ class GradientIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return ShaderMask(
       shaderCallback: (bounds) {
-        return  RadialGradient(
+        return  const RadialGradient(
           center: Alignment.topLeft,
           radius: 2,
-          colors: const [gradientBlueOpacity, gradientBlue],
+          colors: [mainBlue, mainBlue],
           tileMode: TileMode.mirror,
         ).createShader(bounds);
       },

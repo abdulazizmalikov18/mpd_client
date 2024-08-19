@@ -90,7 +90,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
 
   void _updateUser(UpdateUserEvent event, Emitter emit) async {
     emit(state.copyWith(userContainer: state.userContainer.copyWith(status: FormzSubmissionStatus.inProgress)));
-    final user = await _repo.updateUser(event.user, event.avatar);
+    final user = await _repo.updateUser(event.user, event.avatar, event.backgroundImage);
     if (user.isRight) {
       emit(state.copyWith(
         userContainer: state.userContainer.copyWith(

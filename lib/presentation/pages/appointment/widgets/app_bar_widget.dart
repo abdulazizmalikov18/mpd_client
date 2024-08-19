@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
-
 
 class AppBarWidget extends StatelessWidget implements PreferredSize {
   final String title;
@@ -32,12 +30,15 @@ class AppBarWidget extends StatelessWidget implements PreferredSize {
         constraints: const BoxConstraints(minHeight: 0, minWidth: 0),
         icon: SvgPicture.asset(
           AppIcons.back,
-          colorFilter:  const ColorFilter.mode(black, BlendMode.srcIn),
+          colorFilter: const ColorFilter.mode(black, BlendMode.srcIn),
           height: 20.h,
           width: 20.h,
         ),
       ),
-      title: Text(title, style: Styles.headline4.copyWith(color: black)),
+      title: Text(
+        title,
+        style: Styles.headline4.copyWith(color: black),
+      ),
     );
   }
 }

@@ -17,12 +17,14 @@ import 'package:mpd_client/application/post/post_bloc.dart';
 import 'package:mpd_client/application/product_specalist/product_specalist_bloc.dart';
 import 'package:mpd_client/application/profile/user_records/records_bloc.dart';
 import 'package:mpd_client/application/show_pop_up/show_pop_up_bloc.dart';
+import 'package:mpd_client/application/user_subscriptions/user_subscriptions_bloc.dart';
 import 'package:mpd_client/application/yandex/filter_category/filter_category_bloc.dart';
 import 'package:mpd_client/application/yandex/popular_categories/popular_categories_bloc.dart';
 import 'package:mpd_client/application/yandex/search_by_category/search_by_category_bloc.dart';
 import 'package:mpd_client/application/yandex/search_by_specialist/search_by_specialist_bloc.dart';
 import 'package:mpd_client/application/yandex/yandex_doctor/yandex_doctor_bloc.dart';
 import 'package:mpd_client/domain/abstract_repo/lenta_repository.dart';
+import 'package:mpd_client/infrastructure/apis/user_remote_datasource.dart';
 import 'package:mpd_client/infrastructure/core/scope.dart';
 import 'package:mpd_client/infrastructure/reopsitories/appoinment_repository.dart';
 import 'package:mpd_client/infrastructure/reopsitories/doctor_profile_repository.dart';
@@ -30,7 +32,6 @@ import 'package:mpd_client/infrastructure/reopsitories/user_repository.dart';
 import 'package:mpd_client/infrastructure/reopsitories/yandex_doctor_repository.dart';
 import 'package:mpd_client/infrastructure/services/service_locator.dart';
 import 'package:mpd_client/infrastructure/services/yandex_service.dart';
-import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat/chat_bloc.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat_group/chat_group_bloc.dart';
 import 'package:mpd_client/presentation/pages/chat/presentation/bloc/chat_message/bloc/chat_message_bloc.dart';
 import 'package:mpd_client/presentation/router/app_routs.dart';
@@ -81,6 +82,7 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<AddToCartBloc>(create: (context) => AddToCartBloc(serviceLocator<DoctorProfileRepository>())),
         BlocProvider<TimetableBloc>(create: (context) => TimetableBloc(serviceLocator<DoctorProfileRepository>())),
         BlocProvider<CreateOrderBloc>(create: (context) => CreateOrderBloc(serviceLocator<DoctorProfileRepository>())),
+        BlocProvider<UserSubscriptionsBloc>(create: (context) => UserSubscriptionsBloc(UserRepository(mainRemoteDataSource: UserRemoteDataSource()), TextEditingController())),
       ],
       child: BlocListener<AuthBloc, AuthState>(
         bloc: serviceLocator<AuthBloc>(),

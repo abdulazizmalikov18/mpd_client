@@ -6,7 +6,6 @@ import 'package:mpd_client/application/auth/auth_bloc.dart';
 import 'package:mpd_client/application/auth/controller/pin_view_model.dart';
 import 'package:mpd_client/application/post/post_bloc.dart';
 import 'package:mpd_client/application/profile/user_records/records_bloc.dart';
-import 'package:mpd_client/presentation/pages/main/main_view.dart';
 import 'package:mpd_client/presentation/pages/profile/widgets/w_language_sheet.dart';
 import 'package:mpd_client/presentation/pages/profile/widgets/w_profile_header.dart';
 import 'package:mpd_client/presentation/pages/profile/widgets/w_profile_item.dart';
@@ -61,7 +60,9 @@ class _ProfileViewState extends State<ProfileView> with ProfileMixin {
                     icon: AppIcons.userAdd,
                     subTitle: '5 ${context.l10n.profile_following_doctors_doctor.toLowerCase()}',
                     title: context.l10n.profile_following_doctors,
-                    onPressed: () {},
+                    onPressed: () {
+                      context.pushNamed(AppRouteNames.userFollowing);
+                    },
                   ),
                   WProfileItem(
                     icon: AppIcons.languageCircle,

@@ -38,12 +38,14 @@ class GetAccountUserEvent extends AccountsEvent {
 class UpdateUserEvent extends AccountsEvent {
   final UserModel user;
   final String? avatar;
+  final String? backgroundImage;
   final void Function() onSuccess;
   final void Function(String errorMessage) onError;
 
   UpdateUserEvent({
     required this.user,
     this.avatar,
+    this.backgroundImage,
     required this.onSuccess,
     required this.onError,
   });

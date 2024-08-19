@@ -10,8 +10,6 @@ import 'package:mpd_client/presentation/styles/app_images.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/presentation/widgets/w_app_bar.dart';
-import 'package:mpd_client/presentation/widgets/w_paginator.dart';
-import 'package:mpd_client/utils/extensions/context_extension.dart';
 
 class MyPostView extends StatefulWidget {
   const MyPostView({super.key});
@@ -89,10 +87,9 @@ class _MyPostViewState extends State<MyPostView> {
               }
 
               // Post Viewer
-              return PaginatorList(
-                physics: const AlwaysScrollableScrollPhysics(),
-                itemCount: state.myPost.length,
-                itemBuilder: (BuildContext context, int index) {
+              return PageView.builder(
+                scrollDirection: Axis.vertical,
+                itemBuilder: (context, index) {
                   return Padding(
                     padding: EdgeInsets.only(bottom: index + 1 == state.posts.length ? 30 : 0),
                     child: PostWidget(
@@ -101,12 +98,9 @@ class _MyPostViewState extends State<MyPostView> {
                     ),
                   );
                 },
-                paginatorStatus: FormzSubmissionStatus.initial, // state.refreshStatus,
-                fetchMoreFunction: () {
-                  context.read<PostBloc>().add(const PostMoreFetched());
-                },
-                hasMoreToFetch: state.myPostCount != state.myPost.length,
+                itemCount: state.myPost.length,
               );
+             
             },
           ),
         ),

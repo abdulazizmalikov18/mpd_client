@@ -88,6 +88,7 @@ class CategoriesComponent extends StatelessWidget {
                     child: Text(
                       state.popularCategories[index].name!,
                       style: AppTheme.headlineSmall.copyWith(
+                        color: state.popularCategories[index].id == selectedState.selectedId ? white : black,
                         // fontFamily: Styles.gilroyMedium,
                       ),
                     ),

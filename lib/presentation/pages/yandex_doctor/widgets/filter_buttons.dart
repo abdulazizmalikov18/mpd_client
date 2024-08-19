@@ -55,6 +55,7 @@ class FilterButtons extends StatelessWidget {
                   text: Text(
                     context.l10n.search_filter_apply,
                     style: AppTheme.headlineMedium.copyWith(
+                      color: white,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),

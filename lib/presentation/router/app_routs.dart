@@ -37,6 +37,7 @@ import 'package:mpd_client/presentation/pages/profile/edit_profile_view.dart';
 import 'package:mpd_client/presentation/pages/profile/profile_view.dart';
 import 'package:mpd_client/presentation/pages/record/record.dart';
 import 'package:mpd_client/presentation/pages/record/records_page.dart';
+import 'package:mpd_client/presentation/pages/user_following/user_following.dart';
 import 'package:mpd_client/presentation/pages/yandex_doctor/doctor_page.dart';
 import 'package:mpd_client/presentation/router/routs_contact.dart';
 
@@ -193,6 +194,12 @@ sealed class AppRouts {
         builder: (context, state) => ReviewAppoinmentDetail(
           localProducts: (state.extra as Map)['product'],
         ),
+      ),
+      GoRoute(
+        parentNavigatorKey: navigatorKey,
+        path: AppRoutePath.userFollowing,
+        name: AppRouteNames.userFollowing,
+        builder: (context, state) => const UserFollowing(),
       ),
       mainView,
     ],

@@ -186,7 +186,7 @@ class AuthRepository {
     return result;
   }
 
-  Future<Either<Failure, bool>> updateUser(UserModel user, String? avatar) async {
+  Future<Either<Failure, bool>> updateUser(UserModel user, String? avatar, String? backgroundImage) async {
     final data = FormData.fromMap({
       "main": true,
       "business_ava": true,
@@ -198,6 +198,17 @@ class AuthRepository {
           MultipartFile.fromFileSync(
             avatar,
             filename: avatar.split(Platform.pathSeparator).last,
+          ),
+        ),
+      );
+    }
+    if (backgroundImage != null) {
+      data.files.add(
+        MapEntry(
+          "background_image",
+          MultipartFile.fromFileSync(
+            backgroundImage,
+            filename: backgroundImage.split(Platform.pathSeparator).last,
           ),
         ),
       );

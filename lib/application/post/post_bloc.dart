@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
@@ -10,7 +9,6 @@ import 'package:mpd_client/domain/entity/lenta/post_entity.dart';
 import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
 
 part 'post_event.dart';
-
 part 'post_state.dart';
 
 class PostBloc extends Bloc<PostEvent, PostState> {
@@ -20,6 +18,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     on<PostLikeEvent>(_onLikePost);
     on<PostCreateEvent>(_onCreatePost);
     on<GetMyPostEvent>(_onMyPostFetched);
+    on<GetUserPostsEvent>(_onGetUserPost);
   }
 
   final LentaRepository _repo;
@@ -42,9 +41,23 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     emit(state.copyWith(status: FormzSubmissionStatus.failure));
   }
 
+  Future<void> _onGetUserPost(GetUserPostsEvent event, Emitter emit) async {
+    emit(state.copyWith(userPostStatus: FormzSubmissionStatus.inProgress));
+    final result = await _repo.getBanners(GenericEntity(authorUser: event.username));
+    if (result.isRight) {
+      emit(state.copyWith(
+        userPostStatus: FormzSubmissionStatus.success,
+        postUser: result.right.results,
+        userPostCount: result.right.count,
+      ));
+      return;
+    }
+    emit(state.copyWith(status: FormzSubmissionStatus.failure));
+  }
+
   Future<void> _onMyPostFetched(GetMyPostEvent event, Emitter<PostState> emit) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    final result = await _repo.getBanners(GenericEntity(limit: 4, offset: 0, authorUser: StorageRepository.getString(StorageKeys.USERNAME)));
+    final result = await _repo.getBanners(GenericEntity(limit: 1000, offset: 0, authorUser: StorageRepository.getString(StorageKeys.USERNAME)));
     if (result.isRight) {
       emit(
         state.copyWith(

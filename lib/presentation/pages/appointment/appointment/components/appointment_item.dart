@@ -26,7 +26,7 @@ class AppointmentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(16.w, 0, 16.w, 12.h),
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.r),
@@ -42,14 +42,14 @@ class AppointmentItem extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(left: 16.w, top: 16.h, right: 16.w),
+            padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
             child: Row(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(36.r),
+                  borderRadius: BorderRadius.circular(36),
                   child: specialist.avatar != null ? CachedImageWidget(url: specialist.avatar!, size: 72) : const DefaultAvatar(containerSize: 72, imageSize: 60),
                 ),
-                ScreenUtil().setHorizontalSpacing(16.w),
+                ScreenUtil().setHorizontalSpacing(16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +60,9 @@ class AppointmentItem extends StatelessWidget {
                           Expanded(
                             child: Text(
                               specialist.fullname ?? '-',
-                              style: Styles.expTitle.copyWith(color: black),
+                              style: AppTheme.headlineSmall.copyWith(
+                                color: black,
+                              ),
                             ),
                           ),
                           const SizedBox(width: 8),
