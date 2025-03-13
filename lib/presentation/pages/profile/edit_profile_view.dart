@@ -39,7 +39,7 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: WAppBar(
+      appBar: const WAppBar(
         back: true,
         backIconColor: white,
         backgroundColor: Colors.transparent,

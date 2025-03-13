@@ -27,7 +27,7 @@ class AppointmentService extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         padding: EdgeInsets.only(top: 16, bottom: appointmentInfo != DrCardInfo.pending ? 0 : 4.h),
-        margin: EdgeInsets.fromLTRB(16, 0, 16, 12),
+        margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: white,
@@ -37,7 +37,7 @@ class AppointmentService extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 16),
+              padding: const EdgeInsets.only(left: 16),
               child: Text(
                 context.l10n.appointment_service,
                 style: Styles.boldHeadline6.copyWith(
@@ -48,7 +48,7 @@ class AppointmentService extends StatelessWidget {
             ScreenUtil().setVerticalSpacing(14),
             for (int i = 0; i < localProducts.length; i++)
               Padding(
-                padding: EdgeInsets.only(bottom: 12, left: 16, right: 16),
+                padding: const EdgeInsets.only(bottom: 12, left: 16, right: 16),
                 child: Row(
                   children: [
                     ClipRRect(

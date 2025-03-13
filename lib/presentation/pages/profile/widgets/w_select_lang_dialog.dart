@@ -65,7 +65,8 @@ class _WSelectLangDialogState extends State<WSelectLangDialog> {
                 onTap: () => onTapLangItem(const Locale('en')),
               ),
               WButton(
-                margin: const EdgeInsets.only(left: 16, right: 16, top: 24, bottom: 32),
+                margin: const EdgeInsets.only(
+                    left: 16, right: 16, top: 24, bottom: 32),
                 onTap: onTapSelect,
                 text: 'Tanlash',
               ),
@@ -109,11 +110,17 @@ class SelectLangItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color: isActive ? white.withOpacity(0.1) : Colors.transparent,
+            color: isActive ? white.withValues(alpha: 0.1) : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
-            border: isActive ? Border.all(color: white.withOpacity(0.5)) : null,
+            border: isActive
+                ? Border.all(color: white.withValues(alpha: 0.5))
+                : null,
             boxShadow: [
-              if (isActive) BoxShadow(color: primary.withOpacity(0.08), blurRadius: 4, offset: const Offset(0, 4)),
+              if (isActive)
+                BoxShadow(
+                    color: primary.withValues(alpha: 0.08),
+                    blurRadius: 4,
+                    offset: const Offset(0, 4)),
             ],
           ),
           child: Padding(

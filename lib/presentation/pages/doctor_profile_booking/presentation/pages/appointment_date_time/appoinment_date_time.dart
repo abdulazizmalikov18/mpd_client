@@ -80,7 +80,8 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
                 }
               },
               builder: (context, state) {
-                if (state.status == Status.failure && state.failure.contains('Specialist does not work on')) {
+                if (state.status == Status.failure &&
+                    state.failure.contains('Specialist does not work on')) {
                   return Column(
                     children: [
                       SvgPicture.asset(AppIcons.noWorkingDay),
@@ -140,7 +141,8 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
                   child: LongButton(
                     buttonName: context.l10n.book_appointment_next,
                     onPress: () {
-                      final meetDate = Utils.toDateTimeFormat(state.datetime!, state.selectedTime);
+                      final meetDate = Utils.toDateTimeFormat(
+                          state.datetime!, state.selectedTime);
 
                       context.read<AddToCartBloc>().add(
                             AddToCart(
@@ -152,7 +154,9 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
                     },
                   ),
                 ),
-                crossFadeState: state.selectedTime != '' ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+                crossFadeState: state.selectedTime != ''
+                    ? CrossFadeState.showSecond
+                    : CrossFadeState.showFirst,
                 duration: const Duration(milliseconds: 300),
               );
             },
@@ -182,7 +186,8 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
             child: Center(
               child: Text(
                 "Bu kun ish kuni emas",
-                style: Styles.boldTopHint.copyWith(fontSize: 18.sp, color: black),
+                style:
+                    Styles.boldTopHint.copyWith(fontSize: 18.sp, color: black),
               ),
             ),
           );
@@ -210,8 +215,16 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
                           text: context.l10n.book_appointment_select_first_come,
                           style: Styles.headline5.copyWith(color: black),
                           children: [
-                            TextSpan(text: '(${context.l10n.book_appointment_select_first_come_stats_last} 44,', style: Styles.headline5.copyWith(color: gradientBlueOpacity)),
-                            TextSpan(text: ' ${context.l10n.book_appointment_select_first_come_stats_now} 5)', style: Styles.headline5.copyWith(color: gradientBlueOpacity)),
+                            TextSpan(
+                                text:
+                                    '(${context.l10n.book_appointment_select_first_come_stats_last} 44,',
+                                style: Styles.headline5
+                                    .copyWith(color: gradientBlueOpacity)),
+                            TextSpan(
+                                text:
+                                    ' ${context.l10n.book_appointment_select_first_come_stats_now} 5)',
+                                style: Styles.headline5
+                                    .copyWith(color: gradientBlueOpacity)),
                           ],
                         ),
                       ),
@@ -223,7 +236,9 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
                 children: [
                   CommentInputWidget(
                     hintText: context.l10n.book_appointment_comment_write,
-                    onChanged: (value) => context.read<TimetableBloc>().add(OnChangedCommentEvent(value: value)),
+                    onChanged: (value) => context
+                        .read<TimetableBloc>()
+                        .add(OnChangedCommentEvent(value: value)),
                   ),
                   Positioned(
                     right: 28.w,
@@ -233,7 +248,8 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
                       builder: (context, comment) {
                         return Text(
                           '${comment.length}/200',
-                          style: Styles.headline7.copyWith(color: grey, fontSize: 14.sp),
+                          style: Styles.headline7
+                              .copyWith(color: grey, fontSize: 14.sp),
                         );
                       },
                     ),
@@ -248,7 +264,11 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
     );
   }
 
-  Container _buildTableCalendar({required DateTime? selectedDate_, required DateTime focusedDay_, required CalendarFormat calendarFormat_, required BuildContext context}) {
+  Container _buildTableCalendar(
+      {required DateTime? selectedDate_,
+      required DateTime focusedDay_,
+      required CalendarFormat calendarFormat_,
+      required BuildContext context}) {
     String locale = Localizations.localeOf(context).languageCode;
     return Container(
       decoration: BoxDecoration(
@@ -280,13 +300,19 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
         onDaySelected: (selectedDay, focusedDay) {
           if (!isSameDay(selectedDate_, selectedDay)) {
             //? For choose and save day, if month changed also
-            context.read<TimetableBloc>().add(SelectDayEvent(day: selectedDay, focusedDay: focusedDay));
-            context.read<TimetableBloc>().add(GetTimetableByDay(day: selectedDay, id: widget.id));
+            context
+                .read<TimetableBloc>()
+                .add(SelectDayEvent(day: selectedDay, focusedDay: focusedDay));
+            context
+                .read<TimetableBloc>()
+                .add(GetTimetableByDay(day: selectedDay, id: widget.id));
           }
         },
         onFormatChanged: (format) {
           //? For change calendar format scroll up and scroll down
-          context.read<TimetableBloc>().add(OnChangedCalFormatEvent(format: format));
+          context
+              .read<TimetableBloc>()
+              .add(OnChangedCalFormatEvent(format: format));
         },
         onPageChanged: (focusedDay) {
           //? For save focused day in month changed
@@ -315,9 +341,12 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
             colorFilter: const ColorFilter.mode(white, BlendMode.srcIn),
           ),
           formatButtonVisible: false,
-          titleTextStyle: Styles.boldHeadline6.copyWith(color: white, fontSize: 18.sp),
+          titleTextStyle:
+              Styles.boldHeadline6.copyWith(color: white, fontSize: 18.sp),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(10.r), topRight: Radius.circular(10.r)),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10.r),
+                topRight: Radius.circular(10.r)),
             gradient: const LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -326,9 +355,11 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
           ),
         ),
         calendarStyle: CalendarStyle(
-          selectedTextStyle: Styles.headline7.copyWith(fontSize: 14.sp, color: white),
+          selectedTextStyle:
+              Styles.headline7.copyWith(fontSize: 14.sp, color: white),
           cellMargin: const EdgeInsets.all(4.5),
-          defaultTextStyle: Styles.headline7.copyWith(fontSize: 14.sp, color: black),
+          defaultTextStyle:
+              Styles.headline7.copyWith(fontSize: 14.sp, color: black),
           tablePadding: EdgeInsets.zero,
           isTodayHighlighted: false,
           selectedDecoration: const BoxDecoration(
@@ -344,7 +375,7 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
           decoration: BoxDecoration(
             border: Border(
               bottom: BorderSide(
-                color: Colors.grey.withOpacity(0.5),
+                color: Colors.grey.withValues(alpha: 0.5),
               ),
             ),
           ),

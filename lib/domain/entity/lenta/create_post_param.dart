@@ -58,6 +58,6 @@ class CreatePostParam {
 }
 
 enum CreatePostAction {
-  new_avatar,
-  new_duty,
+  newAvatar,
+  newDuty,
 }

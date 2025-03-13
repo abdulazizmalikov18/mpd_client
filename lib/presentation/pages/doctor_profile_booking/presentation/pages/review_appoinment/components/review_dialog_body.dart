@@ -34,7 +34,9 @@ class ReviewDialogBody extends StatelessWidget {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: !isError ? orangeLight.withOpacity(0.1) : gradientRedOpacity.withOpacity(0.1),
+            color: !isError
+                ? orangeLight.withValues(alpha: 0.1)
+                : gradientRedOpacity.withValues(alpha: 0.1),
           ),
           child: SvgPicture.asset(icon),
         ),
@@ -43,7 +45,10 @@ class ReviewDialogBody extends StatelessWidget {
           child: Text(
             title,
             textAlign: TextAlign.center,
-            style: Styles.boldTitle.copyWith(color: !isError ? grey : gradientRedOpacity, fontSize: 24.sp, fontFamily: Styles.gilroyMedium),
+            style: Styles.boldTitle.copyWith(
+                color: !isError ? grey : gradientRedOpacity,
+                fontSize: 24.sp,
+                fontFamily: Styles.gilroyMedium),
           ),
         ),
         const SizedBox(height: 12),
@@ -58,11 +63,15 @@ class ReviewDialogBody extends StatelessWidget {
         const SizedBox(height: 40),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: LongButton(buttonName: firstButtonName, onPress: firstButtonPressed),
+          child: LongButton(
+              buttonName: firstButtonName, onPress: firstButtonPressed),
         ),
         const SizedBox(height: 24),
         TextButton(
-          style: TextButton.styleFrom(alignment: Alignment.center, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.r))),
+          style: TextButton.styleFrom(
+              alignment: Alignment.center,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100.r))),
           onPressed: secondButtonPressed,
           child: Text(
             secondButtonName,

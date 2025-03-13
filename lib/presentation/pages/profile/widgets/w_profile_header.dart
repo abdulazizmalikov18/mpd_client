@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -23,7 +22,8 @@ class WProfileHeader extends StatelessWidget {
         Hero(
           tag: 'profile_background',
           child: WNetworkImage(
-            image: "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
+            image:
+                "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
             width: double.maxFinite,
             height: MediaQuery.sizeOf(context).height * 0.25,
             borderRadius: 0,
@@ -35,7 +35,8 @@ class WProfileHeader extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(top: (MediaQuery.sizeOf(context).height * 0.25) - 48),
+          padding: EdgeInsets.only(
+              top: (MediaQuery.sizeOf(context).height * 0.25) - 48),
           child: BlocBuilder<AccountsBloc, AccountsState>(
             builder: (context, state) {
               return Column(
@@ -94,7 +95,7 @@ class WProfileHeader extends StatelessWidget {
                                 textAlign: TextAlign.center,
                                 style: AppTheme.labelSmall.copyWith(
                                   fontWeight: FontWeight.w600,
-                                  // color: white.withOpacity(0.5),
+                                  // color: white.withValues(alpha:0.5),
                                 ),
                               ),
                             ],
@@ -109,8 +110,9 @@ class WProfileHeader extends StatelessWidget {
           right: 32,
           top: (MediaQuery.sizeOf(context).height * 0.25) - 32,
           child: GestureDetector(
-            onTap: () { 
-              final qrCode = context.read<AccountsBloc>().state.userContainer.user.qrcode;
+            onTap: () {
+              final qrCode =
+                  context.read<AccountsBloc>().state.userContainer.user.qrcode;
               showModalBottomSheet(
                 backgroundColor: Colors.transparent,
                 context: context,
@@ -185,7 +187,7 @@ class WProfileHeaderItem extends StatelessWidget {
       child: Container(
         height: 100,
         decoration: BoxDecoration(
-          color: white.withOpacity(0.1),
+          color: white.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(

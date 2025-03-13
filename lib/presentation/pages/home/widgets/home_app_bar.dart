@@ -40,21 +40,24 @@ class HomeAppbarComponent extends StatelessWidget implements PreferredSize {
             );
           } else if (state.userContainer.status.isInProgress) {
             return Shimmer.fromColors(
-              baseColor: mainBlue.withOpacity(0.2),
-              highlightColor: mainBlue.withOpacity(0.4),
+              baseColor: mainBlue.withValues(alpha: 0.2),
+              highlightColor: mainBlue.withValues(alpha: 0.4),
               child: ListTile(
                 contentPadding: EdgeInsets.zero,
                 leading: Container(
                   width: 42,
-                  decoration: const BoxDecoration(shape: BoxShape.circle, color: white),
+                  decoration:
+                      const BoxDecoration(shape: BoxShape.circle, color: white),
                 ),
                 title: Container(
                   height: 14,
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: white),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10), color: white),
                 ),
                 subtitle: Container(
                   height: 16,
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: white),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10), color: white),
                 ),
               ),
             );
@@ -80,7 +83,8 @@ class HomeAppbarComponent extends StatelessWidget implements PreferredSize {
     );
   }
 
-  Theme _buildUserInfo(String name, String surname, String image, VoidCallback onTap, BuildContext context) {
+  Theme _buildUserInfo(String name, String surname, String image,
+      VoidCallback onTap, BuildContext context) {
     return Theme(
       data: ThemeData(
         splashColor: Colors.transparent,
@@ -112,7 +116,8 @@ class HomeAppbarComponent extends StatelessWidget implements PreferredSize {
                 ),
                 Text(
                   '$name $surname',
-                  style: AppTheme.headlineMedium.copyWith(color: black, fontWeight: FontWeight.w400, fontSize: 14),
+                  style: AppTheme.headlineMedium.copyWith(
+                      color: black, fontWeight: FontWeight.w400, fontSize: 14),
                 ),
               ],
             )

@@ -66,7 +66,7 @@ class WVerificationTextFieldWithTitle extends StatelessWidget {
           hintStyle: AppTheme.labelSmall.copyWith(
             color: gray,
           ),
-          fillColor: white.withOpacity(0.2),
+          fillColor: white.withValues(alpha: 0.2),
           suffixIcon: Padding(
             padding: const EdgeInsets.only(right: 16),
             child: rightIcon ?? const SizedBox(),

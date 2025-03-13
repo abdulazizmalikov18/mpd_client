@@ -21,7 +21,7 @@ class WUserDetail extends StatelessWidget {
                 borderRadius: BorderRadius.circular(28),
                 border: Border.all(
                   width: 2,
-                  color: white.withOpacity(0.2),
+                  color: white.withValues(alpha: 0.2),
                 ),
               ),
               child: WNetworkImage(
@@ -52,7 +52,7 @@ class WUserDetail extends StatelessWidget {
                     state.userContainer.user.mainCat.name,
                     overflow: TextOverflow.ellipsis,
                     style: AppTheme.labelLarge.copyWith(
-                      color: white.withOpacity(0.5),
+                      color: white.withValues(alpha: 0.5),
                     ),
                   ),
                 ),

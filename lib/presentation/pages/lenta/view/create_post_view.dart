@@ -19,7 +19,8 @@ class CreatePostView extends StatefulWidget {
   @override
   State<CreatePostView> createState() => _CreatePostViewState();
 
-  static _CreatePostViewState? maybeOf(BuildContext context) => context.findAncestorStateOfType<_CreatePostViewState>();
+  static _CreatePostViewState? maybeOf(BuildContext context) =>
+      context.findAncestorStateOfType<_CreatePostViewState>();
 }
 
 class _CreatePostViewState extends State<CreatePostView> with CreatePostMixin {
@@ -27,7 +28,6 @@ class _CreatePostViewState extends State<CreatePostView> with CreatePostMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const WAppBar(
-        
         back: true,
         title: Text('Create Post'),
         action: SizedBox(),
@@ -52,13 +52,13 @@ class _CreatePostViewState extends State<CreatePostView> with CreatePostMixin {
                 controller: descriptionController,
                 height: 88,
                 hintText: 'Write your description',
-                fillColor: white.withOpacity(0.1),
+                fillColor: white.withValues(alpha: 0.1),
                 borderColor: border,
                 style: AppTheme.labelLarge.copyWith(
                   color: black,
                 ),
                 hintStyle: AppTheme.labelLarge.copyWith(
-                  color: black.withOpacity(0.5),
+                  color: black.withValues(alpha: 0.5),
                 ),
               ),
             ],

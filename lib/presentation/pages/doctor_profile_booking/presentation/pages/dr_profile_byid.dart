@@ -44,8 +44,12 @@ class _DrProfileByidState extends State<DrProfileByid> {
       isNull = true;
       setState(() {});
     } else {
-      context.read<DoctorProfileBloc>().add(GetDoctorPprofileData(widget.specialist.id.toString()));
-      context.read<PostBloc>().add(GetUserPostsEvent(widget.specialist.username ?? ""));
+      context
+          .read<DoctorProfileBloc>()
+          .add(GetDoctorPprofileData(widget.specialist.id.toString()));
+      context
+          .read<PostBloc>()
+          .add(GetUserPostsEvent(widget.specialist.username ?? ""));
     }
     super.initState();
   }
@@ -113,7 +117,8 @@ class _DrProfileByidState extends State<DrProfileByid> {
                                       borderRadius: BorderRadius.circular(50),
                                       child: widget.specialist.avatar != null
                                           ? CachedImageWidget(
-                                              url: widget.specialist.avatar ?? "",
+                                              url: widget.specialist.avatar ??
+                                                  "",
                                               size: 96,
                                             )
                                           : const DefaultAvatar(
@@ -147,7 +152,9 @@ class _DrProfileByidState extends State<DrProfileByid> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 48),
                             child: Text(
-                              widget.specialist.job != null ? "--" : widget.specialist.job ?? "",
+                              widget.specialist.job != null
+                                  ? "--"
+                                  : widget.specialist.job ?? "",
                               style: Styles.descSubtitle.copyWith(
                                 color: grey,
                               ),
@@ -174,8 +181,10 @@ class _DrProfileByidState extends State<DrProfileByid> {
                                   child: LongButton(
                                     onPress: () {},
                                     widget: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
                                         AppIcons.message.svg(
                                           color: mainBlue,
@@ -226,7 +235,7 @@ class _DrProfileByidState extends State<DrProfileByid> {
                               borderRadius: BorderRadius.circular(8),
                               color: white,
                             ),
-                            indicatorSize:TabBarIndicatorSize.tab ,
+                            indicatorSize: TabBarIndicatorSize.tab,
                             indicatorColor: Colors.transparent,
                             tabs: [
                               Tab(
@@ -240,7 +249,8 @@ class _DrProfileByidState extends State<DrProfileByid> {
                               Tab(
                                 child: Text(
                                   "Post",
-                                  style: Styles.descSubtitle.copyWith(color: black),
+                                  style: Styles.descSubtitle
+                                      .copyWith(color: black),
                                 ),
                               ),
                             ],
@@ -362,14 +372,16 @@ class _DrProfileByidState extends State<DrProfileByid> {
                           BlocBuilder<DoctorProfileBloc, DoctorProfileState>(
                             builder: (context, state) {
                               if (state is DoctorProfileSuccess) {
-                                debugPrint("============>>>>>>>>>>>>. NImaga bilmima");
+                                debugPrint(
+                                    "============>>>>>>>>>>>>. NImaga bilmima");
                                 return DoctorInfoItem(
                                   doctor: state.doctor ?? DoctorProfileModel(),
                                 );
                               } else if (state is DoctorProfileLoading) {
                                 return Shimmer.fromColors(
-                                  baseColor: mainBlue.withOpacity(0.2),
-                                  highlightColor: mainBlue.withOpacity(0.4),
+                                  baseColor: mainBlue.withValues(alpha: 0.2),
+                                  highlightColor:
+                                      mainBlue.withValues(alpha: 0.4),
                                   child: const LoadingDoctorInfo(),
                                 );
                               }
@@ -402,8 +414,8 @@ class _DrProfileByidState extends State<DrProfileByid> {
                       buttonName: context.l10n.book_doctor_book,
                       onPress: () {
                         context.pushNamed(AppRouteNames.service, extra: {
-                          "specialistId" : state.doctor?.id ?? "_",
-                        }); 
+                          "specialistId": state.doctor?.id ?? "_",
+                        });
                       },
                     ),
                   ),
@@ -413,13 +425,16 @@ class _DrProfileByidState extends State<DrProfileByid> {
                         ScreenUtil().setHorizontalSpacing(16.w),
                         IconGradientButton(
                           icon: AppIcons.call,
-                          onPressed: () => Caller.makePhoneCall(state.doctor?.phone ?? "__"),
+                          onPressed: () =>
+                              Caller.makePhoneCall(state.doctor?.phone ?? "__"),
                         )
                       ],
                     )
                 ],
               ),
-              crossFadeState: state is DoctorProfileSuccess ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+              crossFadeState: state is DoctorProfileSuccess
+                  ? CrossFadeState.showSecond
+                  : CrossFadeState.showFirst,
               duration: const Duration(milliseconds: 300),
             );
           },

@@ -228,9 +228,7 @@ class Utils {
         return 'pedestrian';
       case DirectionsMode.bicycling:
         return 'bicycle';
-      default:
-        return 'vehicle';
-    }
+      }
   }
 
   /// Returns [DirectionsMode] for [MapType.yandexMaps]

@@ -29,7 +29,9 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
         type: FileType.any,
         allowMultiple: true,
         onFileLoading: (FilePickerStatus status) => print(status),
-        allowedExtensions: (_extension?.isNotEmpty ?? false) ? _extension?.replaceAll(' ', '').split(',') : null,
+        allowedExtensions: (_extension?.isNotEmpty ?? false)
+            ? _extension?.replaceAll(' ', '').split(',')
+            : null,
       ))
           ?.files;
     } on PlatformException catch (e) {
@@ -39,7 +41,8 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
     }
     if (!mounted) return;
     setState(() {
-      _fileName = _paths != null ? _paths!.map((e) => e.name).toString() : '...';
+      _fileName =
+          _paths != null ? _paths!.map((e) => e.name).toString() : '...';
     });
   }
 
@@ -113,10 +116,15 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                   ? ListView.separated(
                       shrinkWrap: true,
                       padding: const EdgeInsets.only(bottom: 16),
-                      itemCount: _paths != null && _paths!.isNotEmpty ? _paths!.length : 1,
+                      itemCount: _paths != null && _paths!.isNotEmpty
+                          ? _paths!.length
+                          : 1,
                       itemBuilder: (context, index) {
-                        final bool isMultiPath = _paths != null && _paths!.isNotEmpty;
-                        final String name = isMultiPath ? _paths!.map((e) => e.name).toList()[index] : _fileName ?? '...';
+                        final bool isMultiPath =
+                            _paths != null && _paths!.isNotEmpty;
+                        final String name = isMultiPath
+                            ? _paths!.map((e) => e.name).toList()[index]
+                            : _fileName ?? '...';
 
                         return Container(
                           padding: const EdgeInsets.all(8),
@@ -192,7 +200,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
-                          color: border.withOpacity(.5),
+                          color: border.withValues(alpha: .5),
                         ),
                         child: AppIcons.files.svg(),
                       ),

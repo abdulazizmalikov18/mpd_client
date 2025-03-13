@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mpd_client/infrastructure/services/download_file.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/widgets/w_button.dart';
-import 'package:open_app_file/open_app_file.dart';
+import 'package:open_file/open_file.dart';
 
 class WChatFileView extends StatefulWidget {
   final String file;
@@ -34,7 +34,7 @@ class _WChatFileViewState extends State<WChatFileView> {
         WButton(
           onTap: () async {
             if (widget.isLocalFile) {
-              OpenAppFile.open(widget.file);
+              OpenFile.open(widget.file);
             }
             _downloadFile.fileExists && !_downloadFile.dowloading ? _downloadFile.openfile() : _downloadFile.startDownload();
           },

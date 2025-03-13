@@ -149,8 +149,6 @@ class _CancelSheetState extends State<CancelSheet> {
         return 'Change my mind';
       case CancelInfo.bookingTheWrong:
         return 'Booking the wrong doctor';
-      default:
-        return 'Unknown cause';
-    }
+      }
   }
 }

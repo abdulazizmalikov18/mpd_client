@@ -9,7 +9,8 @@ class WChatMediaView extends StatelessWidget {
   final String file;
   final bool isLocalFile;
 
-  const WChatMediaView({super.key, required this.file, required this.isLocalFile});
+  const WChatMediaView(
+      {super.key, required this.file, required this.isLocalFile});
 
   bool get isMobile => Platform.isAndroid || Platform.isIOS;
 
@@ -40,8 +41,10 @@ class WChatMediaView extends StatelessWidget {
                               true => Image.file(
                                   File(file),
                                   fit: BoxFit.cover,
-                                  width: MediaQuery.of(context).size.width * 0.7,
-                                  height: MediaQuery.of(context).size.height * 0.7,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.7,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.7,
                                 ),
                               false => Image.network(
                                   file,
@@ -83,15 +86,13 @@ class ChatImageScreen extends StatelessWidget {
   final bool isLocalFile;
   final String file;
 
-  const ChatImageScreen({super.key, required this.isLocalFile, required this.file});
+  const ChatImageScreen(
+      {super.key, required this.isLocalFile, required this.file});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const WAppBar(
-        back: true,
-        title: const SizedBox(),
-      ),
+      appBar: const WAppBar(back: true, title: SizedBox()),
       body: PinchToZoomScrollableWidget(
         maxScale: 2.5,
         child: Center(

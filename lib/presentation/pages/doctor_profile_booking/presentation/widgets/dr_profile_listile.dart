@@ -21,7 +21,8 @@ class DrProfileListile extends StatelessWidget {
         alignment: Alignment.center,
         height: 48,
         width: 48,
-        decoration: BoxDecoration(shape: BoxShape.circle, color: mainBlue.withOpacity(0.1)),
+        decoration: BoxDecoration(
+            shape: BoxShape.circle, color: mainBlue.withValues(alpha: 0.1)),
         child: Image.asset(
           iconName,
           height: 24,

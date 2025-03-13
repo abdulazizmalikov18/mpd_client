@@ -86,7 +86,7 @@
 //           return IgnorePointer(
 //             ignoring: state.duration != '' && state.duration != '00:00',
 //             child: RoundedLoadingButton(
-//               color: mainBlue.withOpacity(0.2),
+//               color: mainBlue.withValues(alpha:0.2),
 //               elevation: 0,
 //               height: 44.h,
 //               width: 120.w,
@@ -138,7 +138,7 @@
 
 // /*
 // Material(
-//         color: mainBlue.withOpacity(0.1),
+//         color: mainBlue.withValues(alpha:0.1),
 //         borderRadius: BorderRadius.circular(100),
 //         child: InkWell(
 //           borderRadius: BorderRadius.circular(100.r),
@@ -168,6 +168,5 @@
 //           ),
 //         ),
 //       ),
-
 
 //  */

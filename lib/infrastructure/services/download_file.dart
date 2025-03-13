@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:mpd_client/infrastructure/services/log_service.dart';
-import 'package:open_app_file/open_app_file.dart';
+import 'package:open_file/open_file.dart';
 import 'package:path/path.dart' as path;
 
 class DownloadFile {
@@ -65,7 +65,7 @@ class DownloadFile {
 
   Future<OpenResult> openfile() async {
     Log.i("Open File : $filePath");
-    return await OpenAppFile.open(filePath);
+    return await OpenFile.open(filePath);
   }
 
   static Future<String> getPath() async {

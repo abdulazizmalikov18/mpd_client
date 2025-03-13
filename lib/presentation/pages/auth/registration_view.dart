@@ -22,7 +22,8 @@ class RegistrationView extends StatefulWidget {
   State<RegistrationView> createState() => _RegistrationViewState();
 }
 
-class _RegistrationViewState extends State<RegistrationView> with RegistrationMixin {
+class _RegistrationViewState extends State<RegistrationView>
+    with RegistrationMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +46,9 @@ class _RegistrationViewState extends State<RegistrationView> with RegistrationMi
                 builder: (BuildContext context, String? value, Widget? child) {
                   return WTextField(
                     controller: phoneController,
-                    fillColor: value == null ? white.withOpacity(0.2) : red.withOpacity(0.1),
+                    fillColor: value == null
+                        ? white.withValues(alpha: 0.2)
+                        : red.withValues(alpha: 0.1),
                     hintText: '+998 (--) --- -- --',
                     hasError: value != null,
                     style: context.textTheme.labelSmall,
@@ -81,7 +84,8 @@ class _RegistrationViewState extends State<RegistrationView> with RegistrationMi
                           onChanged: (value) {
                             isSurePrivacyPolicy.value = value ?? false;
                           },
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4)),
                         ),
                       );
                     },
@@ -97,12 +101,14 @@ class _RegistrationViewState extends State<RegistrationView> with RegistrationMi
                         children: [
                           TextSpan(text: context.l10n.register_terms_of_use),
                           TextSpan(
-                            text: " ${context.l10n.register_agree_privacy_and_policy}",
+                            text:
+                                " ${context.l10n.register_agree_privacy_and_policy}",
                             style: context.textTheme.labelSmall!.copyWith(
                               fontWeight: FontWeight.w300,
                               color: mainBlue,
                             ),
-                            recognizer: TapGestureRecognizer()..onTap = privacyPolicy,
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = privacyPolicy,
                           ),
                         ],
                       ),

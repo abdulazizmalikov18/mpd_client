@@ -117,7 +117,7 @@
 //                               width: size,
 //                               height: size,
 //                               borderRadius: 8,
-//                               border: Border.all(color: white.withOpacity(0.1)),
+//                               border: Border.all(color: white.withValues(alpha:0.1)),
 //                               color: Colors.transparent,
 //                               onTap: _getAvatar,
 //                               text: "LocaleKeys.picture.tr()",
@@ -139,8 +139,8 @@
 //                           isNotValidate.value = true;
 //                         },
 //                         controller: groupNameController,
-//                         fillColor: white.withOpacity(0.05),
-//                         borderColor: white.withOpacity(0.1),
+//                         fillColor: white.withValues(alpha:0.05),
+//                         borderColor: white.withValues(alpha:0.1),
 //                       ),
 //                       const SizedBox(height: 32),
 //                       const Text(
@@ -151,7 +151,7 @@
 //                       DecoratedBox(
 //                         decoration: BoxDecoration(
 //                             border: Border.all(
-//                               color: white.withOpacity(0.1),
+//                               color: white.withValues(alpha:0.1),
 //                             ),
 //                             borderRadius: BorderRadius.circular(8)),
 //                         child: DefaultTabController(
@@ -185,7 +185,7 @@
 //                         builder: (BuildContext context, value, Widget? child) {
 //                           return WButton(
 //                             isDisabled: value,
-//                             disabledColor: blue.withOpacity(0.4),
+//                             disabledColor: blue.withValues(alpha:0.4),
 //                             onTap: () {
 //                               isOnTap = true;
 //                               context.read<ChatBloc>().add(
@@ -202,7 +202,7 @@
 //                       ),
 //                       const SizedBox(height: 16),
 //                       WButton(
-//                         color: white.withOpacity(0.1),
+//                         color: white.withValues(alpha:0.1),
 //                         onTap: () {
 //                           Navigator.pop(context);
 //                         },

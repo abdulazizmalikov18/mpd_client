@@ -92,7 +92,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(),
                 )
               : const SizedBox(),
-          widget.title.isNotEmpty ? const SizedBox(height: 6) : const SizedBox(),
+          widget.title.isNotEmpty
+              ? const SizedBox(height: 6)
+              : const SizedBox(),
           widget.titleHintText.isNotEmpty
               ? Text(
                   widget.titleHintText,
@@ -101,7 +103,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   // ),
                 )
               : const SizedBox(),
-          widget.titleHintText.isNotEmpty ? const SizedBox(height: 6) : const SizedBox(),
+          widget.titleHintText.isNotEmpty
+              ? const SizedBox(height: 6)
+              : const SizedBox(),
           SizedBox(
             height: widget.noHeight ? null : 44,
             child: TextFormField(
@@ -130,7 +134,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
                         onPressed: widget.onsuffixIconPressed ?? () {},
                       )
                     : null,
-                prefixIcon: widget.prefixIcon != null ? IconButton(icon: widget.prefixIcon!, onPressed: widget.onprefixIconPressed ?? () {}) : null,
+                prefixIcon: widget.prefixIcon != null
+                    ? IconButton(
+                        icon: widget.prefixIcon!,
+                        onPressed: widget.onprefixIconPressed ?? () {})
+                    : null,
                 focusColor: white,
                 fillColor: widget.fillColor ?? white,
                 hoverColor: white,
@@ -142,7 +150,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     ),
                 enabledBorder: widget.border ??
                     OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(widget.borderRadius ?? 8),
+                      borderRadius:
+                          BorderRadius.circular(widget.borderRadius ?? 8),
                       borderSide: BorderSide(
                         color: border,
                         width: widget.borderWidth ?? 1,
@@ -150,19 +159,23 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     ),
                 focusedBorder: widget.border ??
                     OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(widget.borderRadius ?? 8),
+                      borderRadius:
+                          BorderRadius.circular(widget.borderRadius ?? 8),
                       borderSide: const BorderSide(color: border),
                     ),
                 hintText: widget.hintText,
                 // hintStyle: fonts.subtitle1.copyWith(
-                //     color: colors.customBlack.withOpacity(0.5), fontSize: 14.sp),
+                //     color: colors.customBlack.withValues(alpha:0.5), fontSize: 14.sp),
                 // errorText: widget.error,
                 // errorStyle: fonts.caption.copyWith(color: colors.error),
-                contentPadding: const EdgeInsets.only(left: 16, top: 12, right: 12),
+                contentPadding:
+                    const EdgeInsets.only(left: 16, top: 12, right: 12),
               ),
             ),
           ),
-          widget.subTitle.isNotEmpty ? const SizedBox(height: 6) : const SizedBox(),
+          widget.subTitle.isNotEmpty
+              ? const SizedBox(height: 6)
+              : const SizedBox(),
           widget.subTitle.isNotEmpty
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.end,

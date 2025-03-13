@@ -22,9 +22,9 @@ class WCommentBottomSheet extends StatelessWidget {
             color: white,
             boxShadow: [
               BoxShadow(
-                color: black.withOpacity(0.08),
+                color: black.withValues(alpha: 0.08),
                 blurRadius: 12,
-                offset: Offset(0, -2),
+                offset: const Offset(0, -2),
               ),
             ],
           ),
@@ -60,7 +60,9 @@ class WCommentBottomSheet extends StatelessWidget {
                         child: value
                             ? CircularProgressIndicator.adaptive(
                                 strokeWidth: 1,
-                                valueColor: Animation<Color>.fromValueListenable(ValueNotifier(gray)),
+                                valueColor:
+                                    Animation<Color>.fromValueListenable(
+                                        ValueNotifier(gray)),
                               )
                             : InkWell(
                                 onTap: parentWidget.sendComment,

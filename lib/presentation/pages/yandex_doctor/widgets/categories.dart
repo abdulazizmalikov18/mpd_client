@@ -11,7 +11,8 @@ import 'package:shimmer/shimmer.dart';
 class Categories extends StatelessWidget {
   final bool showDoctorInfo;
   final PopularCategoriesState state;
-  const Categories({super.key, required this.showDoctorInfo, required this.state});
+  const Categories(
+      {super.key, required this.showDoctorInfo, required this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,9 @@ class Categories extends StatelessWidget {
         child: CategoriesComponent(
             scrollController: ScrollController(),
             onScrollEnd: () {
-              context.read<PopularCategoriesBloc>().add(GetPopularCategoriesEvent(Localizations.localeOf(context).languageCode));
+              context.read<PopularCategoriesBloc>().add(
+                  GetPopularCategoriesEvent(
+                      Localizations.localeOf(context).languageCode));
             },
             state: state),
       ),
@@ -38,7 +41,11 @@ class CategoriesComponent extends StatelessWidget {
   final PopularCategoriesState state;
   final VoidCallback onScrollEnd;
   final ScrollController scrollController;
-  const CategoriesComponent({super.key, required this.state, required this.onScrollEnd, required this.scrollController});
+  const CategoriesComponent(
+      {super.key,
+      required this.state,
+      required this.onScrollEnd,
+      required this.scrollController});
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +54,11 @@ class CategoriesComponent extends StatelessWidget {
         onNotification: _handleScrollNotification,
         child: ListView.builder(
           controller: scrollController,
-          physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-          itemCount: state is PopularCategoriesLoading ? state.popularCategories.length + 20 : state.popularCategories.length,
+          physics: const AlwaysScrollableScrollPhysics(
+              parent: BouncingScrollPhysics()),
+          itemCount: state is PopularCategoriesLoading
+              ? state.popularCategories.length + 20
+              : state.popularCategories.length,
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           itemBuilder: (context, index) {
@@ -61,7 +71,8 @@ class CategoriesComponent extends StatelessWidget {
                   padding: EdgeInsets.only(right: 8.w, bottom: 5.h),
                   child: Card(
                     color: white,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100)),
                     child: SizedBox(width: 123.w),
                   ),
                 ),
@@ -71,24 +82,42 @@ class CategoriesComponent extends StatelessWidget {
               padding: EdgeInsets.only(right: 8.w, bottom: 5.h),
               child: BlocConsumer<SearchByCategoryBloc, SearchByCategoryState>(
                 listener: (_, state) {
-                  if (!state.isLoading && state is SearchByCategorySuccess && state.specialists.isNotEmpty) {
-                    context.read<YandexDoctorBloc>().add(ClusterPlaceMarkEvent(specialists: state.specialists, context: context));
+                  if (!state.isLoading &&
+                      state is SearchByCategorySuccess &&
+                      state.specialists.isNotEmpty) {
+                    context.read<YandexDoctorBloc>().add(ClusterPlaceMarkEvent(
+                        specialists: state.specialists, context: context));
                   }
                 },
                 builder: (context, selectedState) {
                   return ElevatedButton(
                     onPressed: () {
-                      context.read<SearchByCategoryBloc>().add(SelectCategoryEvent(state.popularCategories[index].id!));
-                      context.read<SearchByCategoryBloc>().add(GetSearchedByCategory(state.popularCategories[index].id!, state.popularCategories[index].name!));
+                      context.read<SearchByCategoryBloc>().add(
+                          SelectCategoryEvent(
+                              state.popularCategories[index].id!));
+                      context.read<SearchByCategoryBloc>().add(
+                          GetSearchedByCategory(
+                              state.popularCategories[index].id!,
+                              state.popularCategories[index].name!));
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: state.popularCategories[index].id == selectedState.selectedId ? mainBlue.withOpacity(0.8) : white,
-                        foregroundColor: state.popularCategories[index].id == selectedState.selectedId ? white : black,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100))),
+                        backgroundColor: state.popularCategories[index].id ==
+                                selectedState.selectedId
+                            ? mainBlue.withValues(alpha: 0.8)
+                            : white,
+                        foregroundColor: state.popularCategories[index].id ==
+                                selectedState.selectedId
+                            ? white
+                            : black,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100))),
                     child: Text(
                       state.popularCategories[index].name!,
                       style: AppTheme.headlineSmall.copyWith(
-                        color: state.popularCategories[index].id == selectedState.selectedId ? white : black,
+                        color: state.popularCategories[index].id ==
+                                selectedState.selectedId
+                            ? white
+                            : black,
                         // fontFamily: Styles.gilroyMedium,
                       ),
                     ),
@@ -106,7 +135,8 @@ class CategoriesComponent extends StatelessWidget {
   ListView _buildLoadingList() {
     return ListView.builder(
       itemCount: 20,
-      physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+      physics:
+          const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
       scrollDirection: Axis.horizontal,
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       itemBuilder: (context, index) {
@@ -117,7 +147,8 @@ class CategoriesComponent extends StatelessWidget {
             padding: EdgeInsets.only(right: 8.w, bottom: 5.h),
             child: Card(
               color: white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100)),
               child: SizedBox(width: 123.w),
             ),
           ),
@@ -127,7 +158,8 @@ class CategoriesComponent extends StatelessWidget {
   }
 
   bool _handleScrollNotification(ScrollNotification notification) {
-    if (notification is ScrollEndNotification && scrollController.position.extentAfter == 0) {
+    if (notification is ScrollEndNotification &&
+        scrollController.position.extentAfter == 0) {
       onScrollEnd();
     }
     return false;

@@ -137,13 +137,13 @@
 //                           height: 100,
 
 //                           decoration: BoxDecoration(
-//                             color: white.withOpacity(.1),
+//                             color: white.withValues(alpha:.1),
 //                             borderRadius: const BorderRadius.only(
 //                               topRight: Radius.circular(16),
 //                               topLeft: Radius.circular(16),
 //                             ),
 //                             border: Border(
-//                               top: BorderSide(color: white.withOpacity(0.2)),
+//                               top: BorderSide(color: white.withValues(alpha:0.2)),
 //                             ),
 //                           ),
 //                           padding: const EdgeInsets.symmetric(
@@ -151,8 +151,8 @@
 //                             vertical: 12,
 //                           ),
 //                           child: WTextField(
-//                             fillColor: white.withOpacity(0.1),
-//                             borderColor: white.withOpacity(0.2),
+//                             fillColor: white.withValues(alpha:0.1),
+//                             borderColor: white.withValues(alpha:0.2),
 //                             style: AppTheme.headlineSmall.copyWith(
 //                               color: white
 //                             ),

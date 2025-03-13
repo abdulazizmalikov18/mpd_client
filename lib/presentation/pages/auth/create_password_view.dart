@@ -63,7 +63,8 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
                 Center(
                   child: Text(
                     context.l10n.register_create_password,
-                    style: context.textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w700),
+                    style: context.textTheme.displaySmall!
+                        .copyWith(fontWeight: FontWeight.w700),
                   ),
                 ),
                 const SizedBox(height: 32),
@@ -73,7 +74,7 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
                     return WTextField(
                       hasError: value != null,
                       controller: passwordController,
-                      // fillColor: white.withOpacity(0.2),
+                      // fillColor: white.withValues(alpha:0.2),
                       hintText: 'Parol',
                       style: context.textTheme.labelSmall!.copyWith(
                         color: value != null ? red : black,
@@ -98,7 +99,7 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
                     return WTextField(
                       hasError: value != null,
                       controller: reTryPasswordController,
-                      // fillColor: white.withOpacity(0.2),
+                      // fillColor: white.withValues(alpha:0.2),
                       hintText: 'Parolni takrorlang',
                       style: context.textTheme.labelSmall!.copyWith(
                         color: value != null ? red : black,

@@ -8,14 +8,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mpd_client/domain/models/yandex/searched_specialist_model.dart';
 import 'package:mpd_client/domain/models/yandex/yandex_map_object_model.dart';
-import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/app_images.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 import '../../../../../application/yandex/yandex_doctor/yandex_doctor_bloc.dart';
 
 abstract class IYandexService {
-  Future<ClusterizedPlacemarkCollection> getClusterizedPlacemarks({required List<MapSpecialist> specialists, required BuildContext context});
+  Future<ClusterizedPlacemarkCollection> getClusterizedPlacemarks(
+      {required List<MapSpecialist> specialists,
+      required BuildContext context});
 
   Future<YandexMapObjectModel> getCurrentPosition();
 }
@@ -28,24 +29,29 @@ class YandexService extends IYandexService {
 
   String? imageUrl;
 
-  final MapObjectId largeMapObjectId = const MapObjectId('large_clusterized_placemark_collection');
+  final MapObjectId largeMapObjectId =
+      const MapObjectId('large_clusterized_placemark_collection');
   final MapObjectId userLocation = const MapObjectId('user_location');
 
   List<CircleMapObject> _myCirclePlacemarks = [];
 
-  final Point initialPoint = const Point(latitude: 41.311081, longitude: 69.240562);
+  final Point initialPoint =
+      const Point(latitude: 41.311081, longitude: 69.240562);
   // const Point(latitude: 41.310733, longitude: 69.251167);
 
-  final animation = const MapAnimation(type: MapAnimationType.smooth, duration: 1.0);
+  final animation =
+      const MapAnimation(type: MapAnimationType.smooth, duration: 1.0);
 
   final int kPlacemarkCount = 500;
   final Random seed = Random();
 
   @override
   Future<YandexMapObjectModel> getCurrentPosition() async {
-    final position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    final position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
 
-    final YandexMapObjectModel placemarkMapObjects = _getPlaceMark(position: position);
+    final YandexMapObjectModel placemarkMapObjects =
+        _getPlaceMark(position: position);
     return placemarkMapObjects;
   }
 
@@ -85,17 +91,23 @@ class YandexService extends IYandexService {
   // }
 
   @override
-  Future<ClusterizedPlacemarkCollection> getClusterizedPlacemarks({required List<MapSpecialist> specialists, required BuildContext context}) async {
+  Future<ClusterizedPlacemarkCollection> getClusterizedPlacemarks(
+      {required List<MapSpecialist> specialists,
+      required BuildContext context}) async {
     final largeMapObject = ClusterizedPlacemarkCollection(
       mapId: largeMapObjectId,
       radius: 30,
       minZoom: 15,
-      onClusterAdded: (ClusterizedPlacemarkCollection self, Cluster cluster) async {
+      onClusterAdded:
+          (ClusterizedPlacemarkCollection self, Cluster cluster) async {
         return cluster.copyWith(
           appearance: cluster.appearance.copyWith(
             opacity: 0.75,
             icon: PlacemarkIcon.single(
-              PlacemarkIconStyle(image: BitmapDescriptor.fromBytes(await _buildClusterAppearance(cluster)), scale: 1),
+              PlacemarkIconStyle(
+                  image: BitmapDescriptor.fromBytes(
+                      await _buildClusterAppearance(cluster)),
+                  scale: 1),
             ),
           ),
         );
@@ -119,18 +131,25 @@ class YandexService extends IYandexService {
       ..strokeWidth = 10;
     const radius = 60.0;
 
-    final textPainter = TextPainter(text: TextSpan(text: cluster.size.toString(), style: const TextStyle(color: Colors.black, fontSize: 50)), textDirection: TextDirection.ltr);
+    final textPainter = TextPainter(
+        text: TextSpan(
+            text: cluster.size.toString(),
+            style: const TextStyle(color: Colors.black, fontSize: 50)),
+        textDirection: TextDirection.ltr);
 
     textPainter.layout(minWidth: 0, maxWidth: size.width);
 
-    final textOffset = Offset((size.width - textPainter.width) / 2, (size.height - textPainter.height) / 2);
+    final textOffset = Offset((size.width - textPainter.width) / 2,
+        (size.height - textPainter.height) / 2);
     final circleOffset = Offset(size.height / 2, size.width / 2);
 
     canvas.drawCircle(circleOffset, radius, fillPaint);
     canvas.drawCircle(circleOffset, radius, strokePaint);
     textPainter.paint(canvas, textOffset);
 
-    final image = await recorder.endRecording().toImage(size.width.toInt(), size.height.toInt());
+    final image = await recorder
+        .endRecording()
+        .toImage(size.width.toInt(), size.height.toInt());
     final pngBytes = await image.toByteData(format: ImageByteFormat.png);
 
     return pngBytes!.buffer.asUint8List();
@@ -148,7 +167,7 @@ class YandexService extends IYandexService {
           zIndex: i.toDouble(),
           circle: Circle(center: point!, radius: 100 * (i + 1)),
           strokeWidth: 0,
-          fillColor: const Color(0xFF3E80FF).withOpacity(0.3),
+          fillColor: const Color(0xFF3E80FF).withValues(alpha: 0.3),
         );
       });
     }
@@ -156,7 +175,8 @@ class YandexService extends IYandexService {
     return YandexMapObjectModel(point: point!, mapObjects: _myCirclePlacemarks);
   }
 
-  List<PlacemarkMapObject> _getListPlacemarks(BuildContext context, {required List<MapSpecialist> specialists}) {
+  List<PlacemarkMapObject> _getListPlacemarks(BuildContext context,
+      {required List<MapSpecialist> specialists}) {
     List<PlacemarkMapObject> placemarks = [];
     noNullspecialists.clear();
 
@@ -170,10 +190,14 @@ class YandexService extends IYandexService {
           mapId: MapObjectId('placemark_$i'),
           point: point,
           onTap: (mapObject, point) {
-            context.read<YandexDoctorBloc>().add(PressedMapObjectEvent(mapObject.point, specialists: noNullspecialists));
+            context.read<YandexDoctorBloc>().add(PressedMapObjectEvent(
+                mapObject.point,
+                specialists: noNullspecialists));
           },
           icon: PlacemarkIcon.single(
-            PlacemarkIconStyle(image: BitmapDescriptor.fromAssetImage(AppImages.placeMark), scale: 0.7),
+            PlacemarkIconStyle(
+                image: BitmapDescriptor.fromAssetImage(AppImages.placeMark),
+                scale: 0.7),
           ),
         );
         placemarks.add(placeMark);
@@ -183,19 +207,25 @@ class YandexService extends IYandexService {
     return placemarks;
   }
 
-  PlacemarkMapObject getSinglePlacemark(Point point, String specialistId, {required BuildContext context, required List<MapSpecialist> specialists}) {
+  PlacemarkMapObject getSinglePlacemark(Point point, String specialistId,
+      {required BuildContext context,
+      required List<MapSpecialist> specialists}) {
     final singlePlaceMark = PlacemarkMapObject(
       mapId: MapObjectId(specialistId),
       point: point,
       onTap: (mapObject, point) {
-        context.read<YandexDoctorBloc>().add(PressedMapObjectEvent(mapObject.point, specialists: specialists));
+        context.read<YandexDoctorBloc>().add(
+            PressedMapObjectEvent(mapObject.point, specialists: specialists));
       },
-      icon: PlacemarkIcon.single(PlacemarkIconStyle(image: BitmapDescriptor.fromAssetImage(AppImages.placeMark), scale: 0.7)),
+      icon: PlacemarkIcon.single(PlacemarkIconStyle(
+          image: BitmapDescriptor.fromAssetImage(AppImages.placeMark),
+          scale: 0.7)),
     );
     return singlePlaceMark;
   }
 
-  Future<PlacemarkMapObject> getMyImagePlaceMark({required Point point, Uint8List? imageBytes}) async {
+  Future<PlacemarkMapObject> getMyImagePlaceMark(
+      {required Point point, Uint8List? imageBytes}) async {
     if (imageBytes == null) {
       final placemark = PlacemarkMapObject(
         mapId: userLocation,
@@ -214,7 +244,12 @@ class YandexService extends IYandexService {
     //   _userImageBytes = imageBytes;
     //   resizedImage = await ImageCropper().resizeAndCircleFromMemory(_userImageBytes!, 120);
     // }
-    final placemark = PlacemarkMapObject(mapId: userLocation, point: point, opacity: 0.7, icon: PlacemarkIcon.single(PlacemarkIconStyle(image: BitmapDescriptor.fromBytes(resizedImage!))));
+    final placemark = PlacemarkMapObject(
+        mapId: userLocation,
+        point: point,
+        opacity: 0.7,
+        icon: PlacemarkIcon.single(PlacemarkIconStyle(
+            image: BitmapDescriptor.fromBytes(resizedImage!))));
 
     return placemark;
   }
@@ -236,7 +271,10 @@ class YandexService extends IYandexService {
   // }
 
   Future<void> moveCameraPosition(Point point, {double zoom = 10}) async {
-    (await yandexController.future).moveCamera(CameraUpdate.newCameraPosition(CameraPosition(target: point, zoom: zoom)), animation: animation);
+    (await yandexController.future).moveCamera(
+        CameraUpdate.newCameraPosition(
+            CameraPosition(target: point, zoom: zoom)),
+        animation: animation);
   }
 
   // Future<Uint8List> _getImageFromNetwork(String imageUrl) async {
@@ -246,5 +284,6 @@ class YandexService extends IYandexService {
 
   //'https://pbs.twimg.com/profile_images/1141781661551665153/BMnvVd2u_400x400.jpg'
 
-  Point positionToPoint(Position position) => Point(latitude: position.latitude, longitude: position.longitude);
+  Point positionToPoint(Position position) =>
+      Point(latitude: position.latitude, longitude: position.longitude);
 }

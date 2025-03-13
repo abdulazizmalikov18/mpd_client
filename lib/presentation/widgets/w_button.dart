@@ -66,9 +66,8 @@ class WButton extends StatelessWidget {
           color: isDisabled ? gray : color ?? mainBlue,
           borderRadius: BorderRadius.circular(isPhone ? borderRadius : 16),
           border: isDisabled
-              ? border ?? Border.all(color: white.withOpacity(0.3))
-              : border ,
-
+              ? border ?? Border.all(color: white.withValues(alpha: 0.3))
+              : border,
         ),
         child: isLoading
             ? const Center(
@@ -77,12 +76,14 @@ class WButton extends StatelessWidget {
             : AnimatedDefaultTextStyle(
                 duration: const Duration(milliseconds: 200),
                 style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                      color:  white,
+                      color: white,
                     ),
                 child: child ??
                     Text(
                       text,
-                      style: isDisabled ? textStyle?.copyWith(color: white) : textStyle,
+                      style: isDisabled
+                          ? textStyle?.copyWith(color: white)
+                          : textStyle,
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,

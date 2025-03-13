@@ -29,70 +29,79 @@ class _WPostAddPhotoItemState extends State<WPostAddPhotoItem> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-      Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Wrap(
-                    children: [
-                      for (int index = 0; index < files.length; index++)
-                        Padding(
-                          padding: EdgeInsets.only(left: index.isOdd ? 16 : 0, top: index > 1 ? 16 : 0),
-                          child: WMediaReder(
-                            onClose: () => onRemoveFile(index),
-                            file: files[index],
-                            width: (size.width - 48) * 0.5,
-                            height: (size.width - 48) * 0.5,
-                          ),
-                        ),
-                      GestureDetector(
-                        onTap: () async {
-                          final medias = await ImagePicker().pickMultipleMedia(limit: 5);
-                          if (context.mounted && medias.isNotEmpty) {
-                            CreatePostView.maybeOf(context)!.files = [...files, ...medias.map((e) => File(e.path))];
-                            setState(() {});
-                          }
-                        },
-                        child: Container(
-                          width: files.isEmpty ? double.infinity : (size.width - 48) * 0.5,
-                          height: (size.width - 48) * 0.5,
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.only(left: files.length.isOdd ? 16 : 0, top: files.length > 1 ? 16 : 0),
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: border,
-                            ),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                width: 48,
-                                height: 48,
-                                padding: const EdgeInsets.all(12),
-                                decoration: BoxDecoration(
-                                  color: black.withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: AppIcons.gallery.svg(),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                'Add Media',
-                                style: AppTheme.headlineSmall.copyWith(
-                                  color: black.withOpacity(0.5),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Wrap(
+              children: [
+                for (int index = 0; index < files.length; index++)
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: index.isOdd ? 16 : 0, top: index > 1 ? 16 : 0),
+                    child: WMediaReder(
+                      onClose: () => onRemoveFile(index),
+                      file: files[index],
+                      width: (size.width - 48) * 0.5,
+                      height: (size.width - 48) * 0.5,
+                    ),
                   ),
-                  const SizedBox(height: 16),
-                ],
-              ),
+                GestureDetector(
+                  onTap: () async {
+                    final medias =
+                        await ImagePicker().pickMultipleMedia(limit: 5);
+                    if (context.mounted && medias.isNotEmpty) {
+                      CreatePostView.maybeOf(context)!.files = [
+                        ...files,
+                        ...medias.map((e) => File(e.path))
+                      ];
+                      setState(() {});
+                    }
+                  },
+                  child: Container(
+                    width: files.isEmpty
+                        ? double.infinity
+                        : (size.width - 48) * 0.5,
+                    height: (size.width - 48) * 0.5,
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.only(
+                        left: files.length.isOdd ? 16 : 0,
+                        top: files.length > 1 ? 16 : 0),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: border,
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          width: 48,
+                          height: 48,
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: black.withValues(alpha: 0.2),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: AppIcons.gallery.svg(),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'Add Media',
+                          style: AppTheme.headlineSmall.copyWith(
+                            color: black.withValues(alpha: 0.5),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(height: 16),
+          ],
+        ),
       ],
     );
   }
@@ -156,15 +165,15 @@ class _WMediaRederState extends State<WMediaReder> {
                         width: widget.width,
                         height: widget.height,
                         decoration: BoxDecoration(
-                          color: white.withOpacity(0.1),
+                          color: white.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: white.withOpacity(0.2),
+                            color: white.withValues(alpha: 0.2),
                           ),
                         ),
                         child: Icon(
                           CupertinoIcons.doc_fill,
-                          color: white.withOpacity(0.5),
+                          color: white.withValues(alpha: 0.5),
                           size: 40,
                         ),
                       );

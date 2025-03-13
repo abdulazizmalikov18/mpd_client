@@ -79,7 +79,7 @@ class _WCommentState extends State<WComment> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -102,7 +102,7 @@ class _WCommentState extends State<WComment> {
           Text(
             widget.comment.text.isNotEmpty ? widget.comment.text : '',
             style: AppTheme.labelSmall.copyWith(
-              color: black.withOpacity(.4),
+              color: black.withValues(alpha: .4),
             ),
           ),
           const SizedBox(height: 16),

@@ -25,7 +25,8 @@ class DrProfileInfo extends StatelessWidget {
             alignment: Alignment.center,
             height: 64.h,
             width: 64.h,
-            decoration: BoxDecoration(shape: BoxShape.circle, color: mainBlue.withOpacity(0.1)),
+            decoration: BoxDecoration(
+                shape: BoxShape.circle, color: mainBlue.withValues(alpha: 0.1)),
             child: GradientIcon(
               iconName: iconName,
               size: 24,
@@ -34,7 +35,8 @@ class DrProfileInfo extends StatelessWidget {
           ScreenUtil().setVerticalSpacing(10.h),
           Text(
             count.toString(),
-            style: Styles.descSubtitle.copyWith(color: mainBlue, fontWeight: FontWeight.w500),
+            style: Styles.descSubtitle
+                .copyWith(color: mainBlue, fontWeight: FontWeight.w500),
           ),
           ScreenUtil().setVerticalSpacing(2.h),
           Text(
@@ -60,19 +62,22 @@ class DrProfileInfoLoading extends StatelessWidget {
             alignment: Alignment.center,
             height: 64.h,
             width: 64.h,
-            decoration: const BoxDecoration(shape: BoxShape.circle, color: white),
+            decoration:
+                const BoxDecoration(shape: BoxShape.circle, color: white),
           ),
           ScreenUtil().setVerticalSpacing(10.h),
           Container(
             height: 19.h,
             width: 75.w,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.r), color: white),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r), color: white),
           ),
           ScreenUtil().setVerticalSpacing(2.h),
           Container(
             height: 14.h,
             width: 75.w,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.r), color: white),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r), color: white),
           ),
         ],
       ),

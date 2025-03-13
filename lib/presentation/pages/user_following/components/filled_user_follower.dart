@@ -50,7 +50,7 @@ class FilledUserFollowers extends StatelessWidget {
                     SizedBox(
                       height: 25.h,
                       width: 25.h,
-                      child: CircularProgressIndicator(
+                      child: const CircularProgressIndicator(
                         strokeWidth: 2,
                         color: mainBlue,
                       ),

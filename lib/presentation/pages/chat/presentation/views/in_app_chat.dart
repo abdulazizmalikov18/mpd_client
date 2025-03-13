@@ -26,7 +26,8 @@ class InChatView extends StatefulWidget {
   State<InChatView> createState() => _InChatViewState();
 
   // ignore: library_private_types_in_public_api
-  static _InChatViewState? of(BuildContext context) => context.findAncestorStateOfType<_InChatViewState>();
+  static _InChatViewState? of(BuildContext context) =>
+      context.findAncestorStateOfType<_InChatViewState>();
 }
 
 class _InChatViewState extends State<InChatView> {
@@ -35,7 +36,9 @@ class _InChatViewState extends State<InChatView> {
   @override
   void initState() {
     context.read<ChatMessageBloc>().add(ChatGetMessages(widget.group));
-    context.read<ChatMessageBloc>().add(ChatReadAllMessage(widget.group.slugName));
+    context
+        .read<ChatMessageBloc>()
+        .add(ChatReadAllMessage(widget.group.slugName));
 
     super.initState();
   }
@@ -91,7 +94,9 @@ class _InChatViewState extends State<InChatView> {
         padding: EdgeInsets.only(
           right: 8,
           left: 8,
-          bottom: MediaQuery.viewInsetsOf(context).bottom > 0 ? kBottomNavigationBarHeight : kBottomNavigationBarHeight + 24,
+          bottom: MediaQuery.viewInsetsOf(context).bottom > 0
+              ? kBottomNavigationBarHeight
+              : kBottomNavigationBarHeight + 24,
         ),
         child: BlocBuilder<ChatMessageBloc, ChatMessageState>(
           builder: (context, state) => switch (state.status) {
@@ -99,23 +104,25 @@ class _InChatViewState extends State<InChatView> {
                 child: CupertinoActivityIndicator(),
               ),
             _ => Align(
-              alignment: Alignment.bottomCenter,
-              child: PaginatorList(
-                controller: $chatController.of(context).scrollController,
-                itemCount: state.messages.length,
-                reverse: true,
-                itemBuilder: (BuildContext context, int index) {
-                  return WMessage(
-                    message: state.messages[index],
-                  );
-                },
-                paginatorStatus: state.status,
-                fetchMoreFunction: () {
-                  context.read<ChatMessageBloc>().add(ChatGetMoreMessages(widget.group));
-                },
-                hasMoreToFetch: (state.count) > state.messages.length,
+                alignment: Alignment.bottomCenter,
+                child: PaginatorList(
+                  controller: $chatController.of(context).scrollController,
+                  itemCount: state.messages.length,
+                  reverse: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return WMessage(
+                      message: state.messages[index],
+                    );
+                  },
+                  paginatorStatus: state.status,
+                  fetchMoreFunction: () {
+                    context
+                        .read<ChatMessageBloc>()
+                        .add(ChatGetMoreMessages(widget.group));
+                  },
+                  hasMoreToFetch: (state.count) > state.messages.length,
+                ),
               ),
-            ),
           },
         ),
       ),
@@ -129,7 +136,12 @@ class _InChatViewState extends State<InChatView> {
         ),
         decoration: BoxDecoration(
           color: white,
-          boxShadow: [BoxShadow(color: black.withOpacity(.15), offset: const Offset(0, -4), blurRadius: 12)],
+          boxShadow: [
+            BoxShadow(
+                color: black.withValues(alpha: .15),
+                offset: const Offset(0, -4),
+                blurRadius: 12)
+          ],
         ),
         duration: const Duration(milliseconds: 200),
         child: const WChatTextField(),
