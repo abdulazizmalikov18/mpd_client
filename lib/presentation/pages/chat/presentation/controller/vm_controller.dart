@@ -44,9 +44,11 @@ class ChatVMController {
   }
 
   static ChatVMController of(BuildContext context) => ChatVMController();
-  Future<void> connectSocket({required void Function(String errorMessage) onError}) async {
+  Future<void> connectSocket(
+      {required void Function(String errorMessage) onError}) async {
     try {
-      final wsUrl = Uri.parse("ws://82.215.78.34:80/SMMS/ws/chat/?token=${StorageRepository.getString(StorageKeys.TOKEN)}");
+      final wsUrl = Uri.parse(
+          "ws://82.215.78.34:80/SMMS/ws/chat/?token=${StorageRepository.getString(StorageKeys.TOKEN)}");
       channel = WebSocketChannel.connect(wsUrl);
       await channel!.ready;
       channel!.stream.asBroadcastStream();
@@ -64,7 +66,8 @@ class ChatVMController {
         (event) {
           Log.i("New Chat Message $event \nType${event.runtimeType}");
           final eventData = (jsonDecode(event));
-          if (eventData is Map<String, dynamic> && eventData.containsValue("notify_about_message")) {
+          if (eventData is Map<String, dynamic> &&
+              eventData.containsValue("notify_about_message")) {
             Log.i("Message  Keldi");
             onMessage(MessageModel.fromSocket(eventData));
           }
@@ -82,7 +85,9 @@ class ChatVMController {
         (event) {
           Log.i("New Chat Message $event \nType${event.runtimeType}");
           final eventData = (jsonDecode(event));
-          if (eventData is Map<String, dynamic> && eventData.containsValue("type") && event['type'] == "online_status") {
+          if (eventData is Map<String, dynamic> &&
+              eventData.containsValue("type") &&
+              event['type'] == "online_status") {
             Log.i("Message  Keldi");
             onMessage(ChatUserState.fromJson(eventData));
           }

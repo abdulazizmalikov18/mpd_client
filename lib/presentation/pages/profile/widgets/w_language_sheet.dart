@@ -29,7 +29,8 @@ class LanguageSheet extends StatelessWidget {
         Center(
           child: Text(
             context.l10n.profile_language,
-            style: Styles.boldTitle.copyWith(color: black, fontSize: 24.sp, fontFamily: Styles.gilroyMedium),
+            style: Styles.boldTitle.copyWith(
+                color: black, fontSize: 24.sp, fontFamily: Styles.gilroyMedium),
           ),
         ),
         const SizedBox(height: 12),
@@ -43,7 +44,8 @@ class LanguageSheet extends StatelessWidget {
         ...List.generate(
           languages.length,
           (index) => Padding(
-            padding: EdgeInsets.only(bottom: index == 2 ? 32 : 10, left: 16, right: 16),
+            padding: EdgeInsets.only(
+                bottom: index == 2 ? 32 : 10, left: 16, right: 16),
             child: LaguageButton(
               imagePath: languages.values.elementAt(index),
               language: languages.keys.elementAt(index),

@@ -36,9 +36,12 @@ class AuthRepository {
         },
       );
       if (result.isRight) {
-        await StorageRepository.putString(StorageKeys.USERID, result.right.username);
-        await StorageRepository.putString(StorageKeys.TOKEN, result.right.access);
-        await StorageRepository.putString(StorageKeys.REFRESH, result.right.refresh);
+        await StorageRepository.putString(
+            StorageKeys.USERID, result.right.username);
+        await StorageRepository.putString(
+            StorageKeys.TOKEN, result.right.access);
+        await StorageRepository.putString(
+            StorageKeys.REFRESH, result.right.refresh);
         return Right(result.right);
       } else {
         return Left(result.left);
@@ -59,12 +62,15 @@ class AuthRepository {
         fromJson: TokenModel.fromJson,
         sendToken: false,
         data: {
-          'refresh': StorageRepository.getString(StorageKeys.REFRESH, defValue: ''),
+          'refresh':
+              StorageRepository.getString(StorageKeys.REFRESH, defValue: ''),
         },
       );
       if (result.isRight) {
-        await StorageRepository.putString(StorageKeys.TOKEN, result.right.access);
-        await StorageRepository.putString(StorageKeys.REFRESH, result.right.refresh);
+        await StorageRepository.putString(
+            StorageKeys.TOKEN, result.right.access);
+        await StorageRepository.putString(
+            StorageKeys.REFRESH, result.right.refresh);
         return Right(result.right);
       } else {
         return Left(result.left);
@@ -92,7 +98,8 @@ class AuthRepository {
     return result;
   }
 
-  Future<Either<Failure, UserModel>> putUser({required int id, required String cardNumber}) async {
+  Future<Either<Failure, UserModel>> putUser(
+      {required int id, required String cardNumber}) async {
     final result = await _repo.putSingle(
       endpoint: 'employee/$id',
       fromJson: UserModel.fromJson,
@@ -119,7 +126,8 @@ class AuthRepository {
     );
   }
 
-  Future<Either<Failure, bool>> changePassword(String oldPassword, String newPassword, String newRepeatPassword) async {
+  Future<Either<Failure, bool>> changePassword(
+      String oldPassword, String newPassword, String newRepeatPassword) async {
     return await _repo.postAndSingle(
       sendToken: false,
       fromJson: (p0) => p0["message"] == "Pvc sent",
@@ -160,7 +168,8 @@ class AuthRepository {
     );
   }
 
-  Future<Either<Failure, CreateUserModel>> createUser(CreateUser user, String? avatar) async {
+  Future<Either<Failure, CreateUserModel>> createUser(
+      CreateUser user, String? avatar) async {
     final data = FormData.fromMap(user.toJson());
     Future.delayed(const Duration(seconds: 3)).whenComplete(() {
 
@@ -185,7 +194,8 @@ class AuthRepository {
     return result;
   }
 
-  Future<Either<Failure, bool>> updateUser(UserModel user, String? avatar, String? backgroundImage) async {
+  Future<Either<Failure, bool>> updateUser(
+      UserModel user, String? avatar, String? backgroundImage) async {
     final data = FormData.fromMap({
       "main": true,
       "business_ava": true,

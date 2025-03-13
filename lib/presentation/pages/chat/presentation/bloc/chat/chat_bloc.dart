@@ -64,7 +64,9 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         name: event.name,
         slugName: event.slugName,
         avatar: event.avatar,
-        chatUsers: state.createGroupContainer.selectionUser.map<String>((e) => e.username).toList(),
+        chatUsers: state.createGroupContainer.selectionUser
+            .map<String>((e) => e.username)
+            .toList(),
         isPrivate: event.isPrivate,
         isUserToUser: false,
       ),
@@ -232,7 +234,9 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   }
 
   void _pushToChat(PushToChatEvent event, Emitter emit) async {
-    final foundIndex = state.groupContainer.groups.findIndex((value) => value.slugName == event.slugName) ?? 0;
+    final foundIndex = state.groupContainer.groups
+            .findIndex((value) => value.slugName == event.slugName) ??
+        0;
 
     emit(
       state.copyWith(
@@ -243,7 +247,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       ),
     );
 
-    final result = await _repo.getMessages(GetChatEntity(groupSlug: event.slugName, limit: 20));
+    final result = await _repo
+        .getMessages(GetChatEntity(groupSlug: event.slugName, limit: 20));
     if (result.isRight) {
       final activeGroup = state.groupContainer.groups[foundIndex];
       state.groupContainer.groups[foundIndex] = activeGroup.copyWith();
@@ -277,7 +282,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   }
 
   void _chatListenerConnect() async {
-    chatSocket = IOWebSocketChannel.connect(Uri.parse("${$baseUrlSocket}:80/SMMS/ws/chat/?token=${StorageRepository.getString(StorageKeys.TOKEN)}"));
+    chatSocket = IOWebSocketChannel.connect(Uri.parse(
+        "${$baseUrlSocket}:80/SMMS/ws/chat/?token=${StorageRepository.getString(StorageKeys.TOKEN)}"));
     await chatSocket?.ready;
     chatSocket?.stream.listen((event) {
       try {
@@ -305,7 +311,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
   void _comingNewMessage(ChatNewComeEvent event, Emitter emit) {
     if (!event.newMessage.isMe) {
-      $chatController.chatNotifier.value = '${event.newMessage.sender}dan Yangi habar';
+      $chatController.chatNotifier.value =
+          '${event.newMessage.sender}dan Yangi habar';
     }
     final foundIndex = (state.groupContainer.groups).findIndex(
       (value) => value.slugName == event.newMessage.groupSlug,
@@ -318,7 +325,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       if (event.newMessage.isMe) return;
 
       /// In Chats Coming New Message
-      if (event.newMessage.groupSlug == state.groupContainer.activeGroup!.slugName) {
+      if (event.newMessage.groupSlug ==
+          state.groupContainer.activeGroup!.slugName) {
         final newState = state.groupContainer.groups;
         newState[foundIndex].lastMessage = event.newMessage.text ?? '';
         newState[foundIndex].lastFile = event.newMessage.file ?? '';
@@ -333,7 +341,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         );
       }
       final newState = state.groupContainer.groups;
-      newState[foundIndex].unreadMessageCount = newState[foundIndex].unreadMessageCount + 1;
+      newState[foundIndex].unreadMessageCount =
+          newState[foundIndex].unreadMessageCount + 1;
       newState[foundIndex].lastMessage = event.newMessage.text ?? '';
       newState[foundIndex].lastFile = event.newMessage.file ?? '';
       emit(
@@ -416,7 +425,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             groups: [...result.right.results],
           ),
         ),
-      );
+      ));
       return;
     }
     emit(
@@ -431,12 +440,16 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   }
 
   void _sendMessage(SendMessageEvent event, Emitter emit) async {
-    final foundIndex = state.groupContainer.groups.findIndex((value) => value.slugName == event.slugName) ?? 0;
+    final foundIndex = state.groupContainer.groups
+            .findIndex((value) => value.slugName == event.slugName) ??
+        0;
     changeFirstChatIndex(foundIndex: foundIndex, emit: emit);
 
     final newMessageId = const Uuid().v4();
     final message = MessageModel(
-      id: (state.chatContainer.chats.isEmpty) ? 0 : (state.chatContainer.chats.last.id ?? 0) + 1,
+      id: (state.chatContainer.chats.isEmpty)
+          ? 0
+          : (state.chatContainer.chats.last.id ?? 0) + 1,
       text: event.text,
       file: event.file?.path,
       groupSlug: event.slugName,
@@ -449,28 +462,25 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       isRead: false,
     );
 
-    emit(
-      state.copyWith(
-        chatContainer: state.chatContainer.copyWith(
-          chats: [
-            message,
-            ...state.chatContainer.chats,
-          ],
-        ),
+    emit(state.copyWith(
+      chatContainer: state.chatContainer.copyWith(
+        chats: [
+          message,
+          ...state.chatContainer.chats,
+        ],
       ),
-    );
+    ));
 
-    final result = await _repo.sendMessage(SendMessageEntity(text: event.text, slugName: event.slugName, file: event.file));
+    final result = await _repo.sendMessage(SendMessageEntity(
+        text: event.text, slugName: event.slugName, file: event.file));
 
     if (result.isRight) {
-      emit(
-        state.copyWith(
-          chatContainer: state.chatContainer.copyWith(
-            chats: state.chatContainer.chats,
-          ),
-          dataStatus: FormzSubmissionStatus.success,
+      emit(state.copyWith(
+        chatContainer: state.chatContainer.copyWith(
+          chats: state.chatContainer.chats,
         ),
-      );
+        dataStatus: FormzSubmissionStatus.success,
+      ));
     }
   }
 
@@ -483,7 +493,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       textForUpdate: const Uuid().v4(),
     ));
 
-    final result = await _repo.getGroups(GetGroupChatEntity(search: event.search));
+    final result =
+        await _repo.getGroups(GetGroupChatEntity(search: event.search));
     emit(state.copyWith(
       groupContainer: state.groupContainer.copyWith(
         status: FormzSubmissionStatus.success,
@@ -502,30 +513,32 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       ),
     );
     if (!event.isActive) {
-      final users = state.createGroupContainer.selectionUser.where((element) => element.username != event.user.username).toList();
-      emit(
-        state.copyWith(
-          createGroupContainer: state.createGroupContainer.copyWith(
-            selectionUser: users,
-            status: FormzSubmissionStatus.success,
-          ),
+      final users = state.createGroupContainer.selectionUser
+          .where((element) => element.username != event.user.username)
+          .toList();
+      emit(state.copyWith(
+        createGroupContainer: state.createGroupContainer.copyWith(
+          selectionUser: users,
+          status: FormzSubmissionStatus.success,
         ),
-      );
+      ));
     } else {
-      emit(
-        state.copyWith(
-          createGroupContainer: state.createGroupContainer.copyWith(
-            selectionUser: [...state.createGroupContainer.selectionUser, event.user],
-            status: FormzSubmissionStatus.success,
-          ),
+      emit(state.copyWith(
+        createGroupContainer: state.createGroupContainer.copyWith(
+          selectionUser: [
+            ...state.createGroupContainer.selectionUser,
+            event.user
+          ],
+          status: FormzSubmissionStatus.success,
         ),
-      );
+      ));
     }
   }
 
   List<ChatUserModel> filterUser(List<ChatUserModel> users) {
     return users.where((element) {
-      return (!state.groupContainer.groups.findExist((value) => value.slugName == element.name && (value.isUserToUser)));
+      return (!state.groupContainer.groups.findExist(
+          (value) => value.slugName == element.name && (value.isUserToUser)));
     }).toList();
   }
 

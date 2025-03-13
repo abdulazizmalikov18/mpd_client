@@ -229,6 +229,7 @@ class Utils {
       case DirectionsMode.bicycling:
         return 'bicycle';
       }
+      }
   }
 
   /// Returns [DirectionsMode] for [MapType.yandexMaps]

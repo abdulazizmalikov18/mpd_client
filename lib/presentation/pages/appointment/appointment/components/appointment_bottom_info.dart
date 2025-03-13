@@ -20,6 +20,13 @@ class AppointmentBottomInfo extends StatelessWidget {
       required this.meetDate,
       required this.onDetailPressed,
       required this.onLocationPressed});
+  const AppointmentBottomInfo(
+      {super.key,
+      this.isPending = false,
+      this.price = 0,
+      required this.meetDate,
+      required this.onDetailPressed,
+      required this.onLocationPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +55,9 @@ class AppointmentBottomInfo extends StatelessWidget {
                           meetDate.isEmpty
                               ? "--"
                               : Utils.appointMentDateFormat(meetDate, context),
+                          meetDate.isEmpty
+                              ? "--"
+                              : Utils.appointMentDateFormat(meetDate, context),
                           overflow: TextOverflow.ellipsis,
                           style: context.textTheme.headlineSmall!.copyWith(
                             color: mainBlue,
@@ -61,6 +71,16 @@ class AppointmentBottomInfo extends StatelessWidget {
               : RichText(
                   text: TextSpan(
                     children: [
+                      TextSpan(
+                          text: '${Utils.priceFormat(price)} UZS\n',
+                          style: Styles.descSubtitle.copyWith(
+                              color: black, fontWeight: FontWeight.w600)),
+                      TextSpan(
+                          text: meetDate.isEmpty
+                              ? "--"
+                              : Utils.appointMentDateFormat(meetDate, context),
+                          style: Styles.cardReview
+                              .copyWith(color: grey, fontSize: 10.sp)),
                       TextSpan(
                           text: '${Utils.priceFormat(price)} UZS\n',
                           style: Styles.descSubtitle.copyWith(

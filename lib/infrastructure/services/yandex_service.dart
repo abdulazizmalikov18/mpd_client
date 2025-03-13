@@ -211,16 +211,15 @@ class YandexService extends IYandexService {
       {required BuildContext context,
       required List<MapSpecialist> specialists}) {
     final singlePlaceMark = PlacemarkMapObject(
-      mapId: MapObjectId(specialistId),
-      point: point,
-      onTap: (mapObject, point) {
-        context.read<YandexDoctorBloc>().add(
-            PressedMapObjectEvent(mapObject.point, specialists: specialists));
-      },
-      icon: PlacemarkIcon.single(PlacemarkIconStyle(
-          image: BitmapDescriptor.fromAssetImage(AppImages.placeMark),
-          scale: 0.7)),
-    );
+        mapId: MapObjectId(specialistId),
+        point: point,
+        onTap: (mapObject, point) {
+          context.read<YandexDoctorBloc>().add(
+              PressedMapObjectEvent(mapObject.point, specialists: specialists));
+        },
+        icon: PlacemarkIcon.single(PlacemarkIconStyle(
+            image: BitmapDescriptor.fromAssetImage(AppImages.placeMark),
+            scale: 0.7)));
     return singlePlaceMark;
   }
 
@@ -228,14 +227,11 @@ class YandexService extends IYandexService {
       {required Point point, Uint8List? imageBytes}) async {
     if (imageBytes == null) {
       final placemark = PlacemarkMapObject(
-        mapId: userLocation,
-        point: point,
-        // icon: PlacemarkIcon.single(
-        //   PlacemarkIconStyle(
-        //     image: BitmapDescriptor.fromAssetImage(AppIcons.mapProfileDefault),
-        //   ),
-        // ),
-      );
+          mapId: userLocation,
+          point: point,
+          icon: PlacemarkIcon.single(PlacemarkIconStyle(
+              image: BitmapDescriptor.fromAssetImage(
+                  AppIcons.mapProfileDefault))));
 
       return placemark;
     }

@@ -61,6 +61,9 @@ class _LoginViewState extends State<LoginView> {
                         fillColor: hasError == null
                             ? white.withValues(alpha: 0.1)
                             : red.withValues(alpha: 0.2),
+                        fillColor: hasError == null
+                            ? white.withValues(alpha: 0.1)
+                            : red.withValues(alpha: 0.2),
                         hintText: context.l10n.login_phone,
                         hasError: hasError != null,
                         inputFormatters: setFormat(loginController.text),
@@ -88,6 +91,9 @@ class _LoginViewState extends State<LoginView> {
                   return WTextField(
                     hasError: hasError != null,
                     controller: passwordController,
+                    fillColor: hasError == null
+                        ? white.withValues(alpha: 0.1)
+                        : red.withValues(alpha: 0.2),
                     fillColor: hasError == null
                         ? white.withValues(alpha: 0.1)
                         : red.withValues(alpha: 0.2),
@@ -209,6 +215,8 @@ class _LoginViewState extends State<LoginView> {
           mask: '+998 ($text#) ###-##-##',
           filter: {"#": RegExp(r'[0-9]')},
         )
+        MaskTextInputFormatter(
+            mask: '+998 ($text#) ###-##-##', filter: {"#": RegExp(r'[0-9]')})
       ];
     } else {
       return [
@@ -224,6 +232,8 @@ class _LoginViewState extends State<LoginView> {
   }
 
   void onChangeText() {
+    if (loginController.text.trim().isNotEmpty &&
+        passwordController.text.trim().isNotEmpty) {
     if (loginController.text.trim().isNotEmpty &&
         passwordController.text.trim().isNotEmpty) {
       isEnable.value = true;

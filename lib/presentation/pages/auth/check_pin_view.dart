@@ -80,7 +80,9 @@ class _CheckPinViewState extends State<CheckPinView> with BiometricAuth {
                     onTap: () async {
                       await authenticate().then((authState) {
                         if (authState) {
-                          context.goNamed(AppRouteNames.home);
+                          if (context.mounted) {
+                            context.goNamed(AppRouteNames.home);
+                          }
                         }
                       });
                     },
@@ -149,7 +151,9 @@ class _CheckPinViewState extends State<CheckPinView> with BiometricAuth {
         hasError.value = 'success';
 
         Future.delayed(const Duration(seconds: 1)).whenComplete(() {
-          context.goNamed(AppRouteNames.home);
+          if (mounted) {
+            context.goNamed(AppRouteNames.home);
+          }
         });
       },
       onError: (errorMessage) {

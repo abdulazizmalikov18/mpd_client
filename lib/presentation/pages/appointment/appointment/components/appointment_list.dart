@@ -62,10 +62,12 @@ class AppointmentList extends StatelessWidget {
       child: NotificationListener(
         onNotification: _handleScrollNotification,
         child: ListView.builder(
-          physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+          physics: const AlwaysScrollableScrollPhysics(
+              parent: BouncingScrollPhysics()),
           controller: scrollController,
           padding: EdgeInsets.symmetric(vertical: 8.h),
-          itemCount: hasReachedMax ? appointments.length : appointments.length + 1,
+          itemCount:
+              hasReachedMax ? appointments.length : appointments.length + 1,
           itemBuilder: (context, index) {
             if (index >= appointments.length) {
               return const Center(child: LoadingPlatform());
@@ -74,12 +76,16 @@ class AppointmentList extends StatelessWidget {
             return AppointmentItem(
               specialist: SpecialistInfoModel(
                 appointmentName: appointment.name,
-                avatar: appointment.currentWorkState?.specialist.avatar ?? appointment.responsible?.avatar,
+                avatar: appointment.currentWorkState?.specialist.avatar ??
+                    appointment.responsible?.avatar,
                 fullname: appointment.currentWorkState != null
                     ? '${appointment.currentWorkState?.specialist.name ?? '-'} ${appointment.currentWorkState?.specialist.lastname ?? '-'}'
                     : '${appointment.responsible?.name ?? '-'} ${appointment.responsible?.lastname ?? '-'}',
-                job: appointment.currentWorkState?.specialist.job ?? appointment.responsible?.job,
-                id: appointment.currentWorkState?.specialist.id ?? appointment.responsible?.id ?? 0,
+                job: appointment.currentWorkState?.specialist.job ??
+                    appointment.responsible?.job,
+                id: appointment.currentWorkState?.specialist.id ??
+                    appointment.responsible?.id ??
+                    0,
               ),
               appoinmentInfo: infos[infoIndex],
               bottomInfo: getBottomWidget(appointments[index], infos, context),
@@ -90,7 +96,8 @@ class AppointmentList extends StatelessWidget {
     );
   }
 
-  Widget getBottomWidget(Appointment appointment, List<AppoinmentInfo> infos, BuildContext context) {
+  Widget getBottomWidget(Appointment appointment, List<AppoinmentInfo> infos,
+      BuildContext context) {
     switch (infos[infoIndex].drCardInfo) {
       case DrCardInfo.pending:
         return AppointmentBottomInfo(
@@ -101,7 +108,6 @@ class AppointmentList extends StatelessWidget {
               'appoinmentInfo': infos[infoIndex],
               'appointment': appointment,
             });
-            // FIXME: PushTo Navigatge
             // Navigator.pushNamed(
             //   context,
             //   AppRoutes.appointment,
@@ -174,7 +180,8 @@ class AppointmentList extends StatelessWidget {
   }
 
   bool _handleScrollNotification(ScrollNotification notification) {
-    if (notification is ScrollEndNotification && scrollController.position.extentAfter == 0) {
+    if (notification is ScrollEndNotification &&
+        scrollController.position.extentAfter == 0) {
       scrollEndFunction();
     }
     return false;

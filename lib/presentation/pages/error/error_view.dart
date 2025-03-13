@@ -20,7 +20,8 @@ class ErrorDrawView extends StatefulWidget {
 
 class _ErrorDrawViewState extends State<ErrorDrawView> {
   final _imageKey = GlobalKey<ImagePainterState>();
-  final _imageController = ImagePainterController(strokeWidth: 2, color: Colors.red, mode: PaintMode.rect);
+  final _imageController = ImagePainterController(
+      strokeWidth: 2, color: Colors.red, mode: PaintMode.rect);
 
   @override
   Widget build(BuildContext context) {

@@ -77,6 +77,12 @@ class AppointmentItem extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(100.r),
                                   color: appoinmentInfo.color!
                                       .withValues(alpha: 0.1)),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 8.w, vertical: 4.h),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100.r),
+                                  color: appoinmentInfo.color!
+                                      .withValues(alpha: 0.1)),
                               child: Row(
                                 children: [
                                   appoinmentInfo.statusIcon!.svg(
@@ -104,6 +110,8 @@ class AppointmentItem extends StatelessWidget {
                           specialist.job ?? "__",
                           style: Styles.headline7
                               .copyWith(fontSize: 14, color: mainBlue),
+                          style: Styles.headline7
+                              .copyWith(fontSize: 14, color: mainBlue),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                         ),
@@ -116,6 +124,8 @@ class AppointmentItem extends StatelessWidget {
                             specialist.appointmentName ?? "--",
                             style: Styles.cardReview
                                 .copyWith(color: red, fontSize: 12),
+                            style: Styles.cardReview
+                                .copyWith(color: red, fontSize: 12),
                           ),
                         ),
                       if (appoinmentInfo.drCardInfo == DrCardInfo.following)
@@ -126,6 +136,8 @@ class AppointmentItem extends StatelessWidget {
                             ScreenUtil().setHorizontalSpacing(8.w),
                             Text(
                               specialist.workingTime.toString(),
+                              style: Styles.descSubtitle
+                                  .copyWith(fontSize: 14.sp, color: grey),
                               style: Styles.descSubtitle
                                   .copyWith(fontSize: 14.sp, color: grey),
                             ),
