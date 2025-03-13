@@ -78,9 +78,9 @@ const _gradientBlue = Color(0xFF003CC5);
 const _gradientBlueOpacity = Color(0xff00B5D9);
 const _yellow = Color(0xFFF4B208);
 const _shadow = Color.fromARGB(141, 201, 201, 201);
-const _cardShadow = Color(0xff14000000);
-final _baseColor = const Color(0xFF3E80FF).withOpacity(0.15);
-final _highlightColor = const Color(0xFF3E80FF).withOpacity(0.25);
+const _cardShadow = Color(0xff140000);
+final _baseColor = const Color(0xFF3E80FF).withValues(alpha: 0.15);
+final _highlightColor = const Color(0xFF3E80FF).withValues(alpha: 0.25);
 const _fillColor = Color(0xFFF2F2F2);
 const _orangeLight = Color(0xFFFD9644);
 
@@ -124,7 +124,7 @@ List<BoxShadow> wboxShadow = [
   BoxShadow(
     offset: const Offset(0, 0),
     blurRadius: 22,
-    color: blue.withOpacity(.9),
+    color: blue.withValues(alpha: .9),
   ),
 ];
 
@@ -133,7 +133,7 @@ List<BoxShadow> wboxShadowRed = [
     offset: const Offset(0, 0),
     blurRadius: 8,
     spreadRadius: 3,
-    color: const Color(0xFFFA193E).withOpacity(.5),
+    color: const Color(0xFFFA193E).withValues(alpha: .5),
   ),
 ];
 LinearGradient wgradient = const LinearGradient(
@@ -159,8 +159,8 @@ RadialGradient radialGradient = RadialGradient(
   center: Alignment.centerRight,
   radius: 1.5,
   colors: [
-    blue.withOpacity(.5),
-    backGroundColor.withOpacity(.5),
+    blue.withValues(alpha: .5),
+    backGroundColor.withValues(alpha: .5),
   ],
 );
 

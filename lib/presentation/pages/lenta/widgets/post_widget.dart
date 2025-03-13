@@ -33,7 +33,8 @@ class PostWidget extends StatefulWidget {
   State<PostWidget> createState() => _PostWidgetState();
 }
 
-class _PostWidgetState extends State<PostWidget> with AutomaticKeepAliveClientMixin {
+class _PostWidgetState extends State<PostWidget>
+    with AutomaticKeepAliveClientMixin {
   late ValueNotifier<bool> isLike = ValueNotifier(widget.post.isLiked);
   ValueNotifier<bool> isMore = ValueNotifier(false);
   ValueNotifier<int> activeIndex = ValueNotifier(0);
@@ -79,7 +80,7 @@ class _PostWidgetState extends State<PostWidget> with AutomaticKeepAliveClientMi
                         Text(
                           widget.post.date.differentCurrentDate,
                           style: AppTheme.labelLarge.copyWith(
-                            color: black.withOpacity(0.5),
+                            color: black.withValues(alpha: 0.5),
                           ),
                         ),
                       ],
@@ -122,7 +123,7 @@ class _PostWidgetState extends State<PostWidget> with AutomaticKeepAliveClientMi
                                       const SizedBox(width: 12),
                                       const Text(
                                         "Share",
-                                        style: const TextStyle(
+                                        style:  TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           color: white,
@@ -197,9 +198,7 @@ class _PostWidgetState extends State<PostWidget> with AutomaticKeepAliveClientMi
                           );
                         }
                       },
-                      child: AppIcons.share.svg(
-                        color: black
-                      ),
+                      child: AppIcons.share.svg(color: black),
                     ),
                   ],
                 ),
@@ -224,7 +223,8 @@ class _PostWidgetState extends State<PostWidget> with AutomaticKeepAliveClientMi
                       alignment: const Alignment(0.9, -0.9),
                       child: ValueListenableBuilder(
                         valueListenable: activeIndex,
-                        builder: (BuildContext context, int value, Widget? child) {
+                        builder:
+                            (BuildContext context, int value, Widget? child) {
                           return WActivityDotted(
                             dotCount: widget.post.medias.length,
                             active: value,
@@ -275,7 +275,11 @@ class _PostWidgetState extends State<PostWidget> with AutomaticKeepAliveClientMi
                         ),
                         children: [
                           TextSpan(
-                            text: (widget.post.text).length > 100 ? (isMore ? widget.post.text : widget.post.text.substring(0, 100)) : widget.post.text,
+                            text: (widget.post.text).length > 100
+                                ? (isMore
+                                    ? widget.post.text
+                                    : widget.post.text.substring(0, 100))
+                                : widget.post.text,
                           ),
                           if ((widget.post.text).length > 100 && !isMore)
                             TextSpan(
@@ -284,7 +288,8 @@ class _PostWidgetState extends State<PostWidget> with AutomaticKeepAliveClientMi
                                 color: gray,
                                 fontWeight: FontWeight.w400,
                               ),
-                              recognizer: TapGestureRecognizer()..onTap = onPressMore,
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = onPressMore,
                             ),
                         ],
                       ),

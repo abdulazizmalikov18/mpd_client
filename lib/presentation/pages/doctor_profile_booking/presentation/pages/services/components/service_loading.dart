@@ -13,8 +13,8 @@ class ServiceLoading extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
       itemBuilder: (context, index) {
         return Shimmer.fromColors(
-          baseColor: mainBlue.withOpacity(0.2),
-          highlightColor: mainBlue.withOpacity(0.4),
+          baseColor: mainBlue.withValues(alpha: 0.2),
+          highlightColor: mainBlue.withValues(alpha: 0.4),
           child: Container(
             height: 72.h,
             margin: EdgeInsets.only(bottom: 12.h),

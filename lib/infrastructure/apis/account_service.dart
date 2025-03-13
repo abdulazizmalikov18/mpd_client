@@ -44,7 +44,7 @@ class AccountServiceImpl implements AccountService {
       );
     } on ServerException {
       rethrow;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       throw DioException(requestOptions: e.requestOptions);
     } on Exception catch (e) {
       throw ParsingException(errorMessage: e.toString());
@@ -74,7 +74,7 @@ class AccountServiceImpl implements AccountService {
       );
     } on ServerException {
       rethrow;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       throw DioException(requestOptions: e.requestOptions);
     } on Exception catch (e) {
       throw ParsingException(errorMessage: e.toString());

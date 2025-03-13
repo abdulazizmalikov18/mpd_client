@@ -192,7 +192,7 @@ mixin ConfirmDataMixin on State<ConfirmAuthDataView> {
     final result = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (result != null) {
       avatar.value = result.path;
-      if (context.mounted) {
+      if (mounted) {
         context.pop();
       }
     }

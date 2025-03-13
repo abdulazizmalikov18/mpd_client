@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/utils/extensions/context_extension.dart';
@@ -36,12 +35,12 @@ class WShadowedItemContainer extends StatelessWidget {
           children: [
             DecoratedBox(
               decoration: BoxDecoration(
-                color: white.withOpacity(0.1),
+                color: white.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: [
                   BoxShadow(
                     blurRadius: 6,
-                    color: black.withOpacity(0.06),
+                    color: black.withValues(alpha: 0.06),
                   ),
                 ],
               ),
@@ -54,7 +53,7 @@ class WShadowedItemContainer extends StatelessWidget {
             Text(
               title,
               style: context.textTheme.headlineSmall!.copyWith(
-                color: white.withOpacity(0.5),
+                color: white.withValues(alpha: 0.5),
               ),
             )
           ],

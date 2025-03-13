@@ -32,7 +32,6 @@ class DownloadFile {
       await Dio().download(file, filePath, onReceiveProgress: (count, total) {
         setState(() {
           progress = (count / total);
-          print(progress);
         });
       }, cancelToken: cancelToken);
       setState(() {

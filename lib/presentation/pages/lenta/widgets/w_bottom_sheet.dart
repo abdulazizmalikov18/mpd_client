@@ -20,14 +20,14 @@ class WButtonBottomSheet extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        color: white.withOpacity(0.1),
+        color: white.withValues(alpha: 0.1),
         borderRadius: const BorderRadius.only(
           topRight: Radius.circular(16),
           topLeft: Radius.circular(16),
         ),
         border: Border(
           top: BorderSide(
-            color: white.withOpacity(0.2),
+            color: white.withValues(alpha: 0.2),
           ),
         ),
       ),

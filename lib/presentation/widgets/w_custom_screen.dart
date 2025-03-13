@@ -19,7 +19,9 @@ class CustomScreen extends StatelessWidget {
           BlocBuilder<ShowPopUpBloc, ShowPopUpState>(
             builder: (context, state) {
               return AnimatedPositioned(
-                top: state.showPopUp ? MediaQuery.of(context).padding.top + 30 : -(MediaQuery.of(context).padding.top + 68 + 80),
+                top: state.showPopUp
+                    ? MediaQuery.of(context).padding.top + 30
+                    : -(MediaQuery.of(context).padding.top + 68 + 80),
                 duration: const Duration(milliseconds: 300),
                 // width: MediaQuery.of(context).size.width - 64,
                 left: (MediaQuery.of(context).size.width - 360) / 10,
@@ -41,7 +43,7 @@ class CustomScreen extends StatelessWidget {
                         children: [
                           DecoratedBox(
                             decoration: BoxDecoration(
-                              color: white.withOpacity(0.2),
+                              color: white.withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Padding(

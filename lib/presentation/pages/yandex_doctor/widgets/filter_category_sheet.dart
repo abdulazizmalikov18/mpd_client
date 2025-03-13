@@ -35,7 +35,9 @@ class _FilterCategorySheetState extends State<FilterCategorySheet> {
               BottomSheetWidget(children: [
                 Expanded(
                   child: NotificationListener(
-                    onNotification: (ScrollNotification notification) => _handleScrollNotification(notification, context, controller),
+                    onNotification: (ScrollNotification notification) =>
+                        _handleScrollNotification(
+                            notification, context, controller),
                     child: CustomScrollView(
                       controller: controller,
                       slivers: [
@@ -63,13 +65,20 @@ class _FilterCategorySheetState extends State<FilterCategorySheet> {
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                                 child: SearchFieldWidget(
-                                  controller: context.read<FilterCategoryBloc>().searchController,
+                                  controller: context
+                                      .read<FilterCategoryBloc>()
+                                      .searchController,
                                   searchHint: context.l10n.search_category,
                                   onChanged: (query) {
-                                    if (query.isEmpty || query.length % 3 == 0) {
+                                    if (query.isEmpty ||
+                                        query.length % 3 == 0) {
                                       setState(() {});
                                     }
-                                    context.read<FilterCategoryBloc>().add(SearchCategoryEvent(query, Localizations.localeOf(context).languageCode));
+                                    context.read<FilterCategoryBloc>().add(
+                                        SearchCategoryEvent(
+                                            query,
+                                            Localizations.localeOf(context)
+                                                .languageCode));
                                   },
                                 ),
                               ),
@@ -78,7 +87,8 @@ class _FilterCategorySheetState extends State<FilterCategorySheet> {
                           ),
                         ),
                         SliverPadding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 16.w, vertical: 12.h),
                           sliver: SliverToBoxAdapter(
                             child: Row(
                               children: [
@@ -90,7 +100,8 @@ class _FilterCategorySheetState extends State<FilterCategorySheet> {
                                   ),
                                 ),
                                 const Spacer(),
-                                BlocBuilder<FilterCategoryBloc, FilterCategoryState>(
+                                BlocBuilder<FilterCategoryBloc,
+                                    FilterCategoryState>(
                                   builder: (context, state) {
                                     if (state is FilterCategorySuccess) {
                                       return Text(
@@ -126,7 +137,8 @@ class _FilterCategorySheetState extends State<FilterCategorySheet> {
                                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                                 sliver: SliverGrid.builder(
                                   itemCount: state.categories.length,
-                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2,
                                     crossAxisSpacing: 16.w,
                                     mainAxisSpacing: 12.h,
@@ -182,7 +194,8 @@ class _FilterCategorySheetState extends State<FilterCategorySheet> {
                               padding: EdgeInsets.symmetric(horizontal: 16.w),
                               sliver: SliverGrid.builder(
                                 itemCount: 20,
-                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
                                   crossAxisSpacing: 16.w,
                                   mainAxisSpacing: 12.h,
@@ -216,17 +229,21 @@ class _FilterCategorySheetState extends State<FilterCategorySheet> {
   ) =>
       // For example wrap with fade transition
       Container(
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(100.r), boxShadow: [
-          BoxShadow(
-            color: black.withOpacity(0.05),
-            blurRadius: 5,
-            offset: const Offset(0, 2),
-          )
-        ]),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100.r),
+            boxShadow: [
+              BoxShadow(
+                color: black.withValues(alpha: 0.05),
+                blurRadius: 5,
+                offset: const Offset(0, 2),
+              )
+            ]),
         child: MaterialButton(
           onPressed: () {
             FocusScope.of(context).unfocus();
-            context.read<FilterCategoryBloc>().add(SelectedCategoryEvent(category.id!, category.name!));
+            context
+                .read<FilterCategoryBloc>()
+                .add(SelectedCategoryEvent(category.id!, category.name!));
           },
           color: category.id == selectedCategoryId ? mainBlue : white,
           shape: const StadiumBorder(),
@@ -257,9 +274,12 @@ class _FilterCategorySheetState extends State<FilterCategorySheet> {
     );
   }
 
-  bool _handleScrollNotification(ScrollNotification notification, BuildContext context, ScrollController controller) {
-    if (notification is ScrollEndNotification && controller.position.extentAfter == 0) {
-      context.read<FilterCategoryBloc>().add(GetFilterCategories(Localizations.localeOf(context).languageCode));
+  bool _handleScrollNotification(ScrollNotification notification,
+      BuildContext context, ScrollController controller) {
+    if (notification is ScrollEndNotification &&
+        controller.position.extentAfter == 0) {
+      context.read<FilterCategoryBloc>().add(
+          GetFilterCategories(Localizations.localeOf(context).languageCode));
     }
     return false;
   }

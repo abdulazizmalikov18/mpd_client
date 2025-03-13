@@ -28,8 +28,9 @@ abstract class AppTheme {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         unselectedWidgetColor: Colors.black,
-        dividerTheme: DividerThemeData(color: white.withOpacity(.2)),
-        bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.transparent),
+        dividerTheme: DividerThemeData(color: white.withValues(alpha: .2)),
+        bottomSheetTheme:
+            const BottomSheetThemeData(backgroundColor: Colors.transparent),
         textTheme: const TextTheme(
           displayLarge: displayLarge,
           displayMedium: displayMedium,
@@ -136,10 +137,6 @@ abstract class AppTheme {
     letterSpacing: -0.1,
   );
 }
-
-
-
-
 
 class Styles {
   Styles._();

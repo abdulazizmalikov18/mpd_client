@@ -101,7 +101,7 @@
 // //   @override
 // //   void paint(Canvas canvas, Size size) {
 // //     Paint paint0Fill = Paint()..style = PaintingStyle.fill;
-// //     paint0Fill.color = Colors.white.withOpacity(1.0);
+// //     paint0Fill.color = Colors.white.withValues(alpha: 1.0);
 // //     canvas.drawOval(Rect.fromCenter(center: Offset(size.width * 0.5015404, size.height * 0.4999646), width: size.width * 0.9937888, height: size.height), paint0Fill);
 
 // //     Path path_1 = Path();
@@ -119,7 +119,7 @@
 // //     path_1.close();
 
 // //     Paint paint1Fill = Paint()..style = PaintingStyle.fill;
-// //     paint1Fill.color = Colors.white.withOpacity(1.0);
+// //     paint1Fill.color = Colors.white.withValues(alpha: 1.0);
 // //     canvas.drawPath(path_1, paint1Fill);
 
 // //     Path path_2 = Path();
@@ -134,7 +134,7 @@
 // //     path_2.close();
 
 // //     Paint paint2Fill = Paint()..style = PaintingStyle.fill;
-// //     paint2Fill.color = const Color(0xffF0F0F0).withOpacity(1.0);
+// //     paint2Fill.color = const Color(0xffF0F0F0).withValues(alpha: 1.0);
 // //     canvas.drawPath(path_2, paint2Fill);
 
 // //     Path path_3 = Path();
@@ -148,7 +148,7 @@
 // //     path_3.close();
 
 // //     Paint paint3Fill = Paint()..style = PaintingStyle.fill;
-// //     paint3Fill.color = const Color(0xffF0F0F0).withOpacity(1.0);
+// //     paint3Fill.color = const Color(0xffF0F0F0).withValues(alpha: 1.0);
 // //     canvas.drawPath(path_3, paint3Fill);
 
 // //     Path path_4 = Path();
@@ -160,7 +160,7 @@
 // //     path_4.close();
 
 // //     Paint paint4Fill = Paint()..style = PaintingStyle.fill;
-// //     paint4Fill.color = const Color(0xffF0F0F0).withOpacity(1.0);
+// //     paint4Fill.color = const Color(0xffF0F0F0).withValues(alpha: 1.0);
 // //     canvas.drawPath(path_4, paint4Fill);
 
 // //     Path path_5 = Path();
@@ -172,7 +172,7 @@
 // //     path_5.close();
 
 // //     Paint paint5Fill = Paint()..style = PaintingStyle.fill;
-// //     paint5Fill.color = const Color(0xffF0F0F0).withOpacity(1.0);
+// //     paint5Fill.color = const Color(0xffF0F0F0).withValues(alpha: 1.0);
 // //     canvas.drawPath(path_5, paint5Fill);
 
 // //     Path path_6 = Path();
@@ -190,7 +190,7 @@
 // //     path_6.close();
 
 // //     Paint paint6Fill = Paint()..style = PaintingStyle.fill;
-// //     paint6Fill.color = const Color(0xffF0F0F0).withOpacity(1.0);
+// //     paint6Fill.color = const Color(0xffF0F0F0).withValues(alpha: 1.0);
 // //     canvas.drawPath(path_6, paint6Fill);
 // //   }
 

@@ -69,7 +69,8 @@ class _ConfirmOtpViewState extends State<ConfirmOtpView> {
                   child: Text(
                     'Tasdiq kodi',
                     textAlign: TextAlign.center,
-                    style: context.textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w600),
+                    style: context.textTheme.displaySmall!
+                        .copyWith(fontWeight: FontWeight.w600),
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -77,15 +78,18 @@ class _ConfirmOtpViewState extends State<ConfirmOtpView> {
                   textAlign: TextAlign.center,
                   text: TextSpan(
                     style: context.textTheme.headlineSmall!.copyWith(
-                      color: black.withOpacity(0.5),
+                      color: black.withValues(alpha: 0.5),
                     ),
                     children: [
                       const TextSpan(text: 'Iltimos, biz '),
                       TextSpan(
-                        text: '(+998) ${widget.phone.substring(3, 5)} ${widget.phone.substring(5, 8)} XX XX ',
-                        style: context.textTheme.headlineSmall!.copyWith(color: mainBlue),
+                        text:
+                            '(+998) ${widget.phone.substring(3, 5)} ${widget.phone.substring(5, 8)} XX XX ',
+                        style: context.textTheme.headlineSmall!
+                            .copyWith(color: mainBlue),
                       ),
-                      const TextSpan(text: 'telefon raqamiga yuborgan kodni kiriting'),
+                      const TextSpan(
+                          text: 'telefon raqamiga yuborgan kodni kiriting'),
                     ],
                   ),
                 ),
@@ -103,7 +107,9 @@ class _ConfirmOtpViewState extends State<ConfirmOtpView> {
                           width: 48,
                           height: 48,
                           decoration: BoxDecoration(
-                            color: value == null ? black.withOpacity(0.1) : red.withOpacity(0.2),
+                            color: value == null
+                                ? black.withValues(alpha: 0.1)
+                                : red.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(
                               color: value == null ? border : red,

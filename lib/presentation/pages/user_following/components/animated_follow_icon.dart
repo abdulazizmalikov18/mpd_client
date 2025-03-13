@@ -50,13 +50,13 @@ class _AnimatedFollowIconState extends State<AnimatedFollowIcon> with TickerProv
                   key: const ValueKey('1'),
                   height: 20.h,
                   width: 20.w,
-                  colorFilter:  ColorFilter.mode(grey, BlendMode.srcIn),
+                  colorFilter:  const ColorFilter.mode(grey, BlendMode.srcIn),
                 )
               : SvgPicture.asset(
                   AppIcons.userTick,
                   height: 20.h,
                   width: 20.w,
-                  colorFilter:  ColorFilter.mode(mainBlue, BlendMode.srcIn),
+                  colorFilter:  const ColorFilter.mode(mainBlue, BlendMode.srcIn),
                   key: const ValueKey('2'),
                 ),
         ),

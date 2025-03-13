@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
         // Doctor
         BlocProvider<FilterCategoryBloc>(create: (context) => FilterCategoryBloc(serviceLocator<YandexDoctorRepository>(), TextEditingController())),
         BlocProvider<YandexDoctorBloc>(create: (context) => YandexDoctorBloc(YandexService())),
-        BlocProvider<PopularCategoriesBloc>(create: (context) => PopularCategoriesBloc(serviceLocator<YandexDoctorRepository>())..add(GetPopularCategoriesEvent('uz'))),
+        BlocProvider<PopularCategoriesBloc>(create: (context) => PopularCategoriesBloc(serviceLocator<YandexDoctorRepository>())..add(const GetPopularCategoriesEvent('uz'))),
         BlocProvider<SearchByCategoryBloc>(create: (context) => SearchByCategoryBloc(serviceLocator<YandexDoctorRepository>())),
         BlocProvider<SearchBySpecialistBloc>(create: (context) => SearchBySpecialistBloc(serviceLocator<YandexDoctorRepository>(), FocusNode())),
 

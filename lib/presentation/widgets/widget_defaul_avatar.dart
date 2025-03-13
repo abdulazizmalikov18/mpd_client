@@ -8,7 +8,11 @@ class DefaultAvatar extends StatelessWidget {
   final double containerSize, imageSize;
   final String iconName;
 
-  const DefaultAvatar({super.key, required this.containerSize, required this.imageSize, this.iconName = AppIcons.avatarDefault});
+  const DefaultAvatar(
+      {super.key,
+      required this.containerSize,
+      required this.imageSize,
+      this.iconName = AppIcons.avatarDefault});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +22,7 @@ class DefaultAvatar extends StatelessWidget {
       width: containerSize.h,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: mainBlue.withOpacity(0.1),
+        color: mainBlue.withValues(alpha: 0.1),
       ),
       child: GradientIcon(iconName: iconName, size: imageSize),
     );

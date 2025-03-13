@@ -28,7 +28,7 @@ class FilterButtons extends StatelessWidget {
               onPressed: () {
                 context.read<FilterCategoryBloc>().add(const SelectedCategoryEvent(-1, ''));
               },
-              style: OutlinedButton.styleFrom(side: BorderSide(color: transparentBorder), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)), minimumSize: Size.fromHeight(48.h)),
+              style: OutlinedButton.styleFrom(side: const BorderSide(color: transparentBorder), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)), minimumSize: Size.fromHeight(48.h)),
               child: Text(
                 context.l10n.search_filter_reset,
                 style: AppTheme.headlineMedium.copyWith(

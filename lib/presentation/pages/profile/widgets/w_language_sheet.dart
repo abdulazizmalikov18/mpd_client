@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/infrastructure/core/scope.dart';
-import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
 import 'package:mpd_client/presentation/pages/initial/widgets/language_button.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
@@ -30,7 +29,8 @@ class LanguageSheet extends StatelessWidget {
         Center(
           child: Text(
             context.l10n.profile_language,
-            style: Styles.boldTitle.copyWith(color: black, fontSize: 24.sp, fontFamily: Styles.gilroyMedium),
+            style: Styles.boldTitle.copyWith(
+                color: black, fontSize: 24.sp, fontFamily: Styles.gilroyMedium),
           ),
         ),
         const SizedBox(height: 12),
@@ -44,7 +44,8 @@ class LanguageSheet extends StatelessWidget {
         ...List.generate(
           languages.length,
           (index) => Padding(
-            padding: EdgeInsets.only(bottom: index == 2 ? 32 : 10, left: 16, right: 16),
+            padding: EdgeInsets.only(
+                bottom: index == 2 ? 32 : 10, left: 16, right: 16),
             child: LaguageButton(
               imagePath: languages.values.elementAt(index),
               language: languages.keys.elementAt(index),
@@ -53,7 +54,11 @@ class LanguageSheet extends StatelessWidget {
                   context,
                   AppScope(locale: locales[index]),
                 );
-                Future.delayed(const Duration(milliseconds: 300)).then((value) => Navigator.of(context).pop());
+                Future.delayed(const Duration(milliseconds: 300)).then((value) {
+                  if (context.mounted) {
+                    Navigator.of(context).pop();
+                  }
+                });
               },
             ),
           ),

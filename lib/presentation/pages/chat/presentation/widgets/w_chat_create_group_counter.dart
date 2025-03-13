@@ -28,7 +28,7 @@
 //               $chatController.of(context).pushToGroup(context);
 //             },
 //             child: const Icon(Icons.chevron_left) /*AppIcons.icArrowLeft.svg(
-//             color: white.withOpacity(0.5),
+//             color: white.withValues(alpha: 0.5),
 //           ),*/
 //             ),
 //         const SizedBox(width: 12),
@@ -42,7 +42,7 @@
 //                   "LocaleKeys.selectUsers.tr()",
 //                   overflow: TextOverflow.ellipsis,
 //                   style: AppTheme.bodyLarge.copyWith(
-//                     color: white.withOpacity(0.5),
+//                     color: white.withValues(alpha: 0.5),
 //                   ),
 //                 ),
 //               ),
@@ -57,7 +57,7 @@
 //                     return Text(
 //                       '${state.createGroupContainer.selectionUser.length}/${state.createGroupContainer.count}',
 //                       style: AppTheme.labelLarge.copyWith(
-//                         color: white.withOpacity(0.5),
+//                         color: white.withValues(alpha: 0.5),
 //                       ),
 //                     );
 //                   },

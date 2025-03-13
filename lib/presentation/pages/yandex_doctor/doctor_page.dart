@@ -32,7 +32,8 @@ class DoctorPage extends StatefulWidget {
   State<DoctorPage> createState() => _DoctorPageState();
 }
 
-class _DoctorPageState extends State<DoctorPage> with AutomaticKeepAliveClientMixin {
+class _DoctorPageState extends State<DoctorPage>
+    with AutomaticKeepAliveClientMixin {
   final YandexService _yandexService = YandexService();
   late FToast fToast;
   final TextEditingController controller = TextEditingController();
@@ -43,9 +44,13 @@ class _DoctorPageState extends State<DoctorPage> with AutomaticKeepAliveClientMi
     fToast.init(context);
     _yandexService.moveCameraPosition(_yandexService.initialPoint, zoom: 5);
     context.read<YandexDoctorBloc>().add(GetCurrentLocationEvent());
-    context.read<FilterCategoryBloc>().add(GetFilterCategories(Localizations.localeOf(AppRouts.navigatorKey.currentContext!).languageCode));
+    context.read<FilterCategoryBloc>().add(GetFilterCategories(
+        Localizations.localeOf(AppRouts.navigatorKey.currentContext!)
+            .languageCode));
 
-    context.read<PopularCategoriesBloc>().add(GetPopularCategoriesEvent(Localizations.localeOf(AppRouts.navigatorKey.currentContext!).languageCode));
+    context.read<PopularCategoriesBloc>().add(GetPopularCategoriesEvent(
+        Localizations.localeOf(AppRouts.navigatorKey.currentContext!)
+            .languageCode));
     super.initState();
   }
 
@@ -66,7 +71,9 @@ class _DoctorPageState extends State<DoctorPage> with AutomaticKeepAliveClientMi
               // if (state.userLocalInfo != null && state.status.isInitial) {
               final yandexState = context.read<YandexDoctorBloc>().state;
               if (yandexState.location != null) {
-                context.read<YandexDoctorBloc>().add(const PlaceImagetoLocationEvent(imageMemory: null)); //user.userContainer.user.avatar
+                context.read<YandexDoctorBloc>().add(
+                    const PlaceImagetoLocationEvent(
+                        imageMemory: null)); //user.userContainer.user.avatar
               }
               // }
             },
@@ -74,10 +81,14 @@ class _DoctorPageState extends State<DoctorPage> with AutomaticKeepAliveClientMi
               return BlocConsumer<YandexDoctorBloc, YandexDoctorState>(
                 listener: (context, state) {
                   if (state.location != null) {
-                    _yandexService.moveCameraPosition(state.location!, zoom: state.zoom);
+                    _yandexService.moveCameraPosition(state.location!,
+                        zoom: state.zoom);
                   }
                   if (state.isMoved && state.location != null) {
-                    context.read<YandexDoctorBloc>().add(const PlaceImagetoLocationEvent(imageMemory: null)); //user.userContainer.user.avatar
+                    context.read<YandexDoctorBloc>().add(
+                        const PlaceImagetoLocationEvent(
+                            imageMemory:
+                                null)); //user.userContainer.user.avatar
                   }
                 },
                 builder: (context, state) {
@@ -92,15 +103,20 @@ class _DoctorPageState extends State<DoctorPage> with AutomaticKeepAliveClientMi
                     key: _yandexService.mapKey,
                     mapObjects: state.mapObjects,
                     onMapTap: (argument) {
-                      context.read<SearchBySpecialistBloc>().add(CloseSuggessionsEvent());
+                      context
+                          .read<SearchBySpecialistBloc>()
+                          .add(CloseSuggessionsEvent());
                     },
-                    onCameraPositionChanged: (cameraPosition, reason, finished) {
+                    onCameraPositionChanged:
+                        (cameraPosition, reason, finished) {
                       if (finished) {
-                        debugPrint('Placemarks ------------------- ${state.mapObjects.length}');
+                        debugPrint(
+                            'Placemarks ------------------- ${state.mapObjects.length}');
                       }
                     },
                     onMapCreated: (YandexMapController yandexMapController) {
-                      _yandexService.yandexController.complete(yandexMapController);
+                      _yandexService.yandexController
+                          .complete(yandexMapController);
                     },
                   );
                 },
@@ -119,12 +135,14 @@ class _DoctorPageState extends State<DoctorPage> with AutomaticKeepAliveClientMi
           BlocSelector<YandexDoctorBloc, YandexDoctorState, bool>(
             selector: (state) => state.showDoctorInfo,
             builder: (context, showDoctorInfo) {
-              return BlocConsumer<PopularCategoriesBloc, PopularCategoriesState>(
+              return BlocConsumer<PopularCategoriesBloc,
+                  PopularCategoriesState>(
                 listener: (context, state) {
                   if (state is PopularCategoriesFailure) {}
                 },
                 builder: (context, state) {
-                  return Categories(showDoctorInfo: showDoctorInfo, state: state);
+                  return Categories(
+                      showDoctorInfo: showDoctorInfo, state: state);
                 },
               );
             },
@@ -135,7 +153,10 @@ class _DoctorPageState extends State<DoctorPage> with AutomaticKeepAliveClientMi
             builder: (context, selectedName) {
               return BlocBuilder<YandexDoctorBloc, YandexDoctorState>(
                 builder: (context, state) {
-                  return DoctorInfo(job: selectedName, showDoctorInfo: state.showDoctorInfo, specialist: state.specialist);
+                  return DoctorInfo(
+                      job: selectedName,
+                      showDoctorInfo: state.showDoctorInfo,
+                      specialist: state.specialist);
                 },
               );
             },
@@ -145,7 +166,8 @@ class _DoctorPageState extends State<DoctorPage> with AutomaticKeepAliveClientMi
             top: 85.h,
             left: 0,
             right: 0,
-            child: SafeArea(child: BlocBuilder<SearchByCategoryBloc, SearchByCategoryState>(
+            child: SafeArea(
+                child: BlocBuilder<SearchByCategoryBloc, SearchByCategoryState>(
               builder: (context, state) {
                 if (state is SearchByCategorySuccess && !state.isLoading) {
                   return InkWell(
@@ -159,7 +181,8 @@ class _DoctorPageState extends State<DoctorPage> with AutomaticKeepAliveClientMi
                     },
                     child: Container(
                       margin: EdgeInsets.symmetric(horizontal: 12.w),
-                      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 16.w, vertical: 12.h),
                       decoration: BoxDecoration(
                         color: white,
                         borderRadius: BorderRadius.circular(12),
@@ -196,7 +219,7 @@ class _DoctorPageState extends State<DoctorPage> with AutomaticKeepAliveClientMi
                   );
                 } else if (state is SearchByCategoryLoading) {
                   return Shimmer.fromColors(
-                    baseColor: black.withOpacity(0.7),
+                    baseColor: black.withValues(alpha: 0.7),
                     highlightColor: white,
                     child: Text(
                       '${context.l10n.search_doctor_loading}...',
@@ -215,7 +238,8 @@ class _DoctorPageState extends State<DoctorPage> with AutomaticKeepAliveClientMi
             right: 0,
             top: 80.h,
             child: SafeArea(
-              child: BlocBuilder<SearchBySpecialistBloc, SearchBySpecialistState>(
+              child:
+                  BlocBuilder<SearchBySpecialistBloc, SearchBySpecialistState>(
                 builder: (context, state) {
                   if (state is SearchBySpecialistInitial) {
                     return const SizedBox();

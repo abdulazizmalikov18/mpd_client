@@ -85,7 +85,7 @@ class _SearchFieldState extends State<SearchField> {
                     alignment: Alignment.center,
                     child: SvgPicture.asset(
                       AppIcons.filter,
-                      colorFilter: ColorFilter.mode(black, BlendMode.srcIn),
+                      colorFilter: const ColorFilter.mode(black, BlendMode.srcIn),
                     ),
                   ),
                 ),

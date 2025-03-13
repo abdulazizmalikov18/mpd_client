@@ -6,7 +6,6 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mpd_client/domain/models/chat/chat_group.dart';
 import 'package:mpd_client/domain/models/chat/chat_user_state.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -47,16 +46,16 @@ class ChatVMController {
   }
 
   static ChatVMController of(BuildContext context) => ChatVMController();
-  Future<void> connectSocket({required void Function(String errorMessage) onError}) async {
+  Future<void> connectSocket(
+      {required void Function(String errorMessage) onError}) async {
     try {
-      final wsUrl = Uri.parse("ws://82.215.78.34:80/SMMS/ws/chat/?token=${StorageRepository.getString(StorageKeys.TOKEN)}");
+      final wsUrl = Uri.parse(
+          "ws://82.215.78.34:80/SMMS/ws/chat/?token=${StorageRepository.getString(StorageKeys.TOKEN)}");
       channel = WebSocketChannel.connect(wsUrl);
       await channel!.ready;
       channel!.stream.asBroadcastStream();
     } catch (e, s) {
-      Log.e("ChatSocket Error ------------------------");
-      print(e);
-      print(s);
+      Log.e("ChatSocket Error ------------------------ $s");
       onError(e.toString());
     }
   }
@@ -69,7 +68,8 @@ class ChatVMController {
         (event) {
           Log.i("New Chat Message $event \nType${event.runtimeType}");
           final eventData = (jsonDecode(event));
-          if (eventData is Map<String, dynamic> && eventData.containsValue("notify_about_message")) {
+          if (eventData is Map<String, dynamic> &&
+              eventData.containsValue("notify_about_message")) {
             Log.i("Message  Keldi");
             onMessage(MessageModel.fromSocket(eventData));
           }
@@ -87,7 +87,9 @@ class ChatVMController {
         (event) {
           Log.i("New Chat Message $event \nType${event.runtimeType}");
           final eventData = (jsonDecode(event));
-          if (eventData is Map<String, dynamic> && eventData.containsValue("type") && event['type'] == "online_status") {
+          if (eventData is Map<String, dynamic> &&
+              eventData.containsValue("type") &&
+              event['type'] == "online_status") {
             Log.i("Message  Keldi");
             onMessage(ChatUserState.fromJson(eventData));
           }

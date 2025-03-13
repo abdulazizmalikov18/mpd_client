@@ -59,8 +59,8 @@ class PaginatorList extends StatelessWidget {
           if (index == itemCount) {
             if (hasMoreToFetch) {
               fetchMoreFunction();
-              return Center(
-                child: const CupertinoActivityIndicator(),
+              return const Center(
+                child: CupertinoActivityIndicator(),
               );
             } else {
               return const SizedBox();

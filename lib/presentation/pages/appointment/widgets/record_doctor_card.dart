@@ -76,7 +76,7 @@ class RecordDoctorCard extends StatelessWidget {
               ),
               SvgPicture.asset(
                 AppIcons.forward,
-                colorFilter: ColorFilter.mode(mainBlue, BlendMode.srcIn),
+                colorFilter: const ColorFilter.mode(mainBlue, BlendMode.srcIn),
                 height: 18.h,
                 width: 18.h,
               )

@@ -109,7 +109,7 @@ class WNotificationSettingsItem extends StatelessWidget {
                 valueListenable: value,
                 builder: (BuildContext context, bool value, Widget? child) {
                   return CupertinoSwitch(
-                    activeColor: primary,
+                    activeTrackColor: primary,
                     value: value,
                     onChanged: onChange,
                   );

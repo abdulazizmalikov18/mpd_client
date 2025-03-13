@@ -54,7 +54,8 @@ class _CreateLoginViewState extends State<CreateLoginView> {
                 Center(
                   child: Text(
                     'Iltimos login yarating',
-                    style: context.textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w700),
+                    style: context.textTheme.displaySmall!
+                        .copyWith(fontWeight: FontWeight.w700),
                   ),
                 ),
                 // const SizedBox(height: 8),
@@ -71,7 +72,9 @@ class _CreateLoginViewState extends State<CreateLoginView> {
                     return WTextField(
                       hasError: value != null,
                       controller: loginController,
-                      fillColor: value == null ? white.withOpacity(0.2) : error.withOpacity(0.2),
+                      fillColor: value == null
+                          ? white.withValues(alpha: 0.2)
+                          : error.withValues(alpha: 0.2),
                       hintText: 'Login',
                       style: context.textTheme.labelSmall!.copyWith(
                         color: black,
@@ -115,7 +118,8 @@ class _CreateLoginViewState extends State<CreateLoginView> {
                     isLoading.value = false;
                     context.read<ShowPopUpBloc>().add(
                           ShowPopUp(
-                            message: "Bunday login mavjud yoki xato login kiritdingiz",
+                            message:
+                                "Bunday login mavjud yoki xato login kiritdingiz",
                             status: PopStatus.error,
                           ),
                         );

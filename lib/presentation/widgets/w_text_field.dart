@@ -72,7 +72,8 @@ class WTextField extends StatefulWidget {
     this.prefixIcon,
     this.title = '',
     this.greyTexts = '',
-    this.contentPadding = const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+    this.contentPadding =
+        const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
     this.inputFormatters,
     this.suffix,
     this.suffixIcon,
@@ -108,13 +109,15 @@ class WTextField extends StatefulWidget {
   State<WTextField> createState() => _WTextFieldState();
 }
 
-class _WTextFieldState extends State<WTextField> with SingleTickerProviderStateMixin {
+class _WTextFieldState extends State<WTextField>
+    with SingleTickerProviderStateMixin {
   bool isObscure = false;
   late AnimationController animationController;
 
   @override
   void initState() {
-    animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 200));
+    animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 200));
     animationController.forward();
 
     super.initState();
@@ -143,7 +146,7 @@ class _WTextFieldState extends State<WTextField> with SingleTickerProviderStateM
           Theme.of(context).textTheme.displayLarge!.copyWith(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
-                color: white.withOpacity(.5),
+                color: white.withValues(alpha: .5),
               ),
       inputFormatters: widget.inputFormatters,
       maxLength: widget.maxLength,
@@ -176,17 +179,20 @@ class _WTextFieldState extends State<WTextField> with SingleTickerProviderStateM
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(widget.borderRadius!),
-              borderSide: BorderSide(color: widget.hasError ? red : widget.borderColor),
+              borderSide:
+                  BorderSide(color: widget.hasError ? red : widget.borderColor),
             ),
             hintText: widget.hintText,
             hintStyle: widget.hintStyle ??
                 Theme.of(context).textTheme.headlineMedium!.copyWith(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
-                      color: widget.hasError ? red : white.withOpacity(.5),
+                      color:
+                          widget.hasError ? red : white.withValues(alpha: .5),
                     ),
             contentPadding: widget.contentPadding,
-            suffixIconConstraints: BoxConstraints(maxWidth: widget.suffixMaxWidth),
+            suffixIconConstraints:
+                BoxConstraints(maxWidth: widget.suffixMaxWidth),
             suffixIcon: widget.hasSuffixIcon
                 ? widget.suffixIcon ?? const SizedBox()
                 : Padding(
@@ -226,7 +232,8 @@ class _WTextFieldState extends State<WTextField> with SingleTickerProviderStateM
             prefix: widget.prefix,
             fillColor: widget.fillColor,
             filled: true,
-            prefixIconConstraints: BoxConstraints(maxWidth: widget.prefixMaxWidth),
+            prefixIconConstraints:
+                BoxConstraints(maxWidth: widget.prefixMaxWidth),
             prefixIcon: widget.prefixIcon == null
                 ? null
                 : Padding(
@@ -234,7 +241,8 @@ class _WTextFieldState extends State<WTextField> with SingleTickerProviderStateM
                     child: widget.prefixIcon,
                   ),
             counterText: widget.counterText,
-            counterStyle: widget.counterStyle ?? Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 12),
+            counterStyle: widget.counterStyle ??
+                Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 12),
           ),
     );
   }

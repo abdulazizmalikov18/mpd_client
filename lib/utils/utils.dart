@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mpd_client/domain/entity/lenta/media_entity.dart';
-import 'package:mpd_client/domain/models/lenta/media_model.dart';
 import 'package:mpd_client/utils/appointment_tools.dart';
 import 'package:mpd_client/utils/extensions/context_extension.dart';
 import 'package:mpd_client/utils/extensions/string_ext.dart';
@@ -14,9 +13,9 @@ class Utils {
         "https://avatars.mds.yandex.net/i?id=69aba87029e7a462032b445ab234e3db_l-9095341-images-thumbs&n=13";
     if (media != null) {
       if (media.type == 'video') {
-        return media.screenshot ?? defaultImage;
+        return media.screenshot;
       } else {
-        return media.image ?? defaultImage;
+        return media.image;
       }
     } else {
       return defaultImage;
@@ -30,9 +29,9 @@ class Utils {
         return defaultImage;
       } else {
         if (media.first.type == 'video') {
-          return media.first.screenshot ?? defaultImage;
+          return media.first.screenshot;
         } else {
-          return media.first.image ?? defaultImage;
+          return media.first.image;
         }
       }
     } else {
@@ -239,9 +238,7 @@ class Utils {
         return 'pedestrian';
       case DirectionsMode.bicycling:
         return 'bicycle';
-      default:
-        return 'vehicle';
-    }
+      }
   }
 
   /// Returns [DirectionsMode] for [MapType.yandexMaps]

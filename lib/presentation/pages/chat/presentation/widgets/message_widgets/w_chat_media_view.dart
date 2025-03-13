@@ -88,7 +88,7 @@ class ChatImageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: WAppBar(
+      appBar: const WAppBar(
         back: true,
         title: SizedBox(),
       ),

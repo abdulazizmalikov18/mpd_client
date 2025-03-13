@@ -34,7 +34,8 @@ class WCustomPinPut extends StatelessWidget {
             width: 10,
             height: 10,
             decoration: BoxDecoration(
-              color: error != null ? (error == 'success' ? green : red) : primary,
+              color:
+                  error != null ? (error == 'success' ? green : red) : primary,
               shape: BoxShape.circle,
             ),
           ),
@@ -61,11 +62,11 @@ class WCustomPinPut extends StatelessWidget {
             width: 14,
             margin: const EdgeInsets.only(left: 12, right: 12),
             decoration: BoxDecoration(
-              color: white.withOpacity(0.2),
+              color: white.withValues(alpha: 0.2),
               shape: BoxShape.circle,
             ),
           ),
-          errorPinTheme:  PinTheme(
+          errorPinTheme: PinTheme(
             height: 14,
             width: 14,
             margin: const EdgeInsets.only(left: 12, right: 12),

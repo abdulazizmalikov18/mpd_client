@@ -49,7 +49,9 @@ class _CheckPinViewState extends State<CheckPinView> with BiometricAuth {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  $pinVM().hasPin ? "Mobile Ilova uchun Pin Kiriting" : "Mobil ilova uchun PIN kod yarating",
+                  $pinVM().hasPin
+                      ? "Mobile Ilova uchun Pin Kiriting"
+                      : "Mobil ilova uchun PIN kod yarating",
                   style: context.textTheme.headlineSmall!.copyWith(
                     color: greyText,
                   ),
@@ -78,23 +80,25 @@ class _CheckPinViewState extends State<CheckPinView> with BiometricAuth {
                     onTap: () async {
                       await authenticate().then((authState) {
                         if (authState) {
-                          context.goNamed(AppRouteNames.home);
+                          if (context.mounted) {
+                            context.goNamed(AppRouteNames.home);
+                          }
                         }
                       });
                     },
                     child: Container(
-                      width: 56,
-                      height: 56,
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: white.withOpacity(0.1),
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: white.withOpacity(0.2),
+                        width: 56,
+                        height: 56,
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: white.withValues(alpha: 0.1),
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: white.withValues(alpha: 0.2),
+                          ),
                         ),
-                      ),
-                      child: const SizedBox()  //AppImages.faceId.imgAsset(),
-                    ),
+                        child: const SizedBox() //AppImages.faceId.imgAsset(),
+                        ),
                   ),
                   WButton(
                     width: 250,
@@ -109,7 +113,7 @@ class _CheckPinViewState extends State<CheckPinView> with BiometricAuth {
                     child: Text(
                       'Войти по логину и паролю',
                       style: context.textTheme.headlineSmall!.copyWith(
-                        color: white.withOpacity(0.5),
+                        color: white.withValues(alpha: 0.5),
                       ),
                     ),
                   ),
@@ -125,7 +129,8 @@ class _CheckPinViewState extends State<CheckPinView> with BiometricAuth {
   void enteredNumber(int index) {
     if (index == 11) {
       if (pinController.text.isNotEmpty) {
-        pinController.text = pinController.text.substring(0, pinController.text.length - 1);
+        pinController.text =
+            pinController.text.substring(0, pinController.text.length - 1);
       }
       return;
     }
@@ -146,7 +151,9 @@ class _CheckPinViewState extends State<CheckPinView> with BiometricAuth {
         hasError.value = 'success';
 
         Future.delayed(const Duration(seconds: 1)).whenComplete(() {
-          context.goNamed(AppRouteNames.home);
+          if (mounted) {
+            context.goNamed(AppRouteNames.home);
+          }
         });
       },
       onError: (errorMessage) {

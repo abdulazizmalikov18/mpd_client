@@ -13,7 +13,13 @@ class AppointmentBottomInfo extends StatelessWidget {
   final double price;
   final VoidCallback onLocationPressed, onDetailPressed;
   final bool isPending;
-  const AppointmentBottomInfo({super.key, this.isPending = false, this.price = 0, required this.meetDate, required this.onDetailPressed, required this.onLocationPressed});
+  const AppointmentBottomInfo(
+      {super.key,
+      this.isPending = false,
+      this.price = 0,
+      required this.meetDate,
+      required this.onDetailPressed,
+      required this.onLocationPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +31,24 @@ class AppointmentBottomInfo extends StatelessWidget {
               ? Container(
                   height: 34.h,
                   padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
-                  decoration: BoxDecoration(color: mainBlue.withOpacity(0.1), borderRadius: BorderRadius.circular(10.r)),
+                  decoration: BoxDecoration(
+                      color: mainBlue.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(10.r)),
                   child: Row(
                     children: [
                       SvgPicture.asset(
                         AppIcons.clockTransparent,
                         height: 18,
                         width: 18,
-                        colorFilter: const ColorFilter.mode(mainBlue, BlendMode.srcIn),
+                        colorFilter:
+                            const ColorFilter.mode(mainBlue, BlendMode.srcIn),
                       ),
                       const SizedBox(width: 4),
                       Flexible(
                         child: Text(
-                          meetDate.isEmpty ? "--" : Utils.appointMentDateFormat(meetDate, context),
+                          meetDate.isEmpty
+                              ? "--"
+                              : Utils.appointMentDateFormat(meetDate, context),
                           overflow: TextOverflow.ellipsis,
                           style: context.textTheme.headlineSmall!.copyWith(
                             color: mainBlue,
@@ -51,8 +62,16 @@ class AppointmentBottomInfo extends StatelessWidget {
               : RichText(
                   text: TextSpan(
                     children: [
-                      TextSpan(text: '${Utils.priceFormat(price)} UZS\n', style: Styles.descSubtitle.copyWith(color: black, fontWeight: FontWeight.w600)),
-                      TextSpan(text: meetDate.isEmpty ? "--" : Utils.appointMentDateFormat(meetDate, context), style: Styles.cardReview.copyWith(color: grey, fontSize: 10.sp)),
+                      TextSpan(
+                          text: '${Utils.priceFormat(price)} UZS\n',
+                          style: Styles.descSubtitle.copyWith(
+                              color: black, fontWeight: FontWeight.w600)),
+                      TextSpan(
+                          text: meetDate.isEmpty
+                              ? "--"
+                              : Utils.appointMentDateFormat(meetDate, context),
+                          style: Styles.cardReview
+                              .copyWith(color: grey, fontSize: 10.sp)),
                     ],
                   ),
                 ),
@@ -85,7 +104,8 @@ class AppointmentBottomInfo extends StatelessWidget {
               shadowColor: Colors.transparent,
               elevation: 0,
               padding: EdgeInsets.symmetric(horizontal: 25.w),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.r)),
             ),
             child: Text(
               context.l10n.appointment_detail,
