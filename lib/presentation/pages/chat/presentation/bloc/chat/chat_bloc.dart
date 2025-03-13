@@ -52,13 +52,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   }
 
   void _createGroup(CreateGroupEvent event, Emitter emit) async {
-    emit(
-      state.copyWith(
-        createGroupContainer: state.createGroupContainer.copyWith(
-          status: FormzSubmissionStatus.inProgress,
-        ),
+    emit(state.copyWith(
+      createGroupContainer: state.createGroupContainer.copyWith(
+        status: FormzSubmissionStatus.inProgress,
       ),
-    );
+    ));
     final result = await _repo.createGroup(
       CreateGroupModel(
         name: event.name,
@@ -73,162 +71,133 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     );
 
     if (result.isRight) {
-      emit(
-        state.copyWith(
-          createGroupContainer: state.createGroupContainer.copyWith(
-            status: FormzSubmissionStatus.success,
-          ),
-          groupContainer: state.groupContainer.copyWith(
-            groups: [result.right, ...state.groupContainer.groups],
-          ),
+      emit(state.copyWith(
+        createGroupContainer: state.createGroupContainer.copyWith(
+          status: FormzSubmissionStatus.success,
         ),
-      );
+        groupContainer: state.groupContainer.copyWith(
+          groups: [result.right, ...state.groupContainer.groups],
+        ),
+      ));
       add(const PushToGroupEvent());
 
       return;
     }
-    emit(
-      state.copyWith(
-        createGroupContainer: state.createGroupContainer.copyWith(
-          status: FormzSubmissionStatus.failure,
-        ),
+    emit(state.copyWith(
+      createGroupContainer: state.createGroupContainer.copyWith(
+        status: FormzSubmissionStatus.failure,
       ),
-    );
+    ));
     add(const PushToGroupEvent());
   }
 
   void _createChat(CreateChatEvent event, Emitter emit) async {
-    emit(
-      state.copyWith(
-        dataStatus: FormzSubmissionStatus.inProgress,
-      ),
-    );
+    emit(state.copyWith(dataStatus: FormzSubmissionStatus.inProgress));
     final result = await _repo.createUserChat(username: event.user.username);
     if (result.isRight) {
-      emit(
-        state.copyWith(
-          groupContainer: state.groupContainer.copyWith(
-            activeGroup: result.right,
-            groups: [result.right, ...state.groupContainer.groups],
-          ),
-          chatContainer: state.chatContainer.copyWith(
-            chats: [],
-          ),
-          dataStatus: FormzSubmissionStatus.success,
+      emit(state.copyWith(
+        groupContainer: state.groupContainer.copyWith(
+          activeGroup: result.right,
+          groups: [result.right, ...state.groupContainer.groups],
         ),
-      );
+        chatContainer: state.chatContainer.copyWith(
+          chats: [],
+        ),
+        dataStatus: FormzSubmissionStatus.success,
+      ));
       event.onSuccess();
       return;
     }
     event.onError();
-    emit(
-      state.copyWith(
-        dataStatus: FormzSubmissionStatus.failure,
-      ),
-    );
+    emit(state.copyWith(dataStatus: FormzSubmissionStatus.failure));
   }
 
   // Navigation ----------------------------------------------------------------
   void _goToCreateChat(GoCreateChatEvent event, Emitter emit) async {
-    emit(
-      state.copyWith(
-        usersContainer: state.usersContainer.copyWith(
-          status: FormzSubmissionStatus.inProgress,
-        ),
+    emit(state.copyWith(
+      usersContainer: state.usersContainer.copyWith(
+        status: FormzSubmissionStatus.inProgress,
       ),
-    );
+    ));
     final result = await _repo.getAllUsers(GetChatUserEntity(limit: 100));
 
     if (result.isRight) {
       final filteredUsers = filterUser(result.right.results);
 
-      emit(
-        state.copyWith(
-          usersContainer: state.usersContainer.copyWith(
-            users: filteredUsers,
-            allUsers: filteredUsers,
-            selectionUser: [],
-            status: FormzSubmissionStatus.success,
-          ),
+      emit(state.copyWith(
+        usersContainer: state.usersContainer.copyWith(
+          users: filteredUsers,
+          allUsers: filteredUsers,
+          selectionUser: [],
+          status: FormzSubmissionStatus.success,
         ),
-      );
+      ));
     } else {
-      emit(
-        state.copyWith(
-          usersContainer: state.usersContainer.copyWith(
-            status: FormzSubmissionStatus.failure,
-          ),
+      emit(state.copyWith(
+        usersContainer: state.usersContainer.copyWith(
+          status: FormzSubmissionStatus.failure,
         ),
-      );
+      ));
     }
   }
 
   void _goToCreateGroup(GoCreateGroupEvent event, Emitter emit) async {
-    emit(
-      state.copyWith(
-        createGroupContainer: state.createGroupContainer.copyWith(
-          status: FormzSubmissionStatus.inProgress,
-        ),
+    emit(state.copyWith(
+      createGroupContainer: state.createGroupContainer.copyWith(
+        status: FormzSubmissionStatus.inProgress,
       ),
-    );
+    ));
     final result = await _repo.getAllUsers(GetChatUserEntity(limit: 100));
 
     if (result.isRight) {
-      emit(
-        state.copyWith(
-          createGroupContainer: state.createGroupContainer.copyWith(
-            users: filterUser(result.right.results),
-            count: result.right.count,
-            selectionUser: [],
-            status: FormzSubmissionStatus.success,
-          ),
+      emit(state.copyWith(
+        createGroupContainer: state.createGroupContainer.copyWith(
+          users: filterUser(result.right.results),
+          count: result.right.count,
+          selectionUser: [],
+          status: FormzSubmissionStatus.success,
         ),
-      );
+      ));
     } else {
-      emit(
-        state.copyWith(
-          createGroupContainer: state.createGroupContainer.copyWith(
-            status: FormzSubmissionStatus.failure,
-          ),
+      emit(state.copyWith(
+        createGroupContainer: state.createGroupContainer.copyWith(
+          status: FormzSubmissionStatus.failure,
         ),
-      );
+      ));
     }
   }
 
   void _pushToGroup(PushToGroupEvent event, Emitter emit) async {
     final groups = state.groupContainer.groups;
-    emit(
-      state.copyWith(
-          createGroupContainer: state.createGroupContainer.copyWith(
-            selectionUser: [],
-            status: FormzSubmissionStatus.success,
-            users: [],
-            count: 0,
-          ),
-          usersContainer: state.usersContainer.copyWith(
-            users: [],
-            status: FormzSubmissionStatus.success,
-            selectionUser: [],
-            allUsers: [],
-          ),
-          groupContainer: state.groupContainer.copyWith(
-            groups: groups,
-            status: FormzSubmissionStatus.success,
-          ),
-          chatContainer: state.chatContainer.copyWith(
-            chats: [],
-          )),
-    );
+    emit(state.copyWith(
+      createGroupContainer: state.createGroupContainer.copyWith(
+        selectionUser: [],
+        status: FormzSubmissionStatus.success,
+        users: [],
+        count: 0,
+      ),
+      usersContainer: state.usersContainer.copyWith(
+        users: [],
+        status: FormzSubmissionStatus.success,
+        selectionUser: [],
+        allUsers: [],
+      ),
+      groupContainer: state.groupContainer.copyWith(
+        groups: groups,
+        status: FormzSubmissionStatus.success,
+      ),
+      chatContainer: state.chatContainer.copyWith(
+        chats: [],
+      ),
+    ));
     final result = await _repo.getGroups(const GetGroupChatEntity());
     if (result.isRight) {
-      emit(
-        state.copyWith(
-          groupContainer: state.groupContainer.copyWith(
-            status: FormzSubmissionStatus.success,
-            groups: result.right.results,
-          ),
+      emit(state.copyWith(
+        groupContainer: state.groupContainer.copyWith(
+          status: FormzSubmissionStatus.success,
+          groups: result.right.results,
         ),
-      );
+      ));
       return;
     }
   }
@@ -238,42 +207,36 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             .findIndex((value) => value.slugName == event.slugName) ??
         0;
 
-    emit(
-      state.copyWith(
-        groupContainer: state.groupContainer.copyWith(
-          activeGroup: state.groupContainer.groups[foundIndex],
-        ),
-        dataStatus: FormzSubmissionStatus.inProgress,
+    emit(state.copyWith(
+      groupContainer: state.groupContainer.copyWith(
+        activeGroup: state.groupContainer.groups[foundIndex],
       ),
-    );
+      dataStatus: FormzSubmissionStatus.inProgress,
+    ));
 
     final result = await _repo
         .getMessages(GetChatEntity(groupSlug: event.slugName, limit: 20));
     if (result.isRight) {
       final activeGroup = state.groupContainer.groups[foundIndex];
       state.groupContainer.groups[foundIndex] = activeGroup.copyWith();
-      emit(
-        state.copyWith(
-          chatContainer: state.chatContainer.copyWith(
-            chats: result.right.results,
-            count: result.right.count,
-            next: result.right.next,
-            nextOffset: result.right.nextOffset,
-          ),
-          groupContainer: state.groupContainer.copyWith(
-            activeGroup: activeGroup,
-          ),
-          dataStatus: FormzSubmissionStatus.success,
+      emit(state.copyWith(
+        chatContainer: state.chatContainer.copyWith(
+          chats: result.right.results,
+          count: result.right.count,
+          next: result.right.next,
+          nextOffset: result.right.nextOffset,
         ),
-      );
+        groupContainer: state.groupContainer.copyWith(
+          activeGroup: activeGroup,
+        ),
+        dataStatus: FormzSubmissionStatus.success,
+      ));
       return;
     }
-    emit(
-      state.copyWith(
-        dataStatus: FormzSubmissionStatus.failure,
-        error: "Chat topilmadi",
-      ),
-    );
+    emit(state.copyWith(
+      dataStatus: FormzSubmissionStatus.failure,
+      error: "Chat topilmadi",
+    ));
   }
 
   // Connection ----------------------------------------------------------------
@@ -330,29 +293,23 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         final newState = state.groupContainer.groups;
         newState[foundIndex].lastMessage = event.newMessage.text ?? '';
         newState[foundIndex].lastFile = event.newMessage.file ?? '';
-        emit(
-          state.copyWith(
-            groupContainer: state.groupContainer.copyWith(groups: newState),
-            chatContainer: state.chatContainer.copyWith(
-              chats: [event.newMessage, ...state.chatContainer.chats],
-            ),
-            textForUpdate: const Uuid().v4(),
+        emit(state.copyWith(
+          groupContainer: state.groupContainer.copyWith(groups: newState),
+          chatContainer: state.chatContainer.copyWith(
+            chats: [event.newMessage, ...state.chatContainer.chats],
           ),
-        );
+          textForUpdate: const Uuid().v4(),
+        ));
       }
       final newState = state.groupContainer.groups;
       newState[foundIndex].unreadMessageCount =
           newState[foundIndex].unreadMessageCount + 1;
       newState[foundIndex].lastMessage = event.newMessage.text ?? '';
       newState[foundIndex].lastFile = event.newMessage.file ?? '';
-      emit(
-        state.copyWith(
-          groupContainer: state.groupContainer.copyWith(
-            groups: newState,
-          ),
-          textForUpdate: const Uuid().v4(),
-        ),
-      );
+      emit(state.copyWith(
+        groupContainer: state.groupContainer.copyWith(groups: newState),
+        textForUpdate: const Uuid().v4(),
+      ));
     }
   }
 
@@ -364,14 +321,12 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     newGroup[find.$1] = find.$2.copyWith(
       isOnline: event.status["is_online"] as bool,
     );
-    emit(
-      state.copyWith(
-        textForUpdate: const Uuid().v4(),
-        groupContainer: state.groupContainer.copyWith(
-          groups: List.from(newGroup),
-        ),
+    emit(state.copyWith(
+      textForUpdate: const Uuid().v4(),
+      groupContainer: state.groupContainer.copyWith(
+        groups: List.from(newGroup),
       ),
-    );
+    ));
   }
 
   // Chat ----------------------------------------------------------------------
@@ -384,59 +339,49 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         offset: state.chatContainer.nextOffset,
       ));
       if (result.isRight) {
-        emit(
-          state.copyWith(
-            chatContainer: state.chatContainer.copyWith(
-              chats: [...state.chatContainer.chats, ...result.right.results],
-              count: result.right.count,
-              next: result.right.next,
-              nextOffset: result.right.nextOffset,
-            ),
-            dataStatus: FormzSubmissionStatus.success,
+        emit(state.copyWith(
+          chatContainer: state.chatContainer.copyWith(
+            chats: [...state.chatContainer.chats, ...result.right.results],
+            count: result.right.count,
+            next: result.right.next,
+            nextOffset: result.right.nextOffset,
           ),
-        );
+          dataStatus: FormzSubmissionStatus.success,
+        ));
       } else {
-        emit(
-          state.copyWith(
-            dataStatus: FormzSubmissionStatus.failure,
-            error: result.left.errorMessage,
-          ),
-        );
+        emit(state.copyWith(
+          dataStatus: FormzSubmissionStatus.failure,
+          error: result.left.errorMessage,
+        ));
       }
     }
   }
 
   void _getGroupChats(GetGroupChat event, Emitter emit) async {
-    emit(
-      state.copyWith(
-        groupContainer: state.groupContainer.copyWith(
-          status: FormzSubmissionStatus.inProgress,
-          groups: null,
-        ),
+    emit(state.copyWith(
+      groupContainer: state.groupContainer.copyWith(
+        status: FormzSubmissionStatus.inProgress,
+        groups: null,
       ),
-    );
+    ));
     final result = await _repo.getGroups(const GetGroupChatEntity());
     if (result.isRight) {
-      emit(
-        state.copyWith(
-          textForUpdate: const Uuid().v4(),
-          groupContainer: state.groupContainer.copyWith(
-            status: FormzSubmissionStatus.success,
-            groups: [...result.right.results],
-          ),
+      emit(state.copyWith(
+        textForUpdate: const Uuid().v4(),
+        groupContainer: state.groupContainer.copyWith(
+          status: FormzSubmissionStatus.success,
+          groups: [...result.right.results],
         ),
       ));
       return;
     }
-    emit(
-      state.copyWith(
-        groupContainer: state.groupContainer.copyWith(
-          status: FormzSubmissionStatus.failure,
-          groups: result.right.results,
-        ),
-        error: result.left.errorMessage,
+    emit(state.copyWith(
+      groupContainer: state.groupContainer.copyWith(
+        status: FormzSubmissionStatus.failure,
+        groups: result.right.results,
       ),
-    );
+      error: result.left.errorMessage,
+    ));
   }
 
   void _sendMessage(SendMessageEvent event, Emitter emit) async {
@@ -505,13 +450,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   }
 
   void _userSelected(GroupUsersSelectionEvent event, Emitter emit) {
-    emit(
-      state.copyWith(
-        createGroupContainer: state.createGroupContainer.copyWith(
-          status: FormzSubmissionStatus.inProgress,
-        ),
+    emit(state.copyWith(
+      createGroupContainer: state.createGroupContainer.copyWith(
+        status: FormzSubmissionStatus.inProgress,
       ),
-    );
+    ));
     if (!event.isActive) {
       final users = state.createGroupContainer.selectionUser
           .where((element) => element.username != event.user.username)
@@ -547,13 +490,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     final group = state.groupContainer.groups[foundIndex];
     groups.removeAt(foundIndex);
 
-    emit(
-      state.copyWith(
-        groupContainer: state.groupContainer.copyWith(
-          groups: [group, ...groups],
-        ),
+    emit(state.copyWith(
+      groupContainer: state.groupContainer.copyWith(
+        groups: [group, ...groups],
       ),
-    );
+    ));
   }
 
   (int index, ChatGroupModel group)? _findGroup(String slugName) {

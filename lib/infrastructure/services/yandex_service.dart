@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mpd_client/domain/models/yandex/searched_specialist_model.dart';
 import 'package:mpd_client/domain/models/yandex/yandex_map_object_model.dart';
+import 'package:mpd_client/presentation/styles/app_icons.dart';
 import 'package:mpd_client/presentation/styles/app_images.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 

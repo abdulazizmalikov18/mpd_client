@@ -20,13 +20,6 @@ class AppointmentBottomInfo extends StatelessWidget {
       required this.meetDate,
       required this.onDetailPressed,
       required this.onLocationPressed});
-  const AppointmentBottomInfo(
-      {super.key,
-      this.isPending = false,
-      this.price = 0,
-      required this.meetDate,
-      required this.onDetailPressed,
-      required this.onLocationPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +45,6 @@ class AppointmentBottomInfo extends StatelessWidget {
                       const SizedBox(width: 4),
                       Flexible(
                         child: Text(
-                          meetDate.isEmpty
-                              ? "--"
-                              : Utils.appointMentDateFormat(meetDate, context),
                           meetDate.isEmpty
                               ? "--"
                               : Utils.appointMentDateFormat(meetDate, context),

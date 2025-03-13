@@ -145,11 +145,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
                         icon: widget.prefixIcon!,
                         onPressed: widget.onprefixIconPressed ?? () {})
                     : null,
-                prefixIcon: widget.prefixIcon != null
-                    ? IconButton(
-                        icon: widget.prefixIcon!,
-                        onPressed: widget.onprefixIconPressed ?? () {})
-                    : null,
                 focusColor: white,
                 fillColor: widget.fillColor ?? white,
                 hoverColor: white,
@@ -163,8 +158,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     OutlineInputBorder(
                       borderRadius:
                           BorderRadius.circular(widget.borderRadius ?? 8),
-                      borderRadius:
-                          BorderRadius.circular(widget.borderRadius ?? 8),
                       borderSide: BorderSide(
                         color: border,
                         width: widget.borderWidth ?? 1,
@@ -174,8 +167,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     OutlineInputBorder(
                       borderRadius:
                           BorderRadius.circular(widget.borderRadius ?? 8),
-                      borderRadius:
-                          BorderRadius.circular(widget.borderRadius ?? 8),
                       borderSide: const BorderSide(color: border),
                     ),
                 hintText: widget.hintText,
@@ -183,8 +174,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 //     color: colors.customBlack.withValues(alpha:0.5), fontSize: 14.sp),
                 // errorText: widget.error,
                 // errorStyle: fonts.caption.copyWith(color: colors.error),
-                contentPadding:
-                    const EdgeInsets.only(left: 16, top: 12, right: 12),
                 contentPadding:
                     const EdgeInsets.only(left: 16, top: 12, right: 12),
               ),

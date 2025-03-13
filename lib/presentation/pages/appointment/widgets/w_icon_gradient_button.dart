@@ -13,12 +13,6 @@ class IconGradientButton extends StatelessWidget {
       required this.onPressed,
       this.height = 50,
       this.width = 50});
-  const IconGradientButton(
-      {super.key,
-      required this.icon,
-      required this.onPressed,
-      this.height = 50,
-      this.width = 50});
 
   @override
   Widget build(BuildContext context) {

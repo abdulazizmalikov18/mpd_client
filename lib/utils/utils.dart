@@ -8,7 +8,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 class Utils {
   static String imageMedieaType(MediaEntity? media) {
-    const defaultImage = "https://avatars.mds.yandex.net/i?id=69aba87029e7a462032b445ab234e3db_l-9095341-images-thumbs&n=13";
+    const defaultImage =
+        "https://avatars.mds.yandex.net/i?id=69aba87029e7a462032b445ab234e3db_l-9095341-images-thumbs&n=13";
     if (media != null) {
       if (media.type == 'video') {
         return media.screenshot.isEmpty ? defaultImage : media.screenshot;
@@ -21,13 +22,16 @@ class Utils {
   }
 
   static String imageMediea(List<MediaEntity>? media) {
-    const defaultImage = "https://avatars.mds.yandex.net/i?id=69aba87029e7a462032b445ab234e3db_l-9095341-images-thumbs&n=13";
+    const defaultImage =
+        "https://avatars.mds.yandex.net/i?id=69aba87029e7a462032b445ab234e3db_l-9095341-images-thumbs&n=13";
     if (media != null) {
       if (media.isEmpty) {
         return defaultImage;
       } else {
         if (media.first.type == 'video') {
-          return media.first.screenshot.isEmpty ? defaultImage : media.first.screenshot ;
+          return media.first.screenshot.isEmpty
+              ? defaultImage
+              : media.first.screenshot;
         } else {
           return media.first.image.isEmpty ? defaultImage : media.first.image;
         }
@@ -67,7 +71,10 @@ class Utils {
 
   static String priceFormat(double? price) {
     if (price == null) return 'Free';
-    final formatted = NumberFormat.simpleCurrency(locale: 'uz').format(price).split(',').first;
+    final formatted = NumberFormat.simpleCurrency(locale: 'uz')
+        .format(price)
+        .split(',')
+        .first;
     return formatted;
   }
 
@@ -86,7 +93,8 @@ class Utils {
 
     if (dateTime.day == DateTime.now().day) {
       return 'T';
-    } else if (dateTime.day == DateTime.now().subtract(const Duration(days: 1)).day) {
+    } else if (dateTime.day ==
+        DateTime.now().subtract(const Duration(days: 1)).day) {
       return 'Tomorrow';
     } else {
       return DateFormat.EEEE(locale).format(dateTime).capitalize();
@@ -94,7 +102,8 @@ class Utils {
   }
 
   static String errorFormat(String error) {
-    final formated = error.replaceAll('[', '').replaceAll(']', '').replaceAll('\'', '');
+    final formated =
+        error.replaceAll('[', '').replaceAll(']', '').replaceAll('\'', '');
     return formated;
   }
 
@@ -127,12 +136,21 @@ class Utils {
   }
 
   static String weekDayFormatObrevation(String dayObrevation) {
-    final fullWeekDayString = <String>['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].where((element) => element.toLowerCase().startsWith(dayObrevation)).first;
+    final fullWeekDayString = <String>[
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday'
+    ].where((element) => element.toLowerCase().startsWith(dayObrevation)).first;
     return fullWeekDayString;
   }
 
   static String formatPostDate(DateTime dateTime, BuildContext context) {
-    if (DateTime.now().difference(dateTime).inSeconds == 0 || DateTime.now().difference(dateTime).inSeconds == 1) {
+    if (DateTime.now().difference(dateTime).inSeconds == 0 ||
+        DateTime.now().difference(dateTime).inSeconds == 1) {
       return context.l10n.lenth_now_ago;
     } else if (DateTime.now().difference(dateTime).inSeconds < 60) {
       return context.l10n.lenth_now_ago;
@@ -146,7 +164,8 @@ class Utils {
       return '${(DateTime.now().difference(dateTime).inDays / 365).round()} ${context.l10n.lenth_years_ago}';
     } else if (DateTime.now().difference(dateTime).inDays > 30) {
       return '${(DateTime.now().difference(dateTime).inDays / 30).round()} ${context.l10n.lenth_months_ago}';
-    } else if (DateTime.now().difference(dateTime).inDays == 30 || DateTime.now().difference(dateTime).inDays == 31) {
+    } else if (DateTime.now().difference(dateTime).inDays == 30 ||
+        DateTime.now().difference(dateTime).inDays == 31) {
       return context.l10n.lenth_month_ago;
     } else if (DateTime.now().difference(dateTime).inDays == 1) {
       return context.l10n.lenth_day_ago;
@@ -164,7 +183,8 @@ class Utils {
 
   /// Returns an [Enum] from [String]
   static T enumFromString<T>(Iterable<T> values, String? value) {
-    return values.firstWhere((type) => type.toString().split('.').last == value);
+    return values
+        .firstWhere((type) => type.toString().split('.').last == value);
   }
 
   static String? nullOrValue(dynamic nullable, String value) {
@@ -228,8 +248,7 @@ class Utils {
         return 'pedestrian';
       case DirectionsMode.bicycling:
         return 'bicycle';
-      }
-      }
+    }
   }
 
   /// Returns [DirectionsMode] for [MapType.yandexMaps]
@@ -300,7 +319,8 @@ enum Status { initial, loading, success, failure }
 class Ticker {
   const Ticker();
   Stream<int> tick({required int ticks}) {
-    return Stream.periodic(const Duration(seconds: 1), (x) => ticks - x - 1).take(ticks);
+    return Stream.periodic(const Duration(seconds: 1), (x) => ticks - x - 1)
+        .take(ticks);
   }
 }
 

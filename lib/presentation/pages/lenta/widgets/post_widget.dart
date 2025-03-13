@@ -36,8 +36,6 @@ class PostWidget extends StatefulWidget {
 
 class _PostWidgetState extends State<PostWidget>
     with AutomaticKeepAliveClientMixin {
-class _PostWidgetState extends State<PostWidget>
-    with AutomaticKeepAliveClientMixin {
   late ValueNotifier<bool> isLike = ValueNotifier(widget.post.isLiked);
   ValueNotifier<bool> isMore = ValueNotifier(false);
   ValueNotifier<int> activeIndex = ValueNotifier(0);
@@ -240,8 +238,6 @@ class _PostWidgetState extends State<PostWidget>
                         valueListenable: activeIndex,
                         builder:
                             (BuildContext context, int value, Widget? child) {
-                        builder:
-                            (BuildContext context, int value, Widget? child) {
                           return WActivityDotted(
                             dotCount: widget.post.medias.length,
                             active: value,
@@ -297,11 +293,6 @@ class _PostWidgetState extends State<PostWidget>
                                     ? widget.post.text
                                     : widget.post.text.substring(0, 100))
                                 : widget.post.text,
-                            text: (widget.post.text).length > 100
-                                ? (isMore
-                                    ? widget.post.text
-                                    : widget.post.text.substring(0, 100))
-                                : widget.post.text,
                           ),
                           if ((widget.post.text).length > 100 && !isMore)
                             TextSpan(
@@ -310,8 +301,6 @@ class _PostWidgetState extends State<PostWidget>
                                 color: gray,
                                 fontWeight: FontWeight.w400,
                               ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = onPressMore,
                               recognizer: TapGestureRecognizer()
                                 ..onTap = onPressMore,
                             ),

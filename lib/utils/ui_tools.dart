@@ -25,8 +25,6 @@ abstract class UiTools {
 
   static Container toast(
       {required String title, required BuildContext context}) {
-  static Container toast(
-      {required String title, required BuildContext context}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
       decoration: BoxDecoration(
@@ -53,9 +51,6 @@ abstract class UiTools {
   static SnackBar failurefailureSnackBar(
           {required String title, required String message}) =>
       SnackBar(
-  static SnackBar failurefailureSnackBar(
-          {required String title, required String message}) =>
-      SnackBar(
         /// need to set following properties for best effect of awesome_snackbar_content
         elevation: 20,
         behavior: SnackBarBehavior.floating,
@@ -72,64 +67,33 @@ abstract class UiTools {
   static SnackBar failSnackbar(
           {required String title, required BuildContext context}) =>
       SnackBar(
-          content: Row(
-            children: [
-              SvgPicture.asset(
-                AppIcons.circleCancel,
-                height: 20.h,
-                width: 20.h,
-                colorFilter:
-                    const ColorFilter.mode(gradientRedOpacity, BlendMode.srcIn),
+        content: Row(
+          children: [
+            SvgPicture.asset(
+              AppIcons.circleCancel,
+              height: 20.h,
+              width: 20.h,
+              colorFilter:
+                  const ColorFilter.mode(gradientRedOpacity, BlendMode.srcIn),
+            ),
+            ScreenUtil().setHorizontalSpacing(8),
+            Expanded(
+              child: Text(
+                title,
+                style: Styles.descSubtitle.copyWith(color: gradientRedOpacity),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 3,
               ),
-              ScreenUtil().setHorizontalSpacing(8),
-              Expanded(
-                child: Text(
-                  title,
-                  style:
-                      Styles.descSubtitle.copyWith(color: gradientRedOpacity),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 3,
-                ),
-              ),
-            ],
-          ),
-          duration: const Duration(seconds: 4),
-          behavior: SnackBarBehavior.floating,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
-          backgroundColor: white);
-  static SnackBar failSnackbar(
-          {required String title, required BuildContext context}) =>
-      SnackBar(
-          content: Row(
-            children: [
-              SvgPicture.asset(
-                AppIcons.circleCancel,
-                height: 20.h,
-                width: 20.h,
-                colorFilter:
-                    const ColorFilter.mode(gradientRedOpacity, BlendMode.srcIn),
-              ),
-              ScreenUtil().setHorizontalSpacing(8),
-              Expanded(
-                child: Text(
-                  title,
-                  style:
-                      Styles.descSubtitle.copyWith(color: gradientRedOpacity),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 3,
-                ),
-              ),
-            ],
-          ),
-          duration: const Duration(seconds: 4),
-          behavior: SnackBarBehavior.floating,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
-          backgroundColor: white);
+            ),
+          ],
+        ),
+        duration: const Duration(seconds: 4),
+        behavior: SnackBarBehavior.floating,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+        backgroundColor: white,
+      );
 
-  static Future<void> openMapsSheet(
-      BuildContext context, String job, Coords coords) async {
   static Future<void> openMapsSheet(
       BuildContext context, String job, Coords coords) async {
     MapLauncher.installedMaps.then(

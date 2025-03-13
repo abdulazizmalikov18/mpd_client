@@ -80,7 +80,6 @@ class _UserPostsViewState extends State<UserPostsView> {
                   onPressed: () async {
                     Share.share(
                       '${widget.postsUser[index].authorFullname} \n\n${widget.postsUser[index].text} \n\n${widget.postsUser[index].medias.first.image} \n\n${widget.postsUser[index].medias.first.file} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
-                      '${widget.postsUser[index].authorFullname} \n\n${widget.postsUser[index].text} \n\n${widget.postsUser[index].medias.first.image} \n\n${widget.postsUser[index].medias.first.file} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
                       subject: 'Look what I made!',
                     );
                   },
@@ -135,7 +134,6 @@ class _UserPostsViewState extends State<UserPostsView> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
                 child: ReadMoreText(
-                  widget.postsUser[index].text,
                   widget.postsUser[index].text,
                   style: Styles.postTitle.copyWith(
                     fontFeatures: [],
