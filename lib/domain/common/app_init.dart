@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:logging/logging.dart';
-import 'package:media_kit/media_kit.dart';
+// import 'package:media_kit/media_kit.dart';
 import 'package:mpd_client/infrastructure/services/connectivity.dart';
 import 'package:mpd_client/infrastructure/services/log_service.dart';
 import 'package:mpd_client/infrastructure/services/service_locator.dart';
@@ -24,7 +24,7 @@ class AppInit {
     setupLocator();
     await StorageRepository.getInstance();
     debugRepaintRainbowEnabled = false;
-    MediaKit.ensureInitialized();
+    // MediaKit.ensureInitialized();
     return AppInit._();
   }
 
