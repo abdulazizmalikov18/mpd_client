@@ -38,7 +38,6 @@ dependencies:
   image_painter: ^0.7.1
   lottie: ^3.3.1
   pretty_chopper_logger: ^1.2.2
-  date_picker_plus: ^4.1.0
   image_picker: ^1.1.2
   mask_text_input_formatter: ^2.9.0
   pinput: ^5.0.1
