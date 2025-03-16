@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mpd_client/domain/entity/lenta/author_job_model.dart';
 import 'package:mpd_client/domain/entity/lenta/media_entity.dart';
 import 'package:mpd_client/domain/entity/lenta/post_entity.dart';
 part 'post_model.g.dart';

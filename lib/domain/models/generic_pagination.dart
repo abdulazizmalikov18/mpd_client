@@ -30,4 +30,8 @@ class GenericPagination<T> {
   factory GenericPagination.fromJson(
           Map<String, dynamic> json, T Function(Object?) fetch) =>
       _$GenericPaginationFromJson(json, fetch);
+
+ /// JSON ga obyektni o'girish
+  Map<String, dynamic> toJson(Object? Function(T value) toJsonT) =>
+      _$GenericPaginationToJson(this, toJsonT);
 }

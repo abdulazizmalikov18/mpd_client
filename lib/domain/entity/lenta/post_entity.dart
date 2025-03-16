@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 // ignore: depend_on_referenced_packages
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mpd_client/domain/entity/lenta/author_job_model.dart';
 import 'package:mpd_client/domain/entity/lenta/media_entity.dart';
 import 'package:mpd_client/domain/models/lenta/post_model.dart';
 
@@ -20,7 +21,7 @@ class PostEntity extends Equatable {
   final String username;
   final String authorFullname;
   final String authorAvatar;
-  final String authorJob;
+  final AuthorJob authorJob;
   final String mainCat;
   final int selectedIndex;
 
@@ -41,7 +42,7 @@ class PostEntity extends Equatable {
     this.authorAvatar = '',
     this.mainCat = '',
     this.selectedIndex = 0,
-    this.authorJob = '',
+    this.authorJob = const AuthorJob(),
   });
 
   @override
@@ -80,7 +81,7 @@ class PostEntity extends Equatable {
     String? username,
     String? authorFullname,
     String? authorAvatar,
-    String? authorJob,
+    AuthorJob? authorJob,
     String? mainCat,
     int? selectedIndex,
   }) {
@@ -106,11 +107,13 @@ class PostEntity extends Equatable {
   }
 }
 
-class PostConverter implements JsonConverter<PostEntity, Map<String, dynamic>?> {
+class PostConverter
+    implements JsonConverter<PostEntity, Map<String, dynamic>?> {
   const PostConverter();
 
   @override
-  PostEntity fromJson(Map<String, dynamic>? json) => PostModel.fromJson(json ?? {});
+  PostEntity fromJson(Map<String, dynamic>? json) =>
+      PostModel.fromJson(json ?? {});
 
   @override
   Map<String, dynamic>? toJson(PostEntity object) => {};

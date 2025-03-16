@@ -11,11 +11,19 @@ import 'package:pretty_chopper_logger/pretty_chopper_logger.dart';
 
 sealed class ReadGeneric {
   // AccountService
-  static GenericPagination<ProfessionModel> professionGeneric(Map<String, dynamic> json) => GenericPagination.fromJson(json, (p0) => ProfessionModel.fromJson(p0 as Map<String, dynamic>));
-  static GenericPagination<RegionModel> regionsGeneric(Map<String, dynamic> json) => GenericPagination.fromJson(json, (p0) => RegionModel.fromJson(p0 as Map<String, dynamic>));
-  static GenericPagination<PostModel> genericLenta(Map<String, dynamic> json) => GenericPagination.fromJson(json, (p0) => PostModel.fromJson(p0 as Map<String, dynamic>));
+  static GenericPagination<ProfessionModel> professionGeneric(
+          Map<String, dynamic> json) =>
+      GenericPagination.fromJson(
+          json, (p0) => ProfessionModel.fromJson(p0 as Map<String, dynamic>));
+  static GenericPagination<RegionModel> regionsGeneric(
+          Map<String, dynamic> json) =>
+      GenericPagination.fromJson(
+          json, (p0) => RegionModel.fromJson(p0 as Map<String, dynamic>));
+  static GenericPagination<PostModel> genericLenta(Map<String, dynamic> json) =>
+      GenericPagination.fromJson(
+          json, (p0) => PostModel.fromJson(p0 as Map<String, dynamic>));
 
-  // 
+  //
 }
 
 const converter = JsonSerializableConverter({
@@ -48,7 +56,8 @@ base class _Client extends ChopperClient {
 
 class MyAuthenticator extends Authenticator {
   @override
-  FutureOr<Request?> authenticate(Request request, Response response, [Request? originalRequest]) async {
+  FutureOr<Request?> authenticate(Request request, Response response,
+      [Request? originalRequest]) async {
     if (response.statusCode == 401) {
       try {
         final result = await const AuthRepository().refreshToken();
@@ -60,17 +69,19 @@ class MyAuthenticator extends Authenticator {
         }, (data) {
           String? newToken = data.access;
 
-          final Map<String, String> updatedHeaders = Map<String, String>.of(request.headers);
+          final Map<String, String> updatedHeaders =
+              Map<String, String>.of(request.headers);
 
           newToken = 'Bearer $newToken';
-          updatedHeaders.update('Authorization', (String _) => newToken!, ifAbsent: () => newToken!);
+          updatedHeaders.update('Authorization', (String _) => newToken!,
+              ifAbsent: () => newToken!);
 
           header = updatedHeaders;
         });
 
         return request.copyWith(headers: header);
       } catch (e) {
-        LogService.i(e.toString());
+        Log.i(e.toString());
       }
     }
     return null;

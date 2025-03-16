@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mpd_client/application/show_pop_up/show_pop_up_bloc.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
-import 'package:mpd_client/utils/extensions/string_ext.dart';
 
 class CustomScreen extends StatelessWidget {
   final Widget child;
@@ -36,41 +35,42 @@ class CustomScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: white.withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: statusImage(state.status).svg(
-                                width: 36,
-                                height: 36,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          SizedBox(
-                            width: MediaQuery.sizeOf(context).width * 0.6,
-                            child: Text(
-                              state.message,
-                              style: AppTheme.bodySmall.copyWith(
-                                color: white,
-                              ),
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
+                  child: SizedBox(
+                    width: MediaQuery.sizeOf(context).width * 0.6,
+                    child: Text(
+                      state.message,
+                      style: AppTheme.bodySmall.copyWith(
+                        color: white,
                       ),
-                      // AppIcons.close.svg(),
-                    ],
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
+                  // child: Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Row(
+                  //       children: [
+                  //         // DecoratedBox(
+                  //         //   decoration: BoxDecoration(
+                  //         //     color: white.withValues(alpha: 0.2),
+                  //         //     borderRadius: BorderRadius.circular(12),
+                  //         //   ),
+                  //         //   child: Padding(
+                  //         //     padding: const EdgeInsets.all(10),
+                  //         //     child: statusImage(state.status).svg(
+                  //         //       width: 36,
+                  //         //       height: 36,
+                  //         //     ),
+                  //         //   ),
+                  //         // ),
+                  //         // const SizedBox(width: 12),
+
+                  //       ],
+                  //     ),
+                  //     // AppIcons.close.svg(),
+                  //   ],
+                  // ),
                 ),
               );
             },

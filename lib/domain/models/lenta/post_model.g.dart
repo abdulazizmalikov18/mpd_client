@@ -27,7 +27,9 @@ PostModel _$PostModelFromJson(Map<String, dynamic> json) => PostModel(
       authorAvatar: json['author_avatar'] as String? ?? '',
       mainCat: json['main_cat'] as String? ?? '',
       selectedIndex: (json['selected_index'] as num?)?.toInt() ?? 0,
-      authorJob: json['author_job'] as String? ?? '',
+      authorJob: json['author_job'] == null
+          ? const AuthorJob()
+          : AuthorJob.fromJson(json['author_job'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$PostModelToJson(PostModel instance) => <String, dynamic>{

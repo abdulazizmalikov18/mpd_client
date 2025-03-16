@@ -32,7 +32,7 @@ class AppInit {
     WidgetsFlutterBinding.ensureInitialized();
 
     /// LogService Create
-    LogService.create;
+    // LogService.create;
 
     /// Easy Localization
     // await EasyLocalization.ensureInitialized();
@@ -89,7 +89,7 @@ class LogBlocObserver extends BlocObserver {
   void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
     if (kDebugMode) {
-      LogService.d('---------Event------------${bloc.runtimeType} $event');
+      Log.d('---------Event------------${bloc.runtimeType} $event');
     }
   }
 

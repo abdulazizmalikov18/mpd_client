@@ -12,6 +12,7 @@ import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/widgets/w_button.dart';
 import 'package:mpd_client/presentation/widgets/w_text_field.dart';
 import 'package:mpd_client/utils/extensions/context_extension.dart';
+import 'package:mpd_client/utils/utils.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -27,10 +28,11 @@ class _LoginViewState extends State<LoginView> {
   ValueNotifier<bool> isLoading = ValueNotifier(false);
   ValueNotifier<bool> isEnable = ValueNotifier(false);
   ValueNotifier<bool> isPhone = ValueNotifier(false);
+  String first = '';
 
   @override
   Widget build(BuildContext context) {
-    final bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
+    // final bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
     return Scaffold(
       // backgroundColor: Colors.black,
       body: SafeArea(
@@ -61,9 +63,15 @@ class _LoginViewState extends State<LoginView> {
                         fillColor: hasError == null
                             ? white.withValues(alpha: 0.1)
                             : red.withValues(alpha: 0.2),
-                        hintText: context.l10n.login_phone,
+                        hintText: '+998 (##) ###-##-##',
                         hasError: hasError != null,
-                        inputFormatters: setFormat(loginController.text),
+                        // inputFormatters: setFormat(loginController.text),
+                        inputFormatters: [
+                          MaskTextInputFormatter(
+                            mask: '+998 (##) ###-##-##',
+                            filter: {"#": RegExp(r'[0-9]')},
+                          )
+                        ],
                         style: context.textTheme.labelSmall!.copyWith(
                           color: black,
                         ),
@@ -72,9 +80,15 @@ class _LoginViewState extends State<LoginView> {
                         ),
                         borderColor: border,
                         onChanged: (e) {
+                          // if (e.isNotEmpty) {
+                          //   first = e[0];
+                          // } else {
+                          //   first = '';
+                          // }
+                          // setState(() {});
                           onChangeText();
-                          if (e.length > 1) return;
-                          isPhone.value = !phoneFormatter;
+                          // if (e.length > 1) return;
+                          // isPhone.value = !phoneFormatter;
                         },
                       );
                     },
@@ -113,25 +127,25 @@ class _LoginViewState extends State<LoginView> {
                 },
               ),
               const SizedBox(height: 16),
-              if (!isKeyboardOpen)
-                DecoratedBox(
-                  decoration: const BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: mainBlue,
-                      ),
-                    ),
-                  ),
-                  child: Text(
-                    context.l10n.login_forgot,
-                    style: context.textTheme.labelSmall!.copyWith(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w400,
-                      color: mainBlue,
-                    ),
-                  ),
-                ),
-              const SizedBox(height: 32),
+              // if (!isKeyboardOpen)
+              //   DecoratedBox(
+              //     decoration: const BoxDecoration(
+              //       border: Border(
+              //         bottom: BorderSide(
+              //           color: mainBlue,
+              //         ),
+              //       ),
+              //     ),
+              //     child: Text(
+              //       context.l10n.login_forgot,
+              //       style: context.textTheme.labelSmall!.copyWith(
+              //         fontSize: 15,
+              //         fontWeight: FontWeight.w400,
+              //         color: mainBlue,
+              //       ),
+              //     ),
+              //   ),
+              // const SizedBox(height: 32),
             ],
           ),
         ),
@@ -203,10 +217,10 @@ class _LoginViewState extends State<LoginView> {
       return null;
     }
 
-    if (int.tryParse(text) != null) {
+    if (text[0] == '+') {
       return [
         MaskTextInputFormatter(
-          mask: '+998 ($text#) ###-##-##',
+          mask: '+### (##) ###-##-##',
           filter: {"#": RegExp(r'[0-9]')},
         )
       ];
@@ -236,12 +250,11 @@ class _LoginViewState extends State<LoginView> {
   void onPressLogin() {
     isLoading.value = true;
     context.read<AuthBloc>().add(LoginEvent(
-          login: loginController.text.trim(),
+          login: Utils.convertPhoneNumber(loginController.text.trim()),
           password: passwordController.text.trim(),
           onSuccess: () {
             isLoading.value = false;
             context.read<AccountsBloc>().add(const GetAccountUserEvent());
-
             debugPrint("Success");
           },
           onError: (e) {

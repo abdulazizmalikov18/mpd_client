@@ -125,7 +125,7 @@ class _PostWidgetState extends State<PostWidget>
                                     onPress: () {
                                       Share.share(
                                         '${widget.post.authorFullname} \n\n${widget.post.text} \n\n${widget.post.medias.first.image} \n\n${widget.post.medias.first.file} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
-                                        subject: 'Look what I made!',
+                                        subject: widget.post.authorFullname,
                                       );
                                     },
                                     widget: Row(

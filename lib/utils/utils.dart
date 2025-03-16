@@ -7,6 +7,11 @@ import 'package:mpd_client/utils/extensions/string_ext.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Utils {
+  static String convertPhoneNumber(String formattedNumber) {
+    // Faqat raqamlarni olib tashlash uchun `RegExp` dan foydalanamiz
+    return formattedNumber.replaceAll(RegExp(r'[^\d]'), '');
+  }
+
   static String imageMedieaType(MediaEntity? media) {
     const defaultImage =
         "https://avatars.mds.yandex.net/i?id=69aba87029e7a462032b445ab234e3db_l-9095341-images-thumbs&n=13";

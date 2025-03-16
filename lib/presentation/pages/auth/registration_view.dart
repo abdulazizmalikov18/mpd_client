@@ -85,7 +85,8 @@ class _RegistrationViewState extends State<RegistrationView>
                             isSurePrivacyPolicy.value = value ?? false;
                           },
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4)),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
                         ),
                       );
                     },

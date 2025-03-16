@@ -80,7 +80,7 @@ class _UserPostsViewState extends State<UserPostsView> {
                   onPressed: () async {
                     Share.share(
                       '${widget.postsUser[index].authorFullname} \n\n${widget.postsUser[index].text} \n\n${widget.postsUser[index].medias.first.image} \n\n${widget.postsUser[index].medias.first.file} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
-                      subject: 'Look what I made!',
+                      subject: widget.postsUser[index].authorFullname,
                     );
                   },
                   icon: AppIcons.moreIcon.svg(),
@@ -126,10 +126,11 @@ class _UserPostsViewState extends State<UserPostsView> {
                 ),
               ],
             ),
-            if (widget.postsUser[index].text.isEmpty) ScreenUtil().setVerticalSpacing(10.h),
-            if (widget.postsUser[index].text.isNotEmpty)
             if (widget.postsUser[index].text.isEmpty)
               ScreenUtil().setVerticalSpacing(10.h),
+            if (widget.postsUser[index].text.isNotEmpty)
+              if (widget.postsUser[index].text.isEmpty)
+                ScreenUtil().setVerticalSpacing(10.h),
             if (widget.postsUser[index].text.isNotEmpty)
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),

@@ -15,10 +15,12 @@ import 'package:mpd_client/infrastructure/services/log_service.dart';
 class LentaRepositoryImpl implements LentaRepository {
   final LentaService _remoteDataSource;
 
-  const LentaRepositoryImpl({required LentaService remoteDataSource}) : _remoteDataSource = remoteDataSource;
+  const LentaRepositoryImpl({required LentaService remoteDataSource})
+      : _remoteDataSource = remoteDataSource;
 
   @override
-  Future<Either<Failure, SpecialistProductModel>> getSpecialistProducts(GenericEntity<int> params) async {
+  Future<Either<Failure, SpecialistProductModel>> getSpecialistProducts(
+      GenericEntity<int> params) async {
     try {
       final response = await _remoteDataSource.getSpecialistProducts(params);
       if (response.data != null) {
@@ -48,7 +50,8 @@ class LentaRepositoryImpl implements LentaRepository {
   }
 
   @override
-  Future<Either<Failure, GenericPagination<PostEntity>>> getBanners(GenericEntity params) async {
+  Future<Either<Failure, GenericPagination<PostEntity>>> getBanners(
+      GenericEntity params) async {
     try {
       final response = await _remoteDataSource.getBanners(params);
 
@@ -58,12 +61,14 @@ class LentaRepositoryImpl implements LentaRepository {
         return Left(response.getException()!.getErrorFailure());
       }
     } catch (e) {
+      Log.wtf(e);
       return Left(DioFailure(errorMessage: e.toString()));
     }
   }
 
   @override
-  Future<Either<Failure, GenericPagination<CommentEntity>>> getPostComments(GenericEntity<int> params) async {
+  Future<Either<Failure, GenericPagination<CommentEntity>>> getPostComments(
+      GenericEntity<int> params) async {
     try {
       final response = await _remoteDataSource.getPostComments(params);
       if (response.data != null) {
@@ -77,7 +82,8 @@ class LentaRepositoryImpl implements LentaRepository {
   }
 
   @override
-  Future<Either<Failure, CommentEntity>> sendPostComment(SendCommentPostEntity params) async {
+  Future<Either<Failure, CommentEntity>> sendPostComment(
+      SendCommentPostEntity params) async {
     try {
       final response = await _remoteDataSource.sendPostComment(params);
       if (response.data != null) {
@@ -91,7 +97,8 @@ class LentaRepositoryImpl implements LentaRepository {
   }
 
   @override
-  Future<Either<Failure, Map<String, dynamic>>> sendLikeOrUnlike({required int postId}) async {
+  Future<Either<Failure, Map<String, dynamic>>> sendLikeOrUnlike(
+      {required int postId}) async {
     try {
       final response = await _remoteDataSource.sendLikeOrUnlike(postId: postId);
       if (response.data != null) {

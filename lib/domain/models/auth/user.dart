@@ -60,6 +60,8 @@ class UserModel extends Equatable {
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
 
+  Map<String, dynamic> toJsons() => _$UserModelToJson(this);
+
   Map<String, dynamic> toJson() => <String, dynamic>{
         if (username.isNotEmpty) 'username': username,
         if (name.isNotEmpty) 'name': name,

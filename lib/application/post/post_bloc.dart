@@ -6,6 +6,7 @@ import 'package:mpd_client/domain/abstract_repo/lenta_repository.dart';
 import 'package:mpd_client/domain/entity/generic_entity.dart';
 import 'package:mpd_client/domain/entity/lenta/create_post_param.dart';
 import 'package:mpd_client/domain/entity/lenta/post_entity.dart';
+import 'package:mpd_client/infrastructure/services/log_service.dart';
 import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
 
 part 'post_event.dart';
@@ -23,80 +24,89 @@ class PostBloc extends Bloc<PostEvent, PostState> {
 
   final LentaRepository _repo;
 
-  Future<void> _onPostFetched(PostFetched event, Emitter<PostState> emit) async {
+  Future<void> _onPostFetched(
+      PostFetched event, Emitter<PostState> emit) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    final result = await _repo.getBanners(const GenericEntity(limit: 4, offset: 0));
+    final result =
+        await _repo.getBanners(const GenericEntity(limit: 4, offset: 0));
+
+    Log.d(result.isLeft);
+    Log.d(result.isRight);
     if (result.isRight) {
-      emit(
-        state.copyWith(
-          status: FormzSubmissionStatus.success,
-          posts: result.right.results,
-          hasReachedMax: result.right.nextOffset != null,
-          offset: result.right.nextOffset,
-          count: result.right.count,
-        ),
-      );
-      return;
+      Log.d(result.right.results);
+      emit(state.copyWith(
+        status: FormzSubmissionStatus.success,
+        posts: result.right.results,
+        hasReachedMax: result.right.nextOffset != null,
+        offset: result.right.nextOffset,
+        count: result.right.count,
+      ));
+    } else {
+      emit(state.copyWith(status: FormzSubmissionStatus.failure));
     }
-    emit(state.copyWith(status: FormzSubmissionStatus.failure));
   }
 
   Future<void> _onGetUserPost(GetUserPostsEvent event, Emitter emit) async {
     emit(state.copyWith(userPostStatus: FormzSubmissionStatus.inProgress));
-    final result = await _repo.getBanners(GenericEntity(authorUser: event.username));
+    final result =
+        await _repo.getBanners(GenericEntity(authorUser: event.username));
     if (result.isRight) {
       emit(state.copyWith(
         userPostStatus: FormzSubmissionStatus.success,
         postUser: result.right.results,
         userPostCount: result.right.count,
       ));
-      return;
+    } else {
+      emit(state.copyWith(status: FormzSubmissionStatus.failure));
     }
-    emit(state.copyWith(status: FormzSubmissionStatus.failure));
   }
 
-  Future<void> _onMyPostFetched(GetMyPostEvent event, Emitter<PostState> emit) async {
+  Future<void> _onMyPostFetched(
+      GetMyPostEvent event, Emitter<PostState> emit) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    final result = await _repo.getBanners(GenericEntity(limit: 1000, offset: 0, authorUser: StorageRepository.getString(StorageKeys.USERNAME)));
+    final result = await _repo.getBanners(GenericEntity(
+        limit: 1000,
+        offset: 0,
+        authorUser: StorageRepository.getString(StorageKeys.USERNAME)));
     if (result.isRight) {
-      emit(
-        state.copyWith(
-          status: FormzSubmissionStatus.success,
-          myPost: result.right.results,
-          hasReachedMax: result.right.nextOffset != null,
-          myPostoffset: result.right.nextOffset,
-          myPostCount: result.right.count,
-        ),
-      );
-      return;
+      emit(state.copyWith(
+        status: FormzSubmissionStatus.success,
+        myPost: result.right.results,
+        hasReachedMax: result.right.nextOffset != null,
+        myPostoffset: result.right.nextOffset,
+        myPostCount: result.right.count,
+      ));
+    } else {
+      emit(state.copyWith(status: FormzSubmissionStatus.failure));
     }
-    emit(state.copyWith(status: FormzSubmissionStatus.failure));
   }
 
-  Future<void> _onPostMoreFetched(PostMoreFetched event, Emitter<PostState> emit) async {
+  Future<void> _onPostMoreFetched(
+      PostMoreFetched event, Emitter<PostState> emit) async {
     if (!state.hasReachedMax) return;
-    final result = await _repo.getBanners(GenericEntity(limit: 4, offset: state.offset));
+    final result =
+        await _repo.getBanners(GenericEntity(limit: 4, offset: state.offset));
     if (result.isRight) {
       await Future.delayed(const Duration(seconds: 2));
-      emit(
-        state.copyWith(
-          refreshStatus: FormzSubmissionStatus.success,
-          posts: [...state.posts, ...result.right.results],
-          hasReachedMax: result.right.nextOffset != null,
-          offset: result.right.nextOffset,
-          count: result.right.count,
-        ),
-      );
-      return;
+      emit(state.copyWith(
+        refreshStatus: FormzSubmissionStatus.success,
+        posts: [...state.posts, ...result.right.results],
+        hasReachedMax: result.right.nextOffset != null,
+        offset: result.right.nextOffset,
+        count: result.right.count,
+      ));
+    } else {
+      emit(state.copyWith(refreshStatus: FormzSubmissionStatus.failure));
     }
-    emit(state.copyWith(refreshStatus: FormzSubmissionStatus.failure));
   }
 
   void _onLikePost(PostLikeEvent event, Emitter emit) async {
     for (int i = 0; i < state.posts.length; i++) {
       if (state.posts[i].id == event.postId) {
         state.posts[i] = state.posts[i].copyWith(
-          likesCount: !state.posts[i].isLiked ? state.posts[i].likesCount + 1 : state.posts[i].likesCount - 1,
+          likesCount: !state.posts[i].isLiked
+              ? state.posts[i].likesCount + 1
+              : state.posts[i].likesCount - 1,
           isLiked: !state.posts[i].isLiked,
         );
         break;
@@ -119,9 +129,9 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         ...state.posts,
       ]));
       event.onSuccess();
-      return;
+    } else {
+      event.onError();
+      emit(state.copyWith(status: FormzSubmissionStatus.failure));
     }
-    event.onError();
-    emit(state.copyWith(status: FormzSubmissionStatus.failure));
   }
 }

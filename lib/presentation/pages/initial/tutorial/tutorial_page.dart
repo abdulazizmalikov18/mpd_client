@@ -64,7 +64,8 @@ class _TutorialPageState extends State<TutorialPage> {
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ScreenUtil().setVerticalSpacing(MediaQuery.of(context).viewPadding.top + 40),
+          ScreenUtil()
+              .setVerticalSpacing(MediaQuery.of(context).viewPadding.top + 40),
           Expanded(
             child: PageView.builder(
               controller: _pageController,
@@ -113,7 +114,9 @@ class _TutorialPageState extends State<TutorialPage> {
               valueListenable: activeIndex,
               builder: (BuildContext context, int value, Widget? child) {
                 return LongButton(
-                  buttonName: value == 3 ? context.l10n.presentation_next : context.l10n.presentation_get_start,
+                  buttonName: value == 3
+                      ? context.l10n.presentation_next
+                      : context.l10n.presentation_get_start,
                   onPress: () {
                     if (value == 3) {
                       context.goNamed(AppRouteNames.login);
@@ -139,9 +142,13 @@ class _TutorialPageState extends State<TutorialPage> {
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: TextButton(
                       onPressed: () {
-                        // Navigator.pushNamed(context, AppRoutes.auth);
+                        context.goNamed(AppRouteNames.login);
                       },
-                      style: TextButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r))),
+                      style: TextButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                      ),
                       child: Text(
                         context.l10n.presentation_skip,
                         textAlign: TextAlign.center,

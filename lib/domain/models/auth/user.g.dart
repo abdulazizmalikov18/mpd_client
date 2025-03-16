@@ -35,3 +35,26 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       hasPassword: json['has_password'] as bool? ?? false,
       backgroundImage: json['background_image'] as String? ?? '',
     );
+
+Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
+      'username': instance.username,
+      'name': instance.name,
+      'surname': instance.surname,
+      'lastname': instance.lastname,
+      'email': instance.email,
+      'phone': instance.phone,
+      'public_phone': instance.publicPhone,
+      'pinfl': instance.pinfl,
+      'birthday': instance.birthday,
+      'gender': instance.gender,
+      'bio': instance.bio,
+      'lang': instance.lang,
+      'status': instance.status,
+      'is_related': instance.isRelated,
+      'login': instance.login,
+      'region': const DataEntityConverter().toJson(instance.region),
+      'main_cat': const DataEntityConverter().toJson(instance.mainCat),
+      'qrcode': instance.qrcode,
+      'has_password': instance.hasPassword,
+      'background_image': instance.backgroundImage,
+    };

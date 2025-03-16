@@ -1,31 +1,29 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:logger/logger.dart';
-typedef Log = LogService;
-class LogService {
-  static Logger? _logger;
 
-  LogService._();
+class Log {
+  static final Logger _logger = Logger(
+    printer: PrettyPrinter(),
+  );
 
-  static LogService get create {
-    _logger ??= Logger(
-      filter: DevelopmentFilter(),
-      printer: PrettyPrinter(),
-    );
-    return LogService._();
+  static void d(dynamic message) {
+    _logger.d(message);
   }
 
-  static void d(String message) {
-    _logger?.d(message);
+  static void i(dynamic message) {
+    _logger.i(message);
   }
 
-  static void i(String message) {
-    _logger?.i(message);
+  static void w(dynamic message) {
+    _logger.w(message);
   }
 
-  static void w(String message) {
-    _logger?.w(message);
+  static void e(dynamic message) {
+    _logger.e(message);
   }
 
-  static void e(String message) {
-    _logger?.e(message);
-  }
+  static void v(dynamic message) => _logger.v(message);
+
+  static void wtf(dynamic message) => _logger.wtf(message);
 }

@@ -53,33 +53,30 @@ class _LentaViewState extends State<LentaView> {
             );
           }
           // Posts Is Empty
-          if (state.posts.isEmpty && (state.status.isFailure || state.status.isSuccess)) {
-          return Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset(
-                  AppImages.chatNotFound,
-                ),
-                Text(
-                  'Post Not Found',
-                  style: AppTheme.bodyLarge.copyWith(
-                    fontSize: 28,
-                    fontWeight: FontWeight.w700,
+          if (state.posts.isEmpty && state.status.isFailure) {
+            return Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Image.asset(
+                    AppImages.chatNotFound,
                   ),
-                ),
-                Text(
-                  'The page you are looking\nfor doesn’t exits',
-                  textAlign: TextAlign.center,
-                  style: AppTheme.bodyLarge.copyWith(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                    color: gray
+                  Text(
+                    'Post Not Found',
+                    style: AppTheme.bodyLarge.copyWith(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
+                  Text(
+                    'The page you are looking\nfor doesn’t exits',
+                    textAlign: TextAlign.center,
+                    style: AppTheme.bodyLarge.copyWith(
+                        fontSize: 18, fontWeight: FontWeight.w400, color: gray),
+                  ),
+                ],
+              ),
+            );
           }
 
           // Post Viewer
@@ -88,7 +85,8 @@ class _LentaViewState extends State<LentaView> {
             itemCount: state.posts.length,
             itemBuilder: (BuildContext context, int index) {
               return Padding(
-                padding: EdgeInsets.only(bottom: index + 1 == state.posts.length ? 30 : 0),
+                padding: EdgeInsets.only(
+                    bottom: index + 1 == state.posts.length ? 30 : 0),
                 child: PostWidget(post: state.posts[index]),
               );
             },
