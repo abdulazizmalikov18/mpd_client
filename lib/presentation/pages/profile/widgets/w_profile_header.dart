@@ -136,8 +136,8 @@ class WProfileHeader extends StatelessWidget {
                     ),
                     const SizedBox(height: 24),
                     SizedBox(
-                      width: MediaQuery.sizeOf(context).width * 0.8,
-                      height: MediaQuery.sizeOf(context).width * 0.8,
+                      width: MediaQuery.sizeOf(context).width * 0.7,
+                      height: MediaQuery.sizeOf(context).width * 0.7,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Center(

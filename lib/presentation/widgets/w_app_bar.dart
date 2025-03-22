@@ -15,7 +15,8 @@ class WAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.isShowNotification = true,
     this.action,
     this.back = false,
-    this.backgroundColor, this.backIconColor,
+    this.backgroundColor,
+    this.backIconColor,
   });
 
   @override
@@ -24,6 +25,7 @@ class WAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: backgroundColor,
       leadingWidth: 40,
       titleSpacing: back ? 0 : null,
+      
       leading: back ? BackButton(color: backIconColor ?? black) : null,
       title: title,
       actions: action == null

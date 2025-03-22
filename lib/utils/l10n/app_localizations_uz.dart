@@ -27,6 +27,12 @@ class AppLocalizationsUz extends AppLocalizations {
   String get presentation_language_en => 'English';
 
   @override
+  String get personal_posts => 'Shaxsiy postlar';
+
+  @override
+  String get access_doctor_profile => 'Shifokor profiliga kirish';
+
+  @override
   String get presentation_next => 'Keyingisi';
 
   @override
@@ -58,6 +64,21 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get presentation_get_start => 'Boshlash';
+
+  @override
+  String get ambulance_services => 'Tez yordam xizmatlari!';
+
+  @override
+  String get ambulance_services_condition => 'Iltimos faqat favqulotda xolatda murojat qiling!';
+
+  @override
+  String get ambulance_accident => 'Baxtsiz hodisa';
+
+  @override
+  String get ambulance_first_aid => 'Birinchi yordam';
+
+  @override
+  String get ambulance_fainting => 'Hushidan ketish';
 
   @override
   String get login_text => 'Salom!\nAkkauntingizga kiring';
@@ -654,6 +675,9 @@ class AppLocalizationsUz extends AppLocalizations {
   String get records_view_doctor_profile => 'Shifokor profilini ko\'rish';
 
   @override
+  String get district => 'Tuman';
+
+  @override
   String get profile_language_uz => 'Uzbek tili';
 
   @override
@@ -664,6 +688,9 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get profile_personal_info => 'Shaxsiy ma\'lumot';
+
+  @override
+  String get profile_edit_field_is_empty => 'Maydon bo\'sh';
 
   @override
   String get profile_payment => 'To\'lov';
@@ -735,7 +762,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get profile_change_number => 'Telefon o\'zgartirish';
 
   @override
-  String get profile_save_changes => 'O\'zgarishni Saqlash';
+  String get profile_save_changes => 'O\'zgarishni saqlash';
 
   @override
   String get profile_following_doctors_page => 'Kuzatadigan shifokorlarim';

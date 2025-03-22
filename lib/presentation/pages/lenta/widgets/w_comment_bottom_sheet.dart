@@ -4,6 +4,7 @@ import 'package:mpd_client/presentation/pages/lenta/view/comment_view.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/presentation/widgets/w_text_field.dart';
+import 'package:mpd_client/utils/extensions/context_extension.dart';
 
 class WCommentBottomSheet extends StatelessWidget {
   const WCommentBottomSheet({super.key});
@@ -44,7 +45,7 @@ class WCommentBottomSheet extends StatelessWidget {
                   fillColor: scaffoldSecondaryBackground,
                   borderColor: Colors.transparent,
                   height: 40,
-                  hintText: 'Fikringizni yozib qoldiring !',
+                  hintText: "${context.l10n.lenth_write_comment} !",
                   hintStyle: AppTheme.labelSmall.copyWith(
                     color: gray,
                   ),

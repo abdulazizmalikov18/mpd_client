@@ -2,34 +2,54 @@ part of '../edit_profile_view.dart';
 
 mixin EditProfileMixin on State<EditProfileView> {
   final ValueNotifier<String?> avatar = ValueNotifier(null);
-  final ValueNotifier<String?> backgroundImage =  ValueNotifier(null);
-  late final ValueNotifier<UserModel> user = ValueNotifier(context.read<AccountsBloc>().state.userContainer.user);
-  late final UserModel oldUser = context.read<AccountsBloc>().state.userContainer.user;
+  final ValueNotifier<String?> backgroundImage = ValueNotifier(null);
+  late final ValueNotifier<UserModel> user =
+      ValueNotifier(context.read<AccountsBloc>().state.userContainer.user);
+  late final UserModel oldUser =
+      context.read<AccountsBloc>().state.userContainer.user;
 
   void updateUserOnPress() async {
     // $loading.on(context);
     context.read<AccountsBloc>().add(UpdateUserEvent(
           user: UserModel(
-            username: user.value.username != oldUser.username ? user.value.username : '',
+            username: user.value.username != oldUser.username
+                ? user.value.username
+                : '',
             name: user.value.name != oldUser.name ? user.value.name : '',
-            surname: user.value.surname != oldUser.surname ? user.value.surname : '',
-            lastname: user.value.lastname != oldUser.lastname ? user.value.lastname : '',
+            surname:
+                user.value.surname != oldUser.surname ? user.value.surname : '',
+            lastname: user.value.lastname != oldUser.lastname
+                ? user.value.lastname
+                : '',
             email: user.value.email != oldUser.email ? user.value.email : '',
             phone: user.value.phone != oldUser.phone ? user.value.phone : '',
-            publicPhone: user.value.publicPhone != oldUser.publicPhone ? user.value.publicPhone : '',
+            publicPhone: user.value.publicPhone != oldUser.publicPhone
+                ? user.value.publicPhone
+                : '',
             pinfl: user.value.pinfl != oldUser.pinfl ? user.value.pinfl : '',
-            birthday: user.value.birthday != oldUser.birthday ? user.value.birthday : '',
-            gender: user.value.gender != oldUser.gender ? user.value.gender : '',
+            birthday: user.value.birthday != oldUser.birthday
+                ? user.value.birthday
+                : '',
+            gender:
+                user.value.gender != oldUser.gender ? user.value.gender : '',
             bio: user.value.bio != oldUser.bio ? user.value.bio : '',
             lang: user.value.lang != oldUser.lang ? user.value.lang : '',
-            status: user.value.status != oldUser.status ? user.value.status : -10,
+            status:
+                user.value.status != oldUser.status ? user.value.status : -10,
             isRelated: oldUser.isRelated,
-          
             login: user.value.login != oldUser.login ? user.value.login : '',
-            region: user.value.region.id != oldUser.region.id ? user.value.region : const DataEntity(),
-            mainCat: user.value.mainCat != oldUser.mainCat ? user.value.mainCat : const DataEntity(),
-            qrcode: user.value.qrcode != oldUser.qrcode ? user.value.qrcode : '',
-            backgroundImage: user.value.backgroundImage != oldUser.backgroundImage ? user.value.backgroundImage : '',
+            region: user.value.region.id != oldUser.region.id
+                ? user.value.region
+                : const DataEntity(),
+            mainCat: user.value.mainCat != oldUser.mainCat
+                ? user.value.mainCat
+                : const DataEntity(),
+            qrcode:
+                user.value.qrcode != oldUser.qrcode ? user.value.qrcode : '',
+            backgroundImage:
+                user.value.backgroundImage != oldUser.backgroundImage
+                    ? user.value.backgroundImage
+                    : '',
           ),
           avatar: avatar.value,
           backgroundImage: backgroundImage.value,
@@ -60,6 +80,7 @@ mixin EditProfileMixin on State<EditProfileView> {
       avatar.value = result.path;
     }
   }
+
   void pickImageBackgroudnBottomSheet() async {
     final result = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (result != null) {

@@ -133,6 +133,18 @@ abstract class AppLocalizations {
   /// **'English'**
   String get presentation_language_en;
 
+  /// No description provided for @personal_posts.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal posts'**
+  String get personal_posts;
+
+  /// No description provided for @access_doctor_profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Access to doctor profile'**
+  String get access_doctor_profile;
+
   /// No description provided for @presentation_next.
   ///
   /// In en, this message translates to:
@@ -198,6 +210,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Get start'**
   String get presentation_get_start;
+
+  /// No description provided for @ambulance_services.
+  ///
+  /// In en, this message translates to:
+  /// **'Ambulance services'**
+  String get ambulance_services;
+
+  /// No description provided for @ambulance_services_condition.
+  ///
+  /// In en, this message translates to:
+  /// **'Please only contact us in case of emergency!'**
+  String get ambulance_services_condition;
+
+  /// No description provided for @ambulance_accident.
+  ///
+  /// In en, this message translates to:
+  /// **'Accident'**
+  String get ambulance_accident;
+
+  /// No description provided for @ambulance_first_aid.
+  ///
+  /// In en, this message translates to:
+  /// **'First aid'**
+  String get ambulance_first_aid;
+
+  /// No description provided for @ambulance_fainting.
+  ///
+  /// In en, this message translates to:
+  /// **'Fainting'**
+  String get ambulance_fainting;
 
   /// No description provided for @login_text.
   ///
@@ -1387,6 +1429,12 @@ abstract class AppLocalizations {
   /// **'View doctor profile'**
   String get records_view_doctor_profile;
 
+  /// No description provided for @district.
+  ///
+  /// In en, this message translates to:
+  /// **'District'**
+  String get district;
+
   /// No description provided for @profile_language_uz.
   ///
   /// In en, this message translates to:
@@ -1410,6 +1458,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Personal information'**
   String get profile_personal_info;
+
+  /// No description provided for @profile_edit_field_is_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'The field is empty'**
+  String get profile_edit_field_is_empty;
 
   /// No description provided for @profile_payment.
   ///

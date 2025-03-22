@@ -5,6 +5,9 @@
     "presentation_language_uz": "O'zbek",
     "presentation_language_ru": "Русский",
     "presentation_language_en": "English",
+    "profile_edit_field_is_empty": "Поле пусто",
+    "personal_posts": "Личные посты",
+    "access_doctor_profile": "Доступ к профилю врача",
     "presentation_next": "Следующее",
     "presentation_skip": "Пропустить",
     "presentation_skip": "Пропустить",
@@ -17,6 +20,12 @@
     "presentation_four_page": "Доступ к службам экстренной помощи",
     "presentation_four_page_description": "Пользователи через приложение MPD, могут получить быстрый доступ к службам экстренной помощи всего несколькими нажатиями",
     "presentation_get_start": "Начать",
+
+    "ambulance_services": "Услуги скорой помощи",
+    "ambulance_services_condition": "Пожалуйста, обращайтесь к нам только в случае чрезвычайной ситуации!",
+    "ambulance_accident": "Несчастный случай",
+    "ambulance_first_aid": "Первая помощь",
+    "ambulance_fainting": "Обморок",
 
     "login_text": "Добро пожаловать!\nАвторизуйтесь чтобы продолжить",
     "login_phone": "Номер телефона или логин",
@@ -232,6 +241,9 @@
     "records_prescription": "Записи",
     "records_record": "Медицинские записи",
     "records_view_doctor_profile": "Просмотреть профиль врача",
+
+    "district": "Округ",
+
 
     "profile_language_uz": "Узбекский",
     "profile_language_ru": "Русский",

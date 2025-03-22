@@ -34,7 +34,8 @@ class EditProfileView extends StatefulWidget {
   State<EditProfileView> createState() => _EditProfileViewState();
 }
 
-class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin {
+class _EditProfileViewState extends State<EditProfileView>
+    with EditProfileMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,9 +44,10 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
         back: true,
         backIconColor: white,
         backgroundColor: Colors.transparent,
-        title: Text("", style: TextStyle(
-          color: white,
-        )),
+        title: Text("",
+            style: TextStyle(
+              color: white,
+            )),
       ),
       body: SingleChildScrollView(
         child: Stack(
@@ -55,17 +57,20 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
               child: ValueListenableBuilder(
                 valueListenable: backgroundImage,
                 builder: (BuildContext context, String? value, Widget? child) {
-                  return value == null ?  WNetworkImage(
-                    image: "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
-                    width: double.maxFinite,
-                    height: MediaQuery.sizeOf(context).height * 0.25,
-                    borderRadius: 0,
-                    defaultWidget: Container(
-                      width: double.infinity,
-                      height: MediaQuery.sizeOf(context).height * 0.25,
-                      color: black,
-                    ),
-                  ) : Image.file(File(value));
+                  return value == null
+                      ? WNetworkImage(
+                          image:
+                              "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
+                          width: double.maxFinite,
+                          height: MediaQuery.sizeOf(context).height * 0.25,
+                          borderRadius: 0,
+                          defaultWidget: Container(
+                            width: double.infinity,
+                            height: MediaQuery.sizeOf(context).height * 0.25,
+                            color: black,
+                          ),
+                        )
+                      : Image.file(File(value));
                 },
               ),
             ),
@@ -84,7 +89,9 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16).copyWith(top: (MediaQuery.sizeOf(context).height * 0.25) - 48),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16)
+                  .copyWith(
+                      top: (MediaQuery.sizeOf(context).height * 0.25) - 48),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -93,7 +100,8 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                       children: [
                         ValueListenableBuilder(
                           valueListenable: avatar,
-                          builder: (BuildContext context, avatar, Widget? child) {
+                          builder:
+                              (BuildContext context, avatar, Widget? child) {
                             return Hero(
                               tag: 'profile_image',
                               child: DecoratedBox(
@@ -150,7 +158,7 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                   ),
                   const SizedBox(height: 24),
                   WVerificationTextFieldWithTitle(
-                    title: 'ism',
+                    title: context.l10n.profile_firstname,
                     hintText: user.value.name,
                     onChange: (newName) {
                       if (newName.isEmpty) {
@@ -167,7 +175,7 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                   ),
                   const SizedBox(height: 24),
                   WVerificationTextFieldWithTitle(
-                    title: 'Familya',
+                    title: context.l10n.profile_lastname,
                     hintText: user.value.lastname,
                     onChange: (lastName) {
                       if (lastName.isEmpty) {
@@ -184,8 +192,12 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                   ),
                   const SizedBox(height: 24),
                   WVerificationTextFieldWithTitle(
-                    title: 'Tug’ilgan sana',
-                    hintText: user.value.birthday.split('-').reversed.toList().join('-'),
+                    title: context.l10n.profile_birth,
+                    hintText: user.value.birthday
+                        .split('-')
+                        .reversed
+                        .toList()
+                        .join('-'),
                     onTap: () {
                       showCupertinoModalPopup(
                           context: context,
@@ -195,7 +207,8 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                         (value) {
                           if (value is Map) {
                             user.value = user.value.copyWith(
-                              birthday: value['date'].toString().replaceAll('.', '-'),
+                              birthday:
+                                  value['date'].toString().replaceAll('.', '-'),
                             );
                           }
                         },
@@ -225,7 +238,7 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                   ),
                   const SizedBox(height: 24),
                   WVerificationTextFieldWithTitle(
-                    title: 'Tumani',
+                    title: context.l10n.district,
                     hintText: user.value.region.name,
                     isRequired: true,
                     isReadOnly: true,
@@ -233,8 +246,10 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                   ),
                   const SizedBox(height: 24),
                   WVerificationTextFieldWithTitle(
-                    title: 'Mutaxasisligi',
-                    hintText: user.value.mainCat.name.isNotEmpty ? user.value.mainCat.name : "Kiritilmagan",
+                    title: context.l10n.profile_profession,
+                    hintText: user.value.mainCat.name.isNotEmpty
+                        ? user.value.mainCat.name
+                        : context.l10n.profile_edit_field_is_empty,
                     isRequired: true,
                     isReadOnly: true,
                     onTap: onPressedSelectSpecialist,
@@ -242,7 +257,9 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                   const SizedBox(height: 24),
                   WVerificationTextFieldWithTitle(
                     title: 'PINFL',
-                    hintText: user.value.pinfl.isNotEmpty ? user.value.pinfl : "Kiritilmagan",
+                    hintText: user.value.pinfl.isNotEmpty
+                        ? user.value.pinfl
+                        : context.l10n.profile_edit_field_is_empty,
                     isRequired: true,
                     onChange: (pinfl) {
                       if (pinfl.isEmpty) {
@@ -267,7 +284,7 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                           return WButton(
                             isDisabled: !(avatar != null || oldUser != user),
                             onTap: updateUserOnPress,
-                            text: "O'zgarishlarni saqlash",
+                            text: context.l10n.profile_save_changes,
                           );
                         },
                       );
@@ -279,7 +296,7 @@ class _EditProfileViewState extends State<EditProfileView> with EditProfileMixin
                       context.pop();
                     },
                     color: mainBlue,
-                    text: "Bekor qilish",
+                    text: context.l10n.appointment_cancel,
                     textStyle: AppTheme.bodyLarge.copyWith(
                       color: black,
                     ),
@@ -321,18 +338,20 @@ Container builtCupertinoDatePicker(BuildContext context) {
                 onDateTimeChanged: (date) {
                   dateTime = date;
                 },
-                initialDateTime: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+                initialDateTime: DateTime(DateTime.now().year,
+                    DateTime.now().month, DateTime.now().day),
                 minimumYear: 1940,
                 maximumYear: DateTime.now().year,
                 minimumDate: DateTime(1940),
-                maximumDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+                maximumDate: DateTime(DateTime.now().year, DateTime.now().month,
+                    DateTime.now().day),
               ),
             ),
             const SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: LongButton(
-                buttonName: 'Saqlash',
+                buttonName: context.l10n.profile_save_changes,
                 onPress: () {
                   Navigator.pop(context, {
                     'date': dateTime.toView,

@@ -15,7 +15,8 @@ class WSelectRegionBottomSheet extends StatefulWidget {
   const WSelectRegionBottomSheet({super.key});
 
   @override
-  State<WSelectRegionBottomSheet> createState() => _WSelectRegionBottomSheetState();
+  State<WSelectRegionBottomSheet> createState() =>
+      _WSelectRegionBottomSheetState();
 }
 
 class _WSelectRegionBottomSheetState extends State<WSelectRegionBottomSheet> {
@@ -39,13 +40,17 @@ class _WSelectRegionBottomSheetState extends State<WSelectRegionBottomSheet> {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Column(
                         children: [
-                          const DialogTitle(title: "Tug'ilgan joyingizni tanlang"),
+                          DialogTitle(
+                              title: context.l10n.profile_region_select),
                           const SizedBox(height: 16),
                           WTextField(
                             style: context.textTheme.bodyLarge,
-                            hintStyle: context.textTheme.bodyLarge!.copyWith(color: greyText),
+                            hintStyle: context.textTheme.bodyLarge!
+                                .copyWith(color: greyText),
                             onChanged: (value) {
-                              context.read<AccountsBloc>().add(GetRegion(search: value));
+                              context
+                                  .read<AccountsBloc>()
+                                  .add(GetRegion(search: value));
                             },
                             hintText: "Search",
                             borderColor: border,
@@ -100,19 +105,24 @@ class _WSelectRegionBottomSheetState extends State<WSelectRegionBottomSheet> {
                             regions: state.regionAndProfessionContainer.regions,
                             controller: controller,
                             index: 1,
-                            isLoading: state.regionAndProfessionContainer.statusd.isInProgress,
+                            isLoading: state.regionAndProfessionContainer
+                                .statusd.isInProgress,
                           ),
                           RegionListView(
-                            regions: state.regionAndProfessionContainer.regions1,
+                            regions:
+                                state.regionAndProfessionContainer.regions1,
                             controller: controller,
                             index: 2,
-                            isLoading: state.regionAndProfessionContainer.statusd.isInProgress,
+                            isLoading: state.regionAndProfessionContainer
+                                .statusd.isInProgress,
                           ),
                           RegionListView(
-                            regions: state.regionAndProfessionContainer.regions2,
+                            regions:
+                                state.regionAndProfessionContainer.regions2,
                             controller: controller,
                             index: 2,
-                            isLoading: state.regionAndProfessionContainer.statusd.isInProgress,
+                            isLoading: state.regionAndProfessionContainer
+                                .statusd.isInProgress,
                           ),
                         ],
                       ),

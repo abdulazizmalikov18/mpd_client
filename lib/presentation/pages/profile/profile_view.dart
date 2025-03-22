@@ -53,12 +53,12 @@ class _ProfileViewState extends State<ProfileView> with ProfileMixin {
                   ),
                   WProfileItem(
                     icon: AppIcons.likeDislike,
-                    title: "Shaxsiy postlar",
+                    title: context.l10n.personal_posts,
                     onPressed: onPressMyPosts,
                   ),
                   WProfileItem(
                     icon: AppIcons.userAdd,
-                    subTitle: '5 ${context.l10n.profile_following_doctors_doctor.toLowerCase()}',
+                    // subTitle: '5 ${context.l10n.profile_following_doctors_doctor.toLowerCase()}',
                     title: context.l10n.profile_following_doctors,
                     onPressed: () {
                       context.pushNamed(AppRouteNames.userFollowing);
@@ -80,7 +80,7 @@ class _ProfileViewState extends State<ProfileView> with ProfileMixin {
                   ),
                   WProfileItem(
                     icon: AppIcons.briefcaseLite,
-                    title: "Shifokor profiliga kirish",
+                    title: context.l10n.access_doctor_profile,
                     onPressed: onPressGoToDoctorProfile,
                   ),
                   WProfileItem(

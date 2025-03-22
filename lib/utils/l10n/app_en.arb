@@ -5,6 +5,8 @@
 "presentation_language_uz": "O'zbek",
 "presentation_language_ru": "Русский",
 "presentation_language_en": "English",
+"personal_posts": "Personal posts",
+"access_doctor_profile": "Access to doctor profile",
 "presentation_next": "Next",
 "presentation_skip": "Skip",
 "presentation_first_page": "Do you need to find a doctor urgently or quickly?",
@@ -16,6 +18,12 @@
 "presentation_four_page": "Access to emergency services",
 "presentation_four_page_description": "Users through the MPD app, caRn get quick access to emergency services with just a few taps",
 "presentation_get_start": "Get start",
+
+"ambulance_services": "Ambulance services",
+"ambulance_services_condition": "Please only contact us in case of emergency!",
+"ambulance_accident":"Accident",
+"ambulance_first_aid": "First aid",
+"ambulance_fainting": "Fainting",
 
 "login_text": "Welcome Back!\nLogin to your account",
 "login_phone": "Enter phone number or username",
@@ -232,10 +240,13 @@
 "records_record": "Medical records",
 "records_view_doctor_profile": "View doctor profile",
 
+"district": "District",
+
 "profile_language_uz": "Uzbek",
 "profile_language_ru": "Russian",
 "profile_language_en": "English",
 "profile_personal_info": "Personal information",
+"profile_edit_field_is_empty": "The field is empty",
 "profile_payment": "Payment",
 "profile_following_doctors": "Following doctors",
 "profile_following_doctors_doctor": "Doctors",

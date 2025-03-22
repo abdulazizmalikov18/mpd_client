@@ -10,6 +10,7 @@ import 'package:mpd_client/presentation/styles/app_images.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/presentation/widgets/w_app_bar.dart';
+import 'package:mpd_client/utils/extensions/context_extension.dart';
 
 class MyPostView extends StatefulWidget {
   const MyPostView({super.key});
@@ -32,8 +33,8 @@ class _MyPostViewState extends State<MyPostView> {
       appBar: WAppBar(
         back: true,
         title: Text(
-          "Shaxsiy postlar",
-          style: AppTheme.headlineSmall.copyWith(fontSize: 16),
+          context.l10n.personal_posts,
+          style: AppTheme.headlineSmall.copyWith(fontSize: 22),
         ),
       ),
       body: Expanded(
@@ -46,7 +47,8 @@ class _MyPostViewState extends State<MyPostView> {
             // context.read<PostBloc>().add(const PostFetched());
             // await Future.delayed(const Duration(seconds: 1));
           },
-          indicatorBuilder: (BuildContext context, IndicatorController controller) {
+          indicatorBuilder:
+              (BuildContext context, IndicatorController controller) {
             return const CupertinoActivityIndicator(
               color: black,
             );
@@ -63,7 +65,8 @@ class _MyPostViewState extends State<MyPostView> {
                 );
               }
               // Posts Is Empty
-              if (state.posts.isEmpty && (state.status.isFailure || state.status.isSuccess)) {
+              if (state.posts.isEmpty &&
+                  (state.status.isFailure || state.status.isSuccess)) {
                 return Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -79,7 +82,10 @@ class _MyPostViewState extends State<MyPostView> {
                       Text(
                         'The page you are looking\nfor doesn’t exits',
                         textAlign: TextAlign.center,
-                        style: AppTheme.bodyLarge.copyWith(fontSize: 18, fontWeight: FontWeight.w400, color: gray),
+                        style: AppTheme.bodyLarge.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            color: gray),
                       ),
                     ],
                   ),
@@ -91,7 +97,8 @@ class _MyPostViewState extends State<MyPostView> {
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: EdgeInsets.only(bottom: index + 1 == state.posts.length ? 30 : 0),
+                    padding: EdgeInsets.only(
+                        bottom: index + 1 == state.posts.length ? 30 : 0),
                     child: PostWidget(
                       post: state.myPost[index],
                       isMyPost: true,
@@ -100,7 +107,6 @@ class _MyPostViewState extends State<MyPostView> {
                 },
                 itemCount: state.myPost.length,
               );
-             
             },
           ),
         ),

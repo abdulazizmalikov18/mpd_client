@@ -52,14 +52,18 @@ class _WSelectProfessionSheetState extends State<WSelectProfessionSheet> {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Column(
                         children: [
-                          const DialogTitle(title: "Mutaxasligingizni tanlang "),
+                          DialogTitle(
+                              title: context.l10n.profile_profession_select),
                           const SizedBox(height: 16),
                           WTextField(
                             style: context.textTheme.bodyLarge,
-                            hintStyle: context.textTheme.bodyLarge?.copyWith(color: greyText),
+                            hintStyle: context.textTheme.bodyLarge
+                                ?.copyWith(color: greyText),
                             onChanged: (value) {
                               onDebounce(() {
-                                context.read<AccountsBloc>().add(GetProfession(search: value));
+                                context
+                                    .read<AccountsBloc>()
+                                    .add(GetProfession(search: value));
                               });
                             },
                             hintText: "Search",
@@ -103,16 +107,20 @@ class _WSelectProfessionSheetState extends State<WSelectProfessionSheet> {
                         physics: const NeverScrollableScrollPhysics(),
                         children: [
                           ProfessionListView(
-                            profession: state.regionAndProfessionContainer.profession,
+                            profession:
+                                state.regionAndProfessionContainer.profession,
                             controller: controller,
                             index: 1,
-                            isLoading: state.regionAndProfessionContainer.statusd.isInProgress,
+                            isLoading: state.regionAndProfessionContainer
+                                .statusd.isInProgress,
                           ),
                           ProfessionListView(
-                            profession: state.regionAndProfessionContainer.profession2,
+                            profession:
+                                state.regionAndProfessionContainer.profession2,
                             controller: controller,
                             index: 2,
-                            isLoading: state.regionAndProfessionContainer.statusd.isInProgress,
+                            isLoading: state.regionAndProfessionContainer
+                                .statusd.isInProgress,
                           ),
                         ],
                       ),

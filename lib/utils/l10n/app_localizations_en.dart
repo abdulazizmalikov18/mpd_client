@@ -27,6 +27,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get presentation_language_en => 'English';
 
   @override
+  String get personal_posts => 'Personal posts';
+
+  @override
+  String get access_doctor_profile => 'Access to doctor profile';
+
+  @override
   String get presentation_next => 'Next';
 
   @override
@@ -58,6 +64,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get presentation_get_start => 'Get start';
+
+  @override
+  String get ambulance_services => 'Ambulance services';
+
+  @override
+  String get ambulance_services_condition => 'Please only contact us in case of emergency!';
+
+  @override
+  String get ambulance_accident => 'Accident';
+
+  @override
+  String get ambulance_first_aid => 'First aid';
+
+  @override
+  String get ambulance_fainting => 'Fainting';
 
   @override
   String get login_text => 'Welcome Back!\nLogin to your account';
@@ -654,6 +675,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get records_view_doctor_profile => 'View doctor profile';
 
   @override
+  String get district => 'District';
+
+  @override
   String get profile_language_uz => 'Uzbek';
 
   @override
@@ -664,6 +688,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile_personal_info => 'Personal information';
+
+  @override
+  String get profile_edit_field_is_empty => 'The field is empty';
 
   @override
   String get profile_payment => 'Payment';

@@ -11,6 +11,7 @@ import 'package:mpd_client/presentation/pages/lenta/widgets/w_comment_bottom_she
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/presentation/widgets/w_app_bar.dart';
+import 'package:mpd_client/utils/extensions/context_extension.dart';
 
 part '../mixin/comment_mixin.dart';
 
@@ -28,7 +29,8 @@ class CommentView extends StatefulWidget {
   State<CommentView> createState() => _CommentViewState();
 
   // ignore: library_private_types_in_public_api
-  static _CommentViewState? maybeOf(BuildContext context) => context.findAncestorStateOfType<_CommentViewState>();
+  static _CommentViewState? maybeOf(BuildContext context) =>
+      context.findAncestorStateOfType<_CommentViewState>();
 }
 
 class _CommentViewState extends State<CommentView> with CommentMixin {
@@ -36,9 +38,10 @@ class _CommentViewState extends State<CommentView> with CommentMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: scaffoldSecondaryBackground,
-      appBar: const WAppBar(
+      appBar: WAppBar(
         back: true,
-        title: Text('Comment View'),
+        title: Text(context.l10n.lenth_comment,
+            style: AppTheme.headlineSmall.copyWith(fontSize: 22)),
       ),
       body: GestureDetector(
         onTap: () {
@@ -79,7 +82,9 @@ class _CommentViewState extends State<CommentView> with CommentMixin {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            for (int index = 0; index < state.comments.length; index++)
+                            for (int index = 0;
+                                index < state.comments.length;
+                                index++)
                               WComment(
                                 isMine: state.comments[index].user == username,
                                 comment: state.comments[index],

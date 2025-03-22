@@ -91,7 +91,12 @@ mixin ProfileMixin on State<ProfileView> {
                               padding: const EdgeInsets.all(8.0),
                               child: Center(
                                 child: CreateQRCode(
-                                  text: context.read<AccountsBloc>().state.userContainer.user.qrcode,
+                                  text: context
+                                      .read<AccountsBloc>()
+                                      .state
+                                      .userContainer
+                                      .user
+                                      .qrcode,
                                 ),
                               ),
                             ),
@@ -188,21 +193,21 @@ mixin ProfileMixin on State<ProfileView> {
       useSafeArea: true,
       builder: (context) => BottomSheetWidget(
         padding: const EdgeInsets.symmetric(
-          vertical: 20,
+          vertical: 12,
           horizontal: 16,
         ),
         children: [
           const SizedBox(height: 12),
-          const Text(
-            "Tez yordam so’rash!",
-            style: TextStyle(
-              fontSize: 24,
+          Text(
+            context.l10n.ambulance_services,
+            style: const TextStyle(
+              fontSize: 20,
               fontWeight: FontWeight.w700,
             ),
           ),
-          const Text(
-            "Iltimos faqat favqulotda xolatda murojat qiling!",
-            style: TextStyle(
+          Text(
+            context.l10n.ambulance_services_condition,
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w400,
               color: grey,
@@ -220,10 +225,10 @@ mixin ProfileMixin on State<ProfileView> {
                 )
               ],
             ),
-            child: const ListTile(
+            child: ListTile(
               title: Text(
-                "Avariya",
-                style: TextStyle(
+                context.l10n.ambulance_accident,
+                style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                   color: mainBlue,
@@ -265,10 +270,10 @@ mixin ProfileMixin on State<ProfileView> {
                 )
               ],
             ),
-            child: const ListTile(
+            child: ListTile(
               title: Text(
-                "Birinchi erdam",
-                style: TextStyle(
+                context.l10n.ambulance_first_aid,
+                style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
@@ -287,26 +292,26 @@ mixin ProfileMixin on State<ProfileView> {
                 )
               ],
             ),
-            child: const ListTile(
+            child: ListTile(
               title: Text(
-                "xushi ketdi",
-                style: TextStyle(
+                context.l10n.ambulance_fainting,
+                style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
               ),
             ),
           ),
-          const SizedBox(height: 20),
-          LongButton(
-            height: 52,
-            buttonName: "SOS",
-            color: red,
-            onPress: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          const SizedBox(height: 16),
+          // const SizedBox(height: 20),
+          // LongButton(
+          //   height: 52,
+          //   buttonName: "SOS",
+          //   color: red,
+          //   onPress: () {
+          //     Navigator.of(context).pop();
+          //   },
+          // ),
+          // const SizedBox(height: 16),
         ],
       ),
     );

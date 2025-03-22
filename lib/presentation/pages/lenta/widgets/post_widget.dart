@@ -113,9 +113,9 @@ class _PostWidgetState extends State<PostWidget>
                                 children: [
                                   const SizedBox(height: 12),
                                   const Text(
-                                    "Опции",
+                                    "Options",
                                     style: TextStyle(
-                                      fontSize: 24,
+                                      fontSize: 22,
                                       fontWeight: FontWeight.w700,
                                       color: black,
                                     ),

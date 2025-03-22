@@ -27,6 +27,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get presentation_language_en => 'English';
 
   @override
+  String get personal_posts => 'Личные посты';
+
+  @override
+  String get access_doctor_profile => 'Доступ к профилю врача';
+
+  @override
   String get presentation_next => 'Следующее';
 
   @override
@@ -58,6 +64,21 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get presentation_get_start => 'Начать';
+
+  @override
+  String get ambulance_services => 'Услуги скорой помощи';
+
+  @override
+  String get ambulance_services_condition => 'Пожалуйста, обращайтесь к нам только в случае чрезвычайной ситуации!';
+
+  @override
+  String get ambulance_accident => 'Несчастный случай';
+
+  @override
+  String get ambulance_first_aid => 'Первая помощь';
+
+  @override
+  String get ambulance_fainting => 'Обморок';
 
   @override
   String get login_text => 'Добро пожаловать!\nАвторизуйтесь чтобы продолжить';
@@ -654,6 +675,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get records_view_doctor_profile => 'Просмотреть профиль врача';
 
   @override
+  String get district => 'Округ';
+
+  @override
   String get profile_language_uz => 'Узбекский';
 
   @override
@@ -664,6 +688,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get profile_personal_info => ' Персональная информация';
+
+  @override
+  String get profile_edit_field_is_empty => 'Поле пусто';
 
   @override
   String get profile_payment => 'Оплата';
