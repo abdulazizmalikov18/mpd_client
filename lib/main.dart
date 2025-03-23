@@ -1,27 +1,113 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:mpd_client/app.dart';
-import 'package:mpd_client/domain/common/app_init.dart';
-import 'package:mpd_client/infrastructure/core/scope.dart';
-import 'package:mpd_client/infrastructure/services/log_service.dart';
-import 'package:mpd_client/infrastructure/services/storage_repo_service.dart';
+// import 'dart:convert';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:mpd_client/app/app_export.dart';
+import 'package:mpd_client/bloc_logger.dart';
+import 'package:mpd_client/core/data/repository/storage_repository.dart';
+import 'package:mpd_client/core/utils/log_service.dart';
+import 'package:mpd_client/features/app.dart';
+// import 'package:mpd_client/core/network/fcm_service.dart';
+// import 'package:mpd_client/features/home/data/models/order_stream_model.dart';
+// import 'package:web_socket_channel/io.dart';
+// import 'package:workmanager/workmanager.dart';
+import 'package:yandex_mapkit/yandex_mapkit.dart';
 
-const String $baseUrlHttp = "http://82.215.78.34/";
-const String $baseUrlSocket = "ws://82.215.78.34";
+void main() async {
+  await runZonedGuarded(
+    () async {
+      // EquatableConfig.stringify = kDebugMode;
+      AndroidYandexMap.useAndroidViewSurface = false;
+      WidgetsFlutterBinding.ensureInitialized();
+      await StorageRepository.getInstance();
+      // await FcmService.init();
 
-Future<void> main() async {
-  await runZonedGuarded(() async {
-    await AppInit.create;
-    runApp(DependencyScope(
-      initialModel: AppScope(
-        locale: Locale(
-            StorageRepository.getString(StorageKeys.LANGUAGE, defValue: 'uz')),
-      ),
-      child: const MyApp(),
-    ));
-  }, (error, stack) {
-    Log.e("ROOT|Error\nError:$error\nStack:");
-    print(error);
-    print(stack);
-  });
+      // Workmanager().initialize(
+      //   callbackDispatcher,
+      //   isInDebugMode: true,
+      // );
+      // Workmanager().registerOneOffTask("task-identifier", "nimadir");
+      await SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
+      );
+      setupLocator();
+      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+      ));
+
+      if (kDebugMode) {
+        Bloc.observer = LogBlocObserver();
+      }
+      runApp(const MyApp());
+    },
+    (error, stack) {
+      Log.e(error);
+      Log.e(stack);
+    },
+  );
 }
+
+// @pragma('vm:entry-point')
+// void callbackDispatcher() {
+//   Workmanager().executeTask((task, inputData) async {
+//     print("Socket Connection $task");
+//     await FLNService.show(
+//       title: "Socket Kuzatilmoqda ...",
+//       body: "Listening Socker",
+//     );
+//     await StorageRepository.getInstance();
+
+//     final socketURl = Uri.parse(
+//         "ws://82.215.78.34/OMS/ws/work/?specialist_id=942&org_slug=mpd&lang=ru");
+
+//     IOWebSocketChannel socketChannel = IOWebSocketChannel.connect(socketURl);
+
+//     final stream = socketChannel.stream.asBroadcastStream();
+//     stream.listen(
+//       (event) async {
+//         await FLNService.show(
+//           title: "Socket Kuzatilmoqda ...",
+//           body: "$event",
+//         );
+//         final data = jsonDecode(event);
+//         switch (data['type']) {
+//           case 'order-create':
+//             {
+//               OrdersStreamModel order = OrdersStreamModel.fromJson(data);
+//               await FLNService.show(
+//                 title: "Order Created",
+//                 body: order.toString(),
+//               );
+
+//               break;
+//             }
+//           case 'order-update':
+//             {
+//               OrdersStreamModel order = OrdersStreamModel.fromJson(data);
+//               await FLNService.show(
+//                 title: "Order Updated",
+//                 body: order.toString(),
+//               );
+
+//               break;
+//             }
+//         }
+//       },
+//       onError: (e) async {
+//         await FLNService.show(
+//           title: "Socket Kuzatilmoqda ...",
+//           body: "ERROR",
+//         );
+//         socketChannel = IOWebSocketChannel.connect(socketURl);
+//       },
+//       onDone: () async {
+//         await FLNService.show(
+//           title: "Socket Kuzatilmoqda ...",
+//           body: "Done",
+//         );
+//       },
+//     );
+
+//     return Future.value(true);
+//   });
+// }

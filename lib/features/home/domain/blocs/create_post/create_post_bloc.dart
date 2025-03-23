@@ -1,0 +1,124 @@
+import 'dart:io';
+import 'package:dio/dio.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:mime/mime.dart';
+import 'package:mpd_client/core/utils/log_service.dart';
+import 'package:mpd_client/core/utils/media_compresser.dart';
+import 'package:mpd_client/core/utils/utils.dart';
+import 'package:mpd_client/features/home/data/models/file_model.dart';
+import 'package:mpd_client/features/home/data/models/upload_post_model.dart';
+import 'package:mpd_client/features/home/data/repositories/home_repository.dart';
+import 'package:path/path.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
+
+part 'create_post_event.dart';
+part 'create_post_state.dart';
+
+class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostState> {
+  CreatePostBloc(this._descriptionController, this._homeRepository)
+      : super(const CreatePostInitial([])) {
+    on<SelectImagesAndVideosEvent>(_onSelectImages);
+
+    on<RemoveImageEvent>(_onRemoveImage);
+    on<CreatePostPressed>(_onCreatePostPressed);
+  }
+  final HomeRepository _homeRepository;
+  final List<FileModel> _fileImagesAndVideos = [];
+
+  final TextEditingController _descriptionController;
+
+  TextEditingController get descriptionController => _descriptionController;
+
+  Future<void> _onSelectImages(
+      SelectImagesAndVideosEvent event, Emitter<CreatePostState> emit) async {
+    try {
+      FilePickerResult? result = await FilePicker.platform
+          .pickFiles(type: FileType.media, allowMultiple: true);
+      if (result == null) return;
+
+      for (var path in result.paths) {
+        _fileImagesAndVideos.add(FileModel(
+            file: File(path!),
+            fileType: lookupMimeType(path)!.split('/').first));
+      }
+
+      emit(CreatePostInitial(_fileImagesAndVideos));
+    } on PlatformException catch (e) {
+      emit(CreatePostFailure(state.files, failure: e.message!));
+    }
+  }
+
+  void _onRemoveImage(RemoveImageEvent event, Emitter<CreatePostState> emit) {
+    final images = state.files;
+    images.remove(event.file);
+    emit(CreatePostInitial(images));
+  }
+
+  Future<void> _onCreatePostPressed(
+      CreatePostPressed event, Emitter<CreatePostState> emit) async {
+    // ? Validate image has or not
+    if (_fileImagesAndVideos.isEmpty) {
+      return emit(CreatePostInitial(state.files, isValidImage: false));
+    }
+
+    emit(CreatePostLoading(state.files, isValidImage: state.isValidImage));
+    final List<MultipartFile> postImages = [];
+    final List<MultipartFile> postVideos = [];
+    final List<MultipartFile> postVideosScreenshot = [];
+
+    for (var file in _fileImagesAndVideos) {
+      if (file.fileType == 'image') {
+        final compressedImage =
+            await MediaCompresser.compressAndTryCatchImage(file.file.path);
+
+        postImages.add(MultipartFile.fromBytes(compressedImage,
+            filename: basename(file.file.path)));
+        for (var element in postImages) {
+            Log.e(element.filename);
+          }
+      } else if (file.fileType == 'video') {
+        // final length = file.file.lengthSync();
+
+        // final compressedVideo =
+        //     await MediaCompresser.compressVideo(file.file.path);
+        final uint8list = await VideoThumbnail.thumbnailFile(
+          video: file.file.path,
+          imageFormat: ImageFormat.JPEG,
+          maxWidth:
+              400, // specify the width of the thumbnail, let the height auto-scaled to keep the source aspect ratio
+          quality: 75,
+        );
+        final noCompressed = await file.file.readAsBytes();
+
+        postVideosScreenshot
+            .add(await MultipartFile.fromFile(uint8list!, filename: uint8list));
+
+        postVideos.add(MultipartFile.fromBytes(noCompressed,
+            filename: basename(file.file.path)));
+      }
+    }
+
+    final result = await _homeRepository.createPost(UploadPost(
+      text: descriptionController.text,
+      images: postImages,
+      screenshots: postVideosScreenshot,
+      // aspectRatio: '4x3',
+      files: postVideos,
+    ));
+
+    if (result.isRight) {
+      emit(CreatePostSucces(
+        state.files,
+        createdPost: result.right,
+        isValidImage: state.isValidImage,
+      ));
+    } else {
+      emit(CreatePostFailure(state.files,
+          failure: Utils.errorFormat(result.left.message),
+          isValidImage: state.isValidImage));
+    }
+  }
+}
