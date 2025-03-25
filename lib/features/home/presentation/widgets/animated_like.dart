@@ -16,18 +16,29 @@ class Like extends StatelessWidget {
   final bool isLiked;
   final int postId;
   final int baseIndex;
-  const Like(
-      {super.key, required this.baseIndex, required this.likeCount, required this.isLiked, required this.postId});
+  const Like({
+    super.key,
+    required this.baseIndex,
+    required this.likeCount,
+    required this.isLiked,
+    required this.postId,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        AnimatedLikeIcon(isLiked: isLiked, postId: postId, baseIndex: baseIndex),
+        AnimatedLikeIcon(
+          isLiked: isLiked,
+          postId: postId,
+          baseIndex: baseIndex,
+        ),
         ScreenUtil().setHorizontalSpacing(8.w),
         Text(
           '$likeCount ${context.l10n.lenth_likes}',
-          style: Styles.postTitle.copyWith(color: context.color.grey, fontFamily: Styles.gilroyRegular),
+          style: Styles.postTitle.copyWith(
+              color: context.color.grey, fontFamily: Styles.gilroyRegular),
         ),
       ],
     );
@@ -38,19 +49,30 @@ class AnimatedLikeIcon extends StatefulWidget {
   final bool isLiked;
   final int postId;
   final int baseIndex;
-  const AnimatedLikeIcon({super.key, required this.isLiked, required this.postId, required this.baseIndex});
+  const AnimatedLikeIcon({
+    super.key,
+    required this.isLiked,
+    required this.postId,
+    required this.baseIndex,
+  });
 
   @override
   State<AnimatedLikeIcon> createState() => _AnimatedFollowIconState();
 }
 
-class _AnimatedFollowIconState extends State<AnimatedLikeIcon> with TickerProviderStateMixin {
+class _AnimatedFollowIconState extends State<AnimatedLikeIcon>
+    with TickerProviderStateMixin {
   late AnimationController _animationController;
 
   @override
   void initState() {
     _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 200), value: 1.0, upperBound: 1.25, lowerBound: 1.0);
+      vsync: this,
+      duration: const Duration(milliseconds: 200),
+      value: 1.0,
+      upperBound: 1.25,
+      lowerBound: 1.0,
+    );
     super.initState();
   }
 
@@ -65,11 +87,16 @@ class _AnimatedFollowIconState extends State<AnimatedLikeIcon> with TickerProvid
     return IconButton(
       onPressed: () {
         if (!widget.isLiked) {
-          _animationController.forward().then((value) => _animationController.reverse());
+          _animationController
+              .forward()
+              .then((value) => _animationController.reverse());
         }
-        context.read<MediaControlBloc>().add(MediaLikePressed(widget.baseIndex));
+        context
+            .read<MediaControlBloc>()
+            .add(MediaLikePressed(widget.baseIndex));
         // context.read<PostUiBloc>().add(PostLikeUnlikeEvent());
-        context.read<LikeUnlikeBloc>().add(LikeUnlikePressed(postId: widget.postId, isLiked: widget.isLiked));
+        context.read<LikeUnlikeBloc>().add(
+            LikeUnlikePressed(postId: widget.postId, isLiked: widget.isLiked));
       },
       padding: EdgeInsets.zero,
       constraints: BoxConstraints(minHeight: 32.w, minWidth: 32.w),

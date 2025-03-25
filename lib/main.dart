@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:mpd_client/app/app_export.dart';
@@ -22,11 +23,13 @@ void main() async {
       await StorageRepository.getInstance();
       await FcmService.init();
 
-      Workmanager().initialize(
-        callbackDispatcher,
-        isInDebugMode: true,
-      );
-      Workmanager().registerOneOffTask("task-identifier", "nimadir");
+      if (Platform.isAndroid) {
+        Workmanager().initialize(
+          callbackDispatcher,
+          isInDebugMode: true,
+        );
+        Workmanager().registerOneOffTask("task-identifier", "nimadir");
+      }
       await SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,

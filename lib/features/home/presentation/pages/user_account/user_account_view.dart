@@ -17,7 +17,6 @@ import 'package:mpd_client/src/widgets/cached_image_widget.dart';
 import 'package:mpd_client/src/widgets/default_avatar.dart';
 import 'package:mpd_client/src/widgets/gradient_icon.dart';
 import 'package:mpd_client/src/widgets/longbutton.dart';
-import 'package:mpd_client/src/widgets/shimmer_container.dart';
 import 'package:mpd_client/src/widgets/w_shimmer.dart';
 
 class UserAccountView extends StatefulWidget {
@@ -320,12 +319,22 @@ class UserAllPosts extends StatelessWidget {
               itemCount: state.postsUser.length,
               itemBuilder: (context, index) => InkWell(
                 onTap: () {
+                  final sendComentBloc = context.read<SendComentBloc>();
+                  final postComentBloc = context.read<PostComentBloc>();
+                  final userInfoBloc = context.read<UserInfoBloc>();
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => UserPostsView(
-                      postsUser: state.postsUser,
-                      index: index,
-                      name: name,
-                      avatar: avatar,
+                    builder: (context) => MultiBlocProvider(
+                      providers: [
+                        BlocProvider.value(value: sendComentBloc),
+                        BlocProvider.value(value: postComentBloc),
+                        BlocProvider.value(value: userInfoBloc),
+                      ],
+                      child: UserPostsView(
+                        postsUser: state.postsUser,
+                        index: index,
+                        name: name,
+                        avatar: avatar,
+                      ),
                     ),
                   ));
                 },

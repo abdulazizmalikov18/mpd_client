@@ -91,6 +91,9 @@ class _PostBodyState extends State<PostBody>
             Expanded(
               child: InkWell(
                 onTap: () {
+                  final sendComentBloc = context.read<SendComentBloc>();
+                  final postComentBloc = context.read<PostComentBloc>();
+                  final userInfoBloc = context.read<UserInfoBloc>();
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => MultiBlocProvider(
                       providers: [
@@ -100,6 +103,9 @@ class _PostBodyState extends State<PostBody>
                         BlocProvider(
                             create: (context) =>
                                 PostBloc(locator.get<HomeRepository>())),
+                        BlocProvider.value(value: sendComentBloc),
+                        BlocProvider.value(value: postComentBloc),
+                        BlocProvider.value(value: userInfoBloc),
                       ],
                       child: UserAccountView(
                         username: widget.post.authorUser ?? "kabulov",
@@ -213,20 +219,6 @@ class _PostBodyState extends State<PostBody>
                 return ComentWidget(
                   comentCount: posts[widget.baseIndex].commentCount,
                   onPressed: () async {
-                    // final flickManager = widget.flickMultiManager
-                    //     .getFlickManager(widget.post.media!.first.file ?? '');
-
-                    // Navigator.pushNamed(
-                    //   context,
-                    //   AppRoutes.postComent,
-                    //   arguments: ComentPageModel(
-                    //     index: widget.baseIndex,
-                    //     flickManager: flickManager,
-                    //     post: widget.post,
-                    //   ),
-                    // ).then(
-                    //   (value) => isComentRoute = false,
-                    // );
                     final sendComentBloc = context.read<SendComentBloc>();
                     final postComentBloc = context.read<PostComentBloc>();
                     final userInfoBloc = context.read<UserInfoBloc>();

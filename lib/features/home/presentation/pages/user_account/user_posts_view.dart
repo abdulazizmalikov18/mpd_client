@@ -6,6 +6,8 @@ import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/core/utils/utils.dart';
 import 'package:mpd_client/features/home/data/models/posts_model.dart';
+import 'package:mpd_client/features/home/presentation/pages/coment_sheet/components/coment_input.dart';
+import 'package:mpd_client/features/home/presentation/pages/coment_sheet/components/coments.dart';
 import 'package:mpd_client/features/home/presentation/widgets/swipe_indicator.dart';
 import 'package:mpd_client/src/themes/styles.dart';
 import 'package:mpd_client/src/widgets/appbar_widget.dart';
@@ -100,18 +102,82 @@ class _UserPostsViewState extends State<UserPostsView> {
                 Text(
                   '${widget.postsUser[index].likesCount} ${context.l10n.lenth_likes}',
                   style: Styles.postTitle.copyWith(
-                      color: context.color.grey,
-                      fontFamily: Styles.gilroyRegular),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: AppIcons.coment.svg(),
-                ),
-                Text(
-                  '${widget.postsUser[index].commentCount} ${context.l10n.lenth_comment.toLowerCase()}',
-                  style: Styles.postTitle.copyWith(
                     color: context.color.grey,
                     fontFamily: Styles.gilroyRegular,
+                  ),
+                ),
+                ScreenUtil().setHorizontalSpacing(10.w),
+                InkWell(
+                  onTap: () {
+                    final sendComentBloc = context.read<SendComentBloc>();
+                    final postComentBloc = context.read<PostComentBloc>();
+                    final userInfoBloc = context.read<UserInfoBloc>();
+                    showModalBottomSheet(
+                      context: context,
+                      useRootNavigator: true,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) => Container(
+                        height: MediaQuery.sizeOf(context).height * 0.7,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: context.color.white,
+                        ),
+                        padding: EdgeInsets.all(16),
+                        child: MultiBlocProvider(
+                          providers: [
+                            BlocProvider.value(value: sendComentBloc),
+                            BlocProvider.value(value: postComentBloc),
+                            BlocProvider.value(value: userInfoBloc),
+                          ],
+                          child: Column(
+                            children: [
+                              Container(
+                                width: 60.w,
+                                height: 2.h,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: context.color.grey,
+                                ),
+                              ),
+                              SizedBox(height: 16.h),
+                              Expanded(
+                                child: Coments(
+                                  post: widget.postsUser[index],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  bottom:
+                                      MediaQuery.of(context).viewInsets.bottom,
+                                ),
+                                child: ComentInput(
+                                  postId: widget.postsUser[index].id!,
+                                  postIndex: index,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      AppIcons.coment.svg(
+                        color: context.color.grey,
+                        height: 22.h,
+                      ),
+                      ScreenUtil().setHorizontalSpacing(8.w),
+                      Text(
+                        '${widget.postsUser[index].commentCount} ${context.l10n.lenth_comment.toLowerCase()}',
+                        style: Styles.postTitle.copyWith(
+                          color: context.color.grey,
+                          fontFamily: Styles.gilroyRegular,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
