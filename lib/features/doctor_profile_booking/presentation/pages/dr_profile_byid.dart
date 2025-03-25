@@ -236,7 +236,7 @@ class _DrProfileByidState extends State<DrProfileByid> {
                             tabs: [
                               Tab(
                                 child: Text(
-                                  "About",
+                                  context.l10n.book_doctor_about_doctor,
                                   style: Styles.descSubtitle.copyWith(
                                     color: context.color.black,
                                   ),

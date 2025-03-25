@@ -8,7 +8,13 @@ import 'package:shimmer/shimmer.dart';
 class CachedImageWidget extends StatelessWidget {
   final String url;
   final double size;
-  const CachedImageWidget({super.key, required this.url, required this.size});
+  final double borderRadius;
+  const CachedImageWidget({
+    super.key,
+    required this.url,
+    required this.size,
+    this.borderRadius = 16,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +25,7 @@ class CachedImageWidget extends StatelessWidget {
       );
     }
     return ClipRRect(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(borderRadius),
       child: CachedNetworkImage(
         imageUrl: url,
         fit: BoxFit.cover,

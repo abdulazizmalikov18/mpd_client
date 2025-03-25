@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +13,7 @@ import 'package:mpd_client/features/home/data/models/file_model.dart';
 import 'package:mpd_client/features/home/data/models/upload_post_model.dart';
 import 'package:mpd_client/features/home/data/repositories/home_repository.dart';
 import 'package:path/path.dart';
-import 'package:video_thumbnail/video_thumbnail.dart';
+import 'package:video_compress/video_compress.dart';
 
 part 'create_post_event.dart';
 part 'create_post_state.dart';
@@ -77,24 +78,22 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostState> {
         postImages.add(MultipartFile.fromBytes(compressedImage,
             filename: basename(file.file.path)));
         for (var element in postImages) {
-            Log.e(element.filename);
-          }
+          Log.e(element.filename);
+        }
       } else if (file.fileType == 'video') {
         // final length = file.file.lengthSync();
 
         // final compressedVideo =
         //     await MediaCompresser.compressVideo(file.file.path);
-        final uint8list = await VideoThumbnail.thumbnailFile(
-          video: file.file.path,
-          imageFormat: ImageFormat.JPEG,
-          maxWidth:
-              400, // specify the width of the thumbnail, let the height auto-scaled to keep the source aspect ratio
+        final uint8list = await VideoCompress.getByteThumbnail(
+          file.file.path,
+          position: -1,
           quality: 75,
         );
         final noCompressed = await file.file.readAsBytes();
 
         postVideosScreenshot
-            .add(await MultipartFile.fromFile(uint8list!, filename: uint8list));
+            .add(await MultipartFile.fromFile(base64Encode(uint8list!)));
 
         postVideos.add(MultipartFile.fromBytes(noCompressed,
             filename: basename(file.file.path)));

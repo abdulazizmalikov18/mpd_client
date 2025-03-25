@@ -123,10 +123,13 @@ class _PostMediaState extends State<PostMedia>
   String isVideoUrl(int index) {
     if (widget.postMedias!.isEmpty) {
       return '';
-    } else if (widget.postMedias![index].image == null) {
-      return widget.postMedias![index].file!;
     } else {
-      return widget.postMedias![index].image!;
+      if (widget.postMedias![index].image == null &&
+          widget.postMedias![index].file != null) {
+        return widget.postMedias![index].file ?? "";
+      } else {
+        return widget.postMedias![index].image ?? "";
+      }
     }
   }
 

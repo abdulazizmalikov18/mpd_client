@@ -18,6 +18,7 @@ import 'package:mpd_client/src/widgets/default_avatar.dart';
 import 'package:mpd_client/src/widgets/gradient_icon.dart';
 import 'package:mpd_client/src/widgets/longbutton.dart';
 import 'package:mpd_client/src/widgets/shimmer_container.dart';
+import 'package:mpd_client/src/widgets/w_shimmer.dart';
 
 class UserAccountView extends StatefulWidget {
   const UserAccountView({
@@ -306,8 +307,7 @@ class UserAllPosts extends StatelessWidget {
               crossAxisSpacing: 4,
             ),
             itemCount: 20,
-            itemBuilder: (context, index) =>
-                const ShimmerContainer(size: Size(118, 21)),
+            itemBuilder: (context, index) => WShimmer(radius: 0),
           );
         } else if (state.statusUser == PostStatus.success) {
           if (state.postsUser.isNotEmpty) {
@@ -317,7 +317,6 @@ class UserAllPosts extends StatelessWidget {
                 mainAxisSpacing: 4,
                 crossAxisSpacing: 4,
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 4),
               itemCount: state.postsUser.length,
               itemBuilder: (context, index) => InkWell(
                 onTap: () {
@@ -333,6 +332,7 @@ class UserAllPosts extends StatelessWidget {
                 child: CachedImageWidget(
                   url: Utils.imageMediea(state.postsUser[index].media),
                   size: 20,
+                  borderRadius: 0,
                 ),
               ),
               paginatorStatus: FormzSubmissionStatus.success,

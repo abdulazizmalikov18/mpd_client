@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/features/appointment/data/models/appoinment_model.dart';
 import 'package:mpd_client/features/appointment/domain/blocs/cancel_appointment/cancel_appointment_bloc.dart';
@@ -9,7 +9,7 @@ import 'package:mpd_client/features/appointment/presentation/pages/book_appoinme
 import 'package:mpd_client/features/appointment/presentation/widgets/my_custom_radiotile.dart';
 import 'package:mpd_client/provider/language.dart';
 import 'package:mpd_client/src/themes/styles.dart';
-import 'package:mpd_client/src/tools/ui_tools.dart';
+// import 'package:mpd_client/src/tools/ui_tools.dart';
 import 'package:mpd_client/src/widgets/bottom_sheet_widget.dart';
 import 'package:mpd_client/src/widgets/loading_dialog_widget.dart';
 import 'package:mpd_client/src/widgets/longbutton.dart';
@@ -26,13 +26,13 @@ class CancelSheet extends StatefulWidget {
 
 class _CancelSheetState extends State<CancelSheet> {
   var cancelInfo = CancelInfo.changeMyMind;
-  late FToast fToast;
+  // late FToast fToast;
 
   @override
   void initState() {
     super.initState();
-    fToast = FToast();
-    fToast.init(context);
+    // fToast = FToast();
+    // fToast.init(context);
   }
 
   @override
@@ -103,13 +103,13 @@ class _CancelSheetState extends State<CancelSheet> {
                 .add(DeleteAppointment(widget.appointment));
           } else {
             Navigator.pop(context);
-            fToast.showToast(
-              child: UiTools.toast(
-                  title: (state as CancelAppointmentFailure).failure,
-                  context: context),
-              gravity: ToastGravity.TOP,
-              toastDuration: const Duration(seconds: 2),
-            );
+            // fToast.showToast(
+            //   child: UiTools.toast(
+            //       title: (state as CancelAppointmentFailure).failure,
+            //       context: context),
+            //   gravity: ToastGravity.TOP,
+            //   toastDuration: const Duration(seconds: 2),
+            // );
           }
         },
         child: Padding(

@@ -36,8 +36,7 @@ class SearchFieldWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.r),
-        color:
-            hasFocus ? context.color.blueBackground : context.color.background,
+        color: context.color.background,
       ),
       child: TextField(
         onChanged: onChanged,

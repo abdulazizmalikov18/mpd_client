@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "699940837220",
+    "project_id": "my-personal-doctor-a635d",
+    "storage_bucket": "my-personal-doctor-a635d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:699940837220:android:0f214507d106216c688c71",
+        "android_client_info": {
+          "package_name": "com.mypd.mpd"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBam2J4pEjFUIipQbKiYn7kXrxeFsQeB1k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -7,7 +7,8 @@ import 'package:mpd_client/core/utils/utils.dart';
 import 'package:mpd_client/features/home/data/models/posts_model.dart';
 import 'package:mpd_client/features/home/domain/blocs/bloc/user_profile_bloc.dart';
 import 'package:mpd_client/features/home/domain/service/flick_multi_manger.dart';
-import 'package:mpd_client/features/home/presentation/pages/home_page.dart';
+import 'package:mpd_client/features/home/presentation/pages/coment_sheet/components/coment_input.dart';
+import 'package:mpd_client/features/home/presentation/pages/coment_sheet/components/coments.dart';
 import 'package:mpd_client/features/home/presentation/pages/user_account/user_account_view.dart';
 import 'package:mpd_client/features/home/presentation/widgets/animated_like.dart';
 import 'package:mpd_client/features/home/presentation/pages/coment_sheet/components/coment.dart';
@@ -212,19 +213,67 @@ class _PostBodyState extends State<PostBody>
                 return ComentWidget(
                   comentCount: posts[widget.baseIndex].commentCount,
                   onPressed: () async {
-                    final flickManager = widget.flickMultiManager
-                        .getFlickManager(widget.post.media!.first.file ?? '');
+                    // final flickManager = widget.flickMultiManager
+                    //     .getFlickManager(widget.post.media!.first.file ?? '');
 
-                    Navigator.pushNamed(
-                      context,
-                      AppRoutes.postComent,
-                      arguments: ComentPageModel(
-                        index: widget.baseIndex,
-                        flickManager: flickManager,
-                        post: widget.post,
+                    // Navigator.pushNamed(
+                    //   context,
+                    //   AppRoutes.postComent,
+                    //   arguments: ComentPageModel(
+                    //     index: widget.baseIndex,
+                    //     flickManager: flickManager,
+                    //     post: widget.post,
+                    //   ),
+                    // ).then(
+                    //   (value) => isComentRoute = false,
+                    // );
+                    final sendComentBloc = context.read<SendComentBloc>();
+                    final postComentBloc = context.read<PostComentBloc>();
+                    final userInfoBloc = context.read<UserInfoBloc>();
+                    showModalBottomSheet(
+                      context: context,
+                      useRootNavigator: true,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) => Container(
+                        height: MediaQuery.sizeOf(context).height * 0.7,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: context.color.white,
+                        ),
+                        padding: EdgeInsets.all(16),
+                        child: MultiBlocProvider(
+                          providers: [
+                            BlocProvider.value(value: sendComentBloc),
+                            BlocProvider.value(value: postComentBloc),
+                            BlocProvider.value(value: userInfoBloc),
+                          ],
+                          child: Column(
+                            children: [
+                              Container(
+                                width: 60.w,
+                                height: 2.h,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: context.color.grey,
+                                ),
+                              ),
+                              SizedBox(height: 16.h),
+                              Expanded(child: Coments(post: widget.post)),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  bottom:
+                                      MediaQuery.of(context).viewInsets.bottom,
+                                ),
+                                child: ComentInput(
+                                  postId: widget.post.id!,
+                                  postIndex: widget.baseIndex,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
                       ),
-                    ).then(
-                      (value) => isComentRoute = false,
                     );
                   },
                 );

@@ -18,6 +18,7 @@ import 'package:mpd_client/features/authentication/domain/blocs/register/registe
 import 'package:mpd_client/features/doctor_profile_booking/data/repositories/doctor_profile_repository.dart';
 import 'package:mpd_client/features/doctor_profile_booking/domain/blocs/add_to_cart/add_to_cart_bloc.dart';
 import 'package:mpd_client/features/doctor_profile_booking/domain/blocs/doctor_profile/doctor_profile_bloc.dart';
+import 'package:mpd_client/features/home/domain/blocs/socket_offer_bloc/socket_offer_bloc.dart';
 import 'package:mpd_client/provider/language_database.dart';
 import 'package:mpd_client/provider/local_provider.dart';
 import 'package:provider/provider.dart';
@@ -42,13 +43,17 @@ class _MyAppState extends State<MyApp> {
     final withmy = MediaQuery.of(context).size.width;
     debugPrint("=====>>> $withmy");
     return ScreenUtilInit(
-      designSize: Responsive.isMediumScreen(context) ? const Size(820, 1180) : const Size(390, 844),
+      designSize: Responsive.isMediumScreen(context)
+          ? const Size(820, 1180)
+          : const Size(390, 844),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
-            BlocProvider(create: (context) => locator<RefreshtokenBloc>()..add(GetRefreshToken())),
+            BlocProvider(
+                create: (context) =>
+                    locator<RefreshtokenBloc>()..add(GetRefreshToken())),
             BlocProvider(
               create: (context) => RegisterBloc(
                 GetIt.instance.get<AuthRepository>(),
@@ -61,8 +66,13 @@ class _MyAppState extends State<MyApp> {
                 GetIt.instance.get<AppoinmentRepository>(),
               ),
             ),
-            BlocProvider(create: (context) => DoctorProfileBloc(locator.get<DoctorProfileRepository>())),
-            BlocProvider(create: (context) => AddToCartBloc(locator.get<DoctorProfileRepository>())),
+            BlocProvider(
+                create: (context) =>
+                    DoctorProfileBloc(locator.get<DoctorProfileRepository>())),
+            BlocProvider(
+                create: (context) =>
+                    AddToCartBloc(locator.get<DoctorProfileRepository>())),
+            BlocProvider(create: (context) => SocketOfferBloc()),
           ],
           child: PostInheritedNotifier(
             postNotifier: PostNotifier(),
@@ -76,7 +86,8 @@ class _MyAppState extends State<MyApp> {
                     behavior: RefreshScrollBehavior(),
                     child: KeyboardDismisser(
                       child: MediaQuery(
-                        data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+                        data: MediaQuery.of(context)
+                            .copyWith(textScaler: const TextScaler.linear(1.0)),
                         child: child!,
                       ),
                     ),
@@ -92,7 +103,8 @@ class _MyAppState extends State<MyApp> {
                     GlobalWidgetsLocalizations.delegate
                   ],
                   locale: provider.locale,
-                  localeResolutionCallback: (Locale? locale, Iterable<Locale> supportedLocales) {
+                  localeResolutionCallback:
+                      (Locale? locale, Iterable<Locale> supportedLocales) {
                     return locale;
                   },
                   debugShowCheckedModeBanner: false,

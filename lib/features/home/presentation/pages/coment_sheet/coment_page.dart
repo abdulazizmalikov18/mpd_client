@@ -16,6 +16,7 @@ import 'package:mpd_client/features/home/presentation/pages/coment_sheet/compone
 import 'package:mpd_client/features/home/presentation/pages/home_page.dart';
 import 'package:mpd_client/provider/language.dart';
 import 'package:mpd_client/src/themes/styles.dart';
+import 'package:mpd_client/src/widgets/pinned_sheet.dart';
 import 'package:readmore/readmore.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -135,7 +136,7 @@ class ComentPage extends StatelessWidget {
           ],
         ),
       ),
-      bottomSheet: ComentInput(postId: post.id!, postIndex: index),
+      bottomSheet: PinnedSheet(widget: ComentInput(postId: post.id!, postIndex: index)),
     );
   }
 

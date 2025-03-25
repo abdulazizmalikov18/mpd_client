@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:formz/formz.dart';
 import 'package:mpd_client/features/user/domain/blocs/user_info/user_info_bloc.dart';
 import 'package:mpd_client/features/yandex_doctor/domain/blocs/specialist/specialist_bloc.dart';
@@ -26,13 +26,13 @@ class DoctorPage extends StatefulWidget {
 class _DoctorPageState extends State<DoctorPage>
     with AutomaticKeepAliveClientMixin {
   final YandexService _yandexService = YandexService();
-  late FToast fToast;
+  // late FToast fToast;
   final TextEditingController controller = TextEditingController();
 
   @override
   void initState() {
-    fToast = FToast();
-    fToast.init(context);
+    // fToast = FToast();
+    // fToast.init(context);
     _yandexService.moveCameraPosition(_yandexService.initialPoint, zoom: 5);
     context.read<YandexDoctorBloc>().add(GetCurrentLocationEvent());
     context.read<SpecialistBloc>().add(GetCategory());
