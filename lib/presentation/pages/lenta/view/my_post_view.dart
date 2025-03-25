@@ -98,7 +98,8 @@ class _MyPostViewState extends State<MyPostView> {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: EdgeInsets.only(
-                        bottom: index + 1 == state.posts.length ? 30 : 0),
+                      bottom: index + 1 == state.posts.length ? 30 : 0,
+                    ),
                     child: PostWidget(
                       post: state.myPost[index],
                       isMyPost: true,

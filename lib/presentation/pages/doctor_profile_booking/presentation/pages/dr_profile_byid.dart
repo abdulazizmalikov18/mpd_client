@@ -47,10 +47,10 @@ class _DrProfileByidState extends State<DrProfileByid> {
       context
           .read<DoctorProfileBloc>()
           .add(GetDoctorPprofileData(widget.specialist.id.toString()));
-      context
-          .read<PostBloc>()
-          .add(GetUserPostsEvent(widget.specialist.username ?? ""));
     }
+    context
+        .read<PostBloc>()
+        .add(GetUserPostsEvent(widget.specialist.username ?? ""));
     super.initState();
   }
 
@@ -58,7 +58,146 @@ class _DrProfileByidState extends State<DrProfileByid> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: isNull
-          ? const SizedBox()
+          ? NestedScrollView(
+              headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                SliverAppBar(
+                  expandedHeight: 304.h,
+                  centerTitle: false,
+                  title: Text(
+                    widget.specialist.fullname ?? "-- --",
+                  ),
+                  elevation: 0,
+                  actions: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: AppIcons.map.svg(color: black),
+                    ),
+                  ],
+                  foregroundColor: black,
+                  backgroundColor: white,
+                  pinned: true,
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Column(
+                      children: [
+                        Stack(
+                          children: [
+                            SizedBox(height: 260.h),
+                            Image.network(
+                              "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
+                              fit: BoxFit.fill,
+                              height: 200.h,
+                              width: double.maxFinite,
+                            ),
+                            Container(
+                              height: 200.h,
+                              width: double.maxFinite,
+                              decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    white,
+                                    Colors.transparent,
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 150.h,
+                              left: 0,
+                              right: 0,
+                              child: Center(
+                                child: SizedBox(
+                                  height: 96.h,
+                                  width: 96.h,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(50),
+                                    child: widget.specialist.avatar != null
+                                        ? CachedImageWidget(
+                                            url: widget.specialist.avatar ?? "",
+                                            size: 96,
+                                          )
+                                        : const DefaultAvatar(
+                                            containerSize: 96,
+                                            imageSize: 64,
+                                          ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              widget.specialist.fullname ?? "-- --",
+                              style: Styles.headline4.copyWith(
+                                color: black,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            ScreenUtil().setHorizontalSpacing(4),
+                            const GradientIcon(
+                              iconName: AppIcons.verify,
+                              size: 20,
+                            ),
+                          ],
+                        ),
+                        ScreenUtil().setVerticalSpacing(12.h),
+                        Container(
+                          height: 34,
+                          padding: const EdgeInsets.symmetric(horizontal: 40),
+                          width: MediaQuery.sizeOf(context).width,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: FollowButton(
+                                  isFollowing: true,
+                                  onTap: () {},
+                                ),
+                              ),
+                              ScreenUtil().setHorizontalSpacing(12.w),
+                              Expanded(
+                                child: LongButton(
+                                  onPress: () {},
+                                  widget: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      AppIcons.message.svg(
+                                        color: mainBlue,
+                                      ),
+                                      Text(
+                                        "Message",
+                                        style: Styles.descSubtitle.copyWith(
+                                          color: mainBlue,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  color: white,
+                                  border: Border.all(color: mainBlue),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        ScreenUtil().setVerticalSpacing(16.h),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+              body: UserAllPosts(
+                avatar: widget.specialist.avatar ?? "",
+                name: widget.specialist.fullname ?? "",
+                username: widget.specialist.username ?? "",
+              ),
+            )
           : DefaultTabController(
               length: 2,
               child: NestedScrollView(
@@ -152,7 +291,7 @@ class _DrProfileByidState extends State<DrProfileByid> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 48),
                             child: Text(
-                              widget.specialist.job != null
+                              widget.specialist.job == null
                                   ? "--"
                                   : widget.specialist.job ?? "",
                               style: Styles.descSubtitle.copyWith(
@@ -432,7 +571,7 @@ class _DrProfileByidState extends State<DrProfileByid> {
                     )
                 ],
               ),
-              crossFadeState: state is DoctorProfileSuccess
+              crossFadeState: state is DoctorProfileSuccess && !isNull
                   ? CrossFadeState.showSecond
                   : CrossFadeState.showFirst,
               duration: const Duration(milliseconds: 300),

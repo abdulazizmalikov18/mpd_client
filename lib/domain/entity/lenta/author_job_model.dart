@@ -5,7 +5,7 @@ part 'author_job_model.g.dart';
 @JsonSerializable()
 class AuthorJob {
   @JsonKey(name: "id")
-  final dynamic id;
+  final String id;
   @JsonKey(name: "name")
   final String name;
   @JsonKey(name: "image")

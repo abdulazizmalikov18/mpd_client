@@ -46,9 +46,7 @@ class _PostWidgetState extends State<PostWidget>
     return Padding(
       padding: const EdgeInsets.only(top: 16),
       child: Container(
-        decoration: const BoxDecoration(
-          color: white,
-        ),
+        decoration: const BoxDecoration(color: white),
         child: Padding(
           padding: const EdgeInsets.only(top: 16, bottom: 8),
           child: Column(
@@ -61,10 +59,11 @@ class _PostWidgetState extends State<PostWidget>
                   onTap: () {
                     context.pushNamed(AppRouteNames.drProfilebyid, extra: {
                       "specialist": SpecialistInfoModel(
-                        id: widget.post.id,
-                        username: widget.post.username,
+                        id: int.tryParse(widget.post.authorJob.id) ?? 0,
+                        username: widget.post.authorUser,
                         avatar: widget.post.authorAvatar,
                         fullname: widget.post.authorFullname,
+                        job: widget.post.authorJob.name,
                       ),
                     });
                   },

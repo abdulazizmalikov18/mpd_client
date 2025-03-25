@@ -86,7 +86,8 @@ class _LentaViewState extends State<LentaView> {
             itemBuilder: (BuildContext context, int index) {
               return Padding(
                 padding: EdgeInsets.only(
-                    bottom: index + 1 == state.posts.length ? 30 : 0),
+                  bottom: index + 1 == state.posts.length ? 30 : 0,
+                ),
                 child: PostWidget(post: state.posts[index]),
               );
             },

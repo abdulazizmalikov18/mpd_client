@@ -33,7 +33,8 @@ class UserAllPosts extends StatelessWidget {
               crossAxisSpacing: 4,
             ),
             itemCount: 20,
-            itemBuilder: (context, index) => const WShimmer(width: 118, height: 21),
+            itemBuilder: (context, index) =>
+                const WShimmer(width: 118, height: 21),
           );
         } else if (state.userPostStatus.isSuccess) {
           if (state.postUser.isNotEmpty) {
@@ -68,7 +69,7 @@ class UserAllPosts extends StatelessWidget {
                 //       isMore: true,
                 //     ));
               },
-              hasMoreToFetch: state.count > state.postUser.length,
+              hasMoreToFetch: false,
             );
           }
           return NoAppointment(
