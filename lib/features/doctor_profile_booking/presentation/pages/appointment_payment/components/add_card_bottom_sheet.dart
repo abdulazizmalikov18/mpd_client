@@ -22,32 +22,42 @@ class AddCardBotomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<InsertCardBloc, InsertCardState>(
-      listener: (_, state) {
+      listener: (ctx, state) {
         if (state is InsertCardLoading) {
           //? When in progress
           FocusScope.of(context).unfocus();
-          showDialog(context: context, barrierDismissible: true, builder: (context) => const LoadingDialogWidget());
+          showDialog(
+            context: context,
+            barrierDismissible: true,
+            builder: (context) => const LoadingDialogWidget(),
+          );
         } else if (state is InsertCardSuccess) {
           //? Have to verify
           Navigator.pop(context);
           Navigator.pop(context);
           showModalBottomSheet(
-              backgroundColor: Colors.transparent,
-              context: _,
-              builder: (_) => MultiBlocProvider(
-                    providers: [
-                      BlocProvider(
-                        create: (context) => VerifyCardBloc(locator.get<DoctorProfileRepository>()),
-                      ),
-                      BlocProvider(
-                        create: (context) =>
-                            ResendVerifyCardBloc(locator.get<DoctorProfileRepository>(), const Ticker()),
-                      ),
-                      BlocProvider.value(value: BlocProvider.of<MyCardsBloc>(contextCons))
-                    ],
-                    child: VerificationCardSheet(id: state.card!.id!),
+            backgroundColor: Colors.transparent,
+            context: ctx,
+            builder: (_) => MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) =>
+                      VerifyCardBloc(locator.get<DoctorProfileRepository>()),
+                ),
+                BlocProvider(
+                  create: (context) => ResendVerifyCardBloc(
+                    locator.get<DoctorProfileRepository>(),
+                    const Ticker(),
                   ),
-              isScrollControlled: true);
+                ),
+                BlocProvider.value(
+                  value: BlocProvider.of<MyCardsBloc>(contextCons),
+                )
+              ],
+              child: VerificationCardSheet(id: state.card!.id!),
+            ),
+            isScrollControlled: true,
+          );
         } else if (state is InsertCardFailure) {
           //? When have a error
           Navigator.pop(context);
@@ -60,8 +70,10 @@ class AddCardBotomSheet extends StatelessWidget {
           Center(
             child: Text(
               'Add card',
-              style:
-                  Styles.boldTitle.copyWith(color: context.color.black, fontSize: 24.sp, fontFamily: Styles.gilroyMedium),
+              style: Styles.boldTitle.copyWith(
+                  color: context.color.black,
+                  fontSize: 24.sp,
+                  fontFamily: Styles.gilroyMedium),
             ),
           ),
           ScreenUtil().setVerticalSpacing(32.h),
@@ -75,7 +87,9 @@ class AddCardBotomSheet extends StatelessWidget {
                 textInputType: TextInputType.number,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 inputformater: [
-                  MaskTextInputFormatter(mask: '#### #### #### ####', filter: {"#": RegExp(r'[0-9]')})
+                  MaskTextInputFormatter(
+                      mask: '#### #### #### ####',
+                      filter: {"#": RegExp(r'[0-9]')})
                 ],
                 textInputAction: TextInputAction.next,
                 controller: context.read<InsertCardBloc>().cardController,
@@ -91,7 +105,8 @@ class AddCardBotomSheet extends StatelessWidget {
             validator: Validators.expiryNumber,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             inputformater: [
-              MaskTextInputFormatter(mask: '##/##', filter: {"#": RegExp(r'[0-9]')})
+              MaskTextInputFormatter(
+                  mask: '##/##', filter: {"#": RegExp(r'[0-9]')})
             ],
             textInputAction: TextInputAction.next,
             controller: context.read<InsertCardBloc>().expiryController,

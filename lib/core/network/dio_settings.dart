@@ -6,13 +6,12 @@ import 'package:mpd_client/core/data/repository/storage_keys.dart';
 import 'package:mpd_client/core/data/repository/storage_repository.dart';
 import 'package:mpd_client/features/app.dart';
 import 'package:mpd_client/features/authentication/data/datasources/auth_remote_datasource.dart';
+import 'package:mpd_client/main.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-
-String $baseUrl = "http://82.215.78.34/";
 
 class DioSettings {
   BaseOptions _dioBaseOptions = BaseOptions(
-    baseUrl: $baseUrl,
+    baseUrl: $baseUrlHttp,
     connectTimeout: const Duration(milliseconds: 35000),
     receiveTimeout: const Duration(milliseconds: 35000),
     followRedirects: false,
@@ -21,14 +20,16 @@ class DioSettings {
         StorageKeys.LANGUAGE,
         defValue: 'uz',
       ),
-      if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
+      if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+        'Authorization':
+            'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
     },
     validateStatus: (status) => status != null && status <= 500,
   );
 
   void setBaseOptions({String? lang}) {
     _dioBaseOptions = BaseOptions(
-      baseUrl: $baseUrl,
+      baseUrl: $baseUrlHttp,
       connectTimeout: const Duration(milliseconds: 35000),
       receiveTimeout: const Duration(milliseconds: 35000),
       headers: <String, dynamic>{
@@ -37,7 +38,9 @@ class DioSettings {
               StorageKeys.LANGUAGE,
               defValue: 'uz',
             ),
-        if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+        if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+          'Authorization':
+              'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
       },
       followRedirects: false,
       validateStatus: (status) => status != null && status <= 500,
@@ -45,12 +48,13 @@ class DioSettings {
   }
 
   final BaseOptions _dioBaseOptionsForAuth = BaseOptions(
-    baseUrl: $baseUrl,
+    baseUrl: $baseUrlHttp,
     connectTimeout: const Duration(milliseconds: 35000),
     receiveTimeout: const Duration(milliseconds: 35000),
     followRedirects: false,
     headers: <String, dynamic>{
-      'Accept-Language': StorageRepository.getString(StorageKeys.LANGUAGE, defValue: 'uz'),
+      'Accept-Language':
+          StorageRepository.getString(StorageKeys.LANGUAGE, defValue: 'uz'),
       // if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
       //   'Authorization':
       //       'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
@@ -60,7 +64,7 @@ class DioSettings {
 
   void setBaseOptionsForAuth({String? lang}) {
     _dioBaseOptions = BaseOptions(
-      baseUrl: $baseUrl,
+      baseUrl: $baseUrlHttp,
       connectTimeout: const Duration(milliseconds: 35000),
       receiveTimeout: const Duration(milliseconds: 35000),
       headers: <String, dynamic>{
@@ -75,10 +79,10 @@ class DioSettings {
 
   BaseOptions get dioBaseOptionsForAuth => _dioBaseOptionsForAuth;
 
-  bool get chuck => StorageRepository.getBool(StorageKeys.CHUCK, defValue: false);
+  bool get chuck =>
+      StorageRepository.getBool(StorageKeys.CHUCK, defValue: false);
 
   Dio get dio {
-    setBaseOptions();
     return Dio(_dioBaseOptions)
       ..interceptors.addAll([
         PrettyDioLogger(
@@ -138,8 +142,10 @@ class ErrorHandlerInterceptor implements Interceptor {
       ).refreshToken();
 
       if (result.isRight) {
-        await StorageRepository.putString(StorageKeys.TOKEN, result.right.access ?? "");
-        await StorageRepository.putString(StorageKeys.REFRESH, result.right.refresh ?? "");
+        await StorageRepository.putString(
+            StorageKeys.TOKEN, result.right.access ?? "");
+        await StorageRepository.putString(
+            StorageKeys.REFRESH, result.right.refresh ?? "");
         return handler.resolve(
           await locator<DioSettings>().dio.fetch(
                 response.requestOptions

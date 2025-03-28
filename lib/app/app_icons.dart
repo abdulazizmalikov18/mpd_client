@@ -40,6 +40,7 @@ abstract class AppIcons {
 
   // Specialist order statistics icons
   static const order = 'assets/icons/order.svg';
+  static const noActiveMessage = 'assets/icons/no_active_messages.svg';
   static const message = 'assets/icons/message.svg';
   static const patient = 'assets/icons/patient.svg';
   static const briefcase = 'assets/icons/briefcase.svg';
@@ -83,15 +84,14 @@ abstract class AppIcons {
   static const unliked = 'assets/icons/unliked.svg';
   static const liked = 'assets/icons/liked.svg';
 
-  // User avatar png for map
-  static const mapProfileDefault = 'assets/icons/map_profile_default.png';
+
 
   // User avatar png for map
   static const serviceEmpty = 'assets/icons/service_empty.svg';
 
   // PDF Document of specialist
   static const documentSvg = 'assets/icons/document.svg';
-  static const documentPng = 'assets/icons/document.png';
+
 
   // Error page icons
   static const error404 = 'assets/icons/404_error.svg';
@@ -122,6 +122,7 @@ abstract class AppIcons {
 
   static const tickCircle = "assets/icons/tick_circle.svg";
   static const tickCircleOff = "assets/icons/tick_circle_off.svg";
+  static const notificationImage = 'assets/icons/notification_logo.svg';
 }
 
 extension SvgExt on String {

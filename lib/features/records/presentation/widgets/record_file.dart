@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/app/app_colors.dart';
-import 'package:mpd_client/app/app_icons.dart';
+import 'package:mpd_client/app/app_images.dart';
 import 'package:mpd_client/app/app_routes.dart';
 import 'package:mpd_client/features/doctor_profile_booking/data/models/pdf_viewer_model.dart';
 import 'package:mpd_client/features/doctor_profile_booking/presentation/widgets/dr_profile_document.dart';
@@ -32,7 +32,7 @@ class RecordFile extends StatelessWidget {
           ScreenUtil().setVerticalSpacing(4.h),
           DrProfileDocument(
             title: 'Prescription',
-            iconName: AppIcons.documentPng,
+            iconName: AppImages.documentPng,
             iconNetwork: file.endsWith('.pdf') ? null : file,
             onPressed: () {
               if (file.endsWith('.pdf')) {

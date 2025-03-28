@@ -14,6 +14,7 @@ class PaginatorList extends StatelessWidget {
   final Widget? loadingWidget;
   final ScrollPhysics? physics;
   final ScrollController? controller;
+  final bool reverse;
 
   const PaginatorList({
     required this.paginatorStatus,
@@ -29,6 +30,7 @@ class PaginatorList extends StatelessWidget {
     this.physics,
     this.controller,
     super.key,
+    this.reverse = false,
   });
 
   @override
@@ -43,6 +45,7 @@ class PaginatorList extends StatelessWidget {
         physics: physics,
         padding: padding,
         controller: controller,
+        reverse: reverse,
         itemBuilder: (context, index) {
           if (index == itemCount) {
             if (hasMoreToFetch) {
@@ -54,7 +57,8 @@ class PaginatorList extends StatelessWidget {
           }
           return itemBuilder(context, index);
         },
-        separatorBuilder: separatorBuilder ?? (context, index) => const SizedBox(),
+        separatorBuilder:
+            separatorBuilder ?? (context, index) => const SizedBox(),
         itemCount: itemCount + 1,
       );
     }

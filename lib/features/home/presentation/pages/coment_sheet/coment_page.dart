@@ -62,7 +62,7 @@ class ComentPage extends StatelessWidget {
             onPressed: () {
               Share.share(
                 '${post.authorFullname} \n\n${post.text} \n\n${post.media?.first.image} \n\n${post.media?.first.file} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
-                subject: 'Look what I made!',
+               subject: post.authorFullname ?? "Mpd Client",
               );
             },
             icon: SvgPicture.asset(

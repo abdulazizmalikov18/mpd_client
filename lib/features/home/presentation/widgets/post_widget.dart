@@ -112,6 +112,8 @@ class _PostBodyState extends State<PostBody>
                         name: widget.post.authorFullname ?? "Фарход Кабулов",
                         avatar: widget.post.authorAvatar ??
                             "https://dwed.fra1.digitaloceanspaces.com/SMMS/media/PostMedia/image/a651706c-f6a0-45fe-9d40-46e9fb37271b.jpeg",
+                        specialistId:
+                            int.tryParse(widget.post.authorJob?.id ?? "0") ?? 0,
                       ),
                     ),
                   ));
@@ -167,7 +169,7 @@ class _PostBodyState extends State<PostBody>
                   onPressed: () async {
                     Share.share(
                       '${widget.post.authorFullname} \n\n${widget.post.text} \n\n${widget.post.media?.first.image ?? ""} \n\n${widget.post.media?.first.file ?? ""} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
-                      subject: 'Look what I made!',
+                      subject: widget.post.authorFullname ?? "Mpd Client",
                     );
                   },
                   // constraints: const BoxConstraints(),
@@ -254,8 +256,13 @@ class _PostBodyState extends State<PostBody>
                               Expanded(child: Coments(post: widget.post)),
                               Padding(
                                 padding: EdgeInsets.only(
-                                  bottom:
-                                      MediaQuery.of(context).viewInsets.bottom,
+                                  bottom: MediaQuery.of(context)
+                                              .viewInsets
+                                              .bottom >
+                                          0
+                                      ? MediaQuery.of(context).viewInsets.bottom
+                                      : 32.h,
+                                  top: 8,
                                 ),
                                 child: ComentInput(
                                   postId: widget.post.id!,

@@ -181,7 +181,8 @@ class _PostBodyState extends State<PostBody>
                               onPress: () {
                                 Share.share(
                                   '${widget.post.authorFullname} \n\n${widget.post.text} \n\n${widget.post.media?.first.image ?? ""} \n\n${widget.post.media?.first.file ?? ""} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
-                                  subject: 'Look what I made!',
+                                  subject: widget.post.authorFullname ??
+                                      "Mpd Client",
                                 );
                               },
                               widget: Row(
@@ -263,7 +264,7 @@ class _PostBodyState extends State<PostBody>
                     } else {
                       Share.share(
                         '${widget.post.authorFullname} \n\n${widget.post.text} \n\n${widget.post.media?.first.image ?? ""} \n\n${widget.post.media?.first.file ?? ""} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
-                        subject: 'Look what I made!',
+                        subject: widget.post.authorFullname ?? "Mpd Client",
                       );
                     }
                   },

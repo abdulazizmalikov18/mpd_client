@@ -41,3 +41,23 @@ class ParsingException implements Exception {
 class NetworkFailure extends Failure {
   const NetworkFailure({required super.message});
 }
+
+class ServerTimeOutFailure extends Failure {
+  const ServerTimeOutFailure({required super.message});
+}
+
+class ServerNotFoundFailure extends Failure {
+  const ServerNotFoundFailure({required super.message});
+}
+
+class ServerUnknownFailure extends Failure {
+  const ServerUnknownFailure({required super.message});
+}
+
+class ServerCancelFailure extends Failure {
+  const ServerCancelFailure({required super.message});
+}
+
+class LocalFailure extends Failure {
+  const LocalFailure({required super.message});
+}

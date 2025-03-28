@@ -47,8 +47,7 @@ class YandexService extends IYandexService {
 
   @override
   Future<YandexMapObjectModel> getCurrentPosition() async {
-    final position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+    final position = await Geolocator.getCurrentPosition();
 
     final YandexMapObjectModel placemarkMapObjects =
         _getPlaceMark(position: position);
@@ -207,19 +206,26 @@ class YandexService extends IYandexService {
     return placemarks;
   }
 
-  PlacemarkMapObject getSinglePlacemark(Point point, String specialistId,
-      {required BuildContext context,
-      required List<MapSpecialist> specialists}) {
+  PlacemarkMapObject getSinglePlacemark(
+    Point point,
+    String specialistId, {
+    required BuildContext context,
+    required List<MapSpecialist> specialists,
+  }) {
     final singlePlaceMark = PlacemarkMapObject(
-        mapId: MapObjectId(specialistId),
-        point: point,
-        onTap: (mapObject, point) {
-          context.read<YandexDoctorBloc>().add(
-              PressedMapObjectEvent(mapObject.point, specialists: specialists));
-        },
-        icon: PlacemarkIcon.single(PlacemarkIconStyle(
-            image: BitmapDescriptor.fromAssetImage(AppImages.placeMark),
-            scale: 0.7)));
+      mapId: MapObjectId(specialistId),
+      point: point,
+      onTap: (mapObject, point) {
+        context.read<YandexDoctorBloc>().add(PressedMapObjectEvent(
+              mapObject.point,
+              specialists: specialists,
+            ));
+      },
+      icon: PlacemarkIcon.single(PlacemarkIconStyle(
+        image: BitmapDescriptor.fromAssetImage(AppImages.placeMark),
+        scale: 0.7,
+      )),
+    );
     return singlePlaceMark;
   }
 

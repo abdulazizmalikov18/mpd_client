@@ -9,7 +9,9 @@ abstract class AppImages {
   static const String eye = 'assets/images/eye.png';
   static const String muscle = 'assets/images/muscle.png';
   static const String placeMark = 'assets/images/11.png';
-
+    // User avatar png for map
+  static const mapProfileDefault = 'assets/images/map_profile_default.png';
+  static const documentPng = 'assets/images/document.png';
   // Banner
   static const String banner = 'assets/images/banner.png';
 
@@ -36,8 +38,9 @@ abstract class AppImages {
   static const String transparent = 'assets/images/transparent.png';
 
   // Notification image
-  static const String notificationImage = 'assets/images/notification_logo.svg';
+
 
   // Entry doctor image
   static const String doctorEntry = 'assets/images/doctor_entry.png';
+  static const String chatNotFound = 'assets/images/chat_not_found.png';
 }

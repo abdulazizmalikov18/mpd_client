@@ -71,7 +71,8 @@ class _UserPostsViewState extends State<UserPostsView> {
                   onPressed: () async {
                     Share.share(
                       '${widget.postsUser[index].authorFullname} \n\n${widget.postsUser[index].text} \n\n${widget.postsUser[index].media?.first.image ?? ""} \n\n${widget.postsUser[index].media?.first.file ?? ""} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
-                      subject: 'Look what I made!',
+                      subject: widget.postsUser[index].authorFullname ??
+                          "Mpd Client",
                     );
                   },
                   icon: AppIcons.moreIcon.svg(),

@@ -14,6 +14,7 @@ import 'package:mpd_client/features/yandex_doctor/presentation/widgets/doctor_ca
 import 'package:mpd_client/features/yandex_doctor/presentation/widgets/search_field.dart';
 import 'package:mpd_client/src/themes/styles.dart';
 import 'package:mpd_client/src/widgets/error_type_widget.dart';
+import 'package:mpd_client/src/widgets/w_shimmer.dart';
 
 class DoctorCategoryPage extends StatefulWidget {
   final TextEditingController controller;
@@ -234,10 +235,37 @@ class AllDoctorsView extends StatelessWidget {
       ],
       body: BlocBuilder<SpecialistBloc, SpecialistState>(
         builder: (context, state) {
+          if (state.status.isInProgress) {
+            return ListView.separated(
+              padding: const EdgeInsets.all(16),
+              itemBuilder: (context, index) => WShimmer(
+                height: 158,
+                width: double.infinity,
+              ),
+              separatorBuilder: (context, index) => const SizedBox(height: 16),
+              itemCount: 12,
+            );
+          } else if (state.status.isFailure) {
+            return Center(
+              child: ErrorTypeWidget(
+                errorIcon: AppIcons.serverError,
+                errorSubtitle: context.l10n.error_internal_server_subtitle,
+                errorTitle: context.l10n.error_internal_server_title,
+                hasReturnButton: false,
+                tryAgainPressed: () {
+                  context.read<SpecialistBloc>().add(GetSpecialist());
+                },
+              ),
+            );
+          }
+          if (state.specialist.isEmpty) {
+            return const Center(child: Text("No data found"));
+          }
           return ListView.separated(
             padding: const EdgeInsets.symmetric(vertical: 16),
-            itemBuilder: (context, index) =>
-                DoctorCardIteam(specialists: state.specialist[index]),
+            itemBuilder: (context, index) => DoctorCardIteam(
+              specialists: state.specialist[index],
+            ),
             separatorBuilder: (context, index) => const SizedBox(height: 16),
             itemCount: state.specialist.length,
           );

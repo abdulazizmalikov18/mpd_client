@@ -8,6 +8,11 @@ import 'package:mpd_client/features/appointment/data/repositories/appoinment_rep
 import 'package:mpd_client/features/authentication/data/datasources/auth_remote_datasource.dart';
 import 'package:mpd_client/features/authentication/data/repositories/auth_repository.dart';
 import 'package:mpd_client/features/authentication/domain/blocs/refresh_token/refreshtoken_bloc.dart';
+import 'package:mpd_client/features/chat/data/repo/chat_repository.dart';
+import 'package:mpd_client/features/chat/data/repo/chat_repository_impl.dart';
+import 'package:mpd_client/features/chat/data/service/chat_service.dart';
+import 'package:mpd_client/features/chat/presentation/bloc/chat_group/chat_group_bloc.dart';
+import 'package:mpd_client/features/chat/presentation/bloc/chat_message/bloc/chat_message_bloc.dart';
 import 'package:mpd_client/features/doctor_profile_booking/data/datasources/doctor_profile_remote_datasource.dart';
 import 'package:mpd_client/features/doctor_profile_booking/data/repositories/doctor_profile_repository.dart';
 import 'package:mpd_client/features/home/data/datasources/home_remote_datasource.dart';
@@ -21,17 +26,8 @@ import '../features/yandex_doctor/data/datasources/yandex_doctor_remote_datasour
 final locator = GetIt.I;
 
 void setupLocator() {
-  // const int connectTimeOut = 10000;
-  // const int sendTimeOut = 100000;
-
-  // final options = BaseOptions(
-  //   baseUrl: baseurl,
-  //   connectTimeout: const Duration(milliseconds: connectTimeOut),
-  //   sendTimeout: const Duration(milliseconds: sendTimeOut),
-  //   contentType: Headers.jsonContentType,
-  // );
-
-  locator.registerSingleton(DioSettings());
+  // Dio Setting Objects
+  locator.registerFactory(DioSettings.new);
 
   locator.registerLazySingleton<Connectivity>(() => Connectivity());
 
@@ -86,6 +82,20 @@ void setupLocator() {
     ),
   );
   locator.registerSingleton(RefreshtokenBloc(locator<AuthRepository>()));
+  // // Chat Objects
+  _chatRegister();
+}
+
+void _chatRegister() {
+  // Service
+  locator.registerSingleton<ChatService>(ChatService.create());
+  //Repo
+  locator.registerSingleton<ChatRepository>(
+      ChatRepositoryImpl(remote: locator<ChatService>()));
+  // Bloc
+  // locator.registerFactory(() => ChatBloc(locator<ChatRepository>()));
+  locator.registerFactory(() => ChatGroupBloc(locator<ChatRepository>()));
+  locator.registerFactory(() => ChatMessageBloc(locator<ChatRepository>()));
 }
 
 Future resetLocator() async {

@@ -1,9 +1,9 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/features/appointment/presentation/pages/appointment/appoinment.dart';
+import 'package:mpd_client/features/chat/presentation/views/chat_view.dart';
 import 'package:mpd_client/features/home/presentation/pages/home_page.dart';
 import 'package:mpd_client/features/main_view_modal.dart';
 import 'package:mpd_client/src/themes/styles.dart';
@@ -29,6 +29,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     const DoctorPage(),
     // const MarketPage(),
     const AppointmentPage(),
+    const ChatView(),
     const UserPage(),
   ];
 
@@ -74,6 +75,10 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
         'inactive': AppIcons.calendar,
         'active': AppIcons.calendarFilled
       },
+      'Chat': {
+        'inactive': AppIcons.noActiveMessage,
+        'active': AppIcons.message
+      },
       context.l10n.navbar_profile: {
         'inactive': AppIcons.user,
         'active': AppIcons.userFilled
@@ -98,12 +103,13 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
         onTap: (value) {
           controller.jumpToPage(value);
         },
-        selectedLabelStyle:
-            Styles.bottomLabel.copyWith(color: context.color.mainBlue),
-        unselectedLabelStyle:
-            Styles.bottomLabel.copyWith(color: context.color.grey),
+        selectedLabelStyle: Styles.bottomLabel.copyWith(
+          color: context.color.mainBlue,
+        ),
+        unselectedLabelStyle: Styles.bottomLabel.copyWith(
+          color: context.color.grey,
+        ),
         type: BottomNavigationBarType.fixed,
-        iconSize: 24.w,
         currentIndex: currentIndex,
         items: List.generate(
           bottomNavigationItems.length,
@@ -111,13 +117,17 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
             label: bottomNavigationItems.keys.elementAt(index),
             icon: SvgPicture.asset(
               bottomNavigationItems.values.elementAt(index)['inactive']!,
-              colorFilter:
-                  ColorFilter.mode(context.color.grey, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                context.color.grey,
+                BlendMode.srcIn,
+              ),
             ),
             activeIcon: SvgPicture.asset(
               bottomNavigationItems.values.elementAt(index)['active']!,
-              colorFilter:
-                  ColorFilter.mode(context.color.mainBlue, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                context.color.mainBlue,
+                BlendMode.srcIn,
+              ),
             ),
           ),
         ),

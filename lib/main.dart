@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/bloc_logger.dart';
@@ -12,43 +13,47 @@ import 'package:mpd_client/features/app.dart';
 import 'package:mpd_client/features/home/data/models/order_stream_model.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:workmanager/workmanager.dart';
-import 'package:yandex_mapkit/yandex_mapkit.dart';
+// import 'package:yandex_mapkit/yandex_mapkit.dart';
+
+const String $baseUrlHttp = "http://82.215.78.34/";
+const String $baseUrlSocket = "ws://82.215.78.34";
 
 void main() async {
-  await runZonedGuarded(
-    () async {
-      // EquatableConfig.stringify = kDebugMode;
-      AndroidYandexMap.useAndroidViewSurface = false;
-      WidgetsFlutterBinding.ensureInitialized();
-      await StorageRepository.getInstance();
-      await FcmService.init();
+  await runZonedGuarded(() async {
+    // EquatableConfig.stringify = kDebugMode;
+    // AndroidYandexMap.useAndroidViewSurface = false;
+    WidgetsFlutterBinding.ensureInitialized();
+    await StorageRepository.getInstance();
+    await FcmService.init();
 
-      if (Platform.isAndroid) {
-        Workmanager().initialize(
-          callbackDispatcher,
-          isInDebugMode: true,
-        );
-        Workmanager().registerOneOffTask("task-identifier", "nimadir");
-      }
-      await SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-      ]);
-      setupLocator();
-      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-      ));
+    setupLocator();
+    if (kDebugMode) {
+      Bloc.observer = LogBlocObserver();
+    }
+    HttpOverrides.global = MyHttpOverrides();
 
-      if (kDebugMode) {
-        Bloc.observer = LogBlocObserver();
-      }
-      runApp(const MyApp());
-    },
-    (error, stack) {
-      Log.e(error);
-      Log.e(stack);
-    },
-  );
+    if (Platform.isAndroid) {
+      Workmanager().initialize(
+        callbackDispatcher,
+        isInDebugMode: true,
+      );
+      Workmanager().registerOneOffTask("task-identifier", "nimadir");
+    }
+
+    await SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ));
+
+    debugRepaintRainbowEnabled = false;
+    runApp(const MyApp());
+  }, (error, stack) {
+    Log.e(error);
+    Log.e(stack);
+  });
 }
 
 @pragma('vm:entry-point')

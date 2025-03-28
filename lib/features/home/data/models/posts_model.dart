@@ -62,7 +62,7 @@ class Post {
   String? username;
   String? authorFullname;
   String? authorAvatar;
-  Map<String, dynamic>? authorJob;
+  AuthorJob? authorJob;
   String? mainCat;
   int? selectedIndex;
 
@@ -85,7 +85,9 @@ class Post {
         authorUser: json["author_user"],
         username: json["username"],
         authorFullname: json["author_fullname"],
-        authorJob: json["author_job"],
+        authorJob: json["author_job"] == null
+            ? null
+            : AuthorJob.fromJson(json["author_job"]),
         authorAvatar: json["author_avatar"] ?? '',
         mainCat: json["main_cat"],
       );
@@ -119,4 +121,48 @@ class Media {
         type: json["type"],
         post: json["post"],
       );
+}
+
+class AuthorJob {
+  final String id;
+  final String name;
+  final String image;
+  final int status;
+  final dynamic description;
+  final int firstLevelScore;
+  final int levelProgressBy;
+
+  AuthorJob({
+    this.id = '',
+    this.name = '',
+    this.image = '',
+    this.status = 0,
+    this.description = 0,
+    this.firstLevelScore = 0,
+    this.levelProgressBy = 0,
+  });
+
+  factory AuthorJob.fromJson(Map<String, dynamic> json) {
+    return AuthorJob(
+      id: json['id'] ?? '',
+      name: json['name'] ?? '',
+      image: json['image'] ?? '',
+      status: json['status'] ?? 0,
+      description: json['description'],
+      firstLevelScore: json['first_level_score'] ?? 0,
+      levelProgressBy: json['level_progress_by'] ?? 0,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'image': image,
+      'status': status,
+      'description': description,
+      'first_level_score': firstLevelScore,
+      'level_progress_by': levelProgressBy,
+    };
+  }
 }
