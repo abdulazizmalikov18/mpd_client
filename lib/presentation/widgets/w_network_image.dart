@@ -10,7 +10,7 @@ class WNetworkImage extends StatelessWidget {
   final Widget Function(BuildContext, Object, StackTrace?)? errorBuilder;
   final BoxFit fit;
 
-  const WNetworkImage( {
+  const WNetworkImage({
     super.key,
     required this.image,
     required this.height,
@@ -18,7 +18,7 @@ class WNetworkImage extends StatelessWidget {
     required this.borderRadius,
     this.errorBuilder,
     required this.defaultWidget,
-     this.fit = BoxFit.cover,
+    this.fit = BoxFit.cover,
   });
 
   @override
@@ -27,26 +27,26 @@ class WNetworkImage extends StatelessWidget {
       borderRadius: BorderRadius.circular(borderRadius),
       child: (image?.isNotEmpty ?? false)
           ? Image.network(
-        image!,
-        height: height,
-        width: width,
-        fit: fit,
-        errorBuilder: errorBuilder ??
-                (_, __, ___) {
-              return defaultWidget;
-            },
-        loadingBuilder: (context, child, loadingProgress) {
-          if (loadingProgress == null) {
-            return child;
-          } else {
-            return WShimmer(
+              image!,
               height: height,
               width: width,
-              radius: borderRadius,
-            );
-          }
-        },
-      )
+              fit: fit,
+              errorBuilder: errorBuilder ??
+                  (_, __, ___) {
+                    return defaultWidget;
+                  },
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) {
+                  return child;
+                } else {
+                  return WShimmer(
+                    height: height,
+                    width: width,
+                    radius: borderRadius,
+                  );
+                }
+              },
+            )
           : defaultWidget,
     );
   }

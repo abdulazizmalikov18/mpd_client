@@ -9,12 +9,11 @@ import 'package:mpd_client/presentation/pages/lenta/widgets/w_activity_dot.dart'
 import 'package:mpd_client/presentation/pages/lenta/widgets/w_post_media.dart';
 import 'package:mpd_client/presentation/router/routs_contact.dart';
 import 'package:mpd_client/presentation/styles/app_icons.dart';
-import 'package:mpd_client/presentation/styles/app_images.dart';
 import 'package:mpd_client/presentation/styles/colors.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
+import 'package:mpd_client/presentation/widgets/cached_image_widget.dart';
 import 'package:mpd_client/presentation/widgets/w_bottom_sheet_clipper.dart';
 import 'package:mpd_client/presentation/widgets/w_long_button.dart';
-import 'package:mpd_client/presentation/widgets/w_network_image.dart';
 import 'package:mpd_client/utils/extensions/string_ext.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -69,16 +68,10 @@ class _PostWidgetState extends State<PostWidget>
                   },
                   child: Row(
                     children: [
-                      WNetworkImage(
-                        image: widget.post.authorAvatar,
-                        height: 40,
-                        width: 40,
+                      CachedImageWidget(
+                        url: widget.post.authorAvatar,
+                        size: 40,
                         borderRadius: 12,
-                        defaultWidget: Image.asset(
-                          AppImages.userAvatar,
-                          height: 40,
-                          width: 40,
-                        ),
                       ),
                       const SizedBox(width: 8),
                       Column(

@@ -21,7 +21,9 @@ class DioSettings {
         StorageKeys.LANGUAGE,
         defValue: 'uz',
       ),
-      if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
+      if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+        'Authorization':
+            'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
     },
     validateStatus: (status) => status != null && status <= 500,
   );
@@ -32,8 +34,11 @@ class DioSettings {
       connectTimeout: const Duration(milliseconds: 35000),
       receiveTimeout: const Duration(milliseconds: 35000),
       headers: <String, dynamic>{
-        'Accept-Language':  StorageRepository.getString(StorageKeys.LANGUAGE, defValue: 'uz'),
-        if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+        'Accept-Language':
+            StorageRepository.getString(StorageKeys.LANGUAGE, defValue: 'uz'),
+        if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+          'Authorization':
+              'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
       },
       followRedirects: false,
       validateStatus: (status) => status != null && status <= 500,
@@ -46,7 +51,8 @@ class DioSettings {
     receiveTimeout: const Duration(milliseconds: 35000),
     followRedirects: false,
     headers: <String, dynamic>{
-      'Accept-Language': StorageRepository.getString(StorageKeys.LANGUAGE, defValue: 'uz'),
+      'Accept-Language':
+          StorageRepository.getString(StorageKeys.LANGUAGE, defValue: 'uz'),
     },
     validateStatus: (status) => status != null && status <= 500,
   );
@@ -57,7 +63,8 @@ class DioSettings {
       connectTimeout: const Duration(milliseconds: 35000),
       receiveTimeout: const Duration(milliseconds: 35000),
       headers: <String, dynamic>{
-        'Accept-Language': StorageRepository.getString(StorageKeys.LANGUAGE, defValue: 'uz'),
+        'Accept-Language':
+            StorageRepository.getString(StorageKeys.LANGUAGE, defValue: 'uz'),
       },
       followRedirects: false,
       validateStatus: (status) => status != null && status <= 500,
@@ -68,7 +75,8 @@ class DioSettings {
 
   BaseOptions get dioBaseOptionsForAuth => _dioBaseOptionsForAuth;
 
-  bool get chuck => StorageRepository.getBool(StorageKeys.CHUCK, defValue: false);
+  bool get chuck =>
+      StorageRepository.getBool(StorageKeys.CHUCK, defValue: false);
 
   Dio get dio => Dio(_dioBaseOptions)
     ..interceptors.addAll([
@@ -81,7 +89,7 @@ class DioSettings {
         error: kDebugMode,
       ),
       ErrorHandlerInterceptor(),
-      chuckI.getDioInterceptor(),
+      // chuckI.getDioInterceptor(),
     ]);
 
   Dio get dioForAuth => Dio(_dioBaseOptionsForAuth)
@@ -95,7 +103,7 @@ class DioSettings {
         error: kDebugMode,
       ),
       ErrorHandlerInterceptor(),
-      chuckI.getDioInterceptor(),
+      // chuckI.getDioInterceptor(),
 
       // CustomInterceptor()
     ]);
@@ -144,18 +152,20 @@ class ErrorHandlerInterceptor implements Interceptor {
     handler.next(response);
   }
 
-  static Future<Response<T>> _retry<T>(RequestOptions requestOptions) async => serviceLocator<DioSettings>().dio.request<T>(
-        requestOptions.path,
-        data: requestOptions.data,
-        queryParameters: requestOptions.queryParameters,
-        options: Options(
-          method: requestOptions.method,
-          headers: requestOptions.headers
-            ..addAll(
-              <String, String>{
-                'Authorization': StorageRepository.getString(StorageKeys.TOKEN),
-              },
+  static Future<Response<T>> _retry<T>(RequestOptions requestOptions) async =>
+      serviceLocator<DioSettings>().dio.request<T>(
+            requestOptions.path,
+            data: requestOptions.data,
+            queryParameters: requestOptions.queryParameters,
+            options: Options(
+              method: requestOptions.method,
+              headers: requestOptions.headers
+                ..addAll(
+                  <String, String>{
+                    'Authorization':
+                        StorageRepository.getString(StorageKeys.TOKEN),
+                  },
+                ),
             ),
-        ),
-      );
+          );
 }

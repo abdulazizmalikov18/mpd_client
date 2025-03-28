@@ -38,7 +38,13 @@ class AppInit {
     // await EasyLocalization.ensureInitialized();
 
     /// Device Orientation
-    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    await SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ));
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
     _setupLogging();
@@ -114,6 +120,7 @@ class LogBlocObserver extends BlocObserver {
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)..badCertificateCallback = (cert, host, port) => true;
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (cert, host, port) => true;
   }
 }

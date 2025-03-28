@@ -23,7 +23,7 @@ abstract class AppTheme {
           ),
           titleTextStyle: displaySmall.copyWith(fontWeight: FontWeight.w600),
           centerTitle: false,
-          iconTheme: const IconThemeData(color: white),
+          iconTheme: const IconThemeData(color: dark),
         ),
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,

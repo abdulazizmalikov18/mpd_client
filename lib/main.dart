@@ -15,7 +15,11 @@ Future<void> main() async {
     runApp(DependencyScope(
       initialModel: AppScope(
         locale: Locale(
-            StorageRepository.getString(StorageKeys.LANGUAGE, defValue: 'uz')),
+          StorageRepository.getString(
+            StorageKeys.LANGUAGE,
+            defValue: 'uz',
+          ),
+        ),
       ),
       child: const MyApp(),
     ));

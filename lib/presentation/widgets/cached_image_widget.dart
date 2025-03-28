@@ -8,21 +8,33 @@ import 'package:shimmer/shimmer.dart';
 class CachedImageWidget extends StatelessWidget {
   final String url;
   final double size;
-  const CachedImageWidget({super.key, required this.url, required this.size});
+  final double? borderRadius;
+  const CachedImageWidget({
+    super.key,
+    required this.url,
+    required this.size,
+    this.borderRadius,
+  });
 
   @override
   Widget build(BuildContext context) {
     if (url.isEmpty) {
-      return DefaultAvatar(containerSize: size.h, imageSize: size.h - 16);
+      return DefaultAvatar(
+        containerSize: size.h,
+        imageSize: size.h - 16,
+      );
     }
     return ClipRRect(
-      borderRadius: BorderRadius.circular(size.h - 16),
+      borderRadius: BorderRadius.circular(borderRadius ?? (size.h - 16)),
       child: CachedNetworkImage(
         imageUrl: url,
         fit: BoxFit.cover,
         height: size.h,
         width: size.h,
-        errorWidget: (context, url, error) => DefaultAvatar(containerSize: size.h, imageSize: size.h - 16),
+        errorWidget: (context, url, error) => DefaultAvatar(
+          containerSize: size.h,
+          imageSize: size.h - 16,
+        ),
         placeholder: (context, url) => Shimmer.fromColors(
           baseColor: baseColor,
           highlightColor: highlightColor,

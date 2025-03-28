@@ -39,6 +39,7 @@ import 'package:mpd_client/presentation/router/routs_contact.dart';
 import 'package:mpd_client/presentation/styles/theme.dart';
 import 'package:mpd_client/presentation/widgets/w_custom_screen.dart';
 import 'package:mpd_client/utils/l10n/app_localizations.dart';
+import 'package:mpd_client/utils/refresh_scroll_behavior.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -53,40 +54,83 @@ class _MyAppState extends State<MyApp> {
     ScreenUtil.init(context);
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AccountsBloc>(create: (context) => serviceLocator<AccountsBloc>()),
-        BlocProvider<AuthBloc>(create: (context) => serviceLocator<AuthBloc>()..add(const GetUserAuthEvent())),
+        BlocProvider<AccountsBloc>(
+            create: (context) => serviceLocator<AccountsBloc>()),
+        BlocProvider<AuthBloc>(
+            create: (context) =>
+                serviceLocator<AuthBloc>()..add(const GetUserAuthEvent())),
         BlocProvider<ShowPopUpBloc>(create: (context) => ShowPopUpBloc()),
         // BlocProvider<ConnectionCubit>(create: (context) => ConnectionCubit()),
         // BlocProvider<ChatBloc>(create: (context) => serviceLocator<ChatBloc>()),
-        BlocProvider<ChatGroupBloc>(create: (context) => serviceLocator<ChatGroupBloc>()),
-        BlocProvider<ChatMessageBloc>(create: (context) => serviceLocator<ChatMessageBloc>()),
+        BlocProvider<ChatGroupBloc>(
+            create: (context) => serviceLocator<ChatGroupBloc>()),
+        BlocProvider<ChatMessageBloc>(
+            create: (context) => serviceLocator<ChatMessageBloc>()),
         BlocProvider<PostBloc>(create: (context) => serviceLocator<PostBloc>()),
-        BlocProvider<CommentBloc>(create: (context) => serviceLocator<CommentBloc>()),
+        BlocProvider<CommentBloc>(
+            create: (context) => serviceLocator<CommentBloc>()),
         // Doctor
-        BlocProvider<FilterCategoryBloc>(create: (context) => FilterCategoryBloc(serviceLocator<YandexDoctorRepository>(), TextEditingController())),
-        BlocProvider<YandexDoctorBloc>(create: (context) => YandexDoctorBloc(YandexService())),
-        BlocProvider<PopularCategoriesBloc>(create: (context) => PopularCategoriesBloc(serviceLocator<YandexDoctorRepository>())..add(const GetPopularCategoriesEvent('uz'))),
-        BlocProvider<SearchByCategoryBloc>(create: (context) => SearchByCategoryBloc(serviceLocator<YandexDoctorRepository>())),
-        BlocProvider<SearchBySpecialistBloc>(create: (context) => SearchBySpecialistBloc(serviceLocator<YandexDoctorRepository>(), FocusNode())),
+        BlocProvider<FilterCategoryBloc>(
+            create: (context) => FilterCategoryBloc(
+                serviceLocator<YandexDoctorRepository>(),
+                TextEditingController())),
+        BlocProvider<YandexDoctorBloc>(
+            create: (context) => YandexDoctorBloc(YandexService())),
+        BlocProvider<PopularCategoriesBloc>(
+            create: (context) =>
+                PopularCategoriesBloc(serviceLocator<YandexDoctorRepository>())
+                  ..add(const GetPopularCategoriesEvent('uz'))),
+        BlocProvider<SearchByCategoryBloc>(
+            create: (context) =>
+                SearchByCategoryBloc(serviceLocator<YandexDoctorRepository>())),
+        BlocProvider<SearchBySpecialistBloc>(
+            create: (context) => SearchBySpecialistBloc(
+                serviceLocator<YandexDoctorRepository>(), FocusNode())),
 
         // Appointment
-        BlocProvider<UpcomingAppoinmentsBloc>(create: (context) => UpcomingAppoinmentsBloc(serviceLocator<AppoinmentRepository>())),
-        BlocProvider<CompletedAppointmentBloc>(create: (context) => CompletedAppointmentBloc(serviceLocator<AppoinmentRepository>())),
-        BlocProvider<CanceledAppointmentBloc>(create: (context) => CanceledAppointmentBloc(serviceLocator<AppoinmentRepository>())),
-        BlocProvider<CancelAppointmentBloc>(create: (context) => CancelAppointmentBloc(serviceLocator<AppoinmentRepository>())),
-        BlocProvider<DoctorProfileBloc>(create: (context) => DoctorProfileBloc(serviceLocator<DoctorProfileRepository>())),
+        BlocProvider<UpcomingAppoinmentsBloc>(
+            create: (context) => UpcomingAppoinmentsBloc(
+                serviceLocator<AppoinmentRepository>())),
+        BlocProvider<CompletedAppointmentBloc>(
+            create: (context) => CompletedAppointmentBloc(
+                serviceLocator<AppoinmentRepository>())),
+        BlocProvider<CanceledAppointmentBloc>(
+            create: (context) => CanceledAppointmentBloc(
+                serviceLocator<AppoinmentRepository>())),
+        BlocProvider<CancelAppointmentBloc>(
+            create: (context) =>
+                CancelAppointmentBloc(serviceLocator<AppoinmentRepository>())),
+        BlocProvider<DoctorProfileBloc>(
+            create: (context) =>
+                DoctorProfileBloc(serviceLocator<DoctorProfileRepository>())),
         // Profile
-        BlocProvider<RecordsBloc>(create: (context) => RecordsBloc(serviceLocator<UserRepository>(), TextEditingController())),
-        BlocProvider<SubscriptionBloc>(create: (context) => SubscriptionBloc(serviceLocator<DoctorProfileRepository>())),
-        BlocProvider<ProductSpecalistBloc>(create: (context) => ProductSpecalistBloc(serviceLocator<LentaRepository>())),
-        BlocProvider<AddToCartBloc>(create: (context) => AddToCartBloc(serviceLocator<DoctorProfileRepository>())),
-        BlocProvider<TimetableBloc>(create: (context) => TimetableBloc(serviceLocator<DoctorProfileRepository>())),
-        BlocProvider<CreateOrderBloc>(create: (context) => CreateOrderBloc(serviceLocator<DoctorProfileRepository>())),
-        BlocProvider<UserSubscriptionsBloc>(create: (context) => UserSubscriptionsBloc(UserRepository(mainRemoteDataSource: UserRemoteDataSource()), TextEditingController())),
+        BlocProvider<RecordsBloc>(
+            create: (context) => RecordsBloc(
+                serviceLocator<UserRepository>(), TextEditingController())),
+        BlocProvider<SubscriptionBloc>(
+            create: (context) =>
+                SubscriptionBloc(serviceLocator<DoctorProfileRepository>())),
+        BlocProvider<ProductSpecalistBloc>(
+            create: (context) =>
+                ProductSpecalistBloc(serviceLocator<LentaRepository>())),
+        BlocProvider<AddToCartBloc>(
+            create: (context) =>
+                AddToCartBloc(serviceLocator<DoctorProfileRepository>())),
+        BlocProvider<TimetableBloc>(
+            create: (context) =>
+                TimetableBloc(serviceLocator<DoctorProfileRepository>())),
+        BlocProvider<CreateOrderBloc>(
+            create: (context) =>
+                CreateOrderBloc(serviceLocator<DoctorProfileRepository>())),
+        BlocProvider<UserSubscriptionsBloc>(
+            create: (context) => UserSubscriptionsBloc(
+                UserRepository(mainRemoteDataSource: UserRemoteDataSource()),
+                TextEditingController())),
       ],
       child: BlocListener<AuthBloc, AuthState>(
         bloc: serviceLocator<AuthBloc>(),
-        listenWhen: (previous, current) => previous.authStatus != current.authStatus,
+        listenWhen: (previous, current) =>
+            previous.authStatus != current.authStatus,
         listener: (context, state) {
           if (state.authStatus == AuthStatus.unauthenticated) {
             AppRouts.router.pushReplacementNamed(AppRouteNames.login);
@@ -103,11 +147,12 @@ class _MyAppState extends State<MyApp> {
           themeMode: ThemeMode.light,
           debugShowCheckedModeBanner: false,
           theme: AppTheme.theme(),
-          builder: (context, child) {
-            return CustomScreen(
+          builder: (context, child) => ScrollConfiguration(
+            behavior: RefreshScrollBehavior(),
+            child: CustomScreen(
               child: child!,
-            );
-          },
+            ),
+          ),
           routerConfig: AppRouts.router,
         ),
       ),

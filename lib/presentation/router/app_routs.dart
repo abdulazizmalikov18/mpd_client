@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:chuck_interceptor/chuck.dart';
+// import 'package:chuck_interceptor/chuck.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -41,10 +41,11 @@ import 'package:mpd_client/presentation/pages/user_following/user_following.dart
 import 'package:mpd_client/presentation/pages/yandex_doctor/doctor_page.dart';
 import 'package:mpd_client/presentation/router/routs_contact.dart';
 
-final chuckI = Chuck(showNotification: true, navigatorKey: AppRouts.navigatorKey);
+// final chuckI = Chuck(showNotification: true, navigatorKey: AppRouts.navigatorKey);
 
 sealed class AppRouts {
-  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
   static GoRouter router = GoRouter(
     navigatorKey: navigatorKey,
     initialLocation: AppRoutePath.splash,
@@ -158,7 +159,8 @@ sealed class AppRouts {
         path: AppRoutePath.drProfilebyid,
         name: AppRouteNames.drProfilebyid,
         builder: (context, state) => BlocProvider(
-          create: (context) => CancelAppointmentBloc(serviceLocator<AppoinmentRepository>()),
+          create: (context) =>
+              CancelAppointmentBloc(serviceLocator<AppoinmentRepository>()),
           child: DrProfileByid(
             specialist: (state.extra as Map)['specialist'],
           ),
@@ -260,7 +262,8 @@ sealed class AppRouts {
                 path: AppRoutePath.appointment,
                 name: AppRouteNames.appointment,
                 builder: (context, state) => BlocProvider(
-                  create: (context) => CancelAppointmentBloc(serviceLocator<AppoinmentRepository>()),
+                  create: (context) => CancelAppointmentBloc(
+                      serviceLocator<AppoinmentRepository>()),
                   child: BookAppoinment(
                     appoinmentInfo: (state.extra as Map)['appoinmentInfo'],
                     appointment: (state.extra as Map)['appointment'],

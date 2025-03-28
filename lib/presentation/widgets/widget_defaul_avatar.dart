@@ -8,11 +8,12 @@ class DefaultAvatar extends StatelessWidget {
   final double containerSize, imageSize;
   final String iconName;
 
-  const DefaultAvatar(
-      {super.key,
-      required this.containerSize,
-      required this.imageSize,
-      this.iconName = AppIcons.avatarDefault});
+  const DefaultAvatar({
+    super.key,
+    required this.containerSize,
+    required this.imageSize,
+    this.iconName = AppIcons.avatarDefault,
+  });
 
   @override
   Widget build(BuildContext context) {
