@@ -1,6 +1,6 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:equatable/equatable.dart';
 import 'package:mpd_client/core/utils/log_service.dart';
 
 import '../../../data/models/posts_model.dart';
@@ -10,10 +10,10 @@ part 'post_event.dart';
 part 'post_state.dart';
 
 class PostBloc extends Bloc<PostEvent, PostState> {
-  PostBloc(this._homeRepository) : super(const PostState()) {
+  PostBloc(this._homeRepository) : super(PostState()) {
     on<PostFetched>(_onPostFetched, transformer: droppable());
     on<DeletePostEvent>(_onDeletePostEvent, transformer: droppable());
-
+    on<MediaLikePressedUser>(_onLikeUnlikePressed);
     on<PostFetchedUser>((event, emit) async {
       if (!event.isMore) {
         emit(state.copyWith(statusUser: PostStatus.inProgress));
@@ -38,6 +38,19 @@ class PostBloc extends Bloc<PostEvent, PostState> {
 
   final HomeRepository _homeRepository;
   final int _limit = 5;
+
+  void _onLikeUnlikePressed(
+      MediaLikePressedUser event, Emitter<PostState> emit) {
+    final post = state.postsUser[event.index];
+    post.isLiked = !post.isLiked!;
+    if (post.isLiked!) {
+      post.likesCount = post.likesCount! + 1;
+    } else {
+      post.likesCount = post.likesCount! - 1;
+    }
+    // state.postsUser[event.index] = post;
+    emit(state.copyWith(postsUser: [...state.postsUser]));
+  }
 
   Future<void> _onDeletePostEvent(
       DeletePostEvent event, Emitter<PostState> emit) async {

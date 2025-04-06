@@ -1,5 +1,7 @@
 import 'package:mpd_client/app/app_export.dart';
+import 'package:mpd_client/features/appointment/data/models/user_posts_arg.dart';
 import 'package:mpd_client/features/home/domain/blocs/product_specalist/product_specalist_bloc.dart';
+import 'package:mpd_client/features/home/presentation/pages/user_account/user_posts_view.dart';
 import 'package:mpd_client/features/user/data/models/user_info_model.dart';
 import 'package:mpd_client/features/user/presentation/pages/user_post/user_post_view.dart';
 import 'package:mpd_client/features/user/presentation/user_specialist_view.dart';
@@ -119,7 +121,26 @@ class AppPages {
             child: const UserSpecialistView(),
           ),
         );
-
+      case AppRoutes.userPage:
+        final args = settings.arguments as UserPostsArg;
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider.value(value: _sendComentBloc),
+              BlocProvider.value(value: _postComentBloc),
+              BlocProvider.value(value: _userInfoBloc),
+              BlocProvider.value(value: _mediaControlBloc),
+              BlocProvider.value(value: _likeUnlikeBloc),
+            ],
+            child: UserPostsView(
+              postsUser: args.postsUser,
+              index: args.index,
+              name: args.name,
+              avatar: args.avatar,
+              bloc: args.bloc,
+            ),
+          ),
+        );
       case AppRoutes.pdfViewer:
         final args = settings.arguments as PdfViewerModel;
         return MaterialPageRoute(

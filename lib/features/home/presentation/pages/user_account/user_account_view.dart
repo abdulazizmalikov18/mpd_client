@@ -8,6 +8,7 @@ import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/core/presentation/paginator.dart';
 import 'package:mpd_client/core/utils/caller.dart';
 import 'package:mpd_client/core/utils/utils.dart';
+import 'package:mpd_client/features/appointment/data/models/user_posts_arg.dart';
 import 'package:mpd_client/features/appointment/presentation/pages/appointment/components/no_appointment.dart';
 import 'package:mpd_client/features/doctor_profile_booking/data/models/doctor_profile_model.dart';
 import 'package:mpd_client/features/doctor_profile_booking/domain/blocs/doctor_profile/doctor_profile_bloc.dart';
@@ -15,7 +16,6 @@ import 'package:mpd_client/features/doctor_profile_booking/presentation/pages/co
 import 'package:mpd_client/features/doctor_profile_booking/presentation/widgets/doctor_info_iteam.dart';
 import 'package:mpd_client/features/doctor_profile_booking/presentation/widgets/loading_doctor_info.dart';
 import 'package:mpd_client/features/home/domain/blocs/bloc/user_profile_bloc.dart';
-import 'package:mpd_client/features/home/presentation/pages/user_account/user_posts_view.dart';
 import 'package:mpd_client/src/themes/styles.dart';
 import 'package:mpd_client/src/widgets/cached_image_widget.dart';
 import 'package:mpd_client/src/widgets/default_avatar.dart';
@@ -538,24 +538,17 @@ class UserAllPosts extends StatelessWidget {
               itemCount: state.postsUser.length,
               itemBuilder: (context, index) => InkWell(
                 onTap: () {
-                  final sendComentBloc = context.read<SendComentBloc>();
-                  final postComentBloc = context.read<PostComentBloc>();
-                  final userInfoBloc = context.read<UserInfoBloc>();
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => MultiBlocProvider(
-                      providers: [
-                        BlocProvider.value(value: sendComentBloc),
-                        BlocProvider.value(value: postComentBloc),
-                        BlocProvider.value(value: userInfoBloc),
-                      ],
-                      child: UserPostsView(
-                        postsUser: state.postsUser,
-                        index: index,
-                        name: name,
-                        avatar: avatar,
-                      ),
+                 final bloc = context.read<PostBloc>();
+                  Navigator.of(context).pushNamed(
+                    AppRoutes.userPage,
+                    arguments: UserPostsArg(
+                      postsUser: state.postsUser,
+                      index: index,
+                      name: name,
+                      avatar: avatar,
+                      bloc: bloc
                     ),
-                  ));
+                  );
                 },
                 child: CachedImageWidget(
                   url: Utils.imageMediea(state.postsUser[index].media),

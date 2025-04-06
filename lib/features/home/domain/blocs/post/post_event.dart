@@ -8,6 +8,12 @@ class PostFetched extends PostEvent {
   PostFetched([this.isRefresh = false]);
 }
 
+class MediaLikePressedUser extends PostEvent {
+  final int index;
+
+  MediaLikePressedUser({required this.index});
+}
+
 class DeletePostEvent extends PostEvent {
   final int id;
   final int index;

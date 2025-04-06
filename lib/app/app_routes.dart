@@ -30,6 +30,7 @@ abstract class AppRoutes {
 
   static const String seeAllSpecialist = '/seeAllSpecialist';
   static const String userSpecialist = '/userSpecialist';
+  static const String userPage = '/userPage';
 
   // Temporary
   static const String yandexMap = '/yandexMap';
