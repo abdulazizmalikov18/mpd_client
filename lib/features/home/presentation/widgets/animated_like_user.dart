@@ -13,13 +13,14 @@ class AnimatedLikeIconUser extends StatefulWidget {
   final bool isLiked;
   final int postId;
   final int baseIndex;
+ final Color? colorUnLiked;
   final VoidCallback onTap;
   const AnimatedLikeIconUser({
     super.key,
     required this.isLiked,
     required this.postId,
     required this.baseIndex,
-    required this.onTap,
+    required this.onTap, this.colorUnLiked,
   });
 
   @override
@@ -74,7 +75,7 @@ class _AnimatedFollowIconState extends State<AnimatedLikeIconUser>
         child: SvgPicture.asset(
           widget.isLiked ? AppIcons.liked : AppIcons.unliked,
           height: 20.h,
-          color: widget.isLiked ? context.color.red : context.color.grey,
+          color: widget.isLiked ? context.color.red :widget.colorUnLiked?? context.color.grey,
         ),
       ),
     );

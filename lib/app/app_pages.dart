@@ -318,6 +318,9 @@ class AppPages {
             providers: [
               BlocProvider.value(value: _postBloc),
               BlocProvider.value(value: _mediaControlBloc),
+              BlocProvider.value(value: _sendComentBloc),
+              BlocProvider.value(value: _postComentBloc),
+              BlocProvider.value(value: _userInfoBloc),
             ],
             child: UserPostView(
               username: username,

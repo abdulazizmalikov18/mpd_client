@@ -34,7 +34,7 @@ class Like extends StatelessWidget {
           postId: postId,
           baseIndex: baseIndex,
         ),
-        ScreenUtil().setHorizontalSpacing(8.w),
+        ScreenUtil().setHorizontalSpacing(4.w),
         Text(
           '$likeCount ${context.l10n.lenth_likes}',
           style: Styles.postTitle.copyWith(

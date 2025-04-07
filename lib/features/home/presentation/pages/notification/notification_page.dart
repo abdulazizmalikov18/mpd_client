@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mpd_client/core/data/repository/storage_keys.dart';
@@ -18,13 +19,14 @@ class _NotificationPageState extends State<NotificationPage> {
       appBar: AppBarWidget(
         title: 'Notification',
         actions: [
-          IconButton(
-            onPressed: () async {
-              final token = StorageRepository.getString(StorageKeys.FCMTOKEN);
-              await Clipboard.setData(ClipboardData(text: token));
-            },
-            icon: const Icon(Icons.copy),
-          ),
+          if (kDebugMode)
+            IconButton(
+              onPressed: () async {
+                final token = StorageRepository.getString(StorageKeys.FCMTOKEN);
+                await Clipboard.setData(ClipboardData(text: token));
+              },
+              icon: const Icon(Icons.copy),
+            ),
         ],
       ),
       // body: ValueListenableBuilder(

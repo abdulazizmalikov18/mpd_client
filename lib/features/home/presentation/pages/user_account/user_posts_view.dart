@@ -94,6 +94,7 @@ class _UserPostsViewState extends State<UserPostsView> {
                                 isLiked: post.isLiked!,
                                 postId: post.id!,
                                 baseIndex: index,
+                                colorUnLiked: white,
                                 onTap: () {
                                   setState(() {});
                                 },
@@ -201,10 +202,19 @@ class _UserPostsViewState extends State<UserPostsView> {
                       ScreenUtil().setVerticalSpacing(10.h),
                     if (widget.postsUser[index].text != null &&
                         widget.postsUser[index].text!.isNotEmpty)
-                      Padding(
+                      Container(
+                        width: double.infinity,
                         padding: EdgeInsets.symmetric(
                           horizontal: 12.w,
                           vertical: 8.h,
+                        ),
+                        margin: EdgeInsets.symmetric(
+                          horizontal: 12.w,
+                          vertical: 8.h,
+                        ),
+                        decoration: BoxDecoration(
+                          color: grey.withValues(alpha: .5),
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         child: ReadMoreText(
                           widget.postsUser[index].text!,
@@ -220,6 +230,7 @@ class _UserPostsViewState extends State<UserPostsView> {
                           trimExpandedText: context.l10n.lenth_show_less,
                         ),
                       ),
+                    ScreenUtil().setVerticalSpacing(10.h),
                   ],
                 ),
               ),
