@@ -16,8 +16,12 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc(
-      this._repository, this._formKey, this._phoneController, this._phoneFocus)
-      : super(const AuthState()) {
+    this._repository,
+    this._formKey,
+    this._phoneController,
+    this._username,
+    this._phoneFocus,
+  ) : super(const AuthState()) {
     on<PasswordTextFieldChanged>(_onPasswordTextFieldChanged);
     on<EyeIconPressed>(_onEyeIconPressed);
     on<LoginButtonPressed>(_onLoginPressed);
@@ -30,10 +34,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _repository;
   final GlobalKey<FormState> _formKey;
   final TextEditingController _phoneController;
+  final TextEditingController _username;
   final FocusNode _phoneFocus;
 
   GlobalKey get formKey => _formKey;
   TextEditingController get phoneController => _phoneController;
+  TextEditingController get username => _username;
   FocusNode get phoneFocys => _phoneFocus;
 
   void _onPasswordTextFieldChanged(
@@ -102,9 +108,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<Either<Failure, TokenModel>> _result() async {
     Log.w("Biz Bu yerdamiz");
-    if (_phoneController.text.characters.first != '+') {
+    if (_username.text.isNotEmpty) {
       return await _repository.login(
-        username: _phoneController.text,
+        username: _username.text,
         password: state.password,
         rememberMe: true,
       );

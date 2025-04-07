@@ -80,6 +80,7 @@ class _UserInfoState extends State<UserInfo> {
                     locator.get<AuthRepository>(),
                     GlobalKey<FormState>(),
                     TextEditingController(),
+                    TextEditingController(),
                     FocusNode(),
                   ),
                   child: DisabledAccount(

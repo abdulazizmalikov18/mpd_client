@@ -91,8 +91,8 @@ abstract class Validators {
       return 'Invalid phone number';
     }
 
-    if (value.length < 6) {
-      return 'Must be at least 6 character';
+    if (value.length < 4) {
+      return 'Must be at least 4 character';
     }
 
     return null;

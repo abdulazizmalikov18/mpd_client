@@ -54,7 +54,9 @@ class _RegisterPartState extends State<RegisterPart> {
                 textInputType: TextInputType.phone,
                 inputformater: [
                   MaskTextInputFormatter(
-                      mask: '(##) ###-##-##', filter: {"#": RegExp(r'[0-9]')})
+                    mask: '(##) ###-##-##',
+                    filter: {"#": RegExp(r'[0-9]')},
+                  )
                 ],
                 style: Styles.headline7Bold,
                 controller: context.read<RegisterBloc>().phoneController,

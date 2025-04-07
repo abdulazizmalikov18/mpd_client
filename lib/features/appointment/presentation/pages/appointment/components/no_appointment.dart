@@ -53,8 +53,8 @@ class NoAppointment extends StatelessWidget {
           ),
           ScreenUtil().setVerticalSpacing(32.h),
           LongButton(buttonName: buttonName, onPress: onPressed),
-          if (!isServer) ScreenUtil().setVerticalSpacing(16.h),
-          if (!isServer)
+          if (isServer) ScreenUtil().setVerticalSpacing(16.h),
+          if (isServer)
             TextButtonWidget(
               onPressed: onRefresh,
               text: context.l10n.appointment_server_error_reload,

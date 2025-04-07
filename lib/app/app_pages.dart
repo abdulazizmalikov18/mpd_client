@@ -197,6 +197,7 @@ class AppPages {
                   locator.get<AuthRepository>(),
                   GlobalKey<FormState>(),
                   TextEditingController(),
+                  TextEditingController(),
                   FocusNode(),
                 )..add(RefreshToken()),
               ),
@@ -283,6 +284,7 @@ class AppPages {
             create: (context) => AuthBloc(
               GetIt.instance.get<AuthRepository>(),
               GlobalKey<FormState>(),
+              TextEditingController(),
               TextEditingController(),
               FocusNode(),
             )..add(RefreshToken()),

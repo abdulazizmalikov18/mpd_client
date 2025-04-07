@@ -53,7 +53,7 @@ class _UserPostViewState extends State<UserPostView> {
                 ),
               );
             case PostStatus.success:
-              if (state.postsUser.isEmpty) {
+              if (state.postsUser.isNotEmpty) {
                 return NoAppointment(
                   title: "No Posts",
                   subtitle: "No Posts",
