@@ -172,7 +172,7 @@ class _UserAccountViewState extends State<UserAccountView> {
                                 children: [
                                   Expanded(
                                     child: FollowButton(
-                                      isFollowing: true,
+                                      isFollowing: state.userAccount.isRelated,
                                       onTap: () {},
                                     ),
                                   ),
@@ -538,16 +538,15 @@ class UserAllPosts extends StatelessWidget {
               itemCount: state.postsUser.length,
               itemBuilder: (context, index) => InkWell(
                 onTap: () {
-                 final bloc = context.read<PostBloc>();
+                  final bloc = context.read<PostBloc>();
                   Navigator.of(context).pushNamed(
                     AppRoutes.userPage,
                     arguments: UserPostsArg(
-                      postsUser: state.postsUser,
-                      index: index,
-                      name: name,
-                      avatar: avatar,
-                      bloc: bloc
-                    ),
+                        postsUser: state.postsUser,
+                        index: index,
+                        name: name,
+                        avatar: avatar,
+                        bloc: bloc),
                   );
                 },
                 child: CachedImageWidget(

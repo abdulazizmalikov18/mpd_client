@@ -15,8 +15,8 @@ import 'package:web_socket_channel/io.dart';
 import 'package:workmanager/workmanager.dart';
 // import 'package:yandex_mapkit/yandex_mapkit.dart';
 
-const String $baseUrlHttp = "http://82.215.78.34/";
-const String $baseUrlSocket = "ws://82.215.78.34";
+const String $baseUrlHttp = "https://api.sharqdarmon.uz/";
+const String $baseUrlSocket = "ws://api.sharqdarmon.uz";
 
 void main() async {
   await runZonedGuarded(() async {
