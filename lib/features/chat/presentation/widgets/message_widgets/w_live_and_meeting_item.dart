@@ -21,7 +21,8 @@ class _WLiveAndMeetingItemState extends State<WLiveAndMeetingItem> {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        gradient: wgradient,
+        // gradient: wgradient,
+        color: mainBlue,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(

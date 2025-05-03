@@ -1,17 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
 import 'package:mpd_client/app/app_colors.dart';
-import 'package:mpd_client/app/app_images.dart';
 import 'package:mpd_client/app/colors.dart';
 import 'package:mpd_client/core/pagination/presentation/paginator_list.dart';
 import 'package:mpd_client/features/chat/domain/models/chat_group.dart';
 import 'package:mpd_client/features/chat/presentation/bloc/chat_message/bloc/chat_message_bloc.dart';
 import 'package:mpd_client/features/chat/presentation/controller/vm_controller.dart';
 import 'package:mpd_client/features/chat/presentation/widgets/message_widgets/w_message.dart';
-import 'package:mpd_client/features/chat/presentation/widgets/message_widgets/w_network_image.dart';
 import 'package:mpd_client/features/chat/presentation/widgets/w_chat_textfield.dart';
 
 class InChatView extends StatefulWidget {
@@ -53,15 +52,29 @@ class _InChatViewState extends State<InChatView> {
           builder: (context, state) {
             return ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: WNetworkImage(
-                image: widget.group.avatar,
+              leading: SizedBox(
                 height: 40,
                 width: 40,
-                borderRadius: 12,
-                defaultWidget: Image.asset(
-                  AppImages.userAvatar,
-                  width: 40,
-                  height: 40,
+                child: Stack(
+                  children: [
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundColor: mainBlue.withValues(alpha: 0.1),
+                      backgroundImage: CachedNetworkImageProvider(
+                        widget.group.avatar,
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: CircleAvatar(
+                        radius: 6,
+                        backgroundColor:
+                            widget.group.isOnline && (widget.group.isUserToUser)
+                                ? context.color.green
+                                : Colors.transparent,
+                      ),
+                    )
+                  ],
                 ),
               ),
               title: Text(

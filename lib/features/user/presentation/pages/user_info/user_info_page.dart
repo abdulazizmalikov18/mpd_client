@@ -373,7 +373,7 @@ class _UserInfoState extends State<UserInfo> {
         width: 100.h,
         decoration: BoxDecoration(
           border: Border.all(color: context.color.white, width: 4),
-          borderRadius: BorderRadius.circular(48.r),
+          shape: BoxShape.circle,
           image: DecorationImage(
             image: CachedNetworkImageProvider(memoryImage),
             onError: (exception, stackTrace) =>

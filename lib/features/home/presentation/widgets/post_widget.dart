@@ -94,6 +94,7 @@ class _PostBodyState extends State<PostBody>
                   final sendComentBloc = context.read<SendComentBloc>();
                   final postComentBloc = context.read<PostComentBloc>();
                   final userInfoBloc = context.read<UserInfoBloc>();
+
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => MultiBlocProvider(
                       providers: [
@@ -167,10 +168,11 @@ class _PostBodyState extends State<PostBody>
                 shape: const CircleBorder(),
                 child: IconButton(
                   onPressed: () async {
-                    Share.share(
-                      '${widget.post.authorFullname} \n\n${widget.post.text} \n\n${widget.post.media?.first.image ?? ""} \n\n${widget.post.media?.first.file ?? ""} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
+                    await SharePlus.instance.share(ShareParams(
+                      text:
+                          '${widget.post.authorFullname} \n\n${widget.post.text} \n\n${widget.post.media?.first.image ?? ""} \n\n${widget.post.media?.first.file ?? ""} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
                       subject: widget.post.authorFullname ?? "Mpd Client",
-                    );
+                    ));
                   },
                   // constraints: const BoxConstraints(),
                   padding: EdgeInsets.zero,

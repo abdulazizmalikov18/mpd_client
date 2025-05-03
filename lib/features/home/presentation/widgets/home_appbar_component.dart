@@ -8,6 +8,7 @@ import 'package:formz/formz.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/app/app_routes.dart';
+import 'package:mpd_client/app/colors.dart';
 import 'package:mpd_client/features/home/domain/blocs/post/post_bloc.dart';
 import 'package:mpd_client/features/home/domain/service/flick_multi_manger.dart';
 import 'package:mpd_client/features/user/domain/blocs/user_info/user_info_bloc.dart';
@@ -185,6 +186,9 @@ class HomeAppbarComponent extends StatelessWidget implements PreferredSize {
           imageUrl: image ??
               'https://resources.comphealth.com/wp-content/uploads/2019/05/post-residency-career-tips.jpg',
           fit: BoxFit.cover,
+          errorWidget: (context, url, error) => CircleAvatar(
+            backgroundColor: mainBlue.withValues(alpha: 0.1),
+          ),
         ),
       );
     } else {

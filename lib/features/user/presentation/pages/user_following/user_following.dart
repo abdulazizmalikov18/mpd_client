@@ -8,7 +8,6 @@ import 'package:mpd_client/features/user/domain/blocs/user_subscriptions/user_su
 import 'package:mpd_client/features/user/presentation/pages/user_following/components/empty_user_followers.dart';
 import 'package:mpd_client/features/user/presentation/pages/user_following/components/filled_user_follower.dart';
 import 'package:mpd_client/provider/language.dart';
-import 'package:mpd_client/src/widgets/appbar_widget.dart';
 import 'package:mpd_client/src/widgets/error_type_widget.dart';
 import '../../../../../src/widgets/search_field_widget.dart';
 
@@ -37,7 +36,7 @@ class _UserFollowingState extends State<UserFollowing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(title: context.l10n.profile_following_doctors_page),
+      appBar: AppBar(title: Text(context.l10n.profile_following_doctors_page)),
       body: Column(
         children: [
           Padding(

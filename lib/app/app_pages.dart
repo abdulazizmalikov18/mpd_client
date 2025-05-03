@@ -3,6 +3,7 @@ import 'package:mpd_client/features/appointment/data/models/user_posts_arg.dart'
 import 'package:mpd_client/features/home/domain/blocs/product_specalist/product_specalist_bloc.dart';
 import 'package:mpd_client/features/home/presentation/pages/user_account/user_posts_view.dart';
 import 'package:mpd_client/features/user/data/models/user_info_model.dart';
+import 'package:mpd_client/features/user/presentation/pages/user_post/user_post_info_view.dart';
 import 'package:mpd_client/features/user/presentation/pages/user_post/user_post_view.dart';
 import 'package:mpd_client/features/user/presentation/user_specialist_view.dart';
 import 'package:mpd_client/features/user/specialist_register_page.dart';
@@ -328,6 +329,26 @@ class AppPages {
             ),
           ),
         );
+      case AppRoutes.postUserInfo:
+        final data = settings.arguments as Map<String, dynamic>;
+        final String username = data["username"] as String;
+        final int index = data["index"] as int;
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider.value(value: _postBloc),
+              BlocProvider.value(value: _mediaControlBloc),
+              BlocProvider.value(value: _sendComentBloc),
+              BlocProvider.value(value: _postComentBloc),
+              BlocProvider.value(value: _userInfoBloc),
+            ],
+            child: UserPostInfoView(
+              username: username,
+              index: index,
+              avatar: _userInfoBloc.state.userInfo?.avatar ?? "",
+            ),
+          ),
+        );
 
       case AppRoutes.drProfilebyid:
         final args = settings.arguments as SpecialistInfoModel;
@@ -335,10 +356,6 @@ class AppPages {
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider.value(value: _postBloc),
-              BlocProvider(
-                create: (context) =>
-                    SubscriptionBloc(locator.get<DoctorProfileRepository>()),
-              ),
               BlocProvider.value(value: _userSubscriptionsBloc),
             ],
             child: DrProfileByid(specialist: args),

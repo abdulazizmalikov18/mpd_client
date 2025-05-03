@@ -1,15 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:formz/formz.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
+import 'package:mpd_client/app/colors.dart';
 import 'package:mpd_client/core/extension/context_ext.dart';
-import 'package:mpd_client/core/presentation/paginator_list.dart';
+import 'package:mpd_client/core/pagination/presentation/paginator.dart';
 import 'package:mpd_client/features/appointment/presentation/pages/appointment/components/no_appointment.dart';
-import 'package:mpd_client/features/home/domain/inherited/post_inhereted.dart';
 import 'package:mpd_client/features/home/domain/service/flick_multi_manger.dart';
 import 'package:mpd_client/features/home/presentation/pages/home_page.dart';
 import 'package:mpd_client/features/home/presentation/widgets/loading_post.dart';
-import 'package:mpd_client/features/home/presentation/widgets/post_widget_user.dart';
-import 'package:mpd_client/src/widgets/appbar_widget.dart';
 import 'package:mpd_client/src/widgets/error_type_widget.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -34,7 +33,7 @@ class _UserPostViewState extends State<UserPostView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWidget(title: "Shaxsiy postlar"),
+      appBar: AppBar(title: Text("Shaxsiy postlar")),
       body: BlocBuilder<PostBloc, PostState>(
         builder: (context, state) {
           switch (state.statusUser) {
@@ -80,27 +79,47 @@ class _UserPostViewState extends State<UserPostView> {
                       flickMultiManager.pause();
                     }
                   },
-                  child: PaginatorList(
+                  child: Paginator(
                     padding: EdgeInsets.only(
                       bottom: MediaQuery.of(context).viewPadding.bottom,
+                    ),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 2,
+                      mainAxisSpacing: 2,
+                      childAspectRatio: 3 / 4,
                     ),
                     physics: const AlwaysScrollableScrollPhysics(
                       parent: BouncingScrollPhysics(),
                     ),
                     itemCount: state.postsUser.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final post = state.postsUser[index];
-                      PostInheritedNotifier.of(context).notifier!.setPost =
-                          post;
-
-                      return PostWidgetUser(
-                        post: post,
-                        baseIndex: index,
-                        flickMultiManager: flickMultiManager,
-                        isMyPost: true,
-                        avatra: widget.avatar,
-                      );
-                    },
+                    itemBuilder: (context, index) => InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(
+                          AppRoutes.postUserInfo,
+                          arguments: {
+                            'index': index,
+                            'username': widget.username,
+                            'avatar': widget.avatar,
+                          },
+                        );
+                      },
+                      child: Container(
+                        color: mainBlue.withValues(alpha: .1),
+                        alignment: Alignment.center,
+                        child: CachedNetworkImage(
+                          imageUrl: (state.postsUser[index].media?.isNotEmpty ??
+                                  false)
+                              ? (state.postsUser[index].media?.first.image ??
+                                      state.postsUser[index].media?.first
+                                          .screenshot) ??
+                                  "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13"
+                              : "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
+                          errorWidget: (context, url, error) =>
+                              const SizedBox(),
+                        ),
+                      ),
+                    ),
                     paginatorStatus: FormzSubmissionStatus.success,
                     fetchMoreFunction: () {
                       context.read<PostBloc>().add(PostFetchedUser(

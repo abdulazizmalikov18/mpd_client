@@ -73,7 +73,7 @@ class UserAvatarPart extends StatelessWidget {
         width: 100.h,
         decoration: BoxDecoration(
           border: Border.all(color: context.color.white, width: 4),
-          borderRadius: BorderRadius.circular(48.r),
+          shape: BoxShape.circle,
           image: DecorationImage(
             image: CachedNetworkImageProvider(image),
             onError: (exception, stackTrace) => Image.network(

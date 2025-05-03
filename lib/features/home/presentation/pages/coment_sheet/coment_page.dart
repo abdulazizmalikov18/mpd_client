@@ -60,10 +60,11 @@ class ComentPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Share.share(
-                '${post.authorFullname} \n\n${post.text} \n\n${post.media?.first.image} \n\n${post.media?.first.file} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
-               subject: post.authorFullname ?? "Mpd Client",
-              );
+              SharePlus.instance.share(ShareParams(
+                text:
+                    '${post.authorFullname} \n\n${post.text} \n\n${post.media?.first.image} \n\n${post.media?.first.file} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
+                subject: post.authorFullname ?? "Mpd Client",
+              ));
             },
             icon: SvgPicture.asset(
               AppIcons.moreIcon,
@@ -136,7 +137,8 @@ class ComentPage extends StatelessWidget {
           ],
         ),
       ),
-      bottomSheet: PinnedSheet(widget: ComentInput(postId: post.id!, postIndex: index)),
+      bottomSheet:
+          PinnedSheet(widget: ComentInput(postId: post.id!, postIndex: index)),
     );
   }
 

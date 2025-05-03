@@ -1,4 +1,3 @@
-
 class ChatUserState {
   final String type;
   final String user;

@@ -33,10 +33,12 @@ class _ChatViewState extends State<ChatView> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(title: Text('Chat')),
-      body: Column(
-        children: [
-          Padding(
+      backgroundColor: context.color.white,
+      appBar: AppBar(
+        title: Text('Chat'),
+        bottom: PreferredSize(
+          preferredSize: Size(double.infinity, 52),
+          child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: WTextField(
               onChanged: (searchText) {
@@ -62,90 +64,90 @@ class _ChatViewState extends State<ChatView> {
               ),
             ),
           ),
-          Expanded(
-            child: BlocBuilder<ChatGroupBloc, ChatGroupState>(
-              builder: (context, state) {
-                if (state.status.isInProgress) {
-                  return ListView.separated(
-                    itemBuilder: (BuildContext context, int index) {
-                      return const WShimmer(
-                        width: double.infinity,
-                        height: 60,
-                        radius: 0,
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) {
-                      return const SizedBox(height: 2);
-                    },
-                    itemCount: 100,
-                  );
-                }
-                if (state.groups.isEmpty) {
-                  return SizedBox(
-                    height: MediaQuery.sizeOf(context).height * 0.7,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Spacer(),
-                        Image.asset(AppImages.chatNotFound),
-                        const SizedBox(height: 32),
-                        Text(
-                          'Chat Not Found',
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'The page you are looking\nfor doesn’t exits',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400,
-                            color: context.color.grey,
-                          ),
-                        ),
-                        const Spacer(),
-                      ],
-                    ),
-                  );
-                }
-                return RefreshIndicator.adaptive(
-                  onRefresh: () async {
-                    context
-                        .read<ChatGroupBloc>()
-                        .add(const ChatGetGroupEvent());
-                  },
-                  child: PaginatorList(
-                    paginatorStatus: state.status,
-                    itemBuilder: (context, index) => WUserChatButton(
-                      onTap: () {
-                        // context.pushNamed(
-                        //   AppRouteNames.inChats,
-                        //   extra: {"group": state.groups[index]},
-                        // );
-                        final bloc = context.read<UserInfoBloc>();
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => BlocProvider.value(
-                            value: bloc,
-                            child: InChatView(
-                              group: state.groups[index],
-                            ),
-                          ),
-                        ));
-                      },
-                      group: state.groups[index],
-                    ),
-                    itemCount: state.groups.length,
-                    fetchMoreFunction: () {},
-                    hasMoreToFetch: false,
-                  ),
+        ),
+      ),
+      body: BlocBuilder<ChatGroupBloc, ChatGroupState>(
+        builder: (context, state) {
+          if (state.status.isInProgress) {
+            return ListView.separated(
+              itemBuilder: (BuildContext context, int index) {
+                return const WShimmer(
+                  width: double.infinity,
+                  height: 60,
+                  radius: 0,
                 );
               },
+              separatorBuilder: (BuildContext context, int index) {
+                return const SizedBox(height: 2);
+              },
+              itemCount: 100,
+            );
+          }
+          if (state.groups.isEmpty) {
+            return SizedBox(
+              height: MediaQuery.sizeOf(context).height * 0.7,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Spacer(),
+                  Image.asset(AppImages.chatNotFound),
+                  const SizedBox(height: 32),
+                  Text(
+                    'Chat Not Found',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'The page you are looking\nfor doesn’t exits',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400,
+                      color: context.color.grey,
+                    ),
+                  ),
+                  const Spacer(),
+                ],
+              ),
+            );
+          }
+          return RefreshIndicator.adaptive(
+            onRefresh: () async {
+              context.read<ChatGroupBloc>().add(const ChatGetGroupEvent());
+            },
+            child: PaginatorList(
+              paginatorStatus: state.status,
+              padding: EdgeInsets.symmetric(vertical: 8),
+              itemBuilder: (context, index) => DecoratedBox(
+                decoration: BoxDecoration(
+                  color: state.groups[index].unreadMessageCount != 0
+                      ? null
+                      : context.color.background,
+                ),
+                child: WUserChatButton(
+                  onTap: () {
+                    final bloc = context.read<UserInfoBloc>();
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => BlocProvider.value(
+                        value: bloc,
+                        child: InChatView(
+                          group: state.groups[index],
+                        ),
+                      ),
+                    ));
+                  },
+                  group: state.groups[index],
+                ),
+              ),
+              itemCount: state.groups.length,
+              fetchMoreFunction: () {},
+              hasMoreToFetch: false,
             ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }

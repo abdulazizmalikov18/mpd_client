@@ -34,3 +34,4 @@ class DoctorProfileBloc extends Bloc<DoctorProfileEvent, DoctorProfileState> {
     }
   }
 }
+

@@ -10,21 +10,29 @@ import 'package:mpd_client/src/themes/styles.dart';
 class FollowButton extends StatelessWidget {
   final bool isFollowing;
   final VoidCallback? onTap;
+  final double? width;
+  final double? height;
   const FollowButton({
     super.key,
     required this.onTap,
     required this.isFollowing,
+    this.width,
+    this.height,
   });
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton.icon(
       style: OutlinedButton.styleFrom(
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          backgroundColor: isFollowing ? context.color.white : context.color.mainBlue,
-          side: BorderSide(color: context.color.mainBlue),
-          minimumSize: Size(136.w, 34.h),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r))),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        backgroundColor:
+            isFollowing ? context.color.white : context.color.mainBlue,
+        side: BorderSide(color: context.color.mainBlue),
+        minimumSize: Size(width ?? 136.w, height ?? 34.h),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.r),
+        ),
+      ),
       onPressed: onTap,
       icon: SvgPicture.asset(
         isFollowing ? AppIcons.userTick : AppIcons.userAdd,
@@ -33,12 +41,16 @@ class FollowButton extends StatelessWidget {
         color: isFollowing ? context.color.mainBlue : context.color.white,
       ),
       label: Text(
-        isFollowing ? context.l10n.book_doctor_unfollow : context.l10n.book_doctor_follow,
-        style: Styles.descSubtitle.copyWith(color: isFollowing ? context.color.mainBlue : context.color.white, fontSize: 12.sp, fontWeight: FontWeight.w500),
+        isFollowing
+            ? context.l10n.book_doctor_unfollow
+            : context.l10n.book_doctor_follow,
+        style: Styles.descSubtitle.copyWith(
+            color: isFollowing ? context.color.mainBlue : context.color.white,
+            fontSize: 12.sp,
+            fontWeight: FontWeight.w500),
       ),
     );
   }
 }
-
 
 //label

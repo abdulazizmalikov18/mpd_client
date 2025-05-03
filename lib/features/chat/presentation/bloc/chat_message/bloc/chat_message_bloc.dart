@@ -60,26 +60,13 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
   }
 
   void _onSendMessage(ChatSendMessageEvent event, Emitter emit) async {
-    // final newMessageId = const Uuid().v4();
-    // final message = MessageModel(
-    //   id: (state.messages.isEmpty) ? 0 : (state.messages.last.id ?? 0) + 1,
-    //   text: event.text,
-    //   file: event.file?.path,
-    //   groupSlug: event.groupSlug,
-    //   sender: StorageRepository.getString(StorageKeys.USERNAME),
-    //   date: DateTime.now().toString(),
-    //   isMe: true,
-    //   isSend: false,
-    //   sendId: newMessageId,
-    //   isLocalFile: true,
-    //   isRead: false,
-    // );
-
-    // emit(state.copyWith(messages: [message, ...state.messages]));
     ChatVMController().messageController.clear();
 
     await _repo.sendMessage(SendMessageEntity(
-        text: event.text, slugName: event.groupSlug, file: event.file));
+      text: event.text,
+      slugName: event.groupSlug,
+      file: event.file,
+    ));
   }
 
   void _onReadAllMessage(ChatReadAllMessage event, Emitter emit) async {

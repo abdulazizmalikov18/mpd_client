@@ -1,5 +1,6 @@
 class DoctorProfileModel {
   final int id;
+  final String? username;
   final String name;
   final String lastname;
   final dynamic avatar;
@@ -20,10 +21,12 @@ class DoctorProfileModel {
   final dynamic bio;
   final dynamic location;
   final int orderCount;
+  bool? isSubscribed;
   final dynamic lastLocation;
 
   DoctorProfileModel({
     this.id = 0,
+    this.username = "",
     this.name = "",
     this.lastname = "",
     this.avatar = "",
@@ -45,11 +48,13 @@ class DoctorProfileModel {
     this.location,
     this.orderCount = 0,
     this.lastLocation,
+    this.isSubscribed = false,
   });
 
   factory DoctorProfileModel.fromMap(Map<String, dynamic> json) =>
       DoctorProfileModel(
         id: json["id"],
+        isSubscribed: json["username"],
         name: json["name"],
         lastname: json["lastname"],
         avatar: json["avatar"],

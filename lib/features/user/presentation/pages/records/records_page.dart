@@ -7,7 +7,6 @@ import 'package:mpd_client/features/user/presentation/pages/records/components/n
 import 'package:mpd_client/features/user/presentation/pages/records/components/record_list.dart';
 import 'package:mpd_client/provider/language.dart';
 import 'package:mpd_client/src/themes/styles.dart';
-import 'package:mpd_client/src/widgets/appbar_widget.dart';
 import 'package:mpd_client/src/widgets/shimmer_container.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -19,7 +18,7 @@ class RecordsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(title: context.l10n.records_title),
+      appBar: AppBar(title: Text(context.l10n.records_title)),
       body: Column(
         children: [
           Padding(

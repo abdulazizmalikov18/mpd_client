@@ -109,9 +109,11 @@ class _UserPageState extends State<UserPage> {
                     },
                     child: CircleAvatar(
                       backgroundColor: Colors.white,
-                      radius: 36,
-                      child: AppIcons.scanBarcode
-                          .svg(color: const Color(0xFF677294)),
+                      radius: 32,
+                      child: AppIcons.scanBarcode.svg(
+                        color: const Color(0xFF677294),
+                        height: 40,
+                      ),
                     ),
                   ),
                 ),

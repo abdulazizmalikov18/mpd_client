@@ -43,6 +43,7 @@ class _DrProfileByidState extends State<DrProfileByid> {
           .read<PostBloc>()
           .add(PostFetchedUser(username: widget.specialist.username ?? ""));
     }
+
     super.initState();
   }
 
@@ -56,7 +57,7 @@ class _DrProfileByidState extends State<DrProfileByid> {
               child: NestedScrollView(
                 headerSliverBuilder: (context, innerBoxIsScrolled) => [
                   SliverAppBar(
-                    expandedHeight: 334.h,
+                    expandedHeight: 318.h,
                     centerTitle: false,
                     title: Text(
                       widget.specialist.fullname ?? "-- --",
@@ -123,22 +124,27 @@ class _DrProfileByidState extends State<DrProfileByid> {
                               ),
                             ],
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                widget.specialist.fullname ?? "-- --",
-                                style: Styles.headline4.copyWith(
-                                  color: context.color.black,
-                                  fontWeight: FontWeight.w600,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 32),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  widget.specialist.fullname ?? "-- --",
+                                  style: Styles.headline4.copyWith(
+                                    color: context.color.black,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                              ),
-                              ScreenUtil().setHorizontalSpacing(4),
-                              const GradientIcon(
-                                iconName: AppIcons.verify,
-                                size: 20,
-                              ),
-                            ],
+                                ScreenUtil().setHorizontalSpacing(4),
+                                const GradientIcon(
+                                  iconName: AppIcons.verify,
+                                  size: 20,
+                                ),
+                              ],
+                            ),
                           ),
                           ScreenUtil().setVerticalSpacing(6.h),
                           Padding(
@@ -157,14 +163,15 @@ class _DrProfileByidState extends State<DrProfileByid> {
                           ),
                           const Spacer(),
                           Container(
-                            height: 34.h,
-                            padding: EdgeInsets.symmetric(horizontal: 40.w),
+                            height: 40.h,
+                            padding: EdgeInsets.symmetric(horizontal: 16.w),
                             width: MediaQuery.sizeOf(context).width,
                             child: Row(
                               children: [
                                 Expanded(
                                   child: FollowButton(
                                     isFollowing: true,
+                                    height: 40.h,
                                     onTap: () {},
                                   ),
                                 ),
@@ -197,13 +204,13 @@ class _DrProfileByidState extends State<DrProfileByid> {
                                     ),
                                     color: context.color.white,
                                     border: Border.all(
-                                        color: context.color.mainBlue),
+                                      color: context.color.mainBlue,
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          ScreenUtil().setVerticalSpacing(16.h),
                         ],
                       ),
                     ),
@@ -399,42 +406,41 @@ class _DrProfileByidState extends State<DrProfileByid> {
                 ),
               ),
             ),
-      bottomSheet: PinnedSheet(
-        widget: BlocBuilder<DoctorProfileBloc, DoctorProfileState>(
-          builder: (context, state) {
-            return AnimatedCrossFade(
-              firstChild: const SizedBox(width: double.maxFinite),
-              secondChild: Row(
+      bottomSheet: BlocBuilder<DoctorProfileBloc, DoctorProfileState>(
+        builder: (context, state) {
+          return AnimatedCrossFade(
+            firstChild: const SizedBox(width: double.maxFinite),
+            secondChild: PinnedSheet(
+              widget: Row(
                 children: [
                   Expanded(
                     child: LongButton(
                       buttonName: context.l10n.book_doctor_book,
                       onPress: () {
-                        Navigator.of(context).pushNamed(AppRoutes.services,
-                            arguments: state.doctor?.id ?? "_");
+                        Navigator.of(context).pushNamed(
+                          AppRoutes.services,
+                          arguments: state.doctor?.id ?? "_",
+                        );
                       },
                     ),
                   ),
-                  if (state.doctor == null && state.doctor?.phone == null)
-                    Row(
-                      children: [
-                        ScreenUtil().setHorizontalSpacing(16.w),
-                        IconGradientButton(
-                          icon: AppIcons.call,
-                          onPressed: () =>
-                              Caller.makePhoneCall(state.doctor?.phone ?? "__"),
-                        )
-                      ],
+                  if (state.doctor != null && state.doctor?.phone != null) ...[
+                    ScreenUtil().setHorizontalSpacing(16.w),
+                    IconGradientButton(
+                      icon: AppIcons.call,
+                      onPressed: () =>
+                          Caller.makePhoneCall(state.doctor?.phone ?? "__"),
                     )
+                  ]
                 ],
               ),
-              crossFadeState: state is DoctorProfileSuccess
-                  ? CrossFadeState.showSecond
-                  : CrossFadeState.showFirst,
-              duration: const Duration(milliseconds: 300),
-            );
-          },
-        ),
+            ),
+            crossFadeState: state is DoctorProfileSuccess
+                ? CrossFadeState.showSecond
+                : CrossFadeState.showFirst,
+            duration: const Duration(milliseconds: 300),
+          );
+        },
       ),
     );
   }

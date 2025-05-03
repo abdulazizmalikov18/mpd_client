@@ -20,6 +20,7 @@ import 'package:mpd_client/features/chat/presentation/bloc/chat_message/bloc/cha
 import 'package:mpd_client/features/doctor_profile_booking/data/repositories/doctor_profile_repository.dart';
 import 'package:mpd_client/features/doctor_profile_booking/domain/blocs/add_to_cart/add_to_cart_bloc.dart';
 import 'package:mpd_client/features/doctor_profile_booking/domain/blocs/doctor_profile/doctor_profile_bloc.dart';
+import 'package:mpd_client/features/doctor_profile_booking/domain/blocs/subscripption/subscription_bloc.dart';
 import 'package:mpd_client/features/home/domain/blocs/socket_offer_bloc/socket_offer_bloc.dart';
 import 'package:mpd_client/provider/language_database.dart';
 import 'package:mpd_client/provider/local_provider.dart';
@@ -79,6 +80,10 @@ class _MyAppState extends State<MyApp> {
                 create: (context) => locator<ChatGroupBloc>()),
             BlocProvider<ChatMessageBloc>(
                 create: (context) => locator<ChatMessageBloc>()),
+            BlocProvider(
+              create: (context) =>
+                  SubscriptionBloc(locator.get<DoctorProfileRepository>()),
+            ),
           ],
           child: PostInheritedNotifier(
             postNotifier: PostNotifier(),

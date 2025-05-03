@@ -117,7 +117,9 @@ class _WTextFieldState extends State<WTextField>
   @override
   void initState() {
     animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 200));
+      vsync: this,
+      duration: const Duration(milliseconds: 200),
+    );
     animationController.forward();
 
     super.initState();

@@ -180,10 +180,13 @@ class _PostBodyState extends State<PostBody>
                             LongButton(
                               color: context.color.mainBlue,
                               onPress: () {
-                                Share.share(
-                                  '${widget.post.authorFullname} \n\n${widget.post.text} \n\n${widget.post.media?.first.image ?? ""} \n\n${widget.post.media?.first.file ?? ""} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
-                                  subject: widget.post.authorFullname ??
-                                      "Mpd Client",
+                                SharePlus.instance.share(
+                                  ShareParams(
+                                    text:
+                                        '${widget.post.authorFullname} \n\n${widget.post.text} \n\n${widget.post.media?.first.image ?? ""} \n\n${widget.post.media?.first.file ?? ""} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
+                                    subject: widget.post.authorFullname ??
+                                        "Mpd Client",
+                                  ),
                                 );
                               },
                               widget: Row(
@@ -263,9 +266,12 @@ class _PostBodyState extends State<PostBody>
                         ),
                       );
                     } else {
-                      Share.share(
-                        '${widget.post.authorFullname} \n\n${widget.post.text} \n\n${widget.post.media?.first.image ?? ""} \n\n${widget.post.media?.first.file ?? ""} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
-                        subject: widget.post.authorFullname ?? "Mpd Client",
+                      SharePlus.instance.share(
+                        ShareParams(
+                          text:
+                              '${widget.post.authorFullname} \n\n${widget.post.text} \n\n${widget.post.media?.first.image ?? ""} \n\n${widget.post.media?.first.file ?? ""} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
+                          subject: widget.post.authorFullname ?? "Mpd Client",
+                        ),
                       );
                     }
                   },

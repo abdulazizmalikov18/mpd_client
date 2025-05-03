@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
-import 'package:mpd_client/src/widgets/appbar_widget.dart';
 
 class UserSpecialistView extends StatefulWidget {
   const UserSpecialistView({super.key});
@@ -16,8 +15,8 @@ class _UserSpecialistViewState extends State<UserSpecialistView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(
-        title: "Mutaxaisliklarim",
+      appBar: AppBar(
+        title: Text("Mutaxaisliklarim"),
         actions: [
           IconButton(
             onPressed: () {

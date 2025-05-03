@@ -57,8 +57,9 @@ class _AppointmentPageState extends State<AppointmentPage>
               height: 50.h,
               width: double.maxFinite,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
-                  color: context.color.background),
+                borderRadius: BorderRadius.circular(10.r),
+                color: context.color.background,
+              ),
               margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
               child: TabBar(
                 isScrollable:

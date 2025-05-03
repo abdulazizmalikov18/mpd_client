@@ -87,6 +87,8 @@ class AppointmentItem extends StatelessWidget {
               child: Text(
                 specialist.fullname ?? '-',
                 style: Styles.expTitle.copyWith(color: context.color.black),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             const SizedBox(width: 8),

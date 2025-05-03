@@ -7,11 +7,12 @@ class DefaultAvatar extends StatelessWidget {
   final double containerSize, imageSize;
   final String iconName;
 
-  const DefaultAvatar(
-      {super.key,
-      required this.containerSize,
-      required this.imageSize,
-      this.iconName = AppIcons.avatarDefault});
+  const DefaultAvatar({
+    super.key,
+    required this.containerSize,
+    required this.imageSize,
+    this.iconName = AppIcons.avatarDefault,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,10 @@ class DefaultAvatar extends StatelessWidget {
         color: context.color.mainBlue.withValues(alpha: 0.1),
       ),
       child: iconName.svg(
-          width: imageSize, height: imageSize, color: context.color.mainBlue),
+        width: imageSize,
+        height: imageSize,
+        color: context.color.mainBlue,
+      ),
     );
   }
 }

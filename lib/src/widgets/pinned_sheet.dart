@@ -16,9 +16,10 @@ class PinnedSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      padding:
-          EdgeInsets.symmetric(vertical: verticalPadding.h, horizontal: 16.w)
-              .copyWith(
+      padding: EdgeInsets.symmetric(
+        vertical: verticalPadding.h,
+        horizontal: 16.w,
+      ).copyWith(
         bottom: MediaQuery.of(context).viewInsets.bottom > 0 ? 12 : 32,
       ),
       decoration: BoxDecoration(
@@ -31,9 +32,6 @@ class PinnedSheet extends StatelessWidget {
           )
         ],
       ),
-      // margin: EdgeInsets.only(
-      //   bottom: MediaQuery.of(context).viewInsets.bottom > 0 ? 0 : 16,
-      // ),
       duration: const Duration(milliseconds: 300),
       child: widget,
     );
