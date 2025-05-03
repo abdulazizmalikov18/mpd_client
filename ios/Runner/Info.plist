@@ -68,12 +68,12 @@
 		<string>Need to upload image MY PERSONAL DOCTOR</string>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true />
-		<key>UIBackgroundModes</key>
+		<!-- <key>UIBackgroundModes</key>
 		<array>
 			<string>fetch</string>
 			<string>processing</string>
 			<string>remote-notification</string>
-		</array>
+		</array> -->
 		<key>UILaunchStoryboardName</key>
 		<string>LaunchScreen</string>
 		<key>UIMainStoryboardFile</key>

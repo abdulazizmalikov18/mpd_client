@@ -29,6 +29,7 @@ flutter run --no-sound-null-safety
 
 build apk with low size:
 flutter build apk --split-per-abi
+flutter build apk --release
 
 build appbundle:
 flutter build appbundle --release --build-name=1.0.7 --build-number=9
