@@ -38,7 +38,7 @@ build runner:
 flutter pub run build_runner build --delete-conflicting-outputs
 
 rename app:
-rename setAppName --targets ios,android --value "T-MED"
+rename setAppName --targets ios,android --value "MPD CLIENT"
 rename setBundleId --targets ios,android --value "com.dwed.dwed"
 
 generation eyse:
