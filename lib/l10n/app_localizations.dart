@@ -106,25 +106,25 @@ abstract class AppLocalizations {
   /// No description provided for @presentation_description.
   ///
   /// In en, this message translates to:
-  /// **'This is an application that allows you to control your health'**
+  /// **'This is an application that helps you manage your health'**
   String get presentation_description;
 
   /// No description provided for @presentation_select_language.
   ///
   /// In en, this message translates to:
-  /// **'Start your journey to MPD by choosing a language'**
+  /// **'Start your MPD journey by selecting a language'**
   String get presentation_select_language;
 
   /// No description provided for @presentation_language_uz.
   ///
   /// In en, this message translates to:
-  /// **'O\'zbek'**
+  /// **'Uzbek'**
   String get presentation_language_uz;
 
   /// No description provided for @presentation_language_ru.
   ///
   /// In en, this message translates to:
-  /// **'Русский'**
+  /// **'Russian'**
   String get presentation_language_ru;
 
   /// No description provided for @presentation_language_en.
@@ -148,73 +148,73 @@ abstract class AppLocalizations {
   /// No description provided for @presentation_first_page.
   ///
   /// In en, this message translates to:
-  /// **'Do you need to find a doctor urgently or quickly?'**
+  /// **'Need to find a doctor urgently?'**
   String get presentation_first_page;
 
   /// No description provided for @presentation_first_page_description.
   ///
   /// In en, this message translates to:
-  /// **'Use the doctor map in our app and find the nearest doctor to your location, wherever you are.'**
+  /// **'Use our doctor map to find the nearest healthcare provider to your location.'**
   String get presentation_first_page_description;
 
   /// No description provided for @presentation_second_page.
   ///
   /// In en, this message translates to:
-  /// **'Keep a copy of your health record in the MPD app in a safe place'**
+  /// **'Securely store your health records'**
   String get presentation_second_page;
 
   /// No description provided for @presentation_second_description.
   ///
   /// In en, this message translates to:
-  /// **'Keep your medical profile right in the app. Keep track of your medical history, store your tests and get notified about upcoming doctor visits'**
+  /// **'Keep your medical history, test results, and appointment reminders in one safe place.'**
   String get presentation_second_description;
 
   /// No description provided for @presentation_third_page.
   ///
   /// In en, this message translates to:
-  /// **'Look for fresh reviews from a variety of sources'**
+  /// **'Read verified doctor reviews'**
   String get presentation_third_page;
 
   /// No description provided for @presentation_third_description.
   ///
   /// In en, this message translates to:
-  /// **'Our application will help you read reviews about doctors and medical institutions, as well as the doctor\'s rating will help you not to make a mistake in choosing a good specialist.'**
+  /// **'Check ratings and feedback to choose the best medical specialists.'**
   String get presentation_third_description;
 
   /// No description provided for @presentation_four_page.
   ///
   /// In en, this message translates to:
-  /// **'Access to emergency services'**
+  /// **'Quick emergency access'**
   String get presentation_four_page;
 
   /// No description provided for @presentation_four_page_description.
   ///
   /// In en, this message translates to:
-  /// **'Users through the MPD app, caRn get quick access to emergency services with just a few taps'**
+  /// **'Connect to emergency services instantly through the app.'**
   String get presentation_four_page_description;
 
-  /// No description provided for @presentation_get_start.
+  /// No description provided for @presentation_get_started.
   ///
   /// In en, this message translates to:
-  /// **'Get start'**
-  String get presentation_get_start;
+  /// **'Get Started'**
+  String get presentation_get_started;
 
   /// No description provided for @login_text.
   ///
   /// In en, this message translates to:
-  /// **'Welcome Back!\nLogin to your account'**
+  /// **'Welcome Back!\nLogin to continue'**
   String get login_text;
 
   /// No description provided for @login_phone.
   ///
   /// In en, this message translates to:
-  /// **'Enter phone number or username'**
+  /// **'Phone number or username'**
   String get login_phone;
 
   /// No description provided for @login_password.
   ///
   /// In en, this message translates to:
-  /// **'Enter password'**
+  /// **'Password'**
   String get login_password;
 
   /// No description provided for @login_rememberme.
@@ -226,91 +226,91 @@ abstract class AppLocalizations {
   /// No description provided for @login_forgot.
   ///
   /// In en, this message translates to:
-  /// **'forgot password'**
+  /// **'Forgot password?'**
   String get login_forgot;
 
   /// No description provided for @login_enter.
   ///
   /// In en, this message translates to:
-  /// **'Log in'**
+  /// **'Log In'**
   String get login_enter;
 
   /// No description provided for @login_register_account.
   ///
   /// In en, this message translates to:
-  /// **'Don`t you have an account?'**
+  /// **'Don\'t have an account?'**
   String get login_register_account;
 
   /// No description provided for @login_register.
   ///
   /// In en, this message translates to:
-  /// **'Register'**
+  /// **'Sign Up'**
   String get login_register;
 
   /// No description provided for @login_error_account.
   ///
   /// In en, this message translates to:
-  /// **'This user not found'**
+  /// **'User not found'**
   String get login_error_account;
 
   /// No description provided for @login_error.
   ///
   /// In en, this message translates to:
-  /// **'Incorrect phone number or password'**
+  /// **'Incorrect credentials'**
   String get login_error;
 
-  /// No description provided for @restory_account.
+  /// No description provided for @restore_account.
   ///
   /// In en, this message translates to:
-  /// **'Please enter your phone number for restore'**
-  String get restory_account;
+  /// **'Account Recovery'**
+  String get restore_account;
 
-  /// No description provided for @restory_phone.
+  /// No description provided for @restore_phone.
   ///
   /// In en, this message translates to:
-  /// **'Enter phone'**
-  String get restory_phone;
+  /// **'Enter your phone number'**
+  String get restore_phone;
 
-  /// No description provided for @restory_button_restory.
+  /// No description provided for @restore_button_restore.
   ///
   /// In en, this message translates to:
-  /// **'Restory account'**
-  String get restory_button_restory;
+  /// **'Recover Account'**
+  String get restore_button_restore;
 
   /// No description provided for @register_title.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to MPD!\nEnter your data to Sign Up'**
+  /// **'Join MPD!\nCreate your account'**
   String get register_title;
 
   /// No description provided for @register_phone.
   ///
   /// In en, this message translates to:
-  /// **'Enter phone number'**
+  /// **'Phone number'**
   String get register_phone;
 
   /// No description provided for @register_terms_of_use.
   ///
   /// In en, this message translates to:
-  /// **'I agree to the Term of use'**
+  /// **'I agree to the Terms of Use'**
   String get register_terms_of_use;
 
   /// No description provided for @register_register.
   ///
   /// In en, this message translates to:
-  /// **'Register'**
+  /// **'Sign Up'**
   String get register_register;
 
   /// No description provided for @register_have_account.
   ///
   /// In en, this message translates to:
-  /// **'Do you have an account?'**
+  /// **'Already have an account?'**
   String get register_have_account;
 
   /// No description provided for @register_privacy_policy.
   ///
   /// In en, this message translates to:
-  /// **'Privacy and policy'**
+  /// **'Privacy Policy'**
   String get register_privacy_policy;
 
   /// No description provided for @register_agree_privacy_and_policy.
@@ -322,43 +322,43 @@ abstract class AppLocalizations {
   /// No description provided for @register_error_number_format.
   ///
   /// In en, this message translates to:
-  /// **'It is not valid phone number '**
+  /// **'Invalid phone number'**
   String get register_error_number_format;
 
   /// No description provided for @register_verify_code.
   ///
   /// In en, this message translates to:
-  /// **'Verification code'**
+  /// **'Verification Code'**
   String get register_verify_code;
 
   /// No description provided for @register_verify_code_description.
   ///
   /// In en, this message translates to:
-  /// **'Please enter the 6 digit  code we sent to'**
+  /// **'Enter the 6-digit code sent to your phone'**
   String get register_verify_code_description;
 
   /// No description provided for @register_verify_code_sent_again.
   ///
   /// In en, this message translates to:
-  /// **'Send again'**
+  /// **'Resend Code'**
   String get register_verify_code_sent_again;
 
   /// No description provided for @register_verify_code_from_message.
   ///
   /// In en, this message translates to:
-  /// **'SMS from message'**
+  /// **'Paste from SMS'**
   String get register_verify_code_from_message;
 
   /// No description provided for @register_verify_code_error_code_write.
   ///
   /// In en, this message translates to:
-  /// **'You have entered an invalid code'**
+  /// **'Invalid code'**
   String get register_verify_code_error_code_write;
 
   /// No description provided for @register_create_password.
   ///
   /// In en, this message translates to:
-  /// **'Please create your\npassword'**
+  /// **'Create Password'**
   String get register_create_password;
 
   /// No description provided for @register_new_password.
@@ -370,7 +370,7 @@ abstract class AppLocalizations {
   /// No description provided for @register_new_password_confirm.
   ///
   /// In en, this message translates to:
-  /// **'Confirm password'**
+  /// **'Confirm Password'**
   String get register_new_password_confirm;
 
   /// No description provided for @register_password_continue.
@@ -382,25 +382,25 @@ abstract class AppLocalizations {
   /// No description provided for @register_error_code_password_missmatch.
   ///
   /// In en, this message translates to:
-  /// **'Password mismatch'**
+  /// **'Passwords don\'t match'**
   String get register_error_code_password_missmatch;
 
   /// No description provided for @register_error_code_password_cant_empty.
   ///
   /// In en, this message translates to:
-  /// **'Can not be empty'**
+  /// **'Field cannot be empty'**
   String get register_error_code_password_cant_empty;
 
   /// No description provided for @register_error_code_password_mistake.
   ///
   /// In en, this message translates to:
-  /// **'This password is too short. It must containt at least 8 characters.'**
+  /// **'Password must be at least 8 characters'**
   String get register_error_code_password_mistake;
 
   /// No description provided for @register_user_info.
   ///
   /// In en, this message translates to:
-  /// **'Please enter your details to register'**
+  /// **'Complete your profile'**
   String get register_user_info;
 
   /// No description provided for @register_login.
@@ -412,31 +412,31 @@ abstract class AppLocalizations {
   /// No description provided for @register_firstname.
   ///
   /// In en, this message translates to:
-  /// **'Firstname'**
+  /// **'First Name'**
   String get register_firstname;
 
   /// No description provided for @register_lastname.
   ///
   /// In en, this message translates to:
-  /// **'Lastname'**
+  /// **'Last Name'**
   String get register_lastname;
 
   /// No description provided for @register_thirdname.
   ///
   /// In en, this message translates to:
-  /// **'Thirdname'**
+  /// **'Middle Name (Optional)'**
   String get register_thirdname;
 
   /// No description provided for @register_date_birth.
   ///
   /// In en, this message translates to:
-  /// **'Date birth'**
+  /// **'Date of Birth'**
   String get register_date_birth;
 
   /// No description provided for @register_date_birth_select.
   ///
   /// In en, this message translates to:
-  /// **'Select date'**
+  /// **'Select Date'**
   String get register_date_birth_select;
 
   /// No description provided for @register_date_birth_cancel.
@@ -448,7 +448,7 @@ abstract class AppLocalizations {
   /// No description provided for @register_date_birth_ok.
   ///
   /// In en, this message translates to:
-  /// **'Ok'**
+  /// **'OK'**
   String get register_date_birth_ok;
 
   /// No description provided for @register_gender.
@@ -460,13 +460,13 @@ abstract class AppLocalizations {
   /// No description provided for @register_gender_man.
   ///
   /// In en, this message translates to:
-  /// **'Man'**
+  /// **'Male'**
   String get register_gender_man;
 
   /// No description provided for @register_gender_woman.
   ///
   /// In en, this message translates to:
-  /// **'Woman'**
+  /// **'Female'**
   String get register_gender_woman;
 
   /// No description provided for @register_profession.
@@ -478,13 +478,13 @@ abstract class AppLocalizations {
   /// No description provided for @register_profession_title.
   ///
   /// In en, this message translates to:
-  /// **'Select your profession'**
+  /// **'Select Profession'**
   String get register_profession_title;
 
   /// No description provided for @register_profession_search.
   ///
   /// In en, this message translates to:
-  /// **'Search your profession'**
+  /// **'Search Professions'**
   String get register_profession_search;
 
   /// No description provided for @register_profession_search_cancel.
@@ -502,13 +502,13 @@ abstract class AppLocalizations {
   /// No description provided for @register_region_title.
   ///
   /// In en, this message translates to:
-  /// **'Select your region'**
+  /// **'Select Region'**
   String get register_region_title;
 
   /// No description provided for @register_error_code_text_cant_empty.
   ///
   /// In en, this message translates to:
-  /// **'Can not be empty'**
+  /// **'Field cannot be empty'**
   String get register_error_code_text_cant_empty;
 
   /// No description provided for @register_error_code_text_short.
@@ -520,7 +520,7 @@ abstract class AppLocalizations {
   /// No description provided for @register_error_code_username_exist.
   ///
   /// In en, this message translates to:
-  /// **'The username is already exist!'**
+  /// **'Username already exists!'**
   String get register_error_code_username_exist;
 
   /// No description provided for @navbar_home.
@@ -538,7 +538,7 @@ abstract class AppLocalizations {
   /// No description provided for @navbar_Appointment.
   ///
   /// In en, this message translates to:
-  /// **'Appointment'**
+  /// **'Appointments'**
   String get navbar_Appointment;
 
   /// No description provided for @navbar_profile.
@@ -550,19 +550,19 @@ abstract class AppLocalizations {
   /// No description provided for @lenth_hello.
   ///
   /// In en, this message translates to:
-  /// **'Good morning'**
+  /// **'Hello'**
   String get lenth_hello;
 
   /// No description provided for @lenth_likes.
   ///
   /// In en, this message translates to:
-  /// **'likes'**
+  /// **'Likes'**
   String get lenth_likes;
 
   /// No description provided for @lenth_comment.
   ///
   /// In en, this message translates to:
-  /// **'Comment'**
+  /// **'Comments'**
   String get lenth_comment;
 
   /// No description provided for @lenth_no_comments.
@@ -574,25 +574,25 @@ abstract class AppLocalizations {
   /// No description provided for @lenth_read_more.
   ///
   /// In en, this message translates to:
-  /// **'Read more'**
+  /// **'Read More'**
   String get lenth_read_more;
 
   /// No description provided for @lenth_show_less.
   ///
   /// In en, this message translates to:
-  /// **'Show less'**
+  /// **'Show Less'**
   String get lenth_show_less;
 
   /// No description provided for @lenth_write_comment.
   ///
   /// In en, this message translates to:
-  /// **'Write your comment'**
+  /// **'Write a comment'**
   String get lenth_write_comment;
 
   /// No description provided for @lenth_publish_comment.
   ///
   /// In en, this message translates to:
-  /// **'Sending'**
+  /// **'Post'**
   String get lenth_publish_comment;
 
   /// No description provided for @lenth_year_ago.
@@ -628,7 +628,7 @@ abstract class AppLocalizations {
   /// No description provided for @lenth_now_ago.
   ///
   /// In en, this message translates to:
-  /// **'now'**
+  /// **'just now'**
   String get lenth_now_ago;
 
   /// No description provided for @lenth_years_ago.
@@ -664,13 +664,13 @@ abstract class AppLocalizations {
   /// No description provided for @lenth_create_post.
   ///
   /// In en, this message translates to:
-  /// **'Create post'**
+  /// **'Create Post'**
   String get lenth_create_post;
 
   /// No description provided for @lenth_image_add.
   ///
   /// In en, this message translates to:
-  /// **'Add an image or video'**
+  /// **'Add Image/Video'**
   String get lenth_image_add;
 
   /// No description provided for @lenth_post_description.
@@ -682,7 +682,7 @@ abstract class AppLocalizations {
   /// No description provided for @lenth_postwrite.
   ///
   /// In en, this message translates to:
-  /// **'Write something'**
+  /// **'Write something...'**
   String get lenth_postwrite;
 
   /// No description provided for @lenth_publish_post.
@@ -694,43 +694,43 @@ abstract class AppLocalizations {
   /// No description provided for @search_doctor.
   ///
   /// In en, this message translates to:
-  /// **'Search your specialist'**
+  /// **'Find a Specialist'**
   String get search_doctor;
 
   /// No description provided for @search_doctor_loading.
   ///
   /// In en, this message translates to:
-  /// **'Loading'**
+  /// **'Loading...'**
   String get search_doctor_loading;
 
   /// No description provided for @search_doctor_showing.
   ///
   /// In en, this message translates to:
-  /// **'Showing'**
+  /// **'Showing results'**
   String get search_doctor_showing;
 
   /// No description provided for @search_doctor_no_result.
   ///
   /// In en, this message translates to:
-  /// **'Specialist not found'**
+  /// **'No specialists found'**
   String get search_doctor_no_result;
 
   /// No description provided for @search_doctor_service_price_start.
   ///
   /// In en, this message translates to:
-  /// **'Service start from'**
+  /// **'Services starting from'**
   String get search_doctor_service_price_start;
 
   /// No description provided for @search_doctor_service_book_now.
   ///
   /// In en, this message translates to:
-  /// **'Book now'**
+  /// **'Book Now'**
   String get search_doctor_service_book_now;
 
   /// No description provided for @search_category.
   ///
   /// In en, this message translates to:
-  /// **'Search category'**
+  /// **'Search by Category'**
   String get search_category;
 
   /// No description provided for @search_filter.
@@ -742,13 +742,13 @@ abstract class AppLocalizations {
   /// No description provided for @search_filter_count.
   ///
   /// In en, this message translates to:
-  /// **'Count'**
+  /// **'Results'**
   String get search_filter_count;
 
   /// No description provided for @search_filter_select_category.
   ///
   /// In en, this message translates to:
-  /// **'Select the category'**
+  /// **'Select Category'**
   String get search_filter_select_category;
 
   /// No description provided for @search_filter_price.
@@ -778,7 +778,7 @@ abstract class AppLocalizations {
   /// No description provided for @book_doctor_follow.
   ///
   /// In en, this message translates to:
-  /// **'Following'**
+  /// **'Follow'**
   String get book_doctor_follow;
 
   /// No description provided for @book_doctor_unfollow.
@@ -790,7 +790,7 @@ abstract class AppLocalizations {
   /// No description provided for @book_doctor_book.
   ///
   /// In en, this message translates to:
-  /// **'Book an appointment'**
+  /// **'Book Appointment'**
   String get book_doctor_book;
 
   /// No description provided for @book_doctor_patients_patients.
@@ -802,13 +802,13 @@ abstract class AppLocalizations {
   /// No description provided for @book_doctor_year_expirience.
   ///
   /// In en, this message translates to:
-  /// **'Year expirience'**
+  /// **'Years of Experience'**
   String get book_doctor_year_expirience;
 
   /// No description provided for @book_doctor_patients_orders.
   ///
   /// In en, this message translates to:
-  /// **'Orders'**
+  /// **'Appointments'**
   String get book_doctor_patients_orders;
 
   /// No description provided for @book_doctor_patients_reviews.
@@ -820,13 +820,13 @@ abstract class AppLocalizations {
   /// No description provided for @book_doctor_about_doctor.
   ///
   /// In en, this message translates to:
-  /// **'About doctor'**
+  /// **'About the Doctor'**
   String get book_doctor_about_doctor;
 
   /// No description provided for @book_doctor_place_work_hours.
   ///
   /// In en, this message translates to:
-  /// **'Place of work and working hours'**
+  /// **'Location & Hours'**
   String get book_doctor_place_work_hours;
 
   /// No description provided for @book_doctor_work_week_monday.
@@ -874,37 +874,37 @@ abstract class AppLocalizations {
   /// No description provided for @book_doctor_education_sertificate.
   ///
   /// In en, this message translates to:
-  /// **'Education and certificate'**
+  /// **'Education & Certificates'**
   String get book_doctor_education_sertificate;
 
   /// No description provided for @book_doctor_reviews.
   ///
   /// In en, this message translates to:
-  /// **'Rewiews'**
+  /// **'Reviews'**
   String get book_doctor_reviews;
 
   /// No description provided for @book_doctor_reviews_read_more.
   ///
   /// In en, this message translates to:
-  /// **'Read more'**
+  /// **'Read More'**
   String get book_doctor_reviews_read_more;
 
   /// No description provided for @book_doctor_reviews_all.
   ///
   /// In en, this message translates to:
-  /// **'View all '**
+  /// **'View All'**
   String get book_doctor_reviews_all;
 
   /// No description provided for @book_doctor_reviews_no.
   ///
   /// In en, this message translates to:
-  /// **'No have reviews'**
+  /// **'No reviews yet'**
   String get book_doctor_reviews_no;
 
   /// No description provided for @book_doctor_reviews_appointment_detail.
   ///
   /// In en, this message translates to:
-  /// **'Review appointment details'**
+  /// **'Appointment Details'**
   String get book_doctor_reviews_appointment_detail;
 
   /// No description provided for @book_doctor_reviews_today.
@@ -922,73 +922,73 @@ abstract class AppLocalizations {
   /// No description provided for @book_doctor_reviews_success_title.
   ///
   /// In en, this message translates to:
-  /// **'Waiting doctors aprove'**
+  /// **'Pending Doctor Approval'**
   String get book_doctor_reviews_success_title;
 
   /// No description provided for @book_doctor_reviews_success_subtitle.
   ///
   /// In en, this message translates to:
-  /// **'Your cannot book now, select correct time and recent again'**
+  /// **'Your appointment is pending confirmation. Please wait or reschedule.'**
   String get book_doctor_reviews_success_subtitle;
 
   /// No description provided for @book_doctor_reviews_success_first_button.
   ///
   /// In en, this message translates to:
-  /// **'Book again'**
+  /// **'Book Again'**
   String get book_doctor_reviews_success_first_button;
 
   /// No description provided for @book_doctor_reviews_success_second_button.
   ///
   /// In en, this message translates to:
-  /// **'Book another appointment'**
+  /// **'Book Another'**
   String get book_doctor_reviews_success_second_button;
 
   /// No description provided for @book_doctor_reviews_cancel_title.
   ///
   /// In en, this message translates to:
-  /// **'Canceled'**
+  /// **'Cancelled'**
   String get book_doctor_reviews_cancel_title;
 
   /// No description provided for @book_doctor_reviews_cancel_subtitle.
   ///
   /// In en, this message translates to:
-  /// **'Your cannot book now, select correct time and recent again'**
+  /// **'This appointment was cancelled. Please book a new slot.'**
   String get book_doctor_reviews_cancel_subtitle;
 
   /// No description provided for @book_doctor_reviews_cancel_first_button.
   ///
   /// In en, this message translates to:
-  /// **'Book again'**
+  /// **'Re-book'**
   String get book_doctor_reviews_cancel_first_button;
 
   /// No description provided for @book_doctor_reviews_cancel_second_button.
   ///
   /// In en, this message translates to:
-  /// **'Book another appointment'**
+  /// **'Choose Another'**
   String get book_doctor_reviews_cancel_second_button;
 
   /// No description provided for @select_the_map.
   ///
   /// In en, this message translates to:
-  /// **'Select the map'**
+  /// **'Select on Map'**
   String get select_the_map;
 
   /// No description provided for @book_appointment_page.
   ///
   /// In en, this message translates to:
-  /// **'Select service'**
+  /// **'Select Service'**
   String get book_appointment_page;
 
   /// No description provided for @book_appointment_select.
   ///
   /// In en, this message translates to:
-  /// **'Select the type of service you need'**
+  /// **'Choose the service you need'**
   String get book_appointment_select;
 
   /// No description provided for @book_appointment_selected.
   ///
   /// In en, this message translates to:
-  /// **'services are selected'**
+  /// **'services selected'**
   String get book_appointment_selected;
 
   /// No description provided for @book_appointment_next.
@@ -1000,61 +1000,61 @@ abstract class AppLocalizations {
   /// No description provided for @book_appointment_date_page.
   ///
   /// In en, this message translates to:
-  /// **'Appointment date and time'**
+  /// **'Date & Time'**
   String get book_appointment_date_page;
 
   /// No description provided for @book_appointment_select_date.
   ///
   /// In en, this message translates to:
-  /// **'Select date'**
+  /// **'Select Date'**
   String get book_appointment_select_date;
 
   /// No description provided for @book_appointment_select_time.
   ///
   /// In en, this message translates to:
-  /// **'Select aviable time'**
+  /// **'Select Available Time'**
   String get book_appointment_select_time;
 
   /// No description provided for @book_appointment_select_first_come.
   ///
   /// In en, this message translates to:
-  /// **'Specialist accepts on a first-come, first-served basis'**
+  /// **'First-come, first-served'**
   String get book_appointment_select_first_come;
 
   /// No description provided for @book_appointment_select_first_come_stats_last.
   ///
   /// In en, this message translates to:
-  /// **'Today last'**
+  /// **'Last today'**
   String get book_appointment_select_first_come_stats_last;
 
   /// No description provided for @book_appointment_select_first_come_stats_now.
   ///
   /// In en, this message translates to:
-  /// **'now'**
+  /// **'Now'**
   String get book_appointment_select_first_come_stats_now;
 
   /// No description provided for @book_appointment_comment.
   ///
   /// In en, this message translates to:
-  /// **'Comment'**
+  /// **'Notes'**
   String get book_appointment_comment;
 
   /// No description provided for @book_appointment_comment_write.
   ///
   /// In en, this message translates to:
-  /// **'Write comment'**
+  /// **'Add notes (optional)'**
   String get book_appointment_comment_write;
 
   /// No description provided for @book_appointment_time_error.
   ///
   /// In en, this message translates to:
-  /// **'On this time have another patient'**
+  /// **'This slot is already booked'**
   String get book_appointment_time_error;
 
   /// No description provided for @book_appointment_date_error.
   ///
   /// In en, this message translates to:
-  /// **'Don`t work this day'**
+  /// **'Not available on this day'**
   String get book_appointment_date_error;
 
   /// No description provided for @pay_appointment_page.
@@ -1066,19 +1066,19 @@ abstract class AppLocalizations {
   /// No description provided for @pay_appointment_page_title.
   ///
   /// In en, this message translates to:
-  /// **'Select payment method'**
+  /// **'Select Payment Method'**
   String get pay_appointment_page_title;
 
   /// No description provided for @pay_appointment_payme_subscribe.
   ///
   /// In en, this message translates to:
-  /// **'Pay with add card'**
+  /// **'Pay with Card'**
   String get pay_appointment_payme_subscribe;
 
   /// No description provided for @pay_appointment_payme_merchant.
   ///
   /// In en, this message translates to:
-  /// **'Pay in app'**
+  /// **'Pay via App'**
   String get pay_appointment_payme_merchant;
 
   /// No description provided for @pay_appointment_cash.
@@ -1096,49 +1096,49 @@ abstract class AppLocalizations {
   /// No description provided for @pay_appointment_bottom_sheet.
   ///
   /// In en, this message translates to:
-  /// **'Select your card'**
+  /// **'Select Card'**
   String get pay_appointment_bottom_sheet;
 
   /// No description provided for @pay_appointment_add_card.
   ///
   /// In en, this message translates to:
-  /// **'Add your card'**
+  /// **'Add Card'**
   String get pay_appointment_add_card;
 
   /// No description provided for @pay_appointment_card_number.
   ///
   /// In en, this message translates to:
-  /// **'Card number'**
+  /// **'Card Number'**
   String get pay_appointment_card_number;
 
   /// No description provided for @pay_appointment_card_expire.
   ///
   /// In en, this message translates to:
-  /// **'Card expire'**
+  /// **'Expiry Date'**
   String get pay_appointment_card_expire;
 
   /// No description provided for @pay_appointment_card_name.
   ///
   /// In en, this message translates to:
-  /// **'Card name'**
+  /// **'Cardholder Name'**
   String get pay_appointment_card_name;
 
   /// No description provided for @pay_appointment_card_add.
   ///
   /// In en, this message translates to:
-  /// **'Card add'**
+  /// **'Add Card'**
   String get pay_appointment_card_add;
 
   /// No description provided for @pay_appointment_card_empty.
   ///
   /// In en, this message translates to:
-  /// **'Can not be empty'**
+  /// **'Field cannot be empty'**
   String get pay_appointment_card_empty;
 
   /// No description provided for @appointment_main_page.
   ///
   /// In en, this message translates to:
-  /// **'Appointment'**
+  /// **'My Appointments'**
   String get appointment_main_page;
 
   /// No description provided for @appointment_upcoming.
@@ -1150,31 +1150,31 @@ abstract class AppLocalizations {
   /// No description provided for @appointment_upcoming_title.
   ///
   /// In en, this message translates to:
-  /// **'You don`t have an appointment yet'**
+  /// **'No Appointments'**
   String get appointment_upcoming_title;
 
   /// No description provided for @appointment_upcoming_subtitle.
   ///
   /// In en, this message translates to:
-  /// **'You don`t have a doctor`s appointment scheduled at the moment'**
+  /// **'You don\'t have any upcoming bookings'**
   String get appointment_upcoming_subtitle;
 
   /// No description provided for @appointment_book_appointment.
   ///
   /// In en, this message translates to:
-  /// **'Book appointment'**
+  /// **'Book Appointment'**
   String get appointment_book_appointment;
 
   /// No description provided for @appointment_server_error.
   ///
   /// In en, this message translates to:
-  /// **'Internal server error'**
+  /// **'Server Error'**
   String get appointment_server_error;
 
   /// No description provided for @appointment_server_error_description.
   ///
   /// In en, this message translates to:
-  /// **'Please reload again or enter later'**
+  /// **'Please reload or try again later'**
   String get appointment_server_error_description;
 
   /// No description provided for @appointment_server_error_reload.
@@ -1192,19 +1192,19 @@ abstract class AppLocalizations {
   /// No description provided for @appointment_canceled.
   ///
   /// In en, this message translates to:
-  /// **'Canceled'**
+  /// **'Cancelled'**
   String get appointment_canceled;
 
   /// No description provided for @appointment_detail.
   ///
   /// In en, this message translates to:
-  /// **'Detail'**
+  /// **'Details'**
   String get appointment_detail;
 
   /// No description provided for @appointment_appointment_list.
   ///
   /// In en, this message translates to:
-  /// **'Appointment'**
+  /// **'Appointments'**
   String get appointment_appointment_list;
 
   /// No description provided for @appointment_filter.
@@ -1216,7 +1216,7 @@ abstract class AppLocalizations {
   /// No description provided for @appointment_cooming_today.
   ///
   /// In en, this message translates to:
-  /// **'Todat at'**
+  /// **'Today at'**
   String get appointment_cooming_today;
 
   /// No description provided for @appointment_cooming_at.
@@ -1234,25 +1234,25 @@ abstract class AppLocalizations {
   /// No description provided for @appointment_reschedule.
   ///
   /// In en, this message translates to:
-  /// **'Reschudule'**
+  /// **'Reschedule'**
   String get appointment_reschedule;
 
   /// No description provided for @appointment_book_again.
   ///
   /// In en, this message translates to:
-  /// **'Book again'**
+  /// **'Book Again'**
   String get appointment_book_again;
 
   /// No description provided for @appointment_view_doctor_profile.
   ///
   /// In en, this message translates to:
-  /// **'View doctor profile'**
+  /// **'View Profile'**
   String get appointment_view_doctor_profile;
 
   /// No description provided for @appointment_time_and_place.
   ///
   /// In en, this message translates to:
-  /// **'Appointment time and place'**
+  /// **'Time & Location'**
   String get appointment_time_and_place;
 
   /// No description provided for @appointment_service.
@@ -1264,7 +1264,7 @@ abstract class AppLocalizations {
   /// No description provided for @appointment_get_direction.
   ///
   /// In en, this message translates to:
-  /// **'Get direction'**
+  /// **'Get Directions'**
   String get appointment_get_direction;
 
   /// No description provided for @appointment_payment.
@@ -1282,109 +1282,109 @@ abstract class AppLocalizations {
   /// No description provided for @appointment_discount_coupons.
   ///
   /// In en, this message translates to:
-  /// **'Discount & Coupons'**
+  /// **'Discounts & Coupons'**
   String get appointment_discount_coupons;
 
   /// No description provided for @appointment_payment_method.
   ///
   /// In en, this message translates to:
-  /// **'Payment method'**
+  /// **'Payment Method'**
   String get appointment_payment_method;
 
   /// No description provided for @appointment_total.
   ///
   /// In en, this message translates to:
-  /// **'Total price'**
+  /// **'Total'**
   String get appointment_total;
 
   /// No description provided for @cancel_appointment.
   ///
   /// In en, this message translates to:
-  /// **'Cancel the appointment'**
+  /// **'Cancel Appointment'**
   String get cancel_appointment;
 
   /// No description provided for @cancel_appointment_are_you_sure.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to cancel the appointment?'**
+  /// **'Are you sure you want to cancel?'**
   String get cancel_appointment_are_you_sure;
 
   /// No description provided for @cancel_appointment_change_my_mind.
   ///
   /// In en, this message translates to:
-  /// **'Change my mind'**
+  /// **'Change My Mind'**
   String get cancel_appointment_change_my_mind;
 
   /// No description provided for @cancel_appointment_wrong_doctor.
   ///
   /// In en, this message translates to:
-  /// **'Booking the wrong doctor'**
+  /// **'Wrong Doctor Selected'**
   String get cancel_appointment_wrong_doctor;
 
   /// No description provided for @cancel_appointment_desctiption.
   ///
   /// In en, this message translates to:
-  /// **'Why are you canceling the appointment'**
+  /// **'Reason for cancellation'**
   String get cancel_appointment_desctiption;
 
   /// No description provided for @cancel_appointment_confirm.
   ///
   /// In en, this message translates to:
-  /// **'Yes, I want to cancel appointment '**
+  /// **'Yes, Cancel'**
   String get cancel_appointment_confirm;
 
   /// No description provided for @cancel_appointment_not_want.
   ///
   /// In en, this message translates to:
-  /// **'No, I don`t want'**
+  /// **'No, Keep It'**
   String get cancel_appointment_not_want;
 
   /// No description provided for @records_title.
   ///
   /// In en, this message translates to:
-  /// **'Records'**
+  /// **'Medical Records'**
   String get records_title;
 
   /// No description provided for @records_seach.
   ///
   /// In en, this message translates to:
-  /// **'Search offer'**
+  /// **'Search Records'**
   String get records_seach;
 
   /// No description provided for @records_not_found.
   ///
   /// In en, this message translates to:
-  /// **'No medical records'**
+  /// **'No Records Found'**
   String get records_not_found;
 
   /// No description provided for @records_not_found_description.
   ///
   /// In en, this message translates to:
-  /// **'A detail health history helps typing a doctor'**
+  /// **'Your medical history will appear here'**
   String get records_not_found_description;
 
   /// No description provided for @records_new_added.
   ///
   /// In en, this message translates to:
-  /// **'New added'**
+  /// **'New Record'**
   String get records_new_added;
 
   /// No description provided for @records_prescription.
   ///
   /// In en, this message translates to:
-  /// **'Prescription'**
+  /// **'Prescriptions'**
   String get records_prescription;
 
   /// No description provided for @records_record.
   ///
   /// In en, this message translates to:
-  /// **'Medical records'**
+  /// **'Records'**
   String get records_record;
 
   /// No description provided for @records_view_doctor_profile.
   ///
   /// In en, this message translates to:
-  /// **'View doctor profile'**
+  /// **'View Doctor'**
   String get records_view_doctor_profile;
 
   /// No description provided for @profile_language_uz.
@@ -1408,19 +1408,19 @@ abstract class AppLocalizations {
   /// No description provided for @profile_personal_info.
   ///
   /// In en, this message translates to:
-  /// **'Personal information'**
+  /// **'Personal Info'**
   String get profile_personal_info;
 
   /// No description provided for @profile_payment.
   ///
   /// In en, this message translates to:
-  /// **'Payment'**
+  /// **'Payments'**
   String get profile_payment;
 
   /// No description provided for @profile_following_doctors.
   ///
   /// In en, this message translates to:
-  /// **'Following doctors'**
+  /// **'My Doctors'**
   String get profile_following_doctors;
 
   /// No description provided for @profile_following_doctors_doctor.
@@ -1438,25 +1438,25 @@ abstract class AppLocalizations {
   /// No description provided for @profile_choose_language.
   ///
   /// In en, this message translates to:
-  /// **'Choose the application language'**
+  /// **'Select App Language'**
   String get profile_choose_language;
 
   /// No description provided for @profile_logout.
   ///
   /// In en, this message translates to:
-  /// **'Log out'**
+  /// **'Log Out'**
   String get profile_logout;
 
   /// No description provided for @profile_not_activated_account.
   ///
   /// In en, this message translates to:
-  /// **'Not activated account'**
+  /// **'Account Not Verified'**
   String get profile_not_activated_account;
 
   /// No description provided for @profile_edit_photo.
   ///
   /// In en, this message translates to:
-  /// **'Edit profile photo'**
+  /// **'Edit Photo'**
   String get profile_edit_photo;
 
   /// No description provided for @profile_username.
@@ -1468,25 +1468,25 @@ abstract class AppLocalizations {
   /// No description provided for @profile_firstname.
   ///
   /// In en, this message translates to:
-  /// **'Firstname'**
+  /// **'First Name'**
   String get profile_firstname;
 
   /// No description provided for @profile_lastname.
   ///
   /// In en, this message translates to:
-  /// **'Lastname'**
+  /// **'Last Name'**
   String get profile_lastname;
 
   /// No description provided for @profile_thirdname.
   ///
   /// In en, this message translates to:
-  /// **'Thirdname'**
+  /// **'Middle Name'**
   String get profile_thirdname;
 
   /// No description provided for @profile_birth.
   ///
   /// In en, this message translates to:
-  /// **'Date birth'**
+  /// **'Date of Birth'**
   String get profile_birth;
 
   /// No description provided for @profile_select_date.
@@ -1516,7 +1516,7 @@ abstract class AppLocalizations {
   /// No description provided for @profile_profession_select.
   ///
   /// In en, this message translates to:
-  /// **'Select profession'**
+  /// **'Select Profession'**
   String get profile_profession_select;
 
   /// No description provided for @profile_profession_Profession.
@@ -1534,7 +1534,7 @@ abstract class AppLocalizations {
   /// No description provided for @profile_region_select.
   ///
   /// In en, this message translates to:
-  /// **'Select region'**
+  /// **'Select Region'**
   String get profile_region_select;
 
   /// No description provided for @profile_region_Profession.
@@ -1546,43 +1546,43 @@ abstract class AppLocalizations {
   /// No description provided for @profile_change_number.
   ///
   /// In en, this message translates to:
-  /// **'Change number'**
+  /// **'Change Number'**
   String get profile_change_number;
 
   /// No description provided for @profile_save_changes.
   ///
   /// In en, this message translates to:
-  /// **'Save changes'**
+  /// **'Save Changes'**
   String get profile_save_changes;
 
   /// No description provided for @profile_following_doctors_page.
   ///
   /// In en, this message translates to:
-  /// **'Following doctors'**
+  /// **'My Doctors'**
   String get profile_following_doctors_page;
 
   /// No description provided for @profile_following_doctors_search_doctor.
   ///
   /// In en, this message translates to:
-  /// **'Search doctors'**
+  /// **'Search Doctors'**
   String get profile_following_doctors_search_doctor;
 
   /// No description provided for @profile_language_page.
   ///
   /// In en, this message translates to:
-  /// **'Change language'**
+  /// **'Change Language'**
   String get profile_language_page;
 
   /// No description provided for @profile_logout_page.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to logout?'**
+  /// **'Are you sure you want to log out?'**
   String get profile_logout_page;
 
   /// No description provided for @profile_logout_yes.
   ///
   /// In en, this message translates to:
-  /// **'Logout'**
+  /// **'Log Out'**
   String get profile_logout_yes;
 
   /// No description provided for @profile_logout_cancel.
@@ -1594,25 +1594,25 @@ abstract class AppLocalizations {
   /// No description provided for @error_internal_server_title.
   ///
   /// In en, this message translates to:
-  /// **'Internal Server Error'**
+  /// **'Server Error'**
   String get error_internal_server_title;
 
   /// No description provided for @error_internal_server_subtitle.
   ///
   /// In en, this message translates to:
-  /// **'U-rent is currently unable to handle this request. HTTP ERROR 500.'**
+  /// **'MPD is temporarily unavailable. Please try again later.'**
   String get error_internal_server_subtitle;
 
   /// No description provided for @error_connection_lost_title.
   ///
   /// In en, this message translates to:
-  /// **'Connection Lost!'**
+  /// **'No Internet'**
   String get error_connection_lost_title;
 
   /// No description provided for @error_connection_lost_subtitle.
   ///
   /// In en, this message translates to:
-  /// **'No internet connection, check the connection to your network.'**
+  /// **'Check your connection and try again.'**
   String get error_connection_lost_subtitle;
 
   /// No description provided for @error_pagenot_found_title.
@@ -1624,7 +1624,7 @@ abstract class AppLocalizations {
   /// No description provided for @error_pagenot_found_subtitle.
   ///
   /// In en, this message translates to:
-  /// **'The page you are looking for doesn’t exits'**
+  /// **'The page you requested doesn\'t exist'**
   String get error_pagenot_found_subtitle;
 
   /// No description provided for @error_try_again.
@@ -1636,7 +1636,7 @@ abstract class AppLocalizations {
   /// No description provided for @error_return_tohome.
   ///
   /// In en, this message translates to:
-  /// **'Return to Home'**
+  /// **'Go Home'**
   String get error_return_tohome;
 }
 

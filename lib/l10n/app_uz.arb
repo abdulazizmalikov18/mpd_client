@@ -15,7 +15,7 @@
     "presentation_third_description": "Bizning ilovamiz shifokorlar va tibbiyot muassasalari haqidagi sharhlarni o'qishga yordam beradi, shuningdek, shifokorning reytingi yaxshi mutaxassis tanlashda xato qilmaslikka yordam beradi.",
     "presentation_four_page": "Favqulodda xizmatlardan foydalanish",
     "presentation_four_page_description": "Foydalanuvchilar MPD ilovasi orqali bir necha marta bosish orqali favqulodda xizmatlarga tezkor kirishlari mumkin",
-    "presentation_get_start": "Boshlash",
+    "presentation_get_started": "Boshlash",
 
     "login_text": "Salom!\nAkkauntingizga kiring",
     "login_phone": "Telefon raqam yoki foydalanuvchi nomi",
@@ -28,9 +28,9 @@
     "login_error_account": "Akkaunt topilmadi",
     "login_error": "Telefor yo'ki mahfiy son noto'g'ri",
 
-    "restory_account": "Akkauntni tiklash uchun telefon raqamingizni kiriting",
-    "restory_phone": "Telefon raqam",
-    "restory_button_restory": "Akkauntni tiklash",
+    "restore_account": "Akkauntni tiklash uchun telefon raqamingizni kiriting",
+    "restore_phone": "Telefon raqam",
+    "restore_button_restore": "Akkauntni tiklash",
 
     "register_title": "MPDga xush kelibsiz!\nRo'yxatdan o'ting",
     "register_phone": "Telefon raqam",

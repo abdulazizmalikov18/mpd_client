@@ -57,7 +57,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get presentation_four_page_description => 'Foydalanuvchilar MPD ilovasi orqali bir necha marta bosish orqali favqulodda xizmatlarga tezkor kirishlari mumkin';
 
   @override
-  String get presentation_get_start => 'Boshlash';
+  String get presentation_get_started => 'Boshlash';
 
   @override
   String get login_text => 'Salom!\nAkkauntingizga kiring';
@@ -90,13 +90,13 @@ class AppLocalizationsUz extends AppLocalizations {
   String get login_error => 'Telefor yo\'ki mahfiy son noto\'g\'ri';
 
   @override
-  String get restory_account => 'Akkauntni tiklash uchun telefon raqamingizni kiriting';
+  String get restore_account => 'Akkauntni tiklash uchun telefon raqamingizni kiriting';
 
   @override
-  String get restory_phone => 'Telefon raqam';
+  String get restore_phone => 'Telefon raqam';
 
   @override
-  String get restory_button_restory => 'Akkauntni tiklash';
+  String get restore_button_restore => 'Akkauntni tiklash';
 
   @override
   String get register_title => 'MPDga xush kelibsiz!\nRo\'yxatdan o\'ting';

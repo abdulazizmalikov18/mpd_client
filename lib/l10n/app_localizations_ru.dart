@@ -12,58 +12,58 @@ class AppLocalizationsRu extends AppLocalizations {
   String get presentation_title => 'MPD';
 
   @override
-  String get presentation_description => 'Это приложение, которое позволяет вам контролировать свое здоровье';
+  String get presentation_description => 'Приложение для управления вашим здоровьем';
 
   @override
-  String get presentation_select_language => 'Начните свое путешествие в MPD, выбрав язык';
+  String get presentation_select_language => 'Начните работу с MPD, выбрав язык';
 
   @override
-  String get presentation_language_uz => 'O\'zbek';
+  String get presentation_language_uz => 'Узбекский';
 
   @override
   String get presentation_language_ru => 'Русский';
 
   @override
-  String get presentation_language_en => 'English';
+  String get presentation_language_en => 'Английский';
 
   @override
-  String get presentation_next => 'Следующее';
+  String get presentation_next => 'Далее';
 
   @override
   String get presentation_skip => 'Пропустить';
 
   @override
-  String get presentation_first_page => 'Нужно срочно или же быстро найти врача?';
+  String get presentation_first_page => 'Нужен срочный врач?';
 
   @override
-  String get presentation_first_page_description => 'Воспользуйтесь картой врачей в нашем приложении и найдите ближайшего врача к вашему местоположению, где-бы вы не находились.';
+  String get presentation_first_page_description => 'Найдите ближайшего врача с помощью карты в приложении.';
 
   @override
-  String get presentation_second_page => 'Храните копию своей медицинской анкеты в приложении MPD в надежном месте';
+  String get presentation_second_page => 'Безопасное хранение медкарты';
 
   @override
-  String get presentation_second_description => 'Ведите свою медицинскую анкету прямо в приложении. Следите за своей историей болезни, храните свои анализы и получайте уведомления о предстоящих визитах к врачу';
+  String get presentation_second_description => 'Храните историю болезней, анализы и напоминания о приемах.';
 
   @override
-  String get presentation_third_page => 'Ищите свежие отзывы из самых разных источников';
+  String get presentation_third_page => 'Читайте отзывы о врачах';
 
   @override
-  String get presentation_third_description => 'Наше приложение поможет вам прочитать отзывы о врачах и медицинских учреждениях, а также рейтинг врача поможет вам не ошибиться в выборе хорошего специалиста.';
+  String get presentation_third_description => 'Выбирайте специалистов на основе рейтингов и отзывов.';
 
   @override
-  String get presentation_four_page => 'Доступ к службам экстренной помощи';
+  String get presentation_four_page => 'Экстренная помощь';
 
   @override
-  String get presentation_four_page_description => 'Пользователи через приложение MPD, могут получить быстрый доступ к службам экстренной помощи всего несколькими нажатиями';
+  String get presentation_four_page_description => 'Быстрый доступ к экстренным службам.';
 
   @override
-  String get presentation_get_start => 'Начать';
+  String get presentation_get_started => 'Начать';
 
   @override
-  String get login_text => 'Добро пожаловать!\nАвторизуйтесь чтобы продолжить';
+  String get login_text => 'С возвращением!\nВойдите в аккаунт';
 
   @override
-  String get login_phone => 'Номер телефона или логин';
+  String get login_phone => 'Телефон или логин';
 
   @override
   String get login_password => 'Пароль';
@@ -72,82 +72,82 @@ class AppLocalizationsRu extends AppLocalizations {
   String get login_rememberme => 'Запомнить меня';
 
   @override
-  String get login_forgot => 'Забыл пароль';
+  String get login_forgot => 'Забыли пароль?';
 
   @override
-  String get login_enter => 'Вход';
+  String get login_enter => 'Войти';
 
   @override
-  String get login_register_account => 'Еще нет аккаунта?';
+  String get login_register_account => 'Нет аккаунта?';
 
   @override
   String get login_register => 'Регистрация';
 
   @override
-  String get login_error_account => 'Такой пользователь не найден';
+  String get login_error_account => 'Пользователь не найден';
 
   @override
-  String get login_error => 'Неверный логин или пароль';
+  String get login_error => 'Неверные данные';
 
   @override
-  String get restory_account => 'Введите мобильный номер для востановления аккаунта';
+  String get restore_account => 'Восстановление аккаунта';
 
   @override
-  String get restory_phone => 'Номер телефона';
+  String get restore_phone => 'Введите телефон';
 
   @override
-  String get restory_button_restory => 'Восстановить аккаунт';
+  String get restore_button_restore => 'Восстановить';
 
   @override
-  String get register_title => 'Добро пожаловать в MPD!\nЗаполните о себе информацию';
+  String get register_title => 'Добро пожаловать в MPD!\nЗарегистрируйтесь';
 
   @override
-  String get register_phone => 'Номер телефона';
+  String get register_phone => 'Телефон';
 
   @override
-  String get register_terms_of_use => 'Я соглашаюсь условиями пользования';
+  String get register_terms_of_use => 'Я согласен с условиями';
 
   @override
-  String get register_register => 'Регистрация';
+  String get register_register => 'Зарегистрироваться';
 
   @override
-  String get register_have_account => 'У тебя уже есть аккаунт?';
+  String get register_have_account => 'Уже есть аккаунт?';
 
   @override
-  String get register_privacy_policy => 'Правила пользования и политика безопасности';
+  String get register_privacy_policy => 'Политика конфиденциальности';
 
   @override
-  String get register_agree_privacy_and_policy => 'Я принимаю условия, продолжить';
+  String get register_agree_privacy_and_policy => 'Я согласен';
 
   @override
-  String get register_error_number_format => 'Не корректный формат номера';
+  String get register_error_number_format => 'Неверный номер';
 
   @override
-  String get register_verify_code => 'Верификационный код';
+  String get register_verify_code => 'Код подтверждения';
 
   @override
-  String get register_verify_code_description => 'Введите 6 значный код высланный на ваш номер';
+  String get register_verify_code_description => 'Введите 6-значный код из SMS';
 
   @override
-  String get register_verify_code_sent_again => 'Отправить повторно';
+  String get register_verify_code_sent_again => 'Отправить снова';
 
   @override
-  String get register_verify_code_from_message => 'Вставить СМС';
+  String get register_verify_code_from_message => 'Вставить из SMS';
 
   @override
-  String get register_verify_code_error_code_write => 'Неправильный СМС код';
+  String get register_verify_code_error_code_write => 'Неверный код';
 
   @override
-  String get register_create_password => 'Создайте новый пароль';
+  String get register_create_password => 'Создайте пароль';
 
   @override
   String get register_new_password => 'Новый пароль';
 
   @override
-  String get register_new_password_confirm => 'Подтвердить пароль';
+  String get register_new_password_confirm => 'Подтвердите пароль';
 
   @override
-  String get register_password_continue => 'Продолжить';
+  String get register_password_continue => 'Далее';
 
   @override
   String get register_error_code_password_missmatch => 'Пароли не совпадают';
@@ -156,10 +156,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get register_error_code_password_cant_empty => 'Поле не может быть пустым';
 
   @override
-  String get register_error_code_password_mistake => 'Пароль слишком короткий. Должен быть более 8 символов.';
+  String get register_error_code_password_mistake => 'Пароль должен быть от 8 символов';
 
   @override
-  String get register_user_info => 'Представьтесь пожалуйста для регистрации';
+  String get register_user_info => 'Заполните профиль';
 
   @override
   String get register_login => 'Логин';
@@ -171,16 +171,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get register_lastname => 'Фамилия';
 
   @override
-  String get register_thirdname => 'Отчетсво(Не обьязательно)';
+  String get register_thirdname => 'Отчество (необязательно)';
 
   @override
   String get register_date_birth => 'Дата рождения';
 
   @override
-  String get register_date_birth_select => 'Выберите дату';
+  String get register_date_birth_select => 'Выбрать дату';
 
   @override
-  String get register_date_birth_cancel => 'Отменить';
+  String get register_date_birth_cancel => 'Отмена';
 
   @override
   String get register_date_birth_ok => 'ОК';
@@ -189,10 +189,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get register_gender => 'Пол';
 
   @override
-  String get register_gender_man => 'Мужчина';
+  String get register_gender_man => 'Мужской';
 
   @override
-  String get register_gender_woman => 'Женщина';
+  String get register_gender_woman => 'Женский';
 
   @override
   String get register_profession => 'Профессия';
@@ -201,46 +201,46 @@ class AppLocalizationsRu extends AppLocalizations {
   String get register_profession_title => 'Выберите профессию';
 
   @override
-  String get register_profession_search => 'Поиск профессии';
+  String get register_profession_search => 'Поиск профессий';
 
   @override
-  String get register_profession_search_cancel => 'Отменить';
+  String get register_profession_search_cancel => 'Отмена';
 
   @override
   String get register_region => 'Регион';
 
   @override
-  String get register_region_title => 'Выберите свой регион';
+  String get register_region_title => 'Выберите регион';
 
   @override
   String get register_error_code_text_cant_empty => 'Поле не может быть пустым';
 
   @override
-  String get register_error_code_text_short => 'Должен быть более 8 символовs';
+  String get register_error_code_text_short => 'Минимум 6 символов';
 
   @override
-  String get register_error_code_username_exist => 'Такой логин уже существует!';
+  String get register_error_code_username_exist => 'Логин уже занят!';
 
   @override
-  String get navbar_home => 'Домой';
+  String get navbar_home => 'Главная';
 
   @override
   String get navbar_Doctor => 'Врачи';
 
   @override
-  String get navbar_Appointment => 'Мои заказы';
+  String get navbar_Appointment => 'Записи';
 
   @override
   String get navbar_profile => 'Профиль';
 
   @override
-  String get lenth_hello => 'Здраствуйте';
+  String get lenth_hello => 'Привет';
 
   @override
-  String get lenth_likes => 'лайки';
+  String get lenth_likes => 'Лайки';
 
   @override
-  String get lenth_comment => 'Комменты';
+  String get lenth_comment => 'Комментарии';
 
   @override
   String get lenth_no_comments => 'Нет комментариев';
@@ -249,13 +249,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get lenth_read_more => 'Читать далее';
 
   @override
-  String get lenth_show_less => 'Показывай меньше';
+  String get lenth_show_less => 'Свернуть';
 
   @override
-  String get lenth_write_comment => 'Пишите свой комментарий';
+  String get lenth_write_comment => 'Написать комментарий';
 
   @override
-  String get lenth_publish_comment => 'Отправляется';
+  String get lenth_publish_comment => 'Отправить';
 
   @override
   String get lenth_year_ago => 'год назад';
@@ -273,64 +273,64 @@ class AppLocalizationsRu extends AppLocalizations {
   String get lenth_minute_ago => 'минуту назад';
 
   @override
-  String get lenth_now_ago => 'сейчас';
+  String get lenth_now_ago => 'только что';
 
   @override
-  String get lenth_years_ago => 'год назад';
+  String get lenth_years_ago => 'года назад';
 
   @override
-  String get lenth_months_ago => 'месяц назад';
+  String get lenth_months_ago => 'месяца назад';
 
   @override
-  String get lenth_days_ago => 'день назад';
+  String get lenth_days_ago => 'дня назад';
 
   @override
-  String get lenth_hours_ago => 'час назад';
+  String get lenth_hours_ago => 'часа назад';
 
   @override
-  String get lenth_minutes_ago => 'минуту назад';
+  String get lenth_minutes_ago => 'минуты назад';
 
   @override
   String get lenth_create_post => 'Создать пост';
 
   @override
-  String get lenth_image_add => 'Добавьте фото или видео';
+  String get lenth_image_add => 'Добавить фото/видео';
 
   @override
   String get lenth_post_description => 'Описание';
 
   @override
-  String get lenth_postwrite => 'Напишите что нибудь';
+  String get lenth_postwrite => 'Написать что-то...';
 
   @override
   String get lenth_publish_post => 'Опубликовать';
 
   @override
-  String get search_doctor => 'Поиск врача';
+  String get search_doctor => 'Найти врача';
 
   @override
-  String get search_doctor_loading => 'Загрузка';
+  String get search_doctor_loading => 'Загрузка...';
 
   @override
-  String get search_doctor_showing => 'По данному запросу врачей не найдено';
+  String get search_doctor_showing => 'Результаты поиска';
 
   @override
-  String get search_doctor_no_result => 'Специалист не найден';
+  String get search_doctor_no_result => 'Врачи не найдены';
 
   @override
-  String get search_doctor_service_price_start => 'Цены начинаются от';
+  String get search_doctor_service_price_start => 'Услуги от';
 
   @override
-  String get search_doctor_service_book_now => 'Оформить сейчас';
+  String get search_doctor_service_book_now => 'Записаться';
 
   @override
-  String get search_category => 'Поиск категории';
+  String get search_category => 'Поиск по категориям';
 
   @override
   String get search_filter => 'Фильтр';
 
   @override
-  String get search_filter_count => 'Число';
+  String get search_filter_count => 'Результаты';
 
   @override
   String get search_filter_select_category => 'Выберите категорию';
@@ -345,7 +345,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get search_filter_reset => 'Сбросить';
 
   @override
-  String get search_filter_apply => 'Принять';
+  String get search_filter_apply => 'Применить';
 
   @override
   String get book_doctor_follow => 'Подписаться';
@@ -354,16 +354,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get book_doctor_unfollow => 'Отписаться';
 
   @override
-  String get book_doctor_book => 'Оформить услуги';
+  String get book_doctor_book => 'Записаться';
 
   @override
   String get book_doctor_patients_patients => 'Пациенты';
 
   @override
-  String get book_doctor_year_expirience => 'Стаж работы';
+  String get book_doctor_year_expirience => 'Опыт работы';
 
   @override
-  String get book_doctor_patients_orders => 'Заказы';
+  String get book_doctor_patients_orders => 'Записи';
 
   @override
   String get book_doctor_patients_reviews => 'Отзывы';
@@ -372,7 +372,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get book_doctor_about_doctor => 'О враче';
 
   @override
-  String get book_doctor_place_work_hours => 'Место работы и рабочие часы';
+  String get book_doctor_place_work_hours => 'График работы';
 
   @override
   String get book_doctor_work_week_monday => 'Понедельник';
@@ -396,22 +396,22 @@ class AppLocalizationsRu extends AppLocalizations {
   String get book_doctor_work_week_Sunday => 'Воскресенье';
 
   @override
-  String get book_doctor_education_sertificate => 'Сертификаты и образование';
+  String get book_doctor_education_sertificate => 'Образование и сертификаты';
 
   @override
   String get book_doctor_reviews => 'Отзывы';
 
   @override
-  String get book_doctor_reviews_read_more => 'читать больше';
+  String get book_doctor_reviews_read_more => 'Читать далее';
 
   @override
-  String get book_doctor_reviews_all => 'Посмотреть все ';
+  String get book_doctor_reviews_all => 'Все отзывы';
 
   @override
   String get book_doctor_reviews_no => 'Нет отзывов';
 
   @override
-  String get book_doctor_reviews_appointment_detail => 'Просмотр сведений о встрече';
+  String get book_doctor_reviews_appointment_detail => 'Детали записи';
 
   @override
   String get book_doctor_reviews_today => 'Сегодня';
@@ -420,94 +420,94 @@ class AppLocalizationsRu extends AppLocalizations {
   String get book_doctor_reviews_tomorrow => 'Завтра';
 
   @override
-  String get book_doctor_reviews_success_title => 'Ожидающие врачи одобряют';
+  String get book_doctor_reviews_success_title => 'Ожидание подтверждения';
 
   @override
-  String get book_doctor_reviews_success_subtitle => 'Вы не можете забронировать сейчас, выберите правильное время и снова недавнее';
+  String get book_doctor_reviews_success_subtitle => 'Ваша запись ожидает подтверждения врачом.';
 
   @override
-  String get book_doctor_reviews_success_first_button => 'Забронировать снова';
+  String get book_doctor_reviews_success_first_button => 'Записаться снова';
 
   @override
-  String get book_doctor_reviews_success_second_button => 'Записаться на другую встречу';
+  String get book_doctor_reviews_success_second_button => 'Другая запись';
 
   @override
   String get book_doctor_reviews_cancel_title => 'Отменено';
 
   @override
-  String get book_doctor_reviews_cancel_subtitle => 'Вы не можете забронировать сейчас, выберите правильное время и снова недавнее';
+  String get book_doctor_reviews_cancel_subtitle => 'Запись отменена. Выберите новое время.';
 
   @override
-  String get book_doctor_reviews_cancel_first_button => 'Забронировать снова';
+  String get book_doctor_reviews_cancel_first_button => 'Перезаписаться';
 
   @override
-  String get book_doctor_reviews_cancel_second_button => 'Записаться на другую встречу';
+  String get book_doctor_reviews_cancel_second_button => 'Выбрать другое';
 
   @override
-  String get select_the_map => 'Выберите карту';
+  String get select_the_map => 'Выбрать на карте';
 
   @override
-  String get book_appointment_page => 'Выбрать услугу';
+  String get book_appointment_page => 'Выбор услуги';
 
   @override
-  String get book_appointment_select => 'Выберите услугу которая вам нужна';
+  String get book_appointment_select => 'Выберите нужную услугу';
 
   @override
-  String get book_appointment_selected => 'услугы уже выбрана';
+  String get book_appointment_selected => 'услуг выбрано';
 
   @override
-  String get book_appointment_next => 'Следующее';
+  String get book_appointment_next => 'Далее';
 
   @override
-  String get book_appointment_date_page => 'Дата и время приема';
+  String get book_appointment_date_page => 'Дата и время';
 
   @override
-  String get book_appointment_select_date => 'Выбрать время';
+  String get book_appointment_select_date => 'Выбрать дату';
 
   @override
-  String get book_appointment_select_time => 'Выберите свободное время';
+  String get book_appointment_select_time => 'Выбрать время';
 
   @override
-  String get book_appointment_select_first_come => 'Специалист принимает в порядке живой очереди';
+  String get book_appointment_select_first_come => 'Живая очередь';
 
   @override
-  String get book_appointment_select_first_come_stats_last => 'В очереди';
+  String get book_appointment_select_first_come_stats_last => 'Последний сегодня';
 
   @override
   String get book_appointment_select_first_come_stats_now => 'Сейчас';
 
   @override
-  String get book_appointment_comment => 'Комментарий';
+  String get book_appointment_comment => 'Примечание';
 
   @override
-  String get book_appointment_comment_write => 'Напишите комментарий';
+  String get book_appointment_comment_write => 'Добавить примечание';
 
   @override
-  String get book_appointment_time_error => 'На это время записан другой пациент';
+  String get book_appointment_time_error => 'Время занято';
 
   @override
-  String get book_appointment_date_error => 'Сегодня специалист отдыхает';
+  String get book_appointment_date_error => 'В этот день врач не работает';
 
   @override
   String get pay_appointment_page => 'Оплата';
 
   @override
-  String get pay_appointment_page_title => 'Выберите метод оплаты';
+  String get pay_appointment_page_title => 'Способ оплаты';
 
   @override
-  String get pay_appointment_payme_subscribe => 'Оплатить по карте';
+  String get pay_appointment_payme_subscribe => 'Оплата картой';
 
   @override
-  String get pay_appointment_payme_merchant => 'Оплатить в Payme';
+  String get pay_appointment_payme_merchant => 'Оплата в приложении';
 
   @override
-  String get pay_appointment_cash => 'Наличный';
+  String get pay_appointment_cash => 'Наличные';
 
   @override
-  String get pay_appointment_next => 'Следующий';
+  String get pay_appointment_next => 'Далее';
 
   @override
-  String get pay_appointment_bottom_sheet => 'Выберите карту';
+  String get pay_appointment_bottom_sheet => 'Выбрать карту';
 
   @override
   String get pay_appointment_add_card => 'Добавить карту';
@@ -516,52 +516,52 @@ class AppLocalizationsRu extends AppLocalizations {
   String get pay_appointment_card_number => 'Номер карты';
 
   @override
-  String get pay_appointment_card_expire => 'Срок годности';
+  String get pay_appointment_card_expire => 'Срок действия';
 
   @override
   String get pay_appointment_card_name => 'Имя владельца';
 
   @override
-  String get pay_appointment_card_add => 'Добавить карту';
+  String get pay_appointment_card_add => 'Добавить';
 
   @override
   String get pay_appointment_card_empty => 'Поле не может быть пустым';
 
   @override
-  String get appointment_main_page => 'Брони';
+  String get appointment_main_page => 'Мои записи';
 
   @override
-  String get appointment_upcoming => 'В ожидании';
+  String get appointment_upcoming => 'Предстоящие';
 
   @override
-  String get appointment_upcoming_title => 'У вас нет встреч';
+  String get appointment_upcoming_title => 'Нет записей';
 
   @override
-  String get appointment_upcoming_subtitle => 'У вас нет заплонированных встреч с врачем';
+  String get appointment_upcoming_subtitle => 'У вас нет предстоящих визитов';
 
   @override
-  String get appointment_book_appointment => 'Забронировать услугу';
+  String get appointment_book_appointment => 'Записаться';
 
   @override
-  String get appointment_server_error => 'Внутренняя ошибка сервера';
+  String get appointment_server_error => 'Ошибка сервера';
 
   @override
-  String get appointment_server_error_description => 'Пожалуйста, перезагрузите снова или введите позже';
+  String get appointment_server_error_description => 'Попробуйте позже';
 
   @override
   String get appointment_server_error_reload => 'Перезагрузить';
 
   @override
-  String get appointment_complited => 'Завершенные';
+  String get appointment_complited => 'Завершено';
 
   @override
-  String get appointment_canceled => 'Отмененные';
+  String get appointment_canceled => 'Отменено';
 
   @override
-  String get appointment_detail => 'Деталь';
+  String get appointment_detail => 'Детали';
 
   @override
-  String get appointment_appointment_list => 'Бронирование';
+  String get appointment_appointment_list => 'Записи';
 
   @override
   String get appointment_filter => 'Фильтр';
@@ -576,82 +576,82 @@ class AppLocalizationsRu extends AppLocalizations {
   String get appointment_cancel => 'Отменить';
 
   @override
-  String get appointment_reschedule => 'Изменить время';
+  String get appointment_reschedule => 'Перенести';
 
   @override
-  String get appointment_book_again => 'Повторно записаться';
+  String get appointment_book_again => 'Записаться снова';
 
   @override
-  String get appointment_view_doctor_profile => 'Просмотреть профиль врача';
+  String get appointment_view_doctor_profile => 'Профиль врача';
 
   @override
-  String get appointment_time_and_place => 'Место и время встречи';
+  String get appointment_time_and_place => 'Время и место';
 
   @override
   String get appointment_service => 'Услуга';
 
   @override
-  String get appointment_get_direction => 'Просмотреть локацию';
+  String get appointment_get_direction => 'Маршрут';
 
   @override
   String get appointment_payment => 'Оплата';
 
   @override
-  String get appointment_amount => 'Количество';
+  String get appointment_amount => 'Сумма';
 
   @override
-  String get appointment_discount_coupons => 'Скидка и купоны';
+  String get appointment_discount_coupons => 'Скидки и купоны';
 
   @override
   String get appointment_payment_method => 'Способ оплаты';
 
   @override
-  String get appointment_total => 'Итого сумма';
+  String get appointment_total => 'Итого';
 
   @override
-  String get cancel_appointment => 'Отменить бронь';
+  String get cancel_appointment => 'Отменить запись';
 
   @override
-  String get cancel_appointment_are_you_sure => 'Вы действительно хотите отменить бронь?';
+  String get cancel_appointment_are_you_sure => 'Вы уверены?';
 
   @override
-  String get cancel_appointment_change_my_mind => 'Передумать';
+  String get cancel_appointment_change_my_mind => 'Передумал';
 
   @override
-  String get cancel_appointment_wrong_doctor => 'Запись не к тому врачу';
+  String get cancel_appointment_wrong_doctor => 'Ошибка выбора врача';
 
   @override
-  String get cancel_appointment_desctiption => 'Почему вы хотите отменить бронь?';
+  String get cancel_appointment_desctiption => 'Причина отмены';
 
   @override
-  String get cancel_appointment_confirm => 'Да, хочу отменить';
+  String get cancel_appointment_confirm => 'Да, отменить';
 
   @override
-  String get cancel_appointment_not_want => 'Нет, не хочу';
+  String get cancel_appointment_not_want => 'Нет, оставить';
 
   @override
-  String get records_title => 'Записи';
+  String get records_title => 'Медкарта';
 
   @override
-  String get records_seach => 'Поиск предложения';
+  String get records_seach => 'Поиск записей';
 
   @override
-  String get records_not_found => 'Нет медицинских записей';
+  String get records_not_found => 'Записей нет';
 
   @override
-  String get records_not_found_description => 'Только врачи могут оставлять записи';
+  String get records_not_found_description => 'Здесь будут ваши медицинские данные';
 
   @override
   String get records_new_added => 'Новая запись';
 
   @override
-  String get records_prescription => 'Записи';
+  String get records_prescription => 'Рецепты';
 
   @override
-  String get records_record => 'Медицинские записи';
+  String get records_record => 'Записи';
 
   @override
-  String get records_view_doctor_profile => 'Просмотреть профиль врача';
+  String get records_view_doctor_profile => 'Профиль врача';
 
   @override
   String get profile_language_uz => 'Узбекский';
@@ -663,13 +663,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profile_language_en => 'Английский';
 
   @override
-  String get profile_personal_info => ' Персональная информация';
+  String get profile_personal_info => 'Личные данные';
 
   @override
   String get profile_payment => 'Оплата';
 
   @override
-  String get profile_following_doctors => 'Подписанные врачи';
+  String get profile_following_doctors => 'Мои врачи';
 
   @override
   String get profile_following_doctors_doctor => 'Врачи';
@@ -678,16 +678,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profile_language => 'Язык';
 
   @override
-  String get profile_choose_language => 'Выберите язык приложения';
+  String get profile_choose_language => 'Выберите язык';
 
   @override
   String get profile_logout => 'Выйти';
 
   @override
-  String get profile_not_activated_account => 'Не верифицированный аккаунт';
+  String get profile_not_activated_account => 'Аккаунт не подтвержден';
 
   @override
-  String get profile_edit_photo => 'Изменить фото профиля';
+  String get profile_edit_photo => 'Изменить фото';
 
   @override
   String get profile_username => 'Логин';
@@ -708,7 +708,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profile_select_date => 'Выбрать дату';
 
   @override
-  String get profile_select_date_cancel => 'Отменить';
+  String get profile_select_date_cancel => 'Отмена';
 
   @override
   String get profile_gender => 'Пол';
@@ -735,19 +735,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profile_change_number => 'Изменить номер';
 
   @override
-  String get profile_save_changes => 'Сохранить изменения';
+  String get profile_save_changes => 'Сохранить';
 
   @override
-  String get profile_following_doctors_page => 'Подписанные врачи';
+  String get profile_following_doctors_page => 'Мои врачи';
 
   @override
-  String get profile_following_doctors_search_doctor => 'Поиск врача';
+  String get profile_following_doctors_search_doctor => 'Поиск врачей';
 
   @override
-  String get profile_language_page => 'Изменить язык';
+  String get profile_language_page => 'Сменить язык';
 
   @override
-  String get profile_logout_page => 'Вы действительно хотите выйти?';
+  String get profile_logout_page => 'Выйти из аккаунта?';
 
   @override
   String get profile_logout_yes => 'Выйти';
@@ -756,26 +756,26 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profile_logout_cancel => 'Отмена';
 
   @override
-  String get error_internal_server_title => 'Внутренняя ошибка сервера';
+  String get error_internal_server_title => 'Ошибка сервера';
 
   @override
-  String get error_internal_server_subtitle => 'U-rent в настоящее время не может обработать этот запрос. ОШИБКА HTTP 500.';
+  String get error_internal_server_subtitle => 'MPD временно недоступен. Попробуйте позже.';
 
   @override
-  String get error_connection_lost_title => 'Соединение потеряно!';
+  String get error_connection_lost_title => 'Нет интернета';
 
   @override
-  String get error_connection_lost_subtitle => 'Нет подключения к интернету, проверьте подключение к сети.';
+  String get error_connection_lost_subtitle => 'Проверьте подключение.';
 
   @override
   String get error_pagenot_found_title => 'Страница не найдена';
 
   @override
-  String get error_pagenot_found_subtitle => 'Страница, которую вы ищете, не существует';
+  String get error_pagenot_found_subtitle => 'Запрошенная страница не существует';
 
   @override
-  String get error_try_again => 'Попробуйте еще раз';
+  String get error_try_again => 'Попробовать снова';
 
   @override
-  String get error_return_tohome => 'Возвращаться домой';
+  String get error_return_tohome => 'На главную';
 }

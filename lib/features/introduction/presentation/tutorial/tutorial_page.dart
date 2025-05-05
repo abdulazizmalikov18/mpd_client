@@ -106,7 +106,7 @@ class _TutorialPageState extends State<TutorialPage> {
             child: LongButton(
               buttonName: notifier.pageIndex != 3
                   ? context.l10n.presentation_next
-                  : context.l10n.presentation_get_start,
+                  : context.l10n.presentation_get_started,
               onPress: () {
                 if (notifier.pageIndex == 3) {
                   Navigator.pushNamed(context, AppRoutes.auth);
