@@ -226,6 +226,7 @@ class _PostBodyState extends State<PostBody>
                     final sendComentBloc = context.read<SendComentBloc>();
                     final postComentBloc = context.read<PostComentBloc>();
                     final userInfoBloc = context.read<UserInfoBloc>();
+                    final mediaControlBloc = context.read<MediaControlBloc>();
                     showModalBottomSheet(
                       context: context,
                       useRootNavigator: true,
@@ -243,6 +244,7 @@ class _PostBodyState extends State<PostBody>
                             BlocProvider.value(value: sendComentBloc),
                             BlocProvider.value(value: postComentBloc),
                             BlocProvider.value(value: userInfoBloc),
+                            BlocProvider.value(value: mediaControlBloc),
                           ],
                           child: Column(
                             children: [

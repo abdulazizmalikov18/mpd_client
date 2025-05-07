@@ -29,11 +29,11 @@ class AppTheme {
       backgroundColor: Colors.white,
       elevation: 0,
       titleTextStyle: TextStyle(
-        color: Colors.white,
+        color: Colors.black,
         fontSize: 20,
         fontWeight: FontWeight.w600,
       ),
-      iconTheme: IconThemeData(color: Colors.white),
+      iconTheme: IconThemeData(color: Colors.black),
     ),
   );
 }
