@@ -12,8 +12,8 @@ import 'package:mpd_client/features/app.dart';
 // import 'package:workmanager/workmanager.dart';
 // import 'package:yandex_mapkit/yandex_mapkit.dart';
 
-const String $baseUrlHttp = "https://api.t-med.uz/";
-const String $baseUrlSocket = "wss://api.t-med.uz";
+const String $baseUrlHttp = "https://sharq-api.sharqdarmon.uz/";
+const String $baseUrlSocket = "wss://sharq-api.sharqdarmon.uz";
 
 void main() async {
   await runZonedGuarded(() async {

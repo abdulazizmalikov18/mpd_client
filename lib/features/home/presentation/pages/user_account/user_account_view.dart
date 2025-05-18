@@ -431,31 +431,31 @@ class _UserAccountViewState extends State<UserAccountView> {
                                 width: MediaQuery.sizeOf(context).width,
                                 child: Row(
                                   children: [
-                                    Expanded(
-                                      child: BlocBuilder<DoctorProfileBloc,
-                                          DoctorProfileState>(
-                                        builder: (context, doctorState) {
-                                          if (doctorState
-                                              is DoctorProfileLoading) {
-                                            return Shimmer.fromColors(
+                                    BlocBuilder<DoctorProfileBloc,
+                                        DoctorProfileState>(
+                                      builder: (context, doctorState) {
+                                        if (doctorState
+                                            is DoctorProfileLoading) {
+                                          return Expanded(
+                                            child: Shimmer.fromColors(
                                               baseColor:
                                                   context.color.baseColor,
                                               highlightColor:
                                                   context.color.highlightColor,
                                               child: const ShimmerContainer(
                                                   size: Size(136, 34)),
-                                            );
-                                          } else if (doctorState
-                                              is DoctorProfileSuccess) {
-                                            context
-                                                .read<SubscriptionBloc>()
-                                                .add(SetSubscribedOrNot(
-                                                    doctorState
-                                                        .doctor!.isSubscribed));
-                                            return BlocBuilder<SubscriptionBloc,
-                                                SubscriptionState>(
-                                              builder: (context, state) {
-                                                return FollowButton(
+                                            ),
+                                          );
+                                        } else if (doctorState
+                                            is DoctorProfileSuccess) {
+                                          context.read<SubscriptionBloc>().add(
+                                              SetSubscribedOrNot(doctorState
+                                                  .doctor!.isSubscribed));
+                                          return BlocBuilder<SubscriptionBloc,
+                                              SubscriptionState>(
+                                            builder: (context, state) {
+                                              return Expanded(
+                                                child: FollowButton(
                                                   isFollowing:
                                                       state.isSubscribed,
                                                   height: 40.h,
@@ -480,16 +480,25 @@ class _UserAccountViewState extends State<UserAccountView> {
                                                                         .username));
                                                           }
                                                         },
-                                                );
-                                              },
-                                            );
-                                          } else {
-                                            return const SizedBox();
-                                          }
-                                        },
-                                      ),
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        } else {
+                                          return const SizedBox();
+                                        }
+                                      },
                                     ),
-                                    ScreenUtil().setHorizontalSpacing(12.w),
+                                    BlocBuilder<DoctorProfileBloc,
+                                        DoctorProfileState>(
+                                      builder: (context, state) {
+                                        if (state is DoctorProfileLoading ||
+                                            state is DoctorProfileSuccess) {
+                                          return SizedBox(width: 12.w);
+                                        }
+                                        return const SizedBox();
+                                      },
+                                    ),
                                     Expanded(
                                       child: LongButton(
                                         onPress: () {},
