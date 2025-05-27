@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
               if (state.posts.isEmpty) {
                 return const Center(child: Text('no posts'));
               }
-              return RefreshIndicator(
+              return RefreshIndicator.adaptive(
                 onRefresh: () async {
                   context.read<PostBloc>().add(PostFetched(true));
                   flickMultiManager.clearAll();

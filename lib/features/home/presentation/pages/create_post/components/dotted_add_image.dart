@@ -13,11 +13,11 @@ class DottedAddImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DottedBorder(
-        borderType: BorderType.RRect,
-        radius: Radius.circular(20.r),
-        dashPattern: const [10, 10],
-        color: Colors.grey,
-        strokeWidth: 2,
+        // borderType: BorderType.RRect,
+        // radius: Radius.circular(20.r),
+        // dashPattern: const [10, 10],
+        // color: Colors.grey,
+        // strokeWidth: 2,
         child: InkWell(
           onTap: onPressed,
           customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),

@@ -12,10 +12,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get presentation_title => 'MPD';
 
   @override
-  String get presentation_description => 'This is an application that helps you manage your health';
+  String get presentation_description =>
+      'This is an application that helps you manage your health';
 
   @override
-  String get presentation_select_language => 'Start your MPD journey by selecting a language';
+  String get presentation_select_language =>
+      'Start your MPD journey by selecting a language';
 
   @override
   String get presentation_language_uz => 'Uzbek';
@@ -36,25 +38,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get presentation_first_page => 'Need to find a doctor urgently?';
 
   @override
-  String get presentation_first_page_description => 'Use our doctor map to find the nearest healthcare provider to your location.';
+  String get presentation_first_page_description =>
+      'Use our doctor map to find the nearest healthcare provider to your location.';
 
   @override
   String get presentation_second_page => 'Securely store your health records';
 
   @override
-  String get presentation_second_description => 'Keep your medical history, test results, and appointment reminders in one safe place.';
+  String get presentation_second_description =>
+      'Keep your medical history, test results, and appointment reminders in one safe place.';
 
   @override
   String get presentation_third_page => 'Read verified doctor reviews';
 
   @override
-  String get presentation_third_description => 'Check ratings and feedback to choose the best medical specialists.';
+  String get presentation_third_description =>
+      'Check ratings and feedback to choose the best medical specialists.';
 
   @override
   String get presentation_four_page => 'Quick emergency access';
 
   @override
-  String get presentation_four_page_description => 'Connect to emergency services instantly through the app.';
+  String get presentation_four_page_description =>
+      'Connect to emergency services instantly through the app.';
 
   @override
   String get presentation_get_started => 'Get Started';
@@ -126,7 +132,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get register_verify_code => 'Verification Code';
 
   @override
-  String get register_verify_code_description => 'Enter the 6-digit code sent to your phone';
+  String get register_verify_code_description =>
+      'Enter the 6-digit code sent to your phone';
 
   @override
   String get register_verify_code_sent_again => 'Resend Code';
@@ -156,7 +163,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get register_error_code_password_cant_empty => 'Field cannot be empty';
 
   @override
-  String get register_error_code_password_mistake => 'Password must be at least 8 characters';
+  String get register_error_code_password_mistake =>
+      'Password must be at least 8 characters';
 
   @override
   String get register_user_info => 'Complete your profile';
@@ -423,7 +431,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get book_doctor_reviews_success_title => 'Pending Doctor Approval';
 
   @override
-  String get book_doctor_reviews_success_subtitle => 'Your appointment is pending confirmation. Please wait or reschedule.';
+  String get book_doctor_reviews_success_subtitle =>
+      'Your appointment is pending confirmation. Please wait or reschedule.';
 
   @override
   String get book_doctor_reviews_success_first_button => 'Book Again';
@@ -435,7 +444,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get book_doctor_reviews_cancel_title => 'Cancelled';
 
   @override
-  String get book_doctor_reviews_cancel_subtitle => 'This appointment was cancelled. Please book a new slot.';
+  String get book_doctor_reviews_cancel_subtitle =>
+      'This appointment was cancelled. Please book a new slot.';
 
   @override
   String get book_doctor_reviews_cancel_first_button => 'Re-book';
@@ -537,7 +547,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appointment_upcoming_title => 'No Appointments';
 
   @override
-  String get appointment_upcoming_subtitle => 'You don\'t have any upcoming bookings';
+  String get appointment_upcoming_subtitle =>
+      'You don\'t have any upcoming bookings';
 
   @override
   String get appointment_book_appointment => 'Book Appointment';
@@ -546,7 +557,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appointment_server_error => 'Server Error';
 
   @override
-  String get appointment_server_error_description => 'Please reload or try again later';
+  String get appointment_server_error_description =>
+      'Please reload or try again later';
 
   @override
   String get appointment_server_error_reload => 'Reload';
@@ -612,7 +624,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cancel_appointment => 'Cancel Appointment';
 
   @override
-  String get cancel_appointment_are_you_sure => 'Are you sure you want to cancel?';
+  String get cancel_appointment_are_you_sure =>
+      'Are you sure you want to cancel?';
 
   @override
   String get cancel_appointment_change_my_mind => 'Change My Mind';
@@ -639,7 +652,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get records_not_found => 'No Records Found';
 
   @override
-  String get records_not_found_description => 'Your medical history will appear here';
+  String get records_not_found_description =>
+      'Your medical history will appear here';
 
   @override
   String get records_new_added => 'New Record';
@@ -759,19 +773,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get error_internal_server_title => 'Server Error';
 
   @override
-  String get error_internal_server_subtitle => 'MPD is temporarily unavailable. Please try again later.';
+  String get error_internal_server_subtitle =>
+      'MPD is temporarily unavailable. Please try again later.';
 
   @override
   String get error_connection_lost_title => 'No Internet';
 
   @override
-  String get error_connection_lost_subtitle => 'Check your connection and try again.';
+  String get error_connection_lost_subtitle =>
+      'Check your connection and try again.';
 
   @override
   String get error_pagenot_found_title => 'Page Not Found';
 
   @override
-  String get error_pagenot_found_subtitle => 'The page you requested doesn\'t exist';
+  String get error_pagenot_found_subtitle =>
+      'The page you requested doesn\'t exist';
 
   @override
   String get error_try_again => 'Try Again';

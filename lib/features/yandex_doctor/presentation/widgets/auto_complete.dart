@@ -1,11 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/app/app_colors.dart';
-import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/provider/language.dart';
 import 'package:mpd_client/src/loading/loading_platform.dart';
 import 'package:mpd_client/src/themes/styles.dart';
-import 'package:mpd_client/src/widgets/gradient_icon.dart';
 
 import '../../domain/blocs/search_by_specialist/search_by_specialist_bloc.dart';
 import '../../domain/blocs/yandex_doctor/yandex_doctor_bloc.dart';
@@ -59,8 +58,15 @@ class AutoComplete extends StatelessWidget {
             },
             splashColor: context.color.background,
             minLeadingWidth: 0,
-            leading: const GradientIcon(iconName: AppIcons.location, size: 24),
+            // leading: const GradientIcon(iconName: AppIcons.location, size: 24),
+            leading: CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(
+                specialist.avatar ??
+                    "https://naushkinskoe-r81.gosweb.gosuslugi.ru/netcat_files/154/1671/image_3_2.jpg",
+              ),
+            ),
             title: Text('${specialist.name} ${specialist.lastname}'),
+            subtitle: Text(specialist.job?.name ?? "Nomalum"),
           );
         },
       );

@@ -12,10 +12,12 @@ class AppLocalizationsUz extends AppLocalizations {
   String get presentation_title => 'MPD';
 
   @override
-  String get presentation_description => 'Bu sizning sog\'lig\'ingizni nazorat qilish imkonini beruvchi dastur';
+  String get presentation_description =>
+      'Bu sizning sog\'lig\'ingizni nazorat qilish imkonini beruvchi dastur';
 
   @override
-  String get presentation_select_language => 'Til tanlash orqali MPDga sayohatingizni boshlang';
+  String get presentation_select_language =>
+      'Til tanlash orqali MPDga sayohatingizni boshlang';
 
   @override
   String get presentation_language_uz => 'O\'zbek';
@@ -33,28 +35,35 @@ class AppLocalizationsUz extends AppLocalizations {
   String get presentation_skip => 'O\'tkazib yuborish';
 
   @override
-  String get presentation_first_page => 'Shoshilinch yoki tezda shifokorni topish kerakmi?';
+  String get presentation_first_page =>
+      'Shoshilinch yoki tezda shifokorni topish kerakmi?';
 
   @override
-  String get presentation_first_page_description => 'Ilovamizdagi shifokor xaritasidan foydalaning va qayerda bo\'lsangiz ham, manzilingizga eng yaqin shifokorni toping.';
+  String get presentation_first_page_description =>
+      'Ilovamizdagi shifokor xaritasidan foydalaning va qayerda bo\'lsangiz ham, manzilingizga eng yaqin shifokorni toping.';
 
   @override
-  String get presentation_second_page => 'MPD ilovasida ambulator kartangiz nusxasini xavfsiz joyda saqlang';
+  String get presentation_second_page =>
+      'MPD ilovasida ambulator kartangiz nusxasini xavfsiz joyda saqlang';
 
   @override
-  String get presentation_second_description => 'Ilovada elektron ambulator kartangizni saqlang. Tibbiy tarixingizni kuzatib boring, biokimyoviy tahlillarni saqlang va bo\'lajak shifokor tashriflari haqida xabar oling';
+  String get presentation_second_description =>
+      'Ilovada elektron ambulator kartangizni saqlang. Tibbiy tarixingizni kuzatib boring, biokimyoviy tahlillarni saqlang va bo\'lajak shifokor tashriflari haqida xabar oling';
 
   @override
-  String get presentation_third_page => 'Turli manbalardan yangi sharhlarni qidiring';
+  String get presentation_third_page =>
+      'Turli manbalardan yangi sharhlarni qidiring';
 
   @override
-  String get presentation_third_description => 'Bizning ilovamiz shifokorlar va tibbiyot muassasalari haqidagi sharhlarni o\'qishga yordam beradi, shuningdek, shifokorning reytingi yaxshi mutaxassis tanlashda xato qilmaslikka yordam beradi.';
+  String get presentation_third_description =>
+      'Bizning ilovamiz shifokorlar va tibbiyot muassasalari haqidagi sharhlarni o\'qishga yordam beradi, shuningdek, shifokorning reytingi yaxshi mutaxassis tanlashda xato qilmaslikka yordam beradi.';
 
   @override
   String get presentation_four_page => 'Favqulodda xizmatlardan foydalanish';
 
   @override
-  String get presentation_four_page_description => 'Foydalanuvchilar MPD ilovasi orqali bir necha marta bosish orqali favqulodda xizmatlarga tezkor kirishlari mumkin';
+  String get presentation_four_page_description =>
+      'Foydalanuvchilar MPD ilovasi orqali bir necha marta bosish orqali favqulodda xizmatlarga tezkor kirishlari mumkin';
 
   @override
   String get presentation_get_started => 'Boshlash';
@@ -90,7 +99,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get login_error => 'Telefor yo\'ki mahfiy son noto\'g\'ri';
 
   @override
-  String get restore_account => 'Akkauntni tiklash uchun telefon raqamingizni kiriting';
+  String get restore_account =>
+      'Akkauntni tiklash uchun telefon raqamingizni kiriting';
 
   @override
   String get restore_phone => 'Telefon raqam';
@@ -117,7 +127,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get register_privacy_policy => 'Qoida va talablar';
 
   @override
-  String get register_agree_privacy_and_policy => 'Qabul qilaman va davom etish';
+  String get register_agree_privacy_and_policy =>
+      'Qabul qilaman va davom etish';
 
   @override
   String get register_error_number_format => 'Telefon formati noto\'g\'ri';
@@ -150,16 +161,20 @@ class AppLocalizationsUz extends AppLocalizations {
   String get register_password_continue => 'Davom etish';
 
   @override
-  String get register_error_code_password_missmatch => 'Mahfiy parollar bir xil emas';
+  String get register_error_code_password_missmatch =>
+      'Mahfiy parollar bir xil emas';
 
   @override
-  String get register_error_code_password_cant_empty => 'Maydon bo\'sh bo\'lmasin';
+  String get register_error_code_password_cant_empty =>
+      'Maydon bo\'sh bo\'lmasin';
 
   @override
-  String get register_error_code_password_mistake => 'Mahfiy parol juda qisqa. 8-ta sondan ortiq bo\'lishi shart.';
+  String get register_error_code_password_mistake =>
+      'Mahfiy parol juda qisqa. 8-ta sondan ortiq bo\'lishi shart.';
 
   @override
-  String get register_user_info => 'Ro\'yxatdan o\'tish uchun ma\'lumotlarni to\'ldiring';
+  String get register_user_info =>
+      'Ro\'yxatdan o\'tish uchun ma\'lumotlarni to\'ldiring';
 
   @override
   String get register_login => 'Akkaunt';
@@ -411,7 +426,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get book_doctor_reviews_no => 'Izohlar';
 
   @override
-  String get book_doctor_reviews_appointment_detail => 'Uchrashuv tafsilotlarini ko\'rib chiqing';
+  String get book_doctor_reviews_appointment_detail =>
+      'Uchrashuv tafsilotlarini ko\'rib chiqing';
 
   @override
   String get book_doctor_reviews_today => 'Bugun';
@@ -420,28 +436,33 @@ class AppLocalizationsUz extends AppLocalizations {
   String get book_doctor_reviews_tomorrow => 'Ertaga';
 
   @override
-  String get book_doctor_reviews_success_title => 'Kutish shifokorlari ma\'qullaydi';
+  String get book_doctor_reviews_success_title =>
+      'Kutish shifokorlari ma\'qullaydi';
 
   @override
-  String get book_doctor_reviews_success_subtitle => 'Hozir band qila olmaysiz, toʻgʻri vaqt va oxirgini yana tanlang';
+  String get book_doctor_reviews_success_subtitle =>
+      'Hozir band qila olmaysiz, toʻgʻri vaqt va oxirgini yana tanlang';
 
   @override
   String get book_doctor_reviews_success_first_button => 'Qayta bron qilish';
 
   @override
-  String get book_doctor_reviews_success_second_button => 'Boshqa uchrashuvni bron qiling';
+  String get book_doctor_reviews_success_second_button =>
+      'Boshqa uchrashuvni bron qiling';
 
   @override
   String get book_doctor_reviews_cancel_title => 'Bekor qilingan';
 
   @override
-  String get book_doctor_reviews_cancel_subtitle => 'Hozir band qila olmaysiz, toʻgʻri vaqt va oxirgini yana tanlang';
+  String get book_doctor_reviews_cancel_subtitle =>
+      'Hozir band qila olmaysiz, toʻgʻri vaqt va oxirgini yana tanlang';
 
   @override
   String get book_doctor_reviews_cancel_first_button => 'Qayta bron qilish';
 
   @override
-  String get book_doctor_reviews_cancel_second_button => 'Boshqa uchrashuvni bron qiling';
+  String get book_doctor_reviews_cancel_second_button =>
+      'Boshqa uchrashuvni bron qiling';
 
   @override
   String get select_the_map => 'Xaritani tanlang';
@@ -468,10 +489,12 @@ class AppLocalizationsUz extends AppLocalizations {
   String get book_appointment_select_time => 'Bo\'sh vaqtni tanlang';
 
   @override
-  String get book_appointment_select_first_come => 'Shifokor jonli navbat orqali qabul qiladi';
+  String get book_appointment_select_first_come =>
+      'Shifokor jonli navbat orqali qabul qiladi';
 
   @override
-  String get book_appointment_select_first_come_stats_last => 'Sizdan oldin bemorlar soni';
+  String get book_appointment_select_first_come_stats_last =>
+      'Sizdan oldin bemorlar soni';
 
   @override
   String get book_appointment_select_first_come_stats_now => 'Xozir';
@@ -483,7 +506,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get book_appointment_comment_write => 'Izoh yo\'zing';
 
   @override
-  String get book_appointment_time_error => 'Ushbu vaqtni boshqa bemor band qilgan';
+  String get book_appointment_time_error =>
+      'Ushbu vaqtni boshqa bemor band qilgan';
 
   @override
   String get book_appointment_date_error => 'Shifokor bugun ishlamaydi';
@@ -537,7 +561,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get appointment_upcoming_title => 'Sizda bandlar yo\'q';
 
   @override
-  String get appointment_upcoming_subtitle => 'Sizda shifokor qabuliga bandlash xali yo\'q';
+  String get appointment_upcoming_subtitle =>
+      'Sizda shifokor qabuliga bandlash xali yo\'q';
 
   @override
   String get appointment_book_appointment => 'Xizmat bandlash';
@@ -546,7 +571,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get appointment_server_error => 'Serverdagi ichki xatolik';
 
   @override
-  String get appointment_server_error_description => 'Iltimos, qayta yuklang yoki keyinroq kiriting';
+  String get appointment_server_error_description =>
+      'Iltimos, qayta yuklang yoki keyinroq kiriting';
 
   @override
   String get appointment_server_error_reload => 'Qayta yuklash';
@@ -612,16 +638,19 @@ class AppLocalizationsUz extends AppLocalizations {
   String get cancel_appointment => 'Bandni bekor qilish';
 
   @override
-  String get cancel_appointment_are_you_sure => 'Siz rostdan xam bekor qilmoqchimisiz?';
+  String get cancel_appointment_are_you_sure =>
+      'Siz rostdan xam bekor qilmoqchimisiz?';
 
   @override
   String get cancel_appointment_change_my_mind => 'Fikrimni o\'zgartirish';
 
   @override
-  String get cancel_appointment_wrong_doctor => 'Noto\'g\'ri shifokorni bron qilish';
+  String get cancel_appointment_wrong_doctor =>
+      'Noto\'g\'ri shifokorni bron qilish';
 
   @override
-  String get cancel_appointment_desctiption => 'Qaysi sababga ko\'ra bekor qilmoqchisiz';
+  String get cancel_appointment_desctiption =>
+      'Qaysi sababga ko\'ra bekor qilmoqchisiz';
 
   @override
   String get cancel_appointment_confirm => 'Xa, bekor qilaman';
@@ -639,7 +668,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get records_not_found => 'Tibbiy xulosalar yo\'q';
 
   @override
-  String get records_not_found_description => 'Tibbiy xulosalarni faqat shifokor qo\'yadi';
+  String get records_not_found_description =>
+      'Tibbiy xulosalarni faqat shifokor qo\'yadi';
 
   @override
   String get records_new_added => 'Yangi xulosa';
@@ -759,19 +789,22 @@ class AppLocalizationsUz extends AppLocalizations {
   String get error_internal_server_title => 'Serverdagi ichki xatolik';
 
   @override
-  String get error_internal_server_subtitle => 'U-rent hozirda bu so‘rovni bajara olmaydi. HTTP XATOSI 500.';
+  String get error_internal_server_subtitle =>
+      'U-rent hozirda bu so‘rovni bajara olmaydi. HTTP XATOSI 500.';
 
   @override
   String get error_connection_lost_title => 'Ulanish uzildi!';
 
   @override
-  String get error_connection_lost_subtitle => 'Internet aloqasi yo\'q, tarmoqqa ulanishni tekshiring.';
+  String get error_connection_lost_subtitle =>
+      'Internet aloqasi yo\'q, tarmoqqa ulanishni tekshiring.';
 
   @override
   String get error_pagenot_found_title => 'Sahifa topilmadi';
 
   @override
-  String get error_pagenot_found_subtitle => 'Siz qidirayotgan sahifa mavjud emas';
+  String get error_pagenot_found_subtitle =>
+      'Siz qidirayotgan sahifa mavjud emas';
 
   @override
   String get error_try_again => 'Qayta urinib ko\'ring';

@@ -20,7 +20,6 @@ import 'package:mpd_client/features/home/data/models/local_service_model.dart';
 import 'package:mpd_client/features/main_page.dart';
 import 'package:mpd_client/provider/language.dart';
 import 'package:mpd_client/src/tools/ui_tools.dart';
-import 'package:mpd_client/src/widgets/appbar_widget.dart';
 import 'package:mpd_client/src/widgets/loading_dialog_widget.dart';
 import 'package:mpd_client/src/widgets/longbutton.dart';
 import 'package:mpd_client/src/widgets/pinned_sheet.dart';
@@ -47,8 +46,10 @@ class ReviewAppoinmentDetail extends StatelessWidget {
         context.select((DoctorProfileBloc bloc) => bloc.state.doctor);
 
     return Scaffold(
-      appBar: AppBarWidget(
-          title: context.l10n.book_doctor_reviews_appointment_detail),
+      appBar: AppBar(
+        titleSpacing: 0,
+        title: Text(context.l10n.book_doctor_reviews_appointment_detail),
+      ),
       backgroundColor: context.color.background,
       body: SingleChildScrollView(
         child: Column(

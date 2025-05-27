@@ -360,10 +360,10 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                                 _pickFiles();
                               },
                               child: DottedBorder(
-                                color: context.color.border,
-                                strokeWidth: 1,
-                                borderType: BorderType.RRect,
-                                radius: const Radius.circular(8),
+                                // color: context.color.border,
+                                // strokeWidth: 1,
+                                // borderType: BorderType.RRect,
+                                // radius: const Radius.circular(8),
                                 child: SizedBox(
                                   height: 106.h,
                                   width: double.infinity,

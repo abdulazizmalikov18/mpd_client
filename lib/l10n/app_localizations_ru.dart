@@ -12,10 +12,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get presentation_title => 'MPD';
 
   @override
-  String get presentation_description => 'Приложение для управления вашим здоровьем';
+  String get presentation_description =>
+      'Приложение для управления вашим здоровьем';
 
   @override
-  String get presentation_select_language => 'Начните работу с MPD, выбрав язык';
+  String get presentation_select_language =>
+      'Начните работу с MPD, выбрав язык';
 
   @override
   String get presentation_language_uz => 'Узбекский';
@@ -36,25 +38,29 @@ class AppLocalizationsRu extends AppLocalizations {
   String get presentation_first_page => 'Нужен срочный врач?';
 
   @override
-  String get presentation_first_page_description => 'Найдите ближайшего врача с помощью карты в приложении.';
+  String get presentation_first_page_description =>
+      'Найдите ближайшего врача с помощью карты в приложении.';
 
   @override
   String get presentation_second_page => 'Безопасное хранение медкарты';
 
   @override
-  String get presentation_second_description => 'Храните историю болезней, анализы и напоминания о приемах.';
+  String get presentation_second_description =>
+      'Храните историю болезней, анализы и напоминания о приемах.';
 
   @override
   String get presentation_third_page => 'Читайте отзывы о врачах';
 
   @override
-  String get presentation_third_description => 'Выбирайте специалистов на основе рейтингов и отзывов.';
+  String get presentation_third_description =>
+      'Выбирайте специалистов на основе рейтингов и отзывов.';
 
   @override
   String get presentation_four_page => 'Экстренная помощь';
 
   @override
-  String get presentation_four_page_description => 'Быстрый доступ к экстренным службам.';
+  String get presentation_four_page_description =>
+      'Быстрый доступ к экстренным службам.';
 
   @override
   String get presentation_get_started => 'Начать';
@@ -153,10 +159,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get register_error_code_password_missmatch => 'Пароли не совпадают';
 
   @override
-  String get register_error_code_password_cant_empty => 'Поле не может быть пустым';
+  String get register_error_code_password_cant_empty =>
+      'Поле не может быть пустым';
 
   @override
-  String get register_error_code_password_mistake => 'Пароль должен быть от 8 символов';
+  String get register_error_code_password_mistake =>
+      'Пароль должен быть от 8 символов';
 
   @override
   String get register_user_info => 'Заполните профиль';
@@ -423,7 +431,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get book_doctor_reviews_success_title => 'Ожидание подтверждения';
 
   @override
-  String get book_doctor_reviews_success_subtitle => 'Ваша запись ожидает подтверждения врачом.';
+  String get book_doctor_reviews_success_subtitle =>
+      'Ваша запись ожидает подтверждения врачом.';
 
   @override
   String get book_doctor_reviews_success_first_button => 'Записаться снова';
@@ -435,7 +444,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get book_doctor_reviews_cancel_title => 'Отменено';
 
   @override
-  String get book_doctor_reviews_cancel_subtitle => 'Запись отменена. Выберите новое время.';
+  String get book_doctor_reviews_cancel_subtitle =>
+      'Запись отменена. Выберите новое время.';
 
   @override
   String get book_doctor_reviews_cancel_first_button => 'Перезаписаться';
@@ -471,7 +481,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get book_appointment_select_first_come => 'Живая очередь';
 
   @override
-  String get book_appointment_select_first_come_stats_last => 'Последний сегодня';
+  String get book_appointment_select_first_come_stats_last =>
+      'Последний сегодня';
 
   @override
   String get book_appointment_select_first_come_stats_now => 'Сейчас';
@@ -639,7 +650,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get records_not_found => 'Записей нет';
 
   @override
-  String get records_not_found_description => 'Здесь будут ваши медицинские данные';
+  String get records_not_found_description =>
+      'Здесь будут ваши медицинские данные';
 
   @override
   String get records_new_added => 'Новая запись';
@@ -759,7 +771,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get error_internal_server_title => 'Ошибка сервера';
 
   @override
-  String get error_internal_server_subtitle => 'MPD временно недоступен. Попробуйте позже.';
+  String get error_internal_server_subtitle =>
+      'MPD временно недоступен. Попробуйте позже.';
 
   @override
   String get error_connection_lost_title => 'Нет интернета';
@@ -771,7 +784,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get error_pagenot_found_title => 'Страница не найдена';
 
   @override
-  String get error_pagenot_found_subtitle => 'Запрошенная страница не существует';
+  String get error_pagenot_found_subtitle =>
+      'Запрошенная страница не существует';
 
   @override
   String get error_try_again => 'Попробовать снова';

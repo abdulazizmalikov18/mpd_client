@@ -33,127 +33,124 @@ class SearchField extends StatefulWidget {
 class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      minimum: EdgeInsets.symmetric(vertical: 10.h),
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16.w),
-        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
-        decoration: BoxDecoration(
-          color: context.color.white,
-          borderRadius: BorderRadius.circular(10.r),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Focus(
-                onFocusChange: (focus) {
-                  if (focus) {
-                    context
-                        .read<SearchBySpecialistBloc>()
-                        .add(FocusedSearchingEvent());
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
+      decoration: BoxDecoration(
+        color: context.color.white,
+        borderRadius: BorderRadius.circular(10.r),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Focus(
+              onFocusChange: (focus) {
+                if (focus) {
+                  context
+                      .read<SearchBySpecialistBloc>()
+                      .add(FocusedSearchingEvent());
+                }
+              },
+              child: SearchFieldWidget(
+                controller: widget.controller,
+                searchHint: context.l10n.search_doctor,
+                onChanged: (query) {
+                  if (widget.onChanged != null) {
+                    widget.onChanged!(query);
                   }
                 },
-                child: SearchFieldWidget(
-                  controller: widget.controller,
-                  searchHint: context.l10n.search_doctor,
-                  onChanged: (query) {
-                    if (widget.onChanged != null) {
-                      widget.onChanged!(query);
-                    }
-                  },
-                ),
               ),
             ),
-            if (widget.isMap)
-              Row(
-                children: [
-                  ScreenUtil().setHorizontalSpacing(8.w),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10.r),
-                    child: Material(
-                      color: context.color.background,
-                      child: InkWell(
-                        onTap: () {
-                          final bloc = context.read<SpecialistBloc>();
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => MultiBlocProvider(
-                              providers: [
-                                BlocProvider.value(
-                                  value: bloc,
-                                ),
-                                BlocProvider(
-                                  create: (context) => ProductSpecalistBloc(
-                                    locator.get<HomeRepository>(),
-                                  ),
-                                ),
-                              ],
-                              child: DoctorCategoryPage(
-                                controller: widget.controller,
+          ),
+          if (widget.isMap)
+            Row(
+              children: [
+                ScreenUtil().setHorizontalSpacing(8.w),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10.r),
+                  child: Material(
+                    color: context.color.background,
+                    child: InkWell(
+                      onTap: () {
+                        final bloc = context.read<SpecialistBloc>();
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => MultiBlocProvider(
+                            providers: [
+                              BlocProvider.value(
+                                value: bloc,
                               ),
+                              BlocProvider(
+                                create: (context) => ProductSpecalistBloc(
+                                  locator.get<HomeRepository>(),
+                                ),
+                              ),
+                            ],
+                            child: DoctorCategoryPage(
+                              controller: widget.controller,
                             ),
-                          ));
-                        },
-                        child: Container(
-                          height: 48.h,
-                          width: 48.h,
-                          color: context.color.mainBlue,
-                          alignment: Alignment.center,
-                          child: SvgPicture.asset(
-                            AppIcons.map,
-                            colorFilter: ColorFilter.mode(
-                              context.color.white,
-                              BlendMode.srcIn,
-                            ),
+                          ),
+                        ));
+                      },
+                      child: Container(
+                        height: 48.h,
+                        width: 48.h,
+                        color: context.color.mainBlue,
+                        alignment: Alignment.center,
+                        child: SvgPicture.asset(
+                          AppIcons.map,
+                          colorFilter: ColorFilter.mode(
+                            context.color.white,
+                            BlendMode.srcIn,
                           ),
                         ),
                       ),
                     ),
                   ),
-                ],
-              ),
-            ScreenUtil().setHorizontalSpacing(8.w),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10.r),
-              child: Material(
-                color: context.color.background,
-                child: InkWell(
-                  onTap: () {
-                    showModalBottomSheet(
-                      context: context,
-                      useSafeArea: true,
-                      backgroundColor: Colors.transparent,
-                      isScrollControlled: true,
-                      builder: (_) => MultiBlocProvider(
-                        providers: [
-                          BlocProvider.value(
-                            value: BlocProvider.of<SpecialistBloc>(context,
-                                listen: false),
-                          ),
-                          BlocProvider.value(
-                            value: BlocProvider.of<SpecialistBloc>(context,
-                                listen: false),
-                          )
-                        ],
-                        child: const FilterCategorySheet(),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    height: 48.h,
-                    width: 48.h,
-                    alignment: Alignment.center,
-                    child: SvgPicture.asset(
-                      AppIcons.filter,
-                      colorFilter: ColorFilter.mode(
-                          context.color.black, BlendMode.srcIn),
+                ),
+              ],
+            ),
+          ScreenUtil().setHorizontalSpacing(8.w),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10.r),
+            child: Material(
+              color: context.color.background,
+              child: InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    useSafeArea: true,
+                    backgroundColor: Colors.transparent,
+                    isScrollControlled: true,
+                    builder: (_) => MultiBlocProvider(
+                      providers: [
+                        BlocProvider.value(
+                          value: BlocProvider.of<SpecialistBloc>(context,
+                              listen: false),
+                        ),
+                        BlocProvider.value(
+                          value: BlocProvider.of<SpecialistBloc>(context,
+                              listen: false),
+                        )
+                      ],
+                      child: const FilterCategorySheet(),
                     ),
+                  );
+                },
+                child: Container(
+                  height: 48.h,
+                  width: 48.h,
+                  alignment: Alignment.center,
+                  child: SvgPicture.asset(
+                    AppIcons.filter,
+                    colorFilter:
+                        ColorFilter.mode(context.color.black, BlendMode.srcIn),
                   ),
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

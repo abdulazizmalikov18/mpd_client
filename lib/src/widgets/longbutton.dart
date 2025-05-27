@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/app/app_colors.dart';
+import 'package:mpd_client/app/colors.dart';
 import 'package:mpd_client/core/platform/platform_check.dart';
 import 'package:mpd_client/src/themes/styles.dart';
 
@@ -52,21 +53,21 @@ class LongButton extends StatelessWidget {
         ],
         borderRadius: BorderRadius.circular(10.r),
         border: border,
-        color: color,
-        gradient: color == null
-            ? LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  !isDisable
-                      ? (gradientOpacity ?? context.color.gradientBlueOpacity)
-                      : context.color.grey,
-                  !isDisable
-                      ? (gradient ?? context.color.gradientBlue)
-                      : context.color.grey,
-                ],
-              )
-            : null,
+        color: isDisable ? context.color.grey : color ?? mainBlue,
+        // gradient: color == null
+        //     ? LinearGradient(
+        //         begin: Alignment.topCenter,
+        //         end: Alignment.bottomCenter,
+        //         colors: [
+        //           !isDisable
+        //               ? (gradientOpacity ?? context.color.gradientBlueOpacity)
+        //               : context.color.grey,
+        //           !isDisable
+        //               ? (gradient ?? context.color.gradientBlue)
+        //               : context.color.grey,
+        //         ],
+        //       )
+        //     : null,
       ),
       child: TextButton(
         onPressed: isDisable ? null : onPress,

@@ -115,6 +115,7 @@ class AllDoctorsView extends StatelessWidget {
         SliverToBoxAdapter(
           child: Column(
             children: [
+              SizedBox(height: 12.h),
               SearchField(
                 controller: widget.controller,
                 isMap: false,

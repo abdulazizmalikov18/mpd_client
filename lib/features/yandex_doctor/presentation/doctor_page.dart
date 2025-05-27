@@ -144,7 +144,7 @@ class _DoctorPageState extends State<DoctorPage>
           Positioned(
             left: 0,
             right: 0,
-            top: 80.h,
+            top: 72.h,
             child: SafeArea(
               child:
                   BlocBuilder<SearchBySpecialistBloc, SearchBySpecialistState>(
@@ -161,20 +161,21 @@ class _DoctorPageState extends State<DoctorPage>
           Positioned(
             left: 0,
             right: 0,
-            top: 12.h,
-            child: SearchField(
-              controller: controller,
-              onChanged: (query) {
-                if (query.isEmpty || query.length < 3) {
+            child: SafeArea(
+              child: SearchField(
+                controller: controller,
+                onChanged: (query) {
+                  if (query.isEmpty || query.length < 3) {
+                    context
+                        .read<SearchBySpecialistBloc>()
+                        .add(StopSearchingEvent());
+                    setState(() {});
+                  }
                   context
                       .read<SearchBySpecialistBloc>()
-                      .add(StopSearchingEvent());
-                  setState(() {});
-                }
-                context
-                    .read<SearchBySpecialistBloc>()
-                    .add(SearchedSpecialistEvent(query));
-              },
+                      .add(SearchedSpecialistEvent(query));
+                },
+              ),
             ),
           ),
         ],

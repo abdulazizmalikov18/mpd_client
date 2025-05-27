@@ -17,6 +17,7 @@ import 'package:mpd_client/src/widgets/gradient_icon.dart';
 import 'package:mpd_client/src/widgets/icon_gradient_button.dart';
 import 'package:mpd_client/src/widgets/longbutton.dart';
 import 'package:mpd_client/src/widgets/pinned_sheet.dart';
+import 'package:mpd_client/src/widgets/shimmer_container.dart';
 import 'package:shimmer/shimmer.dart';
 
 class DrProfileByid extends StatefulWidget {
@@ -168,14 +169,74 @@ class _DrProfileByidState extends State<DrProfileByid> {
                             width: MediaQuery.sizeOf(context).width,
                             child: Row(
                               children: [
-                                Expanded(
-                                  child: FollowButton(
-                                    isFollowing: true,
-                                    height: 40.h,
-                                    onTap: () {},
-                                  ),
+                                BlocBuilder<DoctorProfileBloc,
+                                    DoctorProfileState>(
+                                  builder: (context, doctorState) {
+                                    if (doctorState is DoctorProfileLoading) {
+                                      return Expanded(
+                                        child: Shimmer.fromColors(
+                                          baseColor: context.color.baseColor,
+                                          highlightColor:
+                                              context.color.highlightColor,
+                                          child: ShimmerContainer(
+                                            size: Size(136, 40.h),
+                                          ),
+                                        ),
+                                      );
+                                    } else if (doctorState
+                                        is DoctorProfileSuccess) {
+                                      context.read<SubscriptionBloc>().add(
+                                          SetSubscribedOrNot(doctorState
+                                              .doctor!.isSubscribed));
+                                      return BlocBuilder<SubscriptionBloc,
+                                          SubscriptionState>(
+                                        builder: (context, state) {
+                                          return Expanded(
+                                            child: FollowButton(
+                                              isFollowing: state.isSubscribed,
+                                              height: 40.h,
+                                              onTap:
+                                                  state is SubscriptionLoading
+                                                      ? null
+                                                      : () {
+                                                          if (state
+                                                              .isSubscribed) {
+                                                            context
+                                                                .read<
+                                                                    SubscriptionBloc>()
+                                                                .add(UnSubscribeToDrEvent(widget
+                                                                        .specialist
+                                                                        .username ??
+                                                                    ""));
+                                                          } else {
+                                                            context
+                                                                .read<
+                                                                    SubscriptionBloc>()
+                                                                .add(SubscribeToDrEvent(widget
+                                                                        .specialist
+                                                                        .username ??
+                                                                    ""));
+                                                          }
+                                                        },
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    } else {
+                                      return const SizedBox();
+                                    }
+                                  },
                                 ),
-                                ScreenUtil().setHorizontalSpacing(12.w),
+                                BlocBuilder<DoctorProfileBloc,
+                                    DoctorProfileState>(
+                                  builder: (context, state) {
+                                    if (state is DoctorProfileLoading ||
+                                        state is DoctorProfileSuccess) {
+                                      return SizedBox(width: 12.w);
+                                    }
+                                    return const SizedBox();
+                                  },
+                                ),
                                 Expanded(
                                   child: LongButton(
                                     onPress: () {
