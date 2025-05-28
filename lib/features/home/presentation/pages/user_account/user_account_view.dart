@@ -105,9 +105,8 @@ class _UserAccountViewState extends State<UserAccountView> {
       body: widget.specialistId == 0
           ? BlocConsumer<UserProfileBloc, UserProfileState>(
               listener: (context, state) {
-                context
-                    .read<SubscriptionBloc>()
-                    .add(SetSubscribedOrNot(state.userAccount.isRelated));
+                context.read<SubscriptionBloc>().add(
+                    SetSubscribedOrNot(state.userAccount.isSubscribedToUser));
               },
               listenWhen: (previous, current) =>
                   current.userAccount.username != previous.userAccount.username,
@@ -429,106 +428,130 @@ class _UserAccountViewState extends State<UserAccountView> {
                                 height: 40.h,
                                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                                 width: MediaQuery.sizeOf(context).width,
-                                child: Row(
-                                  children: [
-                                    BlocBuilder<DoctorProfileBloc,
-                                        DoctorProfileState>(
-                                      builder: (context, doctorState) {
-                                        if (doctorState
-                                            is DoctorProfileLoading) {
-                                          return Expanded(
-                                            child: Shimmer.fromColors(
-                                              baseColor:
-                                                  context.color.baseColor,
-                                              highlightColor:
-                                                  context.color.highlightColor,
-                                              child: const ShimmerContainer(
-                                                  size: Size(136, 34)),
-                                            ),
-                                          );
-                                        } else if (doctorState
-                                            is DoctorProfileSuccess) {
-                                          context.read<SubscriptionBloc>().add(
-                                              SetSubscribedOrNot(doctorState
-                                                  .doctor!.isSubscribed));
-                                          return BlocBuilder<SubscriptionBloc,
-                                              SubscriptionState>(
-                                            builder: (context, state) {
-                                              return Expanded(
-                                                child: FollowButton(
-                                                  isFollowing:
-                                                      state.isSubscribed,
-                                                  height: 40.h,
-                                                  onTap: state
-                                                          is SubscriptionLoading
-                                                      ? null
-                                                      : () {
-                                                          if (state
-                                                              .isSubscribed) {
-                                                            context
-                                                                .read<
-                                                                    SubscriptionBloc>()
-                                                                .add(UnSubscribeToDrEvent(
-                                                                    widget
-                                                                        .username));
-                                                          } else {
-                                                            context
-                                                                .read<
-                                                                    SubscriptionBloc>()
-                                                                .add(SubscribeToDrEvent(
-                                                                    widget
-                                                                        .username));
-                                                          }
-                                                        },
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        } else {
-                                          return const SizedBox();
-                                        }
-                                      },
-                                    ),
-                                    BlocBuilder<DoctorProfileBloc,
-                                        DoctorProfileState>(
-                                      builder: (context, state) {
-                                        if (state is DoctorProfileLoading ||
-                                            state is DoctorProfileSuccess) {
-                                          return SizedBox(width: 12.w);
-                                        }
-                                        return const SizedBox();
-                                      },
-                                    ),
-                                    Expanded(
-                                      child: LongButton(
-                                        onPress: () {},
-                                        widget: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            AppIcons.message.svg(
-                                              color: context.color.mainBlue,
-                                            ),
-                                            Text(
-                                              "Message",
-                                              style:
-                                                  Styles.descSubtitle.copyWith(
-                                                color: context.color.mainBlue,
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            )
-                                          ],
+                                child: BlocConsumer<SubscriptionBloc,
+                                    SubscriptionState>(
+                                  listener: (context, state) {
+                                    if (state is SubscriptionFailure) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        UiTools.failurefailureSnackBar(
+                                          title: 'Oh snap',
+                                          message: state.failure,
                                         ),
-                                        color: context.color.white,
-                                        border: Border.all(
-                                          color: context.color.mainBlue,
+                                      );
+                                    } else if (state is SubscriptionSuccess) {
+                                      context.read<DoctorProfileBloc>().add(
+                                          UpdateDoctorSubscription(
+                                              state.isSubscribed));
+                                      context.read<UserSubscriptionsBloc>().add(
+                                          InsertSubscription(
+                                              state.isSubscribed));
+                                    }
+                                  },
+                                  builder: (context, state) => Row(
+                                    children: [
+                                      BlocBuilder<DoctorProfileBloc,
+                                          DoctorProfileState>(
+                                        builder: (context, doctorState) {
+                                          if (doctorState
+                                              is DoctorProfileLoading) {
+                                            return Expanded(
+                                              child: Shimmer.fromColors(
+                                                baseColor:
+                                                    context.color.baseColor,
+                                                highlightColor: context
+                                                    .color.highlightColor,
+                                                child: ShimmerContainer(
+                                                  size: Size(136, 40.h),
+                                                ),
+                                              ),
+                                            );
+                                          } else if (doctorState
+                                              is DoctorProfileSuccess) {
+                                            context
+                                                .read<SubscriptionBloc>()
+                                                .add(SetSubscribedOrNot(
+                                                    doctorState
+                                                        .doctor!.isSubscribed));
+                                            return BlocBuilder<SubscriptionBloc,
+                                                SubscriptionState>(
+                                              builder: (context, state) {
+                                                return Expanded(
+                                                  child: FollowButton(
+                                                    isFollowing:
+                                                        state.isSubscribed,
+                                                    height: 40.h,
+                                                    onTap: state
+                                                            is SubscriptionLoading
+                                                        ? null
+                                                        : () {
+                                                            if (state
+                                                                .isSubscribed) {
+                                                              context
+                                                                  .read<
+                                                                      SubscriptionBloc>()
+                                                                  .add(UnSubscribeToDrEvent(
+                                                                      widget
+                                                                          .username));
+                                                            } else {
+                                                              context
+                                                                  .read<
+                                                                      SubscriptionBloc>()
+                                                                  .add(SubscribeToDrEvent(
+                                                                      widget
+                                                                          .username));
+                                                            }
+                                                          },
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          } else {
+                                            return const SizedBox();
+                                          }
+                                        },
+                                      ),
+                                      BlocBuilder<DoctorProfileBloc,
+                                          DoctorProfileState>(
+                                        builder: (context, state) {
+                                          if (state is DoctorProfileLoading ||
+                                              state is DoctorProfileSuccess) {
+                                            return SizedBox(width: 12.w);
+                                          }
+                                          return const SizedBox();
+                                        },
+                                      ),
+                                      Expanded(
+                                        child: LongButton(
+                                          onPress: () {},
+                                          widget: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              AppIcons.message.svg(
+                                                color: context.color.mainBlue,
+                                              ),
+                                              Text(
+                                                "Message",
+                                                style: Styles.descSubtitle
+                                                    .copyWith(
+                                                  color: context.color.mainBlue,
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          color: context.color.white,
+                                          border: Border.all(
+                                            color: context.color.mainBlue,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                               ScreenUtil().setVerticalSpacing(8.h),

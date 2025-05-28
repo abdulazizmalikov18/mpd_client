@@ -57,6 +57,8 @@ class UserAccountModel {
   final bool hasPassword;
   @JsonKey(name: "background_image")
   final String backgroundImage;
+  @JsonKey(name: "is_subscribed_to_user")
+  final bool isSubscribedToUser;
 
   const UserAccountModel({
     this.username = "",
@@ -80,6 +82,7 @@ class UserAccountModel {
     this.qrcode = "",
     this.hasPassword = false,
     this.backgroundImage = "",
+    this.isSubscribedToUser = false,
   });
 
   factory UserAccountModel.fromJson(Map<String, dynamic> json) =>
