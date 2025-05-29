@@ -8,9 +8,13 @@ import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/app/colors.dart';
 import 'package:mpd_client/core/presentation/paginator.dart';
 import 'package:mpd_client/core/utils/caller.dart';
+import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/core/utils/utils.dart';
 import 'package:mpd_client/features/appointment/data/models/user_posts_arg.dart';
 import 'package:mpd_client/features/appointment/presentation/pages/appointment/components/no_appointment.dart';
+import 'package:mpd_client/features/chat/domain/models/chat_user.dart';
+import 'package:mpd_client/features/chat/presentation/bloc/chat/chat_bloc.dart';
+import 'package:mpd_client/features/chat/presentation/views/in_app_chat.dart';
 import 'package:mpd_client/features/doctor_profile_booking/data/models/doctor_profile_model.dart';
 import 'package:mpd_client/features/doctor_profile_booking/domain/blocs/doctor_profile/doctor_profile_bloc.dart';
 import 'package:mpd_client/features/doctor_profile_booking/presentation/pages/components/follow_button.dart';
@@ -522,32 +526,71 @@ class _UserAccountViewState extends State<UserAccountView> {
                                         },
                                       ),
                                       Expanded(
-                                        child: LongButton(
-                                          onPress: () {},
-                                          widget: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              AppIcons.message.svg(
+                                        child: BlocBuilder<ChatBloc, ChatState>(
+                                          builder: (context, state) {
+                                            return LongButton(
+                                              loading:
+                                                  state.dataStatus.isInProgress,
+                                              onPress: () {
+                                                context
+                                                    .read<ChatBloc>()
+                                                    .add(CreateChatEvent(
+                                                      user: ChatUserModel(
+                                                        username:
+                                                            widget.username,
+                                                      ),
+                                                      onSuccess: (model) {
+                                                        Log.e(model.slugName);
+                                                        final bloc =
+                                                            context.read<
+                                                                UserInfoBloc>();
+                                                        Navigator.of(context)
+                                                            .push(
+                                                                MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              BlocProvider
+                                                                  .value(
+                                                            value: bloc,
+                                                            child: InChatView(
+                                                              group: model,
+                                                            ),
+                                                          ),
+                                                        ));
+                                                      },
+                                                      onError: () {
+                                                        Log.e("message");
+                                                      },
+                                                    ));
+                                              },
+                                              widget: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  AppIcons.message.svg(
+                                                    color:
+                                                        context.color.mainBlue,
+                                                  ),
+                                                  Text(
+                                                    "Message",
+                                                    style: Styles.descSubtitle
+                                                        .copyWith(
+                                                      color: context
+                                                          .color.mainBlue,
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              color: context.color.white,
+                                              border: Border.all(
                                                 color: context.color.mainBlue,
                                               ),
-                                              Text(
-                                                "Message",
-                                                style: Styles.descSubtitle
-                                                    .copyWith(
-                                                  color: context.color.mainBlue,
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          color: context.color.white,
-                                          border: Border.all(
-                                            color: context.color.mainBlue,
-                                          ),
+                                            );
+                                          },
                                         ),
                                       ),
                                     ],

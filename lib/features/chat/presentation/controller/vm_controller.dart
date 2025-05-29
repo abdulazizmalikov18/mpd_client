@@ -13,7 +13,6 @@ import 'package:mpd_client/features/chat/domain/models/message.dart';
 import 'package:mpd_client/features/chat/presentation/bloc/chat_message/bloc/chat_message_bloc.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-
 typedef $chatController = ChatVMController;
 
 class ChatVMController {
@@ -46,11 +45,13 @@ class ChatVMController {
   }
 
   static ChatVMController of(BuildContext context) => ChatVMController();
-  Future<void> connectSocket(
-      {required void Function(String errorMessage) onError}) async {
+  Future<void> connectSocket({
+    required void Function(String errorMessage) onError,
+  }) async {
     try {
       final wsUrl = Uri.parse(
-          "ws://82.215.78.34:80/SMMS/ws/chat/?token=${StorageRepository.getString(StorageKeys.TOKEN)}");
+        "wss://sharq-api.sharqdarmon.uz/SMMS/ws/chat/?token=${StorageRepository.getString(StorageKeys.TOKEN)}",
+      );
       channel = WebSocketChannel.connect(wsUrl);
       await channel!.ready;
       channel!.stream.asBroadcastStream();

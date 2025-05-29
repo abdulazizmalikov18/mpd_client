@@ -3,6 +3,8 @@ import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/features/appointment/presentation/pages/appointment/appoinment.dart';
+import 'package:mpd_client/features/chat/presentation/bloc/chat_group/chat_group_bloc.dart';
+import 'package:mpd_client/features/chat/presentation/controller/vm_controller.dart';
 import 'package:mpd_client/features/chat/presentation/views/chat_view.dart';
 import 'package:mpd_client/features/home/presentation/pages/home_page.dart';
 import 'package:mpd_client/features/main_view_modal.dart';
@@ -42,6 +44,10 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     context.read<UserInfoBloc>().add(GetSpecialistUser());
 
     super.initState();
+    ChatVMController().connectSocket(
+      onError: (errorMessage) {},
+    );
+    context.read<ChatGroupBloc>().add(const ChatGetGroupEvent());
 
     /// Attach a listener which will update the state and refresh the page index
     controller.addListener(() {

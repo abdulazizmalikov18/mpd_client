@@ -80,7 +80,7 @@ class GoCreateChatEvent extends ChatEvent {
 
 class CreateChatEvent extends ChatEvent {
   final ChatUserModel user;
-  final void Function() onSuccess;
+  final void Function(ChatGroupModel model) onSuccess;
   final void Function() onError;
 
   const CreateChatEvent({

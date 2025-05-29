@@ -66,7 +66,8 @@ class ChatServiceImpl extends ChatService {
 
   @override
   Future<ResponseHandler<GenericPagination<MessageModel>>> getMessages(
-      GetChatEntity param) {
+    GetChatEntity param,
+  ) {
     return _handle.apiCantrol(
       request: (client) {
         return client.get(

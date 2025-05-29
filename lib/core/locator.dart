@@ -11,6 +11,7 @@ import 'package:mpd_client/features/authentication/domain/blocs/refresh_token/re
 import 'package:mpd_client/features/chat/data/repo/chat_repository.dart';
 import 'package:mpd_client/features/chat/data/repo/chat_repository_impl.dart';
 import 'package:mpd_client/features/chat/data/service/chat_service.dart';
+import 'package:mpd_client/features/chat/presentation/bloc/chat/chat_bloc.dart';
 import 'package:mpd_client/features/chat/presentation/bloc/chat_group/chat_group_bloc.dart';
 import 'package:mpd_client/features/chat/presentation/bloc/chat_message/bloc/chat_message_bloc.dart';
 import 'package:mpd_client/features/doctor_profile_booking/data/datasources/doctor_profile_remote_datasource.dart';
@@ -93,7 +94,7 @@ void _chatRegister() {
   locator.registerSingleton<ChatRepository>(
       ChatRepositoryImpl(remote: locator<ChatService>()));
   // Bloc
-  // locator.registerFactory(() => ChatBloc(locator<ChatRepository>()));
+  locator.registerFactory(() => ChatBloc(locator<ChatRepository>()));
   locator.registerFactory(() => ChatGroupBloc(locator<ChatRepository>()));
   locator.registerFactory(() => ChatMessageBloc(locator<ChatRepository>()));
 }

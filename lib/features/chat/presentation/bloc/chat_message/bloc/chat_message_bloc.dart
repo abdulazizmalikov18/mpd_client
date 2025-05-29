@@ -28,8 +28,9 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
 
   void _onGetMessages(ChatGetMessages event, Emitter emit) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    final result =
-        await _repo.getMessages(GetChatEntity(groupSlug: event.group.slugName));
+    final result = await _repo.getMessages(GetChatEntity(
+      groupSlug: event.group.slugName,
+    ));
     if (result.isRight) {
       emit(state.copyWith(
         status: FormzSubmissionStatus.success,

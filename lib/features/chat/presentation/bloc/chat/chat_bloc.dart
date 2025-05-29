@@ -106,7 +106,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         ),
         dataStatus: FormzSubmissionStatus.success,
       ));
-      event.onSuccess();
+      event.onSuccess(result.right);
       return;
     }
     event.onError();
@@ -215,8 +215,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       dataStatus: FormzSubmissionStatus.inProgress,
     ));
 
-    final result = await _repo
-        .getMessages(GetChatEntity(groupSlug: event.slugName, limit: 20));
+    final result = await _repo.getMessages(GetChatEntity(
+      groupSlug: event.slugName,
+      limit: 20,
+    ));
     if (result.isRight) {
       final activeGroup = state.groupContainer.groups[foundIndex];
       state.groupContainer.groups[foundIndex] = activeGroup.copyWith();

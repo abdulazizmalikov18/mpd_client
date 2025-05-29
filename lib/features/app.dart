@@ -15,6 +15,7 @@ import 'package:mpd_client/features/appointment/data/repositories/appoinment_rep
 import 'package:mpd_client/features/appointment/domain/blocs/appointment/appoinment_bloc.dart';
 import 'package:mpd_client/features/authentication/domain/blocs/refresh_token/refreshtoken_bloc.dart';
 import 'package:mpd_client/features/authentication/domain/blocs/register/register_bloc.dart';
+import 'package:mpd_client/features/chat/presentation/bloc/chat/chat_bloc.dart';
 import 'package:mpd_client/features/chat/presentation/bloc/chat_group/chat_group_bloc.dart';
 import 'package:mpd_client/features/chat/presentation/bloc/chat_message/bloc/chat_message_bloc.dart';
 import 'package:mpd_client/features/doctor_profile_booking/data/repositories/doctor_profile_repository.dart';
@@ -77,12 +78,16 @@ class _MyAppState extends State<MyApp> {
                     AddToCartBloc(locator.get<DoctorProfileRepository>())),
             BlocProvider(create: (context) => SocketOfferBloc()),
             BlocProvider<ChatGroupBloc>(
-                create: (context) => locator<ChatGroupBloc>()),
+              create: (context) => locator<ChatGroupBloc>(),
+            ),
+            BlocProvider<ChatBloc>(create: (context) => locator<ChatBloc>()),
             BlocProvider<ChatMessageBloc>(
-                create: (context) => locator<ChatMessageBloc>()),
+              create: (context) => locator<ChatMessageBloc>(),
+            ),
             BlocProvider(
-              create: (context) =>
-                  SubscriptionBloc(locator.get<DoctorProfileRepository>()),
+              create: (context) => SubscriptionBloc(
+                locator.get<DoctorProfileRepository>(),
+              ),
             ),
           ],
           child: PostInheritedNotifier(

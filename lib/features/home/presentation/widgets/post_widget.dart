@@ -4,6 +4,7 @@ import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/core/utils/utils.dart';
+import 'package:mpd_client/features/chat/presentation/bloc/chat/chat_bloc.dart';
 import 'package:mpd_client/features/home/data/models/posts_model.dart';
 import 'package:mpd_client/features/home/domain/blocs/bloc/user_profile_bloc.dart';
 import 'package:mpd_client/features/home/domain/service/flick_multi_manger.dart';
@@ -94,19 +95,25 @@ class _PostBodyState extends State<PostBody>
                   final sendComentBloc = context.read<SendComentBloc>();
                   final postComentBloc = context.read<PostComentBloc>();
                   final userInfoBloc = context.read<UserInfoBloc>();
+                  final chatBloc = context.read<ChatBloc>();
 
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => MultiBlocProvider(
                       providers: [
                         BlocProvider(
-                            create: (context) =>
-                                UserProfileBloc(locator.get<HomeRepository>())),
+                          create: (context) => UserProfileBloc(
+                            locator.get<HomeRepository>(),
+                          ),
+                        ),
                         BlocProvider(
-                            create: (context) =>
-                                PostBloc(locator.get<HomeRepository>())),
+                          create: (context) => PostBloc(
+                            locator.get<HomeRepository>(),
+                          ),
+                        ),
                         BlocProvider.value(value: sendComentBloc),
                         BlocProvider.value(value: postComentBloc),
                         BlocProvider.value(value: userInfoBloc),
+                        BlocProvider.value(value: chatBloc),
                       ],
                       child: UserAccountView(
                         username: widget.post.authorUser ?? "kabulov",
