@@ -38,8 +38,8 @@ build runner:
 flutter pub run build_runner build --delete-conflicting-outputs
 
 rename app:
-rename setAppName --targets ios,android --value "MPD CLIENT"
-rename setBundleId --targets ios,android --value "com.dwed.dwed"
+rename setAppName --targets ios,android --value "TMED CLIENT"
+rename setBundleId --targets ios,android --value "uz.tmed.client"
 
 generation eyse:
 flutter pub run easy_localization:generate -f keys -o locale_keys.g.dart --source-dir ./lib/assets/strings/

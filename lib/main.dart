@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/bloc_logger.dart';
 import 'package:mpd_client/core/data/repository/storage_repository.dart';
-import 'package:mpd_client/core/network/fcm_service.dart';
 import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/features/app.dart';
 // import 'package:workmanager/workmanager.dart';
@@ -21,7 +20,7 @@ void main() async {
     // AndroidYandexMap.useAndroidViewSurface = false;
     WidgetsFlutterBinding.ensureInitialized();
     await StorageRepository.getInstance();
-    await FcmService.init();
+    // await FcmService.init();
 
     setupLocator();
     if (kDebugMode) {

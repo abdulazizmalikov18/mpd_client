@@ -7,7 +7,7 @@ import 'package:mpd_client/app/app_images.dart';
 import 'package:mpd_client/app/app_routes.dart';
 import 'package:mpd_client/core/data/repository/storage_keys.dart';
 import 'package:mpd_client/core/data/repository/storage_repository.dart';
-import 'package:mpd_client/src/decorations/custom_loading_indicator.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -58,7 +58,13 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
               ),
             ),
           ),
-          const Positioned(bottom: 110, child: CustomLoadingIndicator())
+          Positioned(
+            bottom: 110,
+            child: SpinKitCircle(
+              size: 52,
+              color: context.color.mainBlue,
+            ),
+          )
         ],
       ),
     );
