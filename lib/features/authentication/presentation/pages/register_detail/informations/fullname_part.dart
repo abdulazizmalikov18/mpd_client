@@ -181,8 +181,17 @@ class _FullnamePartState extends State<FullnamePart> {
                     if (!state.showLoading && state.error == 'No') {
                       // Navigator.pop(context);
                       await Future.delayed(const Duration(milliseconds: 250))
-                          .then((value) => Navigator.pushNamedAndRemoveUntil(
-                              context, AppRoutes.mainPage, (route) => false));
+                          .then(
+                        (value) {
+                          if (context.mounted) {
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              AppRoutes.mainPage,
+                              (route) => false,
+                            );
+                          }
+                        },
+                      );
                     } else if (!state.showLoading &&
                         state.error != 'No' &&
                         state.error != '') {

@@ -76,12 +76,14 @@ class _ExpansionListState extends State<RegionCategory>
         onExpansionChanged: (value) async {
           if (value) {
             Future.delayed(const Duration(milliseconds: 200)).then((value) {
-              context
-                  .read<DistrictBloc>()
-                  .add(GetDistrictsEvent(parent: region.id));
-              OpenCloseExpansionInheritedNotifier.of(context)
-                  .notifier!
-                  .selectTile = index;
+              if (mounted) {
+                context
+                    .read<DistrictBloc>()
+                    .add(GetDistrictsEvent(parent: region.id));
+                OpenCloseExpansionInheritedNotifier.of(context)
+                    .notifier!
+                    .selectTile = index;
+              }
             });
           } else {
             OpenCloseExpansionInheritedNotifier.of(context)

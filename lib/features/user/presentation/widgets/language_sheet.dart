@@ -46,20 +46,27 @@ class LanguageSheet extends StatelessWidget {
         ),
         ScreenUtil().setVerticalSpacing(32.h),
         ...List.generate(
-            languages.length,
-            (index) => Padding(
-                  padding: EdgeInsets.only(bottom: index == 2 ? 32.h : 10.h),
-                  child: LaguageButton(
-                      imagePath: languages.values.elementAt(index),
-                      language: languages.keys.elementAt(index),
-                      onPressed: () {
-                        final provider =
-                            Provider.of<LocalProvider>(context, listen: false);
-                        provider.setLocale(locales[index]);
-                        Future.delayed(const Duration(milliseconds: 300))
-                            .then((value) => Navigator.of(context).pop());
-                      }),
-                ))
+          languages.length,
+          (index) => Padding(
+            padding: EdgeInsets.only(bottom: index == 2 ? 32.h : 10.h),
+            child: LaguageButton(
+              imagePath: languages.values.elementAt(index),
+              language: languages.keys.elementAt(index),
+              onPressed: () {
+                final provider =
+                    Provider.of<LocalProvider>(context, listen: false);
+                provider.setLocale(locales[index]);
+                Future.delayed(const Duration(milliseconds: 300)).then(
+                  (value) {
+                    if (context.mounted) {
+                      Navigator.of(context).pop();
+                    }
+                  },
+                );
+              },
+            ),
+          ),
+        ),
       ],
     );
   }

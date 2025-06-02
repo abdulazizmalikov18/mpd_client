@@ -94,10 +94,16 @@ class _CancelSheetState extends State<CancelSheet> {
                 builder: (context) => const LoadingDialogWidget());
           } else if (state is CancelAppointmentSuccess) {
             Navigator.pop(context);
-            Future.delayed(const Duration(milliseconds: 200))
-                .then((value) => Navigator.pop(context));
-            Future.delayed(const Duration(milliseconds: 200))
-                .then((value) => Navigator.pop(context));
+            Future.delayed(const Duration(milliseconds: 200)).then((value) {
+              if (context.mounted) {
+                Navigator.pop(context);
+              }
+            });
+            Future.delayed(const Duration(milliseconds: 200)).then((value) {
+              if (context.mounted) {
+                Navigator.pop(context);
+              }
+            });
             context
                 .read<AppoinmentsBloc>()
                 .add(DeleteAppointment(widget.appointment));
@@ -142,6 +148,6 @@ class _CancelSheetState extends State<CancelSheet> {
         return 'Change my mind';
       case CancelInfo.bookingTheWrong:
         return 'Booking the wrong doctor';
-      }
+    }
   }
 }

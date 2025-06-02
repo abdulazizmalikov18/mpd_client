@@ -67,13 +67,27 @@ class _VerificationSheetState extends State<VerificationSheet> {
               if (state.error != 'No') return;
               if (state.isNewUser) {
                 await Future.delayed(const Duration(milliseconds: 200)).then(
-                    (value) => Navigator.pushNamed(
-                        context, AppRoutes.registerDetail,
-                        arguments: widget.phone));
+                  (value) {
+                    if (context.mounted) {
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.registerDetail,
+                        arguments: widget.phone,
+                      );
+                    }
+                  },
+                );
               } else {
-                await Future.delayed(const Duration(milliseconds: 200)).then(
-                    (value) => Navigator.pushNamedAndRemoveUntil(
-                        context, AppRoutes.mainPage, (route) => false));
+                await Future.delayed(const Duration(milliseconds: 200))
+                    .then((value) {
+                  if (context.mounted) {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      AppRoutes.mainPage,
+                      (route) => false,
+                    );
+                  }
+                });
               }
             }
           },

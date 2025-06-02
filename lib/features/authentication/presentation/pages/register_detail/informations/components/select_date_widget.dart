@@ -15,7 +15,8 @@ import 'package:mpd_client/src/themes/styles.dart';
 
 class SelectDateWidget extends StatelessWidget {
   final TextEditingController? _birthController;
-  const SelectDateWidget({super.key, TextEditingController? birthController}) : _birthController = birthController;
+  const SelectDateWidget({super.key, TextEditingController? birthController})
+      : _birthController = birthController;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +28,12 @@ class SelectDateWidget extends StatelessWidget {
           child: RichText(
             text: TextSpan(children: [
               TextSpan(
-                  text: context.l10n.register_date_birth, style: Styles.boldTopHint.copyWith(color: context.color.black)),
-              TextSpan(text: '*', style: Styles.boldTopHint.copyWith(color: context.color.red)),
+                  text: context.l10n.register_date_birth,
+                  style:
+                      Styles.boldTopHint.copyWith(color: context.color.black)),
+              TextSpan(
+                  text: '*',
+                  style: Styles.boldTopHint.copyWith(color: context.color.red)),
             ]),
           ),
         ),
@@ -58,16 +63,27 @@ class SelectDateWidget extends StatelessWidget {
                           context: context,
                           builder: (context, child) {
                             return Theme(
-                                data: ThemeData()
-                                    .copyWith(dialogBackgroundColor: context.color.white, primaryColor: context.color.red),
-                                child: child!);
+                              data: ThemeData().copyWith(
+                                dialogTheme: DialogThemeData(
+                                  backgroundColor: context.color.white,
+                                ),
+                                primaryColor: context.color.red,
+                              ),
+                              child: child!,
+                            );
                           },
-                          initialDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+                          initialDate: DateTime(DateTime.now().year,
+                              DateTime.now().month, DateTime.now().day),
                           firstDate: DateTime(19),
-                          lastDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+                          lastDate: DateTime(DateTime.now().year,
+                              DateTime.now().month, DateTime.now().day),
                         ).then((date) {
                           if (date != null) {
-                            context.read<CreateUserBloc>().add(SelectingBirthEvent(date));
+                            if (context.mounted) {
+                              context
+                                  .read<CreateUserBloc>()
+                                  .add(SelectingBirthEvent(date));
+                            }
                           }
                         });
                       }
@@ -84,7 +100,8 @@ class SelectDateWidget extends StatelessWidget {
                     },
                     icon: SvgPicture.asset(
                       AppIcons.arrowDown,
-                      colorFilter:  ColorFilter.mode(context.color.grey, BlendMode.srcIn),
+                      colorFilter:
+                          ColorFilter.mode(context.color.grey, BlendMode.srcIn),
                       height: 24.h,
                       width: 24.h,
                     ),
@@ -95,7 +112,8 @@ class SelectDateWidget extends StatelessWidget {
                   border: Decorations.enabledBorder(context),
                   errorBorder: Decorations.errorBorder(context),
                   hintText: '01.01.2000',
-                  hintStyle: Styles.headline7.copyWith(color: context.color.grey))),
+                  hintStyle:
+                      Styles.headline7.copyWith(color: context.color.grey))),
         )
       ],
     );
@@ -116,11 +134,13 @@ class SelectDateWidget extends StatelessWidget {
             onDateTimeChanged: (date) {
               context.read<CreateUserBloc>().add(SelectingBirthEvent(date));
             },
-            initialDateTime: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+            initialDateTime: DateTime(
+                DateTime.now().year, DateTime.now().month, DateTime.now().day),
             minimumYear: 1940,
             maximumYear: DateTime.now().year,
             minimumDate: DateTime(1940),
-            maximumDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+            maximumDate: DateTime(
+                DateTime.now().year, DateTime.now().month, DateTime.now().day),
           ),
         ));
   }

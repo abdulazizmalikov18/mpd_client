@@ -7,6 +7,7 @@ import 'package:lottie/lottie.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
+import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/features/authentication/presentation/pages/register_detail/informations/components/select_variants_widget.dart';
 import 'package:mpd_client/features/user/data/models/specialist_cat_model.dart';
 import 'package:mpd_client/features/user/data/models/specialist_category_model.dart';
@@ -55,9 +56,9 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
       ))
           ?.files;
     } on PlatformException catch (e) {
-      _logException('Unsupported operation$e');
+      Log.e('Unsupported operation$e');
     } catch (e) {
-      _logException(e.toString());
+      Log.e(e.toString());
     }
     if (!mounted) return;
     setState(() {
@@ -66,9 +67,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
     });
   }
 
-  void _logException(String message) {
-    print(message);
-  }
+
 
   void _resetState() {
     if (!mounted) {

@@ -33,7 +33,8 @@ class PassportStirPart extends StatelessWidget {
           child: LabelInputWidget(
             require: '*',
             inputformater: [
-              MaskTextInputFormatter(mask: '# ###### ### ### #', filter: {"#": RegExp(r'[0-9]')})
+              MaskTextInputFormatter(
+                  mask: '# ###### ### ### #', filter: {"#": RegExp(r'[0-9]')})
             ],
             validator: Validators.passportSTIR,
             textInputType: TextInputType.number,
@@ -57,11 +58,13 @@ class PassportStirPart extends StatelessWidget {
                 onTap: () {
                   context.read<PassportBloc>().add(SelectPassportImage());
                 },
-                customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+                customBorder: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.r)),
                 child: Container(
                   height: 50.h,
                   decoration: BoxDecoration(
-                      border: Border.all(color: context.color.border), borderRadius: BorderRadius.circular(10.r)),
+                      border: Border.all(color: context.color.border),
+                      borderRadius: BorderRadius.circular(10.r)),
                   child: Row(
                     children: [
                       ScreenUtil().setHorizontalSpacing(15.w),
@@ -69,8 +72,11 @@ class PassportStirPart extends StatelessWidget {
                         selector: (state) => state.pasportImage,
                         builder: (context, image) {
                           return Text(
-                            image != null ? image.path.split('/').last : '123456789.JPEG',
-                            style: Styles.headline7.copyWith(color: context.color.grey),
+                            image != null
+                                ? image.path.split('/').last
+                                : '123456789.JPEG',
+                            style: Styles.headline7
+                                .copyWith(color: context.color.grey),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           );
@@ -90,19 +96,33 @@ class PassportStirPart extends StatelessWidget {
         BlocConsumer<PassportBloc, PassportState>(
           listener: (context, state) async {
             if (state.showLoading) {
-              showDialog(context: context, barrierDismissible: true, builder: (context) => const LoadingDialogWidget());
+              showDialog(
+                  context: context,
+                  barrierDismissible: true,
+                  builder: (context) => const LoadingDialogWidget());
             }
 
             if (!state.showLoading && state.error == 'No') {
               Navigator.pop(context);
-
-              await Future.delayed(const Duration(milliseconds: 300))
-                  .then((value) => Navigator.pushNamedAndRemoveUntil(context, AppRoutes.mainPage, (route) => false));
-            } else if (!state.showLoading && state.error != 'No' && state.error != '') {
+              await Future.delayed(const Duration(milliseconds: 300)).then(
+                (value) {
+                  if (context.mounted) {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      AppRoutes.mainPage,
+                      (route) => false,
+                    );
+                  }
+                },
+              );
+            } else if (!state.showLoading &&
+                state.error != 'No' &&
+                state.error != '') {
               Navigator.pop(context);
               ScaffoldMessenger.of(context)
                 ..hideCurrentSnackBar()
-                ..showSnackBar(UiTools.failSnackbar(title: state.error, context: context));
+                ..showSnackBar(
+                    UiTools.failSnackbar(title: state.error, context: context));
             }
           },
           builder: (context, state) {
@@ -124,18 +144,24 @@ class PassportStirPart extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('Later!', style: Styles.headline6.copyWith(color: context.color.black, fontWeight: FontWeight.w500)),
+              Text('Later!',
+                  style: Styles.headline6.copyWith(
+                      color: context.color.black, fontWeight: FontWeight.w500)),
               ScreenUtil().setHorizontalSpacing(5.w),
               InkWell(
                 onTap: () {
-                  Navigator.pushNamedAndRemoveUntil(context, AppRoutes.mainPage, (route) => false);
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, AppRoutes.mainPage, (route) => false);
                 },
-                customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                customBorder: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5)),
                 child: Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Text(
                     'Skip',
-                    style: Styles.headline6.copyWith(color: context.color.mainBlue, fontWeight: FontWeight.w500),
+                    style: Styles.headline6.copyWith(
+                        color: context.color.mainBlue,
+                        fontWeight: FontWeight.w500),
                   ),
                 ),
               ),

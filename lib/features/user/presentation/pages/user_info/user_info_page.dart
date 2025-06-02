@@ -115,7 +115,6 @@ class _UserInfoState extends State<UserInfo> {
                 SizedBox(height: 250.h),
                 BlocBuilder<UserInfoBloc, UserInfoState>(
                   builder: (context, state) {
-                    print(state.isBackChanged && state.userBackImage != null);
                     if (state.isBackChanged && state.userBackImage != null) {
                       return Image.file(
                         state.userBackImage!,

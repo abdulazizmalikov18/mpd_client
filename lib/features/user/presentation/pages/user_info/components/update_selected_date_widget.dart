@@ -69,7 +69,9 @@ class UpdateSelectDateWidget extends StatelessWidget {
                           builder: (context, child) {
                             return Theme(
                               data: ThemeData().copyWith(
-                                dialogBackgroundColor: context.color.white,
+                                dialogTheme: DialogThemeData(
+                                  backgroundColor: context.color.white,
+                                ),
                                 primaryColor: context.color.red,
                               ),
                               child: child!,

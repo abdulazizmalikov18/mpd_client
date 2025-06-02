@@ -132,8 +132,12 @@ class _ExpansionListState extends State<ProfessionCategory>
     final keyContext = expansionTileKey.currentContext;
     if (keyContext != null) {
       Future.delayed(const Duration(milliseconds: 200)).then((value) {
-        Scrollable.ensureVisible(keyContext,
-            duration: const Duration(milliseconds: 200));
+        if (keyContext.mounted) {
+          Scrollable.ensureVisible(
+            keyContext,
+            duration: const Duration(milliseconds: 200),
+          );
+        }
       });
     }
   }
