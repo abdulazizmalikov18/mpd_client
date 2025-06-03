@@ -90,82 +90,96 @@ class _PostBodyState extends State<PostBody>
           children: [
             ScreenUtil().setHorizontalSpacing(12.w),
             Expanded(
-              child: InkWell(
-                onTap: () {
-                  final sendComentBloc = context.read<SendComentBloc>();
-                  final postComentBloc = context.read<PostComentBloc>();
-                  final userInfoBloc = context.read<UserInfoBloc>();
-                  final chatBloc = context.read<ChatBloc>();
+              child: BlocBuilder<UserInfoBloc, UserInfoState>(
+                builder: (context, state) {
+                  return InkWell(
+                    onTap: () {
+                      if (state.userInfo?.username == widget.post.authorUser) {
+                        Navigator.of(context).pushNamed(
+                          AppRoutes.userInfo,
+                          arguments: state.userInfo,
+                        );
+                      } else {
+                        final sendComentBloc = context.read<SendComentBloc>();
+                        final postComentBloc = context.read<PostComentBloc>();
+                        final userInfoBloc = context.read<UserInfoBloc>();
+                        final chatBloc = context.read<ChatBloc>();
 
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => MultiBlocProvider(
-                      providers: [
-                        BlocProvider(
-                          create: (context) => UserProfileBloc(
-                            locator.get<HomeRepository>(),
-                          ),
-                        ),
-                        BlocProvider(
-                          create: (context) => PostBloc(
-                            locator.get<HomeRepository>(),
-                          ),
-                        ),
-                        BlocProvider.value(value: sendComentBloc),
-                        BlocProvider.value(value: postComentBloc),
-                        BlocProvider.value(value: userInfoBloc),
-                        BlocProvider.value(value: chatBloc),
-                      ],
-                      child: UserAccountView(
-                        username: widget.post.authorUser ?? "kabulov",
-                        name: widget.post.authorFullname ?? "Фарход Кабулов",
-                        avatar: widget.post.authorAvatar ??
-                            "https://dwed.fra1.digitaloceanspaces.com/SMMS/media/PostMedia/image/a651706c-f6a0-45fe-9d40-46e9fb37271b.jpeg",
-                        specialistId:
-                            int.tryParse(widget.post.authorJob?.id ?? "0") ?? 0,
-                      ),
-                    ),
-                  ));
-                },
-                child: Row(
-                  children: [
-                    Builder(builder: (context) {
-                      debugPrint("========>>>>>>> ${widget.post.authorAvatar}");
-                      return widget.post.authorAvatar!.isNotEmpty
-                          ? CachedImageWidget(
-                              url: widget.post.authorAvatar ??
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => MultiBlocProvider(
+                            providers: [
+                              BlocProvider(
+                                create: (context) => UserProfileBloc(
+                                  locator.get<HomeRepository>(),
+                                ),
+                              ),
+                              BlocProvider(
+                                create: (context) => PostBloc(
+                                  locator.get<HomeRepository>(),
+                                ),
+                              ),
+                              BlocProvider.value(value: sendComentBloc),
+                              BlocProvider.value(value: postComentBloc),
+                              BlocProvider.value(value: userInfoBloc),
+                              BlocProvider.value(value: chatBloc),
+                            ],
+                            child: UserAccountView(
+                              username: widget.post.authorUser ?? "kabulov",
+                              name: widget.post.authorFullname ??
+                                  "Фарход Кабулов",
+                              avatar: widget.post.authorAvatar ??
                                   "https://dwed.fra1.digitaloceanspaces.com/SMMS/media/PostMedia/image/a651706c-f6a0-45fe-9d40-46e9fb37271b.jpeg",
-                              size: 48,
-                            )
-                          : const DefaultAvatar(
-                              containerSize: 48,
-                              imageSize: 36,
-                            );
-                    }),
-                    ScreenUtil().setHorizontalSpacing(8.w),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                              specialistId: int.tryParse(
+                                      widget.post.authorJob?.id ?? "0") ??
+                                  0,
+                            ),
+                          ),
+                        ));
+                      }
+                    },
+                    child: Row(
                       children: [
-                        Text(
-                          widget.post.authorFullname ?? "--",
-                          style: Styles.postTitle
-                              .copyWith(color: context.color.black),
-                        ),
-                        // Text(
-                        //   widget.post.authorJob ?? "--",
-                        //   style: Styles.postSubtitle
-                        //       .copyWith(color: context.color.black),
-                        // ),
-                        Text(
-                          Utils.formatPostDate(widget.post.date!, context),
-                          overflow: TextOverflow.ellipsis,
-                          style: Styles.postTitle.copyWith(
-                              color: context.color.grey,
-                              fontFamily: Styles.gilroyRegular),
+                        Builder(builder: (context) {
+                          debugPrint(
+                              "========>>>>>>> ${widget.post.authorAvatar}");
+                          return widget.post.authorAvatar!.isNotEmpty
+                              ? CachedImageWidget(
+                                  url: widget.post.authorAvatar ??
+                                      "https://dwed.fra1.digitaloceanspaces.com/SMMS/media/PostMedia/image/a651706c-f6a0-45fe-9d40-46e9fb37271b.jpeg",
+                                  size: 48,
+                                )
+                              : const DefaultAvatar(
+                                  containerSize: 48,
+                                  imageSize: 36,
+                                );
+                        }),
+                        ScreenUtil().setHorizontalSpacing(8.w),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.post.authorFullname ?? "--",
+                              style: Styles.postTitle
+                                  .copyWith(color: context.color.black),
+                            ),
+                            // Text(
+                            //   widget.post.authorJob ?? "--",
+                            //   style: Styles.postSubtitle
+                            //       .copyWith(color: context.color.black),
+                            // ),
+                            Text(
+                              Utils.formatPostDate(widget.post.date!, context),
+                              overflow: TextOverflow.ellipsis,
+                              style: Styles.postTitle.copyWith(
+                                  color: context.color.grey,
+                                  fontFamily: Styles.gilroyRegular),
+                            )
+                          ],
                         )
                       ],
-                    )
-                  ],
-                ),
+                    ),
+                  );
+                },
               ),
             ),
             ClipRRect(

@@ -73,7 +73,7 @@ class _PostMediaState extends State<PostMedia>
                     imageUrl:
                         'https://resources.comphealth.com/wp-content/uploads/2019/05/post-residency-career-tips.jpg',
                   ),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fitWidth,
                 ),
               );
             },
@@ -96,11 +96,19 @@ class _PostMediaState extends State<PostMedia>
             top: 12.h,
             right: 12.w,
             child: widget.postMedias!.length != 1
-                ? Text(
-                    '${PostInheritedNotifier.of(context).notifier!.post.isEmpty ? 0 : PostInheritedNotifier.of(context).notifier!.post[widget.baseIndex].selectedIndex! + 1}/${widget.postMedias!.length}',
-                    style: Styles.semiboldTitle.copyWith(
-                      color: context.color.white,
-                      fontFamily: Styles.gilroyRegular,
+                ? Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: context.color.grey,
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    child: Text(
+                      '${PostInheritedNotifier.of(context).notifier!.post.isEmpty ? 0 : PostInheritedNotifier.of(context).notifier!.post[widget.baseIndex].selectedIndex! + 1}/${widget.postMedias!.length}',
+                      style: Styles.semiboldTitle.copyWith(
+                        color: context.color.white,
+                        fontSize: 12,
+                        fontFamily: Styles.gilroyRegular,
+                      ),
                     ),
                   )
                 : const SizedBox(),

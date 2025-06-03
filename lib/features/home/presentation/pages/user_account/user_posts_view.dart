@@ -290,6 +290,7 @@ class _UserPostIteamState extends State<UserPostIteam> {
             imageUrl: Utils.imageMedieaType(
               widget.media[index],
             ),
+            fit: BoxFit.fitWidth,
           ),
         ),
         Positioned(

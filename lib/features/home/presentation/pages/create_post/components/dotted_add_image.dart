@@ -13,14 +13,16 @@ class DottedAddImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DottedBorder(
-        // borderType: BorderType.RRect,
-        // radius: Radius.circular(20.r),
-        // dashPattern: const [10, 10],
-        // color: Colors.grey,
-        // strokeWidth: 2,
+        options: RoundedRectDottedBorderOptions(
+          radius: Radius.circular(20.r),
+          strokeWidth: 2,
+          color: Colors.grey,
+          dashPattern: const [10, 10],
+        ),
         child: InkWell(
           onTap: onPressed,
-          customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
+          customBorder:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
           child: SizedBox(
             height: 171.h,
             width: 171.h,
@@ -29,7 +31,8 @@ class DottedAddImage extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   AppIcons.gallery,
-                  colorFilter:  ColorFilter.mode(context.color.mainBlue, BlendMode.srcIn),
+                  colorFilter:
+                      ColorFilter.mode(context.color.mainBlue, BlendMode.srcIn),
                   height: 43.h,
                   width: 43.h,
                 ),
@@ -37,7 +40,9 @@ class DottedAddImage extends StatelessWidget {
                 Text(
                   context.l10n.lenth_image_add,
                   textAlign: TextAlign.center,
-                  style: Styles.boldHeadline6.copyWith(fontFamily: Styles.gilroyMedium, color: context.color.mainBlue),
+                  style: Styles.boldHeadline6.copyWith(
+                      fontFamily: Styles.gilroyMedium,
+                      color: context.color.mainBlue),
                 )
               ],
             ),

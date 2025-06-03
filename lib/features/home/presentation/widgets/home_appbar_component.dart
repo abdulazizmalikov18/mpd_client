@@ -137,8 +137,14 @@ class HomeAppbarComponent extends StatelessWidget implements PreferredSize {
     );
   }
 
-  Theme _buildUserInfo(String name, String surname, dynamic image, bool isLocal,
-      VoidCallback onTap, BuildContext context) {
+  Theme _buildUserInfo(
+    String name,
+    String surname,
+    dynamic image,
+    bool isLocal,
+    VoidCallback onTap,
+    BuildContext context,
+  ) {
     return Theme(
       data: ThemeData(
         splashColor: Colors.transparent,
