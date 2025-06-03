@@ -534,12 +534,9 @@ class _UserAccountViewState extends State<UserAccountView> {
                                               onPress: () {
                                                 context
                                                     .read<ChatBloc>()
-                                                    .add(CreateChatEvent(
-                                                      user: ChatUserModel(
-                                                        username:
-                                                            widget.username,
-                                                      ),
-                                                      onSuccess: (model) {
+                                                    .add(GetGroupChat(
+                                                      username: widget.username,
+                                                      onSucces: (model) {
                                                         Log.e(model.slugName);
                                                         final bloc =
                                                             context.read<
@@ -558,7 +555,43 @@ class _UserAccountViewState extends State<UserAccountView> {
                                                         ));
                                                       },
                                                       onError: () {
-                                                        Log.e("message");
+                                                        context
+                                                            .read<ChatBloc>()
+                                                            .add(
+                                                                CreateChatEvent(
+                                                              user:
+                                                                  ChatUserModel(
+                                                                username: widget
+                                                                    .username,
+                                                              ),
+                                                              onSuccess:
+                                                                  (model) {
+                                                                Log.e(model
+                                                                    .slugName);
+                                                                final bloc =
+                                                                    context.read<
+                                                                        UserInfoBloc>();
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .push(
+                                                                        MaterialPageRoute(
+                                                                  builder: (context) =>
+                                                                      BlocProvider
+                                                                          .value(
+                                                                    value: bloc,
+                                                                    child:
+                                                                        InChatView(
+                                                                      group:
+                                                                          model,
+                                                                    ),
+                                                                  ),
+                                                                ));
+                                                              },
+                                                              onError: () {
+                                                                Log.e(
+                                                                    "message");
+                                                              },
+                                                            ));
                                                       },
                                                     ));
                                               },

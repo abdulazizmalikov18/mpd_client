@@ -5,7 +5,14 @@ abstract class ChatEvent {
 }
 
 class GetGroupChat extends ChatEvent {
-  const GetGroupChat();
+  final String? username;
+  final Function(ChatGroupModel model)? onSucces;
+  final VoidCallback? onError;
+  const GetGroupChat({
+    this.username,
+    this.onSucces,
+    this.onError,
+  });
 }
 
 class PushToChatEvent extends ChatEvent {

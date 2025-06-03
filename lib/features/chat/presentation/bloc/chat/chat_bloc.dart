@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/core/data/repository/storage_keys.dart';
 import 'package:mpd_client/core/data/repository/storage_repository.dart';
 import 'package:mpd_client/core/extension/list_extention.dart';
@@ -367,7 +368,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         groups: null,
       ),
     ));
-    final result = await _repo.getGroups(const GetGroupChatEntity());
+    final result =
+        await _repo.getGroups(GetGroupChatEntity(username: event.username));
     if (result.isRight) {
       emit(state.copyWith(
         textForUpdate: const Uuid().v4(),
@@ -376,6 +378,14 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
           groups: [...result.right.results],
         ),
       ));
+      if (event.onSucces != null && event.onError != null) {
+        if (result.right.results.isEmpty) {
+          event.onError!();
+        } else {
+          event.onSucces!(result.right.results.first);
+        }
+      }
+
       return;
     }
     emit(state.copyWith(
