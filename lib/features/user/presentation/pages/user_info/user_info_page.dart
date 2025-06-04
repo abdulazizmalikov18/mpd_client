@@ -18,7 +18,6 @@ import 'package:mpd_client/features/user/data/models/user_info_model.dart';
 import 'package:mpd_client/features/user/presentation/pages/user_info/components/select_gender_user.dart';
 import 'package:mpd_client/features/user/presentation/widgets/disabled_account_sheet.dart';
 import 'package:mpd_client/src/themes/styles.dart';
-import 'package:mpd_client/src/widgets/appbar_widget.dart';
 import 'package:mpd_client/src/widgets/default_avatar.dart';
 import 'package:mpd_client/src/widgets/label_input_widget.dart';
 import 'package:mpd_client/src/widgets/longbutton.dart';
@@ -66,8 +65,17 @@ class _UserInfoState extends State<UserInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(
-        title: context.l10n.profile_personal_info,
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          spacing: 8,
+          children: [
+            Text(context.l10n.profile_personal_info),
+            if (context.read<UserInfoBloc>().state.userInfo?.status == 2)
+              AppIcons.verify.svg()
+          ],
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -118,15 +126,15 @@ class _UserInfoState extends State<UserInfo> {
                     if (state.isBackChanged && state.userBackImage != null) {
                       return Image.file(
                         state.userBackImage!,
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                         height: 200.h,
                         width: double.maxFinite,
                       );
                     }
-                    return Image.network(
-                      state.userInfo?.backgroundImage ??
+                    return CachedNetworkImage(
+                     imageUrl: state.userInfo?.backgroundImage ??
                           "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                       height: 200.h,
                       width: double.maxFinite,
                     );
@@ -202,6 +210,8 @@ class _UserInfoState extends State<UserInfo> {
               inputHint: context.l10n.profile_firstname,
               controller: firsNameController,
               require: '*',
+              readOnly:
+                  context.read<UserInfoBloc>().state.userInfo?.status == 2,
               onChanged: (value) {
                 context.read<UserInfoBloc>().add(const HasChangesEvent());
               },
@@ -215,18 +225,25 @@ class _UserInfoState extends State<UserInfo> {
               inputHint: context.l10n.profile_lastname,
               controller: userLastNameController,
               require: '*',
+              readOnly:
+                  context.read<UserInfoBloc>().state.userInfo?.status == 2,
               onChanged: (value) {
                 context.read<UserInfoBloc>().add(const HasChangesEvent());
               },
             ),
             ScreenUtil().setVerticalSpacing(20.h),
-            const SelectGenderUser(),
+            SelectGenderUser(
+              isDisable:
+                  context.read<UserInfoBloc>().state.userInfo?.status == 2,
+            ),
             ScreenUtil().setVerticalSpacing(20.h),
             UpdateSelectDateWidget(
               onChanged: (value) {
                 context.read<UserInfoBloc>().add(const HasChangesEvent());
               },
               birthController: birthController,
+              isDisable:
+                  context.read<UserInfoBloc>().state.userInfo?.status == 2,
             ),
             ScreenUtil().setVerticalSpacing(20.h),
             BlocSelector<ProfessionBloc, ProfessionState, Profession?>(
@@ -329,13 +346,21 @@ class _UserInfoState extends State<UserInfo> {
                   loading: state.showLoading,
                   buttonName: context.l10n.profile_save_changes,
                   onPress: () {
-                    context.read<UserInfoBloc>().add((UpdateUserProfessionEvent(
-                          lastname: userLastNameController.text.trim(),
-                          name: firsNameController.text.trim(),
-                          birthday: birthController.text.trim(),
-                          gender: gender,
-                          bio: bioController.text.trim(),
-                        )));
+                    if (state.userInfo?.status != 2) {
+                      context
+                          .read<UserInfoBloc>()
+                          .add((UpdateUserProfessionEvent(
+                            lastname: userLastNameController.text.trim(),
+                            name: firsNameController.text.trim(),
+                            birthday: birthController.text.trim(),
+                            gender: gender,
+                            bio: bioController.text.trim(),
+                          )));
+                    } else {
+                      context
+                          .read<UserInfoBloc>()
+                          .add((UpdateUserVerifyEvent()));
+                    }
                     context.read<UserInfoBloc>().add((UpdateUserImage()));
                     Navigator.of(context).pop();
                   },

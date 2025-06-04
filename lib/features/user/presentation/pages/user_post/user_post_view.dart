@@ -33,7 +33,7 @@ class _UserPostViewState extends State<UserPostView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Shaxsiy postlar")),
+      appBar: AppBar(title: Text(context.l10n.personalPosts)),
       body: BlocBuilder<PostBloc, PostState>(
         builder: (context, state) {
           switch (state.statusUser) {

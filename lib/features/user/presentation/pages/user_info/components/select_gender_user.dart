@@ -5,7 +5,8 @@ import 'package:mpd_client/src/themes/styles.dart';
 import 'package:mpd_client/src/widgets/radio_button.dart';
 
 class SelectGenderUser extends StatefulWidget {
-  const SelectGenderUser({super.key});
+  const SelectGenderUser({super.key, required this.isDisable});
+  final bool isDisable;
 
   @override
   State<SelectGenderUser> createState() => _SelectGenderUserState();
@@ -36,10 +37,12 @@ class _SelectGenderUserState extends State<SelectGenderUser> {
                 value: Gender.male,
                 groupValue: UserInfo.of(context).gender,
                 onChanged: (value) {
-                  setState(() {
-                    UserInfo.of(context).gender = value;
-                    context.read<UserInfoBloc>().add(const HasChangesEvent());
-                  });
+                  if (!widget.isDisable) {
+                    setState(() {
+                      UserInfo.of(context).gender = value;
+                      context.read<UserInfoBloc>().add(const HasChangesEvent());
+                    });
+                  }
                 },
                 text: context.l10n.register_gender_man,
                 isSelected: UserInfo.of(context).gender == Gender.male,
@@ -49,10 +52,12 @@ class _SelectGenderUserState extends State<SelectGenderUser> {
                 value: Gender.female,
                 groupValue: UserInfo.of(context).gender,
                 onChanged: (value) {
-                  setState(() {
-                    UserInfo.of(context).gender = value;
-                    context.read<UserInfoBloc>().add(const HasChangesEvent());
-                  });
+                  if (!widget.isDisable) {
+                    setState(() {
+                      UserInfo.of(context).gender = value;
+                      context.read<UserInfoBloc>().add(const HasChangesEvent());
+                    });
+                  }
                 },
                 text: context.l10n.register_gender_woman,
                 isSelected: UserInfo.of(context).gender == Gender.female,

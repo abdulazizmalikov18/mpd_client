@@ -274,5 +274,26 @@
   "error_pagenot_found_title": "Страница не найдена",
   "error_pagenot_found_subtitle": "Запрошенная страница не существует",
   "error_try_again": "Попробовать снова",
-  "error_return_tohome": "На главную"
+  "error_return_tohome": "На главную",
+
+  "posts": "Посты",
+  "about": "О себе",
+  "aboutYou": "О вас",
+  "message": "Сообщение",
+  "doctorProfile": "Профиль врача",
+  "mySpecialties": "Мои специальности",
+  "personalPosts": "Личные посты",
+  "emergencyOnly": "Пожалуйста, обращайтесь только в экстренных случаях!",
+  "requestEmergencyHelp": "Вызвать скорую помощь!",
+  "fainted": "Потерял сознание",
+  "firstAid": "Первая помощь",
+  "trafficAccident": "ДТП",
+  "accident": "Авария",
+  "organization": "Организация",
+  "category": "Категория",
+  "job": "Профессия",
+  "chat": "Чат",
+  "search": "Поиск",
+  "notification": "Уведомление",
+  "noData": "Нет данных"
 }

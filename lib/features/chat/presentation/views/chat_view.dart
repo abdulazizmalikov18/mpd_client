@@ -4,6 +4,7 @@ import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/app/app_images.dart';
 import 'package:mpd_client/app/colors.dart';
+import 'package:mpd_client/core/extension/context_ext.dart';
 import 'package:mpd_client/core/pagination/presentation/paginator_list.dart';
 import 'package:mpd_client/features/chat/presentation/bloc/chat_group/chat_group_bloc.dart';
 import 'package:mpd_client/features/chat/presentation/views/in_app_chat.dart';
@@ -26,7 +27,7 @@ class _ChatViewState extends State<ChatView> {
       resizeToAvoidBottomInset: false,
       backgroundColor: context.color.white,
       appBar: AppBar(
-        title: Text('Chat'),
+        title: Text(context.l10n.chat),
         bottom: PreferredSize(
           preferredSize: Size(double.infinity, 52),
           child: Padding(
@@ -42,7 +43,7 @@ class _ChatViewState extends State<ChatView> {
               prefixIcon: AppIcons.search.svg(
                 color: context.color.grey,
               ),
-              hintText: 'Search',
+              hintText: context.l10n.search,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w300,

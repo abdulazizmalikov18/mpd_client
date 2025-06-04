@@ -304,7 +304,7 @@ class _DrProfileByidState extends State<DrProfileByid> {
                             tabs: [
                               Tab(
                                 child: Text(
-                                  context.l10n.book_doctor_about_doctor,
+                                  context.l10n.about,
                                   style: Styles.descSubtitle.copyWith(
                                     color: context.color.black,
                                   ),
@@ -312,7 +312,7 @@ class _DrProfileByidState extends State<DrProfileByid> {
                               ),
                               Tab(
                                 child: Text(
-                                  "Post",
+                                context.l10n.posts,
                                   style: Styles.descSubtitle
                                       .copyWith(color: context.color.black),
                                 ),

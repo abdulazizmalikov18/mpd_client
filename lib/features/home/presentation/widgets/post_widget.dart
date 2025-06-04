@@ -96,8 +96,8 @@ class _PostBodyState extends State<PostBody>
                     onTap: () {
                       if (state.userInfo?.username == widget.post.authorUser) {
                         Navigator.of(context).pushNamed(
-                          AppRoutes.userInfo,
-                          arguments: state.userInfo,
+                          AppRoutes.postUser,
+                          arguments: state.userInfo?.username ?? "",
                         );
                       } else {
                         final sendComentBloc = context.read<SendComentBloc>();

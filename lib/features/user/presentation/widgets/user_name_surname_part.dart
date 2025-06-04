@@ -1,5 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:formz/formz.dart';
+import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/src/themes/styles.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../../../app/app_export.dart';
@@ -14,13 +15,33 @@ class UserNameSurnamePart extends StatelessWidget {
     return BlocBuilder<UserInfoBloc, UserInfoState>(
       builder: (context, state) {
         if (state.status.isSuccess) {
-          return Text(
-            '${state.userInfo!.name} ${state.userInfo!.lastname}',
-            style: Styles.boldHeadline6.copyWith(fontSize: 24.sp),
-            textAlign: TextAlign.center,
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: 8,
+            children: [
+              Text(
+                '${state.userInfo!.name} ${state.userInfo!.lastname}',
+                style: Styles.boldHeadline6.copyWith(fontSize: 24.sp),
+                textAlign: TextAlign.center,
+              ),
+              if (state.userInfo?.status == 2) AppIcons.verify.svg()
+            ],
           );
         } else if (state.userInfo != null) {
-          return Text('${state.userInfo!.name} ${state.userInfo!.lastname}', style: Styles.boldHeadline6.copyWith(fontSize: 24.sp), textAlign: TextAlign.center);
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: 8,
+            children: [
+              Text(
+                '${state.userInfo!.name} ${state.userInfo!.lastname}',
+                style: Styles.boldHeadline6.copyWith(fontSize: 24.sp),
+                textAlign: TextAlign.center,
+              ),
+              if (state.userInfo?.status == 2) AppIcons.verify.svg()
+            ],
+          );
         } else {
           return Shimmer.fromColors(
             direction: ShimmerDirection.ltr,

@@ -7,6 +7,7 @@ import 'package:lottie/lottie.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
+import 'package:mpd_client/core/extension/context_ext.dart';
 import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/features/authentication/presentation/pages/register_detail/informations/components/select_variants_widget.dart';
 import 'package:mpd_client/features/user/data/models/specialist_cat_model.dart';
@@ -67,8 +68,6 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
     });
   }
 
-
-
   void _resetState() {
     if (!mounted) {
       return;
@@ -98,7 +97,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const AppBarWidget(title: "About you"),
+        appBar:  AppBarWidget(title: context.l10n.aboutYou),
         extendBody: true,
         resizeToAvoidBottomInset: false,
         bottomNavigationBar: status != -1
@@ -359,10 +358,12 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                                 _pickFiles();
                               },
                               child: DottedBorder(
-                                // color: context.color.border,
-                                // strokeWidth: 1,
-                                // borderType: BorderType.RRect,
-                                // radius: const Radius.circular(8),
+                                options: RoundedRectDottedBorderOptions(
+                                  radius: Radius.circular(20.r),
+                                  strokeWidth: 2,
+                                  color: Colors.grey,
+                                  dashPattern: const [10, 10],
+                                ),
                                 child: SizedBox(
                                   height: 106.h,
                                   width: double.infinity,

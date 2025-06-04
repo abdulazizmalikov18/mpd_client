@@ -792,4 +792,65 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get error_return_tohome => 'На главную';
+
+  @override
+  String get posts => 'Посты';
+
+  @override
+  String get about => 'О себе';
+
+  @override
+  String get aboutYou => 'О вас';
+
+  @override
+  String get message => 'Сообщение';
+
+  @override
+  String get doctorProfile => 'Профиль врача';
+
+  @override
+  String get mySpecialties => 'Мои специальности';
+
+  @override
+  String get personalPosts => 'Личные посты';
+
+  @override
+  String get emergencyOnly =>
+      'Пожалуйста, обращайтесь только в экстренных случаях!';
+
+  @override
+  String get requestEmergencyHelp => 'Вызвать скорую помощь!';
+
+  @override
+  String get fainted => 'Потерял сознание';
+
+  @override
+  String get firstAid => 'Первая помощь';
+
+  @override
+  String get trafficAccident => 'ДТП';
+
+  @override
+  String get accident => 'Авария';
+
+  @override
+  String get organization => 'Организация';
+
+  @override
+  String get category => 'Категория';
+
+  @override
+  String get job => 'Профессия';
+
+  @override
+  String get chat => 'Чат';
+
+  @override
+  String get search => 'Поиск';
+
+  @override
+  String get notification => 'Уведомление';
+
+  @override
+  String get noData => 'Нет данных';
 }

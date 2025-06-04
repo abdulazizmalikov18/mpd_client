@@ -811,4 +811,65 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get error_return_tohome => 'Uyga qaytish';
+
+  @override
+  String get posts => 'Postlar';
+
+  @override
+  String get about => 'Haqida';
+
+  @override
+  String get aboutYou => 'Siz haqingizda';
+
+  @override
+  String get message => 'Xabar';
+
+  @override
+  String get doctorProfile => 'Shifokor profiliga kirish';
+
+  @override
+  String get mySpecialties => 'Mutaxassisliklarim';
+
+  @override
+  String get personalPosts => 'Shaxsiy postlar';
+
+  @override
+  String get emergencyOnly =>
+      'Iltimos faqat favqulodda holatda murojaat qiling!';
+
+  @override
+  String get requestEmergencyHelp => 'Tez yordam so\'rash!';
+
+  @override
+  String get fainted => 'Hushi ketdi';
+
+  @override
+  String get firstAid => 'Birinchi yordam';
+
+  @override
+  String get trafficAccident => 'YTH';
+
+  @override
+  String get accident => 'Avariya';
+
+  @override
+  String get organization => 'Tashkilot';
+
+  @override
+  String get category => 'Kategoriya';
+
+  @override
+  String get job => 'Kasb';
+
+  @override
+  String get chat => 'Chat';
+
+  @override
+  String get search => 'Qidirish';
+
+  @override
+  String get notification => 'Bildirishnoma';
+
+  @override
+  String get noData => 'Ma\'lumot yo\'q';
 }

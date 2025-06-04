@@ -12,12 +12,13 @@ class PostImageOrVideo extends StatefulWidget {
   final String? screenshotVideo;
   final FlickMultiManager flickMultiManager;
 
-  const PostImageOrVideo(
-      {super.key,
-      required this.screenshotVideo,
-      required this.url,
-      required this.isVideo,
-      required this.flickMultiManager});
+  const PostImageOrVideo({
+    super.key,
+    required this.screenshotVideo,
+    required this.url,
+    required this.isVideo,
+    required this.flickMultiManager,
+  });
 
   @override
   State<PostImageOrVideo> createState() => _PostImageOrVideoState();
@@ -68,9 +69,15 @@ class _PostImageOrVideoState extends State<PostImageOrVideo>
   Widget getMedia() {
     switch (widget.isVideo) {
       case null:
-        return Image.network(
-          'https://resources.comphealth.com/wp-content/uploads/2019/05/post-residency-career-tips.jpg',
-          fit: BoxFit.cover,
+        return CachedNetworkImage(
+          imageUrl:
+              'https://resources.comphealth.com/wp-content/uploads/2019/05/post-residency-career-tips.jpg',
+          fit: BoxFit.fitWidth,
+          errorWidget: (context, url, error) => CachedNetworkImage(
+            imageUrl:
+                'https://resources.comphealth.com/wp-content/uploads/2019/05/post-residency-career-tips.jpg',
+            fit: BoxFit.cover,
+          ),
         );
 
       case false:
@@ -78,11 +85,12 @@ class _PostImageOrVideoState extends State<PostImageOrVideo>
           imageUrl: widget.url.isEmpty
               ? 'https://resources.comphealth.com/wp-content/uploads/2019/05/post-residency-career-tips.jpg'
               : widget.url,
-          fit: BoxFit.cover,
-          // placeholder: (context, url) => Material(
-          //   color: context.color.grey.withValues(alpha:0.2),
-          // ),
-          errorWidget: (context, url, error) => const Icon(Icons.error),
+          fit: BoxFit.fitWidth,
+          errorWidget: (context, url, error) => CachedNetworkImage(
+            imageUrl:
+                'https://resources.comphealth.com/wp-content/uploads/2019/05/post-residency-career-tips.jpg',
+            fit: BoxFit.cover,
+          ),
         );
 
       case true:

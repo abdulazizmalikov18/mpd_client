@@ -40,7 +40,7 @@ class _UserPostInfoViewState extends State<UserPostInfoView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Posts")),
+      appBar: AppBar(title: Text(context.l10n.posts)),
       body: SafeArea(
         child: BlocBuilder<PostBloc, PostState>(
           builder: (context, state) {

@@ -26,10 +26,10 @@ class SocketOfferBloc extends Bloc<SocketOfferEvent, SocketOfferState> {
     });
     on<ConnectSocketEvent>((event, emit) {
       final socketURl = Uri.parse(
-          "ws://82.215.78.34/OMS/ws/work/?specialist_id=942&org_slug=mpd&lang=ru");
+        "wss://sharq-api.sharqdarmon.uz/OMS/ws/work/?specialist_id=942&org_slug=mpd&lang=ru",
+      );
       socketChannel = IOWebSocketChannel.connect(socketURl);
       emit(state.copyWith(isConnect: true, type: "null"));
-
       final stream = socketChannel!.stream.asBroadcastStream();
       stream.listen(
         (event) {

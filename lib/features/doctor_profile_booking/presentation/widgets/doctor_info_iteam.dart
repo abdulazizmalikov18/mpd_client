@@ -68,7 +68,7 @@ class DoctorInfoItem extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Text(
-            doctor.bio != null ? doctor.bio.toString() : "Malumot yoq",
+            doctor.bio != null ? doctor.bio.toString() : context.l10n.noData,
             style: Styles.descSubtitle
                 .copyWith(fontSize: 14.sp, color: context.color.grey),
           ),
@@ -91,7 +91,7 @@ class DoctorInfoItem extends StatelessWidget {
           child: Text(
             doctor.job.description.isNotEmpty
                 ? doctor.job.description
-                : "Malumot yoq",
+                : context.l10n.noData,
             style: Styles.descSubtitle
                 .copyWith(fontSize: 14.sp, color: context.color.grey),
           ),
@@ -137,28 +137,33 @@ class DoctorInfoItem extends StatelessWidget {
                 '${context.l10n.book_doctor_reviews_all} $rundomReview ${context.l10n.book_doctor_reviews.toLowerCase()}',
             onPress: () {
               showModalBottomSheet(
-                  isScrollControlled: true,
-                  backgroundColor: Colors.transparent,
-                  context: context,
-                  builder: (_) => BottomSheetWidget(children: [
-                        ScreenUtil().setVerticalSpacing(32.h),
-                        Center(
-                          child: Text(
-                            context.l10n.book_doctor_reviews,
-                            style: Styles.boldTitle.copyWith(
-                                color: context.color.black,
-                                fontSize: 24.sp,
-                                fontFamily: Styles.gilroyMedium),
-                          ),
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
+                context: context,
+                builder: (_) => BottomSheetWidget(
+                  children: [
+                    ScreenUtil().setVerticalSpacing(32.h),
+                    Center(
+                      child: Text(
+                        context.l10n.book_doctor_reviews,
+                        style: Styles.boldTitle.copyWith(
+                          color: context.color.black,
+                          fontSize: 24.sp,
+                          fontFamily: Styles.gilroyMedium,
                         ),
-                        ScreenUtil().setVerticalSpacing(28.h),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.w),
-                          child: const ReviewWidget(
-                              status: SendComentInitial(null)),
-                        ),
-                        ScreenUtil().setVerticalSpacing(32.h),
-                      ]));
+                      ),
+                    ),
+                    ScreenUtil().setVerticalSpacing(28.h),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: const ReviewWidget(
+                        status: SendComentInitial(null),
+                      ),
+                    ),
+                    ScreenUtil().setVerticalSpacing(32.h),
+                  ],
+                ),
+              );
             },
             textColor: context.color.mainBlue,
             borderColor: context.color.mainBlue,

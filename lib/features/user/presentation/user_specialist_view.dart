@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
+import 'package:mpd_client/core/extension/context_ext.dart';
 
 class UserSpecialistView extends StatefulWidget {
   const UserSpecialistView({super.key});
@@ -16,7 +17,7 @@ class _UserSpecialistViewState extends State<UserSpecialistView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Mutaxaisliklarim"),
+        title: Text(context.l10n.mySpecialties),
         actions: [
           IconButton(
             onPressed: () {
@@ -65,13 +66,13 @@ class _UserSpecialistViewState extends State<UserSpecialistView> {
                         children: [
                           Text("ORG: ${state.specailistModel[index].org.name}"),
                           Text(
-                            "Name: ${state.specailistModel[index].name} ${state.specailistModel[index].lastname}",
+                            "${context.l10n.register_firstname}: ${state.specailistModel[index].name} ${state.specailistModel[index].lastname}",
                           ),
                           Text(
-                            "Category: ${state.specailistModel[index].specCat.name}",
+                            "${context.l10n.category}: ${state.specailistModel[index].specCat.name}",
                           ),
                           Text(
-                            "Job: ${state.specailistModel[index].job.name}",
+                            "${context.l10n.job}: ${state.specailistModel[index].job.name}",
                           ),
                         ],
                       ),

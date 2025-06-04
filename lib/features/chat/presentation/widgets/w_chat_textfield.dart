@@ -22,17 +22,19 @@ class WChatTextField extends StatelessWidget {
                 height: 48,
                 child: TextField(
                   controller: ChatVMController().messageController,
-                  onEditingComplete: () => context.read<ChatMessageBloc>().add(
-                        ChatSendMessageEvent(
-                          text: ChatVMController().messageController.text,
-                          groupSlug:
-                              InChatView.of(context)!.widget.group.slugName,
-                        ),
-                      ),
+                  // onEditingComplete: () => context.read<ChatMessageBloc>().add(
+                  //       ChatSendMessageEvent(
+                  //         text: ChatVMController().messageController.text,
+                  //         groupSlug:
+                  //             InChatView.of(context)!.widget.group.slugName,
+                  //       ),
+                  //     ),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                   ),
+                  keyboardType: TextInputType.multiline,
+                  // textInputAction: TextInputAction.newline,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.only(top: 14, left: 16),
                     filled: true,

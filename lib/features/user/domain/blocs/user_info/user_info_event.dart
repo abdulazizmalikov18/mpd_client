@@ -68,6 +68,16 @@ class UpdateUserProfessionEvent extends UserInfoEvent {
   });
 }
 
+class UpdateUserVerifyEvent extends UserInfoEvent {
+  final int? mainCat;
+  final int? region;
+
+  const UpdateUserVerifyEvent({
+    this.mainCat,
+    this.region,
+  });
+}
+
 class SelectedCategoryIdEvent extends UserInfoEvent {
   final MainCat mainCat;
   final String localCatName;
@@ -83,9 +93,11 @@ class SelectedRegionIdEvent extends UserInfoEvent {
 }
 
 class SelectUserImage extends UserInfoEvent {}
+
 class SelectUserBackImage extends UserInfoEvent {}
 
 class UpdateUserImage extends UserInfoEvent {}
+
 class UpdateUserBackImage extends UserInfoEvent {}
 
 class HasChangesEvent extends UserInfoEvent {

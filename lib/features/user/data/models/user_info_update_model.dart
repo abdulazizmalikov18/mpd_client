@@ -4,9 +4,11 @@
 
 import 'dart:convert';
 
-UserInfoUpdateModel userInfoUpdateModelFromJson(String str) => UserInfoUpdateModel.fromJson(json.decode(str));
+UserInfoUpdateModel userInfoUpdateModelFromJson(String str) =>
+    UserInfoUpdateModel.fromJson(json.decode(str));
 
-String userInfoUpdateModelToJson(UserInfoUpdateModel data) => json.encode(data.toJson());
+String userInfoUpdateModelToJson(UserInfoUpdateModel data) =>
+    json.encode(data.toJson());
 
 class UserInfoUpdateModel {
   UserInfoUpdateModel({
@@ -43,7 +45,8 @@ class UserInfoUpdateModel {
   String? backgroundImage;
   dynamic region;
 
-  factory UserInfoUpdateModel.fromJson(Map<String, dynamic> json) => UserInfoUpdateModel(
+  factory UserInfoUpdateModel.fromJson(Map<String, dynamic> json) =>
+      UserInfoUpdateModel(
         username: json["username"],
         name: json["name"],
         surname: json["surname"],
@@ -61,13 +64,13 @@ class UserInfoUpdateModel {
       );
 
   Map<String, dynamic> toJson() {
-    final birthDayFormated = birthday!.split('.').reversed.join('-');
+    final birthDayFormated = birthday?.split('.').reversed.join('-');
     Map<String, dynamic> map = {
-      if(name != null)"name": name,
-      if(lastname != null)"lastname" : lastname,
-      if(birthday  != null)"birthday": birthDayFormated,
-      if(bio  != null && bio!.isNotEmpty)"bio": bio,
-      if(gender != null)"gender": gender,
+      if (name != null) "name": name,
+      if (lastname != null) "lastname": lastname,
+      if (birthday != null) "birthday": birthDayFormated,
+      if (bio != null && bio!.isNotEmpty) "bio": bio,
+      if (gender != null) "gender": gender,
       if (mainCat != null) "main_cat": mainCat,
       if (region != null) "region": region,
     };

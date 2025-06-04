@@ -1641,6 +1641,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Go Home'**
   String get error_return_tohome;
+
+  /// No description provided for @posts.
+  ///
+  /// In en, this message translates to:
+  /// **'Posts'**
+  String get posts;
+
+  /// No description provided for @about.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get about;
+
+  /// No description provided for @aboutYou.
+  ///
+  /// In en, this message translates to:
+  /// **'About you'**
+  String get aboutYou;
+
+  /// No description provided for @message.
+  ///
+  /// In en, this message translates to:
+  /// **'Message'**
+  String get message;
+
+  /// No description provided for @doctorProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctor profile'**
+  String get doctorProfile;
+
+  /// No description provided for @mySpecialties.
+  ///
+  /// In en, this message translates to:
+  /// **'My specialties'**
+  String get mySpecialties;
+
+  /// No description provided for @personalPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal posts'**
+  String get personalPosts;
+
+  /// No description provided for @emergencyOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Please contact only in case of emergency!'**
+  String get emergencyOnly;
+
+  /// No description provided for @requestEmergencyHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Request emergency help!'**
+  String get requestEmergencyHelp;
+
+  /// No description provided for @fainted.
+  ///
+  /// In en, this message translates to:
+  /// **'Fainted'**
+  String get fainted;
+
+  /// No description provided for @firstAid.
+  ///
+  /// In en, this message translates to:
+  /// **'First aid'**
+  String get firstAid;
+
+  /// No description provided for @trafficAccident.
+  ///
+  /// In en, this message translates to:
+  /// **'Traffic accident'**
+  String get trafficAccident;
+
+  /// No description provided for @accident.
+  ///
+  /// In en, this message translates to:
+  /// **'Accident'**
+  String get accident;
+
+  /// No description provided for @organization.
+  ///
+  /// In en, this message translates to:
+  /// **'Organization'**
+  String get organization;
+
+  /// No description provided for @category.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get category;
+
+  /// No description provided for @job.
+  ///
+  /// In en, this message translates to:
+  /// **'Job'**
+  String get job;
+
+  /// No description provided for @chat.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat'**
+  String get chat;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// No description provided for @notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification'**
+  String get notification;
+
+  /// No description provided for @noData.
+  ///
+  /// In en, this message translates to:
+  /// **'No data'**
+  String get noData;
 }
 
 class _AppLocalizationsDelegate

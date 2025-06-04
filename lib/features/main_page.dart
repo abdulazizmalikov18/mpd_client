@@ -81,7 +81,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
         'inactive': AppIcons.calendar,
         'active': AppIcons.calendarFilled
       },
-      'Chat': {
+      context.l10n.chat: {
         'inactive': AppIcons.noActiveMessage,
         'active': AppIcons.message
       },

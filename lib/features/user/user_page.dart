@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:formz/formz.dart';
 import 'package:mpd_client/app/app_colors.dart';
@@ -45,15 +46,15 @@ class _UserPageState extends State<UserPage> {
                     if (state.isBackChanged && state.userBackImage != null) {
                       return Image.file(
                         state.userBackImage!,
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                         height: 200.h,
                         width: double.maxFinite,
                       );
                     }
-                    return Image.network(
-                      state.userInfo?.backgroundImage ??
+                    return CachedNetworkImage(
+                      imageUrl: state.userInfo?.backgroundImage ??
                           "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                       height: 200.h,
                       width: double.maxFinite,
                     );
@@ -166,7 +167,7 @@ class _UserPageState extends State<UserPage> {
                   ),
                   horizontalTitleGap: 0,
                   title: Text(
-                    "Shaxsiy postlar",
+                    context.l10n.personalPosts,
                     style: Styles.headline5,
                   ),
                   onTap: state.status.isInProgress || state.status.isFailure
@@ -287,8 +288,8 @@ class _UserPageState extends State<UserPage> {
                   horizontalTitleGap: 0,
                   title: Text(
                     state.specailistModel.isEmpty
-                        ? "Shifokor profiliga kirish"
-                        : "Mataxasisliklarim",
+                        ? context.l10n.doctorProfile
+                        : context.l10n.mySpecialties,
                     style: Styles.headline5,
                   ),
                   onTap: () {
@@ -367,13 +368,13 @@ class _UserPageState extends State<UserPage> {
                     ),
                     children: [
                       const SizedBox(height: 12),
-                      const Text(
-                        "Tez yordam so’rash!",
+                      Text(
+                        context.l10n.requestEmergencyHelp,
                         style: TextStyle(
                             fontSize: 24, fontWeight: FontWeight.w700),
                       ),
                       Text(
-                        "Iltimos faqat favqulotda xolatda murojat qiling!",
+                        context.l10n.emergencyOnly,
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -394,7 +395,7 @@ class _UserPageState extends State<UserPage> {
                         ),
                         child: ListTile(
                           title: Text(
-                            "Avariya",
+                            context.l10n.accident,
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -437,9 +438,9 @@ class _UserPageState extends State<UserPage> {
                             )
                           ],
                         ),
-                        child: const ListTile(
+                        child: ListTile(
                           title: Text(
-                            "Birinchi erdam",
+                            context.l10n.firstAid,
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -459,9 +460,9 @@ class _UserPageState extends State<UserPage> {
                             )
                           ],
                         ),
-                        child: const ListTile(
+                        child: ListTile(
                           title: Text(
-                            "xushi ketdi",
+                            context.l10n.fainted,
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,

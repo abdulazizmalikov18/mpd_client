@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mpd_client/core/data/repository/storage_keys.dart';
 import 'package:mpd_client/core/data/repository/storage_repository.dart';
+import 'package:mpd_client/core/extension/context_ext.dart';
 import 'package:mpd_client/src/widgets/appbar_widget.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -17,7 +18,7 @@ class _NotificationPageState extends State<NotificationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(
-        title: 'Notification',
+        title: context.l10n.notification,
         actions: [
           if (kDebugMode)
             IconButton(

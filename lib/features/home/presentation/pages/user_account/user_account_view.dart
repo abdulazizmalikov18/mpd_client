@@ -405,11 +405,13 @@ class _UserAccountViewState extends State<UserAccountView> {
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                  ScreenUtil().setHorizontalSpacing(4),
-                                  const GradientIcon(
-                                    iconName: AppIcons.verify,
-                                    size: 20,
-                                  ),
+                                  if (state.userAccount.status == 2) ...[
+                                    ScreenUtil().setHorizontalSpacing(4),
+                                    const GradientIcon(
+                                      iconName: AppIcons.verify,
+                                      size: 20,
+                                    ),
+                                  ]
                                 ],
                               ),
                               ScreenUtil().setVerticalSpacing(6.h),
@@ -600,13 +602,14 @@ class _UserAccountViewState extends State<UserAccountView> {
                                                     MainAxisAlignment.center,
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.center,
+                                                spacing: 8,
                                                 children: [
                                                   AppIcons.message.svg(
                                                     color:
                                                         context.color.mainBlue,
                                                   ),
                                                   Text(
-                                                    "Message",
+                                                    context.l10n.message,
                                                     style: Styles.descSubtitle
                                                         .copyWith(
                                                       color: context
@@ -663,7 +666,7 @@ class _UserAccountViewState extends State<UserAccountView> {
                                 tabs: [
                                   Tab(
                                     child: Text(
-                                      "About",
+                                      context.l10n.about,
                                       style: Styles.descSubtitle.copyWith(
                                         color: context.color.black,
                                       ),
@@ -671,7 +674,7 @@ class _UserAccountViewState extends State<UserAccountView> {
                                   ),
                                   Tab(
                                     child: Text(
-                                      "Post",
+                                      context.l10n.posts,
                                       style: Styles.descSubtitle
                                           .copyWith(color: context.color.black),
                                     ),

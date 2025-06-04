@@ -17,10 +17,12 @@ import 'package:mpd_client/src/widgets/longbutton.dart';
 class UpdateSelectDateWidget extends StatelessWidget {
   final TextEditingController? _birthController;
   final ValueChanged? onChanged;
+  final bool isDisable;
   const UpdateSelectDateWidget({
     super.key,
     TextEditingController? birthController,
     this.onChanged,
+    this.isDisable = false,
   }) : _birthController = birthController;
 
   @override
@@ -47,6 +49,7 @@ class UpdateSelectDateWidget extends StatelessWidget {
           margin: EdgeInsets.symmetric(horizontal: 16.w),
           child: TextFormField(
               onChanged: onChanged,
+              readOnly: isDisable,
               style: Styles.headline7.copyWith(color: context.color.black),
               validator: (value) => Validators.empty(value, context),
               keyboardType: TextInputType.number,
@@ -54,53 +57,58 @@ class UpdateSelectDateWidget extends StatelessWidget {
               controller: _birthController,
               inputFormatters: [
                 MaskTextInputFormatter(
-                    mask: '##.##.####', filter: {"#": RegExp(r'[0-9]')})
+                  mask: '##.##.####',
+                  filter: {"#": RegExp(r'[0-9]')},
+                )
               ],
               decoration: InputDecoration(
                   suffixIconColor: context.color.grey,
                   suffixIcon: IconButton(
                     onPressed: () async {
-                      FocusScope.of(context).unfocus();
-                      if (!PlatformCheck.platform) {
-                        showDatePicker(
-                          initialEntryMode: DatePickerEntryMode.calendarOnly,
-                          initialDatePickerMode: DatePickerMode.day,
-                          context: context,
-                          builder: (context, child) {
-                            return Theme(
-                              data: ThemeData().copyWith(
-                                dialogTheme: DialogThemeData(
-                                  backgroundColor: context.color.white,
+                      if (!isDisable) {
+                        FocusScope.of(context).unfocus();
+                        if (!PlatformCheck.platform) {
+                          showDatePicker(
+                            initialEntryMode: DatePickerEntryMode.calendarOnly,
+                            initialDatePickerMode: DatePickerMode.day,
+                            context: context,
+                            builder: (context, child) {
+                              return Theme(
+                                data: ThemeData().copyWith(
+                                  dialogTheme: DialogThemeData(
+                                    backgroundColor: context.color.white,
+                                  ),
+                                  primaryColor: context.color.red,
                                 ),
-                                primaryColor: context.color.red,
-                              ),
-                              child: child!,
-                            );
-                          },
-                          initialDate: DateTime(DateTime.now().year,
-                              DateTime.now().month, DateTime.now().day),
-                          firstDate: DateTime(19),
-                          lastDate: DateTime(DateTime.now().year,
-                              DateTime.now().month, DateTime.now().day),
-                        ).then((date) {
-                          if (date != null) {
-                            if (context.mounted) {
-                              context
-                                  .read<UserInfoBloc>()
-                                  .add(UpdateUserBirthEvent(date));
+                                child: child!,
+                              );
+                            },
+                            initialDate: DateTime(DateTime.now().year,
+                                DateTime.now().month, DateTime.now().day),
+                            firstDate: DateTime(19),
+                            lastDate: DateTime(DateTime.now().year,
+                                DateTime.now().month, DateTime.now().day),
+                          ).then((date) {
+                            if (date != null) {
+                              if (context.mounted) {
+                                context
+                                    .read<UserInfoBloc>()
+                                    .add(UpdateUserBirthEvent(date));
+                              }
                             }
-                          }
-                        });
-                      }
-                      if (PlatformCheck.platform) {
-                        showCupertinoModalPopup<void>(
+                          });
+                        }
+                        if (PlatformCheck.platform) {
+                          showCupertinoModalPopup<void>(
                             context: context,
                             builder: (ctx) {
                               return BlocProvider.value(
                                 value: BlocProvider.of<UserInfoBloc>(context),
                                 child: _builtCupertinoDatePicker(context),
                               );
-                            });
+                            },
+                          );
+                        }
                       }
                     },
                     icon: SvgPicture.asset(

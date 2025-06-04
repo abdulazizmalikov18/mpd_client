@@ -29,6 +29,7 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
     on<GetUserInfoEvent>(_onGetUserInfo);
     on<UpdateUserInfoLocal>(_onUpdateUserLocalInfo);
     on<UpdateUserProfessionEvent>(_onSavedChangesButtonPressed);
+    on<UpdateUserVerifyEvent>(_onUpdateUserVerifyEvent);
     on<SelectedCategoryIdEvent>(_onSelectedCategoryId);
     on<SelectedRegionIdEvent>(_onSelectedRegionId);
     on<SelectUserImage>(_onSelectUserImage);
@@ -61,8 +62,10 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
     final response = await _userRepository.getSpecialist();
     if (response.isRight) {
       if (response.right.isNotEmpty) {
-        await StorageRepository.putString(StorageKeys.SPID,response.right.first.id);
-        await StorageRepository.putString(StorageKeys.COMPID,response.right.first.org.slugName);
+        await StorageRepository.putString(
+            StorageKeys.SPID, response.right.first.id);
+        await StorageRepository.putString(
+            StorageKeys.COMPID, response.right.first.org.slugName);
       }
       emit(state.copyWith(
         specailistModel: response.right,
@@ -314,6 +317,26 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
         region: state.region?.id,
         mainCat: state.mainCat?.id,
         bio: event.bio,
+      ),
+    );
+    if (result.isRight) {
+      emit(state.copyWith(
+        showLoading: false,
+        error: 'No',
+      ));
+    } else {
+      emit(state.copyWith(error: result.left.message, showLoading: false));
+    }
+  }
+
+  Future<void> _onUpdateUserVerifyEvent(
+      UpdateUserVerifyEvent event, Emitter<UserInfoState> emit) async {
+    emit(state.copyWith(showLoading: true));
+    add(UpdateUserBackImage());
+    final result = await _userRepository.updateUserInfo(
+      UserInfoUpdateModel(
+        region: state.region?.id,
+        mainCat: state.mainCat?.id,
       ),
     );
     if (result.isRight) {

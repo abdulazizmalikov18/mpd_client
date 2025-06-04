@@ -795,4 +795,64 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get error_return_tohome => 'Go Home';
+
+  @override
+  String get posts => 'Posts';
+
+  @override
+  String get about => 'About';
+
+  @override
+  String get aboutYou => 'About you';
+
+  @override
+  String get message => 'Message';
+
+  @override
+  String get doctorProfile => 'Doctor profile';
+
+  @override
+  String get mySpecialties => 'My specialties';
+
+  @override
+  String get personalPosts => 'Personal posts';
+
+  @override
+  String get emergencyOnly => 'Please contact only in case of emergency!';
+
+  @override
+  String get requestEmergencyHelp => 'Request emergency help!';
+
+  @override
+  String get fainted => 'Fainted';
+
+  @override
+  String get firstAid => 'First aid';
+
+  @override
+  String get trafficAccident => 'Traffic accident';
+
+  @override
+  String get accident => 'Accident';
+
+  @override
+  String get organization => 'Organization';
+
+  @override
+  String get category => 'Category';
+
+  @override
+  String get job => 'Job';
+
+  @override
+  String get chat => 'Chat';
+
+  @override
+  String get search => 'Search';
+
+  @override
+  String get notification => 'Notification';
+
+  @override
+  String get noData => 'No data';
 }
