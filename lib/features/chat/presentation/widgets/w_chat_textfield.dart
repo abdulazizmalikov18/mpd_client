@@ -44,8 +44,10 @@ class WChatTextField extends StatelessWidget {
                       color: Colors.transparent,
                       padding: EdgeInsets.zero,
                       border: const Border(),
-                      onTap: () => ChatVMController().sendMedia(context,
-                          InChatView.of(context)!.widget.group.slugName),
+                      onTap: () => ChatVMController().showFileOptions(
+                        context,
+                        InChatView.of(context)!.widget.group.slugName,
+                      ),
                       child: const Icon(
                         CupertinoIcons.paperclip,
                         color: gray,

@@ -102,14 +102,16 @@ class _MyAppState extends State<MyApp> {
                     behavior: RefreshScrollBehavior(),
                     child: KeyboardDismisser(
                       child: MediaQuery(
-                        data: MediaQuery.of(context)
-                            .copyWith(textScaler: const TextScaler.linear(1.0)),
+                        data: MediaQuery.of(context).copyWith(
+                          textScaler: const TextScaler.linear(1.0),
+                        ),
                         child: child!,
                       ),
                     ),
                   ),
                   theme: AppTheme.light,
                   darkTheme: AppTheme.dark,
+                  themeMode: ThemeMode.light,
                   supportedLocales: AppLocalizations.supportedLocales,
                   localizationsDelegates: const [
                     AppLocalizations.delegate,

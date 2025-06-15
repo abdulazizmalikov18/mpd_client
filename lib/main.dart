@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/bloc_logger.dart';
@@ -40,12 +39,16 @@ void main() async {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
+    // debugRepaintRainbowEnabled = false;
+    runApp(const MyApp());
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+      systemNavigationBarColor: Colors.white,
+      systemNavigationBarIconBrightness: Brightness.dark,
     ));
-
-    debugRepaintRainbowEnabled = false;
-    runApp(const MyApp());
   }, (error, stack) {
     Log.e(error);
     Log.e(stack);

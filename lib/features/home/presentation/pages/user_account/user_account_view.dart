@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:formz/formz.dart';
 import 'package:mpd_client/app/app_colors.dart';
@@ -349,11 +350,19 @@ class _UserAccountViewState extends State<UserAccountView> {
                               Stack(
                                 children: [
                                   SizedBox(height: 260.h),
-                                  Image.network(
-                                    "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
-                                    fit: BoxFit.fill,
+                                  CachedNetworkImage(
+                                    imageUrl: state.userAccount.backgroundImage,
+                                    fit: BoxFit.cover,
                                     height: 200.h,
                                     width: double.maxFinite,
+                                    errorWidget: (context, url, error) =>
+                                        CachedNetworkImage(
+                                      imageUrl:
+                                          "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
+                                      fit: BoxFit.cover,
+                                      height: 200.h,
+                                      width: double.maxFinite,
+                                    ),
                                   ),
                                   Container(
                                     height: 200.h,

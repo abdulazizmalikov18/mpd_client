@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
@@ -8,6 +8,7 @@ import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/colors.dart';
 import 'package:mpd_client/core/pagination/presentation/paginator_list.dart';
 import 'package:mpd_client/features/chat/domain/models/chat_group.dart';
+import 'package:mpd_client/features/chat/domain/models/message.dart';
 import 'package:mpd_client/features/chat/presentation/bloc/chat_message/bloc/chat_message_bloc.dart';
 import 'package:mpd_client/features/chat/presentation/controller/vm_controller.dart';
 import 'package:mpd_client/features/chat/presentation/widgets/message_widgets/w_message.dart';
@@ -99,60 +100,121 @@ class _InChatViewState extends State<InChatView> {
           },
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.only(
-          right: 8,
-          left: 8,
-          bottom: MediaQuery.viewInsetsOf(context).bottom > 0
-              ? kBottomNavigationBarHeight
-              : kBottomNavigationBarHeight + 32,
-        ),
-        child: BlocBuilder<ChatMessageBloc, ChatMessageState>(
-          builder: (context, state) => switch (state.status) {
-            FormzSubmissionStatus.inProgress => const Center(
-                child: CupertinoActivityIndicator(),
+      body: Column(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: BlocBuilder<ChatMessageBloc, ChatMessageState>(
+                builder: (context, state) => switch (state.status) {
+                  FormzSubmissionStatus.inProgress => const Center(
+                      child: CircularProgressIndicator.adaptive(),
+                    ),
+                  _ => Align(
+                      alignment: Alignment.bottomCenter,
+                      child: PaginatorList(
+                        controller:
+                            $chatController.of(context).scrollController,
+                        itemCount: state.messages.length,
+                        reverse: true,
+                        itemBuilder: (context, index) => GestureDetector(
+                          onLongPress: () => _showMessageOptions(
+                            context,
+                            index,
+                            state.messages[index],
+                          ),
+                          child: WMessage(
+                            message: state.messages[index],
+                          ),
+                        ),
+                        padding: EdgeInsets.only(top: 16),
+                        paginatorStatus: state.status,
+                        fetchMoreFunction: () {
+                          context
+                              .read<ChatMessageBloc>()
+                              .add(ChatGetMoreMessages(widget.group));
+                        },
+                        hasMoreToFetch: (state.count) > state.messages.length,
+                      ),
+                    ),
+                },
               ),
-            _ => Align(
-                alignment: Alignment.bottomCenter,
-                child: PaginatorList(
-                  controller: $chatController.of(context).scrollController,
-                  itemCount: state.messages.length,
-                  reverse: true,
-                  itemBuilder: (context, index) => WMessage(
-                    message: state.messages[index],
-                  ),
-                  paginatorStatus: state.status,
-                  fetchMoreFunction: () {
-                    context
-                        .read<ChatMessageBloc>()
-                        .add(ChatGetMoreMessages(widget.group));
-                  },
-                  hasMoreToFetch: (state.count) > state.messages.length,
-                ),
-              ),
-          },
-        ),
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(
+              vertical: 8,
+              horizontal: 16,
+            ),
+            decoration: BoxDecoration(
+              color: context.color.white,
+              boxShadow: [
+                BoxShadow(
+                  color: context.color.black.withValues(alpha: .15),
+                  offset: const Offset(0, -4),
+                  blurRadius: 12,
+                )
+              ],
+            ),
+            child: SafeArea(child: const WChatTextField()),
+          ),
+        ],
       ),
-      bottomSheet: AnimatedContainer(
-        width: double.infinity,
-        padding: EdgeInsets.only(
-          top: 8,
-          bottom: MediaQuery.viewInsetsOf(context).bottom > 0 ? 8 : 32,
-          left: 16,
-          right: 16,
-        ),
-        decoration: BoxDecoration(
-          color: context.color.white,
-          boxShadow: [
-            BoxShadow(
-              color: context.color.black.withValues(alpha: .15),
-              offset: const Offset(0, -4),
-              blurRadius: 12,
-            )
+    );
+  }
+
+  void _showMessageOptions(
+    BuildContext context,
+    int index,
+    MessageModel? message,
+  ) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) => SafeArea(
+        child: Wrap(
+          children: [
+            if (message?.text != null && (message?.text ?? "").isNotEmpty)
+              ListTile(
+                leading: const Icon(Icons.copy),
+                title: const Text('Copy'),
+                onTap: () async {
+                  Navigator.pop(context);
+                  await Clipboard.setData(
+                    ClipboardData(text: message?.text ?? ''),
+                  );
+                },
+              ),
+            if (message?.file != null)
+              ListTile(
+                leading: const Icon(Icons.download),
+                title: const Text('Download'),
+                onTap: () {
+                  Navigator.pop(context);
+                  ChatVMController().downloadAndSaveFile(
+                    message?.file ?? "",
+                    context,
+                  );
+                },
+              ),
+            ListTile(
+              leading: const Icon(Icons.edit),
+              title: const Text('Edit'),
+              onTap: () {
+                Navigator.pop(context);
+                // _startEditing(index);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.delete, color: Colors.red),
+              title: const Text('Delete'),
+              onTap: () {
+                Navigator.pop(context);
+                // _deleteMessage(index);
+              },
+            ),
           ],
         ),
-        duration: const Duration(milliseconds: 200),
-        child: const WChatTextField(),
       ),
     );
   }

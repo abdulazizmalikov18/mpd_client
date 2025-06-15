@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_images.dart';
@@ -22,11 +23,15 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     Timer(const Duration(milliseconds: 1600), () async {
       if (StorageRepository.getString(StorageKeys.REFRESH).isNotEmpty &&
           StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) {
-        Navigator.pushNamedAndRemoveUntil(
-            context, AppRoutes.mainPage, (route) => false);
+        Navigator.of(context).pushNamedAndRemoveUntil(
+          AppRoutes.mainPage,
+          (route) => false,
+        );
       } else {
-        Navigator.pushNamedAndRemoveUntil(
-            context, AppRoutes.splashLanguage, (route) => false);
+        Navigator.of(context).pushNamedAndRemoveUntil(
+          AppRoutes.splashLanguage,
+          (route) => false,
+        );
       }
     });
     super.initState();
@@ -34,38 +39,46 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: context.color.white,
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          Positioned(
-            bottom: 470.h,
-            child: Image.asset(
-              AppImages.logo,
-              width: 250.w,
-              height: 55.h,
-            ),
-          ),
-          Positioned(
-            bottom: 24.h,
-            child: Text(
-              '© All rights reserved',
-              style: TextStyle(
-                color: context.color.black,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        systemNavigationBarColor: Colors.white,
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+      ),
+      child: Scaffold(
+        backgroundColor: context.color.white,
+        body: Stack(
+          alignment: Alignment.center,
+          children: [
+            Positioned(
+              bottom: 470.h,
+              child: Image.asset(
+                AppImages.logo,
+                width: 250.w,
+                height: 55.h,
               ),
             ),
-          ),
-           Positioned(
-            bottom: 110,
-            child: SpinKitCircle(
-              size: 52,
-              color: context.color.mainBlue,
+            Positioned(
+              bottom: 24.h,
+              child: Text(
+                '© All rights reserved',
+                style: TextStyle(
+                  color: context.color.black,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
             ),
-          )
-        ],
+            Positioned(
+              bottom: 110,
+              child: SpinKitCircle(
+                size: 52,
+                color: context.color.mainBlue,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

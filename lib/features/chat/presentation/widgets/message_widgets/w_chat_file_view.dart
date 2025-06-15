@@ -49,7 +49,7 @@ class _WChatFileViewState extends State<WChatFileView> {
           child: _downloadFile.fileExists
               ? Icon(
                   Icons.save,
-                  color: context.color.black,
+                  color: context.color.white,
                 )
               : _downloadFile.dowloading
                   ? Stack(
@@ -69,7 +69,7 @@ class _WChatFileViewState extends State<WChatFileView> {
                         ),
                       ],
                     )
-                  :  Icon(
+                  : Icon(
                       Icons.download,
                       color: context.color.white,
                     ),
@@ -81,12 +81,10 @@ class _WChatFileViewState extends State<WChatFileView> {
             maxWidth: 120,
           ),
           child: Text(
-            widget.file.substring(
-              8,
-            ),
+            widget.file.split('/').last,
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
-            style:  TextStyle(
+            style: TextStyle(
               fontSize: 16,
               color: context.color.black,
               fontWeight: FontWeight.w500,

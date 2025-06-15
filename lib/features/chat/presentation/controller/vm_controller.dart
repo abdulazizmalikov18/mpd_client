@@ -2,16 +2,21 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mpd_client/core/data/repository/storage_keys.dart';
 import 'package:mpd_client/core/data/repository/storage_repository.dart';
 import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/features/chat/domain/models/chat_user_state.dart';
 import 'package:mpd_client/features/chat/domain/models/message.dart';
 import 'package:mpd_client/features/chat/presentation/bloc/chat_message/bloc/chat_message_bloc.dart';
+import 'package:mpd_client/src/widgets/custom_snackbar.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 typedef $chatController = ChatVMController;
 
@@ -42,6 +47,59 @@ class ChatVMController {
             );
       }
     }
+  }
+
+  void sendImage(BuildContext context, String slugName) async {
+    final ImagePicker picker = ImagePicker();
+    final result = await picker.pickMedia();
+    if (result?.path != null) {
+      File file = File(result!.path);
+      if (context.mounted) {
+        context.read<ChatMessageBloc>().add(
+              ChatSendMessageEvent(
+                groupSlug: slugName,
+                file: file,
+                text: messageController.text,
+              ),
+            );
+      }
+    }
+  }
+
+  void showFileOptions(BuildContext context, String slugName) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) => SafeArea(
+        child: Wrap(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.image),
+              title: const Text('Images'),
+              onTap: () {
+                Navigator.pop(context);
+                sendImage(context, slugName);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.file_copy),
+              title: const Text('Files'),
+              onTap: () {
+                Navigator.pop(context);
+                sendMedia(context, slugName);
+              },
+            ),
+            // ListTile(
+            //   leading: const Icon(Icons.delete, color: Colors.red),
+            //   title: const Text('Delete'),
+            //   onTap: () {
+            //     Navigator.pop(context);
+            //     // _deleteMessage(index);
+            //   },
+            // ),
+          ],
+        ),
+      ),
+    );
   }
 
   static ChatVMController of(BuildContext context) => ChatVMController();
@@ -118,4 +176,54 @@ class ChatVMController {
   //     throw Exception("Modelga o'tkasa olmadi Message");
   //   }
   // }
+
+  Future<void> downloadAndSaveFile(
+    String fileUrl,
+    BuildContext context,
+  ) async {
+    try {
+      // Ruxsatlar so‘rash
+      if (Platform.isAndroid) {
+        var status = await Permission.storage.request();
+        if (!status.isGranted) {
+          print('❌ Storage ruxsat berilmadi');
+          return;
+        }
+      } else if (Platform.isIOS) {
+        var status = await Permission.photos.request(); // iOS uchun
+        if (!status.isGranted) {
+          print('❌ iOS uchun ruxsat berilmadi');
+          return;
+        }
+      }
+
+      // Platformaga qarab saqlash joyini aniqlash
+      Directory directory;
+      if (Platform.isAndroid) {
+        if (await Permission.manageExternalStorage.isGranted) {
+          directory = Directory("/storage/emulated/0/Download");
+        } else {
+          directory = await getExternalStorageDirectory() ??
+              await getApplicationDocumentsDirectory();
+        }
+      } else {
+        directory = await getApplicationDocumentsDirectory(); // iOS
+      }
+
+      String fullPath = "${directory.path}/${fileUrl.split('/').last}";
+      print("📥 Yuklanmoqda: $fullPath");
+
+      // Faylni yuklab olish
+      Dio dio = Dio();
+      await dio.download(fileUrl, fullPath);
+
+      if (context.mounted) {
+        CustomSnackbar.show(context, "✅ Fayl saqlandi");
+      }
+    } catch (e) {
+      if (context.mounted) {
+        CustomSnackbar.show(context, "❌ Xatolik yuz berdi: $e");
+      }
+    }
+  }
 }

@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
-import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/features/chat/domain/models/message.dart';
 import 'package:mpd_client/features/chat/presentation/widgets/message_widgets/w_chat_media_view.dart';
 import 'package:mpd_client/features/chat/presentation/widgets/message_widgets/w_live_and_meeting_item.dart';
@@ -26,8 +25,6 @@ class _WMessageState extends State<WMessage> {
 
   @override
   Widget build(BuildContext context) {
-    Log.wtf(widget.message?.sender);
-    Log.wtf(context.read<UserInfoBloc>().state.userInfo?.username);
     final isMe = (widget.message?.sender ==
         context.read<UserInfoBloc>().state.userInfo?.username);
     return Align(
@@ -58,8 +55,10 @@ class _WMessageState extends State<WMessage> {
                       isLocalFile: widget.message!.isLocalFile,
                     ),
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -68,24 +67,20 @@ class _WMessageState extends State<WMessage> {
                         if (widget.message?.text?.isNotEmpty ?? false)
                           ConstrainedBox(
                             constraints: BoxConstraints(
-                                maxWidth: MediaQuery.sizeOf(context).width *
-                                    ((Platform.isAndroid || Platform.isIOS)
-                                        ? 0.6
-                                        : 0.10)),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                SelectableText(
-                                  widget.message?.text ?? "-",
-                                  style: TextStyle(
-                                    color: isMe
-                                        ? context.color.white
-                                        : context.color.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ],
+                              maxWidth: MediaQuery.sizeOf(context).width *
+                                  ((Platform.isAndroid || Platform.isIOS)
+                                      ? 0.6
+                                      : 0.10),
+                            ),
+                            child: SelectableText(
+                              widget.message?.text ?? "-",
+                              style: TextStyle(
+                                color: isMe
+                                    ? context.color.white
+                                    : context.color.black,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
                         const SizedBox(width: 12),

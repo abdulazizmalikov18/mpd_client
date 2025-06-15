@@ -313,7 +313,7 @@ class _PostBodyState extends State<PostBody>
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
             child: ReadMoreText(
-              widget.post.text!,
+              widget.post.text ?? "",
               style: Styles.postTitle.copyWith(
                 fontFeatures: [],
                 color: context.color.black,
