@@ -205,14 +205,14 @@ class _InChatViewState extends State<InChatView> {
                 // _startEditing(index);
               },
             ),
-            ListTile(
-              leading: const Icon(Icons.delete, color: Colors.red),
-              title: const Text('Delete'),
-              onTap: () {
-                Navigator.pop(context);
-                // _deleteMessage(index);
-              },
-            ),
+            // ListTile(
+            //   leading: const Icon(Icons.delete, color: Colors.red),
+            //   title: const Text('Delete'),
+            //   onTap: () {
+            //     Navigator.pop(context);
+            //     // _deleteMessage(index);
+            //   },
+            // ),
           ],
         ),
       ),
