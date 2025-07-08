@@ -15,11 +15,18 @@ class AuthPage extends StatelessWidget {
       authNotifier: AuthNotifier(),
       child: Builder(builder: (context) {
         final notifier = AuthInheritedNotifier.of(context).notifier!;
-        return WillPopScope(
-          onWillPop: () async {
-            if (notifier.isSignIn) return true;
-            notifier.setAuthPage();
-            return false;
+        return PopScope(
+          canPop: false,
+          onPopInvokedWithResult: (didPop, result) async {
+            if (!didPop) {
+              if (notifier.isSignIn) {
+                if (Navigator.of(context).canPop()) {
+                  Navigator.of(context).pop();
+                }
+              } else {
+                notifier.setAuthPage();
+              }
+            }
           },
           child: Scaffold(
             body: SingleChildScrollView(

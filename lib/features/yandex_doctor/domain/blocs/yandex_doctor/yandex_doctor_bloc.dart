@@ -31,8 +31,12 @@ class YandexDoctorBloc extends Bloc<YandexDoctorEvent, YandexDoctorState> {
     mapObjects.removeWhere((element) => element is PlacemarkMapObject);
     for (var speci in event.specialist) {
       if (speci.lastLocation != null) {
-        final latitude = speci.lastLocation?.latitude ?? 41.311015;
-        final longitude = speci.lastLocation?.longitude ?? 69.279760;
+        final latitude =
+            (speci.lastLocation?.latitude ?? speci.location?.latitude) ??
+                41.311015;
+        final longitude =
+            (speci.lastLocation?.longitude ?? speci.location?.longitude) ??
+                69.279760;
 
         final point = Point(latitude: latitude, longitude: longitude);
         singleMapSpecialist.add(speci);
@@ -52,7 +56,7 @@ class YandexDoctorBloc extends Bloc<YandexDoctorEvent, YandexDoctorState> {
       mapObjects,
       showDoctorInfo: false,
       specialist: null,
-      zoom: 20,
+      zoom: 12,
     ));
   }
 
@@ -193,7 +197,6 @@ class YandexDoctorBloc extends Bloc<YandexDoctorEvent, YandexDoctorState> {
   // mapObjects.add(imagePlaceMark);
   // }
 }
-
 
 /*
 Future<void> _onPlaceImagetoLocation(

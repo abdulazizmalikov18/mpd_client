@@ -20,7 +20,7 @@ class ProductSpecalistBloc
     on<GetProductOfferingEvent>(_onGetProductOffering);
   }
 
-  _onGetProductOffering(GetProductOfferingEvent event,
+  Future<void> _onGetProductOffering(GetProductOfferingEvent event,
       Emitter<ProductSpecalistState> emit) async {
     if (!event.isMore) {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
@@ -46,7 +46,7 @@ class ProductSpecalistBloc
     }
   }
 
-  _onGetProductSpecalist(GetProductSpecalistEvent event,
+  Future<void> _onGetProductSpecalist(GetProductSpecalistEvent event,
       Emitter<ProductSpecalistState> emit) async {
     if (!event.isMore) {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
@@ -72,7 +72,7 @@ class ProductSpecalistBloc
     }
   }
 
-  _onInsertProduct(
+  void _onInsertProduct(
       InsertProductEvent event, Emitter<ProductSpecalistState> emit) {
     List<LocalService> localProducts = List.from(state.localProducts);
     if (state.localProducts

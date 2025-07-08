@@ -2,13 +2,14 @@ import 'package:flutter/widgets.dart';
 
 class Responsive {
   // function reponsible for providing value according to screensize
-  getResponsiveValue(
-      {dynamic forShortScreen,
-      dynamic forMediumScreen,
-      dynamic forLargeScreen,
-      dynamic forMobLandScapeMode,
-      dynamic forTabletScreen,
-      required BuildContext context}) {
+  dynamic getResponsiveValue({
+    dynamic forShortScreen,
+    dynamic forMediumScreen,
+    dynamic forLargeScreen,
+    dynamic forMobLandScapeMode,
+    dynamic forTabletScreen,
+    required BuildContext context,
+  }) {
     if (isLargeScreen(context)) {
       return forLargeScreen ?? forShortScreen;
     } else if (isMediumScreen(context)) {
@@ -22,7 +23,7 @@ class Responsive {
     }
   }
 
-  isLandScapeMode(BuildContext context) {
+  bool isLandScapeMode(BuildContext context) {
     if (MediaQuery.of(context).orientation == Orientation.landscape) {
       return true;
     } else {

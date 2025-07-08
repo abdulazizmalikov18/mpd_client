@@ -9,8 +9,10 @@ abstract class UserSubscriptionsEvent extends Equatable {
 
 class GetUserSubscriptionsEvent extends UserSubscriptionsEvent {
   final bool isRefresh, tryAgain;
-  const GetUserSubscriptionsEvent(
-      {this.isRefresh = false, this.tryAgain = false});
+  const GetUserSubscriptionsEvent({
+    this.isRefresh = false,
+    this.tryAgain = false,
+  });
 }
 
 class InsertSubscription extends UserSubscriptionsEvent {

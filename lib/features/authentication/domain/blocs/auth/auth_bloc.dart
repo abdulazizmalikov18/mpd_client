@@ -61,7 +61,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  _onDeleteToken(DeleteToken event, Emitter<AuthState> emit) async {
+  Future<void> _onDeleteToken(DeleteToken event, Emitter<AuthState> emit) async {
     try {
       await StorageRepository.deleteString(StorageKeys.REFRESH);
       await StorageRepository.deleteString(StorageKeys.TOKEN);
@@ -71,7 +71,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  _onRefreshToken(RefreshToken event, Emitter<AuthState> emit) async {
+  Future<void> _onRefreshToken(RefreshToken event, Emitter<AuthState> emit) async {
     try {
       final respons = await _repository.refreshToken();
       if (respons.isRight) {

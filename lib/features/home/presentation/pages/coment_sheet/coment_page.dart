@@ -74,8 +74,16 @@ class ComentPage extends StatelessWidget {
           ),
         ],
       ),
-      body: WillPopScope(
-        onWillPop: () => onBackPress(context),
+      body: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, result) async {
+          if (!didPop) {
+            final shouldPop = await onBackPress(context);
+            if (shouldPop && context.mounted) {
+              Navigator.of(context).pop(true);
+            }
+          }
+        },
         child: CustomScrollView(
           slivers: [
             SliverPadding(

@@ -23,20 +23,26 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
   @override
   Widget build(BuildContext context) {
     return AuthUIWidget(
-      child: WillPopScope(
-        onWillPop: () async {
-          switch (AuthInheritedNotifier.of(context).notifier!.currentIndex) {
-            case 1:
-              AuthInheritedNotifier.of(context).notifier!.currentIndex = 0;
-              return false;
-            case 2:
-              AuthInheritedNotifier.of(context).notifier!.currentIndex = 1;
-              return false;
-            case 3:
-              AuthInheritedNotifier.of(context).notifier!.currentIndex = 2;
-              return false;
-            default:
-              return true;
+      child: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, result) async {
+          if (!didPop) {
+            final notifier = AuthInheritedNotifier.of(context).notifier!;
+            switch (notifier.currentIndex) {
+              case 1:
+                notifier.currentIndex = 0;
+                break;
+              case 2:
+                notifier.currentIndex = 1;
+                break;
+              case 3:
+                notifier.currentIndex = 2;
+                break;
+              default:
+                if (context.mounted) {
+                  Navigator.of(context).pop(); // Sahifani yop
+                }
+            }
           }
         },
         child: ValueListenableBuilder(

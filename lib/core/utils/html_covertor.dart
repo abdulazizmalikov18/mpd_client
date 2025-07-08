@@ -1,3 +1,5 @@
+import 'package:mpd_client/core/utils/log_service.dart';
+
 class JsonToHTML {
   final Map<String, String> tags = {
     'bold': '<b>{}</b>',
@@ -165,10 +167,10 @@ class JsonToHTML {
           text += '</tr>';
         }
       } else {
-        print('Mismatch between row/col count and children length');
+        Log.i('Mismatch between row/col count and children length');
       }
     } else {
-      print('Table rows or cols are not defined properly');
+      Log.i('Table rows or cols are not defined properly');
     }
 
     text += '</table>';

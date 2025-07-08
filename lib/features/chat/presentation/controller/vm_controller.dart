@@ -186,13 +186,13 @@ class ChatVMController {
       if (Platform.isAndroid) {
         var status = await Permission.storage.request();
         if (!status.isGranted) {
-          print('❌ Storage ruxsat berilmadi');
+          Log.i('❌ Storage ruxsat berilmadi');
           return;
         }
       } else if (Platform.isIOS) {
         var status = await Permission.photos.request(); // iOS uchun
         if (!status.isGranted) {
-          print('❌ iOS uchun ruxsat berilmadi');
+          Log.i('❌ iOS uchun ruxsat berilmadi');
           return;
         }
       }
@@ -211,7 +211,7 @@ class ChatVMController {
       }
 
       String fullPath = "${directory.path}/${fileUrl.split('/').last}";
-      print("📥 Yuklanmoqda: $fullPath");
+      Log.i("📥 Yuklanmoqda: $fullPath");
 
       // Faylni yuklab olish
       Dio dio = Dio();

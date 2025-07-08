@@ -50,7 +50,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
       _paths = (await FilePicker.platform.pickFiles(
         type: FileType.any,
         // allowMultiple: true,
-        onFileLoading: (FilePickerStatus status) => print(status),
+        onFileLoading: (FilePickerStatus status) => Log.i(status),
         allowedExtensions: (_extension?.isNotEmpty ?? false)
             ? _extension?.replaceAll(' ', '').split(',')
             : null,
@@ -97,7 +97,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:  AppBarWidget(title: context.l10n.aboutYou),
+        appBar: AppBarWidget(title: context.l10n.aboutYou),
         extendBody: true,
         resizeToAvoidBottomInset: false,
         bottomNavigationBar: status != -1

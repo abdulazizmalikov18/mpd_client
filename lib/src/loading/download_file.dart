@@ -54,7 +54,7 @@ class DownloadFile {
     });
   }
 
-  checkFileExit() async {
+  Future<void> checkFileExit() async {
     final storePath = await getPath();
     filePath = '$storePath/$fileName';
     bool fileExistCheck = await File(filePath).exists();

@@ -5,11 +5,11 @@ class ResponseHandler<T> {
   ServerError? _error;
   T? data;
 
-  setException(ServerError error) {
+  void setException(ServerError error) {
     _error = error;
   }
 
-  setData(T data) {
+  void setData(T data) {
     this.data = data;
   }
 

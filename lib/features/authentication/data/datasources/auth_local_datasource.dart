@@ -10,7 +10,7 @@ class AuthLocalDataSource {
 
   factory AuthLocalDataSource() => _instance;
 
-  static init() async {
+  static Future<void> init() async {
     _prefs = await SharedPreferences.getInstance();
   }
 

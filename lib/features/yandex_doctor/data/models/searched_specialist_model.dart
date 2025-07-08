@@ -38,7 +38,7 @@ class MapSpecialist {
   final String? phone;
   final JobModel? job;
   final bool? isWorking;
-  // final LocationModel? location;
+  final LocationModel? location;
   final double? minPrice;
   final String? currencyCode;
   final String? locationDesc;
@@ -53,6 +53,7 @@ class MapSpecialist {
     this.job,
     this.isWorking,
     this.phone,
+    this.location,
     this.currencyCode,
     this.minPrice,
     this.locationDesc,
@@ -68,9 +69,9 @@ class MapSpecialist {
         phone: json["phone"],
         job: json["job"] == null ? null : JobModel.fromJson(json["job"]),
         isWorking: json["is_working"],
-        // location: json["location"] == null
-        //     ? null
-        //     : LocationModel.fromJson(json["location"]),
+        location: json["location"] == null
+            ? null
+            : LocationModel.fromJson(json["location"]),
         minPrice: json["min_price"],
         currencyCode: json["currency_code"],
         locationDesc: json["location_desc"],

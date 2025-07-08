@@ -87,9 +87,9 @@ class CategoriesComponent extends StatelessWidget {
               builder: (context, selectedState) {
                 return ElevatedButton(
                   onPressed: () {
-                    Log.e(state.categories[index].id);
                     if (state.categories[index].id ==
                         selectedState.categoryId) {
+                      Log.e(state.categories[index].id);
                       context.read<SpecialistBloc>().add(SelectingCategory(-1));
                       context.read<SpecialistBloc>().add(GetSpecialist(
                         onSucces: (specialist) {
@@ -105,6 +105,7 @@ class CategoriesComponent extends StatelessWidget {
                         },
                       ));
                     } else {
+                   
                       context
                           .read<SpecialistBloc>()
                           .add(SelectingCategory(state.categories[index].id!));
