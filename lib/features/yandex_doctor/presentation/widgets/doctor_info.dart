@@ -5,6 +5,7 @@ import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/app/app_routes.dart';
 import 'package:mpd_client/core/utils/utils.dart';
 import 'package:mpd_client/features/user/data/models/specialist_info_model.dart';
+import 'package:mpd_client/features/user/domain/blocs/user_info/user_info_bloc.dart';
 import 'package:mpd_client/features/yandex_doctor/data/models/searched_specialist_model.dart';
 import 'package:mpd_client/provider/language.dart';
 import 'package:mpd_client/src/themes/styles.dart';
@@ -48,23 +49,36 @@ class DoctorInfo extends StatelessWidget {
                 icon: AppIcons.arrowLeft),
           ),
           ScreenUtil().setVerticalSpacing(13.h),
-          MapDoctorCard(
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                AppRoutes.drProfilebyid,
-                arguments: SpecialistInfoModel(
-                  avatar: specialist!.avatar,
-                  fullname: '${specialist!.name} ${specialist!.lastname!}',
-                  username: specialist!.user,
-                  id: specialist?.id ?? 0,
-                  job: specialist?.job?.name ?? "-- --",
-                  phone: specialist?.phone ?? "",
-                ),
+          BlocBuilder<UserInfoBloc, UserInfoState>(
+            builder: (context, state) {
+              return MapDoctorCard(
+                onPressed: () {
+                  // if (specialist?.user == state.userInfo?.username) {
+                  //   Navigator.of(context).pushNamed(
+                  //     AppRoutes.userInfo,
+                  //     arguments: state.userInfo,
+                  //   );
+                  // } else {
+
+                  // }
+
+                  Navigator.pushNamed(
+                    context,
+                    AppRoutes.drProfilebyid,
+                    arguments: SpecialistInfoModel(
+                      avatar: specialist!.avatar,
+                      fullname: '${specialist!.name} ${specialist!.lastname!}',
+                      username: specialist!.user,
+                      id: specialist?.id ?? 0,
+                      job: specialist?.job?.name ?? "-- --",
+                      phone: specialist?.phone ?? "",
+                    ),
+                  );
+                },
+                job: job,
+                specialist: specialist,
               );
             },
-            job: job,
-            specialist: specialist,
           )
         ],
       ),

@@ -7,16 +7,22 @@ class FilledGradientButton extends StatelessWidget {
   final Widget text;
   final double height;
   final bool isDisable;
-  const FilledGradientButton(
-      {super.key, this.isDisable = false, required this.onPressed, required this.text, this.height = 34});
+  const FilledGradientButton({
+    super.key,
+    this.isDisable = false,
+    required this.onPressed,
+    required this.text,
+    this.height = 34,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: height.h,
       decoration: BoxDecoration(
-         color: context.color.mainBlue,
-          borderRadius: BorderRadius.circular(8.r)),
+        color: context.color.mainBlue,
+        borderRadius: BorderRadius.circular(8.r),
+      ),
       child: ElevatedButton(
         onPressed: isDisable ? null : onPressed,
         style: ElevatedButton.styleFrom(
@@ -24,7 +30,8 @@ class FilledGradientButton extends StatelessWidget {
             shadowColor: Colors.transparent,
             elevation: 0,
             padding: EdgeInsets.symmetric(horizontal: 25.w),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r))),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.r))),
         child: text,
       ),
     );

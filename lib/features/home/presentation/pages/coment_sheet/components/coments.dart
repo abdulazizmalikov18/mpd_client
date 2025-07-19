@@ -34,28 +34,35 @@ class _ComentsState extends State<Coments> {
         if (state.coments.isEmpty && state is PostComentLoading) {
           return const ComentLoading();
         } else if (state.coments.isNotEmpty) {
-          return ListView.builder(
-            itemCount: state.coments.length + 1,
-            itemBuilder: (context, index) {
-              if (index >= state.coments.length) {
-                if (state.isEnd) {
-                  return const SizedBox();
-                }
-                return const InfiniteLoadingWidget();
-              }
-              return BlocBuilder<SendComentBloc, SendComentState>(
-                builder: (context, sendState) {
-                  return Padding(
-                    padding: EdgeInsets.only(bottom: 16.h),
-                    child: ReviewWidget(
-                      postId: widget.post.id!,
-                      coment: state.coments[index],
-                      status: sendState,
-                    ),
-                  );
-                },
-              );
+          return RefreshIndicator.adaptive(
+            onRefresh: () async {
+              context
+                  .read<PostComentBloc>()
+                  .add(GetComentPostEvent(widget.post.id!, false));
             },
+            child: ListView.builder(
+              itemCount: state.coments.length + 1,
+              itemBuilder: (context, index) {
+                if (index >= state.coments.length) {
+                  if (state.isEnd) {
+                    return const SizedBox();
+                  }
+                  return const InfiniteLoadingWidget();
+                }
+                return BlocBuilder<SendComentBloc, SendComentState>(
+                  builder: (context, sendState) {
+                    return Padding(
+                      padding: EdgeInsets.only(bottom: 16.h),
+                      child: ReviewWidget(
+                        postId: widget.post.id!,
+                        coment: state.coments[index],
+                        status: sendState,
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
           );
           // return Column(
           //   children: List.generate(state.coments.length + 1, (index) {

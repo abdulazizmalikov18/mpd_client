@@ -356,6 +356,7 @@ class AppPages {
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider.value(value: _postBloc),
+              BlocProvider.value(value: _userInfoBloc),
               BlocProvider.value(value: _userSubscriptionsBloc),
             ],
             child: DrProfileByid(specialist: args),

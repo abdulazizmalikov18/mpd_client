@@ -1,8 +1,13 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:formz/formz.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/core/utils/caller.dart';
+import 'package:mpd_client/core/utils/log_service.dart';
+import 'package:mpd_client/features/chat/domain/models/chat_user.dart';
+import 'package:mpd_client/features/chat/presentation/bloc/chat/chat_bloc.dart';
+import 'package:mpd_client/features/chat/presentation/views/in_app_chat.dart';
 import 'package:mpd_client/features/doctor_profile_booking/data/models/doctor_profile_model.dart';
 import 'package:mpd_client/features/doctor_profile_booking/domain/blocs/doctor_profile/doctor_profile_bloc.dart';
 import 'package:mpd_client/features/doctor_profile_booking/presentation/pages/components/follow_button.dart';
@@ -238,35 +243,94 @@ class _DrProfileByidState extends State<DrProfileByid> {
                                   },
                                 ),
                                 Expanded(
-                                  child: LongButton(
-                                    onPress: () {
-                                      Caller.makePhoneCall(
-                                        widget.specialist.phone ?? "",
-                                      );
-                                    },
-                                    widget: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        AppIcons.message.svg(
+                                  child: BlocBuilder<ChatBloc, ChatState>(
+                                    builder: (context, state) {
+                                      return LongButton(
+                                        loading: state.dataStatus.isInProgress,
+                                        onPress: () {
+                                          context
+                                              .read<ChatBloc>()
+                                              .add(GetGroupChat(
+                                                username:
+                                                    widget.specialist.username,
+                                                onSucces: (model) {
+                                                  Log.e(model.slugName);
+                                                  final bloc = context
+                                                      .read<UserInfoBloc>();
+                                                  Navigator.of(context)
+                                                      .push(MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        BlocProvider.value(
+                                                      value: bloc,
+                                                      child: InChatView(
+                                                        group: model,
+                                                      ),
+                                                    ),
+                                                  ));
+                                                },
+                                                onError: () {
+                                                  context
+                                                      .read<ChatBloc>()
+                                                      .add(CreateChatEvent(
+                                                        user: ChatUserModel(
+                                                          username: widget
+                                                                  .specialist
+                                                                  .username ??
+                                                              "",
+                                                        ),
+                                                        onSuccess: (model) {
+                                                          Log.e(model.slugName);
+                                                          final bloc =
+                                                              context.read<
+                                                                  UserInfoBloc>();
+                                                          Navigator.of(context)
+                                                              .push(
+                                                                  MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    BlocProvider
+                                                                        .value(
+                                                              value: bloc,
+                                                              child: InChatView(
+                                                                group: model,
+                                                              ),
+                                                            ),
+                                                          ));
+                                                        },
+                                                        onError: () {
+                                                          Log.e("message");
+                                                        },
+                                                      ));
+                                                },
+                                              ));
+                                        },
+                                        widget: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          spacing: 8,
+                                          children: [
+                                            AppIcons.message.svg(
+                                              color: context.color.mainBlue,
+                                            ),
+                                            Text(
+                                              context.l10n.message,
+                                              style:
+                                                  Styles.descSubtitle.copyWith(
+                                                color: context.color.mainBlue,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        color: context.color.white,
+                                        border: Border.all(
                                           color: context.color.mainBlue,
                                         ),
-                                        Text(
-                                          "Message",
-                                          style: Styles.descSubtitle.copyWith(
-                                            color: context.color.mainBlue,
-                                            fontSize: 12.sp,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    color: context.color.white,
-                                    border: Border.all(
-                                      color: context.color.mainBlue,
-                                    ),
+                                      );
+                                    },
                                   ),
                                 ),
                               ],
@@ -312,7 +376,7 @@ class _DrProfileByidState extends State<DrProfileByid> {
                               ),
                               Tab(
                                 child: Text(
-                                context.l10n.posts,
+                                  context.l10n.posts,
                                   style: Styles.descSubtitle
                                       .copyWith(color: context.color.black),
                                 ),
