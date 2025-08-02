@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:formz/formz.dart';
@@ -187,8 +188,9 @@ class AllDoctorsView extends StatelessWidget {
                                         ? SvgPicture.network(
                                             state.categories[index].image!,
                                           )
-                                        : Image.network(
-                                            state.categories[index].image!,
+                                        : CachedNetworkImage(
+                                            imageUrl:
+                                                state.categories[index].image!,
                                           )
                                     : const SizedBox(),
                               ),

@@ -13,8 +13,8 @@ import 'package:mpd_client/features/app.dart';
 const String $baseUrlHttp = "https://sharq-api.sharqdarmon.uz/";
 const String $baseUrlSocket = "wss://sharq-api.sharqdarmon.uz";
 
-void main() async {
-  await runZonedGuarded(() async {
+void main() {
+  runZonedGuarded(() async {
     // EquatableConfig.stringify = kDebugMode;
     // AndroidYandexMap.useAndroidViewSurface = false;
     WidgetsFlutterBinding.ensureInitialized();

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/app/app_colors.dart';
@@ -91,8 +92,8 @@ class Adverticements extends StatelessWidget {
                 ),
                 itemBuilder: (context, index, realIndex) => SizedBox(
                   width: double.maxFinite,
-                  child: Image.network(
-                    state.adverts[0].post!.media![0].image ??
+                  child: CachedNetworkImage(
+                    imageUrl: state.adverts[0].post!.media![0].image ??
                         'https://resources.comphealth.com/wp-content/uploads/2019/05/post-residency-career-tips.jpg',
                     fit: BoxFit.cover,
                   ),
@@ -132,12 +133,3 @@ class Adverticements extends StatelessWidget {
     );
   }
 }
-
-
-/*
-Image.network(
-                        state.adverts[0].post!.media![0].image!,
-                        fit: BoxFit.cover)
-
-
- */

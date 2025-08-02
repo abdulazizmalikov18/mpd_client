@@ -61,14 +61,14 @@ class JsonToHTML {
         ? "text-align: ${data['data']?['align']}"
         : '';
 
-    var _text = '';
+    var text = '';
     var closeTag = '';
 
     if (level is int && level > 0) {
-      _text = '<h$level style="$align">';
+      text = '<h$level style="$align">';
       closeTag = '</h$level>';
     } else {
-      _text = '<div style="$align">';
+      text = '<div style="$align">';
       closeTag = '</div>';
     }
 
@@ -78,12 +78,12 @@ class JsonToHTML {
       if (item is Map<String, dynamic>) {
         var text = item['insert'];
         var style = item['attributes'] ?? {};
-        _text += getTextStyle(text ?? '', style);
+        text += getTextStyle(text ?? '', style);
       }
     }
 
-    _text += closeTag;
-    return _text;
+    text += closeTag;
+    return text;
   }
 
   String getHtml() {
@@ -92,10 +92,10 @@ class JsonToHTML {
     var numbered = false;
 
     for (var data in dataList) {
-      var _text = '';
+      var text = '';
 
       if (!numbered && lastNumbered) {
-        _text += '</ol>';
+        text += '</ol>';
         lastNumbered = false;
       }
 
@@ -106,31 +106,31 @@ class JsonToHTML {
       switch (data['type']) {
         case 'heading':
         case 'paragraph':
-          _text = getText(data);
+          text = getText(data);
           break;
         case 'bulleted_list':
-          _text = getBulletedList(data);
+          text = getBulletedList(data);
           break;
         case 'numbered_list':
           if (!numbered) {
-            _text = '<ol>';
+            text = '<ol>';
             numbered = true;
           }
-          _text += getNumberedList(data);
+          text += getNumberedList(data);
           lastNumbered = true;
           break;
         case 'table':
-          _text = getTable(data);
+          text = getTable(data);
           break;
         case 'todo_list':
-          _text = getTodoList(data);
+          text = getTodoList(data);
           break;
         default:
-          _text = 'Unknown type: ${data['type']}';
+          text = 'Unknown type: ${data['type']}';
           break;
       }
 
-      htmlContent += _text;
+      htmlContent += text;
     }
 
     if (lastNumbered) {

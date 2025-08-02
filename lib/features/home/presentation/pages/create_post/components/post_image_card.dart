@@ -61,9 +61,10 @@ class _PostImageAndVideoViewState extends State<PostImageAndVideoView> {
             child: Align(
               alignment: Alignment.topRight,
               child: IconButton(
-                  splashRadius: 21,
-                  onPressed: widget.onRemovePressed,
-                  icon: SvgPicture.asset(AppIcons.remove)),
+                splashRadius: 21,
+                onPressed: widget.onRemovePressed,
+                icon: SvgPicture.asset(AppIcons.remove),
+              ),
             ),
           ),
         ],

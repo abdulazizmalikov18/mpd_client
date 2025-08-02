@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:mpd_client/app/app_colors.dart';
@@ -28,8 +29,8 @@ class FlickVideoWidget extends StatelessWidget {
             children: <Widget>[
               Positioned.fill(
                 child: screenShotVideo != null
-                    ? Image.network(
-                        screenShotVideo ??
+                    ? CachedNetworkImage(
+                        imageUrl: screenShotVideo ??
                             'https://resources.comphealth.com/wp-content/uploads/2019/05/post-residency-career-tips.jpg',
                         fit: BoxFit.cover,
                       )
@@ -63,8 +64,8 @@ class FlickVideoWidget extends StatelessWidget {
         videoFit: BoxFit.fitWidth,
         playerLoadingFallback: Center(
           child: screenShotVideo != null
-              ? Image.network(
-                  screenShotVideo ??
+              ? CachedNetworkImage(
+                  imageUrl: screenShotVideo ??
                       'https://resources.comphealth.com/wp-content/uploads/2019/05/post-residency-career-tips.jpg',
                   fit: BoxFit.fitWidth,
                 )

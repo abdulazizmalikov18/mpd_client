@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mpd_client/src/widgets/w_shimmer.dart';
 
@@ -26,25 +27,20 @@ class WNetworkImage extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius),
       child: (image?.isNotEmpty ?? false)
-          ? Image.network(
-              image!,
+          ? CachedNetworkImage(
+              imageUrl: image!,
               height: height,
               width: width,
               fit: fit,
-              errorBuilder: errorBuilder ??
-                  (_, __, ___) {
-                    return defaultWidget;
-                  },
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress == null) {
-                  return child;
-                } else {
-                  return WShimmer(
-                    height: height,
-                    width: width,
-                    radius: borderRadius,
-                  );
-                }
+              errorWidget: (_, __, ___) {
+                return defaultWidget;
+              },
+              progressIndicatorBuilder: (context, child, loadingProgress) {
+                return WShimmer(
+                  height: height,
+                  width: width,
+                  radius: borderRadius,
+                );
               },
             )
           : defaultWidget,

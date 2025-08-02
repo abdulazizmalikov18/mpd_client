@@ -63,9 +63,13 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
     if (response.isRight) {
       if (response.right.isNotEmpty) {
         await StorageRepository.putString(
-            StorageKeys.SPID, response.right.first.id);
+          StorageKeys.SPID,
+          response.right.first.id,
+        );
         await StorageRepository.putString(
-            StorageKeys.COMPID, response.right.first.org.slugName);
+          StorageKeys.COMPID,
+          response.right.first.org.slugName,
+        );
       }
       emit(state.copyWith(
         specailistModel: response.right,

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:formz/formz.dart';
 import 'package:mpd_client/app/app_colors.dart';
@@ -84,8 +85,9 @@ class _DrProfileByidState extends State<DrProfileByid> {
                           Stack(
                             children: [
                               SizedBox(height: 249.h),
-                              Image.network(
-                                "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
+                              CachedNetworkImage(
+                                imageUrl:
+                                    "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
                                 fit: BoxFit.fill,
                                 height: 200.h,
                                 width: double.maxFinite,

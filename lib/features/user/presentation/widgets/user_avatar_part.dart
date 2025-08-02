@@ -76,8 +76,8 @@ class UserAvatarPart extends StatelessWidget {
           shape: BoxShape.circle,
           image: DecorationImage(
             image: CachedNetworkImageProvider(image),
-            onError: (exception, stackTrace) => Image.network(
-              "https://www.no5.com/media/1772/place-holder-image.png",
+            onError: (exception, stackTrace) => CachedNetworkImage(
+              imageUrl: "https://www.no5.com/media/1772/place-holder-image.png",
             ),
             fit: BoxFit.cover,
           ),
@@ -106,8 +106,8 @@ class UserAvatarPart extends StatelessWidget {
           borderRadius: BorderRadius.circular(48.r),
           image: DecorationImage(
             image: CachedNetworkImageProvider(image),
-            onError: (exception, stackTrace) => Image.network(
-              "https://www.no5.com/media/1772/place-holder-image.png",
+            onError: (exception, stackTrace) => CachedNetworkImage(
+              imageUrl: "https://www.no5.com/media/1772/place-holder-image.png",
             ),
             fit: BoxFit.cover,
           ),

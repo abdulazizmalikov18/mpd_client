@@ -23,12 +23,13 @@ class _FilterCategorySheetState extends State<FilterCategorySheet> {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-        maxChildSize: .97,
-        initialChildSize: .7,
-        builder: (context, controller) {
-          return Stack(
-            children: [
-              BottomSheetWidget(children: [
+      maxChildSize: .97,
+      initialChildSize: .7,
+      builder: (context, controller) {
+        return Stack(
+          children: [
+            BottomSheetWidget(
+              children: [
                 Expanded(
                   child: CustomScrollView(
                     controller: controller,
@@ -158,16 +159,18 @@ class _FilterCategorySheetState extends State<FilterCategorySheet> {
                     ],
                   ),
                 ),
-              ]),
-              const Positioned(
-                left: 0,
-                right: 0,
-                bottom: 12,
-                child: FilterButtons(),
-              )
-            ],
-          );
-        });
+              ],
+            ),
+            const Positioned(
+              left: 0,
+              right: 0,
+              bottom: 12,
+              child: FilterButtons(),
+            )
+          ],
+        );
+      },
+    );
   }
 
   Widget buildAnimatedItem(

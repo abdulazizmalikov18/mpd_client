@@ -141,8 +141,9 @@ class _UserAccountViewState extends State<UserAccountView> {
                             Stack(
                               children: [
                                 SizedBox(height: 260.h),
-                                Image.network(
-                                  "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
+                                CachedNetworkImage(
+                                  imageUrl:
+                                      "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
                                   fit: BoxFit.fill,
                                   height: 200.h,
                                   width: double.maxFinite,

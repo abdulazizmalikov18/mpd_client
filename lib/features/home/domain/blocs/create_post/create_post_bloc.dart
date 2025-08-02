@@ -2,9 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:file_picker/file_picker.dart';
+// import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
 import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/core/utils/media_compresser.dart';
@@ -34,16 +35,25 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostState> {
   TextEditingController get descriptionController => _descriptionController;
 
   Future<void> _onSelectImages(
-      SelectImagesAndVideosEvent event, Emitter<CreatePostState> emit) async {
+    SelectImagesAndVideosEvent event,
+    Emitter<CreatePostState> emit,
+  ) async {
     try {
-      FilePickerResult? result = await FilePicker.platform
-          .pickFiles(type: FileType.media, allowMultiple: true);
-      if (result == null) return;
+      // FilePickerResult? result = await FilePicker.platform.pickFiles(
+      //   type: FileType.media,
+      //   allowMultiple: true,
+      // );
 
-      for (var path in result.paths) {
+      final picker = ImagePicker();
+      final result = await picker.pickMultipleMedia();
+
+      if (result.isEmpty) return;
+
+      for (var path in result) {
         _fileImagesAndVideos.add(FileModel(
-            file: File(path!),
-            fileType: lookupMimeType(path)!.split('/').first));
+          file: File(path.path),
+          fileType: lookupMimeType(path.path)!.split('/').first,
+        ));
       }
 
       emit(CreatePostInitial(_fileImagesAndVideos));
@@ -59,7 +69,9 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostState> {
   }
 
   Future<void> _onCreatePostPressed(
-      CreatePostPressed event, Emitter<CreatePostState> emit) async {
+    CreatePostPressed event,
+    Emitter<CreatePostState> emit,
+  ) async {
     // ? Validate image has or not
     if (_fileImagesAndVideos.isEmpty) {
       return emit(CreatePostInitial(state.files, isValidImage: false));
@@ -72,11 +84,14 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostState> {
 
     for (var file in _fileImagesAndVideos) {
       if (file.fileType == 'image') {
-        final compressedImage =
-            await MediaCompresser.compressAndTryCatchImage(file.file.path);
+        final compressedImage = await MediaCompresser.compressAndTryCatchImage(
+          file.file.path,
+        );
 
-        postImages.add(MultipartFile.fromBytes(compressedImage,
-            filename: basename(file.file.path)));
+        postImages.add(MultipartFile.fromBytes(
+          compressedImage,
+          filename: basename(file.file.path),
+        ));
         for (var element in postImages) {
           Log.e(element.filename);
         }
@@ -92,11 +107,14 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostState> {
         );
         final noCompressed = await file.file.readAsBytes();
 
-        postVideosScreenshot
-            .add(await MultipartFile.fromFile(base64Encode(uint8list!)));
+        postVideosScreenshot.add(await MultipartFile.fromFile(
+          base64Encode(uint8list!),
+        ));
 
-        postVideos.add(MultipartFile.fromBytes(noCompressed,
-            filename: basename(file.file.path)));
+        postVideos.add(MultipartFile.fromBytes(
+          noCompressed,
+          filename: basename(file.file.path),
+        ));
       }
     }
 
@@ -115,9 +133,11 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostState> {
         isValidImage: state.isValidImage,
       ));
     } else {
-      emit(CreatePostFailure(state.files,
-          failure: Utils.errorFormat(result.left.message),
-          isValidImage: state.isValidImage));
+      emit(CreatePostFailure(
+        state.files,
+        failure: Utils.errorFormat(result.left.message),
+        isValidImage: state.isValidImage,
+      ));
     }
   }
 }

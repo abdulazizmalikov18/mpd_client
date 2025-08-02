@@ -25,11 +25,12 @@ class PostWidget extends StatefulWidget {
   final int baseIndex;
   final FlickMultiManager flickMultiManager;
 
-  const PostWidget(
-      {super.key,
-      required this.post,
-      required this.baseIndex,
-      required this.flickMultiManager});
+  const PostWidget({
+    super.key,
+    required this.post,
+    required this.baseIndex,
+    required this.flickMultiManager,
+  });
 
   @override
   State<PostWidget> createState() => _PostWidgetState();
