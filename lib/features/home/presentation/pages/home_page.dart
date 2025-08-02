@@ -4,6 +4,7 @@ import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/core/extension/context_ext.dart';
 import 'package:mpd_client/features/home/domain/inherited/post_inhereted.dart';
+
 import 'package:mpd_client/features/home/domain/service/flick_multi_manger.dart';
 import 'package:mpd_client/features/home/presentation/widgets/home_appbar_component.dart';
 import 'package:mpd_client/features/home/presentation/widgets/loading_post.dart';
@@ -86,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                       parent: BouncingScrollPhysics(),
                     ),
                     controller: _scrollController,
-                    shrinkWrap: true,
+                    // shrinkWrap: true, // Removed for performance
                     itemCount: state.hasReachedMax
                         ? state.posts.length
                         : state.posts.length + 1,
