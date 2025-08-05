@@ -131,10 +131,7 @@ class Organization {
   @JsonKey(name: "name")
   final String name;
 
-  const Organization({
-    this.slugName = "",
-    this.name = "",
-  });
+  const Organization({this.slugName = "", this.name = ""});
 
   factory Organization.fromJson(Map<String, dynamic> json) =>
       _$OrganizationFromJson(json);
@@ -184,8 +181,8 @@ class Product {
   final String createDate;
   @JsonKey(name: "finish_date")
   final dynamic finishDate;
-  @JsonKey(name: "type")
-  final Type type;
+  // @JsonKey(name: "type")
+  // final Type type;
   @JsonKey(name: "text_check")
   final dynamic textCheck;
   @JsonKey(name: "created_at")
@@ -222,7 +219,7 @@ class Product {
     this.addCharge = 0,
     this.createDate = "",
     this.finishDate = 0,
-    this.type = const Type(),
+    // this.type = const Type(),
     this.textCheck = 0,
     this.createdAt = "",
     this.addedBy = const AddedBy(),
@@ -247,11 +244,7 @@ class AddedBy {
   @JsonKey(name: "lastname")
   final String lastname;
 
-  const AddedBy({
-    this.id = 0,
-    this.name = "",
-    this.lastname = "",
-  });
+  const AddedBy({this.id = 0, this.name = "", this.lastname = ""});
 
   factory AddedBy.fromJson(Map<String, dynamic> json) =>
       _$AddedByFromJson(json);
@@ -349,10 +342,7 @@ class Type {
   @JsonKey(name: "name")
   final String name;
 
-  const Type({
-    this.id = "",
-    this.name = "",
-  });
+  const Type({this.id = "", this.name = ""});
 
   factory Type.fromJson(Map<String, dynamic> json) => _$TypeFromJson(json);
 
@@ -401,10 +391,7 @@ class MainCat {
   @JsonKey(name: "name")
   final String name;
 
-  const MainCat({
-    this.id = 0,
-    this.name = "",
-  });
+  const MainCat({this.id = 0, this.name = ""});
 
   factory MainCat.fromJson(Map<String, dynamic> json) =>
       _$MainCatFromJson(json);

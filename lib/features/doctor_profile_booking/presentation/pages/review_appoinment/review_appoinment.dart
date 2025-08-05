@@ -42,8 +42,9 @@ class ReviewAppoinmentDetail extends StatelessWidget {
       totalDoublePrice += product.price * product.count;
     }
     final totalPrice = Utils.priceFormat(totalDoublePrice);
-    final doctorProfile =
-        context.select((DoctorProfileBloc bloc) => bloc.state.doctor);
+    final doctorProfile = context.select(
+      (DoctorProfileBloc bloc) => bloc.state.doctor,
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -59,20 +60,21 @@ class ReviewAppoinmentDetail extends StatelessWidget {
                 ? const SizedBox()
                 : ReviewCard(localProducts: localProducts),
             AppointmentPlaceDate(
-                onPress: () {
-                  UiTools.openMapsSheet(
-                    context,
-                    doctorProfile!.job.name,
-                    Coords(
-                      doctorProfile.location?.latitude ?? 41.311015,
-                      doctorProfile.location?.longitude ?? 69.279760,
-                    ),
-                  );
-                },
-                placeName: 'Shox Med Center',
-                date:
-                    '${Utils.dateCheckByNow(time.datetime!, context)}, ${Utils.dateReviewFormat(time.datetime!, context)}, ${time.datetime!.year}',
-                time: time.selectedTime),
+              onPress: () {
+                UiTools.openMapsSheet(
+                  context,
+                  doctorProfile!.job.name,
+                  Coords(
+                    doctorProfile.location?.latitude ?? 41.311015,
+                    doctorProfile.location?.longitude ?? 69.279760,
+                  ),
+                );
+              },
+              placeName: 'Shox Med Center',
+              date:
+                  '${Utils.dateCheckByNow(time.datetime!, context)}, ${Utils.dateReviewFormat(time.datetime!, context)}, ${time.datetime!.year}',
+              time: time.selectedTime,
+            ),
             AppointmentService(
               localProducts: localProducts,
               appointmentInfo: DrCardInfo.pending,
@@ -84,7 +86,7 @@ class ReviewAppoinmentDetail extends StatelessWidget {
               discount: '0 UZS',
               total: '$totalPrice UZS',
             ),
-            ScreenUtil().setVerticalSpacing(90.h)
+            ScreenUtil().setVerticalSpacing(90.h),
           ],
         ),
       ),
@@ -102,7 +104,7 @@ class ReviewAppoinmentDetail extends StatelessWidget {
               showDialog(
                 context: context,
                 barrierDismissible: false,
-                builder: (_) => _buildWaitingApproveDialog(context),
+                builder: (_) => _buildWaitingApproveDialog(context, time),
               );
             } else {
               Navigator.pop(context);
@@ -127,31 +129,29 @@ class ReviewAppoinmentDetail extends StatelessWidget {
     if (carts.isEmpty || isOffering) {
       List<Map<String, dynamic>> carts = [];
       for (var element in localProducts) {
-        carts.add({
-          "product": element.id,
-          "qty": element.count,
-        });
+        carts.add({"product": element.id, "qty": element.count});
       }
-      context
-          .read<CreateOrderBloc>()
-          .add(CreateOrderProcess(carts: carts, payment: 1, action: 'save'));
+      context.read<CreateOrderBloc>().add(
+        CreateOrderProcess(carts: carts, payment: 1, action: 'save'),
+      );
     } else {
-      context
-          .read<CreateOrderBloc>()
-          .add(CreateOrderProcess(carts: carts, payment: 1, action: 'save'));
+      context.read<CreateOrderBloc>().add(
+        CreateOrderProcess(carts: carts, payment: 1, action: 'save'),
+      );
     }
   }
 
-  Dialog _buildWaitingApproveDialog(BuildContext context) {
+  Dialog _buildWaitingApproveDialog(BuildContext context, TimetableState time) {
     return Dialog(
       backgroundColor: context.color.white,
       insetPadding: EdgeInsets.symmetric(horizontal: 16.w),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
       child: ReviewDialogBody(
-        icon: AppIcons.timer,
-        title: context.l10n.book_doctor_reviews_success_title,
-        subtitle: context.l10n.book_doctor_reviews_success_subtitle,
-        firstButtonName: "Bosh sahifaga qaytish",
+        icon: AppIcons.circleCheckBig,
+        title: "Success",
+        subtitle:
+            "Your appointment has been successfully booked for ${Utils.formatDateTime(time.datetime ?? DateTime.now())} at ${time.selectedTime}",
+        firstButtonName: "Okey",
         secondButtonName:
             context.l10n.book_doctor_reviews_success_second_button,
         firstButtonPressed: () {

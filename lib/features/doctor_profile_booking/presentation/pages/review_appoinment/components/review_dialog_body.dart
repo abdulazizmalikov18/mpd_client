@@ -1,6 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:mpd_client/app/app_colors.dart';
+import 'package:mpd_client/app/app_icons.dart';
+import 'package:mpd_client/app/colors.dart';
 import 'package:mpd_client/provider/language.dart';
 import 'package:mpd_client/src/themes/styles.dart';
 import 'package:mpd_client/src/widgets/longbutton.dart';
@@ -33,22 +34,28 @@ class ReviewDialogBody extends StatelessWidget {
           width: 156.h,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: !isError
-                  ? context.color.orangeLight.withValues(alpha: 0.1)
-                  : context.color.gradientRedOpacity.withValues(alpha: 0.1)),
-          child: SvgPicture.asset(icon),
+            shape: BoxShape.circle,
+            color: !isError
+                ? context.color.blueBackground.withValues(alpha: 0.1)
+                : context.color.gradientRedOpacity.withValues(alpha: 0.1),
+          ),
+          child: icon.svg(
+            height: 80.h,
+            width: 80.h,
+            color: !isError ? blue : red,
+          ),
         ),
         ScreenUtil().setVerticalSpacing(26.h),
         Center(
           child: Text(
             title,
             style: Styles.boldTitle.copyWith(
-                color: !isError
-                    ? context.color.grey
-                    : context.color.gradientRedOpacity,
-                fontSize: 24.sp,
-                fontFamily: Styles.gilroyMedium),
+              color: !isError
+                  ? context.color.grey
+                  : context.color.gradientRedOpacity,
+              fontSize: 24.sp,
+              fontFamily: Styles.gilroyMedium,
+            ),
           ),
         ),
         ScreenUtil().setVerticalSpacing(12.h),
@@ -57,28 +64,34 @@ class ReviewDialogBody extends StatelessWidget {
           child: Text(
             subtitle,
             textAlign: TextAlign.center,
-            style: Styles.descSubtitle
-                .copyWith(color: context.color.grey, height: null),
+            style: Styles.descSubtitle.copyWith(
+              color: context.color.grey,
+              height: null,
+            ),
           ),
         ),
         ScreenUtil().setVerticalSpacing(40.h),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: LongButton(
-              buttonName: firstButtonName, onPress: firstButtonPressed),
+            buttonName: firstButtonName,
+            onPress: firstButtonPressed,
+          ),
         ),
         ScreenUtil().setVerticalSpacing(24.h),
         TextButton(
-            style: TextButton.styleFrom(
-                alignment: Alignment.center,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100.r))),
-            onPressed: secondButtonPressed,
-            child: Text(
-              secondButtonName,
-              style:
-                  Styles.descSubtitle.copyWith(color: context.color.mainBlue),
-            )),
+          style: TextButton.styleFrom(
+            alignment: Alignment.center,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(100.r),
+            ),
+          ),
+          onPressed: secondButtonPressed,
+          child: Text(
+            secondButtonName,
+            style: Styles.descSubtitle.copyWith(color: context.color.mainBlue),
+          ),
+        ),
         ScreenUtil().setVerticalSpacing(20.h),
       ],
     );

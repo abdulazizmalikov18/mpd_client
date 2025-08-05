@@ -84,14 +84,11 @@ abstract class AppIcons {
   static const unliked = 'assets/icons/unliked.svg';
   static const liked = 'assets/icons/liked.svg';
 
-
-
   // User avatar png for map
   static const serviceEmpty = 'assets/icons/service_empty.svg';
 
   // PDF Document of specialist
   static const documentSvg = 'assets/icons/document.svg';
-
 
   // Error page icons
   static const error404 = 'assets/icons/404_error.svg';
@@ -123,18 +120,18 @@ abstract class AppIcons {
   static const tickCircle = "assets/icons/tick_circle.svg";
   static const tickCircleOff = "assets/icons/tick_circle_off.svg";
   static const notificationImage = 'assets/icons/notification_logo.svg';
+
+  static const circleCheck = "assets/icons/circle-check.svg";
+  static const circleCheckBig = "assets/icons/circle-check-big.svg";
 }
 
 extension SvgExt on String {
-  SvgPicture svg({
-    Color? color,
-    double? width,
-    double? height,
-  }) {
+  SvgPicture svg({Color? color, double? width, double? height}) {
     return SvgPicture.asset(
       this,
-      colorFilter:
-          color != null ? ColorFilter.mode(color, BlendMode.srcIn) : null,
+      colorFilter: color != null
+          ? ColorFilter.mode(color, BlendMode.srcIn)
+          : null,
       width: width,
       height: height,
     );

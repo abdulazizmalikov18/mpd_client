@@ -125,9 +125,6 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
   addCharge: (json['add_charge'] as num?)?.toInt() ?? 0,
   createDate: json['create_date'] as String? ?? "",
   finishDate: json['finish_date'] ?? 0,
-  type: json['type'] == null
-      ? const Type()
-      : Type.fromJson(json['type'] as Map<String, dynamic>),
   textCheck: json['text_check'] ?? 0,
   createdAt: json['created_at'] as String? ?? "",
   addedBy: json['added_by'] == null
@@ -160,7 +157,6 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
   'add_charge': instance.addCharge,
   'create_date': instance.createDate,
   'finish_date': instance.finishDate,
-  'type': instance.type,
   'text_check': instance.textCheck,
   'created_at': instance.createdAt,
   'added_by': instance.addedBy,
