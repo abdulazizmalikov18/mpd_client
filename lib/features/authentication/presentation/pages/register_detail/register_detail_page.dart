@@ -47,7 +47,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
         },
         child: ValueListenableBuilder(
             valueListenable: valueNotifier,
-            builder: (context, _, __) {
+            builder: (context, _, _) {
               return AnimatedSwitcher(
                 switchInCurve: Curves.easeIn,
                 switchOutCurve: Curves.easeOut,

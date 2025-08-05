@@ -295,5 +295,11 @@
   "chat": "Chat",
   "search": "Search",
   "notification": "Notification",
-  "noData": "No data"
+  "noData": "No data",
+
+  "userExists": "This user still exists",
+  "well": "Well",
+  "forgotPassword": "Forgot password?",
+  "passwordShort": "This password is too short. It must contain at least 6 characters.",
+  "empty": "Can't be empty"
 }

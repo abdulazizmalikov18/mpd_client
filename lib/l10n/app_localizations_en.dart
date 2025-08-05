@@ -855,4 +855,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noData => 'No data';
+
+  @override
+  String get userExists => 'This user still exists';
+
+  @override
+  String get well => 'Well';
+
+  @override
+  String get forgotPassword => 'Forgot password?';
+
+  @override
+  String get passwordShort =>
+      'This password is too short. It must contain at least 6 characters.';
+
+  @override
+  String get empty => 'Can\'t be empty';
 }

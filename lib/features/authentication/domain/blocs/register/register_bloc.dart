@@ -9,7 +9,7 @@ part 'register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterBloc(this._repository, this._formKey, this._phoneController)
-      : super(const RegisterState()) {
+    : super(const RegisterState()) {
     on<PrivacyReatPressed>(_onPrivacyReat);
     on<RegisterButtonPressed>(_onRegisterPressed);
 
@@ -27,7 +27,10 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     emit(state.copyWith(isPrivacyReat: !state.isPrivacyReat));
   }
 
-  void _accountDisabled(AccountDisabled event, Emitter<RegisterState> emit)async {
+  void _accountDisabled(
+    AccountDisabled event,
+    Emitter<RegisterState> emit,
+  ) async {
     final result = await _repository.disabledAccount();
     if (result.isRight) {
       event.onSucces();
@@ -37,7 +40,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   }
 
   void _onRegisterPressed(
-      RegisterButtonPressed event, Emitter<RegisterState> emit) async {
+    RegisterButtonPressed event,
+    Emitter<RegisterState> emit,
+  ) async {
     emit(state.copyWith(error: ''));
     if (_formKey.currentState!.validate()) {
       emit(state.copyWith(showLoading: true));
@@ -46,15 +51,19 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
       final result = await _repository.register(phone);
       if (result.isRight) {
-        emit(state.copyWith(
+        emit(
+          state.copyWith(
             showLoading: false,
-            error: result.right ? 'This user still exist' : 'Well'));
+            error: result.right ? 'This user still exist' : 'Well',
+          ),
+        );
       } else {
         if (result.left is NetworkFailure) {
           emit(state.copyWith(error: result.left.message, showLoading: false));
         } else {
-          emit(state.copyWith(
-              error: 'Unknown server error', showLoading: false));
+          emit(
+            state.copyWith(error: 'Unknown server error', showLoading: false),
+          );
         }
       }
     }

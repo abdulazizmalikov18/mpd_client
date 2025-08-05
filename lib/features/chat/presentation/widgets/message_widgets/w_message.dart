@@ -8,10 +8,7 @@ import 'package:mpd_client/features/chat/presentation/widgets/message_widgets/w_
 class WMessage extends StatefulWidget {
   final MessageModel? message;
 
-  const WMessage({
-    super.key,
-    required this.message,
-  });
+  const WMessage({super.key, required this.message});
 
   @override
   State<WMessage> createState() => _WMessageState();
@@ -25,7 +22,8 @@ class _WMessageState extends State<WMessage> {
 
   @override
   Widget build(BuildContext context) {
-    final isMe = (widget.message?.sender ==
+    final isMe =
+        (widget.message?.sender ==
         context.read<UserInfoBloc>().state.userInfo?.username);
     return Align(
       alignment: (isMe) ? Alignment.topRight : Alignment.topLeft,
@@ -33,7 +31,8 @@ class _WMessageState extends State<WMessage> {
           ? WLiveAndMeetingItem(message: widget.message)
           : Container(
               constraints: BoxConstraints(
-                maxWidth: MediaQuery.sizeOf(context).width *
+                maxWidth:
+                    MediaQuery.sizeOf(context).width *
                     ((Platform.isIOS || Platform.isAndroid) ? 0.9 : 0.18),
               ),
               margin: const EdgeInsets.only(bottom: 12),
@@ -67,7 +66,8 @@ class _WMessageState extends State<WMessage> {
                         if (widget.message?.text?.isNotEmpty ?? false)
                           ConstrainedBox(
                             constraints: BoxConstraints(
-                              maxWidth: MediaQuery.sizeOf(context).width *
+                              maxWidth:
+                                  MediaQuery.sizeOf(context).width *
                                   ((Platform.isAndroid || Platform.isIOS)
                                       ? 0.6
                                       : 0.10),
@@ -107,7 +107,7 @@ class _WMessageState extends State<WMessage> {
                                 Icons.check,
                                 size: 12,
                                 color: context.color.white,
-                              )
+                              ),
                           ],
                         ),
                       ],

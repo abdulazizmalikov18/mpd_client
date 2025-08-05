@@ -20,7 +20,6 @@ class ChatView extends StatefulWidget {
 }
 
 class _ChatViewState extends State<ChatView> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,15 +33,13 @@ class _ChatViewState extends State<ChatView> {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: WTextField(
               onChanged: (searchText) {
-                context
-                    .read<ChatGroupBloc>()
-                    .add(ChatGroupSearchEvent(search: searchText));
+                context.read<ChatGroupBloc>().add(
+                  ChatGroupSearchEvent(search: searchText),
+                );
               },
               fillColor: background,
               borderColor: Colors.transparent,
-              prefixIcon: AppIcons.search.svg(
-                color: context.color.grey,
-              ),
+              prefixIcon: AppIcons.search.svg(color: context.color.grey),
               hintText: context.l10n.search,
               style: TextStyle(
                 fontSize: 16,
@@ -86,10 +83,7 @@ class _ChatViewState extends State<ChatView> {
                   const SizedBox(height: 32),
                   Text(
                     'Chat Not Found',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w700,
-                    ),
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(height: 8),
                   Text(
@@ -122,14 +116,14 @@ class _ChatViewState extends State<ChatView> {
                 child: WUserChatButton(
                   onTap: () {
                     final bloc = context.read<UserInfoBloc>();
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => BlocProvider.value(
-                        value: bloc,
-                        child: InChatView(
-                          group: state.groups[index],
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => BlocProvider.value(
+                          value: bloc,
+                          child: InChatView(group: state.groups[index]),
                         ),
                       ),
-                    ));
+                    );
                   },
                   group: state.groups[index],
                 ),

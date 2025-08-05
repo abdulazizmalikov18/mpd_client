@@ -300,7 +300,7 @@ class _UserPostIteamState extends State<UserPostIteam> {
           child: SafeArea(
             child: ValueListenableBuilder(
               valueListenable: valueNotifier,
-              builder: (context, value, __) {
+              builder: (context, value, _) {
                 return SwipeIndicator(
                   current: value,
                   length: widget.media.length,
@@ -316,7 +316,7 @@ class _UserPostIteamState extends State<UserPostIteam> {
               ? SafeArea(
                   child: ValueListenableBuilder(
                     valueListenable: valueNotifier,
-                    builder: (context, value, __) {
+                    builder: (context, value, _) {
                       return Text(
                         '${value + 1}/${widget.media.length}',
                         style: Styles.semiboldTitle.copyWith(

@@ -74,7 +74,7 @@ class _VerificationCardSheetState extends State<VerificationCardSheet> {
             autofocus: true,
             forceErrorState: state is VerifyCardFailure ? true : false,
             errorText: '',
-            errorBuilder: (_, __) {
+            errorBuilder: (_, _) {
               return _builtError(context);
             },
             length: 6,

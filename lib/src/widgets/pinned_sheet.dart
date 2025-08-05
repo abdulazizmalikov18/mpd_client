@@ -10,18 +10,19 @@ class PinnedSheet extends StatelessWidget {
   const PinnedSheet({
     super.key,
     required this.widget,
-    this.verticalPadding = 14,
+    this.verticalPadding = 12,
   });
 
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      padding: EdgeInsets.symmetric(
-        vertical: verticalPadding.h,
-        horizontal: 16.w,
-      ).copyWith(
-        bottom: MediaQuery.of(context).viewInsets.bottom > 0 ? 12 : 32,
-      ),
+      padding:
+          EdgeInsets.symmetric(
+            vertical: verticalPadding.h,
+            horizontal: 16.w,
+          ).copyWith(
+            bottom: MediaQuery.of(context).viewInsets.bottom > 0 ? 12 : 32,
+          ),
       decoration: BoxDecoration(
         color: context.color.white,
         boxShadow: [
@@ -29,7 +30,7 @@ class PinnedSheet extends StatelessWidget {
             color: context.color.shadow,
             offset: const Offset(0, -4),
             blurRadius: 12,
-          )
+          ),
         ],
       ),
       duration: const Duration(milliseconds: 300),

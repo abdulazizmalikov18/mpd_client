@@ -70,15 +70,14 @@ class WButton extends StatelessWidget {
               : border,
         ),
         child: isLoading
-            ? const Center(
-                child: CupertinoActivityIndicator(color: white),
-              )
+            ? const Center(child: CupertinoActivityIndicator(color: white))
             : AnimatedDefaultTextStyle(
                 duration: const Duration(milliseconds: 200),
-                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                      color: white,
-                    ),
-                child: child ??
+                style: Theme.of(
+                  context,
+                ).textTheme.headlineSmall!.copyWith(color: white),
+                child:
+                    child ??
                     Text(
                       text,
                       style: isDisabled

@@ -40,36 +40,34 @@ Map<String, dynamic> _$SpecialistModelToJson(SpecialistModel instance) =>
       'location': instance.location,
     };
 
-Job _$JobFromJson(Map<String, dynamic> json) => Job(
-      id: json['id'] as String? ?? "",
-      name: json['name'] as String? ?? "",
-    );
+Job _$JobFromJson(Map<String, dynamic> json) =>
+    Job(id: json['id'] as String? ?? "", name: json['name'] as String? ?? "");
 
 Map<String, dynamic> _$JobToJson(Job instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-    };
+  'id': instance.id,
+  'name': instance.name,
+};
 
 Org _$OrgFromJson(Map<String, dynamic> json) => Org(
-      id: json['id'] as String? ?? "",
-      name: json['name'] as String? ?? "",
-      slugName: json['slug_name'] as String? ?? "",
-      logo: json['logo'] as String? ?? "",
-      operationType: json['operation_type'] as String? ?? "",
-      address: json['address'] as String? ?? "",
-      phone: json['phone'] as String? ?? "",
-      faceId: json['face_id'] as bool? ?? false,
-      workRadius: (json['work_radius'] as num?)?.toInt() ?? 0,
-    );
+  id: json['id'] as String? ?? "",
+  name: json['name'] as String? ?? "",
+  slugName: json['slug_name'] as String? ?? "",
+  logo: json['logo'] as String? ?? "",
+  operationType: json['operation_type'] as String? ?? "",
+  address: json['address'] as String? ?? "",
+  phone: json['phone'] as String? ?? "",
+  faceId: json['face_id'] as bool? ?? false,
+  workRadius: (json['work_radius'] as num?)?.toInt() ?? 0,
+);
 
 Map<String, dynamic> _$OrgToJson(Org instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'slug_name': instance.slugName,
-      'logo': instance.logo,
-      'operation_type': instance.operationType,
-      'address': instance.address,
-      'phone': instance.phone,
-      'face_id': instance.faceId,
-      'work_radius': instance.workRadius,
-    };
+  'id': instance.id,
+  'name': instance.name,
+  'slug_name': instance.slugName,
+  'logo': instance.logo,
+  'operation_type': instance.operationType,
+  'address': instance.address,
+  'phone': instance.phone,
+  'face_id': instance.faceId,
+  'work_radius': instance.workRadius,
+};

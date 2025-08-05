@@ -59,27 +59,29 @@ class _VerificationSheetState extends State<VerificationSheet> {
             // print(object)
             if (state.showLoading) {
               showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (context) => const LoadingDialogWidget());
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => const LoadingDialogWidget(),
+              );
             } else {
               Navigator.pop(context);
               if (state.error != 'No') return;
               if (state.isNewUser) {
-                await Future.delayed(const Duration(milliseconds: 200)).then(
-                  (value) {
-                    if (context.mounted) {
-                      Navigator.pushNamed(
-                        context,
-                        AppRoutes.registerDetail,
-                        arguments: widget.phone,
-                      );
-                    }
-                  },
-                );
+                await Future.delayed(const Duration(milliseconds: 200)).then((
+                  value,
+                ) {
+                  if (context.mounted) {
+                    Navigator.pushNamed(
+                      context,
+                      AppRoutes.registerDetail,
+                      arguments: widget.phone,
+                    );
+                  }
+                });
               } else {
-                await Future.delayed(const Duration(milliseconds: 200))
-                    .then((value) {
+                await Future.delayed(const Duration(milliseconds: 200)).then((
+                  value,
+                ) {
                   if (context.mounted) {
                     Navigator.pushNamedAndRemoveUntil(
                       context,
@@ -94,15 +96,16 @@ class _VerificationSheetState extends State<VerificationSheet> {
           builder: (context, state) {
             return Pinput(
               onCompleted: (code) {
-                context
-                    .read<VerificationBloc>()
-                    .add(CheckCodeEvent(widget.phone, code));
+                context.read<VerificationBloc>().add(
+                  CheckCodeEvent(widget.phone, code),
+                );
               },
               autofocus: true,
-              forceErrorState:
-                  state.error != '' && state.error != 'No' ? true : false,
+              forceErrorState: state.error != '' && state.error != 'No'
+                  ? true
+                  : false,
               errorText: '',
-              errorBuilder: (_, __) {
+              errorBuilder: (_, _) {
                 return _builtError(context);
               },
               length: 6,
@@ -126,7 +129,8 @@ class _VerificationSheetState extends State<VerificationSheet> {
           },
           builder: (context, state) {
             return IgnorePointer(
-              ignoring: state.duration != '' && state.duration != '00:00' ||
+              ignoring:
+                  state.duration != '' && state.duration != '00:00' ||
                   state.buttonState == ResendButton.submitting,
               child: RoundedLoadingButton(
                 color: context.color.mainBlue.withValues(alpha: 0.2),
@@ -150,7 +154,7 @@ class _VerificationSheetState extends State<VerificationSheet> {
             );
           },
         ),
-        ScreenUtil().setVerticalSpacing(22.h)
+        ScreenUtil().setVerticalSpacing(22.h),
       ],
     );
   }
@@ -163,18 +167,14 @@ class _VerificationSheetState extends State<VerificationSheet> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.error,
-              color: context.color.red,
-              size: 21,
-            ),
+            Icon(Icons.error, color: context.color.red, size: 21),
             ScreenUtil().setHorizontalSpacing(6.5.w),
             Text(
               context.l10n.register_verify_code_error_code_write,
               style: Styles.descSubtitle.copyWith(color: context.color.red),
-            )
+            ),
           ],
-        )
+        ),
       ],
     );
   }

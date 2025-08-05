@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
 import 'package:mpd_client/app/app_colors.dart';
+import 'package:mpd_client/app/app_images.dart';
 import 'package:mpd_client/app/colors.dart';
 import 'package:mpd_client/core/pagination/presentation/paginator_list.dart';
 import 'package:mpd_client/features/chat/domain/models/chat_group.dart';
@@ -17,10 +18,7 @@ import 'package:mpd_client/features/chat/presentation/widgets/w_chat_textfield.d
 class InChatView extends StatefulWidget {
   final ChatGroupModel group;
 
-  const InChatView({
-    super.key,
-    required this.group,
-  });
+  const InChatView({super.key, required this.group});
 
   @override
   State<InChatView> createState() => _InChatViewState();
@@ -36,9 +34,9 @@ class _InChatViewState extends State<InChatView> {
   @override
   void initState() {
     context.read<ChatMessageBloc>().add(ChatGetMessages(widget.group));
-    context
-        .read<ChatMessageBloc>()
-        .add(ChatReadAllMessage(widget.group.slugName));
+    context.read<ChatMessageBloc>().add(
+      ChatReadAllMessage(widget.group.slugName),
+    );
 
     super.initState();
   }
@@ -62,6 +60,9 @@ class _InChatViewState extends State<InChatView> {
                       radius: 20,
                       backgroundColor: mainBlue.withValues(alpha: 0.1),
                       backgroundImage: CachedNetworkImageProvider(
+                        AppImages.networkAvatar,
+                      ),
+                      foregroundImage: CachedNetworkImageProvider(
                         widget.group.avatar,
                       ),
                     ),
@@ -71,10 +72,10 @@ class _InChatViewState extends State<InChatView> {
                         radius: 6,
                         backgroundColor:
                             widget.group.isOnline && (widget.group.isUserToUser)
-                                ? context.color.green
-                                : Colors.transparent,
+                            ? context.color.green
+                            : Colors.transparent,
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -108,45 +109,39 @@ class _InChatViewState extends State<InChatView> {
               child: BlocBuilder<ChatMessageBloc, ChatMessageState>(
                 builder: (context, state) => switch (state.status) {
                   FormzSubmissionStatus.inProgress => const Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    ),
+                    child: CircularProgressIndicator.adaptive(),
+                  ),
                   _ => Align(
-                      alignment: Alignment.bottomCenter,
-                      child: PaginatorList(
-                        controller:
-                            $chatController.of(context).scrollController,
-                        itemCount: state.messages.length,
-                        reverse: true,
-                        itemBuilder: (context, index) => GestureDetector(
-                          onLongPress: () => _showMessageOptions(
-                            context,
-                            index,
-                            state.messages[index],
-                          ),
-                          child: WMessage(
-                            message: state.messages[index],
-                          ),
+                    alignment: Alignment.bottomCenter,
+                    child: PaginatorList(
+                      controller: $chatController.of(context).scrollController,
+                      itemCount: state.messages.length,
+                      reverse: true,
+                      itemBuilder: (context, index) => GestureDetector(
+                        onLongPress: () => _showMessageOptions(
+                          context,
+                          index,
+                          state.messages[index],
                         ),
-                        padding: EdgeInsets.only(top: 16),
-                        paginatorStatus: state.status,
-                        fetchMoreFunction: () {
-                          context
-                              .read<ChatMessageBloc>()
-                              .add(ChatGetMoreMessages(widget.group));
-                        },
-                        hasMoreToFetch: (state.count) > state.messages.length,
+                        child: WMessage(message: state.messages[index]),
                       ),
+                      padding: EdgeInsets.only(top: 16),
+                      paginatorStatus: state.status,
+                      fetchMoreFunction: () {
+                        context.read<ChatMessageBloc>().add(
+                          ChatGetMoreMessages(widget.group),
+                        );
+                      },
+                      hasMoreToFetch: (state.count) > state.messages.length,
                     ),
+                  ),
                 },
               ),
             ),
           ),
           Container(
             width: double.infinity,
-            padding: EdgeInsets.symmetric(
-              vertical: 8,
-              horizontal: 16,
-            ),
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             decoration: BoxDecoration(
               color: context.color.white,
               boxShadow: [
@@ -154,7 +149,7 @@ class _InChatViewState extends State<InChatView> {
                   color: context.color.black.withValues(alpha: .15),
                   offset: const Offset(0, -4),
                   blurRadius: 12,
-                )
+                ),
               ],
             ),
             child: SafeArea(child: const WChatTextField()),

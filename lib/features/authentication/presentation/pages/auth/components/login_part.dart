@@ -33,12 +33,7 @@ class LoginPart extends StatelessWidget {
             ScreenUtil().setVerticalSpacing(16.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: WTabBar(
-                tabs: [
-                  Text('Telefon'),
-                  Text('Username'),
-                ],
-              ),
+              child: WTabBar(tabs: [Text('Telefon'), Text('Username')]),
             ),
             ScreenUtil().setVerticalSpacing(16.h),
             Form(
@@ -59,30 +54,38 @@ class LoginPart extends StatelessWidget {
                               margin: EdgeInsets.symmetric(horizontal: 16.w),
                               child: TextFormField(
                                 style: Styles.descSubtitle,
-                                validator: Validators.usernameOrPhone,
+                                validator: (value) =>
+                                    Validators.usernameOrPhone(value, context),
                                 textInputAction: TextInputAction.next,
-                                controller:
-                                    context.read<AuthBloc>().phoneController,
+                                controller: context
+                                    .read<AuthBloc>()
+                                    .phoneController,
                                 onChanged: (value) => context
                                     .read<AuthBloc>()
                                     .add(ChangePhoneorUsername(value)),
                                 keyboardType: TextInputType.phone,
                                 inputFormatters: [Formatters.phoneFormatter],
                                 decoration: InputDecoration(
-                                  contentPadding:
-                                      EdgeInsets.only(left: 16.w, top: 16.h),
-                                  enabledBorder:
-                                      Decorations.enabledBorder(context),
-                                  focusedBorder:
-                                      Decorations.focusedBorder(context),
+                                  contentPadding: EdgeInsets.only(
+                                    left: 16.w,
+                                    top: 16.h,
+                                  ),
+                                  enabledBorder: Decorations.enabledBorder(
+                                    context,
+                                  ),
+                                  focusedBorder: Decorations.focusedBorder(
+                                    context,
+                                  ),
                                   border: Decorations.enabledBorder(context),
-                                  errorText: state.error !=
+                                  errorText:
+                                      state.error !=
                                           '[User with this credentials not found]'
                                       ? null
                                       : context.l10n.login_error,
                                   hintText: "+998 (00) 000-00-00",
-                                  hintStyle: Styles.descSubtitle
-                                      .copyWith(color: context.color.grey),
+                                  hintStyle: Styles.descSubtitle.copyWith(
+                                    color: context.color.grey,
+                                  ),
                                 ),
                               ),
                             );
@@ -98,10 +101,10 @@ class LoginPart extends StatelessWidget {
                               margin: EdgeInsets.symmetric(horizontal: 16.w),
                               child: TextFormField(
                                 style: Styles.descSubtitle,
-                                validator: Validators.usernameOrPhone,
+                                validator: (value) =>
+                                    Validators.usernameOrPhone(value, context),
                                 textInputAction: TextInputAction.next,
-                                controller:
-                                    context.read<AuthBloc>().username,
+                                controller: context.read<AuthBloc>().username,
                                 onChanged: (value) => context
                                     .read<AuthBloc>()
                                     .add(ChangePhoneorUsername(value)),
@@ -110,18 +113,22 @@ class LoginPart extends StatelessWidget {
                                     left: 16.w,
                                     top: 16.h,
                                   ),
-                                  enabledBorder:
-                                      Decorations.enabledBorder(context),
-                                  focusedBorder:
-                                      Decorations.focusedBorder(context),
+                                  enabledBorder: Decorations.enabledBorder(
+                                    context,
+                                  ),
+                                  focusedBorder: Decorations.focusedBorder(
+                                    context,
+                                  ),
                                   border: Decorations.enabledBorder(context),
-                                  errorText: state.error !=
+                                  errorText:
+                                      state.error !=
                                           '[User with this credentials not found]'
                                       ? null
                                       : context.l10n.login_error,
                                   hintText: "Username",
-                                  hintStyle: Styles.descSubtitle
-                                      .copyWith(color: context.color.grey),
+                                  hintStyle: Styles.descSubtitle.copyWith(
+                                    color: context.color.grey,
+                                  ),
                                 ),
                               ),
                             );
@@ -151,15 +158,17 @@ class LoginPart extends StatelessWidget {
                       return InputWidget(
                         textInputAction: TextInputAction.done,
                         hintText: context.l10n.login_password,
-                        errorText: state.error !=
+                        errorText:
+                            state.error !=
                                 '[User with this credentials not found]'
                             ? null
                             : context.l10n.login_error,
                         obscure: state.obscureText,
-                        validator: Validators.password,
-                        onChanged: (value) => context
-                            .read<AuthBloc>()
-                            .add(PasswordTextFieldChanged(value)),
+                        validator: (value) =>
+                            Validators.password(value, context),
+                        onChanged: (value) => context.read<AuthBloc>().add(
+                          PasswordTextFieldChanged(value),
+                        ),
                         suffixIcon: IconButton(
                           onPressed: () {
                             context.read<AuthBloc>().add(EyeIconPressed());
@@ -206,9 +215,10 @@ class LoginPart extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {},
                   child: Text(
-                    "Forgot password?",
-                    style: Styles.bottomLabel
-                        .copyWith(color: context.color.blueBackground),
+                    context.l10n.forgotPassword,
+                    style: Styles.bottomLabel.copyWith(
+                      color: context.color.blueBackground,
+                    ),
                   ),
                 ),
               ),
@@ -220,7 +230,10 @@ class LoginPart extends StatelessWidget {
               listener: (context, state) {
                 if (state.error == 'No') {
                   Navigator.pushNamedAndRemoveUntil(
-                      context, AppRoutes.mainPage, (route) => false);
+                    context,
+                    AppRoutes.mainPage,
+                    (route) => false,
+                  );
                 } else if (state.error != 'No' && state.error != '') {
                   // ScaffoldMessenger.of(context).showSnackBar(UiTools.failSnackbar(title: Utils.errorFormat(state.error), context: context));
                 }
@@ -274,7 +287,9 @@ class LoginPart extends StatelessWidget {
   }
 
   List<TextInputFormatter>? setFormat(
-      PhoneOrUsername phoneOrUsername, String text) {
+    PhoneOrUsername phoneOrUsername,
+    String text,
+  ) {
     switch (phoneOrUsername) {
       case PhoneOrUsername.phone:
         return [
@@ -282,7 +297,7 @@ class LoginPart extends StatelessWidget {
             mask: '+998 (##) ###-##-##',
             filter: {'#': RegExp(r'[\+0-9]')},
             type: MaskAutoCompletionType.lazy,
-          )
+          ),
         ];
       case PhoneOrUsername.username:
         return [];

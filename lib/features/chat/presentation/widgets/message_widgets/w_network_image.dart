@@ -32,7 +32,7 @@ class WNetworkImage extends StatelessWidget {
               height: height,
               width: width,
               fit: fit,
-              errorWidget: (_, __, ___) {
+              errorWidget: (_, _, _) {
                 return defaultWidget;
               },
               progressIndicatorBuilder: (context, child, loadingProgress) {

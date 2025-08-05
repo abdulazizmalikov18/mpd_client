@@ -29,11 +29,12 @@ class WChatMediaView extends StatelessWidget {
         child: GestureDetector(
           onTap: () {
             isMobile
-                ? Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => ChatImageScreen(
-                          file: file,
-                          isLocalFile: isLocalFile,
-                        )))
+                ? Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ChatImageScreen(file: file, isLocalFile: isLocalFile),
+                    ),
+                  )
                 : showDialog(
                     context: context,
                     builder: (context) => Dialog(
@@ -41,15 +42,15 @@ class WChatMediaView extends StatelessWidget {
                         maxScale: 2.5,
                         child: switch (isLocalFile) {
                           true => Image.file(
-                              File(file),
-                              fit: BoxFit.cover,
-                              width: MediaQuery.of(context).size.width * 0.7,
-                              height: MediaQuery.of(context).size.height * 0.7,
-                            ),
+                            File(file),
+                            fit: BoxFit.cover,
+                            width: MediaQuery.of(context).size.width * 0.7,
+                            height: MediaQuery.of(context).size.height * 0.7,
+                          ),
                           false => CachedNetworkImage(
-                              imageUrl: file,
-                              fit: BoxFit.cover,
-                            ),
+                            imageUrl: file,
+                            fit: BoxFit.cover,
+                          ),
                         },
                       ),
                     ),
@@ -57,24 +58,18 @@ class WChatMediaView extends StatelessWidget {
           },
           child: switch (isLocalFile) {
             true => Image.file(
-                File(file),
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
-            false => CachedNetworkImage(
-                imageUrl: file,
-                fit: BoxFit.cover,
-              ),
+              File(file),
+              fit: BoxFit.cover,
+              width: double.infinity,
+            ),
+            false => CachedNetworkImage(imageUrl: file, fit: BoxFit.cover),
           },
         ),
       );
     } else {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-        child: WChatFileView(
-          file: file,
-          isLocalFile: isLocalFile,
-        ),
+        child: WChatFileView(file: file, isLocalFile: isLocalFile),
       );
     }
   }
@@ -99,16 +94,16 @@ class ChatImageScreen extends StatelessWidget {
         child: Center(
           child: switch (isLocalFile) {
             true => Image.file(
-                File(file),
-                fit: BoxFit.cover,
-                width: MediaQuery.of(context).size.width * 0.7,
-                height: MediaQuery.of(context).size.height * 0.7,
-              ),
+              File(file),
+              fit: BoxFit.cover,
+              width: MediaQuery.of(context).size.width * 0.7,
+              height: MediaQuery.of(context).size.height * 0.7,
+            ),
             false => CachedNetworkImage(
-                imageUrl: file,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
+              imageUrl: file,
+              fit: BoxFit.cover,
+              width: double.infinity,
+            ),
           },
         ),
       ),

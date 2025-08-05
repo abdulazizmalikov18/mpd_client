@@ -30,9 +30,9 @@ abstract class Validators {
     return null;
   }
 
-  static String? phone(String? value) {
+  static String? phone(String? value, BuildContext context) {
     if (value == null || value.isEmpty) {
-      return 'Can\'t be empty';
+      return context.l10n.empty;
     }
     if (value.length < 14) {
       return 'It is not valid phone number';
@@ -41,13 +41,13 @@ abstract class Validators {
     return null;
   }
 
-  static String? password(String? value) {
+  static String? password(String? value, BuildContext context) {
     if (value == null || value.isEmpty) {
-      return 'Can\'t be empty';
+      return context.l10n.empty;
     }
 
     if (value.length < 6) {
-      return 'This password is too short. It must contain at least 6 characters.';
+      return context.l10n.passwordShort;
     }
 
     // if (value.length < 8) {
@@ -82,9 +82,9 @@ abstract class Validators {
     return null;
   }
 
-  static String? usernameOrPhone(String? value) {
+  static String? usernameOrPhone(String? value, BuildContext context) {
     if (value == null || value.isEmpty) {
-      return 'Can\'t be empty';
+      return context.l10n.empty;
     }
 
     if (!value.contains(RegExp(r'[a-zA-Z]'), 0) && value.length < 19) {
@@ -98,9 +98,9 @@ abstract class Validators {
     return null;
   }
 
-  static String? passportSTIR(String? value) {
+  static String? passportSTIR(String? value, BuildContext context) {
     if (value == null || value.isEmpty) {
-      return 'Can\'t be empty!';
+      return context.l10n.empty;
     }
     if (value.length != 18) {
       return 'Must be 14 character!';

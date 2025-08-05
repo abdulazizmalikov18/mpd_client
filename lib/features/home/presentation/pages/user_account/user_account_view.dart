@@ -29,7 +29,6 @@ import 'package:mpd_client/src/widgets/default_avatar.dart';
 import 'package:mpd_client/src/widgets/gradient_icon.dart';
 import 'package:mpd_client/src/widgets/icon_gradient_button.dart';
 import 'package:mpd_client/src/widgets/longbutton.dart';
-import 'package:mpd_client/src/widgets/pinned_sheet.dart';
 import 'package:mpd_client/src/widgets/shimmer_container.dart';
 import 'package:mpd_client/src/widgets/w_shimmer.dart';
 import 'package:shimmer/shimmer.dart';
@@ -55,13 +54,13 @@ class _UserAccountViewState extends State<UserAccountView> {
   @override
   void initState() {
     if (widget.specialistId != 0) {
-      context
-          .read<DoctorProfileBloc>()
-          .add(GetDoctorPprofileData(widget.specialistId.toString()));
+      context.read<DoctorProfileBloc>().add(
+        GetDoctorPprofileData(widget.specialistId.toString()),
+      );
     }
-    context
-        .read<UserProfileBloc>()
-        .add(GetUserEvent(username: widget.username));
+    context.read<UserProfileBloc>().add(
+      GetUserEvent(username: widget.username),
+    );
     context.read<PostBloc>().add(PostFetchedUser(username: widget.username));
     super.initState();
   }
@@ -69,49 +68,80 @@ class _UserAccountViewState extends State<UserAccountView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: BlocBuilder<DoctorProfileBloc, DoctorProfileState>(
+      bottomNavigationBar: BlocBuilder<DoctorProfileBloc, DoctorProfileState>(
         builder: (context, state) {
-          return AnimatedCrossFade(
-            firstChild: const SizedBox(width: double.maxFinite),
-            secondChild: PinnedSheet(
-              widget: Row(
-                children: [
-                  Expanded(
-                    child: LongButton(
-                      color: mainBlue,
-                      buttonName: context.l10n.book_doctor_book,
-                      onPress: () {
-                        Navigator.of(context).pushNamed(
-                          AppRoutes.services,
-                          arguments: state.doctor?.id ?? "_",
-                        );
-                      },
-                    ),
+          if ((state is DoctorProfileSuccess && widget.specialistId == 0)) {
+            return SizedBox();
+          }
+          return BottomAppBar(
+            padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 16.h),
+            child: Row(
+              children: [
+                Expanded(
+                  child: LongButton(
+                    color: mainBlue,
+                    buttonName: context.l10n.book_doctor_book,
+                    onPress: () {
+                      Navigator.of(context).pushNamed(
+                        AppRoutes.services,
+                        arguments: state.doctor?.id ?? "_",
+                      );
+                    },
                   ),
-                  if (state.doctor != null && state.doctor?.phone != null) ...[
-                    ScreenUtil().setHorizontalSpacing(16.w),
-                    IconGradientButton(
-                      icon: AppIcons.call,
-                      onPressed: () =>
-                          Caller.makePhoneCall(state.doctor?.phone ?? "__"),
-                    )
-                  ]
+                ),
+                if (state.doctor != null && state.doctor?.phone != null) ...[
+                  ScreenUtil().setHorizontalSpacing(16.w),
+                  IconGradientButton(
+                    icon: AppIcons.call,
+                    onPressed: () =>
+                        Caller.makePhoneCall(state.doctor?.phone ?? "__"),
+                  ),
                 ],
-              ),
+              ],
             ),
-            crossFadeState:
-                (state is DoctorProfileSuccess && widget.specialistId != 0)
-                    ? CrossFadeState.showSecond
-                    : CrossFadeState.showFirst,
-            duration: const Duration(milliseconds: 300),
           );
+          // return AnimatedCrossFade(
+          //   firstChild: const SizedBox(width: double.maxFinite),
+          //   secondChild: PinnedSheet(
+          //     widget: Row(
+          //       children: [
+          //         Expanded(
+          //           child: LongButton(
+          //             color: mainBlue,
+          //             buttonName: context.l10n.book_doctor_book,
+          //             onPress: () {
+          //               Navigator.of(context).pushNamed(
+          //                 AppRoutes.services,
+          //                 arguments: state.doctor?.id ?? "_",
+          //               );
+          //             },
+          //           ),
+          //         ),
+          //         if (state.doctor != null && state.doctor?.phone != null) ...[
+          //           ScreenUtil().setHorizontalSpacing(16.w),
+          //           IconGradientButton(
+          //             icon: AppIcons.call,
+          //             onPressed: () =>
+          //                 Caller.makePhoneCall(state.doctor?.phone ?? "__"),
+          //           ),
+          //         ],
+          //       ],
+          //     ),
+          //   ),
+          //   crossFadeState:
+          //       (state is DoctorProfileSuccess && widget.specialistId != 0)
+          //       ? CrossFadeState.showSecond
+          //       : CrossFadeState.showFirst,
+          //   duration: const Duration(milliseconds: 300),
+          // );
         },
       ),
       body: widget.specialistId == 0
           ? BlocConsumer<UserProfileBloc, UserProfileState>(
               listener: (context, state) {
                 context.read<SubscriptionBloc>().add(
-                    SetSubscribedOrNot(state.userAccount.isSubscribedToUser));
+                  SetSubscribedOrNot(state.userAccount.isSubscribedToUser),
+                );
               },
               listenWhen: (previous, current) =>
                   current.userAccount.username != previous.userAccount.username,
@@ -227,56 +257,78 @@ class _UserAccountViewState extends State<UserAccountView> {
                               child: Row(
                                 children: [
                                   Expanded(
-                                    child: BlocConsumer<SubscriptionBloc,
-                                        SubscriptionState>(
-                                      listener: (context, state) {
-                                        if (state is SubscriptionFailure) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            UiTools.failurefailureSnackBar(
-                                              title: 'Oh snap',
-                                              message: state.failure,
-                                            ),
-                                          );
-                                        } else if (state
-                                            is SubscriptionSuccess) {
-                                          context.read<DoctorProfileBloc>().add(
-                                              UpdateDoctorSubscription(
-                                                  state.isSubscribed));
-                                          context
-                                              .read<UserSubscriptionsBloc>()
-                                              .add(InsertSubscription(
-                                                  state.isSubscribed));
-                                        }
-                                      },
-                                      builder: (context, stateSub) {
-                                        return FollowButton(
-                                          height: 40.h,
-                                          isFollowing: stateSub.isSubscribed,
-                                          onTap: state is SubscriptionLoading
-                                              ? null
-                                              : () {
-                                                  if (stateSub.isSubscribed) {
-                                                    context
-                                                        .read<
-                                                            SubscriptionBloc>()
-                                                        .add(
-                                                            UnSubscribeToDrEvent(
+                                    child:
+                                        BlocConsumer<
+                                          SubscriptionBloc,
+                                          SubscriptionState
+                                        >(
+                                          listener: (context, state) {
+                                            if (state is SubscriptionFailure) {
+                                              ScaffoldMessenger.of(
+                                                context,
+                                              ).showSnackBar(
+                                                UiTools.failurefailureSnackBar(
+                                                  title: 'Oh snap',
+                                                  message: state.failure,
+                                                ),
+                                              );
+                                            } else if (state
+                                                is SubscriptionSuccess) {
+                                              context
+                                                  .read<DoctorProfileBloc>()
+                                                  .add(
+                                                    UpdateDoctorSubscription(
+                                                      state.isSubscribed,
+                                                    ),
+                                                  );
+                                              context
+                                                  .read<UserSubscriptionsBloc>()
+                                                  .add(
+                                                    InsertSubscription(
+                                                      state.isSubscribed,
+                                                    ),
+                                                  );
+                                            }
+                                          },
+                                          builder: (context, stateSub) {
+                                            return FollowButton(
+                                              height: 40.h,
+                                              isFollowing:
+                                                  stateSub.isSubscribed,
+                                              onTap:
+                                                  state is SubscriptionLoading
+                                                  ? null
+                                                  : () {
+                                                      if (stateSub
+                                                          .isSubscribed) {
+                                                        context
+                                                            .read<
+                                                              SubscriptionBloc
+                                                            >()
+                                                            .add(
+                                                              UnSubscribeToDrEvent(
                                                                 state
                                                                     .userAccount
-                                                                    .username));
-                                                  } else {
-                                                    context
-                                                        .read<
-                                                            SubscriptionBloc>()
-                                                        .add(SubscribeToDrEvent(
-                                                            state.userAccount
-                                                                .username));
-                                                  }
-                                                },
-                                        );
-                                      },
-                                    ),
+                                                                    .username,
+                                                              ),
+                                                            );
+                                                      } else {
+                                                        context
+                                                            .read<
+                                                              SubscriptionBloc
+                                                            >()
+                                                            .add(
+                                                              SubscribeToDrEvent(
+                                                                state
+                                                                    .userAccount
+                                                                    .username,
+                                                              ),
+                                                            );
+                                                      }
+                                                    },
+                                            );
+                                          },
+                                        ),
                                   ),
                                   ScreenUtil().setHorizontalSpacing(12.w),
                                   Expanded(
@@ -298,12 +350,13 @@ class _UserAccountViewState extends State<UserAccountView> {
                                               fontSize: 12.sp,
                                               fontWeight: FontWeight.w500,
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                       color: context.color.white,
                                       border: Border.all(
-                                          color: context.color.mainBlue),
+                                        color: context.color.mainBlue,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -358,12 +411,12 @@ class _UserAccountViewState extends State<UserAccountView> {
                                     width: double.maxFinite,
                                     errorWidget: (context, url, error) =>
                                         CachedNetworkImage(
-                                      imageUrl:
-                                          "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
-                                      fit: BoxFit.cover,
-                                      height: 200.h,
-                                      width: double.maxFinite,
-                                    ),
+                                          imageUrl:
+                                              "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
+                                          fit: BoxFit.cover,
+                                          height: 200.h,
+                                          width: double.maxFinite,
+                                        ),
                                   ),
                                   Container(
                                     height: 200.h,
@@ -388,8 +441,9 @@ class _UserAccountViewState extends State<UserAccountView> {
                                         height: 96.h,
                                         width: 96.h,
                                         child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
+                                          borderRadius: BorderRadius.circular(
+                                            50,
+                                          ),
                                           child: widget.avatar.isNotEmpty
                                               ? CachedImageWidget(
                                                   url: widget.avatar,
@@ -421,7 +475,7 @@ class _UserAccountViewState extends State<UserAccountView> {
                                       iconName: AppIcons.verify,
                                       size: 20,
                                     ),
-                                  ]
+                                  ],
                                 ],
                               ),
                               ScreenUtil().setVerticalSpacing(6.h),
@@ -444,12 +498,12 @@ class _UserAccountViewState extends State<UserAccountView> {
                                 height: 40.h,
                                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                                 width: MediaQuery.sizeOf(context).width,
-                                child: BlocConsumer<SubscriptionBloc,
-                                    SubscriptionState>(
+                                child: BlocConsumer<SubscriptionBloc, SubscriptionState>(
                                   listener: (context, state) {
                                     if (state is SubscriptionFailure) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
                                         UiTools.failurefailureSnackBar(
                                           title: 'Oh snap',
                                           message: state.failure,
@@ -457,17 +511,21 @@ class _UserAccountViewState extends State<UserAccountView> {
                                       );
                                     } else if (state is SubscriptionSuccess) {
                                       context.read<DoctorProfileBloc>().add(
-                                          UpdateDoctorSubscription(
-                                              state.isSubscribed));
+                                        UpdateDoctorSubscription(
+                                          state.isSubscribed,
+                                        ),
+                                      );
                                       context.read<UserSubscriptionsBloc>().add(
-                                          InsertSubscription(
-                                              state.isSubscribed));
+                                        InsertSubscription(state.isSubscribed),
+                                      );
                                     }
                                   },
                                   builder: (context, state) => Row(
                                     children: [
-                                      BlocBuilder<DoctorProfileBloc,
-                                          DoctorProfileState>(
+                                      BlocBuilder<
+                                        DoctorProfileBloc,
+                                        DoctorProfileState
+                                      >(
                                         builder: (context, doctorState) {
                                           if (doctorState
                                               is DoctorProfileLoading) {
@@ -476,7 +534,8 @@ class _UserAccountViewState extends State<UserAccountView> {
                                                 baseColor:
                                                     context.color.baseColor,
                                                 highlightColor: context
-                                                    .color.highlightColor,
+                                                    .color
+                                                    .highlightColor,
                                                 child: ShimmerContainer(
                                                   size: Size(136, 40.h),
                                                 ),
@@ -486,18 +545,25 @@ class _UserAccountViewState extends State<UserAccountView> {
                                               is DoctorProfileSuccess) {
                                             context
                                                 .read<SubscriptionBloc>()
-                                                .add(SetSubscribedOrNot(
+                                                .add(
+                                                  SetSubscribedOrNot(
                                                     doctorState
-                                                        .doctor!.isSubscribed));
-                                            return BlocBuilder<SubscriptionBloc,
-                                                SubscriptionState>(
+                                                        .doctor!
+                                                        .isSubscribed,
+                                                  ),
+                                                );
+                                            return BlocBuilder<
+                                              SubscriptionBloc,
+                                              SubscriptionState
+                                            >(
                                               builder: (context, state) {
                                                 return Expanded(
                                                   child: FollowButton(
                                                     isFollowing:
                                                         state.isSubscribed,
                                                     height: 40.h,
-                                                    onTap: state
+                                                    onTap:
+                                                        state
                                                             is SubscriptionLoading
                                                         ? null
                                                         : () {
@@ -505,17 +571,25 @@ class _UserAccountViewState extends State<UserAccountView> {
                                                                 .isSubscribed) {
                                                               context
                                                                   .read<
-                                                                      SubscriptionBloc>()
-                                                                  .add(UnSubscribeToDrEvent(
+                                                                    SubscriptionBloc
+                                                                  >()
+                                                                  .add(
+                                                                    UnSubscribeToDrEvent(
                                                                       widget
-                                                                          .username));
+                                                                          .username,
+                                                                    ),
+                                                                  );
                                                             } else {
                                                               context
                                                                   .read<
-                                                                      SubscriptionBloc>()
-                                                                  .add(SubscribeToDrEvent(
+                                                                    SubscriptionBloc
+                                                                  >()
+                                                                  .add(
+                                                                    SubscribeToDrEvent(
                                                                       widget
-                                                                          .username));
+                                                                          .username,
+                                                                    ),
+                                                                  );
                                                             }
                                                           },
                                                   ),
@@ -527,8 +601,10 @@ class _UserAccountViewState extends State<UserAccountView> {
                                           }
                                         },
                                       ),
-                                      BlocBuilder<DoctorProfileBloc,
-                                          DoctorProfileState>(
+                                      BlocBuilder<
+                                        DoctorProfileBloc,
+                                        DoctorProfileState
+                                      >(
                                         builder: (context, state) {
                                           if (state is DoctorProfileLoading ||
                                               state is DoctorProfileSuccess) {
@@ -544,68 +620,68 @@ class _UserAccountViewState extends State<UserAccountView> {
                                               loading:
                                                   state.dataStatus.isInProgress,
                                               onPress: () {
-                                                context
-                                                    .read<ChatBloc>()
-                                                    .add(GetGroupChat(
-                                                      username: widget.username,
-                                                      onSucces: (model) {
-                                                        Log.e(model.slugName);
-                                                        final bloc =
-                                                            context.read<
-                                                                UserInfoBloc>();
-                                                        Navigator.of(context)
-                                                            .push(
-                                                                MaterialPageRoute(
+                                                context.read<ChatBloc>().add(
+                                                  GetGroupChat(
+                                                    username: widget.username,
+                                                    onSucces: (model) {
+                                                      Log.e(model.slugName);
+                                                      final bloc = context
+                                                          .read<UserInfoBloc>();
+                                                      Navigator.of(
+                                                        context,
+                                                      ).push(
+                                                        MaterialPageRoute(
                                                           builder: (context) =>
-                                                              BlocProvider
-                                                                  .value(
-                                                            value: bloc,
-                                                            child: InChatView(
-                                                              group: model,
-                                                            ),
-                                                          ),
-                                                        ));
-                                                      },
-                                                      onError: () {
-                                                        context
-                                                            .read<ChatBloc>()
-                                                            .add(
-                                                                CreateChatEvent(
-                                                              user:
-                                                                  ChatUserModel(
-                                                                username: widget
-                                                                    .username,
-                                                              ),
-                                                              onSuccess:
-                                                                  (model) {
-                                                                Log.e(model
-                                                                    .slugName);
-                                                                final bloc =
-                                                                    context.read<
-                                                                        UserInfoBloc>();
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .push(
-                                                                        MaterialPageRoute(
-                                                                  builder: (context) =>
-                                                                      BlocProvider
-                                                                          .value(
-                                                                    value: bloc,
-                                                                    child:
-                                                                        InChatView(
+                                                              BlocProvider.value(
+                                                                value: bloc,
+                                                                child:
+                                                                    InChatView(
                                                                       group:
                                                                           model,
                                                                     ),
-                                                                  ),
-                                                                ));
-                                                              },
-                                                              onError: () {
-                                                                Log.e(
-                                                                    "message");
-                                                              },
-                                                            ));
-                                                      },
-                                                    ));
+                                                              ),
+                                                        ),
+                                                      );
+                                                    },
+                                                    onError: () {
+                                                      context.read<ChatBloc>().add(
+                                                        CreateChatEvent(
+                                                          user: ChatUserModel(
+                                                            username:
+                                                                widget.username,
+                                                          ),
+                                                          onSuccess: (model) {
+                                                            Log.e(
+                                                              model.slugName,
+                                                            );
+                                                            final bloc = context
+                                                                .read<
+                                                                  UserInfoBloc
+                                                                >();
+                                                            Navigator.of(
+                                                              context,
+                                                            ).push(
+                                                              MaterialPageRoute(
+                                                                builder: (context) =>
+                                                                    BlocProvider.value(
+                                                                      value:
+                                                                          bloc,
+                                                                      child: InChatView(
+                                                                        group:
+                                                                            model,
+                                                                      ),
+                                                                    ),
+                                                              ),
+                                                            );
+                                                          },
+                                                          onError: () {
+                                                            Log.e("message");
+                                                          },
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                );
                                               },
                                               widget: Row(
                                                 mainAxisAlignment:
@@ -622,13 +698,14 @@ class _UserAccountViewState extends State<UserAccountView> {
                                                     context.l10n.message,
                                                     style: Styles.descSubtitle
                                                         .copyWith(
-                                                      color: context
-                                                          .color.mainBlue,
-                                                      fontSize: 12.sp,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
-                                                  )
+                                                          color: context
+                                                              .color
+                                                              .mainBlue,
+                                                          fontSize: 12.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                  ),
                                                 ],
                                               ),
                                               color: context.color.white,
@@ -685,8 +762,9 @@ class _UserAccountViewState extends State<UserAccountView> {
                                   Tab(
                                     child: Text(
                                       context.l10n.posts,
-                                      style: Styles.descSubtitle
-                                          .copyWith(color: context.color.black),
+                                      style: Styles.descSubtitle.copyWith(
+                                        color: context.color.black,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -702,12 +780,15 @@ class _UserAccountViewState extends State<UserAccountView> {
                           child: Column(
                             children: [
                               ScreenUtil().setVerticalSpacing(24.h),
-                              BlocBuilder<DoctorProfileBloc,
-                                  DoctorProfileState>(
+                              BlocBuilder<
+                                DoctorProfileBloc,
+                                DoctorProfileState
+                              >(
                                 builder: (context, state) {
                                   if (state is DoctorProfileSuccess) {
                                     debugPrint(
-                                        "============>>>>>>>>>>>>. NImaga bilmima");
+                                      "============>>>>>>>>>>>>. NImaga bilmima",
+                                    );
                                     return DoctorInfoItem(
                                       doctor:
                                           state.doctor ?? DoctorProfileModel(),
@@ -725,7 +806,7 @@ class _UserAccountViewState extends State<UserAccountView> {
                                   return const SizedBox();
                                 },
                               ),
-                              ScreenUtil().setVerticalSpacing(90.h)
+                              ScreenUtil().setVerticalSpacing(90.h),
                             ],
                           ),
                         ),
@@ -801,10 +882,9 @@ class UserAllPosts extends StatelessWidget {
               ),
               paginatorStatus: FormzSubmissionStatus.success,
               fetchMoreFunction: () {
-                context.read<PostBloc>().add(PostFetchedUser(
-                      username: username,
-                      isMore: true,
-                    ));
+                context.read<PostBloc>().add(
+                  PostFetchedUser(username: username, isMore: true),
+                );
               },
               hasMoreToFetch: state.count > state.postsUser.length,
             );
@@ -842,7 +922,10 @@ class SliverTabBarDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
     return SizedBox.expand(child: child);
   }
 

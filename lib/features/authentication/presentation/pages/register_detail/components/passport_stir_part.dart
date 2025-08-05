@@ -34,9 +34,11 @@ class PassportStirPart extends StatelessWidget {
             require: '*',
             inputformater: [
               MaskTextInputFormatter(
-                  mask: '# ###### ### ### #', filter: {"#": RegExp(r'[0-9]')})
+                mask: '# ###### ### ### #',
+                filter: {"#": RegExp(r'[0-9]')},
+              ),
             ],
-            validator: Validators.passportSTIR,
+            validator: (value) => Validators.passportSTIR(value, context),
             textInputType: TextInputType.number,
             controller: context.read<PassportBloc>().stirController,
             topHint: 'Pasport',
@@ -59,12 +61,14 @@ class PassportStirPart extends StatelessWidget {
                   context.read<PassportBloc>().add(SelectPassportImage());
                 },
                 customBorder: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.r)),
+                  borderRadius: BorderRadius.circular(10.r),
+                ),
                 child: Container(
                   height: 50.h,
                   decoration: BoxDecoration(
-                      border: Border.all(color: context.color.border),
-                      borderRadius: BorderRadius.circular(10.r)),
+                    border: Border.all(color: context.color.border),
+                    borderRadius: BorderRadius.circular(10.r),
+                  ),
                   child: Row(
                     children: [
                       ScreenUtil().setHorizontalSpacing(15.w),
@@ -75,8 +79,9 @@ class PassportStirPart extends StatelessWidget {
                             image != null
                                 ? image.path.split('/').last
                                 : '123456789.JPEG',
-                            style: Styles.headline7
-                                .copyWith(color: context.color.grey),
+                            style: Styles.headline7.copyWith(
+                              color: context.color.grey,
+                            ),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           );
@@ -84,7 +89,7 @@ class PassportStirPart extends StatelessWidget {
                       ),
                       const Spacer(),
                       SvgPicture.asset(AppIcons.documentUpload, height: 22.h),
-                      ScreenUtil().setHorizontalSpacing(15.w)
+                      ScreenUtil().setHorizontalSpacing(15.w),
                     ],
                   ),
                 ),
@@ -97,24 +102,25 @@ class PassportStirPart extends StatelessWidget {
           listener: (context, state) async {
             if (state.showLoading) {
               showDialog(
-                  context: context,
-                  barrierDismissible: true,
-                  builder: (context) => const LoadingDialogWidget());
+                context: context,
+                barrierDismissible: true,
+                builder: (context) => const LoadingDialogWidget(),
+              );
             }
 
             if (!state.showLoading && state.error == 'No') {
               Navigator.pop(context);
-              await Future.delayed(const Duration(milliseconds: 300)).then(
-                (value) {
-                  if (context.mounted) {
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      AppRoutes.mainPage,
-                      (route) => false,
-                    );
-                  }
-                },
-              );
+              await Future.delayed(const Duration(milliseconds: 300)).then((
+                value,
+              ) {
+                if (context.mounted) {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AppRoutes.mainPage,
+                    (route) => false,
+                  );
+                }
+              });
             } else if (!state.showLoading &&
                 state.error != 'No' &&
                 state.error != '') {
@@ -122,7 +128,8 @@ class PassportStirPart extends StatelessWidget {
               ScaffoldMessenger.of(context)
                 ..hideCurrentSnackBar()
                 ..showSnackBar(
-                    UiTools.failSnackbar(title: state.error, context: context));
+                  UiTools.failSnackbar(title: state.error, context: context),
+                );
             }
           },
           builder: (context, state) {
@@ -144,24 +151,33 @@ class PassportStirPart extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('Later!',
-                  style: Styles.headline6.copyWith(
-                      color: context.color.black, fontWeight: FontWeight.w500)),
+              Text(
+                'Later!',
+                style: Styles.headline6.copyWith(
+                  color: context.color.black,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
               ScreenUtil().setHorizontalSpacing(5.w),
               InkWell(
                 onTap: () {
                   Navigator.pushNamedAndRemoveUntil(
-                      context, AppRoutes.mainPage, (route) => false);
+                    context,
+                    AppRoutes.mainPage,
+                    (route) => false,
+                  );
                 },
                 customBorder: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5)),
+                  borderRadius: BorderRadius.circular(5),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Text(
                     'Skip',
                     style: Styles.headline6.copyWith(
-                        color: context.color.mainBlue,
-                        fontWeight: FontWeight.w500),
+                      color: context.color.mainBlue,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ),

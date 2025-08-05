@@ -26,8 +26,10 @@ class RegisterPart extends StatefulWidget {
 }
 
 class _RegisterPartState extends State<RegisterPart> {
-  final resendBloc =
-      ResendPvcBloc(locator.get<AuthRepository>(), const Ticker());
+  final resendBloc = ResendPvcBloc(
+    locator.get<AuthRepository>(),
+    const Ticker(),
+  );
 
   @override
   void dispose() {
@@ -40,9 +42,11 @@ class _RegisterPartState extends State<RegisterPart> {
     return Column(
       children: [
         ScreenUtil().setVerticalSpacing(24.h),
-        Text(context.l10n.register_title,
-            textAlign: TextAlign.center,
-            style: Styles.boldTitle.copyWith(color: context.color.black)),
+        Text(
+          context.l10n.register_title,
+          textAlign: TextAlign.center,
+          style: Styles.boldTitle.copyWith(color: context.color.black),
+        ),
         ScreenUtil().setVerticalSpacing(32.h),
         BlocSelector<RegisterBloc, RegisterState, String>(
           selector: (state) => state.error,
@@ -56,47 +60,56 @@ class _RegisterPartState extends State<RegisterPart> {
                   MaskTextInputFormatter(
                     mask: '(##) ###-##-##',
                     filter: {"#": RegExp(r'[0-9]')},
-                  )
+                  ),
                 ],
                 style: Styles.headline7Bold,
                 controller: context.read<RegisterBloc>().phoneController,
                 hintText: context.l10n.register_phone,
-                errorText: error != '' && error != 'Well' ? error : null,
-                validator: Validators.phone,
+                errorText: error != '' && error != 'Well'
+                    ? context.l10n.userExists
+                    : null,
+                validator: (value) => Validators.phone(value, context),
               ),
             );
           },
         ),
         ScreenUtil().setVerticalSpacing(20.h),
-        Row(children: [
-          BlocBuilder<RegisterBloc, RegisterState>(
-            builder: (context, state) {
-              return Checkbox(
+        Row(
+          children: [
+            BlocBuilder<RegisterBloc, RegisterState>(
+              builder: (context, state) {
+                return Checkbox(
                   side: BorderSide(color: context.color.border),
                   value: state.isPrivacyReat,
                   onChanged: (value) =>
                       context.read<RegisterBloc>().add(PrivacyReatPressed()),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.r)));
-            },
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '${context.l10n.register_terms_of_use}  ',
-                style: Styles.headline7.copyWith(color: context.color.black),
-              ),
-              InkWell(
-                onTap: () => Navigator.pushNamed(context, AppRoutes.privacy),
-                child: Text(context.l10n.register_agree_privacy_and_policy,
+                    borderRadius: BorderRadius.circular(4.r),
+                  ),
+                );
+              },
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${context.l10n.register_terms_of_use}  ',
+                  style: Styles.headline7.copyWith(color: context.color.black),
+                ),
+                InkWell(
+                  onTap: () => Navigator.pushNamed(context, AppRoutes.privacy),
+                  child: Text(
+                    context.l10n.register_agree_privacy_and_policy,
                     style: Styles.headline7.copyWith(
-                        color: context.color.mainBlue,
-                        decoration: TextDecoration.underline)),
-              ),
-            ],
-          )
-        ]),
+                      color: context.color.mainBlue,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
         ScreenUtil().setVerticalSpacing(32.h),
         BlocConsumer<RegisterBloc, RegisterState>(
           listenWhen: (previous, current) => previous.error != current.error,
@@ -109,16 +122,15 @@ class _RegisterPartState extends State<RegisterPart> {
                 // useSafeArea: true,
                 builder: (_) => MultiBlocProvider(
                   providers: [
-                    BlocProvider.value(
-                      value: resendBloc,
-                    ),
+                    BlocProvider.value(value: resendBloc),
                     BlocProvider(
                       create: (context) =>
                           VerificationBloc(locator.get<AuthRepository>()),
                     ),
                   ],
                   child: VerificationSheet(
-                      phone: context.read<RegisterBloc>().phoneController.text),
+                    phone: context.read<RegisterBloc>().phoneController.text,
+                  ),
                 ),
                 isScrollControlled: true,
               );
@@ -146,7 +158,7 @@ class _RegisterPartState extends State<RegisterPart> {
           onPressed: () {
             AuthInheritedNotifier.of(context).notifier!.setAuthPage();
           },
-        )
+        ),
       ],
     );
   }

@@ -9,8 +9,11 @@ class WChatFileView extends StatefulWidget {
   final String file;
   final bool isLocalFile;
 
-  const WChatFileView(
-      {super.key, required this.file, required this.isLocalFile});
+  const WChatFileView({
+    super.key,
+    required this.file,
+    required this.isLocalFile,
+  });
 
   @override
   State<WChatFileView> createState() => _WChatFileViewState();
@@ -47,39 +50,28 @@ class _WChatFileViewState extends State<WChatFileView> {
           height: 40,
           width: 40,
           child: _downloadFile.fileExists
-              ? Icon(
-                  Icons.save,
-                  color: context.color.white,
-                )
+              ? Icon(Icons.save, color: context.color.white)
               : _downloadFile.dowloading
-                  ? Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        CircularProgressIndicator(
-                          value: _downloadFile.progress,
-                          strokeWidth: 3,
-                          backgroundColor: context.color.black,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            blue,
-                          ),
-                        ),
-                        Text(
-                          (_downloadFile.progress * 100).toStringAsFixed(2),
-                          style: const TextStyle(fontSize: 12),
-                        ),
-                      ],
-                    )
-                  : Icon(
-                      Icons.download,
-                      color: context.color.white,
+              ? Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    CircularProgressIndicator(
+                      value: _downloadFile.progress,
+                      strokeWidth: 3,
+                      backgroundColor: context.color.black,
+                      valueColor: AlwaysStoppedAnimation<Color>(blue),
                     ),
+                    Text(
+                      (_downloadFile.progress * 100).toStringAsFixed(2),
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                  ],
+                )
+              : Icon(Icons.download, color: context.color.white),
         ),
         const SizedBox(width: 16),
         ConstrainedBox(
-          constraints: const BoxConstraints(
-            minWidth: 0,
-            maxWidth: 120,
-          ),
+          constraints: const BoxConstraints(minWidth: 0, maxWidth: 120),
           child: Text(
             widget.file.split('/').last,
             maxLines: 3,
@@ -90,7 +82,7 @@ class _WChatFileViewState extends State<WChatFileView> {
               fontWeight: FontWeight.w500,
             ),
           ),
-        )
+        ),
       ],
     );
   }

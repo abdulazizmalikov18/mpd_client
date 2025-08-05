@@ -12,11 +12,9 @@ OrdersStreamModel _$OrdersStreamModelFromJson(Map<String, dynamic> json) =>
       message: json['message'] == null
           ? const SpecialistOrderModel()
           : SpecialistOrderModel.fromJson(
-              json['message'] as Map<String, dynamic>),
+              json['message'] as Map<String, dynamic>,
+            ),
     );
 
 Map<String, dynamic> _$OrdersStreamModelToJson(OrdersStreamModel instance) =>
-    <String, dynamic>{
-      'type': instance.action,
-      'message': instance.message,
-    };
+    <String, dynamic>{'type': instance.action, 'message': instance.message};

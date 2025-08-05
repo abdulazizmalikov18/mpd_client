@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mpd_client/app/colors.dart';
 
-
 class WAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget title;
   final Color? backgroundColor;
@@ -26,14 +25,10 @@ class WAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: backgroundColor,
       leadingWidth: 40,
       titleSpacing: back ? 0 : null,
-      
+
       leading: back ? BackButton(color: backIconColor ?? black) : null,
       title: title,
-      actions: action == null
-          ? null
-          : [
-              action!,
-            ],
+      actions: action == null ? null : [action!],
     );
   }
 

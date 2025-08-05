@@ -872,4 +872,20 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get noData => 'Ma\'lumot yo\'q';
+
+  @override
+  String get userExists => 'Bu foydalanuvchi allaqachon mavjud';
+
+  @override
+  String get well => 'Yaxshi';
+
+  @override
+  String get forgotPassword => 'Parolni unutdingizmi?';
+
+  @override
+  String get passwordShort =>
+      'Parol juda qisqa. U kamida 6 ta belgidan iborat bo‘lishi kerak.';
+
+  @override
+  String get empty => 'Bo‘sh bo‘lishi mumkin emas';
 }

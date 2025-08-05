@@ -33,6 +33,7 @@ UserAccountModel _$UserAccountModelFromJson(Map<String, dynamic> json) =>
       qrcode: json['qrcode'] as String? ?? "",
       hasPassword: json['has_password'] as bool? ?? false,
       backgroundImage: json['background_image'] as String? ?? "",
+      isSubscribedToUser: json['is_subscribed_to_user'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$UserAccountModelToJson(UserAccountModel instance) =>
@@ -58,14 +59,15 @@ Map<String, dynamic> _$UserAccountModelToJson(UserAccountModel instance) =>
       'qrcode': instance.qrcode,
       'has_password': instance.hasPassword,
       'background_image': instance.backgroundImage,
+      'is_subscribed_to_user': instance.isSubscribedToUser,
     };
 
 MainCat _$MainCatFromJson(Map<String, dynamic> json) => MainCat(
-      id: (json['id'] as num?)?.toInt() ?? 0,
-      name: json['name'] as String? ?? "",
-    );
+  id: (json['id'] as num?)?.toInt() ?? 0,
+  name: json['name'] as String? ?? "",
+);
 
 Map<String, dynamic> _$MainCatToJson(MainCat instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-    };
+  'id': instance.id,
+  'name': instance.name,
+};

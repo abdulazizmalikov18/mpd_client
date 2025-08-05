@@ -853,4 +853,20 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get noData => 'Нет данных';
+
+  @override
+  String get userExists => 'Этот пользователь уже существует';
+
+  @override
+  String get well => 'Хорошо';
+
+  @override
+  String get forgotPassword => 'Забыли пароль?';
+
+  @override
+  String get passwordShort =>
+      'Этот пароль слишком короткий. Он должен содержать не менее 6 символов.';
+
+  @override
+  String get empty => 'Не может быть пустым';
 }

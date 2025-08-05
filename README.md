@@ -35,7 +35,7 @@ build appbundle:
 flutter build appbundle --release --build-name=1.0.7 --build-number=9
 
 build runner:
-flutter pub run build_runner build --delete-conflicting-outputs
+dart pub run build_runner build --delete-conflicting-outputs
 
 rename app:
 rename setAppName --targets ios,android --value "MPD CLIENT"
