@@ -44,42 +44,43 @@ void setupLocator() {
   locator.registerLazySingleton<AuthRepository>(
     () => AuthRepository(
       remoteDataSource: locator<AuthRemoteDataSource>(),
-      connectionInfo: locator<ConnectionInfo>(),
+      // connectionInfo: locator<ConnectionInfo>(),
     ),
   );
   locator.registerSingletonAsync<YandexDoctorRepository>(
     () async => YandexDoctorRepository(
-      remoteDataSource:
-          YandexDoctorRemoteDataSource(locator<DioSettings>().dio),
-      connectionInfo: locator<ConnectionInfo>(),
+      remoteDataSource: YandexDoctorRemoteDataSource(
+        locator<DioSettings>().dio,
+      ),
+      // connectionInfo: locator<ConnectionInfo>(),
     ),
   );
   locator.registerLazySingleton<HomeRepository>(
     () => HomeRepository(
       remoteDataSource: HomeRemoteDataSource(locator<DioSettings>().dio),
-      connectionInfo: locator<ConnectionInfo>(),
+      // connectionInfo: locator<ConnectionInfo>(),
     ),
   );
 
   locator.registerSingletonAsync<UserRepository>(
     () async => UserRepository(
-      connectionInfo: locator<ConnectionInfo>(),
-      mainRemoteDataSource: UserRemoteDataSource(locator<DioSettings>().dio),
+      // connectionInfo: locator<ConnectionInfo>(),
+      remoteDataSource: UserRemoteDataSource(locator<DioSettings>().dio),
     ),
   );
   locator.registerLazySingleton<DoctorProfileRepository>(
     () => DoctorProfileRepository(
-      remoteDataSource:
-          DoctorProfileRemoteDataSource(locator<DioSettings>().dio),
-      connectionInfo: locator<ConnectionInfo>(),
+      remoteDataSource: DoctorProfileRemoteDataSource(
+        locator<DioSettings>().dio,
+      ),
+      // connectionInfo: locator<ConnectionInfo>(),
     ),
   );
 
   locator.registerLazySingleton<AppoinmentRepository>(
     () => AppoinmentRepository(
-      appoinmentRemoteDataSource:
-          AppoinmentRemoteDataSource(locator<DioSettings>().dio),
-      connectionInfo: locator<ConnectionInfo>(),
+      remoteDataSource: AppoinmentRemoteDataSource(locator<DioSettings>().dio),
+      // connectionInfo: locator<ConnectionInfo>(),
     ),
   );
   locator.registerSingleton(RefreshtokenBloc(locator<AuthRepository>()));

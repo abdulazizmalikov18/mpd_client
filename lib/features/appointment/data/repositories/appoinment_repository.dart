@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:mpd_client/core/connection/connection_info.dart';
 import 'package:mpd_client/core/exceptions/exceptions.dart';
 import 'package:mpd_client/core/exceptions/failures.dart';
 import 'package:mpd_client/core/utils/either.dart';
@@ -12,22 +11,14 @@ import 'package:mpd_client/features/appointment/domain/repositories/i_appoinment
 import '../models/pagination_model.dart';
 
 class AppoinmentRepository implements IAppoinmentRepository {
-  final ConnectionInfo _connectionInfo;
-  final AppoinmentRemoteDataSource _appoinmentRemoteDataSource;
-  const AppoinmentRepository(
-      {required AppoinmentRemoteDataSource appoinmentRemoteDataSource,
-      required ConnectionInfo connectionInfo})
-      : _appoinmentRemoteDataSource = appoinmentRemoteDataSource,
-        _connectionInfo = connectionInfo;
+  final AppoinmentRemoteDataSource remoteDataSource;
+  const AppoinmentRepository({required this.remoteDataSource});
   @override
   Future<Either<Failure, AppointmentModel>> getUserAppoinments(
       PaginationModel paginationModel) async {
-    if (!await _connectionInfo.isConnected) {
-      return Left(const NetworkFailure(message: 'Connection failure'));
-    }
     try {
       final response =
-          await _appoinmentRemoteDataSource.getUserAppoinments(paginationModel);
+          await remoteDataSource.getUserAppoinments(paginationModel);
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -41,11 +32,8 @@ class AppoinmentRepository implements IAppoinmentRepository {
   @override
   Future<Either<Failure, Map<String, dynamic>>> cancelAppoinment(
       {required String productid, required String cancelInfo}) async {
-    if (!await _connectionInfo.isConnected) {
-      return Left(const NetworkFailure(message: 'Connection failure'));
-    }
     try {
-      final response = await _appoinmentRemoteDataSource.cancelAppoinment(
+      final response = await remoteDataSource.cancelAppoinment(
           cancelInfo: cancelInfo, productid: productid);
       return Right(response);
     } on DioException {

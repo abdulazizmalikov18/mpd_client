@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:formz/formz.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
-import 'package:mpd_client/app/colors.dart';
 import 'package:mpd_client/core/extension/context_ext.dart';
 import 'package:mpd_client/core/pagination/presentation/paginator.dart';
 import 'package:mpd_client/features/appointment/presentation/pages/appointment/components/no_appointment.dart';
@@ -104,20 +103,17 @@ class _UserPostViewState extends State<UserPostView> {
                           },
                         );
                       },
-                      child: Container(
-                        color: mainBlue.withValues(alpha: .1),
-                        alignment: Alignment.center,
-                        child: CachedNetworkImage(
-                          imageUrl: (state.postsUser[index].media?.isNotEmpty ??
-                                  false)
-                              ? (state.postsUser[index].media?.first.image ??
-                                      state.postsUser[index].media?.first
-                                          .screenshot) ??
-                                  "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13"
-                              : "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
-                          errorWidget: (context, url, error) =>
-                              const SizedBox(),
-                        ),
+                      child: CachedNetworkImage(
+                        imageUrl: (state.postsUser[index].media?.isNotEmpty ??
+                                false)
+                            ? (state.postsUser[index].media?.first.image ??
+                                    state.postsUser[index].media?.first
+                                        .screenshot) ??
+                                "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13"
+                            : "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
+                        fit: BoxFit.cover,
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
                       ),
                     ),
                     paginatorStatus: FormzSubmissionStatus.success,

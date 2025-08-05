@@ -27,8 +27,10 @@
 //   notificationsLocal.add(message);
 //   $notificationList.value = notificationsLocal;
 
-//   await StorageRepository.putList(StorageKeys.NOTIFICATIONS,
-//       notificationsLocal.map((e) => jsonEncode(e.toMap())).toList());
+//   await StorageRepository.putList(
+//     StorageKeys.NOTIFICATIONS,
+//     notificationsLocal.map((e) => jsonEncode(e.toMap())).toList(),
+//   );
 // }
 
 // // Notification Navigate
@@ -142,7 +144,7 @@
 //         .resolvePlatformSpecificImplementation<
 //             AndroidFlutterLocalNotificationsPlugin>()
 //         ?.requestNotificationsPermission();
-//     print('Adnroid Request Option : $androidRequestResponse');
+//     Log.w('Adnroid Request Option : $androidRequestResponse');
 //   }
 
 //   static Future<List<ActiveNotification>> getActiveNotifications() async {

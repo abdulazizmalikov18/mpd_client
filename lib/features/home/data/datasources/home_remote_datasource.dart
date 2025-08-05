@@ -38,8 +38,11 @@ class HomeRemoteDataSource implements IHomeRemoteDataSource {
   HomeRemoteDataSource(this._client);
 
   @override
-  Future<ComentModel> getPostComments(
-      {required int limit, required int offset, required int postId}) async {
+  Future<ComentModel> getPostComments({
+    required int limit,
+    required int offset,
+    required int postId,
+  }) async {
     return _handle.apiControl(
       request: () {
         return _client.get(
@@ -58,8 +61,10 @@ class HomeRemoteDataSource implements IHomeRemoteDataSource {
   }
 
   @override
-  Future<Coment> sendPostComment(
-      {required String text, required int postId}) async {
+  Future<Coment> sendPostComment({
+    required String text,
+    required int postId,
+  }) async {
     final data = FormData.fromMap({'text': text});
     return _handle.apiControl(
       request: () {
@@ -99,8 +104,10 @@ class HomeRemoteDataSource implements IHomeRemoteDataSource {
   }
 
   @override
-  Future<AdvertsModel> getAdverts(
-      {required int limit, required int offset}) async {
+  Future<AdvertsModel> getAdverts({
+    required int limit,
+    required int offset,
+  }) async {
     return _handle.apiControl(
       request: () {
         return _client.get(
@@ -147,16 +154,19 @@ class HomeRemoteDataSource implements IHomeRemoteDataSource {
 
   @override
   Future<SpecialistProductModel> getSpecialistProducts(
-      ProductFilterModel model) async {
+    ProductFilterModel model,
+  ) async {
     return _handle.apiControl(
       request: () {
-        return _client.get("/PMS/api/v1.0/public/product_org/",
-            options: Options(headers: {
-              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-                'Authorization':
-                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-            }),
-            queryParameters: model.toJson());
+        return _client.get(
+          "/PMS/api/v1.0/public/product_org/",
+          options: Options(headers: {
+            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+              'Authorization':
+                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
+          }),
+          queryParameters: model.toJson(),
+        );
       },
       body: (response) {
         return SpecialistProductModel.fromJson(response);

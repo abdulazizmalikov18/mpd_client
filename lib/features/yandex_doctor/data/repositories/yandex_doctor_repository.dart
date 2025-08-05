@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:mpd_client/core/connection/connection_info.dart';
 import 'package:mpd_client/core/exceptions/exceptions.dart';
 import 'package:mpd_client/core/exceptions/failures.dart';
 import 'package:mpd_client/core/utils/either.dart';
@@ -13,24 +12,14 @@ import '../../domain/repositories/i_yandex_doctor_repository.dart';
 import '../datasources/yandex_doctor_remote_datasources.dart';
 
 class YandexDoctorRepository implements IYandexDoctorRepository {
-  final YandexDoctorRemoteDataSource _remoteDataSource;
-
-  final ConnectionInfo _connectionInfo;
-
-  const YandexDoctorRepository(
-      {required YandexDoctorRemoteDataSource remoteDataSource,
-      required ConnectionInfo connectionInfo})
-      : _remoteDataSource = remoteDataSource,
-        _connectionInfo = connectionInfo;
+  final YandexDoctorRemoteDataSource remoteDataSource;
+  const YandexDoctorRepository({required this.remoteDataSource});
 
   @override
   Future<Either<Failure, SpecialistProductModel>> getProducts(
       ProductFilterModel model) async {
-    if (!await _connectionInfo.isConnected) {
-      return Left(const NetworkFailure(message: 'Connection failure'));
-    }
     try {
-      final response = await _remoteDataSource.getProducts(model);
+      final response = await remoteDataSource.getProducts(model);
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -44,11 +33,8 @@ class YandexDoctorRepository implements IYandexDoctorRepository {
   @override
   Future<Either<Failure, PopularCategoriesModel>> getPopularCategories(
       {int? limit, int? offset, String? query, String? langCode}) async {
-    if (!await _connectionInfo.isConnected) {
-      return Left(const NetworkFailure(message: 'Connection failure'));
-    }
     try {
-      final response = await _remoteDataSource.getPopularCategories(
+      final response = await remoteDataSource.getPopularCategories(
           offset: offset, limit: limit, query: query, langCode: langCode);
       return Right(response);
     } on DioException {
@@ -67,11 +53,8 @@ class YandexDoctorRepository implements IYandexDoctorRepository {
       String? query,
       bool isPagination = false,
       CancelToken? cancelToken}) async {
-    if (!await _connectionInfo.isConnected) {
-      return Left(const NetworkFailure(message: 'Connection failure'));
-    }
     try {
-      final response = await _remoteDataSource.getTopSpecialists(
+      final response = await remoteDataSource.getTopSpecialists(
           offset: offset, limit: limit, query: query, cancelToken: cancelToken);
       return Right(response);
     } on DioException {
@@ -88,11 +71,8 @@ class YandexDoctorRepository implements IYandexDoctorRepository {
     required String query,
     int? jobId,
   }) async {
-    if (!await _connectionInfo.isConnected) {
-      return Left(const NetworkFailure(message: 'Connection failure'));
-    }
     try {
-      final response = await _remoteDataSource.getSearchedSpecialist(
+      final response = await remoteDataSource.getSearchedSpecialist(
         query: query,
         jobId: jobId,
       );
@@ -107,13 +87,11 @@ class YandexDoctorRepository implements IYandexDoctorRepository {
   }
 
   @override
-  Future<Either<Failure, MapSpecialistModel>> getSpecialistByCategory(
-      {required int id}) async {
-    if (!await _connectionInfo.isConnected) {
-      return Left(const NetworkFailure(message: 'Connection failure'));
-    }
+  Future<Either<Failure, MapSpecialistModel>> getSpecialistByCategory({
+    required int id,
+  }) async {
     try {
-      final response = await _remoteDataSource.getSpecialistByCategory(id: id);
+      final response = await remoteDataSource.getSpecialistByCategory(id: id);
       return Right(response);
     } on DioException {
       return Left(const DioFailure());

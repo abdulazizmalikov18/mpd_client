@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:mpd_client/core/connection/connection_info.dart';
 import 'package:mpd_client/core/exceptions/exceptions.dart';
 import 'package:mpd_client/core/exceptions/failures.dart';
 import 'package:mpd_client/core/utils/either.dart';
@@ -13,24 +12,15 @@ import 'package:mpd_client/features/doctor_profile_booking/domain/repositories/i
 import 'package:mpd_client/features/user/data/models/user_subscriptions_model.dart';
 
 class DoctorProfileRepository implements IDoctorProfileRepository {
-  final DoctorProfileRemoteDataSource _remoteDataSource;
+  final DoctorProfileRemoteDataSource remoteDataSource;
 
-  final ConnectionInfo _connectionInfo;
-
-  const DoctorProfileRepository(
-      {required DoctorProfileRemoteDataSource remoteDataSource,
-      required ConnectionInfo connectionInfo})
-      : _remoteDataSource = remoteDataSource,
-        _connectionInfo = connectionInfo;
+  const DoctorProfileRepository({required this.remoteDataSource});
 
   @override
   Future<Either<Failure, DoctorProfileModel>> getDoctorInfobyId(
       String username) async {
-    if (!await _connectionInfo.isConnected) {
-      return Left(const NetworkFailure(message: 'Connection failure'));
-    }
     try {
-      final response = await _remoteDataSource.getDoctorInfo(username);
+      final response = await remoteDataSource.getDoctorInfo(username);
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -44,11 +34,8 @@ class DoctorProfileRepository implements IDoctorProfileRepository {
   @override
   Future<Either<Failure, TimetableByDateModel>> getTimetable(
       {required String date, required int id}) async {
-    if (!await _connectionInfo.isConnected) {
-      return Left(const NetworkFailure(message: 'Connection failure'));
-    }
     try {
-      final response = await _remoteDataSource.getTimetable(date: date, id: id);
+      final response = await remoteDataSource.getTimetable(date: date, id: id);
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -62,11 +49,8 @@ class DoctorProfileRepository implements IDoctorProfileRepository {
   @override
   Future<Either<Failure, Subscription>> subscribeToDoctor(
       String usernmae) async {
-    if (!await _connectionInfo.isConnected) {
-      return Left(const NetworkFailure(message: 'Connection failure'));
-    }
     try {
-      final response = await _remoteDataSource.subscribeToDoctor(usernmae);
+      final response = await remoteDataSource.subscribeToDoctor(usernmae);
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -80,11 +64,8 @@ class DoctorProfileRepository implements IDoctorProfileRepository {
   @override
   Future<Either<Failure, List<CartRemoteModel>>> addToCart(
       List<Map<String, dynamic>> carts) async {
-    if (!await _connectionInfo.isConnected) {
-      return Left(const NetworkFailure(message: 'Connection failure'));
-    }
     try {
-      final response = await _remoteDataSource.addToCart(carts);
+      final response = await remoteDataSource.addToCart(carts);
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -98,11 +79,8 @@ class DoctorProfileRepository implements IDoctorProfileRepository {
   @override
   Future<Either<Failure, CardRemoteModel>> insertCard(
       CardLocalModel card) async {
-    if (!await _connectionInfo.isConnected) {
-      return Left(const NetworkFailure(message: 'Connection failure'));
-    }
     try {
-      final response = await _remoteDataSource.insertCard(card);
+      final response = await remoteDataSource.insertCard(card);
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -116,12 +94,9 @@ class DoctorProfileRepository implements IDoctorProfileRepository {
   @override
   Future<Either<Failure, CardRemoteModel>> verifyCard(
       {required int code, required int cardId}) async {
-    if (!await _connectionInfo.isConnected) {
-      return Left(const NetworkFailure(message: 'Connection failure'));
-    }
     try {
       final response =
-          await _remoteDataSource.verifyCard(code: code, cardId: cardId);
+          await remoteDataSource.verifyCard(code: code, cardId: cardId);
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -135,11 +110,8 @@ class DoctorProfileRepository implements IDoctorProfileRepository {
   @override
   Future<Either<Failure, Map<String, dynamic>>> resendverifyCode(
       {required int cardId}) async {
-    if (!await _connectionInfo.isConnected) {
-      return Left(const NetworkFailure(message: 'Connection failure'));
-    }
     try {
-      final response = await _remoteDataSource.resendVerifyCode(cardId: cardId);
+      final response = await remoteDataSource.resendVerifyCode(cardId: cardId);
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -152,11 +124,8 @@ class DoctorProfileRepository implements IDoctorProfileRepository {
 
   @override
   Future<Either<Failure, List<CardRemoteModel>>> getMyCards() async {
-    if (!await _connectionInfo.isConnected) {
-      return Left(const NetworkFailure(message: 'Connection failure'));
-    }
     try {
-      final response = await _remoteDataSource.getMyCards();
+      final response = await remoteDataSource.getMyCards();
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -170,11 +139,8 @@ class DoctorProfileRepository implements IDoctorProfileRepository {
   @override
   Future<Either<Failure, Map<String, dynamic>>> deleteSubscription(
       String username) async {
-    if (!await _connectionInfo.isConnected) {
-      return Left(const NetworkFailure(message: 'Connection failure'));
-    }
     try {
-      final response = await _remoteDataSource.deleteSubscription(username);
+      final response = await remoteDataSource.deleteSubscription(username);
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -190,11 +156,8 @@ class DoctorProfileRepository implements IDoctorProfileRepository {
       {required List<Map<String, dynamic>> carts,
       int? payment,
       required String action}) async {
-    if (!await _connectionInfo.isConnected) {
-      return Left(const NetworkFailure(message: 'Connection failure'));
-    }
     try {
-      final response = await _remoteDataSource.createOrder(
+      final response = await remoteDataSource.createOrder(
           carts: carts, action: action, payment: payment);
       return Right(response);
     } on DioException {

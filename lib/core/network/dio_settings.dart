@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mpd_client/app/app_export.dart';
-import 'package:mpd_client/core/connection/connection_info.dart';
 import 'package:mpd_client/core/data/repository/storage_keys.dart';
 import 'package:mpd_client/core/data/repository/storage_repository.dart';
 import 'package:mpd_client/features/app.dart';
@@ -138,7 +137,7 @@ class ErrorHandlerInterceptor implements Interceptor {
     if (response.statusCode == 401) {
       final result = await AuthRepository(
         remoteDataSource: locator<AuthRemoteDataSource>(),
-        connectionInfo: locator<ConnectionInfo>(),
+        // connectionInfo: locator<ConnectionInfo>(),
       ).refreshToken();
 
       if (result.isRight) {
