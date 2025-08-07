@@ -19,7 +19,8 @@ class HomeRepository implements IHomeRepository {
 
   @override
   Future<Either<Failure, SpecialistProductModel>> getSpecialistProducts(
-      ProductFilterModel model) async {
+    ProductFilterModel model,
+  ) async {
     try {
       final response = await remoteDataSource.getSpecialistProducts(model);
       return Right(response);
@@ -34,7 +35,8 @@ class HomeRepository implements IHomeRepository {
 
   @override
   Future<Either<Failure, Map<String, dynamic>>> createPost(
-      UploadPost post) async {
+    UploadPost post,
+  ) async {
     try {
       final response = await remoteDataSource.createPost(post);
       return Right(response);
@@ -54,8 +56,11 @@ class HomeRepository implements IHomeRepository {
   // }
 
   @override
-  Future<Either<Failure, PostsModel>> getBanners(
-      {int limit = 5, int offset = 0, String username = ""}) async {
+  Future<Either<Failure, PostsModel>> getBanners({
+    int limit = 5,
+    int offset = 0,
+    String username = "",
+  }) async {
     try {
       final response = await remoteDataSource.getBanners(
         offset: offset,
@@ -73,11 +78,17 @@ class HomeRepository implements IHomeRepository {
   }
 
   @override
-  Future<Either<Failure, ComentModel>> getPostComents(
-      {required int limit, required int offset, required int postId}) async {
+  Future<Either<Failure, ComentModel>> getPostComents({
+    required int limit,
+    required int offset,
+    required int postId,
+  }) async {
     try {
       final response = await remoteDataSource.getPostComments(
-          offset: offset, limit: limit, postId: postId);
+        offset: offset,
+        limit: limit,
+        postId: postId,
+      );
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -89,11 +100,15 @@ class HomeRepository implements IHomeRepository {
   }
 
   @override
-  Future<Either<Failure, Coment>> sendPostComent(
-      {required String text, required int postId}) async {
+  Future<Either<Failure, Coment>> sendPostComent({
+    required String text,
+    required int postId,
+  }) async {
     try {
-      final response =
-          await remoteDataSource.sendPostComment(text: text, postId: postId);
+      final response = await remoteDataSource.sendPostComment(
+        text: text,
+        postId: postId,
+      );
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -105,8 +120,9 @@ class HomeRepository implements IHomeRepository {
   }
 
   @override
-  Future<Either<Failure, Map<String, dynamic>>> sendLikeOrUnlike(
-      {required int postId}) async {
+  Future<Either<Failure, Map<String, dynamic>>> sendLikeOrUnlike({
+    required int postId,
+  }) async {
     try {
       final response = await remoteDataSource.sendLikeOrUnlike(postId: postId);
       return Right(response);
@@ -120,11 +136,15 @@ class HomeRepository implements IHomeRepository {
   }
 
   @override
-  Future<Either<Failure, AdvertsModel>> getAdverts(
-      {required int limit, required int offset}) async {
+  Future<Either<Failure, AdvertsModel>> getAdverts({
+    required int limit,
+    required int offset,
+  }) async {
     try {
-      final response =
-          await remoteDataSource.getAdverts(limit: limit, offset: offset);
+      final response = await remoteDataSource.getAdverts(
+        limit: limit,
+        offset: offset,
+      );
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -150,8 +170,9 @@ class HomeRepository implements IHomeRepository {
   }
 
   @override
-  Future<Either<Failure, UserAccountModel>> getUser(
-      {required String username}) async {
+  Future<Either<Failure, UserAccountModel>> getUser({
+    required String username,
+  }) async {
     try {
       final response = await remoteDataSource.getUser(username: username);
       return Right(response);

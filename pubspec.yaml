@@ -59,7 +59,7 @@ dependencies:
   dotted_border: ^3.1.0
   carousel_slider: ^5.1.1
   flutter_widget_from_html: ^0.17.0
-  awesome_snackbar_content: ^0.1.6
+  awesome_snackbar_content: ^0.1.7
   rxdart: ^0.28.0
   # firebase_core: ^3.13.1
   # firebase_messaging: ^15.2.6
@@ -74,12 +74,14 @@ dependencies:
   flutter_spinkit: ^5.2.1
   permission_handler: ^12.0.0+1
   device_info_plus: ^11.5.0
+  http_parser: ^4.1.2
+  video_thumbnail: ^0.5.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^6.0.0
+  flutter_lints: ^5.0.0
   build_runner: ^2.6.0
   json_serializable: ^6.10.0
 

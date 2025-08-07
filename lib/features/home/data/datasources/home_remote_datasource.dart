@@ -12,7 +12,8 @@ import 'package:mpd_client/features/home/data/models/user_account_model.dart';
 
 abstract class IHomeRemoteDataSource {
   Future<SpecialistProductModel> getSpecialistProducts(
-      ProductFilterModel model);
+    ProductFilterModel model,
+  );
   Future<Map<String, dynamic>> createPost(UploadPost post);
   Future<AdvertsModel> getAdverts({required int limit, required int offset});
   Future<PostsModel> getBanners({
@@ -47,11 +48,13 @@ class HomeRemoteDataSource implements IHomeRemoteDataSource {
       request: () {
         return _client.get(
           '/SMMS/api/v1.0/public/post/$postId/comment/?limit=$limit&offset=$offset',
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -71,11 +74,13 @@ class HomeRemoteDataSource implements IHomeRemoteDataSource {
         return _client.post(
           '/SMMS/api/v1.0/public/post/$postId/comment/',
           data: data,
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -90,11 +95,13 @@ class HomeRemoteDataSource implements IHomeRemoteDataSource {
       request: () {
         return _client.patch(
           '/SMMS/api/v1.0/public/post/$postId/like/',
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -112,11 +119,13 @@ class HomeRemoteDataSource implements IHomeRemoteDataSource {
       request: () {
         return _client.get(
           '/SMMS/api/v1.0/admin/advert-post/?limit=$limit&offset=$offset',
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -141,7 +150,7 @@ class HomeRemoteDataSource implements IHomeRemoteDataSource {
               'content-Type': 'application/x-www-form-urlencoded',
               if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
                 'Authorization':
-                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
             },
           ),
         );
@@ -160,11 +169,13 @@ class HomeRemoteDataSource implements IHomeRemoteDataSource {
       request: () {
         return _client.get(
           "/PMS/api/v1.0/public/product_org/",
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
           queryParameters: model.toJson(),
         );
       },
@@ -182,11 +193,13 @@ class HomeRemoteDataSource implements IHomeRemoteDataSource {
         return _client.post(
           "/SMMS/api/v1.0/public/post/",
           data: data,
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -201,11 +214,13 @@ class HomeRemoteDataSource implements IHomeRemoteDataSource {
       request: () {
         return _client.delete(
           "/SMMS/api/v1.0/public/post/$postId/",
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -220,11 +235,13 @@ class HomeRemoteDataSource implements IHomeRemoteDataSource {
       request: () {
         return _client.get(
           "/UMS/api/v1.0/account/get-data/$username",
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {

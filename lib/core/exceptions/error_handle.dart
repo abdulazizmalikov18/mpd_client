@@ -4,9 +4,10 @@ import 'package:mpd_client/core/exceptions/failures.dart';
 import 'package:mpd_client/core/utils/log_service.dart';
 
 class ErrorHandle {
-  Future<R> apiControl<T, R>(
-      {required Future<Response<T>?> Function() request,
-      required R Function(T response) body}) async {
+  Future<R> apiControl<T, R>({
+    required Future<Response<T>?> Function() request,
+    required R Function(T response) body,
+  }) async {
     try {
       final response = await request();
       if (response!.statusCode! >= 200 && response.statusCode! < 300) {

@@ -1,11 +1,9 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:file_picker/file_picker.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
 import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/core/utils/media_compresser.dart';
@@ -15,13 +13,14 @@ import 'package:mpd_client/features/home/data/models/upload_post_model.dart';
 import 'package:mpd_client/features/home/data/repositories/home_repository.dart';
 import 'package:path/path.dart';
 import 'package:video_compress/video_compress.dart';
+import 'package:http_parser/http_parser.dart';
 
 part 'create_post_event.dart';
 part 'create_post_state.dart';
 
 class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostState> {
   CreatePostBloc(this._descriptionController, this._homeRepository)
-      : super(const CreatePostInitial([])) {
+    : super(const CreatePostInitial([])) {
     on<SelectImagesAndVideosEvent>(_onSelectImages);
 
     on<RemoveImageEvent>(_onRemoveImage);
@@ -39,21 +38,19 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostState> {
     Emitter<CreatePostState> emit,
   ) async {
     try {
-      // FilePickerResult? result = await FilePicker.platform.pickFiles(
-      //   type: FileType.media,
-      //   allowMultiple: true,
-      // );
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.media,
+        allowMultiple: true,
+      );
+      if (result == null) return;
 
-      final picker = ImagePicker();
-      final result = await picker.pickMultipleMedia();
-
-      if (result.isEmpty) return;
-
-      for (var path in result) {
-        _fileImagesAndVideos.add(FileModel(
-          file: File(path.path),
-          fileType: lookupMimeType(path.path)!.split('/').first,
-        ));
+      for (var path in result.paths) {
+        _fileImagesAndVideos.add(
+          FileModel(
+            file: File(path!),
+            fileType: lookupMimeType(path)!.split('/').first,
+          ),
+        );
       }
 
       emit(CreatePostInitial(_fileImagesAndVideos));
@@ -88,18 +85,19 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostState> {
           file.file.path,
         );
 
-        postImages.add(MultipartFile.fromBytes(
-          compressedImage,
-          filename: basename(file.file.path),
-        ));
+        postImages.add(
+          MultipartFile.fromBytes(
+            compressedImage,
+            filename: basename(file.file.path),
+          ),
+        );
         for (var element in postImages) {
           Log.e(element.filename);
         }
       } else if (file.fileType == 'video') {
-        // final length = file.file.lengthSync();
+        final mimeType = lookupMimeType(file.file.path) ?? 'video/mp4';
+        final mediaType = MediaType.parse(mimeType);
 
-        // final compressedVideo =
-        //     await MediaCompresser.compressVideo(file.file.path);
         final uint8list = await VideoCompress.getByteThumbnail(
           file.file.path,
           position: -1,
@@ -107,37 +105,49 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostState> {
         );
         final noCompressed = await file.file.readAsBytes();
 
-        postVideosScreenshot.add(await MultipartFile.fromFile(
-          base64Encode(uint8list!),
-        ));
+        postVideosScreenshot.add(
+          MultipartFile.fromBytes(
+            uint8list!,
+            filename: 'thumbnail_${basename(file.file.path)}.jpg',
+          ),
+        );
 
-        postVideos.add(MultipartFile.fromBytes(
-          noCompressed,
-          filename: basename(file.file.path),
-        ));
+        postVideos.add(
+          MultipartFile.fromBytes(
+            noCompressed,
+            filename: basename(file.file.path),
+            contentType: mediaType,
+          ),
+        );
       }
     }
 
-    final result = await _homeRepository.createPost(UploadPost(
-      text: descriptionController.text,
-      images: postImages,
-      screenshots: postVideosScreenshot,
-      // aspectRatio: '4x3',
-      files: postVideos,
-    ));
+    final result = await _homeRepository.createPost(
+      UploadPost(
+        text: descriptionController.text,
+        images: postImages,
+        screenshots: postVideosScreenshot,
+        // aspectRatio: '4x3',
+        files: postVideos,
+      ),
+    );
 
     if (result.isRight) {
-      emit(CreatePostSucces(
-        state.files,
-        createdPost: result.right,
-        isValidImage: state.isValidImage,
-      ));
+      emit(
+        CreatePostSucces(
+          state.files,
+          createdPost: result.right,
+          isValidImage: state.isValidImage,
+        ),
+      );
     } else {
-      emit(CreatePostFailure(
-        state.files,
-        failure: Utils.errorFormat(result.left.message),
-        isValidImage: state.isValidImage,
-      ));
+      emit(
+        CreatePostFailure(
+          state.files,
+          failure: Utils.errorFormat(result.left.message),
+          isValidImage: state.isValidImage,
+        ),
+      );
     }
   }
 }

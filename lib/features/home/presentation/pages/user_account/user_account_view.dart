@@ -51,8 +51,23 @@ class UserAccountView extends StatefulWidget {
 }
 
 class _UserAccountViewState extends State<UserAccountView> {
+  late ScrollController _scrollController;
+  final ValueNotifier<bool> _showTitle = ValueNotifier(false);
   @override
   void initState() {
+    super.initState();
+
+    _scrollController = ScrollController()
+      ..addListener(() {
+        bool isCollapsed =
+            _scrollController.hasClients &&
+            _scrollController.offset > (318.h - kToolbarHeight);
+
+        if (isCollapsed != _showTitle.value) {
+          _showTitle.value = isCollapsed;
+        }
+      });
+
     if (widget.specialistId != 0) {
       context.read<DoctorProfileBloc>().add(
         GetDoctorPprofileData(widget.specialistId.toString()),
@@ -62,7 +77,12 @@ class _UserAccountViewState extends State<UserAccountView> {
       GetUserEvent(username: widget.username),
     );
     context.read<PostBloc>().add(PostFetchedUser(username: widget.username));
-    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -147,25 +167,32 @@ class _UserAccountViewState extends State<UserAccountView> {
                   current.userAccount.username != previous.userAccount.username,
               builder: (context, state) {
                 return NestedScrollView(
+                  controller: _scrollController,
                   headerSliverBuilder: (context, innerBoxIsScrolled) => [
                     SliverAppBar(
                       expandedHeight: 318.h,
                       centerTitle: false,
-                      title: Text(
-                        "${state.userAccount.name} ${state.userAccount.lastname}",
+                      title: ValueListenableBuilder(
+                        valueListenable: _showTitle,
+                        builder: (context, value, child) => value
+                            ? Text(
+                                "${state.userAccount.name} ${state.userAccount.lastname}",
+                              )
+                            : SizedBox(),
                       ),
                       elevation: 0,
-                      actions: [
-                        if (widget.specialistId != 0)
-                          IconButton(
-                            onPressed: () {},
-                            icon: AppIcons.map.svg(color: context.color.black),
-                          ),
-                      ],
+                      // actions: [
+                      //   if (widget.specialistId != 0)
+                      //     IconButton(
+                      //       onPressed: () {},
+                      //       icon: AppIcons.map.svg(color: context.color.black),
+                      //     ),
+                      // ],
                       foregroundColor: context.color.black,
                       backgroundColor: context.color.white,
                       pinned: true,
                       flexibleSpace: FlexibleSpaceBar(
+                        collapseMode: CollapseMode.pin,
                         background: Column(
                           children: [
                             Stack(
@@ -381,24 +408,31 @@ class _UserAccountViewState extends State<UserAccountView> {
               child: BlocBuilder<UserProfileBloc, UserProfileState>(
                 builder: (context, state) {
                   return NestedScrollView(
+                    controller: _scrollController,
                     headerSliverBuilder: (context, innerBoxIsScrolled) => [
                       SliverAppBar(
                         expandedHeight: 334.h,
                         centerTitle: false,
-                        title: Text(
-                          "${state.userAccount.name} ${state.userAccount.lastname}",
+                        title: ValueListenableBuilder(
+                          valueListenable: _showTitle,
+                          builder: (context, value, child) => value
+                              ? Text(
+                                  "${state.userAccount.name} ${state.userAccount.lastname}",
+                                )
+                              : SizedBox(),
                         ),
                         elevation: 0,
-                        actions: [
-                          IconButton(
-                            onPressed: () {},
-                            icon: AppIcons.map.svg(color: context.color.black),
-                          ),
-                        ],
+                        // actions: [
+                        //   IconButton(
+                        //     onPressed: () {},
+                        //     icon: AppIcons.map.svg(color: context.color.black),
+                        //   ),
+                        // ],
                         foregroundColor: context.color.black,
                         backgroundColor: context.color.white,
                         pinned: true,
                         flexibleSpace: FlexibleSpaceBar(
+                          collapseMode: CollapseMode.pin,
                           background: Column(
                             children: [
                               Stack(

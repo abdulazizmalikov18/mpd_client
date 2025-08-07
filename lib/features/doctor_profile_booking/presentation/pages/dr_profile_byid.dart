@@ -36,22 +36,41 @@ class DrProfileByid extends StatefulWidget {
 }
 
 class _DrProfileByidState extends State<DrProfileByid> {
+  late ScrollController _scrollController;
+  final ValueNotifier<bool> _showTitle = ValueNotifier(false);
   bool isNull = false;
   @override
   void initState() {
+    super.initState();
+
+    _scrollController = ScrollController()
+      ..addListener(() {
+        bool isCollapsed =
+            _scrollController.hasClients &&
+            _scrollController.offset > (318.h - kToolbarHeight);
+
+        if (isCollapsed != _showTitle.value) {
+          _showTitle.value = isCollapsed;
+        }
+      });
+
     if (widget.specialist.id == 0) {
       isNull = true;
       setState(() {});
     } else {
-      context
-          .read<DoctorProfileBloc>()
-          .add(GetDoctorPprofileData(widget.specialist.id.toString()));
-      context
-          .read<PostBloc>()
-          .add(PostFetchedUser(username: widget.specialist.username ?? ""));
+      context.read<DoctorProfileBloc>().add(
+        GetDoctorPprofileData(widget.specialist.id.toString()),
+      );
+      context.read<PostBloc>().add(
+        PostFetchedUser(username: widget.specialist.username ?? ""),
+      );
     }
+  }
 
-    super.initState();
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -62,24 +81,30 @@ class _DrProfileByidState extends State<DrProfileByid> {
           : DefaultTabController(
               length: 2,
               child: NestedScrollView(
+                controller: _scrollController,
                 headerSliverBuilder: (context, innerBoxIsScrolled) => [
                   SliverAppBar(
                     expandedHeight: 318.h,
                     centerTitle: false,
-                    title: Text(
-                      widget.specialist.fullname ?? "-- --",
+                    title: ValueListenableBuilder(
+                      valueListenable: _showTitle,
+                      builder: (context, value, child) => value
+                          ? Text(widget.specialist.fullname ?? "-- --")
+                          : SizedBox(),
                     ),
                     elevation: 0,
-                    actions: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: AppIcons.map.svg(color: context.color.black),
-                      ),
-                    ],
+                    // actions: [
+                    //   IconButton(
+                    //     onPressed: () {},
+                    //     icon: AppIcons.map.svg(color: context.color.black),
+                    //   ),
+                    // ],
                     foregroundColor: context.color.black,
                     backgroundColor: context.color.white,
                     pinned: true,
+
                     flexibleSpace: FlexibleSpaceBar(
+                      collapseMode: CollapseMode.pin,
                       background: Column(
                         children: [
                           Stack(
@@ -92,20 +117,20 @@ class _DrProfileByidState extends State<DrProfileByid> {
                                 height: 200.h,
                                 width: double.maxFinite,
                               ),
-                              Container(
-                                height: 200.h,
-                                width: double.maxFinite,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      context.color.white,
-                                      Colors.transparent,
-                                    ],
-                                  ),
-                                ),
-                              ),
+                              // Container(
+                              //   height: 200.h,
+                              //   width: double.maxFinite,
+                              //   decoration: BoxDecoration(
+                              //     gradient: LinearGradient(
+                              //       begin: Alignment.topCenter,
+                              //       end: Alignment.bottomCenter,
+                              //       colors: [
+                              //         Colors.transparent,
+                              //         Colors.black.withValues(alpha: 0.7),
+                              //       ],
+                              //     ),
+                              //   ),
+                              // ),
                               Positioned(
                                 top: 150.h,
                                 left: 0,
@@ -118,7 +143,8 @@ class _DrProfileByidState extends State<DrProfileByid> {
                                       borderRadius: BorderRadius.circular(50),
                                       child: widget.specialist.avatar != null
                                           ? CachedImageWidget(
-                                              url: widget.specialist.avatar ??
+                                              url:
+                                                  widget.specialist.avatar ??
                                                   "",
                                               size: 96,
                                             )
@@ -176,8 +202,10 @@ class _DrProfileByidState extends State<DrProfileByid> {
                             width: MediaQuery.sizeOf(context).width,
                             child: Row(
                               children: [
-                                BlocBuilder<DoctorProfileBloc,
-                                    DoctorProfileState>(
+                                BlocBuilder<
+                                  DoctorProfileBloc,
+                                  DoctorProfileState
+                                >(
                                   builder: (context, doctorState) {
                                     if (doctorState is DoctorProfileLoading) {
                                       return Expanded(
@@ -193,10 +221,14 @@ class _DrProfileByidState extends State<DrProfileByid> {
                                     } else if (doctorState
                                         is DoctorProfileSuccess) {
                                       context.read<SubscriptionBloc>().add(
-                                          SetSubscribedOrNot(doctorState
-                                              .doctor!.isSubscribed));
-                                      return BlocBuilder<SubscriptionBloc,
-                                          SubscriptionState>(
+                                        SetSubscribedOrNot(
+                                          doctorState.doctor!.isSubscribed,
+                                        ),
+                                      );
+                                      return BlocBuilder<
+                                        SubscriptionBloc,
+                                        SubscriptionState
+                                      >(
                                         builder: (context, state) {
                                           return Expanded(
                                             child: FollowButton(
@@ -204,27 +236,36 @@ class _DrProfileByidState extends State<DrProfileByid> {
                                               height: 40.h,
                                               onTap:
                                                   state is SubscriptionLoading
-                                                      ? null
-                                                      : () {
-                                                          if (state
-                                                              .isSubscribed) {
-                                                            context
-                                                                .read<
-                                                                    SubscriptionBloc>()
-                                                                .add(UnSubscribeToDrEvent(widget
+                                                  ? null
+                                                  : () {
+                                                      if (state.isSubscribed) {
+                                                        context
+                                                            .read<
+                                                              SubscriptionBloc
+                                                            >()
+                                                            .add(
+                                                              UnSubscribeToDrEvent(
+                                                                widget
                                                                         .specialist
                                                                         .username ??
-                                                                    ""));
-                                                          } else {
-                                                            context
-                                                                .read<
-                                                                    SubscriptionBloc>()
-                                                                .add(SubscribeToDrEvent(widget
+                                                                    "",
+                                                              ),
+                                                            );
+                                                      } else {
+                                                        context
+                                                            .read<
+                                                              SubscriptionBloc
+                                                            >()
+                                                            .add(
+                                                              SubscribeToDrEvent(
+                                                                widget
                                                                         .specialist
                                                                         .username ??
-                                                                    ""));
-                                                          }
-                                                        },
+                                                                    "",
+                                                              ),
+                                                            );
+                                                      }
+                                                    },
                                             ),
                                           );
                                         },
@@ -234,8 +275,10 @@ class _DrProfileByidState extends State<DrProfileByid> {
                                     }
                                   },
                                 ),
-                                BlocBuilder<DoctorProfileBloc,
-                                    DoctorProfileState>(
+                                BlocBuilder<
+                                  DoctorProfileBloc,
+                                  DoctorProfileState
+                                >(
                                   builder: (context, state) {
                                     if (state is DoctorProfileLoading ||
                                         state is DoctorProfileSuccess) {
@@ -250,61 +293,64 @@ class _DrProfileByidState extends State<DrProfileByid> {
                                       return LongButton(
                                         loading: state.dataStatus.isInProgress,
                                         onPress: () {
-                                          context
-                                              .read<ChatBloc>()
-                                              .add(GetGroupChat(
-                                                username:
-                                                    widget.specialist.username,
-                                                onSucces: (model) {
-                                                  Log.e(model.slugName);
-                                                  final bloc = context
-                                                      .read<UserInfoBloc>();
-                                                  Navigator.of(context)
-                                                      .push(MaterialPageRoute(
+                                          context.read<ChatBloc>().add(
+                                            GetGroupChat(
+                                              username:
+                                                  widget.specialist.username,
+                                              onSucces: (model) {
+                                                Log.e(model.slugName);
+                                                final bloc = context
+                                                    .read<UserInfoBloc>();
+                                                Navigator.of(context).push(
+                                                  MaterialPageRoute(
                                                     builder: (context) =>
                                                         BlocProvider.value(
-                                                      value: bloc,
-                                                      child: InChatView(
-                                                        group: model,
-                                                      ),
-                                                    ),
-                                                  ));
-                                                },
-                                                onError: () {
-                                                  context
-                                                      .read<ChatBloc>()
-                                                      .add(CreateChatEvent(
-                                                        user: ChatUserModel(
-                                                          username: widget
-                                                                  .specialist
-                                                                  .username ??
-                                                              "",
+                                                          value: bloc,
+                                                          child: InChatView(
+                                                            group: model,
+                                                          ),
                                                         ),
-                                                        onSuccess: (model) {
-                                                          Log.e(model.slugName);
-                                                          final bloc =
-                                                              context.read<
-                                                                  UserInfoBloc>();
-                                                          Navigator.of(context)
-                                                              .push(
-                                                                  MaterialPageRoute(
-                                                            builder:
-                                                                (context) =>
-                                                                    BlocProvider
-                                                                        .value(
-                                                              value: bloc,
-                                                              child: InChatView(
-                                                                group: model,
+                                                  ),
+                                                );
+                                              },
+                                              onError: () {
+                                                context.read<ChatBloc>().add(
+                                                  CreateChatEvent(
+                                                    user: ChatUserModel(
+                                                      username:
+                                                          widget
+                                                              .specialist
+                                                              .username ??
+                                                          "",
+                                                    ),
+                                                    onSuccess: (model) {
+                                                      Log.e(model.slugName);
+                                                      final bloc = context
+                                                          .read<UserInfoBloc>();
+                                                      Navigator.of(
+                                                        context,
+                                                      ).push(
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              BlocProvider.value(
+                                                                value: bloc,
+                                                                child:
+                                                                    InChatView(
+                                                                      group:
+                                                                          model,
+                                                                    ),
                                                               ),
-                                                            ),
-                                                          ));
-                                                        },
-                                                        onError: () {
-                                                          Log.e("message");
-                                                        },
-                                                      ));
-                                                },
-                                              ));
+                                                        ),
+                                                      );
+                                                    },
+                                                    onError: () {
+                                                      Log.e("message");
+                                                    },
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          );
                                         },
                                         widget: Row(
                                           mainAxisAlignment:
@@ -318,13 +364,14 @@ class _DrProfileByidState extends State<DrProfileByid> {
                                             ),
                                             Text(
                                               context.l10n.message,
-                                              style:
-                                                  Styles.descSubtitle.copyWith(
-                                                color: context.color.mainBlue,
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            )
+                                              style: Styles.descSubtitle
+                                                  .copyWith(
+                                                    color:
+                                                        context.color.mainBlue,
+                                                    fontSize: 12.sp,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                            ),
                                           ],
                                         ),
                                         color: context.color.white,
@@ -379,8 +426,9 @@ class _DrProfileByidState extends State<DrProfileByid> {
                               Tab(
                                 child: Text(
                                   context.l10n.posts,
-                                  style: Styles.descSubtitle
-                                      .copyWith(color: context.color.black),
+                                  style: Styles.descSubtitle.copyWith(
+                                    color: context.color.black,
+                                  ),
                                 ),
                               ),
                             ],
@@ -503,14 +551,16 @@ class _DrProfileByidState extends State<DrProfileByid> {
                             builder: (context, state) {
                               if (state is DoctorProfileSuccess) {
                                 debugPrint(
-                                    "============>>>>>>>>>>>>. NImaga bilmima");
+                                  "============>>>>>>>>>>>>. NImaga bilmima",
+                                );
                                 return DoctorInfoItem(
                                   doctor: state.doctor ?? DoctorProfileModel(),
                                 );
                               } else if (state is DoctorProfileLoading) {
                                 return Shimmer.fromColors(
-                                  baseColor: context.color.mainBlue
-                                      .withValues(alpha: 0.2),
+                                  baseColor: context.color.mainBlue.withValues(
+                                    alpha: 0.2,
+                                  ),
                                   highlightColor: context.color.mainBlue
                                       .withValues(alpha: 0.4),
                                   child: const LoadingDoctorInfo(),
@@ -520,7 +570,7 @@ class _DrProfileByidState extends State<DrProfileByid> {
                               return const SizedBox();
                             },
                           ),
-                          ScreenUtil().setVerticalSpacing(90.h)
+                          ScreenUtil().setVerticalSpacing(90.h),
                         ],
                       ),
                     ),
@@ -557,8 +607,8 @@ class _DrProfileByidState extends State<DrProfileByid> {
                       icon: AppIcons.call,
                       onPressed: () =>
                           Caller.makePhoneCall(state.doctor?.phone ?? "__"),
-                    )
-                  ]
+                    ),
+                  ],
                 ],
               ),
             ),

@@ -42,8 +42,9 @@ class HomeAppbarComponent extends StatelessWidget implements PreferredSize {
               true,
               () {
                 flickMultiManager.pause();
-                Navigator.of(context)
-                    .pushNamed(AppRoutes.userInfo, arguments: state.userInfo);
+                Navigator.of(
+                  context,
+                ).pushNamed(AppRoutes.userInfo, arguments: state.userInfo);
               },
               context,
             );
@@ -55,10 +56,9 @@ class HomeAppbarComponent extends StatelessWidget implements PreferredSize {
               state.userInfo!.avatar!,
               false,
               () {
-                Navigator.of(context).pushNamed(
-                  AppRoutes.userInfo,
-                  arguments: state.userInfo,
-                );
+                Navigator.of(
+                  context,
+                ).pushNamed(AppRoutes.userInfo, arguments: state.userInfo);
               },
               context,
             );
@@ -71,19 +71,23 @@ class HomeAppbarComponent extends StatelessWidget implements PreferredSize {
                 leading: Container(
                   width: 42.h,
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: context.color.white),
+                    shape: BoxShape.circle,
+                    color: context.color.white,
+                  ),
                 ),
                 title: Container(
                   height: 14.h,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
-                      color: context.color.white),
+                    borderRadius: BorderRadius.circular(10.r),
+                    color: context.color.white,
+                  ),
                 ),
                 subtitle: Container(
                   height: 16.h,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
-                      color: context.color.white),
+                    borderRadius: BorderRadius.circular(10.r),
+                    color: context.color.white,
+                  ),
                 ),
               ),
             );
@@ -113,26 +117,28 @@ class HomeAppbarComponent extends StatelessWidget implements PreferredSize {
               splashRadius: 26,
               constraints: const BoxConstraints(),
               onPressed: () {
-                Navigator.of(context).pushNamed(AppRoutes.createPost).then(
-                  (value) {
-                    if (value != null) {
-                      if (value as bool) {
-                        if (context.mounted) {
-                          context.read<PostBloc>().add(PostFetched(true));
-                        }
+                Navigator.of(context).pushNamed(AppRoutes.createPost).then((
+                  value,
+                ) {
+                  if (value != null) {
+                    if (value as bool) {
+                      if (context.mounted) {
+                        context.read<PostBloc>().add(PostFetched(true));
                       }
                     }
-                  },
-                );
+                  }
+                });
               },
               icon: SvgPicture.asset(
                 AppIcons.plusCircle,
-                colorFilter:
-                    ColorFilter.mode(context.color.black, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(
+                  context.color.black,
+                  BlendMode.srcIn,
+                ),
               ),
             );
           },
-        )
+        ),
       ],
     );
   }
@@ -169,12 +175,13 @@ class HomeAppbarComponent extends StatelessWidget implements PreferredSize {
                 Text(
                   '$name $surname',
                   style: Styles.bottomLabel.copyWith(
-                      color: context.color.black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14),
+                    color: context.color.black,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                  ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -189,12 +196,12 @@ class HomeAppbarComponent extends StatelessWidget implements PreferredSize {
         height: 42.h,
         width: 42.h,
         child: CachedNetworkImage(
-          imageUrl: image ??
+          imageUrl:
+              image ??
               'https://resources.comphealth.com/wp-content/uploads/2019/05/post-residency-career-tips.jpg',
           fit: BoxFit.cover,
-          errorWidget: (context, url, error) => CircleAvatar(
-            backgroundColor: mainBlue.withValues(alpha: 0.1),
-          ),
+          errorWidget: (context, url, error) =>
+              CircleAvatar(backgroundColor: mainBlue.withValues(alpha: 0.1)),
         ),
       );
     } else {
