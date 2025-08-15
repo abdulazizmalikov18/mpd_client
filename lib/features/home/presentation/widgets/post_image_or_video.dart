@@ -33,11 +33,15 @@ class _PostImageOrVideoState extends State<PostImageOrVideo>
   void initState() {
     super.initState();
     if (widget.isVideo != null && widget.isVideo!) {
+      final controller = VideoPlayerController.networkUrl(
+        Uri.parse(widget.url),
+        videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
+      );
+      controller.initialize().then((_) {
+        controller.setLooping(true);
+      });
       flickManager = FlickManager(
-        videoPlayerController: VideoPlayerController.networkUrl(
-          Uri.parse(widget.url),
-          videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
-        )..setLooping(true),
+        videoPlayerController: controller,
         autoPlay: false,
       );
       widget.flickMultiManager.init(flickManager);
@@ -46,7 +50,7 @@ class _PostImageOrVideoState extends State<PostImageOrVideo>
 
   @override
   void dispose() {
-    flickManager!.dispose();
+    flickManager?.dispose();
     super.dispose();
   }
 
