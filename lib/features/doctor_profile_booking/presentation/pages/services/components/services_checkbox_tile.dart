@@ -42,7 +42,8 @@ class ServicesCheckBoxTile extends StatelessWidget {
           children: [
             ListTile(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.r)),
+                borderRadius: BorderRadius.circular(12.r),
+              ),
               contentPadding: EdgeInsets.zero,
               title: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -71,20 +72,23 @@ class ServicesCheckBoxTile extends StatelessWidget {
                       ),
                       ScreenUtil().setVerticalSpacing(4.h),
                       Text(
-                          product.price.isNotEmpty
-                              ? '${Utils.priceFormat(product.price.first.value)} ${Utils.currencyFormat(product.price.first.currency)}'
-                              : "--",
-                          style: Styles.headline7Sp14
-                              .copyWith(color: context.color.mainBlue)),
+                        product.price.isNotEmpty
+                            ? '${Utils.priceFormat(product.price.first.value)} ${Utils.currencyFormat(product.price.first.currency)}'
+                            : "--",
+                        style: Styles.headline7Sp14.copyWith(
+                          color: context.color.mainBlue,
+                        ),
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
               visualDensity: const VisualDensity(vertical: 4, horizontal: -4),
               leading: Checkbox(
                 activeColor: context.color.mainBlue,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6)),
+                  borderRadius: BorderRadius.circular(6),
+                ),
                 onChanged: product.remains == 0 ? (_) {} : onChanged,
                 value: value,
               ),
@@ -106,14 +110,17 @@ class ServicesCheckBoxTile extends StatelessWidget {
                       icon: SvgPicture.asset(
                         AppIcons.minus,
                         colorFilter: ColorFilter.mode(
-                            context.color.mainBlue, BlendMode.srcIn),
+                          context.color.mainBlue,
+                          BlendMode.srcIn,
+                        ),
                       ),
                     ),
                     ScreenUtil().setHorizontalSpacing(8.w),
                     Text(
                       count.toString(),
-                      style: Styles.headline7Sp14
-                          .copyWith(color: context.color.mainBlue),
+                      style: Styles.headline7Sp14.copyWith(
+                        color: context.color.mainBlue,
+                      ),
                     ),
                     ScreenUtil().setHorizontalSpacing(8.w),
                     IconButton(
@@ -124,26 +131,28 @@ class ServicesCheckBoxTile extends StatelessWidget {
                       icon: SvgPicture.asset(
                         AppIcons.plus,
                         colorFilter: ColorFilter.mode(
-                            context.color.mainBlue, BlendMode.srcIn),
+                          context.color.mainBlue,
+                          BlendMode.srcIn,
+                        ),
                       ),
                     ),
                   ],
                 ),
-                crossFadeState: !context
-                        .read<ProductSpecalistBloc>()
-                        .contains(id: product.id)
+                crossFadeState:
+                    !context.read<ProductSpecalistBloc>().contains(
+                      id: product.id,
+                    )
                     ? CrossFadeState.showFirst
                     : CrossFadeState.showSecond,
                 duration: const Duration(milliseconds: 200),
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
 }
-
 
 /*
 Material(

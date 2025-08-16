@@ -9,9 +9,13 @@ part 'change_password_state.dart';
 
 class ChangePasswordBloc
     extends Bloc<ChangePasswordEvent, ChangePasswordState> {
-  ChangePasswordBloc(this._repository, this._formKey, this._passwordController1,
-      this._passwordController2, this._oldPasswordController)
-      : super(const ChangePasswordState()) {
+  ChangePasswordBloc(
+    this._repository,
+    this._formKey,
+    this._passwordController1,
+    this._passwordController2,
+    this._oldPasswordController,
+  ) : super(const ChangePasswordState()) {
     on<CheckPasswordAndChange>(_onCheckAndChangePassword);
     on<OnlyCheckPasswordEvent>(_onOnlyCheckPassword);
     on<MakeVisibleNewPassword>(_onMakeVisibleNewPassword);
@@ -30,15 +34,22 @@ class ChangePasswordBloc
   TextEditingController get oldPasswordController => _oldPasswordController;
 
   Future<void> _onOnlyCheckPassword(
-      OnlyCheckPasswordEvent event, Emitter<ChangePasswordState> emit) async {
+    OnlyCheckPasswordEvent event,
+    Emitter<ChangePasswordState> emit,
+  ) async {
     if (_formKey.currentState!.validate()) {
       emit(state.copyWith(error: 'No'));
 
       emit(state.copyWith(showLoading: true));
       final result = await _repository.checkPassword(_passwordController2.text);
       if (result.isRight) {
-        emit(state.copyWith(
-            showLoading: false, error: 'No', isCorrect: result.right));
+        emit(
+          state.copyWith(
+            showLoading: false,
+            error: 'No',
+            isCorrect: result.right,
+          ),
+        );
       } else {
         if (result.left is NetworkFailure) {
           emit(state.copyWith(error: result.left.message, showLoading: false));
@@ -50,13 +61,17 @@ class ChangePasswordBloc
   }
 
   Future<void> _onCheckAndChangePassword(
-      CheckPasswordAndChange event, Emitter<ChangePasswordState> emit) async {
+    CheckPasswordAndChange event,
+    Emitter<ChangePasswordState> emit,
+  ) async {
     if (_formKey.currentState!.validate()) {
       emit(state.copyWith(error: 'No'));
 
       emit(state.copyWith(showLoading: true));
-      final result = await _repository.changePassword(_passwordController2.text,
-          oldPassword: oldPasswordController.text);
+      final result = await _repository.changePassword(
+        _passwordController2.text,
+        oldPassword: oldPasswordController.text,
+      );
       if (result.isRight) {
         emit(state.copyWith(showLoading: false, error: 'No'));
       } else {
@@ -70,10 +85,12 @@ class ChangePasswordBloc
   }
 
   void _onMakeVisibleNewPassword(
-          MakeVisibleNewPassword event, Emitter<ChangePasswordState> emit) =>
-      emit(state.copyWith(newPasswordEye: !state.newPasswordEye));
+    MakeVisibleNewPassword event,
+    Emitter<ChangePasswordState> emit,
+  ) => emit(state.copyWith(newPasswordEye: !state.newPasswordEye));
 
-  void _onMakeVisibleConfirmPassword(MakeVisibleConfirmPassword event,
-          Emitter<ChangePasswordState> emit) =>
-      emit(state.copyWith(confirmPasswordEye: !state.confirmPasswordEye));
+  void _onMakeVisibleConfirmPassword(
+    MakeVisibleConfirmPassword event,
+    Emitter<ChangePasswordState> emit,
+  ) => emit(state.copyWith(confirmPasswordEye: !state.confirmPasswordEye));
 }

@@ -41,7 +41,8 @@ class TimetableByDateModel {
         spec: Spec.fromJson(json["spec"]),
         breaksList: List<dynamic>.from(json["breaks_list"].map((x) => x)),
         bookedTimes: List<BookedTime>.from(
-            json["booked_times"].map((x) => BookedTime.fromJson(x))),
+          json["booked_times"].map((x) => BookedTime.fromJson(x)),
+        ),
         dayOfWeek: json["day_of_week"],
         startTime: json["start_time"],
         endTime: json["end_time"],
@@ -51,17 +52,17 @@ class TimetableByDateModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "spec": spec.toJson(),
-        "breaks_list": List<dynamic>.from(breaksList.map((x) => x)),
-        "booked_times": List<dynamic>.from(bookedTimes.map((x) => x.toJson())),
-        "day_of_week": dayOfWeek,
-        "start_time": startTime,
-        "end_time": endTime,
-        "is_working": isWorking,
-        "repeat_day_off": repeatDayOff,
-        "proc_interval": procInterval,
-      };
+    "id": id,
+    "spec": spec.toJson(),
+    "breaks_list": List<dynamic>.from(breaksList.map((x) => x)),
+    "booked_times": List<dynamic>.from(bookedTimes.map((x) => x.toJson())),
+    "day_of_week": dayOfWeek,
+    "start_time": startTime,
+    "end_time": endTime,
+    "is_working": isWorking,
+    "repeat_day_off": repeatDayOff,
+    "proc_interval": procInterval,
+  };
 }
 
 class BookedTime {
@@ -76,17 +77,17 @@ class BookedTime {
   });
 
   factory BookedTime.fromJson(Map<String, dynamic> json) => BookedTime(
-        date: DateTime.parse(json["date"]),
-        startTime: json["start_time"],
-        endTime: json["end_time"],
-      );
+    date: DateTime.parse(json["date"]),
+    startTime: json["start_time"],
+    endTime: json["end_time"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "date":
-            "${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",
-        "start_time": startTime,
-        "end_time": endTime,
-      };
+    "date":
+        "${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",
+    "start_time": startTime,
+    "end_time": endTime,
+  };
 }
 
 class Spec {
@@ -111,26 +112,26 @@ class Spec {
   });
 
   factory Spec.fromJson(Map<String, dynamic> json) => Spec(
-        id: json["id"],
-        user: json["user"],
-        job: Job.fromJson(json["job"]),
-        specCat: SpecCat.fromJson(json["spec_cat"]),
-        position: json["position"],
-        bio: json["bio"],
-        experience: json["experience"],
-        location: json["location"],
-      );
+    id: json["id"],
+    user: json["user"],
+    job: Job.fromJson(json["job"]),
+    specCat: SpecCat.fromJson(json["spec_cat"]),
+    position: json["position"],
+    bio: json["bio"],
+    experience: json["experience"],
+    location: json["location"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "user": user,
-        "job": job.toJson(),
-        "spec_cat": specCat.toJson(),
-        "position": position,
-        "bio": bio,
-        "experience": experience,
-        "location": location,
-      };
+    "id": id,
+    "user": user,
+    "job": job.toJson(),
+    "spec_cat": specCat.toJson(),
+    "position": position,
+    "bio": bio,
+    "experience": experience,
+    "location": location,
+  };
 }
 
 class Job {
@@ -161,32 +162,32 @@ class Job {
   });
 
   factory Job.fromJson(Map<String, dynamic> json) => Job(
-        id: json["id"],
-        name: json["name"],
-        description: json["description"],
-        hideFromOrgs: json["hide_from_orgs"],
-        hideFromUsers: json["hide_from_users"],
-        image: json["image"],
-        status: json["status"],
-        firstLevelScore: json["first_level_score"],
-        levelProgressBy: json["level_progress_by"],
-        creator: json["creator"],
-        parent: json["parent"],
-      );
+    id: json["id"],
+    name: json["name"],
+    description: json["description"],
+    hideFromOrgs: json["hide_from_orgs"],
+    hideFromUsers: json["hide_from_users"],
+    image: json["image"],
+    status: json["status"],
+    firstLevelScore: json["first_level_score"],
+    levelProgressBy: json["level_progress_by"],
+    creator: json["creator"],
+    parent: json["parent"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "description": description,
-        "hide_from_orgs": hideFromOrgs,
-        "hide_from_users": hideFromUsers,
-        "image": image,
-        "status": status,
-        "first_level_score": firstLevelScore,
-        "level_progress_by": levelProgressBy,
-        "creator": creator,
-        "parent": parent,
-      };
+    "id": id,
+    "name": name,
+    "description": description,
+    "hide_from_orgs": hideFromOrgs,
+    "hide_from_users": hideFromUsers,
+    "image": image,
+    "status": status,
+    "first_level_score": firstLevelScore,
+    "level_progress_by": levelProgressBy,
+    "creator": creator,
+    "parent": parent,
+  };
 }
 
 class SpecCat {
@@ -194,21 +195,17 @@ class SpecCat {
   final String name;
   final int specialistCount;
 
-  const SpecCat({
-    this.id = 0,
-    this.name = "",
-    this.specialistCount = 0,
-  });
+  const SpecCat({this.id = 0, this.name = "", this.specialistCount = 0});
 
   factory SpecCat.fromJson(Map<String, dynamic> json) => SpecCat(
-        id: json["id"],
-        name: json["name"],
-        specialistCount: json["specialist_count"],
-      );
+    id: json["id"],
+    name: json["name"],
+    specialistCount: json["specialist_count"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "specialist_count": specialistCount,
-      };
+    "id": id,
+    "name": name,
+    "specialist_count": specialistCount,
+  };
 }

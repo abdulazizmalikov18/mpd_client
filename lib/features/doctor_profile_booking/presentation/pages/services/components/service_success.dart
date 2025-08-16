@@ -40,9 +40,12 @@ class ServiceSuccess extends StatelessWidget {
           ScreenUtil().setVerticalSpacing(24.h),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 44.w),
-            child: Text('The doctor does not have any type of service',
-                textAlign: TextAlign.center, style: Styles.emptyboldTitle),
-          )
+            child: Text(
+              'The doctor does not have any type of service',
+              textAlign: TextAlign.center,
+              style: Styles.emptyboldTitle,
+            ),
+          ),
         ],
       );
     }
@@ -65,29 +68,29 @@ class ServiceSuccess extends StatelessWidget {
               }
 
               return Theme(
-                data: Theme.of(context).copyWith(
-                  unselectedWidgetColor: context.color.mainBlue,
-                ),
+                data: Theme.of(
+                  context,
+                ).copyWith(unselectedWidgetColor: context.color.mainBlue),
                 child: ServicesCheckBoxTile(
                   onMinus: () {
-                    context
-                        .read<ProductSpecalistBloc>()
-                        .add(DicrementProductEvent(id: product.id, count: 1));
+                    context.read<ProductSpecalistBloc>().add(
+                      DicrementProductEvent(id: product.id, count: 1),
+                    );
                   },
                   onPlus: () {
-                    context
-                        .read<ProductSpecalistBloc>()
-                        .add(IncrementProductEvent(id: product.id, count: 1));
+                    context.read<ProductSpecalistBloc>().add(
+                      IncrementProductEvent(id: product.id, count: 1),
+                    );
                   },
                   count: localCount(product.id),
                   product: product,
-                  value: context
-                      .read<ProductSpecalistBloc>()
-                      .contains(id: product.id),
+                  value: context.read<ProductSpecalistBloc>().contains(
+                    id: product.id,
+                  ),
                   onChanged: (value) {
-                    context
-                        .read<ProductSpecalistBloc>()
-                        .add(InsertProductEvent(product));
+                    context.read<ProductSpecalistBloc>().add(
+                      InsertProductEvent(product),
+                    );
                   },
                 ),
               );

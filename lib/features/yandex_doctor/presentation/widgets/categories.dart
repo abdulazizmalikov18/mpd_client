@@ -27,11 +27,12 @@ class Categories extends StatelessWidget {
       child: SizedBox(
         height: 47.h,
         child: CategoriesComponent(
-            scrollController: ScrollController(),
-            onScrollEnd: () {
-              context.read<SpecialistBloc>().add(GetCategory());
-            },
-            state: state),
+          scrollController: ScrollController(),
+          onScrollEnd: () {
+            context.read<SpecialistBloc>().add(GetCategory());
+          },
+          state: state,
+        ),
       ),
     );
   }
@@ -41,11 +42,12 @@ class CategoriesComponent extends StatelessWidget {
   final SpecialistState state;
   final VoidCallback onScrollEnd;
   final ScrollController scrollController;
-  const CategoriesComponent(
-      {super.key,
-      required this.state,
-      required this.onScrollEnd,
-      required this.scrollController});
+  const CategoriesComponent({
+    super.key,
+    required this.state,
+    required this.onScrollEnd,
+    required this.scrollController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,8 @@ class CategoriesComponent extends StatelessWidget {
       return ListView.builder(
         controller: scrollController,
         physics: const AlwaysScrollableScrollPhysics(
-            parent: BouncingScrollPhysics()),
+          parent: BouncingScrollPhysics(),
+        ),
         itemCount: state.statusCategory.isInProgress
             ? state.categories.length + 20
             : state.categories.length,
@@ -69,7 +72,8 @@ class CategoriesComponent extends StatelessWidget {
                 child: Card(
                   color: context.color.white,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100)),
+                    borderRadius: BorderRadius.circular(100),
+                  ),
                   child: SizedBox(width: 123.w),
                 ),
               ),
@@ -80,8 +84,12 @@ class CategoriesComponent extends StatelessWidget {
             child: BlocConsumer<SpecialistBloc, SpecialistState>(
               listener: (_, state) {
                 if (!state.status.isInProgress && state.specialist.isNotEmpty) {
-                  context.read<YandexDoctorBloc>().add(ClusterPlaceMarkEvent(
-                      specialists: state.specialist, context: context));
+                  context.read<YandexDoctorBloc>().add(
+                    ClusterPlaceMarkEvent(
+                      specialists: state.specialist,
+                      context: context,
+                    ),
+                  );
                 }
               },
               builder: (context, selectedState) {
@@ -91,57 +99,65 @@ class CategoriesComponent extends StatelessWidget {
                         selectedState.categoryId) {
                       Log.e(state.categories[index].id);
                       context.read<SpecialistBloc>().add(SelectingCategory(-1));
-                      context.read<SpecialistBloc>().add(GetSpecialist(
-                        onSucces: (specialist) {
-                          FocusScope.of(context).unfocus();
-                          context
-                              .read<SearchBySpecialistBloc>()
-                              .add(CloseSuggessionsEvent());
+                      context.read<SpecialistBloc>().add(
+                        GetSpecialist(
+                          onSucces: (specialist) {
+                            FocusScope.of(context).unfocus();
+                            context.read<SearchBySpecialistBloc>().add(
+                              CloseSuggessionsEvent(),
+                            );
 
-                          context.read<YandexDoctorBloc>().add(AddSpecialistMap(
+                            context.read<YandexDoctorBloc>().add(
+                              AddSpecialistMap(
                                 specialist: specialist ?? [],
                                 context: context,
-                              ));
-                        },
-                      ));
+                              ),
+                            );
+                          },
+                        ),
+                      );
                     } else {
-                   
-                      context
-                          .read<SpecialistBloc>()
-                          .add(SelectingCategory(state.categories[index].id!));
-                      context.read<SpecialistBloc>().add(GetSpecialist(
-                            jobId: state.categories[index].id!,
-                            onSucces: (specialist) {
-                              FocusScope.of(context).unfocus();
-                              context
-                                  .read<SearchBySpecialistBloc>()
-                                  .add(CloseSuggessionsEvent());
+                      context.read<SpecialistBloc>().add(
+                        SelectingCategory(state.categories[index].id!),
+                      );
+                      context.read<SpecialistBloc>().add(
+                        GetSpecialist(
+                          jobId: state.categories[index].id!,
+                          onSucces: (specialist) {
+                            FocusScope.of(context).unfocus();
+                            context.read<SearchBySpecialistBloc>().add(
+                              CloseSuggessionsEvent(),
+                            );
 
-                              context
-                                  .read<YandexDoctorBloc>()
-                                  .add(AddSpecialistMap(
-                                    specialist: specialist ?? [],
-                                    context: context,
-                                  ));
-                            },
-                          ));
+                            context.read<YandexDoctorBloc>().add(
+                              AddSpecialistMap(
+                                specialist: specialist ?? [],
+                                context: context,
+                              ),
+                            );
+                          },
+                        ),
+                      );
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          state.categories[index].id == selectedState.categoryId
-                              ? context.color.mainBlue.withValues(alpha: 0.8)
-                              : context.color.white,
-                      foregroundColor:
-                          state.categories[index].id == selectedState.categoryId
-                              ? context.color.white
-                              : context.color.black,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100))),
+                    backgroundColor:
+                        state.categories[index].id == selectedState.categoryId
+                        ? context.color.mainBlue.withValues(alpha: 0.8)
+                        : context.color.white,
+                    foregroundColor:
+                        state.categories[index].id == selectedState.categoryId
+                        ? context.color.white
+                        : context.color.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                  ),
                   child: Text(
                     state.categories[index].name!,
-                    style: Styles.postTitle
-                        .copyWith(fontFamily: Styles.gilroyMedium),
+                    style: Styles.postTitle.copyWith(
+                      fontFamily: Styles.gilroyMedium,
+                    ),
                   ),
                 );
               },
@@ -156,8 +172,9 @@ class CategoriesComponent extends StatelessWidget {
   ListView _buildLoadingList() {
     return ListView.builder(
       itemCount: 20,
-      physics:
-          const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+      physics: const AlwaysScrollableScrollPhysics(
+        parent: BouncingScrollPhysics(),
+      ),
       scrollDirection: Axis.horizontal,
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       itemBuilder: (context, index) {
@@ -169,7 +186,8 @@ class CategoriesComponent extends StatelessWidget {
             child: Card(
               color: context.color.white,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100)),
+                borderRadius: BorderRadius.circular(100),
+              ),
               child: SizedBox(width: 123.w),
             ),
           ),

@@ -4,7 +4,8 @@
 
 import 'dart:convert';
 
-ProfessionModel? professionModelFromJson(String str) => ProfessionModel.fromJson(json.decode(str));
+ProfessionModel? professionModelFromJson(String str) =>
+    ProfessionModel.fromJson(json.decode(str));
 
 class ProfessionModel {
   ProfessionModel({
@@ -23,13 +24,18 @@ class ProfessionModel {
   dynamic previous;
   List<Profession>? results;
 
-  factory ProfessionModel.fromJson(Map<String, dynamic> json) => ProfessionModel(
+  factory ProfessionModel.fromJson(Map<String, dynamic> json) =>
+      ProfessionModel(
         count: json["count"],
         next: json["next"],
         nextOffset: json["next_offset"],
         previousOffset: json["previous_offset"],
         previous: json["previous"],
-        results: json["results"] == null ? [] : (json["results"] as List).map<Profession>((x) => Profession.fromJson(x)).toList(),
+        results: json["results"] == null
+            ? []
+            : (json["results"] as List)
+                  .map<Profession>((x) => Profession.fromJson(x))
+                  .toList(),
       );
 }
 
@@ -63,17 +69,17 @@ class Profession {
   int? parent;
 
   factory Profession.fromJson(Map<String, dynamic> json) => Profession(
-        id: json["id"],
-        isParent: json["is_parent"],
-        childNumber: json["child_number"],
-        name: json["name"],
-        hideFromOrgs: json["hide_from_orgs"],
-        hideFromUsers: json["hide_from_users"],
-        image: json["image"],
-        status: json["status"],
-        description: json["description"],
-        firstLevelScore: json["first_level_score"],
-        levelProgressBy: json["level_progress_by"],
-        parent: json["parent"],
-      );
+    id: json["id"],
+    isParent: json["is_parent"],
+    childNumber: json["child_number"],
+    name: json["name"],
+    hideFromOrgs: json["hide_from_orgs"],
+    hideFromUsers: json["hide_from_users"],
+    image: json["image"],
+    status: json["status"],
+    description: json["description"],
+    firstLevelScore: json["first_level_score"],
+    levelProgressBy: json["level_progress_by"],
+    parent: json["parent"],
+  );
 }

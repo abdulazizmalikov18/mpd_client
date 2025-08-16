@@ -22,9 +22,10 @@ class SelectCardSheet extends StatelessWidget {
           child: Text(
             'Select your card',
             style: Styles.boldTitle.copyWith(
-                color: context.color.black,
-                fontSize: 24.sp,
-                fontFamily: Styles.gilroyMedium),
+              color: context.color.black,
+              fontSize: 24.sp,
+              fontFamily: Styles.gilroyMedium,
+            ),
           ),
         ),
         ScreenUtil().setVerticalSpacing(32.h),
@@ -46,12 +47,13 @@ class SelectCardSheet extends StatelessWidget {
                     children: [
                       ScreenUtil().setVerticalSpacing(12.h),
                       _buildCard(
-                          card: card,
-                          selectedId: state.selectId,
-                          context: context),
+                        card: card,
+                        selectedId: state.selectId,
+                        context: context,
+                      ),
                     ],
                   );
-                })
+                }),
               ],
             );
           },
@@ -63,24 +65,27 @@ class SelectCardSheet extends StatelessWidget {
             buttonName: 'Add your card',
             onPress: () {
               showModalBottomSheet(
-                  isScrollControlled: true,
-                  backgroundColor: Colors.transparent,
-                  context: context,
-                  builder: (_) => MultiBlocProvider(
-                        providers: [
-                          BlocProvider(
-                            create: (context) => InsertCardBloc(
-                                locator.get<DoctorProfileRepository>(),
-                                TextEditingController(),
-                                TextEditingController(),
-                                TextEditingController(),
-                                GlobalKey<FormState>()),
-                          ),
-                          BlocProvider.value(
-                              value: BlocProvider.of<MyCardsBloc>(context))
-                        ],
-                        child: AddCardBotomSheet(contextCons: context),
-                      ));
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
+                context: context,
+                builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => InsertCardBloc(
+                        locator.get<DoctorProfileRepository>(),
+                        TextEditingController(),
+                        TextEditingController(),
+                        TextEditingController(),
+                        GlobalKey<FormState>(),
+                      ),
+                    ),
+                    BlocProvider.value(
+                      value: BlocProvider.of<MyCardsBloc>(context),
+                    ),
+                  ],
+                  child: AddCardBotomSheet(contextCons: context),
+                ),
+              );
             },
             textColor: context.color.mainBlue,
             borderColor: context.color.mainBlue,
@@ -107,22 +112,24 @@ class SelectCardSheet extends StatelessWidget {
     );
   }
 
-  Container _buildCard(
-      {required CardRemoteModel card,
-      required int selectedId,
-      required BuildContext context}) {
+  Container _buildCard({
+    required CardRemoteModel card,
+    required int selectedId,
+    required BuildContext context,
+  }) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.w),
       decoration: BoxDecoration(
         color: context.color.white,
         boxShadow: [
-          BoxShadow(color: context.color.cardShadow, blurRadius: 20.r)
+          BoxShadow(color: context.color.cardShadow, blurRadius: 20.r),
         ],
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: MaterialButton(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.r),
+        ),
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
         onPressed: () {
           context.read<MyCardsBloc>().add(SelectCardEvent(card.id!));
@@ -140,23 +147,29 @@ class SelectCardSheet extends StatelessWidget {
   }
 
   Widget _buildRadio(
-      int selectedId, CardRemoteModel card, BuildContext context) {
+    int selectedId,
+    CardRemoteModel card,
+    BuildContext context,
+  ) {
     bool isSelected = card.id == selectedId;
     return Container(
-        alignment: Alignment.center,
-        height: 22,
-        width: 22,
-        decoration: ShapeDecoration(
-            shape: CircleBorder(
-                side: BorderSide(
-                    color: isSelected
-                        ? context.color.mainBlue
-                        : context.color.grey,
-                    width: 1.5))),
-        child: CircleAvatar(
-          backgroundColor:
-              isSelected ? context.color.mainBlue : context.color.white,
-          radius: 7,
-        ));
+      alignment: Alignment.center,
+      height: 22,
+      width: 22,
+      decoration: ShapeDecoration(
+        shape: CircleBorder(
+          side: BorderSide(
+            color: isSelected ? context.color.mainBlue : context.color.grey,
+            width: 1.5,
+          ),
+        ),
+      ),
+      child: CircleAvatar(
+        backgroundColor: isSelected
+            ? context.color.mainBlue
+            : context.color.white,
+        radius: 7,
+      ),
+    );
   }
 }

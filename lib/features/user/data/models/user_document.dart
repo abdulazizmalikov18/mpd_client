@@ -27,16 +27,7 @@ class UserDocument extends Equatable {
 
   @override
   List<Object> get props {
-    return [
-      id,
-      file,
-      name,
-      status,
-      public,
-      orgList,
-      professional,
-      description,
-    ];
+    return [id, file, name, status, public, orgList, professional, description];
   }
 
   Map<String, dynamic> toMap() {
@@ -67,7 +58,8 @@ class UserDocument extends Equatable {
 
   String toJson() => json.encode(toMap());
 
-  factory UserDocument.fromJson(Object? source) => UserDocument.fromMap(source as Map<String, dynamic>);
+  factory UserDocument.fromJson(Object? source) =>
+      UserDocument.fromMap(source as Map<String, dynamic>);
 
   @override
   bool get stringify => true;

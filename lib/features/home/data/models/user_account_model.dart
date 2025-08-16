@@ -98,10 +98,7 @@ class MainCat {
   @JsonKey(name: "name")
   final String name;
 
-  const MainCat({
-    this.id = 0,
-    this.name = "",
-  });
+  const MainCat({this.id = 0, this.name = ""});
 
   factory MainCat.fromJson(Map<String, dynamic> json) =>
       _$MainCatFromJson(json);

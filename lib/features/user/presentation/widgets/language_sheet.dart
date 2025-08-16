@@ -12,7 +12,7 @@ import '../../../../../../src/widgets/language_button.dart';
 Map<String, dynamic> languages = {
   'Uzbek': 'assets/images/uz.png',
   'Russian': 'assets/images/ru.png',
-  'English': 'assets/images/en.png'
+  'English': 'assets/images/en.png',
 };
 List<Locale> locales = [
   const Locale("uz"),
@@ -32,9 +32,10 @@ class LanguageSheet extends StatelessWidget {
           child: Text(
             context.l10n.profile_language,
             style: Styles.boldTitle.copyWith(
-                color: context.color.black,
-                fontSize: 24.sp,
-                fontFamily: Styles.gilroyMedium),
+              color: context.color.black,
+              fontSize: 24.sp,
+              fontFamily: Styles.gilroyMedium,
+            ),
           ),
         ),
         ScreenUtil().setVerticalSpacing(12.h),
@@ -53,16 +54,16 @@ class LanguageSheet extends StatelessWidget {
               imagePath: languages.values.elementAt(index),
               language: languages.keys.elementAt(index),
               onPressed: () {
-                final provider =
-                    Provider.of<LocalProvider>(context, listen: false);
-                provider.setLocale(locales[index]);
-                Future.delayed(const Duration(milliseconds: 300)).then(
-                  (value) {
-                    if (context.mounted) {
-                      Navigator.of(context).pop();
-                    }
-                  },
+                final provider = Provider.of<LocalProvider>(
+                  context,
+                  listen: false,
                 );
+                provider.setLocale(locales[index]);
+                Future.delayed(const Duration(milliseconds: 300)).then((value) {
+                  if (context.mounted) {
+                    Navigator.of(context).pop();
+                  }
+                });
               },
             ),
           ),

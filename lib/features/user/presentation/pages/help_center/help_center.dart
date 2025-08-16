@@ -6,8 +6,6 @@ class HelpCenter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: AppBarWidget(title: 'Help center'),
-    );
+    return const Scaffold(appBar: AppBarWidget(title: 'Help center'));
   }
 }

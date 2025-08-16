@@ -9,25 +9,29 @@ part 'add_to_cart_state.dart';
 
 class AddToCartBloc extends Bloc<AddToCartEvent, AddToCartState> {
   AddToCartBloc(this._profileRepository)
-      : super(const AddToCartInitial([], [])) {
+    : super(const AddToCartInitial([], [])) {
     on<AddToCart>(_onAddToCart);
   }
 
   final DoctorProfileRepository _profileRepository;
 
   Future<void> _onAddToCart(
-      AddToCart event, Emitter<AddToCartState> emit) async {
+    AddToCart event,
+    Emitter<AddToCartState> emit,
+  ) async {
     emit(AddToCartLoading(state.cartIDs, state.carts));
 
     final List<Map<String, dynamic>> carts = [];
 
     for (var service in event.localServices) {
-      carts.add(CartLocalModel(
-              product: service.id,
-              responsible: event.responsible,
-              qty: service.count,
-              meetDate: event.meetDate)
-          .toJson());
+      carts.add(
+        CartLocalModel(
+          product: service.id,
+          responsible: event.responsible,
+          qty: service.count,
+          meetDate: event.meetDate,
+        ).toJson(),
+      );
     }
 
     final result = await _profileRepository.addToCart(carts);
@@ -39,7 +43,8 @@ class AddToCartBloc extends Bloc<AddToCartEvent, AddToCartState> {
       emit(AddToCartSuccess(cartIDs, carts));
     } else {
       emit(
-          AddToCartFailure(state.cartIDs, carts, failure: result.left.message));
+        AddToCartFailure(state.cartIDs, carts, failure: result.left.message),
+      );
     }
   }
 }

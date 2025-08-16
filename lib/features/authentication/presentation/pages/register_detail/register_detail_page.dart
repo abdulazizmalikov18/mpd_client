@@ -46,20 +46,21 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
           }
         },
         child: ValueListenableBuilder(
-            valueListenable: valueNotifier,
-            builder: (context, _, _) {
-              return AnimatedSwitcher(
-                switchInCurve: Curves.easeIn,
-                switchOutCurve: Curves.easeOut,
-                reverseDuration: const Duration(milliseconds: 300),
-                duration: const Duration(milliseconds: 300),
-                transitionBuilder: (child, animation) =>
-                    FadeTransition(opacity: animation, child: child),
-                child: valueNotifier.value == 0
-                    ? PasswordPart(valueNotifier: valueNotifier)
-                    : FullnamePart(phone: widget.phone),
-              );
-            }),
+          valueListenable: valueNotifier,
+          builder: (context, _, _) {
+            return AnimatedSwitcher(
+              switchInCurve: Curves.easeIn,
+              switchOutCurve: Curves.easeOut,
+              reverseDuration: const Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder: (child, animation) =>
+                  FadeTransition(opacity: animation, child: child),
+              child: valueNotifier.value == 0
+                  ? PasswordPart(valueNotifier: valueNotifier)
+                  : FullnamePart(phone: widget.phone),
+            );
+          },
+        ),
       ),
     );
   }

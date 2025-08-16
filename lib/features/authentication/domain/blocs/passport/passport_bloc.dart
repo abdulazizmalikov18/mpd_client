@@ -12,7 +12,7 @@ part 'passport_state.dart';
 
 class PassportBloc extends Bloc<PassportEvent, PassportState> {
   PassportBloc(this._repository, this._formKey, this._stirController)
-      : super(const PassportState()) {
+    : super(const PassportState()) {
     on<SelectPassportImage>(_onSelectPassportImage);
     on<UpdatePersonalDataEvent>(_onUpdateUser);
   }
@@ -25,7 +25,9 @@ class PassportBloc extends Bloc<PassportEvent, PassportState> {
   TextEditingController get stirController => _stirController;
 
   Future<void> _onSelectPassportImage(
-      SelectPassportImage event, Emitter<PassportState> emit) async {
+    SelectPassportImage event,
+    Emitter<PassportState> emit,
+  ) async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (image == null) return;
@@ -37,7 +39,9 @@ class PassportBloc extends Bloc<PassportEvent, PassportState> {
   }
 
   Future<void> _onUpdateUser(
-      UpdatePersonalDataEvent event, Emitter<PassportState> emit) async {
+    UpdatePersonalDataEvent event,
+    Emitter<PassportState> emit,
+  ) async {
     if (_formKey.currentState!.validate()) {
       emit(state.copyWith(showLoading: true));
       final result = await _repository.updatePersonalData(

@@ -25,7 +25,8 @@ class PopularCategoriesModel {
         results: json["results"] == null
             ? []
             : List<PopularCategories>.from(
-                json["results"]!.map((x) => PopularCategories.fromJson(x))),
+                json["results"]!.map((x) => PopularCategories.fromJson(x)),
+              ),
       );
 }
 

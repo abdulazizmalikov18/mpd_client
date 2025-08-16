@@ -12,8 +12,9 @@ class AddToCart extends AddToCartEvent {
   final int responsible;
   final DateTime meetDate;
 
-  const AddToCart(
-      {required this.localServices,
-      required this.responsible,
-      required this.meetDate});
+  const AddToCart({
+    required this.localServices,
+    required this.responsible,
+    required this.meetDate,
+  });
 }

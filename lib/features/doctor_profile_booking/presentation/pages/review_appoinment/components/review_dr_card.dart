@@ -27,8 +27,9 @@ class ReviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // statusColor ?? context.color.white
-    final doctor =
-        context.select((DoctorProfileBloc bloc) => bloc.state.doctor);
+    final doctor = context.select(
+      (DoctorProfileBloc bloc) => bloc.state.doctor,
+    );
     if (doctor == null) {
       return const SizedBox();
     } else {
@@ -48,9 +49,7 @@ class ReviewCard extends StatelessWidget {
               children: [
                 _buildDrImage(context),
                 ScreenUtil().setHorizontalSpacing(16.w),
-                Expanded(
-                  child: _buildDrInfo(context),
-                ),
+                Expanded(child: _buildDrInfo(context)),
               ],
             ),
           ],
@@ -59,10 +58,11 @@ class ReviewCard extends StatelessWidget {
     }
   }
 
-//doctor info method
+  //doctor info method
   Column _buildDrInfo(BuildContext context) {
-    final doctor =
-        context.select((DoctorProfileBloc bloc) => bloc.state.doctor);
+    final doctor = context.select(
+      (DoctorProfileBloc bloc) => bloc.state.doctor,
+    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -83,8 +83,10 @@ class ReviewCard extends StatelessWidget {
           constraints: BoxConstraints(maxWidth: 140.w),
           child: Text(
             doctor.job.name,
-            style: Styles.headline7
-                .copyWith(fontSize: 14, color: context.color.mainBlue),
+            style: Styles.headline7.copyWith(
+              fontSize: 14,
+              color: context.color.mainBlue,
+            ),
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
           ),
@@ -92,21 +94,25 @@ class ReviewCard extends StatelessWidget {
         ScreenUtil().setVerticalSpacing(3.h),
         Text(
           localProducts.first.name,
-          style: Styles.cardReview
-              .copyWith(color: context.color.grey, fontSize: 12),
+          style: Styles.cardReview.copyWith(
+            color: context.color.grey,
+            fontSize: 12,
+          ),
         ),
       ],
     );
   }
 
-//doctor image method
+  //doctor image method
   ClipRRect _buildDrImage(BuildContext context) {
-    final doctor =
-        context.select((DoctorProfileBloc bloc) => bloc.state.doctor);
+    final doctor = context.select(
+      (DoctorProfileBloc bloc) => bloc.state.doctor,
+    );
     return ClipRRect(
-        borderRadius: BorderRadius.circular(36.r),
-        child: doctor!.avatar != null
-            ? CachedImageWidget(url: doctor.avatar!, size: 72)
-            : const DefaultAvatar(containerSize: 72, imageSize: 60));
+      borderRadius: BorderRadius.circular(36.r),
+      child: doctor!.avatar != null
+          ? CachedImageWidget(url: doctor.avatar!, size: 72)
+          : const DefaultAvatar(containerSize: 72, imageSize: 60),
+    );
   }
 }

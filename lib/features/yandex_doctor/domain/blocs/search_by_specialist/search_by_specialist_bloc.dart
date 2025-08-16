@@ -8,7 +8,7 @@ part 'search_by_specialist_state.dart';
 class SearchBySpecialistBloc
     extends Bloc<SearchBySpecialistEvent, SearchBySpecialistState> {
   SearchBySpecialistBloc(this._yandexDoctorRepository, this._focusNode)
-      : super(const SearchBySpecialistInitial([])) {
+    : super(const SearchBySpecialistInitial([])) {
     on<SearchedSpecialistEvent>(
       _onSearchedSpecialist,
       transformer: (events, mapper) {
@@ -28,32 +28,45 @@ class SearchBySpecialistBloc
   FocusNode get focusnode => _focusNode;
 
   void _onCloseSuggestions(
-      CloseSuggessionsEvent event, Emitter<SearchBySpecialistState> emit) {
+    CloseSuggessionsEvent event,
+    Emitter<SearchBySpecialistState> emit,
+  ) {
     _focusNode.unfocus();
     emit(SearchBySpecialistInitial(state.searchedSpecialists));
   }
 
   void _onStopSearching(
-      StopSearchingEvent event, Emitter<SearchBySpecialistState> emit) {
+    StopSearchingEvent event,
+    Emitter<SearchBySpecialistState> emit,
+  ) {
     emit(SearchBySpecialistInitial(state.searchedSpecialists));
   }
 
   void _onFocusedSearch(
-      FocusedSearchingEvent event, Emitter<SearchBySpecialistState> emit) {
+    FocusedSearchingEvent event,
+    Emitter<SearchBySpecialistState> emit,
+  ) {
     emit(SearchBySpecialistSuccess(state.searchedSpecialists));
   }
 
-  Future<void> _onSearchedSpecialist(SearchedSpecialistEvent event,
-      Emitter<SearchBySpecialistState> emit) async {
+  Future<void> _onSearchedSpecialist(
+    SearchedSpecialistEvent event,
+    Emitter<SearchBySpecialistState> emit,
+  ) async {
     if (event.query.isEmpty || event.query.length < 3) return;
     emit(SearchBySpecialistLoading(state.searchedSpecialists));
-    final result =
-        await _yandexDoctorRepository.getSearchedSpecialist(query: event.query);
+    final result = await _yandexDoctorRepository.getSearchedSpecialist(
+      query: event.query,
+    );
     if (result.isRight) {
       emit(SearchBySpecialistSuccess(result.right.results!));
     } else {
-      emit(SearchBySpecialistFailure(state.searchedSpecialists,
-          failure: result.left.message));
+      emit(
+        SearchBySpecialistFailure(
+          state.searchedSpecialists,
+          failure: result.left.message,
+        ),
+      );
     }
   }
 }

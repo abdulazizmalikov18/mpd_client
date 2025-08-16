@@ -16,13 +16,30 @@ abstract class IUserRepository {
   Future<Either<Failure, UserInfoModel>> getUserInfo();
   Future<Either<Failure, List<SpecialistModel>>> getSpecialist();
   Future<Either<Failure, bool>> postSpecialist(SpecAddModel model);
-  Future<Either<Failure, GenericPagination<SpecialistPositionModel>>> getSpecialistPosition();
-  Future<Either<Failure, GenericPagination<SpecialistCatModel>>> getSpecialistCat();
-  Future<Either<Failure, GenericPagination<SpecialistCategoryModel>>> getSpecialistCategory();
-  Future<Either<Failure, UserInfoUpdateModel>> updateUserInfo(UserInfoUpdateModel userInfoUpdateModel);
-  Future<Either<Failure, UserImageUpdate>> updateUserImage(UserImageUpdate userImageUpdate);
-  Future<Either<Failure, UserImageUpdate>> updateUserBackImage(UserImageUpdate userImageUpdate);
-  Future<Either<Failure, UserSubscriptionsModel>> getUserSubscriptions({required int limit, required int offset, String? query});
-  Future<Either<Failure, UserRecordModel>> getUserRecords({int? limit, int? offset, String? query});
+  Future<Either<Failure, GenericPagination<SpecialistPositionModel>>>
+  getSpecialistPosition();
+  Future<Either<Failure, GenericPagination<SpecialistCatModel>>>
+  getSpecialistCat();
+  Future<Either<Failure, GenericPagination<SpecialistCategoryModel>>>
+  getSpecialistCategory();
+  Future<Either<Failure, UserInfoUpdateModel>> updateUserInfo(
+    UserInfoUpdateModel userInfoUpdateModel,
+  );
+  Future<Either<Failure, UserImageUpdate>> updateUserImage(
+    UserImageUpdate userImageUpdate,
+  );
+  Future<Either<Failure, UserImageUpdate>> updateUserBackImage(
+    UserImageUpdate userImageUpdate,
+  );
+  Future<Either<Failure, UserSubscriptionsModel>> getUserSubscriptions({
+    required int limit,
+    required int offset,
+    String? query,
+  });
+  Future<Either<Failure, UserRecordModel>> getUserRecords({
+    int? limit,
+    int? offset,
+    String? query,
+  });
   Future<Either<Failure, int>> isAddedSpecialist();
 }

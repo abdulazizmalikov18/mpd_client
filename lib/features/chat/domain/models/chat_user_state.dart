@@ -11,9 +11,9 @@ class ChatUserState {
   });
 
   factory ChatUserState.fromJson(Map<String, dynamic> json) => ChatUserState(
-        type: json['type'] as String? ?? '',
-        user: json['user'] as String? ?? '',
-        isOnline: json['is_online'] as bool? ?? false,
-        slugName: json['slug_name'] as String? ?? '',
-      );
+    type: json['type'] as String? ?? '',
+    user: json['user'] as String? ?? '',
+    isOnline: json['is_online'] as bool? ?? false,
+    slugName: json['slug_name'] as String? ?? '',
+  );
 }

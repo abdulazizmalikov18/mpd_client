@@ -40,9 +40,9 @@ class RecordsPage extends StatelessWidget {
 
                 return RecordList(
                   onRefresh: () async {
-                    context
-                        .read<RecordsBloc>()
-                        .add(const GetRecordsEvent(true));
+                    context.read<RecordsBloc>().add(
+                      const GetRecordsEvent(true),
+                    );
                     await context.read<RecordsBloc>().stream.first;
                   },
                   records: state.records,
@@ -54,7 +54,7 @@ class RecordsPage extends StatelessWidget {
 
               return Expanded(child: _buildRecordsShimmer(context));
             },
-          )
+          ),
         ],
       ),
     );
@@ -65,30 +65,35 @@ class RecordsPage extends StatelessWidget {
       baseColor: context.color.baseColor,
       highlightColor: context.color.highlightColor,
       child: ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          padding: EdgeInsets.only(bottom: 30.h),
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ScreenUtil().setVerticalSpacing(12.h),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.w),
-                    child: const ShimmerContainer(size: Size(98, 24)),
-                  ),
-                  ScreenUtil().setVerticalSpacing(12.h),
-                  const ShimmerContainer(
-                      size: Size(double.maxFinite, 96), radius: 12),
-                  ScreenUtil().setVerticalSpacing(12.h),
-                  const ShimmerContainer(
-                      size: Size(double.maxFinite, 96), radius: 12),
-                ],
-              ),
-            );
-          },
-          itemCount: 3),
+        physics: const BouncingScrollPhysics(),
+        padding: EdgeInsets.only(bottom: 30.h),
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ScreenUtil().setVerticalSpacing(12.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                  child: const ShimmerContainer(size: Size(98, 24)),
+                ),
+                ScreenUtil().setVerticalSpacing(12.h),
+                const ShimmerContainer(
+                  size: Size(double.maxFinite, 96),
+                  radius: 12,
+                ),
+                ScreenUtil().setVerticalSpacing(12.h),
+                const ShimmerContainer(
+                  size: Size(double.maxFinite, 96),
+                  radius: 12,
+                ),
+              ],
+            ),
+          );
+        },
+        itemCount: 3,
+      ),
     );
   }
 }

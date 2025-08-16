@@ -12,9 +12,11 @@ part 'media_control_state.dart';
 
 class MediaControlBloc extends Bloc<MediaControlEvent, MediaControlState> {
   MediaControlBloc(this._postBloc)
-      : super(_postBloc.state.status == PostStatus.success
+    : super(
+        _postBloc.state.status == PostStatus.success
             ? MediaControlState(posts: _postBloc.state.posts)
-            : MediaControlState()) {
+            : MediaControlState(),
+      ) {
     postSubscription = _postBloc.stream.listen((state) {
       if (state.status == PostStatus.success) add(GetFetchedPosts(state.posts));
     });
@@ -28,15 +30,24 @@ class MediaControlBloc extends Bloc<MediaControlEvent, MediaControlState> {
   final PostBloc _postBloc;
   late StreamSubscription postSubscription;
 
-  void _onVideoControl(VideoControlEvent event, Emitter<MediaControlState> emit) {
+  void _onVideoControl(
+    VideoControlEvent event,
+    Emitter<MediaControlState> emit,
+  ) {
     emit(state.copyWith(flickManager: event.flickManager));
   }
 
-  void _onGetFetchedPosts(GetFetchedPosts event, Emitter<MediaControlState> emit) {
+  void _onGetFetchedPosts(
+    GetFetchedPosts event,
+    Emitter<MediaControlState> emit,
+  ) {
     emit(state.copyWith(posts: event.posts));
   }
 
-  void _onPostViewChanged(PostViewChanged event, Emitter<MediaControlState> emit) {
+  void _onPostViewChanged(
+    PostViewChanged event,
+    Emitter<MediaControlState> emit,
+  ) {
     emit(state.copyWith(postViewIndex: event.selectedViewIndex));
   }
 
@@ -46,7 +57,10 @@ class MediaControlBloc extends Bloc<MediaControlEvent, MediaControlState> {
     emit(state.copyWith(posts: [...state.posts]));
   }
 
-  void _onLikeUnlikePressed(MediaLikePressed event, Emitter<MediaControlState> emit) {
+  void _onLikeUnlikePressed(
+    MediaLikePressed event,
+    Emitter<MediaControlState> emit,
+  ) {
     final post = state.posts[event.index];
     post.isLiked = !post.isLiked!;
     if (post.isLiked!) {

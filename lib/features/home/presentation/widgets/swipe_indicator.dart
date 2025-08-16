@@ -25,10 +25,11 @@ class SwipeIndicator extends StatelessWidget {
           width: current == index ? 20.w : 5.w,
           margin: EdgeInsets.only(right: 4.w),
           decoration: BoxDecoration(
-              color: current == index
-                  ? context.color.grey
-                  : context.color.grey.withValues(alpha: .5),
-              borderRadius: BorderRadius.circular(100)),
+            color: current == index
+                ? context.color.grey
+                : context.color.grey.withValues(alpha: .5),
+            borderRadius: BorderRadius.circular(100),
+          ),
         ),
       ),
     );

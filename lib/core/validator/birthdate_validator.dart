@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 class DateFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
     int selectionIndex;
 
     // Get the previous and current input strings

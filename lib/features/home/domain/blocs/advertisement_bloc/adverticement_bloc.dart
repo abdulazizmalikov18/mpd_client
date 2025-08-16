@@ -8,7 +8,7 @@ part 'adverticement_state.dart';
 
 class AdverticementBloc extends Bloc<AdverticementEvent, AdverticementState> {
   AdverticementBloc(this._homeRepository)
-      : super(const AdverticementInitial(adverts: [])) {
+    : super(const AdverticementInitial(adverts: [])) {
     on<GetAdvertsEvent>(_onGetAdverts);
   }
 
@@ -18,21 +18,32 @@ class AdverticementBloc extends Bloc<AdverticementEvent, AdverticementState> {
   int _offset = 0;
 
   Future<void> _onGetAdverts(
-      GetAdvertsEvent event, Emitter<AdverticementState> emit) async {
+    GetAdvertsEvent event,
+    Emitter<AdverticementState> emit,
+  ) async {
     if (state.isEnd) return;
     if (state is AdverticementLoading) return;
     emit(AdverticementLoading(adverts: state.adverts));
 
-    final result =
-        await _homeRepository.getAdverts(limit: _limit, offset: _offset);
+    final result = await _homeRepository.getAdverts(
+      limit: _limit,
+      offset: _offset,
+    );
     if (result.isRight) {
       _addOffset(result.right);
-      emit(AdverticementSuccess(
-          adverts: _adverts, isEnd: _adverts.length < _offset));
+      emit(
+        AdverticementSuccess(
+          adverts: _adverts,
+          isEnd: _adverts.length < _offset,
+        ),
+      );
     } else {
-      emit(AdverticementFailure(
+      emit(
+        AdverticementFailure(
           adverts: state.adverts,
-          failure: Utils.errorFormat(result.left.message)));
+          failure: Utils.errorFormat(result.left.message),
+        ),
+      );
     }
   }
 

@@ -20,7 +20,9 @@ class CheckUsernameBloc extends Bloc<CheckUsernameEvent, CheckUsernameState> {
   final AuthRepository _authRepository;
 
   Future<void> _onCheckUsername(
-      CheckUsername event, Emitter<CheckUsernameState> emit) async {
+    CheckUsername event,
+    Emitter<CheckUsernameState> emit,
+  ) async {
     if (event.username.isEmpty || event.username.length < 6) {
       if (state is! CheckUsernameInitial) {
         emit(CheckUsernameInitial());

@@ -15,31 +15,34 @@ class DioConnectivityRequestRetrier {
     late StreamSubscription streamSubscription;
     final responseCompleter = Completer<Response>();
 
-    streamSubscription = connectivity.onConnectivityChanged.listen(
-      (connectivityResult) async {
-        if (!connectivityResult.contains(ConnectivityResult.none)) {
-          streamSubscription.cancel();
-          // Complete the completer instead of returning
-          responseCompleter.complete(
-            await dio.request(requestOptions.path,
-                cancelToken: requestOptions.cancelToken,
-                data: requestOptions.data,
-                onReceiveProgress: requestOptions.onReceiveProgress,
-                onSendProgress: requestOptions.onSendProgress,
-                queryParameters: requestOptions.queryParameters,
-                options: Options(
-                    contentType: requestOptions.contentType,
-                    headers: requestOptions.headers,
-                    receiveTimeout: requestOptions.receiveTimeout,
-                    sendTimeout: requestOptions.sendTimeout,
-                    responseType: requestOptions.responseType,
-                    validateStatus: requestOptions.validateStatus,
-                    extra: requestOptions.extra,
-                    method: requestOptions.method)),
-          );
-        } else {}
-      },
-    );
+    streamSubscription = connectivity.onConnectivityChanged.listen((
+      connectivityResult,
+    ) async {
+      if (!connectivityResult.contains(ConnectivityResult.none)) {
+        streamSubscription.cancel();
+        // Complete the completer instead of returning
+        responseCompleter.complete(
+          await dio.request(
+            requestOptions.path,
+            cancelToken: requestOptions.cancelToken,
+            data: requestOptions.data,
+            onReceiveProgress: requestOptions.onReceiveProgress,
+            onSendProgress: requestOptions.onSendProgress,
+            queryParameters: requestOptions.queryParameters,
+            options: Options(
+              contentType: requestOptions.contentType,
+              headers: requestOptions.headers,
+              receiveTimeout: requestOptions.receiveTimeout,
+              sendTimeout: requestOptions.sendTimeout,
+              responseType: requestOptions.responseType,
+              validateStatus: requestOptions.validateStatus,
+              extra: requestOptions.extra,
+              method: requestOptions.method,
+            ),
+          ),
+        );
+      } else {}
+    });
 
     return responseCompleter.future;
   }

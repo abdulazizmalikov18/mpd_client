@@ -54,21 +54,25 @@ class LabelInputWidget extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: 16.w),
           child: RichText(
-            text: TextSpan(children: [
-              TextSpan(
-                text: topHint!,
-                style: Styles.boldTopHint.copyWith(color: context.color.black),
-              ),
-              TextSpan(
-                text: require,
-                style: TextStyle(
-                  color: context.color.red,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
-                  fontFamily: Styles.gilroyMedium,
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: topHint!,
+                  style: Styles.boldTopHint.copyWith(
+                    color: context.color.black,
+                  ),
                 ),
-              ),
-            ]),
+                TextSpan(
+                  text: require,
+                  style: TextStyle(
+                    color: context.color.red,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                    fontFamily: Styles.gilroyMedium,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         ScreenUtil().setVerticalSpacing(8.h),
@@ -89,7 +93,7 @@ class LabelInputWidget extends StatelessWidget {
           textCapitalization: textCapitalization,
           onChanged: onChanged,
           style: Styles.headline7.copyWith(color: context.color.black),
-        )
+        ),
       ],
     );
   }
@@ -144,26 +148,33 @@ class LabelInputBioWidget extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: 16.w),
           child: RichText(
-            text: TextSpan(children: [
-              TextSpan(
-                text: topHint!,
-                style: Styles.boldTopHint.copyWith(color: context.color.black),
-              ),
-              TextSpan(
-                text: require,
-                style: TextStyle(
-                  color: context.color.red,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
-                  fontFamily: Styles.gilroyMedium,
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: topHint!,
+                  style: Styles.boldTopHint.copyWith(
+                    color: context.color.black,
+                  ),
                 ),
-              ),
-            ]),
+                TextSpan(
+                  text: require,
+                  style: TextStyle(
+                    color: context.color.red,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                    fontFamily: Styles.gilroyMedium,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         ScreenUtil().setVerticalSpacing(8.h),
         Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.r), color: (background ?? context.color.white)),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12.r),
+            color: (background ?? context.color.white),
+          ),
           margin: EdgeInsets.symmetric(horizontal: 16.w),
           child: TextFormField(
             autovalidateMode: autovalidateMode,
@@ -180,7 +191,8 @@ class LabelInputBioWidget extends StatelessWidget {
             decoration: InputDecoration(
               suffixIcon: suffixIcon,
               contentPadding: EdgeInsets.symmetric(
-                horizontal: 16.w, vertical: 8.h
+                horizontal: 16.w,
+                vertical: 8.h,
               ),
               enabledBorder: Decorations.enabledBorder(context),
               focusedBorder: Decorations.focusedBorder(context),
@@ -188,7 +200,9 @@ class LabelInputBioWidget extends StatelessWidget {
               errorBorder: Decorations.errorBorder(context),
               errorText: errorText,
               hintText: inputHint,
-              hintStyle: Styles.descSubtitle.copyWith(color: context.color.grey),
+              hintStyle: Styles.descSubtitle.copyWith(
+                color: context.color.grey,
+              ),
             ),
           ),
         ),

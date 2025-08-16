@@ -24,6 +24,7 @@ class StorageRepository {
     debugPrint('writing $key : $value');
     return _preferences!.setString(key, value);
   }
+
   static Future<bool>? putInt(String key, int value) {
     if (_preferences == null) return null;
     debugPrint('writing $key : $value');
@@ -41,6 +42,7 @@ class StorageRepository {
 
     return _preferences!.getString(key) ?? defValue;
   }
+
   static int getInt(String key, {int defValue = 0}) {
     if (_preferences == null) return defValue;
 

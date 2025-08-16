@@ -47,9 +47,9 @@ class _SearchFieldState extends State<SearchField> {
             child: Focus(
               onFocusChange: (focus) {
                 if (focus) {
-                  context
-                      .read<SearchBySpecialistBloc>()
-                      .add(FocusedSearchingEvent());
+                  context.read<SearchBySpecialistBloc>().add(
+                    FocusedSearchingEvent(),
+                  );
                 }
               },
               child: SearchFieldWidget(
@@ -74,23 +74,23 @@ class _SearchFieldState extends State<SearchField> {
                     child: InkWell(
                       onTap: () {
                         final bloc = context.read<SpecialistBloc>();
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => MultiBlocProvider(
-                            providers: [
-                              BlocProvider.value(
-                                value: bloc,
-                              ),
-                              BlocProvider(
-                                create: (context) => ProductSpecalistBloc(
-                                  locator.get<HomeRepository>(),
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => MultiBlocProvider(
+                              providers: [
+                                BlocProvider.value(value: bloc),
+                                BlocProvider(
+                                  create: (context) => ProductSpecalistBloc(
+                                    locator.get<HomeRepository>(),
+                                  ),
                                 ),
+                              ],
+                              child: DoctorCategoryPage(
+                                controller: widget.controller,
                               ),
-                            ],
-                            child: DoctorCategoryPage(
-                              controller: widget.controller,
                             ),
                           ),
-                        ));
+                        );
                       },
                       child: Container(
                         height: 48.h,
@@ -125,13 +125,17 @@ class _SearchFieldState extends State<SearchField> {
                     builder: (_) => MultiBlocProvider(
                       providers: [
                         BlocProvider.value(
-                          value: BlocProvider.of<SpecialistBloc>(context,
-                              listen: false),
+                          value: BlocProvider.of<SpecialistBloc>(
+                            context,
+                            listen: false,
+                          ),
                         ),
                         BlocProvider.value(
-                          value: BlocProvider.of<SpecialistBloc>(context,
-                              listen: false),
-                        )
+                          value: BlocProvider.of<SpecialistBloc>(
+                            context,
+                            listen: false,
+                          ),
+                        ),
                       ],
                       child: const FilterCategorySheet(),
                     ),
@@ -143,13 +147,15 @@ class _SearchFieldState extends State<SearchField> {
                   alignment: Alignment.center,
                   child: SvgPicture.asset(
                     AppIcons.filter,
-                    colorFilter:
-                        ColorFilter.mode(context.color.black, BlendMode.srcIn),
+                    colorFilter: ColorFilter.mode(
+                      context.color.black,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

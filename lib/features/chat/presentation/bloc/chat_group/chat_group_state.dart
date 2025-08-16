@@ -10,16 +10,11 @@ class ChatGroupState extends Equatable {
     this.groups = const [],
     this.status = FormzSubmissionStatus.initial,
     this.count = -1,
-    this.offset= -1,
+    this.offset = -1,
   });
 
   @override
-  List<Object?> get props => [
-        groups,
-        status,
-        count,
-        offset,
-      ];
+  List<Object?> get props => [groups, status, count, offset];
 
   ChatGroupState copyWith({
     List<ChatGroupModel>? groups,

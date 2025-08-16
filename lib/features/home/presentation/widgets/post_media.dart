@@ -44,7 +44,9 @@ class _PostMediaState extends State<PostMedia>
             itemCount: widget.postMedias!.length,
             onPageChanged: (index) {
               PostInheritedNotifier.of(context).notifier!.changedMediaIndex(
-                  postIndex: widget.baseIndex, mediaIndex: index);
+                postIndex: widget.baseIndex,
+                mediaIndex: index,
+              );
             },
             itemBuilder: (context, index) {
               if (isVideo(index) ?? false) {
@@ -57,17 +59,20 @@ class _PostMediaState extends State<PostMedia>
               }
               return GestureDetector(
                 onDoubleTap: () {
-                  context
-                      .read<MediaControlBloc>()
-                      .add(MediaLikePressed(widget.baseIndex));
+                  context.read<MediaControlBloc>().add(
+                    MediaLikePressed(widget.baseIndex),
+                  );
                   // context.read<PostUiBloc>().add(PostLikeUnlikeEvent());
-                  context.read<LikeUnlikeBloc>().add(LikeUnlikePressed(
-                        postId: widget.post.id ?? 0,
-                        isLiked: widget.post.isLiked ?? false,
-                      ));
+                  context.read<LikeUnlikeBloc>().add(
+                    LikeUnlikePressed(
+                      postId: widget.post.id ?? 0,
+                      isLiked: widget.post.isLiked ?? false,
+                    ),
+                  );
                 },
                 child: CachedNetworkImage(
-                  imageUrl: widget.postMedias![index].image ??
+                  imageUrl:
+                      widget.postMedias![index].image ??
                       'https://resources.comphealth.com/wp-content/uploads/2019/05/post-residency-career-tips.jpg',
                   errorWidget: (context, url, error) => CachedNetworkImage(
                     imageUrl:
@@ -85,10 +90,9 @@ class _PostMediaState extends State<PostMedia>
             child: SwipeIndicator(
               current: PostInheritedNotifier.of(context).notifier!.post.isEmpty
                   ? 0
-                  : PostInheritedNotifier.of(context)
-                      .notifier!
-                      .post[widget.baseIndex]
-                      .selectedIndex!,
+                  : PostInheritedNotifier.of(
+                      context,
+                    ).notifier!.post[widget.baseIndex].selectedIndex!,
               length: widget.postMedias!.length,
             ),
           ),
@@ -112,7 +116,7 @@ class _PostMediaState extends State<PostMedia>
                     ),
                   )
                 : const SizedBox(),
-          )
+          ),
         ],
       ),
     );
@@ -146,7 +150,8 @@ class _PostMediaState extends State<PostMedia>
       return null;
     }
     return VideoPlayerController.networkUrl(
-        Uri.parse(widget.postMedias![index].file!));
+      Uri.parse(widget.postMedias![index].file!),
+    );
   }
 
   @override

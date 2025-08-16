@@ -103,12 +103,12 @@ class _UserPostsViewState extends State<UserPostsView> {
                                 ),
                               IconButton(
                                 onPressed: () async {
-                                  final sendComentBloc =
-                                      context.read<SendComentBloc>();
-                                  final postComentBloc =
-                                      context.read<PostComentBloc>();
-                                  final userInfoBloc =
-                                      context.read<UserInfoBloc>();
+                                  final sendComentBloc = context
+                                      .read<SendComentBloc>();
+                                  final postComentBloc = context
+                                      .read<PostComentBloc>();
+                                  final userInfoBloc = context
+                                      .read<UserInfoBloc>();
                                   showModalBottomSheet(
                                     context: context,
                                     useRootNavigator: true,
@@ -117,7 +117,7 @@ class _UserPostsViewState extends State<UserPostsView> {
                                     builder: (context) => Container(
                                       height:
                                           MediaQuery.sizeOf(context).height *
-                                              0.7,
+                                          0.7,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(16),
                                         color: context.color.white,
@@ -126,11 +126,14 @@ class _UserPostsViewState extends State<UserPostsView> {
                                       child: MultiBlocProvider(
                                         providers: [
                                           BlocProvider.value(
-                                              value: sendComentBloc),
+                                            value: sendComentBloc,
+                                          ),
                                           BlocProvider.value(
-                                              value: postComentBloc),
+                                            value: postComentBloc,
+                                          ),
                                           BlocProvider.value(
-                                              value: userInfoBloc),
+                                            value: userInfoBloc,
+                                          ),
                                         ],
                                         child: Column(
                                           children: [
@@ -151,13 +154,14 @@ class _UserPostsViewState extends State<UserPostsView> {
                                             ),
                                             Padding(
                                               padding: EdgeInsets.only(
-                                                bottom: MediaQuery.of(context)
-                                                            .viewInsets
-                                                            .bottom >
+                                                bottom:
+                                                    MediaQuery.of(
+                                                          context,
+                                                        ).viewInsets.bottom >
                                                         0
-                                                    ? MediaQuery.of(context)
-                                                        .viewInsets
-                                                        .bottom
+                                                    ? MediaQuery.of(
+                                                        context,
+                                                      ).viewInsets.bottom
                                                     : 32.h,
                                                 top: 8,
                                               ),
@@ -166,7 +170,7 @@ class _UserPostsViewState extends State<UserPostsView> {
                                                     widget.postsUser[index].id!,
                                                 postIndex: widget.index,
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -190,7 +194,9 @@ class _UserPostsViewState extends State<UserPostsView> {
                                     ShareParams(
                                       text:
                                           '${widget.postsUser[index].authorFullname} \n\n${widget.postsUser[index].text} \n\n${widget.postsUser[index].media?.first.image ?? ""} \n\n${widget.postsUser[index].media?.first.file ?? ""} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
-                                      subject: widget.postsUser[index]
+                                      subject:
+                                          widget
+                                              .postsUser[index]
                                               .authorFullname ??
                                           "Mpd Client",
                                     ),
@@ -226,10 +232,12 @@ class _UserPostsViewState extends State<UserPostsView> {
                                   color: context.color.white,
                                 ),
                                 trimLines: 3,
-                                moreStyle:
-                                    Styles.postTitle.copyWith(color: white),
-                                lessStyle:
-                                    Styles.postTitle.copyWith(color: white),
+                                moreStyle: Styles.postTitle.copyWith(
+                                  color: white,
+                                ),
+                                lessStyle: Styles.postTitle.copyWith(
+                                  color: white,
+                                ),
                                 trimMode: TrimMode.Line,
                                 trimCollapsedText: context.l10n.lenth_read_more,
                                 trimExpandedText: context.l10n.lenth_show_less,
@@ -263,10 +271,7 @@ class _UserPostsViewState extends State<UserPostsView> {
 }
 
 class UserPostIteam extends StatefulWidget {
-  const UserPostIteam({
-    super.key,
-    required this.media,
-  });
+  const UserPostIteam({super.key, required this.media});
 
   final List<Media> media;
 
@@ -287,9 +292,7 @@ class _UserPostIteamState extends State<UserPostIteam> {
             valueNotifier.value = value;
           },
           itemBuilder: (context, index) => CachedNetworkImage(
-            imageUrl: Utils.imageMedieaType(
-              widget.media[index],
-            ),
+            imageUrl: Utils.imageMedieaType(widget.media[index]),
             fit: BoxFit.fitWidth,
           ),
         ),
@@ -328,7 +331,7 @@ class _UserPostIteamState extends State<UserPostIteam> {
                   ),
                 )
               : const SizedBox(),
-        )
+        ),
       ],
     );
   }

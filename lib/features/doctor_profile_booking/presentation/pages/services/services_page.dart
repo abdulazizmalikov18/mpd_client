@@ -22,9 +22,9 @@ class ServicesPage extends StatefulWidget {
 class _ServicesPageState extends State<ServicesPage> {
   @override
   void initState() {
-    context
-        .read<ProductSpecalistBloc>()
-        .add(GetProductSpecalistEvent(specialistId: widget.specialistId));
+    context.read<ProductSpecalistBloc>().add(
+      GetProductSpecalistEvent(specialistId: widget.specialistId),
+    );
     super.initState();
   }
 
@@ -41,8 +41,11 @@ class _ServicesPageState extends State<ServicesPage> {
               hasMoreToFetch: state.count > state.specialistProducts.length,
               fetchMoreFunction: () {
                 context.read<ProductSpecalistBloc>().add(
-                    GetProductSpecalistEvent(
-                        specialistId: widget.specialistId, isMore: true));
+                  GetProductSpecalistEvent(
+                    specialistId: widget.specialistId,
+                    isMore: true,
+                  ),
+                );
               },
               paginatorStatus: state.status,
               localProducts: state.localProducts,
@@ -58,8 +61,8 @@ class _ServicesPageState extends State<ServicesPage> {
                 hasReturnButton: false,
                 tryAgainPressed: () {
                   context.read<ProductSpecalistBloc>().add(
-                      GetProductSpecalistEvent(
-                          specialistId: widget.specialistId));
+                    GetProductSpecalistEvent(specialistId: widget.specialistId),
+                  );
                 },
               ),
             );
@@ -68,8 +71,8 @@ class _ServicesPageState extends State<ServicesPage> {
             child: ErrorTypeWidget(
               tryAgainPressed: () {
                 context.read<ProductSpecalistBloc>().add(
-                    GetProductSpecalistEvent(
-                        specialistId: widget.specialistId));
+                  GetProductSpecalistEvent(specialistId: widget.specialistId),
+                );
               },
               hasReturnButton: false,
               errorIcon: AppIcons.connectionLostError,

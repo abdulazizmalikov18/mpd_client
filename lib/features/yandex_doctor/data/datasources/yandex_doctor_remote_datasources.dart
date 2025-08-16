@@ -38,13 +38,17 @@ class YandexDoctorRemoteDataSource implements IYandexDoctorRemoteDataSource {
   Future<SpecialistProductModel> getProducts(ProductFilterModel model) async {
     return _handle.apiControl(
       request: () {
-        return _client.get("/PMS/api/v1.0/public/product_org/",
-            options: Options(headers: {
+        return _client.get(
+          "/PMS/api/v1.0/public/product_org/",
+          options: Options(
+            headers: {
               if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
                 'Authorization':
-                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-            }),
-            queryParameters: model.toJson());
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
+          queryParameters: model.toJson(),
+        );
       },
       body: (response) {
         return SpecialistProductModel.fromJson(response);
@@ -66,15 +70,13 @@ class YandexDoctorRemoteDataSource implements IYandexDoctorRemoteDataSource {
       request: () {
         return _client.get(
           "/BMS/api/v1.0/public/org/mpd/specialist/category/",
-          queryParameters: {
-            if (query != null) 'search': query,
-          },
+          queryParameters: {if (query != null) 'search': query},
           options: Options(
             headers: {
               'Accept-Language': langCode,
               if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
                 'Authorization':
-                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
             },
           ),
         );
@@ -93,18 +95,21 @@ class YandexDoctorRemoteDataSource implements IYandexDoctorRemoteDataSource {
     CancelToken? cancelToken,
   }) async {
     final baseUrl = StringBuffer(
-        'http://213.230.125.177/BMS/api/v1.0/public/cluster/mpd/specialist/?limit=$limit&offset=$offset&bff_price=true');
+      'http://213.230.125.177/BMS/api/v1.0/public/cluster/mpd/specialist/?limit=$limit&offset=$offset&bff_price=true',
+    );
     if (query != null) baseUrl.write('&search=$query');
     return _handle.apiControl(
       request: () {
         return _client.get(
           baseUrl.toString(),
           cancelToken: cancelToken,
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -122,14 +127,14 @@ class YandexDoctorRemoteDataSource implements IYandexDoctorRemoteDataSource {
       request: () {
         return _client.get(
           "/BMS/api/v1.0/public/cluster/mpd/specialist/?search=$query",
-          queryParameters: {
-            if (jobId != null) 'job': jobId,
-          },
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          queryParameters: {if (jobId != null) 'job': jobId},
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -144,11 +149,13 @@ class YandexDoctorRemoteDataSource implements IYandexDoctorRemoteDataSource {
       request: () {
         return _client.get(
           '/BMS/api/v1.0/public/cluster/mpd/specialist/location/?job=$id&bff_price=true',
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {

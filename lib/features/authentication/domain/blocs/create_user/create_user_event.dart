@@ -21,9 +21,10 @@ class ForCreateUserEvent extends CreateUserEvent {
   final int? mainCategory, region;
   final String phone, password;
 
-  const ForCreateUserEvent(
-      {required this.phone,
-      required this.password,
-      this.mainCategory,
-      this.region});
+  const ForCreateUserEvent({
+    required this.phone,
+    required this.password,
+    this.mainCategory,
+    this.region,
+  });
 }

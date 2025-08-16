@@ -9,10 +9,7 @@ import 'package:mpd_client/provider/language.dart';
 import 'package:mpd_client/src/themes/styles.dart';
 
 class ViewDoctorProfileBottom extends StatelessWidget {
-  const ViewDoctorProfileBottom({
-    super.key,
-    required this.appointment,
-  });
+  const ViewDoctorProfileBottom({super.key, required this.appointment});
 
   final Appointment appointment;
 
@@ -35,24 +32,29 @@ class ViewDoctorProfileBottom extends StatelessWidget {
           ),
         ),
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.r)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(100.r),
+        ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Text(
               context.l10n.appointment_view_doctor_profile,
-              style: Styles.headline7
-                  .copyWith(color: context.color.mainBlue, fontSize: 14.sp),
+              style: Styles.headline7.copyWith(
+                color: context.color.mainBlue,
+                fontSize: 14.sp,
+              ),
             ),
             SvgPicture.asset(
               AppIcons.forward,
-              colorFilter:
-                  ColorFilter.mode(context.color.mainBlue, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                context.color.mainBlue,
+                BlendMode.srcIn,
+              ),
               height: 18.h,
               width: 18.h,
-            )
+            ),
           ],
         ),
       ),

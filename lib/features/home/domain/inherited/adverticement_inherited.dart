@@ -12,7 +12,9 @@ class AdverticementInheritedNotifier
     final AdverticementInheritedNotifier? result = context
         .dependOnInheritedWidgetOfExactType<AdverticementInheritedNotifier>();
     assert(
-        result != null, 'No AdverticementInheritedNotifier found in context');
+      result != null,
+      'No AdverticementInheritedNotifier found in context',
+    );
     return result!;
   }
 }

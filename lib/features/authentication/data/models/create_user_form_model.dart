@@ -43,7 +43,7 @@ class CreateUserFormModel {
       "birthday": birthDayFormated,
       "main_cat": mainCat,
       "region": region,
-      "password": password
+      "password": password,
     };
   }
 }

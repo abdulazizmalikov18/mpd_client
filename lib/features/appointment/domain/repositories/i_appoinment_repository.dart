@@ -5,8 +5,11 @@ import 'package:mpd_client/features/appointment/data/models/pagination_model.dar
 
 abstract class IAppoinmentRepository {
   Future<Either<Failure, AppointmentModel>> getUserAppoinments(
-      PaginationModel paginationModel);
+    PaginationModel paginationModel,
+  );
 
-  Future<Either<Failure, Map<String, dynamic>>> cancelAppoinment(
-      {required String productid, required String cancelInfo});
+  Future<Either<Failure, Map<String, dynamic>>> cancelAppoinment({
+    required String productid,
+    required String cancelInfo,
+  });
 }

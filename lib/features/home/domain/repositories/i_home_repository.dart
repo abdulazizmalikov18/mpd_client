@@ -15,21 +15,31 @@ abstract class IHomeRepository {
 
   Future<Either<Failure, Map<String, dynamic>>> createPost(UploadPost post);
 
-  Future<Either<Failure, PostsModel>> getBanners(
-      {required int limit, required int offset});
+  Future<Either<Failure, PostsModel>> getBanners({
+    required int limit,
+    required int offset,
+  });
 
-  Future<Either<Failure, AdvertsModel>> getAdverts(
-      {required int limit, required int offset});
+  Future<Either<Failure, AdvertsModel>> getAdverts({
+    required int limit,
+    required int offset,
+  });
 
-  Future<Either<Failure, ComentModel>> getPostComents(
-      {required int limit, required int offset, required int postId});
+  Future<Either<Failure, ComentModel>> getPostComents({
+    required int limit,
+    required int offset,
+    required int postId,
+  });
 
-  Future<Either<Failure, Coment>> sendPostComent(
-      {required String text, required int postId});
+  Future<Either<Failure, Coment>> sendPostComent({
+    required String text,
+    required int postId,
+  });
 
   Future<Either<Failure, bool>> deletePost({required int postId});
   Future<Either<Failure, UserAccountModel>> getUser({required String username});
 
-  Future<Either<Failure, Map<String, dynamic>>> sendLikeOrUnlike(
-      {required int postId});
+  Future<Either<Failure, Map<String, dynamic>>> sendLikeOrUnlike({
+    required int postId,
+  });
 }

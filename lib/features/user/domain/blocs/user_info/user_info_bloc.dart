@@ -57,7 +57,9 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
   final UserRepository _userRepository;
 
   void _onGetSpecialist(
-      GetSpecialistUser event, Emitter<UserInfoState> emit) async {
+    GetSpecialistUser event,
+    Emitter<UserInfoState> emit,
+  ) async {
     emit(state.copyWith(statusSpec: FormzSubmissionStatus.inProgress));
     final response = await _userRepository.getSpecialist();
     if (response.isRight) {
@@ -71,17 +73,21 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
           response.right.first.org.slugName,
         );
       }
-      emit(state.copyWith(
-        specailistModel: response.right,
-        statusSpec: FormzSubmissionStatus.success,
-      ));
+      emit(
+        state.copyWith(
+          specailistModel: response.right,
+          statusSpec: FormzSubmissionStatus.success,
+        ),
+      );
     } else {
       emit(state.copyWith(statusSpec: FormzSubmissionStatus.failure));
     }
   }
 
   void _onPostSpecialist(
-      PostSpecialist event, Emitter<UserInfoState> emit) async {
+    PostSpecialist event,
+    Emitter<UserInfoState> emit,
+  ) async {
     emit(state.copyWith(statusCreate: FormzSubmissionStatus.inProgress));
     final model = SpecAddModel(
       position: event.idPos,
@@ -100,82 +106,111 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
   }
 
   void _onGetSpecCategory(
-      GetSpecCategory event, Emitter<UserInfoState> emit) async {
+    GetSpecCategory event,
+    Emitter<UserInfoState> emit,
+  ) async {
     emit(state.copyWith(statusJob: FormzSubmissionStatus.inProgress));
     final response = await _userRepository.getSpecialistCategory();
     if (response.isRight) {
-      emit(state.copyWith(
-        specialistCategory: response.right.results,
-        statusJob: FormzSubmissionStatus.success,
-      ));
+      emit(
+        state.copyWith(
+          specialistCategory: response.right.results,
+          statusJob: FormzSubmissionStatus.success,
+        ),
+      );
     } else {
       emit(state.copyWith(statusJob: FormzSubmissionStatus.failure));
     }
   }
 
   void _onGetSpecialistCat(
-      GetSpecialistCat event, Emitter<UserInfoState> emit) async {
+    GetSpecialistCat event,
+    Emitter<UserInfoState> emit,
+  ) async {
     emit(state.copyWith(statusCat: FormzSubmissionStatus.inProgress));
     final response = await _userRepository.getSpecialistCat();
     if (response.isRight) {
-      emit(state.copyWith(
-        specialistCat: response.right.results,
-        statusCat: FormzSubmissionStatus.success,
-      ));
+      emit(
+        state.copyWith(
+          specialistCat: response.right.results,
+          statusCat: FormzSubmissionStatus.success,
+        ),
+      );
     } else {
       emit(state.copyWith(statusCat: FormzSubmissionStatus.failure));
     }
   }
 
   void _onGetSpecialistPosition(
-      GetSpecialistPosition event, Emitter<UserInfoState> emit) async {
+    GetSpecialistPosition event,
+    Emitter<UserInfoState> emit,
+  ) async {
     emit(state.copyWith(statusPos: FormzSubmissionStatus.inProgress));
     final response = await _userRepository.getSpecialistPosition();
     if (response.isRight) {
-      emit(state.copyWith(
-        specialistPosition: response.right.results,
-        statusPos: FormzSubmissionStatus.success,
-      ));
+      emit(
+        state.copyWith(
+          specialistPosition: response.right.results,
+          statusPos: FormzSubmissionStatus.success,
+        ),
+      );
     } else {
       emit(state.copyWith(statusPos: FormzSubmissionStatus.failure));
     }
   }
 
   void _onUpdateUserLocalInfo(
-      UpdateUserInfoLocal event, Emitter<UserInfoState> emit) async {
+    UpdateUserInfoLocal event,
+    Emitter<UserInfoState> emit,
+  ) async {
     final userLocalInfo = await _userRepository.getUserInfo();
     if (userLocalInfo.isRight) {
-      emit(state.copyWith(
-        userInfo: userLocalInfo.right,
-        status: FormzSubmissionStatus.initial,
-      ));
+      emit(
+        state.copyWith(
+          userInfo: userLocalInfo.right,
+          status: FormzSubmissionStatus.initial,
+        ),
+      );
     } else {
       emit(state.copyWith(status: FormzSubmissionStatus.failure));
     }
   }
 
   Future<void> _onGetUserInfo(
-      GetUserInfoEvent event, Emitter<UserInfoState> emit) async {
+    GetUserInfoEvent event,
+    Emitter<UserInfoState> emit,
+  ) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
 
     final result = await _userRepository.getUserInfo();
     Log.e(result.isRight);
     if (result.isRight) {
-      emit(state.copyWith(
-        status: FormzSubmissionStatus.success,
-        userInfo: result.right,
-      ));
+      emit(
+        state.copyWith(
+          status: FormzSubmissionStatus.success,
+          userInfo: result.right,
+        ),
+      );
     } else {
       if (result.left is NetworkFailure) {
-        emit(state.copyWith(
+        emit(
+          state.copyWith(
             status: FormzSubmissionStatus.failure,
             failure: const NetworkFailure(
-                message: 'Please, check your internet connection!')));
+              message: 'Please, check your internet connection!',
+            ),
+          ),
+        );
       } else {
-        emit(state.copyWith(
+        emit(
+          state.copyWith(
             status: FormzSubmissionStatus.failure,
             failure: const ServerFailure(
-                message: 'Unkown failure', statusCode: 000)));
+              message: 'Unkown failure',
+              statusCode: 000,
+            ),
+          ),
+        );
       }
     }
   }
@@ -191,7 +226,9 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
   }
 
   Future<void> _onUpdateUserImage(
-      UpdateUserImage event, Emitter<UserInfoState> emit) async {
+    UpdateUserImage event,
+    Emitter<UserInfoState> emit,
+  ) async {
     if (state.userImage != null) {
       emit(state.copyWith(showLoading: true, userImage: state.userImage));
 
@@ -204,11 +241,13 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
       );
       if (result.isRight) {
         add(GetUserInfoEvent());
-        emit(state.copyWith(
-          showLoading: false,
-          error: 'No',
-          userImage: state.userImage,
-        ));
+        emit(
+          state.copyWith(
+            showLoading: false,
+            error: 'No',
+            userImage: state.userImage,
+          ),
+        );
       } else {
         emit(state.copyWith(error: result.left.message, showLoading: false));
       }
@@ -216,23 +255,25 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
   }
 
   Future<void> _onUpdateUserBackImage(
-      UpdateUserBackImage event, Emitter<UserInfoState> emit) async {
+    UpdateUserBackImage event,
+    Emitter<UserInfoState> emit,
+  ) async {
     if (state.userBackImage != null) {
-      emit(state.copyWith(
-          showLoading: true, userBackImage: state.userBackImage));
+      emit(
+        state.copyWith(showLoading: true, userBackImage: state.userBackImage),
+      );
       final result = await _userRepository.updateUserBackImage(
-        UserImageUpdate(
-          main: true,
-          image: state.userBackImage!.path,
-        ),
+        UserImageUpdate(main: true, image: state.userBackImage!.path),
       );
       if (result.isRight) {
         add(GetUserInfoEvent());
-        emit(state.copyWith(
-          showLoading: false,
-          error: 'No',
-          userBackImage: state.userBackImage,
-        ));
+        emit(
+          state.copyWith(
+            showLoading: false,
+            error: 'No',
+            userBackImage: state.userBackImage,
+          ),
+        );
       } else {
         emit(state.copyWith(error: result.left.message, showLoading: false));
       }
@@ -240,25 +281,9 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
   }
 
   Future<void> _onSelectUserImage(
-      SelectUserImage event, Emitter<UserInfoState> emit) async {
-    try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (image == null) return;
-
-      File? img = File(image.path);
-
-      emit(state.copyWith(
-          userImage: img,
-          mainCat: state.mainCat,
-          showLoading: state.showLoading,
-          isChanged: true));
-    } on PlatformException catch (e) {
-      emit(state.copyWith(error: e.toString()));
-    }
-  }
-
-  Future<void> _onSelectUserBackImage(
-      SelectUserBackImage event, Emitter<UserInfoState> emit) async {
+    SelectUserImage event,
+    Emitter<UserInfoState> emit,
+  ) async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (image == null) return;
@@ -267,8 +292,10 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
 
       emit(
         state.copyWith(
-          userBackImage: img,
-          isBackChanged: true,
+          userImage: img,
+          mainCat: state.mainCat,
+          showLoading: state.showLoading,
+          isChanged: true,
         ),
       );
     } on PlatformException catch (e) {
@@ -276,8 +303,26 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
     }
   }
 
+  Future<void> _onSelectUserBackImage(
+    SelectUserBackImage event,
+    Emitter<UserInfoState> emit,
+  ) async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image == null) return;
+
+      File? img = File(image.path);
+
+      emit(state.copyWith(userBackImage: img, isBackChanged: true));
+    } on PlatformException catch (e) {
+      emit(state.copyWith(error: e.toString()));
+    }
+  }
+
   void _onSelectedCategoryId(
-      SelectedCategoryIdEvent event, Emitter<UserInfoState> emit) {
+    SelectedCategoryIdEvent event,
+    Emitter<UserInfoState> emit,
+  ) {
     if (event.mainCat.name! != event.localCatName) {
       emit(
         state.copyWith(
@@ -293,7 +338,9 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
   }
 
   void _onSelectedRegionId(
-      SelectedRegionIdEvent event, Emitter<UserInfoState> emit) {
+    SelectedRegionIdEvent event,
+    Emitter<UserInfoState> emit,
+  ) {
     if (event.region.name! != event.localRegion) {
       emit(
         state.copyWith(
@@ -309,7 +356,9 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
   }
 
   Future<void> _onSavedChangesButtonPressed(
-      UpdateUserProfessionEvent event, Emitter<UserInfoState> emit) async {
+    UpdateUserProfessionEvent event,
+    Emitter<UserInfoState> emit,
+  ) async {
     emit(state.copyWith(showLoading: true));
     add(UpdateUserBackImage());
     final result = await _userRepository.updateUserInfo(
@@ -324,30 +373,23 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
       ),
     );
     if (result.isRight) {
-      emit(state.copyWith(
-        showLoading: false,
-        error: 'No',
-      ));
+      emit(state.copyWith(showLoading: false, error: 'No'));
     } else {
       emit(state.copyWith(error: result.left.message, showLoading: false));
     }
   }
 
   Future<void> _onUpdateUserVerifyEvent(
-      UpdateUserVerifyEvent event, Emitter<UserInfoState> emit) async {
+    UpdateUserVerifyEvent event,
+    Emitter<UserInfoState> emit,
+  ) async {
     emit(state.copyWith(showLoading: true));
     add(UpdateUserBackImage());
     final result = await _userRepository.updateUserInfo(
-      UserInfoUpdateModel(
-        region: state.region?.id,
-        mainCat: state.mainCat?.id,
-      ),
+      UserInfoUpdateModel(region: state.region?.id, mainCat: state.mainCat?.id),
     );
     if (result.isRight) {
-      emit(state.copyWith(
-        showLoading: false,
-        error: 'No',
-      ));
+      emit(state.copyWith(showLoading: false, error: 'No'));
     } else {
       emit(state.copyWith(error: result.left.message, showLoading: false));
     }

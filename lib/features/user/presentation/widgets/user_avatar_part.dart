@@ -40,11 +40,7 @@ class UserAvatarPart extends StatelessWidget {
           highlightColor: Colors.grey[300]!,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(48.h),
-            child: Image.asset(
-              AppImages.userAvatar,
-              height: 96.h,
-              width: 96.h,
-            ),
+            child: Image.asset(AppImages.userAvatar, height: 96.h, width: 96.h),
           ),
         ),
       ),
@@ -58,10 +54,7 @@ class UserAvatarPart extends StatelessWidget {
       right: 0,
       bottom: 0,
       child: Center(
-        child: Hero(
-          tag: 'image',
-          child: setImage(isLocal, image, context),
-        ),
+        child: Hero(tag: 'image', child: setImage(isLocal, image, context)),
       ),
     );
   }
@@ -91,10 +84,7 @@ class UserAvatarPart extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(color: context.color.black),
           borderRadius: BorderRadius.circular(48.r),
-          image: DecorationImage(
-            image: MemoryImage(image),
-            fit: BoxFit.cover,
-          ),
+          image: DecorationImage(image: MemoryImage(image), fit: BoxFit.cover),
         ),
       );
     } else if (!isLocal && image != null) {
@@ -121,10 +111,7 @@ class UserAvatarPart extends StatelessWidget {
           shape: BoxShape.circle,
           color: context.color.white.withValues(alpha: 0.9),
         ),
-        child: const GradientIcon(
-          iconName: AppIcons.avatarDefault,
-          size: 68,
-        ),
+        child: const GradientIcon(iconName: AppIcons.avatarDefault, size: 68),
       );
     }
   }

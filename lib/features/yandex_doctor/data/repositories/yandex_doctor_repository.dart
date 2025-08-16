@@ -17,7 +17,8 @@ class YandexDoctorRepository implements IYandexDoctorRepository {
 
   @override
   Future<Either<Failure, SpecialistProductModel>> getProducts(
-      ProductFilterModel model) async {
+    ProductFilterModel model,
+  ) async {
     try {
       final response = await remoteDataSource.getProducts(model);
       return Right(response);
@@ -31,11 +32,19 @@ class YandexDoctorRepository implements IYandexDoctorRepository {
   }
 
   @override
-  Future<Either<Failure, PopularCategoriesModel>> getPopularCategories(
-      {int? limit, int? offset, String? query, String? langCode}) async {
+  Future<Either<Failure, PopularCategoriesModel>> getPopularCategories({
+    int? limit,
+    int? offset,
+    String? query,
+    String? langCode,
+  }) async {
     try {
       final response = await remoteDataSource.getPopularCategories(
-          offset: offset, limit: limit, query: query, langCode: langCode);
+        offset: offset,
+        limit: limit,
+        query: query,
+        langCode: langCode,
+      );
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -47,15 +56,20 @@ class YandexDoctorRepository implements IYandexDoctorRepository {
   }
 
   @override
-  Future<Either<Failure, TopSpecialistsModel>> getTopSpecialists(
-      {required int limit,
-      required int offset,
-      String? query,
-      bool isPagination = false,
-      CancelToken? cancelToken}) async {
+  Future<Either<Failure, TopSpecialistsModel>> getTopSpecialists({
+    required int limit,
+    required int offset,
+    String? query,
+    bool isPagination = false,
+    CancelToken? cancelToken,
+  }) async {
     try {
       final response = await remoteDataSource.getTopSpecialists(
-          offset: offset, limit: limit, query: query, cancelToken: cancelToken);
+        offset: offset,
+        limit: limit,
+        query: query,
+        cancelToken: cancelToken,
+      );
       return Right(response);
     } on DioException {
       return Left(const DioFailure());

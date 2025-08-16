@@ -13,15 +13,21 @@ class LikeUnlikeBloc extends Bloc<LikeUnlikeEvent, LikeUnlikeState> {
   final HomeRepository _homeRepository;
 
   Future<void> _onLikeAndUnlike(
-      LikeUnlikePressed event, Emitter<LikeUnlikeState> emit) async {
+    LikeUnlikePressed event,
+    Emitter<LikeUnlikeState> emit,
+  ) async {
     emit(LikeUnlikeLoading(event.isLiked));
 
     final result = await _homeRepository.sendLikeOrUnlike(postId: event.postId);
     if (result.isRight) {
       emit(LikeUnlikeSuccess(state.isLiked));
     } else {
-       emit(LikeUnlikeFailure(
-            Utils.errorFormat(result.left.message), !state.isLiked));
+      emit(
+        LikeUnlikeFailure(
+          Utils.errorFormat(result.left.message),
+          !state.isLiked,
+        ),
+      );
     }
   }
 }

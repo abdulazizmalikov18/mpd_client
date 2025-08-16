@@ -66,8 +66,10 @@ class _DoctorPageState extends State<DoctorPage>
               return BlocConsumer<YandexDoctorBloc, YandexDoctorState>(
                 listener: (context, state) {
                   if (state.location != null) {
-                    _yandexService.moveCameraPosition(state.location!,
-                        zoom: state.zoom);
+                    _yandexService.moveCameraPosition(
+                      state.location!,
+                      zoom: state.zoom,
+                    );
                   }
                   if (userstate.userInfo != null) {
                     if (state.isMoved && state.location != null) {
@@ -82,20 +84,21 @@ class _DoctorPageState extends State<DoctorPage>
                     key: _yandexService.mapKey,
                     mapObjects: state.mapObjects,
                     onMapTap: (argument) {
-                      context
-                          .read<SearchBySpecialistBloc>()
-                          .add(CloseSuggessionsEvent());
+                      context.read<SearchBySpecialistBloc>().add(
+                        CloseSuggessionsEvent(),
+                      );
                     },
-                    onCameraPositionChanged:
-                        (cameraPosition, reason, finished) {
+                    onCameraPositionChanged: (cameraPosition, reason, finished) {
                       if (finished) {
                         debugPrint(
-                            'Placemarks ------------------- ${state.mapObjects.length}');
+                          'Placemarks ------------------- ${state.mapObjects.length}',
+                        );
                       }
                     },
                     onMapCreated: (YandexMapController yandexMapController) {
-                      _yandexService.yandexController
-                          .complete(yandexMapController);
+                      _yandexService.yandexController.complete(
+                        yandexMapController,
+                      );
                     },
                   );
                 },
@@ -148,13 +151,13 @@ class _DoctorPageState extends State<DoctorPage>
             child: SafeArea(
               child:
                   BlocBuilder<SearchBySpecialistBloc, SearchBySpecialistState>(
-                builder: (context, state) {
-                  if (state is SearchBySpecialistInitial) {
-                    return const SizedBox();
-                  }
-                  return AutoComplete(state: state, oldcontext: context);
-                },
-              ),
+                    builder: (context, state) {
+                      if (state is SearchBySpecialistInitial) {
+                        return const SizedBox();
+                      }
+                      return AutoComplete(state: state, oldcontext: context);
+                    },
+                  ),
             ),
           ),
           //? Search field part
@@ -166,14 +169,14 @@ class _DoctorPageState extends State<DoctorPage>
                 controller: controller,
                 onChanged: (query) {
                   if (query.isEmpty || query.length < 3) {
-                    context
-                        .read<SearchBySpecialistBloc>()
-                        .add(StopSearchingEvent());
+                    context.read<SearchBySpecialistBloc>().add(
+                      StopSearchingEvent(),
+                    );
                     setState(() {});
                   }
-                  context
-                      .read<SearchBySpecialistBloc>()
-                      .add(SearchedSpecialistEvent(query));
+                  context.read<SearchBySpecialistBloc>().add(
+                    SearchedSpecialistEvent(query),
+                  );
                 },
               ),
             ),
@@ -186,12 +189,6 @@ class _DoctorPageState extends State<DoctorPage>
   @override
   bool get wantKeepAlive => true;
 }
-
-
-
-
-
-
 
 /*
   _searchSpecialist(String pattern) async {

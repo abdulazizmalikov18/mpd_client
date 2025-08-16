@@ -48,7 +48,8 @@ class _PositionSheetState extends State<PositionSheet> {
                 Navigator.pop(context);
               },
               title: Text(widget.specialistPosition[index].name),
-              trailing: (widget.selection?.id ?? 0) ==
+              trailing:
+                  (widget.selection?.id ?? 0) ==
                       widget.specialistPosition[index].id
                   ? AppIcons.tickCircle.svg()
                   : AppIcons.tickCircleOff.svg(),

@@ -76,7 +76,7 @@ class _UserSpecialistViewState extends State<UserSpecialistView> {
                           ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

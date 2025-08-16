@@ -6,20 +6,19 @@ import 'package:mpd_client/app/app_colors.dart';
 class GradientIcon extends StatelessWidget {
   final String iconName;
   final double size;
-  const GradientIcon({
-    super.key,
-    this.size = 18,
-    required this.iconName,
-  });
+  const GradientIcon({super.key, this.size = 18, required this.iconName});
 
   @override
   Widget build(BuildContext context) {
     return ShaderMask(
       shaderCallback: (bounds) {
-        return  RadialGradient(
+        return RadialGradient(
           center: Alignment.topLeft,
           radius: 2,
-          colors: [context.color.gradientBlueOpacity, context.color.gradientBlue],
+          colors: [
+            context.color.gradientBlueOpacity,
+            context.color.gradientBlue,
+          ],
           tileMode: TileMode.mirror,
         ).createShader(bounds);
       },
@@ -27,7 +26,7 @@ class GradientIcon extends StatelessWidget {
         iconName,
         height: size.h,
         width: size.h,
-        colorFilter:  ColorFilter.mode(context.color.white, BlendMode.srcIn),
+        colorFilter: ColorFilter.mode(context.color.white, BlendMode.srcIn),
       ),
     );
   }

@@ -7,11 +7,11 @@ class FlickMultiManager {
 
   FlickManager? getFlickManager(String url) {
     final flick = _flickManagers.firstWhere(
-        (flickManager) =>
-            flickManager!
-                .flickVideoManager!.videoPlayerController!.dataSource ==
-            url,
-        orElse: () => null);
+      (flickManager) =>
+          flickManager!.flickVideoManager!.videoPlayerController!.dataSource ==
+          url,
+      orElse: () => null,
+    );
 
     return flick;
   }

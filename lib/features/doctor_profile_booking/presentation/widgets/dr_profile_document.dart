@@ -24,10 +24,7 @@ class DrProfileDocument extends StatelessWidget {
       horizontalTitleGap: 10.w,
       contentPadding: EdgeInsets.zero,
       leading: iconNetwork != null
-          ? CachedImageWidget(
-              url: iconNetwork ?? "",
-              size: 48.h,
-            )
+          ? CachedImageWidget(url: iconNetwork ?? "", size: 48.h)
           : Image.asset(iconName, height: 48.h, width: 48.h),
       title: Text(title, style: Styles.boldHeadline6),
     );

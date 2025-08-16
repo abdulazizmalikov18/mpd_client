@@ -8,7 +8,8 @@ class AuthInheritedNotifier extends InheritedNotifier<AuthNotifier> {
   }) : super(notifier: authNotifier);
 
   static AuthInheritedNotifier of(BuildContext context) {
-    final AuthInheritedNotifier? result = context.dependOnInheritedWidgetOfExactType<AuthInheritedNotifier>();
+    final AuthInheritedNotifier? result = context
+        .dependOnInheritedWidgetOfExactType<AuthInheritedNotifier>();
     assert(result != null, 'No AuthInheritedNotifier found in context');
     return result!;
   }
@@ -43,6 +44,10 @@ class AuthNotifier extends ChangeNotifier {
   }
 
   void topScroll() {
-    _controller.animateTo(0, duration: const Duration(milliseconds: 400), curve: Curves.fastOutSlowIn);
+    _controller.animateTo(
+      0,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.fastOutSlowIn,
+    );
   }
 }

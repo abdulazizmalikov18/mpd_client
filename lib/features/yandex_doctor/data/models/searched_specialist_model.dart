@@ -25,7 +25,8 @@ class MapSpecialistModel {
         results: json["results"] == null
             ? []
             : List<MapSpecialist>.from(
-                json["results"]!.map((x) => MapSpecialist.fromJson(x))),
+                json["results"]!.map((x) => MapSpecialist.fromJson(x)),
+              ),
       );
 }
 
@@ -61,24 +62,24 @@ class MapSpecialist {
   });
 
   factory MapSpecialist.fromJson(Map<String, dynamic> json) => MapSpecialist(
-        id: json["id"],
-        name: json["name"],
-        lastname: json["lastname"],
-        avatar: json["avatar"],
-        user: json["user"],
-        phone: json["phone"],
-        job: json["job"] == null ? null : JobModel.fromJson(json["job"]),
-        isWorking: json["is_working"],
-        location: json["location"] == null
-            ? null
-            : LocationModel.fromJson(json["location"]),
-        minPrice: json["min_price"],
-        currencyCode: json["currency_code"],
-        locationDesc: json["location_desc"],
-        lastLocation: json["last_location"] == null
-            ? null
-            : LastLocationModel.fromJson(json["last_location"]),
-      );
+    id: json["id"],
+    name: json["name"],
+    lastname: json["lastname"],
+    avatar: json["avatar"],
+    user: json["user"],
+    phone: json["phone"],
+    job: json["job"] == null ? null : JobModel.fromJson(json["job"]),
+    isWorking: json["is_working"],
+    location: json["location"] == null
+        ? null
+        : LocationModel.fromJson(json["location"]),
+    minPrice: json["min_price"],
+    currencyCode: json["currency_code"],
+    locationDesc: json["location_desc"],
+    lastLocation: json["last_location"] == null
+        ? null
+        : LastLocationModel.fromJson(json["last_location"]),
+  );
 }
 
 class JobModel {
@@ -107,32 +108,29 @@ class JobModel {
   });
 
   factory JobModel.fromJson(Map<String, dynamic> json) => JobModel(
-        id: json["id"],
-        name: json["name"],
-        description: json["description"],
-        hideFromOrgs: json["hide_from_orgs"],
-        hideFromUsers: json["hide_from_users"],
-        image: json["image"],
-        status: json["status"],
-        firstLevelScore: json["first_level_score"],
-        levelProgressBy: json["level_progress_by"],
-        parent: json["parent"],
-      );
+    id: json["id"],
+    name: json["name"],
+    description: json["description"],
+    hideFromOrgs: json["hide_from_orgs"],
+    hideFromUsers: json["hide_from_users"],
+    image: json["image"],
+    status: json["status"],
+    firstLevelScore: json["first_level_score"],
+    levelProgressBy: json["level_progress_by"],
+    parent: json["parent"],
+  );
 }
 
 class LocationModel {
   final double latitude;
   final double longitude;
 
-  LocationModel({
-    this.latitude = 41.311015,
-    this.longitude = 69.279760,
-  });
+  LocationModel({this.latitude = 41.311015, this.longitude = 69.279760});
 
   factory LocationModel.fromJson(Map<String, dynamic> json) => LocationModel(
-        latitude: json["latitude"]?.toDouble(),
-        longitude: json["longitude"]?.toDouble(),
-      );
+    latitude: json["latitude"]?.toDouble(),
+    longitude: json["longitude"]?.toDouble(),
+  );
 }
 
 class LastLocationModel {

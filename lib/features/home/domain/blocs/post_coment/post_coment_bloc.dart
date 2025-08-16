@@ -20,8 +20,9 @@ class PostComentBloc extends Bloc<PostComentEvent, PostComentState> {
 
   void _onInsertComent(InsertNewComent event, Emitter<PostComentState> emit) {
     if (event.isSuccess) {
-      final lastIndex =
-          _coments.lastIndexWhere((element) => element.date == null);
+      final lastIndex = _coments.lastIndexWhere(
+        (element) => element.date == null,
+      );
 
       _coments[lastIndex].date = event.coment.date;
       _coments[lastIndex].id = event.coment.id;
@@ -30,25 +31,32 @@ class PostComentBloc extends Bloc<PostComentEvent, PostComentState> {
         _coments.insert(0, event.coment);
       }
     }
-    emit(PostComentSuccess([..._coments],
-        isEnd: state.isEnd, oldId: state.oldId));
+    emit(
+      PostComentSuccess([..._coments], isEnd: state.isEnd, oldId: state.oldId),
+    );
   }
 
   void _onUpdateOldComent(
-      UpdateOldComent event, Emitter<PostComentState> emit) {
+    UpdateOldComent event,
+    Emitter<PostComentState> emit,
+  ) {
     if (event.isSuccess) {
-      final lastIndex =
-          _coments.lastIndexWhere((element) => element.date == null);
+      final lastIndex = _coments.lastIndexWhere(
+        (element) => element.date == null,
+      );
 
       _coments[lastIndex].date = event.coment.date;
       _coments[lastIndex].id = event.coment.id;
     }
-    emit(PostComentSuccess([..._coments],
-        isEnd: state.isEnd, oldId: state.oldId));
+    emit(
+      PostComentSuccess([..._coments], isEnd: state.isEnd, oldId: state.oldId),
+    );
   }
 
   Future<void> _onGetComents(
-      GetComentPostEvent event, Emitter<PostComentState> emit) async {
+    GetComentPostEvent event,
+    Emitter<PostComentState> emit,
+  ) async {
     if (event.postId == state.oldId && state.isEnd) return;
 
     if (event.postId == state.oldId && !event.pagination) return;
@@ -61,11 +69,19 @@ class PostComentBloc extends Bloc<PostComentEvent, PostComentState> {
     }
     emit(PostComentLoading(_coments, oldId: event.postId));
     final result = await _homeRepository.getPostComents(
-        limit: _limit, offset: _offset, postId: event.postId);
+      limit: _limit,
+      offset: _offset,
+      postId: event.postId,
+    );
     if (result.isRight) {
       _addOffset(result.right);
-      emit(PostComentSuccess(_coments,
-          isEnd: _coments.length < _offset, oldId: event.postId));
+      emit(
+        PostComentSuccess(
+          _coments,
+          isEnd: _coments.length < _offset,
+          oldId: event.postId,
+        ),
+      );
     } else {
       emit(PostComentFailure(state.coments, failure: result.left.message));
     }

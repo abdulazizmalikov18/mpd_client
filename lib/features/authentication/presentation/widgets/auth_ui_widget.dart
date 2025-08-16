@@ -22,7 +22,12 @@ class AuthUIWidget extends StatelessWidget {
               Stack(
                 children: [
                   SizedBox(height: 352.h),
-                  Image.asset('assets/images/topimage.png', height: 290.h, width: double.maxFinite, fit: BoxFit.fill),
+                  Image.asset(
+                    'assets/images/topimage.png',
+                    height: 290.h,
+                    width: double.maxFinite,
+                    fit: BoxFit.fill,
+                  ),
                   Positioned(
                     top: 90.h,
                     left: 70.w,
@@ -36,17 +41,18 @@ class AuthUIWidget extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                      top: 177.h,
-                      left: 108.w,
-                      right: 108.w,
-                      child: Image.asset(
-                        AppImages.doctorEntry,
-                        height: 175.h,
-                        width: 175.w,
-                      )),
+                    top: 177.h,
+                    left: 108.w,
+                    right: 108.w,
+                    child: Image.asset(
+                      AppImages.doctorEntry,
+                      height: 175.h,
+                      width: 175.w,
+                    ),
+                  ),
                 ],
               ),
-              child
+              child,
             ],
           ),
         ),

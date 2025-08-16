@@ -16,11 +16,15 @@ class TextButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: onPressed,
-        style: TextButton.styleFrom(minimumSize: Size.fromHeight(50.h)),
-        child: Text(
-          text,
-          style: Styles.headline7Bold.copyWith(fontSize: 16.sp, color: context.color.black),
-        ));
+      onPressed: onPressed,
+      style: TextButton.styleFrom(minimumSize: Size.fromHeight(50.h)),
+      child: Text(
+        text,
+        style: Styles.headline7Bold.copyWith(
+          fontSize: 16.sp,
+          color: context.color.black,
+        ),
+      ),
+    );
   }
 }

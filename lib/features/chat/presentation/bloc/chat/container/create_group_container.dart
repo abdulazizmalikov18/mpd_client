@@ -39,5 +39,9 @@ class CreateGroupContainer {
           count == other.count;
 
   @override
-  int get hashCode => users.hashCode ^ selectionUser.hashCode ^ status.hashCode ^ count.hashCode;
+  int get hashCode =>
+      users.hashCode ^
+      selectionUser.hashCode ^
+      status.hashCode ^
+      count.hashCode;
 }

@@ -24,5 +24,4 @@ class ChatUsersContainer {
       status: status ?? this.status,
     );
   }
-
 }

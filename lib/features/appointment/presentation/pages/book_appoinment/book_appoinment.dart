@@ -26,8 +26,11 @@ enum CancelInfo { changeMyMind, bookingTheWrong }
 class BookAppoinment extends StatelessWidget {
   final AppoinmentInfo appoinmentInfo;
   final Appointment appointment;
-  const BookAppoinment(
-      {super.key, required this.appoinmentInfo, required this.appointment});
+  const BookAppoinment({
+    super.key,
+    required this.appoinmentInfo,
+    required this.appointment,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +40,8 @@ class BookAppoinment extends StatelessWidget {
       appBar: AppBarWidget(title: context.l10n.appointment_appointment_list),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(
-            parent: BouncingScrollPhysics()),
+          parent: BouncingScrollPhysics(),
+        ),
         padding: EdgeInsets.symmetric(vertical: 12.h),
         child: Column(
           children: [
@@ -45,15 +49,18 @@ class BookAppoinment extends StatelessWidget {
               specialist: SpecialistInfoModel(
                 phone: "",
                 appointmentName: appointment.name,
-                avatar: appointment.currentWorkState?.specialist.avatar ??
+                avatar:
+                    appointment.currentWorkState?.specialist.avatar ??
                     appointment.responsible?.avatar,
                 fullname: appointment.currentWorkState != null
                     ? '${appointment.currentWorkState?.specialist.name ?? "__"} ${appointment.currentWorkState?.specialist.lastname ?? "__"}'
                     : '${appointment.responsible?.name ?? "__"} ${appointment.responsible?.lastname ?? "__"}',
-                job: appointment.currentWorkState?.specialist.job ??
+                job:
+                    appointment.currentWorkState?.specialist.job ??
                     appointment.responsible?.job ??
                     "__",
-                id: appointment.currentWorkState?.specialist.id ??
+                id:
+                    appointment.currentWorkState?.specialist.id ??
                     appointment.responsible?.id ??
                     0,
               ),
@@ -68,7 +75,10 @@ class BookAppoinment extends StatelessWidget {
                   appointment.currentWorkState?.specialist.location?.latitude ??
                       41.311015,
                   appointment
-                          .currentWorkState?.specialist.location?.longitude ??
+                          .currentWorkState
+                          ?.specialist
+                          .location
+                          ?.longitude ??
                       69.279760,
                 ),
               ),
@@ -88,7 +98,7 @@ class BookAppoinment extends StatelessWidget {
                   name: appointment.name ?? "",
                   image: appointment.image,
                   count: appointment.qty ?? 0,
-                )
+                ),
               ],
               appointmentInfo: DrCardInfo.pending,
             ),
@@ -99,7 +109,7 @@ class BookAppoinment extends StatelessWidget {
               discount: '${appointment.surcharge} UZS',
               total: '$totalCost UZS',
             ),
-            ScreenUtil().setVerticalSpacing(90.h)
+            ScreenUtil().setVerticalSpacing(90.h),
           ],
         ),
       ),
@@ -117,15 +127,17 @@ class BookAppoinment extends StatelessWidget {
                     builder: (_) => MultiBlocProvider(
                       providers: [
                         BlocProvider.value(
-                          value: BlocProvider.of<CancelAppointmentBloc>(context,
-                              listen: false),
+                          value: BlocProvider.of<CancelAppointmentBloc>(
+                            context,
+                            listen: false,
+                          ),
                         ),
                         BlocProvider.value(
                           value: BlocProvider.of<AppoinmentsBloc>(
                             context,
                             listen: false,
                           ),
-                        )
+                        ),
                       ],
                       child: CancelSheet(appointment: appointment),
                     ),
@@ -142,9 +154,11 @@ class BookAppoinment extends StatelessWidget {
                     child: LongButton(
                       buttonName: context.l10n.appointment_book_again,
                       onPress: () {
-                        controller.animateToPage(1,
-                            duration: const Duration(milliseconds: 600),
-                            curve: Curves.fastOutSlowIn);
+                        controller.animateToPage(
+                          1,
+                          duration: const Duration(milliseconds: 600),
+                          curve: Curves.fastOutSlowIn,
+                        );
                         Navigator.popUntil(context, (route) => route.isFirst);
                       },
                     ),

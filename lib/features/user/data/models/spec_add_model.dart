@@ -25,16 +25,16 @@ class SpecAddModel {
   });
 
   factory SpecAddModel.fromJson(Map<String, dynamic> json) => SpecAddModel(
-        position: (json['position'] as num).toInt(),
-        specCat: (json['spec_cat'] as num).toInt(),
-        job: (json['job'] as num).toInt(),
-      );
+    position: (json['position'] as num).toInt(),
+    specCat: (json['spec_cat'] as num).toInt(),
+    job: (json['job'] as num).toInt(),
+  );
 
   Map<String, dynamic> toJson() => {
-        'position': position,
-        'spec_cat': specCat,
-        'job': job,
-      };
+    'position': position,
+    'spec_cat': specCat,
+    'job': job,
+  };
 
   FormData? get toJsonDocument {
     final data = FormData.fromMap({

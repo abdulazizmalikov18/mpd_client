@@ -25,7 +25,8 @@ class UserRecordModel {
         results: json["results"] == null
             ? []
             : List<RecordModel>.from(
-                json["results"]!.map((x) => RecordModel.fromJson(x))),
+                json["results"]!.map((x) => RecordModel.fromJson(x)),
+              ),
       );
 }
 
@@ -49,14 +50,14 @@ class RecordModel {
   });
 
   factory RecordModel.fromJson(Map<String, dynamic> json) => RecordModel(
-        id: json["id"],
-        product: json["product"],
-        title: json["title"],
-        conclusion: json["conclusion"],
-        conclusionFile: json["conclusion_file"],
-        writer: json["writer"] == null ? null : Writer.fromJson(json["writer"]),
-        date: json["date"] == null ? null : DateTime.tryParse(json["date"]),
-      );
+    id: json["id"],
+    product: json["product"],
+    title: json["title"],
+    conclusion: json["conclusion"],
+    conclusionFile: json["conclusion_file"],
+    writer: json["writer"] == null ? null : Writer.fromJson(json["writer"]),
+    date: json["date"] == null ? null : DateTime.tryParse(json["date"]),
+  );
 }
 
 class Writer {
@@ -77,11 +78,11 @@ class Writer {
   });
 
   factory Writer.fromJson(Map<String, dynamic> json) => Writer(
-        id: json["id"],
-        username: json["username"],
-        name: json["name"],
-        lastname: json["lastname"],
-        avatar: json["avatar"],
-        job: json["job"],
-      );
+    id: json["id"],
+    username: json["username"],
+    name: json["name"],
+    lastname: json["lastname"],
+    avatar: json["avatar"],
+    job: json["job"],
+  );
 }

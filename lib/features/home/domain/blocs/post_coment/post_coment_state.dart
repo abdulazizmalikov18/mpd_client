@@ -21,6 +21,10 @@ class PostComentSuccess extends PostComentState {
 
 class PostComentFailure extends PostComentState {
   final String failure;
-  const PostComentFailure(super.coments,
-      {required this.failure, super.isEnd, super.oldId});
+  const PostComentFailure(
+    super.coments, {
+    required this.failure,
+    super.isEnd,
+    super.oldId,
+  });
 }

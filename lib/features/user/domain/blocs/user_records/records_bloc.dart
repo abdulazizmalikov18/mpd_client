@@ -12,7 +12,7 @@ part 'records_state.dart';
 
 class RecordsBloc extends Bloc<RecordsEvent, RecordsState> {
   RecordsBloc(this._profileRepository, this._searchController)
-      : super(const RecordsState()) {
+    : super(const RecordsState()) {
     on<GetRecordsEvent>(_onGetRecordsEvent);
     on<SearchRecordEvent>(_onSearchRecords);
     on<CancelSearchEvent>(_onCancelSearchEvent);
@@ -26,15 +26,19 @@ class RecordsBloc extends Bloc<RecordsEvent, RecordsState> {
   final _limit = 10;
   int _offset = 0;
 
-//camcel search
+  //camcel search
   Future<void> _onCancelSearchEvent(
-      CancelSearchEvent event, Emitter<RecordsState> emit) async {
+    CancelSearchEvent event,
+    Emitter<RecordsState> emit,
+  ) async {
     // _clearFromSearch(state);
   }
 
   //get records
   Future<void> _onGetRecordsEvent(
-      GetRecordsEvent event, Emitter<RecordsState> emit) async {
+    GetRecordsEvent event,
+    Emitter<RecordsState> emit,
+  ) async {
     if (state.hasReachedMax && !event.isRefresh) return;
 
     if (event.isRefresh) _offset = 0;
@@ -42,15 +46,19 @@ class RecordsBloc extends Bloc<RecordsEvent, RecordsState> {
     // Here, Getting professions first time
     if (state.status.isInitial) {
       final result = await _profileRepository.getUserRecords(
-          limit: _limit, offset: _offset);
+        limit: _limit,
+        offset: _offset,
+      );
       if (result.isRight) {
         _offset += 10;
         _records.addAll(result.right.results!);
-        emit(state.copyWith(
-          status: FormzSubmissionStatus.success,
-          records: result.right.results!,
-          hasReachedMax: result.right.results!.length < _offset,
-        ));
+        emit(
+          state.copyWith(
+            status: FormzSubmissionStatus.success,
+            records: result.right.results!,
+            hasReachedMax: result.right.results!.length < _offset,
+          ),
+        );
       } else {
         errorChecker(result.left, emit);
       }
@@ -58,7 +66,9 @@ class RecordsBloc extends Bloc<RecordsEvent, RecordsState> {
 
     // Here, Getting retailed professions with pagination
     final result = await _profileRepository.getUserRecords(
-        limit: _limit, offset: event.isRefresh ? 0 : _offset);
+      limit: _limit,
+      offset: event.isRefresh ? 0 : _offset,
+    );
     if (result.isRight) {
       if (event.isRefresh) {
         _offset = 0;
@@ -67,18 +77,22 @@ class RecordsBloc extends Bloc<RecordsEvent, RecordsState> {
       _offset += 10;
       _records.addAll(result.right.results!);
 
-      emit(state.copyWith(
-        status: FormzSubmissionStatus.success,
-        hasReachedMax: _records.length < _offset,
-        records: [..._records],
-      ));
+      emit(
+        state.copyWith(
+          status: FormzSubmissionStatus.success,
+          hasReachedMax: _records.length < _offset,
+          records: [..._records],
+        ),
+      );
     } else {
       errorChecker(result.left, emit);
     }
   }
 
   Future<void> _onSearchRecords(
-      SearchRecordEvent event, Emitter<RecordsState> emit) async {
+    SearchRecordEvent event,
+    Emitter<RecordsState> emit,
+  ) async {
     if (event.query.length < 3) {
       emit(
         state.copyWith(
@@ -92,16 +106,20 @@ class RecordsBloc extends Bloc<RecordsEvent, RecordsState> {
     }
     if (state.hasReachedMax) {
       final searchingResult = _records
-          .where((element) => element.product!
-              .toLowerCase()
-              .contains(event.query.toLowerCase()))
+          .where(
+            (element) => element.product!.toLowerCase().contains(
+              event.query.toLowerCase(),
+            ),
+          )
           .toList();
-      emit(state.copyWith(
-        status: FormzSubmissionStatus.success,
-        records: searchingResult,
-        hasReachedMax: _records.length < _offset,
-        isSearch: true,
-      ));
+      emit(
+        state.copyWith(
+          status: FormzSubmissionStatus.success,
+          records: searchingResult,
+          hasReachedMax: _records.length < _offset,
+          isSearch: true,
+        ),
+      );
       return;
     }
 
@@ -109,12 +127,14 @@ class RecordsBloc extends Bloc<RecordsEvent, RecordsState> {
     // Here, Getting records with searching event
     final result = await _profileRepository.getUserRecords(query: event.query);
     if (result.isRight) {
-      emit(state.copyWith(
-        status: FormzSubmissionStatus.success,
-        records: result.right.results!,
-        hasReachedMax: true,
-        isSearch: true,
-      ));
+      emit(
+        state.copyWith(
+          status: FormzSubmissionStatus.success,
+          records: result.right.results!,
+          hasReachedMax: true,
+          isSearch: true,
+        ),
+      );
     } else {
       errorChecker(result.left, emit);
     }
@@ -122,15 +142,21 @@ class RecordsBloc extends Bloc<RecordsEvent, RecordsState> {
 
   void errorChecker(Failure failure, Emitter<RecordsState> emit) {
     if (failure is NetworkFailure) {
-      emit(state.copyWith(
+      emit(
+        state.copyWith(
           status: FormzSubmissionStatus.failure,
           records: state.records,
-          failure: failure.message));
+          failure: failure.message,
+        ),
+      );
     } else {
-      emit(state.copyWith(
+      emit(
+        state.copyWith(
           status: FormzSubmissionStatus.failure,
           records: state.records,
-          failure: 'Server failure'));
+          failure: 'Server failure',
+        ),
+      );
     }
   }
 }

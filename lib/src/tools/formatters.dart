@@ -3,9 +3,10 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class Formatters {
   static MaskTextInputFormatter pinFormatter = MaskTextInputFormatter(
-      mask: '####',
-      filter: {'#': RegExp(r'[\+0-9]')},
-      type: MaskAutoCompletionType.lazy);
+    mask: '####',
+    filter: {'#': RegExp(r'[\+0-9]')},
+    type: MaskAutoCompletionType.lazy,
+  );
   static MaskTextInputFormatter phoneFormatter = MaskTextInputFormatter(
     mask: '+998 (##) ###-##-##',
     filter: {'#': RegExp(r'[\+0-9]')},
@@ -68,15 +69,18 @@ class Formatters {
 class ThousandsFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
     if (newValue.text.isEmpty) {
       return newValue.copyWith(text: '');
     }
     final int selectionIndexFromTheRight =
         newValue.text.length - newValue.selection.end;
     final newText = newValue.text.replaceAll(' ', ''); // Remove existing spaces
-    final formattedText =
-        _addSpacesToNumericString(newText); // Function to add spaces
+    final formattedText = _addSpacesToNumericString(
+      newText,
+    ); // Function to add spaces
     return TextEditingValue(
       text: formattedText,
       selection: TextSelection.collapsed(

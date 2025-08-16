@@ -34,26 +34,25 @@ class AppoinmentsState extends Equatable {
     FormzSubmissionStatus? status,
     FormzSubmissionStatus? statusCompleted,
     FormzSubmissionStatus? statusCancel,
-  }) =>
-      AppoinmentsState(
-        appoinments: appoinments ?? this.appoinments,
-        appoinmentsCancel: appoinmentsCancel ?? this.appoinmentsCancel,
-        appoinmentsCompleted: appoinmentsCompleted ?? this.appoinmentsCompleted,
-        status: status ?? this.status,
-        statusCompleted: statusCompleted ?? this.statusCompleted,
-        statusCancel: statusCancel ?? this.statusCancel,
-      );
+  }) => AppoinmentsState(
+    appoinments: appoinments ?? this.appoinments,
+    appoinmentsCancel: appoinmentsCancel ?? this.appoinmentsCancel,
+    appoinmentsCompleted: appoinmentsCompleted ?? this.appoinmentsCompleted,
+    status: status ?? this.status,
+    statusCompleted: statusCompleted ?? this.statusCompleted,
+    statusCancel: statusCancel ?? this.statusCancel,
+  );
 
   @override
   List<Object?> get props => [
-        appoinments,
-        appoinmentsCancel,
-        appoinmentsCompleted,
-        status,
-        statusCancel,
-        statusCompleted,
-        count,
-        countCancel,
-        countCompleted,
-      ];
+    appoinments,
+    appoinmentsCancel,
+    appoinmentsCompleted,
+    status,
+    statusCancel,
+    statusCompleted,
+    count,
+    countCancel,
+    countCompleted,
+  ];
 }

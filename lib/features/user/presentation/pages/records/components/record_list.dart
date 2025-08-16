@@ -31,18 +31,24 @@ class RecordList extends StatelessWidget {
           onNotification: _handleScrollNotification,
           child: ListView.separated(
             controller: scrollController,
-            physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+            physics: const AlwaysScrollableScrollPhysics(
+              parent: BouncingScrollPhysics(),
+            ),
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             separatorBuilder: (context, index) {
               if (records.length == 1) {
-                return RecordsLabelPart(dateTime: context.l10n.records_new_added);
+                return RecordsLabelPart(
+                  dateTime: context.l10n.records_new_added,
+                );
               }
               final initialDate = records[index].date!;
               final nextDate = records[index + 1].date!;
               bool isFirstTime = initialDate.isDateEqual(nextDate);
               if (isFirstTime && !initialDate.isDateEqual(nextDate)) {
                 isFirstTime = false;
-                return RecordsLabelPart(dateTime: context.l10n.records_new_added);
+                return RecordsLabelPart(
+                  dateTime: context.l10n.records_new_added,
+                );
               } else {
                 return const SizedBox();
               }
@@ -63,8 +69,10 @@ class RecordList extends StatelessWidget {
                     ScreenUtil().setHorizontalSpacing(10.w),
                     Text(
                       'Loading...',
-                      style: Styles.headline7.copyWith(color: context.color.mainBlue),
-                    )
+                      style: Styles.headline7.copyWith(
+                        color: context.color.mainBlue,
+                      ),
+                    ),
                   ],
                 );
               }
@@ -73,10 +81,13 @@ class RecordList extends StatelessWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (index == 0) RecordsLabelPart(dateTime: context.l10n.records_new_added),
+                  if (index == 0)
+                    RecordsLabelPart(dateTime: context.l10n.records_new_added),
                   RecordsCard(
                     onPressed: () {
-                      Navigator.of(context).pushNamed(AppRoutes.record, arguments: record);
+                      Navigator.of(
+                        context,
+                      ).pushNamed(AppRoutes.record, arguments: record);
                     },
                     record: record,
                   ),
@@ -91,7 +102,8 @@ class RecordList extends StatelessWidget {
   }
 
   bool _handleScrollNotification(ScrollNotification notification) {
-    if (notification is ScrollEndNotification && scrollController.position.extentAfter == 0) {
+    if (notification is ScrollEndNotification &&
+        scrollController.position.extentAfter == 0) {
       scrollEndFunc();
     }
     return false;

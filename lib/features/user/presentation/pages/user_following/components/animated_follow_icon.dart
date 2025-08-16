@@ -11,11 +11,17 @@ class AnimatedFollowIcon extends StatefulWidget {
   State<AnimatedFollowIcon> createState() => _AnimatedFollowIconState();
 }
 
-class _AnimatedFollowIconState extends State<AnimatedFollowIcon> with TickerProviderStateMixin {
+class _AnimatedFollowIconState extends State<AnimatedFollowIcon>
+    with TickerProviderStateMixin {
   bool? onTapped = false;
 
   late final AnimationController _animationController = AnimationController(
-      vsync: this, duration: const Duration(milliseconds: 200), value: 1.0, upperBound: 1.25, lowerBound: 1.0);
+    vsync: this,
+    duration: const Duration(milliseconds: 200),
+    value: 1.0,
+    upperBound: 1.25,
+    lowerBound: 1.0,
+  );
 
   @override
   void initState() {
@@ -34,12 +40,16 @@ class _AnimatedFollowIconState extends State<AnimatedFollowIcon> with TickerProv
       onTap: () {
         setState(() {
           if (onTapped == false) {
-            _animationController.forward().then((value) => _animationController.reverse());
+            _animationController.forward().then(
+              (value) => _animationController.reverse(),
+            );
           }
           onTapped = !onTapped!;
         });
       },
-      customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.r)),
+      customBorder: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(100.r),
+      ),
       child: ScaleTransition(
         scale: _animationController,
         child: Padding(
@@ -50,13 +60,19 @@ class _AnimatedFollowIconState extends State<AnimatedFollowIcon> with TickerProv
                   key: const ValueKey('1'),
                   height: 20.h,
                   width: 20.w,
-                  colorFilter:  ColorFilter.mode(context.color.grey, BlendMode.srcIn),
+                  colorFilter: ColorFilter.mode(
+                    context.color.grey,
+                    BlendMode.srcIn,
+                  ),
                 )
               : SvgPicture.asset(
                   AppIcons.userTick,
                   height: 20.h,
                   width: 20.w,
-                  colorFilter:  ColorFilter.mode(context.color.mainBlue, BlendMode.srcIn),
+                  colorFilter: ColorFilter.mode(
+                    context.color.mainBlue,
+                    BlendMode.srcIn,
+                  ),
                   key: const ValueKey('2'),
                 ),
         ),

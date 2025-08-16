@@ -28,10 +28,7 @@ class IsAddedSpecialist extends UserInfoEvent {
   final void Function(int status) onSucces;
   final void Function() onError;
 
-  const IsAddedSpecialist({
-    required this.onSucces,
-    required this.onError,
-  });
+  const IsAddedSpecialist({required this.onSucces, required this.onError});
 }
 
 class GetSpecialistPosition extends UserInfoEvent {}
@@ -72,10 +69,7 @@ class UpdateUserVerifyEvent extends UserInfoEvent {
   final int? mainCat;
   final int? region;
 
-  const UpdateUserVerifyEvent({
-    this.mainCat,
-    this.region,
-  });
+  const UpdateUserVerifyEvent({this.mainCat, this.region});
 }
 
 class SelectedCategoryIdEvent extends UserInfoEvent {

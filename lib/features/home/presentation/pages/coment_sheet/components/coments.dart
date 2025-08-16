@@ -21,9 +21,9 @@ class Coments extends StatefulWidget {
 class _ComentsState extends State<Coments> {
   @override
   void initState() {
-    context
-        .read<PostComentBloc>()
-        .add(GetComentPostEvent(widget.post.id!, false));
+    context.read<PostComentBloc>().add(
+      GetComentPostEvent(widget.post.id!, false),
+    );
     super.initState();
   }
 
@@ -36,9 +36,9 @@ class _ComentsState extends State<Coments> {
         } else if (state.coments.isNotEmpty) {
           return RefreshIndicator.adaptive(
             onRefresh: () async {
-              context
-                  .read<PostComentBloc>()
-                  .add(GetComentPostEvent(widget.post.id!, false));
+              context.read<PostComentBloc>().add(
+                GetComentPostEvent(widget.post.id!, false),
+              );
             },
             child: ListView.builder(
               itemCount: state.coments.length + 1,

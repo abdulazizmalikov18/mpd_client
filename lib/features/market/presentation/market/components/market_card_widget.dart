@@ -7,9 +7,7 @@ import '../../../../../app/app_colors.dart';
 import '../../../../../src/themes/styles.dart';
 
 class MarketCardWidget extends StatelessWidget {
-  const MarketCardWidget({
-    super.key,
-  });
+  const MarketCardWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,17 +18,24 @@ class MarketCardWidget extends StatelessWidget {
           height: 276.h,
           width: 173.w,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.r),
-              color: context.color.white,
-              boxShadow:  [BoxShadow(color: context.color.cardShadow, blurRadius: 20)]),
+            borderRadius: BorderRadius.circular(8.r),
+            color: context.color.white,
+            boxShadow: [
+              BoxShadow(color: context.color.cardShadow, blurRadius: 20),
+            ],
+          ),
           child: Column(
             children: [
               Container(
                 width: double.maxFinite,
                 height: 140.h,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.r),
-                    image: const DecorationImage(image: AssetImage(AppImages.marketCategory), fit: BoxFit.fill)),
+                  borderRadius: BorderRadius.circular(8.r),
+                  image: const DecorationImage(
+                    image: AssetImage(AppImages.marketCategory),
+                    fit: BoxFit.fill,
+                  ),
+                ),
               ),
               ScreenUtil().setVerticalSpacing(8.h),
               Text(
@@ -40,7 +45,9 @@ class MarketCardWidget extends StatelessWidget {
               const Spacer(),
               Text(
                 '159 900 UZS',
-                style: Styles.boldHeadline6.copyWith(fontWeight: FontWeight.w600),
+                style: Styles.boldHeadline6.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               ScreenUtil().setVerticalSpacing(8.h),
               TransparentLongButton(
@@ -50,23 +57,30 @@ class MarketCardWidget extends StatelessWidget {
                 onPress: () {},
                 height: 32.h,
                 fontsize: 12.sp,
-              )
+              ),
             ],
           ),
         ),
         Positioned(
-            top: 16,
-            left: 16,
-            child: Container(
-              width: 28.w,
-              height: 15.h,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.r), color: context.color.gradientRedOpacity),
-              child: Text(
-                '15%',
-                style: Styles.headline6.copyWith(color: context.color.white, fontSize: 10.sp),
+          top: 16,
+          left: 16,
+          child: Container(
+            width: 28.w,
+            height: 15.h,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8.r),
+              color: context.color.gradientRedOpacity,
+            ),
+            child: Text(
+              '15%',
+              style: Styles.headline6.copyWith(
+                color: context.color.white,
+                fontSize: 10.sp,
               ),
-            ))
+            ),
+          ),
+        ),
       ],
     );
   }

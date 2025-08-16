@@ -23,7 +23,7 @@ class UpdatePersonalDataModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "passport_scan": passportScan,
-        "passport_stir": passportStir,
-      };
+    "passport_scan": passportScan,
+    "passport_stir": passportStir,
+  };
 }

@@ -1,8 +1,7 @@
 part of 'chat_group_bloc.dart';
 
-sealed class ChatGroupEvent  {
+sealed class ChatGroupEvent {
   const ChatGroupEvent();
-
 }
 
 class ChatGetGroupEvent extends ChatGroupEvent {

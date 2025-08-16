@@ -24,23 +24,22 @@ class SpecialistState extends Equatable {
     FormzSubmissionStatus? statusCategory,
     int? categoryId,
     String? selectedName,
-  }) =>
-      SpecialistState(
-        specialist: specialist ?? this.specialist,
-        status: status ?? this.status,
-        categories: categories ?? this.categories,
-        statusCategory: statusCategory ?? this.statusCategory,
-        categoryId: categoryId ?? this.categoryId,
-        selectedName: selectedName ?? this.selectedName,
-      );
+  }) => SpecialistState(
+    specialist: specialist ?? this.specialist,
+    status: status ?? this.status,
+    categories: categories ?? this.categories,
+    statusCategory: statusCategory ?? this.statusCategory,
+    categoryId: categoryId ?? this.categoryId,
+    selectedName: selectedName ?? this.selectedName,
+  );
 
   @override
   List<Object> get props => [
-        status,
-        specialist,
-        categories,
-        statusCategory,
-        categoryId,
-        selectedName,
-      ];
+    status,
+    specialist,
+    categories,
+    statusCategory,
+    categoryId,
+    selectedName,
+  ];
 }

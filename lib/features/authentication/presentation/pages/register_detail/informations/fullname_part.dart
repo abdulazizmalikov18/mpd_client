@@ -59,21 +59,23 @@ class _FullnamePartState extends State<FullnamePart> {
               BlocBuilder<CheckUsernameBloc, CheckUsernameState>(
                 builder: (context, state) {
                   return LabelInputWidget(
-                      require: '*',
-                      errorText: getFailure(state, context),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) => Validators.username(value, context),
-                      textInputAction: TextInputAction.next,
-                      controller:
-                          context.read<CreateUserBloc>().userNameController,
-                      topHint: context.l10n.register_login,
-                      inputHint: context.l10n.register_login,
-                      onChanged: (text) {
-                        context
-                            .read<CheckUsernameBloc>()
-                            .add(CheckUsername(text));
-                      },
-                      suffixIcon: getStatus(state));
+                    require: '*',
+                    errorText: getFailure(state, context),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) => Validators.username(value, context),
+                    textInputAction: TextInputAction.next,
+                    controller: context
+                        .read<CreateUserBloc>()
+                        .userNameController,
+                    topHint: context.l10n.register_login,
+                    inputHint: context.l10n.register_login,
+                    onChanged: (text) {
+                      context.read<CheckUsernameBloc>().add(
+                        CheckUsername(text),
+                      );
+                    },
+                    suffixIcon: getStatus(state),
+                  );
                 },
               ),
               ScreenUtil().setVerticalSpacing(20.h),
@@ -98,13 +100,14 @@ class _FullnamePartState extends State<FullnamePart> {
               ),
               ScreenUtil().setVerticalSpacing(20.h),
               SelectDateWidget(
-                  birthController:
-                      context.read<CreateUserBloc>().birthController),
+                birthController: context.read<CreateUserBloc>().birthController,
+              ),
             ],
           ),
         ),
         ScreenUtil().setVerticalSpacing(20.h),
         const SelectGenderWidget(),
+
         // ScreenUtil().setVerticalSpacing(20.h),
         // BlocSelector<ProfessionBloc, ProfessionState, Profession?>(
         //   selector: (state) => state.chosenProfession,
@@ -158,14 +161,16 @@ class _FullnamePartState extends State<FullnamePart> {
         //     );
         //   },
         // ),
-
         ScreenUtil().setVerticalSpacing(32.h),
         BlocSelector<ProfessionBloc, ProfessionState, Profession?>(
           selector: (state) => state.chosenProfession,
           builder: (context, chosenProfession) {
             Profession? chosen = chosenProfession;
-            return BlocSelector<SubProfessionsBloc, SubProfessionsState,
-                Profession?>(
+            return BlocSelector<
+              SubProfessionsBloc,
+              SubProfessionsState,
+              Profession?
+            >(
               selector: (state) => state.selectedSubProfession,
               builder: (context, selectedSubProfession) {
                 chosen = chosenProfession ?? selectedSubProfession;
@@ -173,58 +178,64 @@ class _FullnamePartState extends State<FullnamePart> {
                   listener: (context, state) async {
                     if (state.showLoading) {
                       showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (context) => const LoadingDialogWidget());
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) => const LoadingDialogWidget(),
+                      );
                     }
 
                     if (!state.showLoading && state.error == 'No') {
                       // Navigator.pop(context);
-                      await Future.delayed(const Duration(milliseconds: 250))
-                          .then(
-                        (value) {
-                          if (context.mounted) {
-                            Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              AppRoutes.mainPage,
-                              (route) => false,
-                            );
-                          }
-                        },
-                      );
+                      await Future.delayed(
+                        const Duration(milliseconds: 250),
+                      ).then((value) {
+                        if (context.mounted) {
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            AppRoutes.mainPage,
+                            (route) => false,
+                          );
+                        }
+                      });
                     } else if (!state.showLoading &&
                         state.error != 'No' &&
                         state.error != '') {
                       // Navigator.pop(context);
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
-                        ..showSnackBar(UiTools.failSnackbar(
-                            title: state.error, context: context));
+                        ..showSnackBar(
+                          UiTools.failSnackbar(
+                            title: state.error,
+                            context: context,
+                          ),
+                        );
                     }
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: LongButton(
-                        buttonName: context.l10n.register_register,
-                        onPress: () {
-                          FocusScope.of(context).unfocus();
+                      buttonName: context.l10n.register_register,
+                      onPress: () {
+                        FocusScope.of(context).unfocus();
 
-                          final region = context
-                              .read<DistrictBloc>()
-                              .state
-                              .selectedDistict;
-                          context.read<CreateUserBloc>().add(ForCreateUserEvent(
-                              phone: widget.phone,
-                              password: context
-                                  .read<ChangePasswordBloc>()
-                                  .password2Controller
-                                  .text,
-                              mainCategory: chosen?.id,
-                              region: region?.id));
-                          AuthInheritedNotifier.of(context)
-                              .notifier!
-                              .topScroll();
-                        }),
+                        final region = context
+                            .read<DistrictBloc>()
+                            .state
+                            .selectedDistict;
+                        context.read<CreateUserBloc>().add(
+                          ForCreateUserEvent(
+                            phone: widget.phone,
+                            password: context
+                                .read<ChangePasswordBloc>()
+                                .password2Controller
+                                .text,
+                            mainCategory: chosen?.id,
+                            region: region?.id,
+                          ),
+                        );
+                        AuthInheritedNotifier.of(context).notifier!.topScroll();
+                      },
+                    ),
                   ),
                 );
               },
@@ -239,7 +250,10 @@ class _FullnamePartState extends State<FullnamePart> {
             FocusScope.of(context).unfocus();
 
             Navigator.pushNamedAndRemoveUntil(
-                context, AppRoutes.auth, (route) => false);
+              context,
+              AppRoutes.auth,
+              (route) => false,
+            );
           },
         ),
         ScreenUtil().setVerticalSpacing(40.h),

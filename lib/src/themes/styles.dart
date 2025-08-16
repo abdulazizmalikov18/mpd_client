@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:mpd_client/core/extension/context_ext.dart';
 
-
 class Styles {
   Styles._();
 

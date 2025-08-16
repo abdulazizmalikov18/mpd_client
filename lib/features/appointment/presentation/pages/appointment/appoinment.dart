@@ -47,9 +47,7 @@ class _AppointmentPageState extends State<AppointmentPage>
           centerTitle: false,
           title: Text(
             context.l10n.appointment_main_page,
-            style: Styles.headline4.copyWith(
-              color: context.color.black,
-            ),
+            style: Styles.headline4.copyWith(color: context.color.black),
           ),
           bottom: PreferredSize(
             preferredSize: Size(double.maxFinite, 56.h),
@@ -64,12 +62,13 @@ class _AppointmentPageState extends State<AppointmentPage>
               child: TabBar(
                 isScrollable:
                     context.read<LocalProvider>().locale == const Locale('en')
-                        ? false
-                        : true,
+                    ? false
+                    : true,
                 padding: const EdgeInsets.all(4),
                 indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.r),
-                    color: context.color.white),
+                  borderRadius: BorderRadius.circular(8.r),
+                  color: context.color.white,
+                ),
                 indicatorColor: Colors.transparent,
                 tabs: [
                   Tab(
@@ -83,27 +82,31 @@ class _AppointmentPageState extends State<AppointmentPage>
                   Tab(
                     child: Text(
                       context.l10n.appointment_complited,
-                      style: Styles.descSubtitle
-                          .copyWith(color: context.color.black),
+                      style: Styles.descSubtitle.copyWith(
+                        color: context.color.black,
+                      ),
                     ),
                   ),
                   Tab(
                     child: Text(
                       context.l10n.appointment_canceled,
-                      style: Styles.descSubtitle
-                          .copyWith(color: context.color.black),
+                      style: Styles.descSubtitle.copyWith(
+                        color: context.color.black,
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
           ),
         ),
-        body: TabBarView(children: [
-          _buildUpcomingAppointments(),
-          _buildCompletedAppointments(),
-          _buildCanceledAppointments()
-        ]),
+        body: TabBarView(
+          children: [
+            _buildUpcomingAppointments(),
+            _buildCompletedAppointments(),
+            _buildCanceledAppointments(),
+          ],
+        ),
       ),
     );
   }
@@ -116,18 +119,18 @@ class _AppointmentPageState extends State<AppointmentPage>
             title: context.l10n.appointment_server_error,
             subtitle: context.l10n.appointment_server_error_description,
             buttonName: context.l10n.appointment_server_error_reload,
-            onPressed: () => context
-                .read<AppoinmentsBloc>()
-                .add(const GetAppoinmentsEvent()),
+            onPressed: () => context.read<AppoinmentsBloc>().add(
+              const GetAppoinmentsEvent(),
+            ),
             isServer: true,
           );
         } else if (state.status.isSuccess) {
           if (state.appoinments.isEmpty) {
             return NoAppointment(
               onRefresh: () {
-                context
-                    .read<AppoinmentsBloc>()
-                    .add(const GetAppoinmentsEvent());
+                context.read<AppoinmentsBloc>().add(
+                  const GetAppoinmentsEvent(),
+                );
               },
               title: context.l10n.appointment_upcoming_title,
               subtitle: context.l10n.appointment_upcoming_subtitle,
@@ -148,9 +151,9 @@ class _AppointmentPageState extends State<AppointmentPage>
             hasReachedMax: state.count > state.appoinments.length,
             appointments: state.appoinments,
             scrollEndFunction: () {
-              context
-                  .read<AppoinmentsBloc>()
-                  .add(const GetAppoinmentsEvent(getMore: true));
+              context.read<AppoinmentsBloc>().add(
+                const GetAppoinmentsEvent(getMore: true),
+              );
             },
             paginatorStatus: state.status,
           );
@@ -168,18 +171,18 @@ class _AppointmentPageState extends State<AppointmentPage>
             title: context.l10n.appointment_server_error,
             subtitle: context.l10n.appointment_server_error_description,
             buttonName: context.l10n.appointment_server_error_reload,
-            onPressed: () => context
-                .read<AppoinmentsBloc>()
-                .add(const GetAppoinmentsCompletedEvent()),
+            onPressed: () => context.read<AppoinmentsBloc>().add(
+              const GetAppoinmentsCompletedEvent(),
+            ),
             isServer: true,
           );
         } else if (state.statusCompleted.isSuccess) {
           if (state.appoinmentsCompleted.isEmpty) {
             return NoAppointment(
               onRefresh: () {
-                context
-                    .read<AppoinmentsBloc>()
-                    .add(const GetAppoinmentsCompletedEvent());
+                context.read<AppoinmentsBloc>().add(
+                  const GetAppoinmentsCompletedEvent(),
+                );
               },
               title: context.l10n.appointment_upcoming_title,
               subtitle: context.l10n.appointment_upcoming_subtitle,
@@ -194,18 +197,18 @@ class _AppointmentPageState extends State<AppointmentPage>
           return AppointmentList(
             infoIndex: 1,
             onRefresh: () async {
-              context
-                  .read<AppoinmentsBloc>()
-                  .add(const GetAppoinmentsCompletedEvent());
+              context.read<AppoinmentsBloc>().add(
+                const GetAppoinmentsCompletedEvent(),
+              );
               await context.read<AppoinmentsBloc>().stream.first;
             },
             hasReachedMax:
                 state.countCompleted > state.appoinmentsCompleted.length,
             appointments: state.appoinmentsCompleted,
             scrollEndFunction: () {
-              context
-                  .read<AppoinmentsBloc>()
-                  .add(const GetAppoinmentsCompletedEvent(getMore: true));
+              context.read<AppoinmentsBloc>().add(
+                const GetAppoinmentsCompletedEvent(getMore: true),
+              );
             },
             paginatorStatus: state.statusCompleted,
           );
@@ -223,18 +226,18 @@ class _AppointmentPageState extends State<AppointmentPage>
             title: context.l10n.appointment_server_error,
             subtitle: context.l10n.appointment_server_error_description,
             buttonName: context.l10n.appointment_server_error_reload,
-            onPressed: () => context
-                .read<AppoinmentsBloc>()
-                .add(const GetAppoinmentsCanceledEvent()),
+            onPressed: () => context.read<AppoinmentsBloc>().add(
+              const GetAppoinmentsCanceledEvent(),
+            ),
             isServer: true,
           );
         } else if (state.statusCancel.isSuccess) {
           if (state.appoinmentsCancel.isEmpty) {
             return NoAppointment(
               onRefresh: () {
-                context
-                    .read<AppoinmentsBloc>()
-                    .add(const GetAppoinmentsCanceledEvent());
+                context.read<AppoinmentsBloc>().add(
+                  const GetAppoinmentsCanceledEvent(),
+                );
               },
               title: context.l10n.appointment_upcoming_title,
               subtitle: context.l10n.appointment_upcoming_subtitle,
@@ -249,17 +252,17 @@ class _AppointmentPageState extends State<AppointmentPage>
           return AppointmentList(
             infoIndex: 2,
             onRefresh: () async {
-              context
-                  .read<AppoinmentsBloc>()
-                  .add(const GetAppoinmentsCanceledEvent());
+              context.read<AppoinmentsBloc>().add(
+                const GetAppoinmentsCanceledEvent(),
+              );
               await context.read<AppoinmentsBloc>().stream.first;
             },
             hasReachedMax: state.countCancel > state.appoinmentsCancel.length,
             appointments: state.appoinmentsCancel,
             scrollEndFunction: () {
-              context
-                  .read<AppoinmentsBloc>()
-                  .add(const GetAppoinmentsCanceledEvent(getMore: true));
+              context.read<AppoinmentsBloc>().add(
+                const GetAppoinmentsCanceledEvent(getMore: true),
+              );
             },
             paginatorStatus: state.statusCancel,
           );
@@ -378,9 +381,6 @@ class _AppointmentPageState extends State<AppointmentPage>
   @override
   bool get wantKeepAlive => true;
 }
-
-
-
 
 //! Filteration appointment UI
 /*

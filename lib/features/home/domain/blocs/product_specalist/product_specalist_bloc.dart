@@ -12,7 +12,7 @@ class ProductSpecalistBloc
     extends Bloc<ProductSpecalistEvent, ProductSpecalistState> {
   final HomeRepository _homeRepository;
   ProductSpecalistBloc(this._homeRepository)
-      : super(const ProductSpecalistState()) {
+    : super(const ProductSpecalistState()) {
     on<InsertProductEvent>(_onInsertProduct);
     on<IncrementProductEvent>(_onIncrementProduct);
     on<DicrementProductEvent>(_onDicrementProduct);
@@ -20,8 +20,10 @@ class ProductSpecalistBloc
     on<GetProductOfferingEvent>(_onGetProductOffering);
   }
 
-  Future<void> _onGetProductOffering(GetProductOfferingEvent event,
-      Emitter<ProductSpecalistState> emit) async {
+  Future<void> _onGetProductOffering(
+    GetProductOfferingEvent event,
+    Emitter<ProductSpecalistState> emit,
+  ) async {
     if (!event.isMore) {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     }
@@ -34,20 +36,24 @@ class ProductSpecalistBloc
     final result = await _homeRepository.getSpecialistProducts(model);
 
     if (result.isRight) {
-      emit(state.copyWith(
-        specialistProducts: event.isMore
-            ? [...state.specialistProducts, ...result.right.results]
-            : result.right.results,
-        count: result.right.count,
-        status: FormzSubmissionStatus.success,
-      ));
+      emit(
+        state.copyWith(
+          specialistProducts: event.isMore
+              ? [...state.specialistProducts, ...result.right.results]
+              : result.right.results,
+          count: result.right.count,
+          status: FormzSubmissionStatus.success,
+        ),
+      );
     } else {
       emit(state.copyWith(status: FormzSubmissionStatus.failure));
     }
   }
 
-  Future<void> _onGetProductSpecalist(GetProductSpecalistEvent event,
-      Emitter<ProductSpecalistState> emit) async {
+  Future<void> _onGetProductSpecalist(
+    GetProductSpecalistEvent event,
+    Emitter<ProductSpecalistState> emit,
+  ) async {
     if (!event.isMore) {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     }
@@ -60,26 +66,31 @@ class ProductSpecalistBloc
     final result = await _homeRepository.getSpecialistProducts(model);
 
     if (result.isRight) {
-      emit(state.copyWith(
-        specialistProducts: event.isMore
-            ? [...state.specialistProducts, ...result.right.results]
-            : result.right.results,
-        count: result.right.count,
-        status: FormzSubmissionStatus.success,
-      ));
+      emit(
+        state.copyWith(
+          specialistProducts: event.isMore
+              ? [...state.specialistProducts, ...result.right.results]
+              : result.right.results,
+          count: result.right.count,
+          status: FormzSubmissionStatus.success,
+        ),
+      );
     } else {
       emit(state.copyWith(status: FormzSubmissionStatus.failure));
     }
   }
 
   void _onInsertProduct(
-      InsertProductEvent event, Emitter<ProductSpecalistState> emit) {
+    InsertProductEvent event,
+    Emitter<ProductSpecalistState> emit,
+  ) {
     List<LocalService> localProducts = List.from(state.localProducts);
     if (state.localProducts
         .where((element) => element.id == event.specialistProduct.id)
         .isNotEmpty) {
-      localProducts
-          .removeWhere((element) => element.id == event.specialistProduct.id);
+      localProducts.removeWhere(
+        (element) => element.id == event.specialistProduct.id,
+      );
     } else {
       localProducts.add(LocalService.format(event.specialistProduct));
     }
@@ -88,7 +99,9 @@ class ProductSpecalistBloc
   }
 
   void _onIncrementProduct(
-      IncrementProductEvent event, Emitter<ProductSpecalistState> emit) {
+    IncrementProductEvent event,
+    Emitter<ProductSpecalistState> emit,
+  ) {
     List<LocalService> localProducts = List.from(state.localProducts);
     for (var el in localProducts) {
       if (el.id == event.id) {
@@ -99,10 +112,13 @@ class ProductSpecalistBloc
   }
 
   void _onDicrementProduct(
-      DicrementProductEvent event, Emitter<ProductSpecalistState> emit) {
+    DicrementProductEvent event,
+    Emitter<ProductSpecalistState> emit,
+  ) {
     List<LocalService> localProducts = List.from(state.localProducts);
-    LocalService selectedDicrement =
-        localProducts.singleWhere((e) => e.id == event.id);
+    LocalService selectedDicrement = localProducts.singleWhere(
+      (e) => e.id == event.id,
+    );
     selectedDicrement.count -= event.count;
 
     if (selectedDicrement.count == 0) {

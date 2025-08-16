@@ -19,9 +19,7 @@ class _SelectGenderUserState extends State<SelectGenderUser> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(
-            left: 16.w,
-          ),
+          padding: EdgeInsets.only(left: 16.w),
           child: Text(
             context.l10n.profile_gender,
             style: Styles.boldTopHint.copyWith(color: context.color.black),
@@ -64,7 +62,7 @@ class _SelectGenderUserState extends State<SelectGenderUser> {
               ),
             ],
           ),
-        )
+        ),
       ],
     );
   }

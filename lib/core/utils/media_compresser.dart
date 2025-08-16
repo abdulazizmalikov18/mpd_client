@@ -28,10 +28,11 @@ class MediaCompresser {
   }
 
   static Future<Uint8List> compressVideo(String path) async {
-    Uint8List result = (await VideoCompress.getByteThumbnail(path,
-        quality: 50, // default(100)
-        position: -1 // default(-1)
-        ))!;
+    Uint8List result = (await VideoCompress.getByteThumbnail(
+      path,
+      quality: 50, // default(100)
+      position: -1, // default(-1)
+    ))!;
 
     return result;
   }

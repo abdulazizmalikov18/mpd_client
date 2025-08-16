@@ -27,8 +27,9 @@ class DrProfileInfo extends StatelessWidget {
             height: 64.h,
             width: 64.h,
             decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: context.color.mainBlue.withValues(alpha: 0.1)),
+              shape: BoxShape.circle,
+              color: context.color.mainBlue.withValues(alpha: 0.1),
+            ),
             child: iconName.svg(
               width: 24,
               height: 24,
@@ -39,13 +40,15 @@ class DrProfileInfo extends StatelessWidget {
           Text(
             count.toString(),
             style: Styles.descSubtitle.copyWith(
-                color: context.color.mainBlue, fontWeight: FontWeight.w500),
+              color: context.color.mainBlue,
+              fontWeight: FontWeight.w500,
+            ),
           ),
           ScreenUtil().setVerticalSpacing(2.h),
           Text(
             label,
             style: Styles.bottomLabel.copyWith(color: context.color.black),
-          )
+          ),
         ],
       ),
     );
@@ -66,23 +69,27 @@ class DrProfileInfoLoading extends StatelessWidget {
             height: 64.h,
             width: 64.h,
             decoration: BoxDecoration(
-                shape: BoxShape.circle, color: context.color.white),
+              shape: BoxShape.circle,
+              color: context.color.white,
+            ),
           ),
           ScreenUtil().setVerticalSpacing(10.h),
           Container(
             height: 19.h,
             width: 75.w,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.r),
-                color: context.color.white),
+              borderRadius: BorderRadius.circular(10.r),
+              color: context.color.white,
+            ),
           ),
           ScreenUtil().setVerticalSpacing(2.h),
           Container(
             height: 14.h,
             width: 75.w,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.r),
-                color: context.color.white),
+              borderRadius: BorderRadius.circular(10.r),
+              color: context.color.white,
+            ),
           ),
         ],
       ),

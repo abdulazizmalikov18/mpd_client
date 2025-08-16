@@ -19,15 +19,18 @@ class RecordFile extends StatelessWidget {
       width: double.maxFinite,
       margin: EdgeInsets.symmetric(horizontal: 16.w),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
-          color: context.color.white),
+        borderRadius: BorderRadius.circular(12.r),
+        color: context.color.white,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Prescription',
-            style: Styles.boldTopHint
-                .copyWith(fontSize: 16.sp, color: context.color.black),
+            style: Styles.boldTopHint.copyWith(
+              fontSize: 16.sp,
+              color: context.color.black,
+            ),
           ),
           ScreenUtil().setVerticalSpacing(4.h),
           DrProfileDocument(

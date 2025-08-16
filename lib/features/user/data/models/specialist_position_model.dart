@@ -50,10 +50,7 @@ class Org {
   @JsonKey(name: "name")
   final String name;
 
-  const Org({
-    this.id = 0,
-    this.name = "",
-  });
+  const Org({this.id = 0, this.name = ""});
 
   factory Org.fromJson(Map<String, dynamic> json) => _$OrgFromJson(json);
 

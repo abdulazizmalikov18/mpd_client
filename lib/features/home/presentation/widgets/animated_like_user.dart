@@ -13,14 +13,15 @@ class AnimatedLikeIconUser extends StatefulWidget {
   final bool isLiked;
   final int postId;
   final int baseIndex;
- final Color? colorUnLiked;
+  final Color? colorUnLiked;
   final VoidCallback onTap;
   const AnimatedLikeIconUser({
     super.key,
     required this.isLiked,
     required this.postId,
     required this.baseIndex,
-    required this.onTap, this.colorUnLiked,
+    required this.onTap,
+    this.colorUnLiked,
   });
 
   @override
@@ -54,16 +55,17 @@ class _AnimatedFollowIconState extends State<AnimatedLikeIconUser>
     return IconButton(
       onPressed: () {
         if (!widget.isLiked) {
-          _animationController
-              .forward()
-              .then((value) => _animationController.reverse());
+          _animationController.forward().then(
+            (value) => _animationController.reverse(),
+          );
         }
-        context
-            .read<PostBloc>()
-            .add(MediaLikePressedUser(index: widget.baseIndex));
+        context.read<PostBloc>().add(
+          MediaLikePressedUser(index: widget.baseIndex),
+        );
         // context.read<PostUiBloc>().add(PostLikeUnlikeEvent());
         context.read<LikeUnlikeBloc>().add(
-            LikeUnlikePressed(postId: widget.postId, isLiked: widget.isLiked));
+          LikeUnlikePressed(postId: widget.postId, isLiked: widget.isLiked),
+        );
         widget.onTap();
       },
       padding: EdgeInsets.zero,
@@ -75,7 +77,9 @@ class _AnimatedFollowIconState extends State<AnimatedLikeIconUser>
         child: SvgPicture.asset(
           widget.isLiked ? AppIcons.liked : AppIcons.unliked,
           height: 20.h,
-          color: widget.isLiked ? context.color.red :widget.colorUnLiked?? context.color.grey,
+          color: widget.isLiked
+              ? context.color.red
+              : widget.colorUnLiked ?? context.color.grey,
         ),
       ),
     );

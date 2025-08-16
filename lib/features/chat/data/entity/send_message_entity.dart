@@ -7,16 +7,10 @@ class SendMessageEntity {
   File? file;
   String slugName;
 
-  SendMessageEntity({
-    required this.text,
-    required this.slugName,
-    this.file,
-  });
+  SendMessageEntity({required this.text, required this.slugName, this.file});
 
   FormData toData() {
-    final data = FormData.fromMap({
-      "text": text,
-    });
+    final data = FormData.fromMap({"text": text});
     if (file != null) {
       data.files.add(
         MapEntry(

@@ -25,35 +25,47 @@ class _AppointmentTimeWidgetState extends State<AppointmentTimeWidget> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
-          color: widget.isBooked ? context.color.background : context.color.white,
-          gradient: widget.selected
-              ?  LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [context.color.gradientBlueOpacity, context.color.gradientBlue])
-              : null,
-          border: widget.isBooked
-              ? Border.all(width: 1, color: context.color.grey)
-              : !widget.selected
-                  ? Border.all(width: 1, color: context.color.transparentBorder)
-                  : Border.all(width: 1, color: Colors.transparent)),
+        borderRadius: BorderRadius.circular(12.r),
+        color: widget.isBooked ? context.color.background : context.color.white,
+        gradient: widget.selected
+            ? LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  context.color.gradientBlueOpacity,
+                  context.color.gradientBlue,
+                ],
+              )
+            : null,
+        border: widget.isBooked
+            ? Border.all(width: 1, color: context.color.grey)
+            : !widget.selected
+            ? Border.all(width: 1, color: context.color.transparentBorder)
+            : Border.all(width: 1, color: Colors.transparent),
+      ),
       // height: 42.h,
       // width: 112.w,
       child: CustomPaint(
-        foregroundPainter: widget.isBooked ? LinePainter(color: context.color.grey) : null,
+        foregroundPainter: widget.isBooked
+            ? LinePainter(color: context.color.grey)
+            : null,
         child: TextButton(
-          style: TextButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r))),
+          style: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+          ),
           onPressed: widget.isBooked ? null : widget.onTap,
           child: Text(
             widget.time,
             style: Styles.headline7.copyWith(
-                fontSize: 14.sp,
-                color: widget.isBooked
-                    ? context.color.grey
-                    : widget.selected
-                        ? context.color.white
-                        : context.color.black),
+              fontSize: 14.sp,
+              color: widget.isBooked
+                  ? context.color.grey
+                  : widget.selected
+                  ? context.color.white
+                  : context.color.black,
+            ),
           ),
         ),
       ),

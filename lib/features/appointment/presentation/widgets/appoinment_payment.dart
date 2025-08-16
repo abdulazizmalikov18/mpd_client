@@ -23,108 +23,109 @@ class AppointmentPaymentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
-        margin: EdgeInsets.fromLTRB(16.w, 0, 16.w, 12.h),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
-          color: context.color.white,
-        ),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
+      padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
+      margin: EdgeInsets.fromLTRB(16.w, 0, 16.w, 12.h),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12.r),
+        color: context.color.white,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            context.l10n.appointment_payment,
+            style: Styles.boldHeadline6.copyWith(color: context.color.black),
+          ),
+          ScreenUtil().setVerticalSpacing(12.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(context.l10n.appointment_payment,
-                  style: Styles.boldHeadline6.copyWith(
-                    color: context.color.black,
-                  )),
-              ScreenUtil().setVerticalSpacing(12.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    context.l10n.appointment_amount,
-                    style: Styles.descSubtitle
-                        .copyWith(fontSize: 14.sp, color: context.color.grey),
-                  ),
-                  Text(
-                    amount,
-                    style: Styles.boldHeadline6.copyWith(
-                      color: context.color.black,
-                      fontSize: 14.sp,
-                    ),
-                  ),
-                ],
+              Text(
+                context.l10n.appointment_amount,
+                style: Styles.descSubtitle.copyWith(
+                  fontSize: 14.sp,
+                  color: context.color.grey,
+                ),
               ),
-              ScreenUtil().setVerticalSpacing(12.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    context.l10n.appointment_discount_coupons,
-                    style: Styles.descSubtitle
-                        .copyWith(fontSize: 14.sp, color: context.color.grey),
-                  ),
-                  Text(
-                    discount,
-                    style: Styles.boldHeadline6.copyWith(
-                      color: context.color.black,
-                      fontSize: 14.sp,
-                    ),
-                  ),
-                ],
+              Text(
+                amount,
+                style: Styles.boldHeadline6.copyWith(
+                  color: context.color.black,
+                  fontSize: 14.sp,
+                ),
               ),
-              ScreenUtil().setVerticalSpacing(12.h),
+            ],
+          ),
+          ScreenUtil().setVerticalSpacing(12.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                context.l10n.appointment_discount_coupons,
+                style: Styles.descSubtitle.copyWith(
+                  fontSize: 14.sp,
+                  color: context.color.grey,
+                ),
+              ),
+              Text(
+                discount,
+                style: Styles.boldHeadline6.copyWith(
+                  color: context.color.black,
+                  fontSize: 14.sp,
+                ),
+              ),
+            ],
+          ),
+          ScreenUtil().setVerticalSpacing(12.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                context.l10n.appointment_payment_method,
+                style: Styles.descSubtitle.copyWith(
+                  fontSize: 14.sp,
+                  color: context.color.grey,
+                ),
+              ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    context.l10n.appointment_payment_method,
-                    style: Styles.descSubtitle
-                        .copyWith(fontSize: 14.sp, color: context.color.grey),
-                  ),
-                  Row(
-                    children: [
-                      Image.asset(
-                        paymentMethod,
-                        height: 24.h,
-                        fit: BoxFit.fill,
+                  Image.asset(paymentMethod, height: 24.h, fit: BoxFit.fill),
+                  if (isCash) ScreenUtil().setHorizontalSpacing(8.w),
+                  if (isCash)
+                    Text(
+                      'Cash',
+                      style: Styles.boldHeadline6.copyWith(
+                        color: context.color.black,
+                        fontSize: 14.sp,
                       ),
-                      if (isCash) ScreenUtil().setHorizontalSpacing(8.w),
-                      if (isCash)
-                        Text(
-                          'Cash',
-                          style: Styles.boldHeadline6.copyWith(
-                            color: context.color.black,
-                            fontSize: 14.sp,
-                          ),
-                        ),
-                    ],
-                  )
+                    ),
                 ],
               ),
-              ScreenUtil().setVerticalSpacing(12.h),
-              Divider(
-                height: 1.h,
-                color: context.color.dividerColor,
+            ],
+          ),
+          ScreenUtil().setVerticalSpacing(12.h),
+          Divider(height: 1.h, color: context.color.dividerColor),
+          ScreenUtil().setVerticalSpacing(12.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                context.l10n.appointment_total,
+                style: Styles.boldHeadline6.copyWith(
+                  color: context.color.black,
+                ),
               ),
-              ScreenUtil().setVerticalSpacing(12.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    context.l10n.appointment_total,
-                    style: Styles.boldHeadline6.copyWith(
-                      color: context.color.black,
-                    ),
-                  ),
-                  Text(
-                    total,
-                    style: Styles.boldHeadline6.copyWith(
-                      color: context.color.black,
-                    ),
-                  ),
-                ],
+              Text(
+                total,
+                style: Styles.boldHeadline6.copyWith(
+                  color: context.color.black,
+                ),
               ),
-            ]));
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

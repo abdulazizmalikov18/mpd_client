@@ -33,29 +33,28 @@ class TimetableState extends Equatable {
     final String? comment,
     final Status? status,
     final String? failure,
-  }) =>
-      TimetableState(
-        specialistId: specialistId ?? this.specialistId,
-        specTimetable: specTimetable ?? this.specTimetable,
-        datetime: datetime ?? this.datetime,
-        selectedTime: selectedTime ?? this.selectedTime,
-        focusedDay: focusedDay ?? this.focusedDay,
-        calendarFormat: calendarFormat ?? this.calendarFormat,
-        comment: comment ?? this.comment,
-        status: status ?? this.status,
-        failure: failure ?? this.failure,
-      );
+  }) => TimetableState(
+    specialistId: specialistId ?? this.specialistId,
+    specTimetable: specTimetable ?? this.specTimetable,
+    datetime: datetime ?? this.datetime,
+    selectedTime: selectedTime ?? this.selectedTime,
+    focusedDay: focusedDay ?? this.focusedDay,
+    calendarFormat: calendarFormat ?? this.calendarFormat,
+    comment: comment ?? this.comment,
+    status: status ?? this.status,
+    failure: failure ?? this.failure,
+  );
 
   @override
   List<Object?> get props => [
-        specialistId,
-        specTimetable,
-        datetime,
-        selectedTime,
-        focusedDay,
-        comment,
-        calendarFormat,
-        status,
-        failure
-      ];
+    specialistId,
+    specTimetable,
+    datetime,
+    selectedTime,
+    focusedDay,
+    comment,
+    calendarFormat,
+    status,
+    failure,
+  ];
 }

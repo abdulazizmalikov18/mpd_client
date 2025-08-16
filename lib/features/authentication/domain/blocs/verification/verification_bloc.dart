@@ -13,7 +13,9 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
   final AuthRepository _repository;
 
   Future<void> _onCheckCode(
-      CheckCodeEvent event, Emitter<VerificationState> emit) async {
+    CheckCodeEvent event,
+    Emitter<VerificationState> emit,
+  ) async {
     emit(state.copyWith(showLoading: true, error: ''));
     final phone =
         '+998${event.phone.replaceAll('-', '').replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '')}';
@@ -21,10 +23,13 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
 
     final result = await _repository.verification(phone, event.code);
     if (result.isRight) {
-      emit(state.copyWith(
+      emit(
+        state.copyWith(
           showLoading: false,
           isNewUser: result.right.access != null ? false : true,
-          error: 'No'));
+          error: 'No',
+        ),
+      );
     } else {
       emit(state.copyWith(error: result.left.message, showLoading: false));
     }

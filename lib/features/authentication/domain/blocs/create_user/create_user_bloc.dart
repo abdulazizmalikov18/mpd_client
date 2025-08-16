@@ -10,13 +10,13 @@ part 'create_user_state.dart';
 
 class CreateUserBloc extends Bloc<CreateUserEvent, CreateUserState> {
   CreateUserBloc(
-      this._userNameController,
-      this._firstNameController,
-      this._lastNameController,
-      this._birthController,
-      this._repository,
-      this._formKey)
-      : super(const CreateUserState()) {
+    this._userNameController,
+    this._firstNameController,
+    this._lastNameController,
+    this._birthController,
+    this._repository,
+    this._formKey,
+  ) : super(const CreateUserState()) {
     on<SelectingGenderEvent>(_onSelectGender);
     on<SelectingBirthEvent>(_onSelectingDateTime);
     on<ForCreateUserEvent>(_onCreateUserButtonPressed);
@@ -37,23 +37,30 @@ class CreateUserBloc extends Bloc<CreateUserEvent, CreateUserState> {
   TextEditingController get birthController => _birthController;
 
   void _onSelectGender(
-      SelectingGenderEvent event, Emitter<CreateUserState> emit) {
+    SelectingGenderEvent event,
+    Emitter<CreateUserState> emit,
+  ) {
     emit(state.copyWith(gender: event.gender));
   }
 
   void _onSelectingDateTime(
-      SelectingBirthEvent event, Emitter<CreateUserState> emit) {
+    SelectingBirthEvent event,
+    Emitter<CreateUserState> emit,
+  ) {
     final dateString = Utils.formatDateTime(event.dateTime);
     _birthController.value = TextEditingValue(text: dateString);
   }
 
   Future<void> _onCreateUserButtonPressed(
-      ForCreateUserEvent event, Emitter<CreateUserState> emit) async {
+    ForCreateUserEvent event,
+    Emitter<CreateUserState> emit,
+  ) async {
     emit(state.copyWith(error: '', gender: state.gender));
     if (_formKey.currentState!.validate()) {
       emit(state.copyWith(showLoading: true, gender: state.gender));
 
-      final result = await _repository.createUser(CreateUserFormModel(
+      final result = await _repository.createUser(
+        CreateUserFormModel(
           username: _userNameController.text,
           name: _firstNameController.text,
           lastname: _lastNameController.text,
@@ -63,16 +70,22 @@ class CreateUserBloc extends Bloc<CreateUserEvent, CreateUserState> {
           mainCat: event.mainCategory,
           region: event.region,
           phone: event.phone,
-          password: event.password));
+          password: event.password,
+        ),
+      );
 
       if (result.isRight) {
-        emit(state.copyWith(
-            showLoading: false, error: 'No', gender: state.gender));
+        emit(
+          state.copyWith(showLoading: false, error: 'No', gender: state.gender),
+        );
       } else {
-        emit(state.copyWith(
+        emit(
+          state.copyWith(
             error: result.left.message,
             showLoading: false,
-            gender: state.gender));
+            gender: state.gender,
+          ),
+        );
       }
     }
   }

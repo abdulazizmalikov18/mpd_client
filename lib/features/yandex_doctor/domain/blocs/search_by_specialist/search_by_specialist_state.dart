@@ -22,6 +22,8 @@ class SearchBySpecialistSuccess extends SearchBySpecialistState {
 
 class SearchBySpecialistFailure extends SearchBySpecialistState {
   final String failure;
-  const SearchBySpecialistFailure(super.searchedSpecialists,
-      {required this.failure});
+  const SearchBySpecialistFailure(
+    super.searchedSpecialists, {
+    required this.failure,
+  });
 }

@@ -44,9 +44,7 @@ class _UserPostViewState extends State<UserPostView> {
                   errorTitle: context.l10n.error_internal_server_title,
                   hasReturnButton: false,
                   tryAgainPressed: () {
-                    context.read<PostBloc>().add(
-                          PostFetched(true),
-                        );
+                    context.read<PostBloc>().add(PostFetched(true));
                   },
                 ),
               );
@@ -57,9 +55,9 @@ class _UserPostViewState extends State<UserPostView> {
                   subtitle: "No Posts",
                   buttonName: "Refresh",
                   onPressed: () {
-                    context
-                        .read<PostBloc>()
-                        .add(PostFetchedUser(username: widget.username));
+                    context.read<PostBloc>().add(
+                      PostFetchedUser(username: widget.username),
+                    );
                   },
                 );
               }
@@ -104,12 +102,15 @@ class _UserPostViewState extends State<UserPostView> {
                         );
                       },
                       child: CachedNetworkImage(
-                        imageUrl: (state.postsUser[index].media?.isNotEmpty ??
-                                false)
+                        imageUrl:
+                            (state.postsUser[index].media?.isNotEmpty ?? false)
                             ? (state.postsUser[index].media?.first.image ??
-                                    state.postsUser[index].media?.first
-                                        .screenshot) ??
-                                "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13"
+                                      state
+                                          .postsUser[index]
+                                          .media
+                                          ?.first
+                                          .screenshot) ??
+                                  "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13"
                             : "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
                         fit: BoxFit.cover,
                         errorWidget: (context, url, error) =>
@@ -118,10 +119,12 @@ class _UserPostViewState extends State<UserPostView> {
                     ),
                     paginatorStatus: FormzSubmissionStatus.success,
                     fetchMoreFunction: () {
-                      context.read<PostBloc>().add(PostFetchedUser(
-                            username: widget.username,
-                            isMore: true,
-                          ));
+                      context.read<PostBloc>().add(
+                        PostFetchedUser(
+                          username: widget.username,
+                          isMore: true,
+                        ),
+                      );
                     },
                     hasMoreToFetch: state.count > state.postsUser.length,
                   ),

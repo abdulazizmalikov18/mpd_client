@@ -59,15 +59,17 @@ class DoctorProfileModel {
         lastname: json["lastname"],
         avatar: json["avatar"],
         phone: json["phone"],
-        currentWorkplace:
-            List<dynamic>.from(json["current_workplace"].map((x) => x)),
+        currentWorkplace: List<dynamic>.from(
+          json["current_workplace"].map((x) => x),
+        ),
         user: json["user"],
         job: json["job"] == null ? const Job() : Job.fromMap(json["job"]),
         specCat: json["spec_cat"] != null
             ? SpecCat.fromMap(json["spec_cat"])
             : const SpecCat(),
         specialistOrders: List<SpecialistOrder>.from(
-            json["specialist_orders"].map((x) => SpecialistOrder.fromMap(x))),
+          json["specialist_orders"].map((x) => SpecialistOrder.fromMap(x)),
+        ),
         isWorking: json["is_working"],
         isCatHead: json["is_cat_head"],
         operatingMode: json["operating_mode"] ?? "",
@@ -85,29 +87,29 @@ class DoctorProfileModel {
       );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
-        "name": name,
-        "lastname": lastname,
-        "avatar": avatar,
-        "phone": phone,
-        "current_workplace": List<dynamic>.from(currentWorkplace.map((x) => x)),
-        "user": user,
-        "job": job.toMap(),
-        "spec_cat": specCat.toMap(),
-        "specialist_orders": List<dynamic>.from(specialistOrders.map((x) => x)),
-        "is_working": isWorking,
-        "is_cat_head": isCatHead,
-        "operating_mode": operatingMode,
-        "position": position,
-        "auto_mode": autoMode,
-        "accepted": accepted,
-        "today_timetable": todayTimetable.toMap(),
-        "experience": experience,
-        "bio": bio,
-        "location": location,
-        "order_count": orderCount,
-        "last_location": lastLocation,
-      };
+    "id": id,
+    "name": name,
+    "lastname": lastname,
+    "avatar": avatar,
+    "phone": phone,
+    "current_workplace": List<dynamic>.from(currentWorkplace.map((x) => x)),
+    "user": user,
+    "job": job.toMap(),
+    "spec_cat": specCat.toMap(),
+    "specialist_orders": List<dynamic>.from(specialistOrders.map((x) => x)),
+    "is_working": isWorking,
+    "is_cat_head": isCatHead,
+    "operating_mode": operatingMode,
+    "position": position,
+    "auto_mode": autoMode,
+    "accepted": accepted,
+    "today_timetable": todayTimetable.toMap(),
+    "experience": experience,
+    "bio": bio,
+    "location": location,
+    "order_count": orderCount,
+    "last_location": lastLocation,
+  };
 }
 
 class Job {
@@ -138,32 +140,32 @@ class Job {
   });
 
   factory Job.fromMap(Map<String, dynamic> json) => Job(
-        id: json["id"],
-        name: json["name"],
-        description: json["description"] ?? "",
-        hideFromOrgs: json["hide_from_orgs"],
-        hideFromUsers: json["hide_from_users"],
-        image: json["image"] ?? "",
-        status: json["status"],
-        firstLevelScore: json["first_level_score"],
-        levelProgressBy: json["level_progress_by"],
-        creator: json["creator"] ?? "",
-        parent: json["parent"],
-      );
+    id: json["id"],
+    name: json["name"],
+    description: json["description"] ?? "",
+    hideFromOrgs: json["hide_from_orgs"],
+    hideFromUsers: json["hide_from_users"],
+    image: json["image"] ?? "",
+    status: json["status"],
+    firstLevelScore: json["first_level_score"],
+    levelProgressBy: json["level_progress_by"],
+    creator: json["creator"] ?? "",
+    parent: json["parent"],
+  );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
-        "name": name,
-        "description": description,
-        "hide_from_orgs": hideFromOrgs,
-        "hide_from_users": hideFromUsers,
-        "image": image,
-        "status": status,
-        "first_level_score": firstLevelScore,
-        "level_progress_by": levelProgressBy,
-        "creator": creator,
-        "parent": parent,
-      };
+    "id": id,
+    "name": name,
+    "description": description,
+    "hide_from_orgs": hideFromOrgs,
+    "hide_from_users": hideFromUsers,
+    "image": image,
+    "status": status,
+    "first_level_score": firstLevelScore,
+    "level_progress_by": levelProgressBy,
+    "creator": creator,
+    "parent": parent,
+  };
 }
 
 class SpecCat {
@@ -171,23 +173,19 @@ class SpecCat {
   final String name;
   final int specialistCount;
 
-  const SpecCat({
-    this.id = 0,
-    this.name = "",
-    this.specialistCount = 0,
-  });
+  const SpecCat({this.id = 0, this.name = "", this.specialistCount = 0});
 
   factory SpecCat.fromMap(Map<String, dynamic> json) => SpecCat(
-        id: json["id"],
-        name: json["name"],
-        specialistCount: json["specialist_count"],
-      );
+    id: json["id"],
+    name: json["name"],
+    specialistCount: json["specialist_count"],
+  );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
-        "name": name,
-        "specialist_count": specialistCount,
-      };
+    "id": id,
+    "name": name,
+    "specialist_count": specialistCount,
+  };
 }
 
 class TodayTimetable {
@@ -212,26 +210,26 @@ class TodayTimetable {
   });
 
   factory TodayTimetable.fromMap(Map<String, dynamic> json) => TodayTimetable(
-        id: json["id"],
-        dayOfWeek: json["day_of_week"],
-        startTime: json["start_time"],
-        endTime: json["end_time"],
-        isWorking: json["is_working"],
-        repeatDayOff: json["repeat_day_off"],
-        procInterval: json["proc_interval"],
-        spec: json["spec"],
-      );
+    id: json["id"],
+    dayOfWeek: json["day_of_week"],
+    startTime: json["start_time"],
+    endTime: json["end_time"],
+    isWorking: json["is_working"],
+    repeatDayOff: json["repeat_day_off"],
+    procInterval: json["proc_interval"],
+    spec: json["spec"],
+  );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
-        "day_of_week": dayOfWeek,
-        "start_time": startTime,
-        "end_time": endTime,
-        "is_working": isWorking,
-        "repeat_day_off": repeatDayOff,
-        "proc_interval": procInterval,
-        "spec": spec,
-      };
+    "id": id,
+    "day_of_week": dayOfWeek,
+    "start_time": startTime,
+    "end_time": endTime,
+    "is_working": isWorking,
+    "repeat_day_off": repeatDayOff,
+    "proc_interval": procInterval,
+    "spec": spec,
+  };
 }
 
 class SpecialistOrder {
@@ -252,20 +250,20 @@ class SpecialistOrder {
   });
 
   factory SpecialistOrder.fromMap(Map<String, dynamic> json) => SpecialistOrder(
-        id: json["id"],
-        orderNumber: json["order_number"],
-        lastOrderNumber: json["last_order_number"],
-        patientNumber: json["patient_number"],
-        lastPatientNumber: json["last_patient_number"],
-        specialist: json["specialist"],
-      );
+    id: json["id"],
+    orderNumber: json["order_number"],
+    lastOrderNumber: json["last_order_number"],
+    patientNumber: json["patient_number"],
+    lastPatientNumber: json["last_patient_number"],
+    specialist: json["specialist"],
+  );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
-        "order_number": orderNumber,
-        "last_order_number": lastOrderNumber,
-        "patient_number": patientNumber,
-        "last_patient_number": lastPatientNumber,
-        "specialist": specialist,
-      };
+    "id": id,
+    "order_number": orderNumber,
+    "last_order_number": lastOrderNumber,
+    "patient_number": patientNumber,
+    "last_patient_number": lastPatientNumber,
+    "specialist": specialist,
+  };
 }

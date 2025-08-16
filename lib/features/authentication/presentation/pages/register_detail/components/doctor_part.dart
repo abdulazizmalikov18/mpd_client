@@ -24,10 +24,11 @@ class DoctorPart extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: LongButton(
-              buttonName: 'I am doctor',
-              onPress: () {
-                AuthInheritedNotifier.of(context).notifier!.currentIndex = 3;
-              }),
+            buttonName: 'I am doctor',
+            onPress: () {
+              AuthInheritedNotifier.of(context).notifier!.currentIndex = 3;
+            },
+          ),
         ),
         ScreenUtil().setVerticalSpacing(20.h),
         Center(
@@ -35,18 +36,30 @@ class DoctorPart extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('I will only buy offers?',
-                  style: Styles.headline6.copyWith(color: context.color.black, fontWeight: FontWeight.w500)),
+              Text(
+                'I will only buy offers?',
+                style: Styles.headline6.copyWith(
+                  color: context.color.black,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
               ScreenUtil().setHorizontalSpacing(5.w),
               InkWell(
                 onTap: () {
-                  Navigator.pushNamedAndRemoveUntil(context, AppRoutes.mainPage, (route) => false);
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AppRoutes.mainPage,
+                    (route) => false,
+                  );
                 },
                 child: Text(
                   'Skip',
-                  style: Styles.headline6.copyWith(color: context.color.mainBlue, fontWeight: FontWeight.w500),
+                  style: Styles.headline6.copyWith(
+                    color: context.color.mainBlue,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),

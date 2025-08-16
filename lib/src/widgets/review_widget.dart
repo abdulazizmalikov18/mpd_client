@@ -18,7 +18,12 @@ class ReviewWidget extends StatelessWidget {
   final Coment? coment;
   final SendComentState status;
   final int postId;
-  const ReviewWidget({super.key, this.coment, required this.status, this.postId = 0});
+  const ReviewWidget({
+    super.key,
+    this.coment,
+    required this.status,
+    this.postId = 0,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +37,8 @@ class ReviewWidget extends StatelessWidget {
             children: [
               coment != null
                   ? coment!.avatar != null || coment!.avatar != ''
-                      ? CachedImageWidget(url: coment!.avatar ?? "", size: 40)
-                      : const DefaultAvatar(containerSize: 40, imageSize: 28)
+                        ? CachedImageWidget(url: coment!.avatar ?? "", size: 40)
+                        : const DefaultAvatar(containerSize: 40, imageSize: 28)
                   : const DefaultAvatar(containerSize: 40, imageSize: 28),
               ScreenUtil().setHorizontalSpacing(10),
               coment != null
@@ -41,10 +46,7 @@ class ReviewWidget extends StatelessWidget {
                       '${coment!.name ?? "--"} ${coment!.lastname ?? "--"}',
                       style: Styles.boldHeadline6,
                     )
-                  : Text(
-                      'Leslie Alexader',
-                      style: Styles.boldHeadline6,
-                    ),
+                  : Text('Leslie Alexader', style: Styles.boldHeadline6),
               const Spacer(),
               Row(
                 children: [
@@ -52,10 +54,13 @@ class ReviewWidget extends StatelessWidget {
                     AppIcons.clockTransparent,
                     height: 16.h,
                     width: 16.h,
-                    colorFilter: ColorFilter.mode(context.color.grey, BlendMode.srcIn),
+                    colorFilter: ColorFilter.mode(
+                      context.color.grey,
+                      BlendMode.srcIn,
+                    ),
                   ),
                   ScreenUtil().setHorizontalSpacing(4),
-                  comentStatus(context)
+                  comentStatus(context),
                 ],
               ),
             ],
@@ -66,9 +71,18 @@ class ReviewWidget extends StatelessWidget {
           coment != null
               ? coment!.text!
               : 'Lorem ipsum dolor sit amet consectetur. Risus faucibus euismod turpis faucibus euismod elit augue interdum lacus. Dictum urna tempus dui interdum elementum dui dui  dui dui  dui duisadasdasd  dui dui',
-          style: Styles.headline7.copyWith(color: context.color.grey, fontSize: 14.sp),
-          moreStyle: Styles.headline7.copyWith(color: context.color.mainBlue, fontSize: 14.sp),
-          lessStyle: Styles.headline7.copyWith(color: context.color.mainBlue, fontSize: 14.sp),
+          style: Styles.headline7.copyWith(
+            color: context.color.grey,
+            fontSize: 14.sp,
+          ),
+          moreStyle: Styles.headline7.copyWith(
+            color: context.color.mainBlue,
+            fontSize: 14.sp,
+          ),
+          lessStyle: Styles.headline7.copyWith(
+            color: context.color.mainBlue,
+            fontSize: 14.sp,
+          ),
           trimExpandedText: context.l10n.lenth_show_less,
           trimCollapsedText: context.l10n.lenth_read_more,
           trimLines: 3,
@@ -79,7 +93,9 @@ class ReviewWidget extends StatelessWidget {
   }
 
   Widget comentStatus(BuildContext context) {
-    if (status.coment != null && status is SendComentLoading && coment!.id == status.coment!.id) {
+    if (status.coment != null &&
+        status is SendComentLoading &&
+        coment!.id == status.coment!.id) {
       return Text(
         context.l10n.lenth_publish_comment,
         style: Styles.bottomLabel.copyWith(color: context.color.grey),
@@ -91,19 +107,22 @@ class ReviewWidget extends StatelessWidget {
       );
     } else if (status is SendComentFailure && coment!.id == status.coment!.id) {
       return IconButton(
-          onPressed: () {
-            FocusScope.of(context).unfocus();
-            final oldComent = Coment(id: -1, text: coment!.text);
-            context.read<SendComentBloc>().add(SendComment(postId, oldComent));
-            context.read<PostComentBloc>().add(UpdateOldComent(oldComent, isSuccess: false));
-          },
-          icon: const Icon(Icons.refresh));
+        onPressed: () {
+          FocusScope.of(context).unfocus();
+          final oldComent = Coment(id: -1, text: coment!.text);
+          context.read<SendComentBloc>().add(SendComment(postId, oldComent));
+          context.read<PostComentBloc>().add(
+            UpdateOldComent(oldComent, isSuccess: false),
+          );
+        },
+        icon: const Icon(Icons.refresh),
+      );
     } else {
       return Text(
         coment != null
             ? coment!.date != null
-                ? Utils.formatPostDate(coment!.date!, context)
-                : Utils.formatPostDate(DateTime.now(), context)
+                  ? Utils.formatPostDate(coment!.date!, context)
+                  : Utils.formatPostDate(DateTime.now(), context)
             : '24 Dec 2022',
         style: Styles.bottomLabel.copyWith(color: context.color.grey),
       );

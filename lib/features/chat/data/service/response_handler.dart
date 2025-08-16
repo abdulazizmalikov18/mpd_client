@@ -31,8 +31,9 @@ class ServerError implements Exception {
   Failure _handleError(DioException error) {
     switch (error.type) {
       case DioExceptionType.connectionTimeout:
-        _errorFailure =
-            const ServerTimeOutFailure(message: 'Connection timeOut');
+        _errorFailure = const ServerTimeOutFailure(
+          message: 'Connection timeOut',
+        );
         break;
       case DioExceptionType.sendTimeout:
         _errorFailure = const ServerTimeOutFailure(message: 'Send timeOut');
@@ -45,10 +46,12 @@ class ServerError implements Exception {
         {
           if (error.response!.data is List) {
             _errorFailure = ServerNotFoundFailure(
-                message: error.response!.data[0]['message'].toString());
+              message: error.response!.data[0]['message'].toString(),
+            );
           } else {
-            _errorFailure =
-                ServerUnknownFailure(message: error.response!.data.toString());
+            _errorFailure = ServerUnknownFailure(
+              message: error.response!.data.toString(),
+            );
           }
           break;
         }

@@ -24,15 +24,16 @@ class UploadPost {
   int? repost;
 
   Map<String, dynamic> toJson() => {
-        "images": images == null
-            ? []
-            : List<MultipartFile>.from(images!.map((x) => x)),
-        "files":
-            files == null ? [] : List<MultipartFile>.from(files!.map((x) => x)),
-        "screenshots": screenshots == null
-            ? []
-            : List<MultipartFile>.from(screenshots!.map((e) => e)),
-        // "aspect_ratio": aspectRatio,
-        "text": text,
-      };
+    "images": images == null
+        ? []
+        : List<MultipartFile>.from(images!.map((x) => x)),
+    "files": files == null
+        ? []
+        : List<MultipartFile>.from(files!.map((x) => x)),
+    "screenshots": screenshots == null
+        ? []
+        : List<MultipartFile>.from(screenshots!.map((e) => e)),
+    // "aspect_ratio": aspectRatio,
+    "text": text,
+  };
 }

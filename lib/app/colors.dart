@@ -138,18 +138,12 @@ List<BoxShadow> wboxShadowRed = [
 LinearGradient wgradient = const LinearGradient(
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,
-  colors: [
-    Color(0xFF00B5D9),
-    Color(0xFF003CC5),
-  ],
+  colors: [Color(0xFF00B5D9), Color(0xFF003CC5)],
 );
 LinearGradient wgradientRed = const LinearGradient(
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,
-  colors: [
-    Color(0xFFFA193E),
-    Color(0xFF940F25),
-  ],
+  colors: [Color(0xFFFA193E), Color(0xFF940F25)],
 );
 
 RadialGradient radialGradient = RadialGradient(
@@ -157,10 +151,7 @@ RadialGradient radialGradient = RadialGradient(
   stops: const [0.1, 5],
   center: Alignment.centerRight,
   radius: 1.5,
-  colors: [
-    blue.withValues(alpha: .5),
-    backGroundColor.withValues(alpha: .5),
-  ],
+  colors: [blue.withValues(alpha: .5), backGroundColor.withValues(alpha: .5)],
 );
 
 BoxDecoration wdecoration = BoxDecoration(

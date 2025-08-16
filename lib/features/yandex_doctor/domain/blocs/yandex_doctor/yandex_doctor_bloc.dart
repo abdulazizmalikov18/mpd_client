@@ -10,7 +10,7 @@ part 'yandex_doctor_state.dart';
 
 class YandexDoctorBloc extends Bloc<YandexDoctorEvent, YandexDoctorState> {
   YandexDoctorBloc(this._yandexService)
-      : super(const YandexDoctorState(location: null, mapObjects: [])) {
+    : super(const YandexDoctorState(location: null, mapObjects: [])) {
     on<ClusterPlaceMarkEvent>(_onClusterizedPlaceMark);
     on<GetCurrentLocationEvent>(_onGetCurrentLocation);
     on<InsertSingleObjectEvent>(_onInsertSingleObject);
@@ -33,10 +33,10 @@ class YandexDoctorBloc extends Bloc<YandexDoctorEvent, YandexDoctorState> {
       if (speci.lastLocation != null) {
         final latitude =
             (speci.lastLocation?.latitude ?? speci.location?.latitude) ??
-                41.311015;
+            41.311015;
         final longitude =
             (speci.lastLocation?.longitude ?? speci.location?.longitude) ??
-                69.279760;
+            69.279760;
 
         final point = Point(latitude: latitude, longitude: longitude);
         singleMapSpecialist.add(speci);
@@ -51,25 +51,29 @@ class YandexDoctorBloc extends Bloc<YandexDoctorEvent, YandexDoctorState> {
       }
     }
 
-    emit(state.copyWith(
-      null,
-      mapObjects,
-      showDoctorInfo: false,
-      specialist: null,
-      zoom: 12,
-    ));
+    emit(
+      state.copyWith(
+        null,
+        mapObjects,
+        showDoctorInfo: false,
+        specialist: null,
+        zoom: 12,
+      ),
+    );
   }
 
   void _onShowDoctorInfo(
     ShowDoctorInfo event,
     Emitter<YandexDoctorState> emit,
   ) {
-    emit(state.copyWith(
-      state.location,
-      mapObjects,
-      showDoctorInfo: event.showInfo,
-      zoom: 12,
-    ));
+    emit(
+      state.copyWith(
+        state.location,
+        mapObjects,
+        showDoctorInfo: event.showInfo,
+        zoom: 12,
+      ),
+    );
   }
 
   void _onPressedMapObject(
@@ -78,13 +82,15 @@ class YandexDoctorBloc extends Bloc<YandexDoctorEvent, YandexDoctorState> {
   ) {
     for (var specialist in event.specialists) {
       if (specialist.lastLocation?.latitude == event.point.latitude) {
-        emit(state.copyWith(
-          event.point,
-          mapObjects,
-          showDoctorInfo: true,
-          specialist: specialist,
-          zoom: 20,
-        ));
+        emit(
+          state.copyWith(
+            event.point,
+            mapObjects,
+            showDoctorInfo: true,
+            specialist: specialist,
+            zoom: 20,
+          ),
+        );
       }
     }
   }
@@ -99,13 +105,15 @@ class YandexDoctorBloc extends Bloc<YandexDoctorEvent, YandexDoctorState> {
     final point = Point(latitude: latitude, longitude: longitude);
 
     if (point == state.location) {
-      emit(state.copyWith(
-        point,
-        mapObjects,
-        specialist: event.specialist,
-        showDoctorInfo: true,
-        zoom: 20,
-      ));
+      emit(
+        state.copyWith(
+          point,
+          mapObjects,
+          specialist: event.specialist,
+          showDoctorInfo: true,
+          zoom: 20,
+        ),
+      );
       return;
     }
     singleMapSpecialist.add(event.specialist);
@@ -118,13 +126,15 @@ class YandexDoctorBloc extends Bloc<YandexDoctorEvent, YandexDoctorState> {
 
     mapObjects.add(singPlacemark);
 
-    emit(state.copyWith(
-      point,
-      mapObjects,
-      showDoctorInfo: true,
-      specialist: event.specialist,
-      zoom: 20,
-    ));
+    emit(
+      state.copyWith(
+        point,
+        mapObjects,
+        showDoctorInfo: true,
+        specialist: event.specialist,
+        zoom: 20,
+      ),
+    );
   }
 
   void _onClusterizedPlaceMark(
@@ -139,35 +149,51 @@ class YandexDoctorBloc extends Bloc<YandexDoctorEvent, YandexDoctorState> {
     mapObjects.add(largeMapObject);
     debugPrint("==========>>>>>>>> bu blocda ${largeMapObject.placemarks}");
     if (largeMapObject.placemarks.isNotEmpty) {
-      emit(state.copyWith(
-        largeMapObject.placemarks.first.point,
-        mapObjects,
-        zoom: 12,
-      ));
+      emit(
+        state.copyWith(
+          largeMapObject.placemarks.first.point,
+          mapObjects,
+          zoom: 12,
+        ),
+      );
     }
   }
 
   void _onGetCurrentLocation(
-      GetCurrentLocationEvent event, Emitter<YandexDoctorState> emit) async {
+    GetCurrentLocationEvent event,
+    Emitter<YandexDoctorState> emit,
+  ) async {
     if (!await Geolocator.isLocationServiceEnabled()) {
-      return emit(state.copyWith(
-        state.location,
-        state.mapObjects,
-        failure: 'Location service is not enabled in your device',
-      ));
+      return emit(
+        state.copyWith(
+          state.location,
+          state.mapObjects,
+          failure: 'Location service is not enabled in your device',
+        ),
+      );
     }
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return emit(state.copyWith(state.location, state.mapObjects,
-            failure: 'Location permission is denied'));
+        return emit(
+          state.copyWith(
+            state.location,
+            state.mapObjects,
+            failure: 'Location permission is denied',
+          ),
+        );
       }
     }
     if (permission == LocationPermission.deniedForever) {
-      return emit(state.copyWith(state.location, state.mapObjects,
+      return emit(
+        state.copyWith(
+          state.location,
+          state.mapObjects,
           failure:
-              'Location permissions are permanently denied, we cannot request permissions.'));
+              'Location permissions are permanently denied, we cannot request permissions.',
+        ),
+      );
     }
 
     final placeMarkObjects = await _yandexService.getCurrentPosition();
@@ -175,12 +201,21 @@ class YandexDoctorBloc extends Bloc<YandexDoctorEvent, YandexDoctorState> {
     mapObjects.removeWhere((element) => element is CircleMapObject);
     mapObjects.addAll(placeMarkObjects.mapObjects);
 
-    emit(state.copyWith(placeMarkObjects.point, mapObjects,
-        isMoved: true, showDoctorInfo: false, zoom: 14.5));
+    emit(
+      state.copyWith(
+        placeMarkObjects.point,
+        mapObjects,
+        isMoved: true,
+        showDoctorInfo: false,
+        zoom: 14.5,
+      ),
+    );
   }
 
   Future<void> _onPlaceImagetoLocation(
-      PlaceImagetoLocationEvent event, Emitter<YandexDoctorState> emit) async {
+    PlaceImagetoLocationEvent event,
+    Emitter<YandexDoctorState> emit,
+  ) async {
     // for (var map in mapObjects) {
     //   if (map.mapId == const MapObjectId('me_${0}')) {
     //     await _addMyImageAndPlacemark((map as CircleMapObject).circle.center, event.imageMemory);

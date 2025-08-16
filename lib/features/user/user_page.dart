@@ -27,9 +27,9 @@ class _UserPageState extends State<UserPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    context
-        .read<UserSubscriptionsBloc>()
-        .add(const GetUserSubscriptionsEvent());
+    context.read<UserSubscriptionsBloc>().add(
+      const GetUserSubscriptionsEvent(),
+    );
   }
 
   @override
@@ -52,7 +52,8 @@ class _UserPageState extends State<UserPage> {
                       );
                     }
                     return CachedNetworkImage(
-                      imageUrl: state.userInfo?.backgroundImage ??
+                      imageUrl:
+                          state.userInfo?.backgroundImage ??
                           "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
                       fit: BoxFit.cover,
                       height: 200.h,
@@ -93,7 +94,8 @@ class _UserPageState extends State<UserPage> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Center(
                                   child: CreateQRCode(
-                                    text: context
+                                    text:
+                                        context
                                             .read<UserInfoBloc>()
                                             .state
                                             .userInfo
@@ -142,15 +144,17 @@ class _UserPageState extends State<UserPage> {
                       ? null
                       : () {
                           Navigator.of(context)
-                              .pushNamed(AppRoutes.userInfo,
-                                  arguments: state.userInfo)
+                              .pushNamed(
+                                AppRoutes.userInfo,
+                                arguments: state.userInfo,
+                              )
                               .whenComplete(() {
-                            if (context.mounted) {
-                              context
-                                  .read<UserInfoBloc>()
-                                  .add(GetUserInfoEvent());
-                            }
-                          });
+                                if (context.mounted) {
+                                  context.read<UserInfoBloc>().add(
+                                    GetUserInfoEvent(),
+                                  );
+                                }
+                              });
                         },
                 );
               },
@@ -173,8 +177,10 @@ class _UserPageState extends State<UserPage> {
                   onTap: state.status.isInProgress || state.status.isFailure
                       ? null
                       : () {
-                          Navigator.of(context).pushNamed(AppRoutes.postUser,
-                              arguments: state.userInfo?.username ?? "");
+                          Navigator.of(context).pushNamed(
+                            AppRoutes.postUser,
+                            arguments: state.userInfo?.username ?? "",
+                          );
                         },
                 );
               },
@@ -193,8 +199,7 @@ class _UserPageState extends State<UserPage> {
                     context.l10n.profile_following_doctors,
                     style: Styles.headline5,
                   ),
-                  subtitle: BlocBuilder<UserSubscriptionsBloc,
-                      UserSubscriptionsState>(
+                  subtitle: BlocBuilder<UserSubscriptionsBloc, UserSubscriptionsState>(
                     builder: (context, state) {
                       if (state is! UserSubscriptionsSuccess) {
                         return SizedBox(
@@ -207,8 +212,9 @@ class _UserPageState extends State<UserPage> {
                               style: Styles.descSubtitle.copyWith(
                                 color: !disabled
                                     ? context.color.mainBlue
-                                    : context.color.mainBlue
-                                        .withValues(alpha: 0.5),
+                                    : context.color.mainBlue.withValues(
+                                        alpha: 0.5,
+                                      ),
                               ),
                             ),
                           ),
@@ -232,8 +238,9 @@ class _UserPageState extends State<UserPage> {
                   onTap: state.status.isInProgress
                       ? null
                       : () {
-                          Navigator.of(context)
-                              .pushNamed(AppRoutes.userFollowing);
+                          Navigator.of(
+                            context,
+                          ).pushNamed(AppRoutes.userFollowing);
                         },
                 );
               },
@@ -247,14 +254,16 @@ class _UserPageState extends State<UserPage> {
               ),
               subtitle: Text(
                 lang,
-                style:
-                    Styles.descSubtitle.copyWith(color: context.color.mainBlue),
+                style: Styles.descSubtitle.copyWith(
+                  color: context.color.mainBlue,
+                ),
               ),
               onTap: () {
                 showModalBottomSheet(
-                    backgroundColor: Colors.transparent,
-                    context: context,
-                    builder: (_) => const LanguageSheet());
+                  backgroundColor: Colors.transparent,
+                  context: context,
+                  builder: (_) => const LanguageSheet(),
+                );
               },
             ),
             BlocBuilder<UserInfoBloc, UserInfoState>(
@@ -274,8 +283,9 @@ class _UserPageState extends State<UserPage> {
                   onTap: state.status.isInProgress
                       ? null
                       : () {
-                          Navigator.of(context)
-                              .pushNamed(AppRoutes.recordsPage);
+                          Navigator.of(
+                            context,
+                          ).pushNamed(AppRoutes.recordsPage);
                         },
                 );
               },
@@ -283,8 +293,9 @@ class _UserPageState extends State<UserPage> {
             BlocBuilder<UserInfoBloc, UserInfoState>(
               builder: (context, state) {
                 return ListTile(
-                  leading:
-                      AppIcons.briefcaseLite.svg(color: context.color.black),
+                  leading: AppIcons.briefcaseLite.svg(
+                    color: context.color.black,
+                  ),
                   horizontalTitleGap: 0,
                   title: Text(
                     state.specailistModel.isEmpty
@@ -326,8 +337,9 @@ class _UserPageState extends State<UserPage> {
                               height: 52,
                               buttonName: "Xa, roziman",
                               onPress: () {
-                                Navigator.of(context)
-                                    .pushNamed(AppRoutes.registerSpecialist);
+                                Navigator.of(
+                                  context,
+                                ).pushNamed(AppRoutes.registerSpecialist);
                               },
                             ),
                             const SizedBox(height: 12),
@@ -371,7 +383,9 @@ class _UserPageState extends State<UserPage> {
                       Text(
                         context.l10n.requestEmergencyHelp,
                         style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w700),
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                       Text(
                         context.l10n.emergencyOnly,
@@ -390,7 +404,7 @@ class _UserPageState extends State<UserPage> {
                             BoxShadow(
                               color: context.color.cardShadow,
                               blurRadius: 8.r,
-                            )
+                            ),
                           ],
                         ),
                         child: ListTile(
@@ -413,7 +427,7 @@ class _UserPageState extends State<UserPage> {
                             BoxShadow(
                               color: context.color.cardShadow,
                               blurRadius: 8.r,
-                            )
+                            ),
                           ],
                         ),
                         child: const ListTile(
@@ -435,7 +449,7 @@ class _UserPageState extends State<UserPage> {
                             BoxShadow(
                               color: context.color.cardShadow,
                               blurRadius: 8.r,
-                            )
+                            ),
                           ],
                         ),
                         child: ListTile(
@@ -457,7 +471,7 @@ class _UserPageState extends State<UserPage> {
                             BoxShadow(
                               color: context.color.cardShadow,
                               blurRadius: 8.r,
-                            )
+                            ),
                           ],
                         ),
                         child: ListTile(
@@ -510,9 +524,9 @@ class _UserPageState extends State<UserPage> {
                     child: LogOutSheet(
                       onPress: () {
                         context.read<AuthBloc>().add(DeleteToken());
-                        context
-                            .read<UserSubscriptionsBloc>()
-                            .add(CloseSubscriptionBloc());
+                        context.read<UserSubscriptionsBloc>().add(
+                          CloseSubscriptionBloc(),
+                        );
                       },
                     ),
                   ),
@@ -547,10 +561,7 @@ class CreateQRCode extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: QrImageView(
-        data: text,
-        version: QrVersions.auto,
-      ),
+      child: QrImageView(data: text, version: QrVersions.auto),
     );
   }
 }

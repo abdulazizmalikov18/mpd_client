@@ -7,9 +7,10 @@ import 'package:mpd_client/core/network/dio_settings.dart';
 class ErrorHandleNew {
   ErrorHandleNew();
   final DioSettings dioSettings = locator<DioSettings>();
-  Future<R> apiCantrol<T, R>(
-      {required Future<Response<T>?> Function(Dio client) request,
-      required R Function(T response) body}) async {
+  Future<R> apiCantrol<T, R>({
+    required Future<Response<T>?> Function(Dio client) request,
+    required R Function(T response) body,
+  }) async {
     dioSettings.setBaseOptions();
     try {
       final response = await request(dioSettings.dio);

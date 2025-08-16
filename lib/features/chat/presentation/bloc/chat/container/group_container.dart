@@ -14,11 +14,7 @@ class GroupContainer extends Equatable {
   });
 
   @override
-  List<Object?> get props => [
-        activeGroup,
-        groups,
-        status,
-      ];
+  List<Object?> get props => [activeGroup, groups, status];
 
   GroupContainer copyWith({
     ChatGroupModel? activeGroup,

@@ -15,7 +15,8 @@ class SpecialistOfferModel {
     this.results,
   });
 
-  factory SpecialistOfferModel.fromJson(Map<String, dynamic> json) => SpecialistOfferModel(
+  factory SpecialistOfferModel.fromJson(Map<String, dynamic> json) =>
+      SpecialistOfferModel(
         count: json["count"],
         next: json["next"],
         nextOffset: json["next_offset"],
@@ -23,7 +24,9 @@ class SpecialistOfferModel {
         previous: json["previous"],
         results: json["results"] == null
             ? []
-            : List<SpecialistOffer>.from(json["results"]!.map((x) => SpecialistOffer.fromJson(x))),
+            : List<SpecialistOffer>.from(
+                json["results"]!.map((x) => SpecialistOffer.fromJson(x)),
+              ),
       );
 }
 
@@ -54,7 +57,8 @@ class SpecialistOffer {
     this.isAssigned = false,
   });
 
-  factory SpecialistOffer.fromJson(Map<String, dynamic> json) => SpecialistOffer(
+  factory SpecialistOffer.fromJson(Map<String, dynamic> json) =>
+      SpecialistOffer(
         id: json["id"] ?? 0,
         name: json["name"] ?? '',
         flow: json["flow"] ?? 0,
@@ -63,7 +67,7 @@ class SpecialistOffer {
         isVisible: json["is_visible"] ?? false,
         image: json["image"] ?? '',
         isDefault: json["is_default"] ?? false,
-    isAssigned: json["is_assigned"] ?? false,
+        isAssigned: json["is_assigned"] ?? false,
         productCount: json["product_count"] ?? 0,
         totalProductCount: json["total_product_count"] ?? 0,
       );

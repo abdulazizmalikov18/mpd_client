@@ -9,9 +9,9 @@ class ImageDownloader {
       return bytes;
     } catch (e) {
       Log.d(e);
-      final image = await NetworkAssetBundle(Uri.parse(
-              "https://www.no5.com/media/1772/place-holder-image.png"))
-          .load("https://www.no5.com/media/1772/place-holder-image.png");
+      final image = await NetworkAssetBundle(
+        Uri.parse("https://www.no5.com/media/1772/place-holder-image.png"),
+      ).load("https://www.no5.com/media/1772/place-holder-image.png");
       Uint8List bytes = image.buffer.asUint8List();
       return bytes;
     }

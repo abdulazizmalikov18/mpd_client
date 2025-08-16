@@ -12,7 +12,8 @@ class RefreshtokenBloc extends Bloc<RefreshtokenEvent, RefreshtokenState> {
       final result = await repo.refreshToken();
       if (result.isRight) {
         debugPrint(
-            'New token -----------------------> 😏😏😏😏😏😏😏😏  ${result.right.access}');
+          'New token -----------------------> 😏😏😏😏😏😏😏😏  ${result.right.access}',
+        );
       } else {
         $navigatorKey.currentState!.popUntil((route) => false);
         $navigatorKey.currentState!.pushReplacementNamed(AppRoutes.auth);

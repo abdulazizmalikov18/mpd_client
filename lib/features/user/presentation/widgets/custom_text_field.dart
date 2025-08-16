@@ -137,31 +137,39 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 prefixIcon: widget.prefixIcon != null
                     ? IconButton(
                         icon: widget.prefixIcon!,
-                        onPressed: widget.onprefixIconPressed ?? () {})
+                        onPressed: widget.onprefixIconPressed ?? () {},
+                      )
                     : null,
                 focusColor: context.color.white,
                 fillColor: widget.fillColor ?? context.color.white,
                 hoverColor: context.color.white,
                 filled: true,
-                border: widget.border ??
+                border:
+                    widget.border ??
                     OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
-                      borderSide:
-                          BorderSide(color: context.color.border, width: 1),
+                      borderSide: BorderSide(
+                        color: context.color.border,
+                        width: 1,
+                      ),
                     ),
-                enabledBorder: widget.border ??
+                enabledBorder:
+                    widget.border ??
                     OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.circular(widget.borderRadius ?? 8),
+                      borderRadius: BorderRadius.circular(
+                        widget.borderRadius ?? 8,
+                      ),
                       borderSide: BorderSide(
                         color: context.color.border,
                         width: widget.borderWidth ?? 1,
                       ),
                     ),
-                focusedBorder: widget.border ??
+                focusedBorder:
+                    widget.border ??
                     OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.circular(widget.borderRadius ?? 8),
+                      borderRadius: BorderRadius.circular(
+                        widget.borderRadius ?? 8,
+                      ),
                       borderSide: BorderSide(color: context.color.border),
                     ),
                 hintText: widget.hintText,
@@ -169,8 +177,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 //     color: colors.customBlack.withValues(alpha:0.5), fontSize: 14.sp),
                 // errorText: widget.error,
                 // errorStyle: fonts.caption.copyWith(color: colors.error),
-                contentPadding:
-                    const EdgeInsets.only(left: 16, top: 12, right: 12),
+                contentPadding: const EdgeInsets.only(
+                  left: 16,
+                  top: 12,
+                  right: 12,
+                ),
               ),
             ),
           ),

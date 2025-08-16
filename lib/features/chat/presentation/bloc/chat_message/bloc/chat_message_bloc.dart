@@ -28,16 +28,18 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
 
   void _onGetMessages(ChatGetMessages event, Emitter emit) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    final result = await _repo.getMessages(GetChatEntity(
-      groupSlug: event.group.slugName,
-    ));
+    final result = await _repo.getMessages(
+      GetChatEntity(groupSlug: event.group.slugName),
+    );
     if (result.isRight) {
-      emit(state.copyWith(
-        status: FormzSubmissionStatus.success,
-        messages: result.right.results,
-        count: result.right.count,
-        offset: result.right.nextOffset,
-      ));
+      emit(
+        state.copyWith(
+          status: FormzSubmissionStatus.success,
+          messages: result.right.results,
+          count: result.right.count,
+          offset: result.right.nextOffset,
+        ),
+      );
       return;
     }
 
@@ -46,28 +48,31 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
 
   void _onGetMoreMessages(ChatGetMoreMessages event, Emitter emit) async {
     final result = await _repo.getMessages(
-        GetChatEntity(groupSlug: event.group.slugName, offset: state.offset));
+      GetChatEntity(groupSlug: event.group.slugName, offset: state.offset),
+    );
     if (result.isRight) {
-      emit(state.copyWith(
-        messages: [...state.messages, ...result.right.results],
-        status: FormzSubmissionStatus.success,
-        offset: result.right.nextOffset,
-      ));
+      emit(
+        state.copyWith(
+          messages: [...state.messages, ...result.right.results],
+          status: FormzSubmissionStatus.success,
+          offset: result.right.nextOffset,
+        ),
+      );
       return;
     }
-    emit(state.copyWith(
-      status: FormzSubmissionStatus.failure,
-    ));
+    emit(state.copyWith(status: FormzSubmissionStatus.failure));
   }
 
   void _onSendMessage(ChatSendMessageEvent event, Emitter emit) async {
     ChatVMController().messageController.clear();
 
-    await _repo.sendMessage(SendMessageEntity(
-      text: event.text,
-      slugName: event.groupSlug,
-      file: event.file,
-    ));
+    await _repo.sendMessage(
+      SendMessageEntity(
+        text: event.text,
+        slugName: event.groupSlug,
+        file: event.file,
+      ),
+    );
   }
 
   void _onReadAllMessage(ChatReadAllMessage event, Emitter emit) async {
@@ -75,18 +80,18 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
   }
 
   void _onSocketMessage(ChatSocketMessage event, Emitter emit) async {
-    emit(state.copyWith(
-      messages: [event.message, ...state.messages],
-      status: FormzSubmissionStatus.success,
-    ));
+    emit(
+      state.copyWith(
+        messages: [event.message, ...state.messages],
+        status: FormzSubmissionStatus.success,
+      ),
+    );
   }
 
   void onComingMessage() {
-    ChatVMController().onComingNewMessage(
-      (message) {
-        Log.e("NewMessage");
-        add(ChatSocketMessage(message));
-      },
-    );
+    ChatVMController().onComingNewMessage((message) {
+      Log.e("NewMessage");
+      add(ChatSocketMessage(message));
+    });
   }
 }

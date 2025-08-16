@@ -32,7 +32,9 @@ class IconCircleButton extends StatelessWidget {
       minWidth: size.width.h,
       child: SvgPicture.asset(
         icon,
-        colorFilter: iconColor == null ? null : ColorFilter.mode(iconColor!, BlendMode.srcIn),
+        colorFilter: iconColor == null
+            ? null
+            : ColorFilter.mode(iconColor!, BlendMode.srcIn),
       ),
     );
   }

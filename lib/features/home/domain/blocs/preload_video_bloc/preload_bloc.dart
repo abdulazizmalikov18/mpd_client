@@ -7,7 +7,15 @@ part 'preload_event.dart';
 part 'preload_state.dart';
 
 class PreloadBloc extends Bloc<PreloadEvent, PreloadState> {
-  PreloadBloc() : super(PreloadState(controllers: {}, urls: [], focusedIndex: [], reloadCounter: 0)) {
+  PreloadBloc()
+    : super(
+        PreloadState(
+          controllers: {},
+          urls: [],
+          focusedIndex: [],
+          reloadCounter: 0,
+        ),
+      ) {
     on<FillVideoIndex>(_onFillVideoIndex);
     on<GetVideoesFromList>(_onGetVideoUrls);
     on<VideoIndexChanged>(_onVideoIndexChanged);
@@ -21,7 +29,10 @@ class PreloadBloc extends Bloc<PreloadEvent, PreloadState> {
     emit(state.copyWith(focusedIndex: focusedIndexes));
   }
 
-  Future<void> _onGetVideoUrls(GetVideoesFromList event, Emitter<PreloadState> emit) async {
+  Future<void> _onGetVideoUrls(
+    GetVideoesFromList event,
+    Emitter<PreloadState> emit,
+  ) async {
     final filledUrls = [...event.urls];
     state.urls = filledUrls;
 
@@ -33,10 +44,18 @@ class PreloadBloc extends Bloc<PreloadEvent, PreloadState> {
 
     /// Initialize 2nd video
     _initializeControllerAtIndex(event.baseIndex, 1);
-    emit(state.copyWith(reloadCounter: state.reloadCounter + 1, focusedIndex: state.focusedIndex));
+    emit(
+      state.copyWith(
+        reloadCounter: state.reloadCounter + 1,
+        focusedIndex: state.focusedIndex,
+      ),
+    );
   }
 
-  Future<void> _onVideoIndexChanged(VideoIndexChanged event, Emitter<PreloadState> emit) async {
+  Future<void> _onVideoIndexChanged(
+    VideoIndexChanged event,
+    Emitter<PreloadState> emit,
+  ) async {
     // if (event.baseIndex > 0 &&
     //     state.urls[event.baseIndex - 1]['videoes']!.length == 1) {
     //   state.focusedIndex = 0;
@@ -97,13 +116,15 @@ class PreloadBloc extends Bloc<PreloadEvent, PreloadState> {
 
   Future _initializeControllerAtIndex(int baseIndex, int index) async {
     if (state.urls[baseIndex].media!.length > index && index >= 0) {
-      if (state.urls[baseIndex].media![index].file == null || state.urls[baseIndex].media!.isEmpty) {
+      if (state.urls[baseIndex].media![index].file == null ||
+          state.urls[baseIndex].media!.isEmpty) {
         return;
       }
 
       /// Create new controller
-      final VideoPlayerController controller =
-          VideoPlayerController.networkUrl(Uri.parse(state.urls[baseIndex].media![index].file!));
+      final VideoPlayerController controller = VideoPlayerController.networkUrl(
+        Uri.parse(state.urls[baseIndex].media![index].file!),
+      );
 
       /// Add to [controllers] list
       if (state.controllers[baseIndex] == null) {
@@ -119,12 +140,14 @@ class PreloadBloc extends Bloc<PreloadEvent, PreloadState> {
 
   void _playControllerAtIndex(int baseIndex, int index) {
     if (state.urls[baseIndex].media!.length > index && index >= 0) {
-      if (state.urls[baseIndex].media![index].file == null || state.urls[baseIndex].media!.isEmpty) {
+      if (state.urls[baseIndex].media![index].file == null ||
+          state.urls[baseIndex].media!.isEmpty) {
         return;
       }
 
       /// Get controller at [index]
-      final VideoPlayerController controller = state.controllers[baseIndex]![index]!;
+      final VideoPlayerController controller =
+          state.controllers[baseIndex]![index]!;
 
       /// Play controller
       controller.play();
@@ -134,12 +157,14 @@ class PreloadBloc extends Bloc<PreloadEvent, PreloadState> {
 
   void _stopControllerAtIndex(int baseIndex, int index) {
     if (state.urls[baseIndex].media!.length > index && index >= 0) {
-      if (state.urls[baseIndex].media![index].file == null || state.urls[baseIndex].media!.isEmpty) {
+      if (state.urls[baseIndex].media![index].file == null ||
+          state.urls[baseIndex].media!.isEmpty) {
         return;
       }
 
       /// Get controller at [index]
-      final VideoPlayerController controller = state.controllers[baseIndex]![index]!;
+      final VideoPlayerController controller =
+          state.controllers[baseIndex]![index]!;
 
       /// Pause
       controller.pause();

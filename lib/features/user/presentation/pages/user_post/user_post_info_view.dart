@@ -53,9 +53,7 @@ class _UserPostInfoViewState extends State<UserPostInfoView> {
                     errorTitle: context.l10n.error_internal_server_title,
                     hasReturnButton: false,
                     tryAgainPressed: () {
-                      context.read<PostBloc>().add(
-                            PostFetched(true),
-                          );
+                      context.read<PostBloc>().add(PostFetched(true));
                     },
                   ),
                 );
@@ -66,9 +64,9 @@ class _UserPostInfoViewState extends State<UserPostInfoView> {
                     subtitle: "No Posts",
                     buttonName: "Refresh",
                     onPressed: () {
-                      context
-                          .read<PostBloc>()
-                          .add(PostFetchedUser(username: widget.username));
+                      context.read<PostBloc>().add(
+                        PostFetchedUser(username: widget.username),
+                      );
                     },
                   );
                 }
@@ -104,10 +102,12 @@ class _UserPostInfoViewState extends State<UserPostInfoView> {
                       },
                       paginatorStatus: FormzSubmissionStatus.success,
                       fetchMoreFunction: () {
-                        context.read<PostBloc>().add(PostFetchedUser(
-                              username: widget.username,
-                              isMore: true,
-                            ));
+                        context.read<PostBloc>().add(
+                          PostFetchedUser(
+                            username: widget.username,
+                            isMore: true,
+                          ),
+                        );
                       },
                       hasMoreToFetch: state.count > state.postsUser.length,
                     ),
@@ -121,7 +121,8 @@ class _UserPostInfoViewState extends State<UserPostInfoView> {
                 );
               case PostStatus.inProgress:
                 return const Center(
-                    child: CircularProgressIndicator.adaptive());
+                  child: CircularProgressIndicator.adaptive(),
+                );
             }
           },
         ),

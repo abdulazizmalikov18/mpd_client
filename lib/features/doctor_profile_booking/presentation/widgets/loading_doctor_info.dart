@@ -24,13 +24,19 @@ class LoadingDoctorInfo extends StatelessWidget {
           height: 24.h,
           width: 102.w,
           margin: EdgeInsets.symmetric(horizontal: 16.w),
-          decoration: BoxDecoration(color: context.color.white, borderRadius: BorderRadius.circular(10.r)),
+          decoration: BoxDecoration(
+            color: context.color.white,
+            borderRadius: BorderRadius.circular(10.r),
+          ),
         ),
         ScreenUtil().setVerticalSpacing(8.h),
         Container(
           height: 85.h,
           margin: EdgeInsets.symmetric(horizontal: 16.w),
-          decoration: BoxDecoration(color: context.color.white, borderRadius: BorderRadius.circular(10.r)),
+          decoration: BoxDecoration(
+            color: context.color.white,
+            borderRadius: BorderRadius.circular(10.r),
+          ),
         ),
       ],
     );

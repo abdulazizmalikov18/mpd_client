@@ -52,65 +52,69 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomSheet: PinnedSheet(
-          verticalPadding: 0,
-          widget: BlocListener<AddToCartBloc, AddToCartState>(
-            listener: (context, state) {
-              if (state is AddToCartLoading) {
-                FocusScope.of(context).unfocus();
-                showDialog(
+        verticalPadding: 0,
+        widget: BlocListener<AddToCartBloc, AddToCartState>(
+          listener: (context, state) {
+            if (state is AddToCartLoading) {
+              FocusScope.of(context).unfocus();
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => const LoadingDialogWidget(),
+              );
+            } else if (state is AddToCartSuccess) {
+              Navigator.pop(context);
+              Navigator.pushNamed(
+                context,
+                AppRoutes.appointmentReview,
+                arguments: {
+                  "isOffering": false,
+                  "product": widget.localProducts,
+                },
+              );
+            } else {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                UiTools.failSnackbar(
+                  title: 'Unknown server failure!',
                   context: context,
-                  barrierDismissible: false,
-                  builder: (context) => const LoadingDialogWidget(),
-                );
-              } else if (state is AddToCartSuccess) {
-                Navigator.pop(context);
-                Navigator.pushNamed(
-                  context,
-                  AppRoutes.appointmentReview,
-                  arguments: {
-                    "isOffering": false,
-                    "product": widget.localProducts,
-                  },
-                );
-              } else {
-                Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  UiTools.failSnackbar(
-                    title: 'Unknown server failure!',
-                    context: context,
-                  ),
-                );
-              }
-            },
-            child: BlocBuilder<TimetableBloc, TimetableState>(
-              builder: (_, state) {
-                return AnimatedCrossFade(
-                    firstChild: const SizedBox(width: double.maxFinite),
-                    secondChild: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 14.h),
-                      child: LongButton(
-                        buttonName: context.l10n.book_appointment_next,
-                        onPress: () {
-                          final meetDate = Utils.toDateTimeFormat(
-                              state.datetime!, state.selectedTime);
+                ),
+              );
+            }
+          },
+          child: BlocBuilder<TimetableBloc, TimetableState>(
+            builder: (_, state) {
+              return AnimatedCrossFade(
+                firstChild: const SizedBox(width: double.maxFinite),
+                secondChild: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 14.h),
+                  child: LongButton(
+                    buttonName: context.l10n.book_appointment_next,
+                    onPress: () {
+                      final meetDate = Utils.toDateTimeFormat(
+                        state.datetime!,
+                        state.selectedTime,
+                      );
 
-                          context.read<AddToCartBloc>().add(
-                                AddToCart(
-                                  localServices: widget.localProducts,
-                                  responsible: widget.id,
-                                  meetDate: meetDate,
-                                ),
-                              );
-                        },
-                      ),
-                    ),
-                    crossFadeState: state.selectedTime != ''
-                        ? CrossFadeState.showSecond
-                        : CrossFadeState.showFirst,
-                    duration: const Duration(milliseconds: 300));
-              },
-            ),
-          )),
+                      context.read<AddToCartBloc>().add(
+                        AddToCart(
+                          localServices: widget.localProducts,
+                          responsible: widget.id,
+                          meetDate: meetDate,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                crossFadeState: state.selectedTime != ''
+                    ? CrossFadeState.showSecond
+                    : CrossFadeState.showFirst,
+                duration: const Duration(milliseconds: 300),
+              );
+            },
+          ),
+        ),
+      ),
       appBar: AppBarWidget(title: context.l10n.book_appointment_date_page),
       body: SingleChildScrollView(
         reverse: true,
@@ -150,15 +154,16 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
                       ScreenUtil().setVerticalSpacing(8.h),
                       Text(
                         context.l10n.book_appointment_time_error,
-                        style: Styles.descSubtitle
-                            .copyWith(color: context.color.grey),
+                        style: Styles.descSubtitle.copyWith(
+                          color: context.color.grey,
+                        ),
                       ),
                     ],
                   );
                 }
                 return _buildWorkingDay(state);
               },
-            )
+            ),
           ],
         ),
       ),
@@ -173,10 +178,7 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
             children: [
               BuildLabel(label: context.l10n.book_appointment_select_time),
               ScreenUtil().setVerticalSpacing(12.h),
-              SizedBox(
-                height: 150.h,
-                child: const TimesLoadingComponent(),
-              ),
+              SizedBox(height: 150.h, child: const TimesLoadingComponent()),
             ],
           );
         } else if (state.status == Status.failure) {
@@ -185,8 +187,10 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
             child: Center(
               child: Text(
                 "Bu kun ish kuni emas",
-                style: Styles.boldTopHint
-                    .copyWith(fontSize: 18.sp, color: context.color.black),
+                style: Styles.boldTopHint.copyWith(
+                  fontSize: 18.sp,
+                  color: context.color.black,
+                ),
               ),
             ),
           );
@@ -212,19 +216,24 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
                       child: RichText(
                         text: TextSpan(
                           text: context.l10n.book_appointment_select_first_come,
-                          style: Styles.headline5
-                              .copyWith(color: context.color.black),
+                          style: Styles.headline5.copyWith(
+                            color: context.color.black,
+                          ),
                           children: [
                             TextSpan(
-                                text:
-                                    '(${context.l10n.book_appointment_select_first_come_stats_last} 44,',
-                                style: Styles.headline5.copyWith(
-                                    color: context.color.gradientBlueOpacity)),
+                              text:
+                                  '(${context.l10n.book_appointment_select_first_come_stats_last} 44,',
+                              style: Styles.headline5.copyWith(
+                                color: context.color.gradientBlueOpacity,
+                              ),
+                            ),
                             TextSpan(
-                                text:
-                                    ' ${context.l10n.book_appointment_select_first_come_stats_now} 5)',
-                                style: Styles.headline5.copyWith(
-                                    color: context.color.gradientBlueOpacity)),
+                              text:
+                                  ' ${context.l10n.book_appointment_select_first_come_stats_now} 5)',
+                              style: Styles.headline5.copyWith(
+                                color: context.color.gradientBlueOpacity,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -236,9 +245,9 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
                 children: [
                   CommentInputWidget(
                     hintText: context.l10n.book_appointment_comment_write,
-                    onChanged: (value) => context
-                        .read<TimetableBloc>()
-                        .add(OnChangedCommentEvent(value: value)),
+                    onChanged: (value) => context.read<TimetableBloc>().add(
+                      OnChangedCommentEvent(value: value),
+                    ),
                   ),
                   Positioned(
                     right: 28.w,
@@ -249,14 +258,16 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
                         return Text(
                           '${comment.length}/200',
                           style: Styles.headline7.copyWith(
-                              color: context.color.grey, fontSize: 14.sp),
+                            color: context.color.grey,
+                            fontSize: 14.sp,
+                          ),
                         );
                       },
                     ),
-                  )
+                  ),
                 ],
               ),
-              ScreenUtil().setVerticalSpacing(90.h)
+              ScreenUtil().setVerticalSpacing(90.h),
             ],
           );
         }
@@ -264,11 +275,12 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
     );
   }
 
-  Container _buildTableCalendar(
-      {required DateTime? selectedDate_,
-      required DateTime focusedDay_,
-      required CalendarFormat calendarFormat_,
-      required BuildContext context}) {
+  Container _buildTableCalendar({
+    required DateTime? selectedDate_,
+    required DateTime focusedDay_,
+    required CalendarFormat calendarFormat_,
+    required BuildContext context,
+  }) {
     String locale = Localizations.localeOf(context).languageCode;
     return Container(
       decoration: BoxDecoration(
@@ -300,19 +312,19 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
         onDaySelected: (selectedDay, focusedDay) {
           if (!isSameDay(selectedDate_, selectedDay)) {
             //? For choose and save day, if month changed also
-            context
-                .read<TimetableBloc>()
-                .add(SelectDayEvent(day: selectedDay, focusedDay: focusedDay));
-            context
-                .read<TimetableBloc>()
-                .add(GetTimetableByDay(day: selectedDay, id: widget.id));
+            context.read<TimetableBloc>().add(
+              SelectDayEvent(day: selectedDay, focusedDay: focusedDay),
+            );
+            context.read<TimetableBloc>().add(
+              GetTimetableByDay(day: selectedDay, id: widget.id),
+            );
           }
         },
         onFormatChanged: (format) {
           //? For change calendar format scroll up and scroll down
-          context
-              .read<TimetableBloc>()
-              .add(OnChangedCalFormatEvent(format: format));
+          context.read<TimetableBloc>().add(
+            OnChangedCalFormatEvent(format: format),
+          );
         },
         onPageChanged: (focusedDay) {
           //? For save focused day in month changed
@@ -341,28 +353,35 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
             colorFilter: ColorFilter.mode(context.color.white, BlendMode.srcIn),
           ),
           formatButtonVisible: false,
-          titleTextStyle: Styles.boldHeadline6
-              .copyWith(color: context.color.white, fontSize: 18.sp),
+          titleTextStyle: Styles.boldHeadline6.copyWith(
+            color: context.color.white,
+            fontSize: 18.sp,
+          ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10.r),
-                topRight: Radius.circular(10.r)),
+              topLeft: Radius.circular(10.r),
+              topRight: Radius.circular(10.r),
+            ),
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
                 context.color.gradientBlueOpacity,
-                context.color.gradientBlue
+                context.color.gradientBlue,
               ],
             ),
           ),
         ),
         calendarStyle: CalendarStyle(
-          selectedTextStyle: Styles.headline7
-              .copyWith(fontSize: 14.sp, color: context.color.white),
+          selectedTextStyle: Styles.headline7.copyWith(
+            fontSize: 14.sp,
+            color: context.color.white,
+          ),
           cellMargin: const EdgeInsets.all(4.5),
-          defaultTextStyle: Styles.headline7
-              .copyWith(fontSize: 14.sp, color: context.color.black),
+          defaultTextStyle: Styles.headline7.copyWith(
+            fontSize: 14.sp,
+            color: context.color.black,
+          ),
           tablePadding: EdgeInsets.zero,
           isTodayHighlighted: false,
           selectedDecoration: BoxDecoration(
@@ -372,7 +391,7 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
               end: Alignment.bottomCenter,
               colors: [
                 context.color.gradientBlueOpacity,
-                context.color.gradientBlue
+                context.color.gradientBlue,
               ],
             ),
           ),
@@ -380,15 +399,17 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
         daysOfWeekStyle: DaysOfWeekStyle(
           decoration: BoxDecoration(
             border: Border(
-              bottom: BorderSide(
-                color: Colors.grey.withValues(alpha: 0.5),
-              ),
+              bottom: BorderSide(color: Colors.grey.withValues(alpha: 0.5)),
             ),
           ),
-          weekendStyle: Styles.headline7
-              .copyWith(fontSize: 14.sp, color: context.color.grey),
-          weekdayStyle: Styles.headline7
-              .copyWith(fontSize: 14.sp, color: context.color.grey),
+          weekendStyle: Styles.headline7.copyWith(
+            fontSize: 14.sp,
+            color: context.color.grey,
+          ),
+          weekdayStyle: Styles.headline7.copyWith(
+            fontSize: 14.sp,
+            color: context.color.grey,
+          ),
         ),
         startingDayOfWeek: StartingDayOfWeek.monday,
         daysOfWeekHeight: 45,

@@ -24,22 +24,18 @@ class DrProfileListile extends StatelessWidget {
         height: 48.h,
         width: 48.h,
         decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: context.color.mainBlue.withValues(alpha: 0.1)),
-        child: Image.asset(
-          iconName,
-          height: 24.h,
-          width: 24.h,
+          shape: BoxShape.circle,
+          color: context.color.mainBlue.withValues(alpha: 0.1),
         ),
+        child: Image.asset(iconName, height: 24.h, width: 24.h),
       ),
-      title: Text(
-        title,
-        style: Styles.boldTopHint.copyWith(fontSize: 16.sp),
-      ),
+      title: Text(title, style: Styles.boldTopHint.copyWith(fontSize: 16.sp)),
       subtitle: Text(
         subtitle,
-        style: Styles.descSubtitle
-            .copyWith(fontSize: 14.sp, color: context.color.grey),
+        style: Styles.descSubtitle.copyWith(
+          fontSize: 14.sp,
+          color: context.color.grey,
+        ),
       ),
     );
   }

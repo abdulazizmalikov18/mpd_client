@@ -48,11 +48,13 @@ class UserTileWigdet extends StatelessWidget {
             Text(
               title,
               style: Styles.descSubtitle.copyWith(
-                  color: !disabled
-                      ? (titleColor ?? context.color.black)
-                      : (titleColor ?? context.color.black)
-                          .withValues(alpha: 0.5),
-                  fontSize: 18.sp),
+                color: !disabled
+                    ? (titleColor ?? context.color.black)
+                    : (titleColor ?? context.color.black).withValues(
+                        alpha: 0.5,
+                      ),
+                fontSize: 18.sp,
+              ),
             ),
             const Spacer(),
             Text(

@@ -26,12 +26,14 @@ class FilledGradientButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isDisable ? null : onPressed,
         style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
-            elevation: 0,
-            padding: EdgeInsets.symmetric(horizontal: 25.w),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.r))),
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          elevation: 0,
+          padding: EdgeInsets.symmetric(horizontal: 25.w),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.r),
+          ),
+        ),
         child: text,
       ),
     );

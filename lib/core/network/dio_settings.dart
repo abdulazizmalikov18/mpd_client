@@ -21,7 +21,7 @@ class DioSettings {
       ),
       if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
         'Authorization':
-            'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
+            'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
     },
     validateStatus: (status) => status != null && status <= 500,
   );
@@ -32,11 +32,9 @@ class DioSettings {
       connectTimeout: const Duration(milliseconds: 35000),
       receiveTimeout: const Duration(milliseconds: 35000),
       headers: <String, dynamic>{
-        'Accept-Language': lang ??
-            StorageRepository.getString(
-              StorageKeys.LANGUAGE,
-              defValue: 'uz',
-            ),
+        'Accept-Language':
+            lang ??
+            StorageRepository.getString(StorageKeys.LANGUAGE, defValue: 'uz'),
         if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
           'Authorization':
               'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
@@ -52,8 +50,10 @@ class DioSettings {
     receiveTimeout: const Duration(milliseconds: 35000),
     followRedirects: false,
     headers: <String, dynamic>{
-      'Accept-Language':
-          StorageRepository.getString(StorageKeys.LANGUAGE, defValue: 'uz'),
+      'Accept-Language': StorageRepository.getString(
+        StorageKeys.LANGUAGE,
+        defValue: 'uz',
+      ),
       // if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
       //   'Authorization':
       //       'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
@@ -66,9 +66,7 @@ class DioSettings {
       baseUrl: $baseUrlHttp,
       connectTimeout: const Duration(milliseconds: 35000),
       receiveTimeout: const Duration(milliseconds: 35000),
-      headers: <String, dynamic>{
-        'Accept-Language': lang,
-      },
+      headers: <String, dynamic>{'Accept-Language': lang},
       followRedirects: false,
       validateStatus: (status) => status != null && status <= 500,
     );
@@ -93,25 +91,23 @@ class DioSettings {
           error: kDebugMode,
         ),
         // interceptor,
-        ErrorHandlerInterceptor()
+        ErrorHandlerInterceptor(),
       ]);
   }
 
   Dio get dioForAuth => Dio(_dioBaseOptionsForAuth)
-    ..interceptors.addAll(
-      [
-        PrettyDioLogger(
-          requestBody: kDebugMode,
-          request: kDebugMode,
-          requestHeader: kDebugMode,
-          responseBody: kDebugMode,
-          responseHeader: kDebugMode,
-          error: kDebugMode,
-        ),
-      ],
-    );
+    ..interceptors.addAll([
+      PrettyDioLogger(
+        requestBody: kDebugMode,
+        request: kDebugMode,
+        requestHeader: kDebugMode,
+        responseBody: kDebugMode,
+        responseHeader: kDebugMode,
+        error: kDebugMode,
+      ),
+    ]);
 
-// get interceptor => DioInterceptors(AuthRemoteDataSource(), DioConnectivityRequestRetrier(connectivity: locator<Connectivity>()));
+  // get interceptor => DioInterceptors(AuthRemoteDataSource(), DioConnectivityRequestRetrier(connectivity: locator<Connectivity>()));
 }
 
 class ErrorHandlerInterceptor implements Interceptor {
@@ -142,16 +138,18 @@ class ErrorHandlerInterceptor implements Interceptor {
 
       if (result.isRight) {
         await StorageRepository.putString(
-            StorageKeys.TOKEN, result.right.access ?? "");
+          StorageKeys.TOKEN,
+          result.right.access ?? "",
+        );
         await StorageRepository.putString(
-            StorageKeys.REFRESH, result.right.refresh ?? "");
+          StorageKeys.REFRESH,
+          result.right.refresh ?? "",
+        );
         return handler.resolve(
           await locator<DioSettings>().dio.fetch(
-                response.requestOptions
-                  ..headers = {
-                    "Authorization": "Bearer ${result.right.access}",
-                  },
-              ),
+            response.requestOptions
+              ..headers = {"Authorization": "Bearer ${result.right.access}"},
+          ),
         );
       } else {
         $navigatorKey.currentState!.pushReplacementNamed(AppRoutes.auth);

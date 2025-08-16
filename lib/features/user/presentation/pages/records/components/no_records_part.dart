@@ -4,9 +4,7 @@ import 'package:mpd_client/provider/language.dart';
 import 'package:mpd_client/src/themes/styles.dart';
 
 class NoRecordsPart extends StatelessWidget {
-  const NoRecordsPart({
-    super.key,
-  });
+  const NoRecordsPart({super.key});
 
   @override
   Widget build(BuildContext context) {

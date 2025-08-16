@@ -27,10 +27,10 @@ class CardRemoteModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "card_number": cardNumber,
-        "expire": expire,
-        "verified": verified,
-      };
+    "id": id,
+    "name": name,
+    "card_number": cardNumber,
+    "expire": expire,
+    "verified": verified,
+  };
 }

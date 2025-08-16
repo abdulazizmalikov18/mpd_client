@@ -10,8 +10,12 @@ part 'sub_professions_state.dart';
 class SubProfessionsBloc
     extends Bloc<SubProfessionsEvent, SubProfessionsState> {
   SubProfessionsBloc(this._repository)
-      : super(const SubProfessionsInitial(
-            subProfessions: [], selectedSubProfession: null)) {
+    : super(
+        const SubProfessionsInitial(
+          subProfessions: [],
+          selectedSubProfession: null,
+        ),
+      ) {
     on<GetSubProfessionsEvent>(
       _onGetSubProfessions,
       transformer: (events, mapper) {
@@ -29,35 +33,54 @@ class SubProfessionsBloc
   int _offset = 0;
 
   void _onSelectSubProfession(
-      SelectSubProfessionEvent event, Emitter<SubProfessionsState> emit) {
-    emit(SubProfessionsLoaded(
+    SelectSubProfessionEvent event,
+    Emitter<SubProfessionsState> emit,
+  ) {
+    emit(
+      SubProfessionsLoaded(
         subProfessions: state.subProfessions,
-        selectedSubProfession: event.selectedSubProfession));
+        selectedSubProfession: event.selectedSubProfession,
+      ),
+    );
   }
 
   Future<void> _onGetSubProfessions(
-      GetSubProfessionsEvent event, Emitter<SubProfessionsState> emit) async {
+    GetSubProfessionsEvent event,
+    Emitter<SubProfessionsState> emit,
+  ) async {
     if (state.isEnd && state.oldParent == event.parent) return;
     _clearOffset(event, state);
-    emit(SubProfessionsLoading(
+    emit(
+      SubProfessionsLoading(
         subProfessions: state.subProfessions,
         oldParent: event.parent,
-        selectedSubProfession: state.selectedSubProfession));
+        selectedSubProfession: state.selectedSubProfession,
+      ),
+    );
 
     final result = await _repository.getProfessions(
-        limit: _limit, offset: _offset, parent: event.parent);
+      limit: _limit,
+      offset: _offset,
+      parent: event.parent,
+    );
     if (result.isRight) {
       _addOffset(result.right);
-      emit(SubProfessionsLoaded(
+      emit(
+        SubProfessionsLoaded(
           subProfessions: _subProfessions,
           isEnd: _subProfessions.length < _offset,
           oldParent: event.parent,
-          selectedSubProfession: state.selectedSubProfession));
+          selectedSubProfession: state.selectedSubProfession,
+        ),
+      );
     } else {
-      emit(SubProfessionsFailure(
+      emit(
+        SubProfessionsFailure(
           subProfessions: state.subProfessions,
           error: result.left.message,
-          selectedSubProfession: state.selectedSubProfession));
+          selectedSubProfession: state.selectedSubProfession,
+        ),
+      );
     }
   }
 

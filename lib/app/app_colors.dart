@@ -181,13 +181,18 @@ class AppColors extends ThemeExtension<AppColors> {
 
   @override
   ThemeExtension<AppColors> lerp(
-      covariant ThemeExtension<AppColors>? other, double t) {
+    covariant ThemeExtension<AppColors>? other,
+    double t,
+  ) {
     if (other is! AppColors) {
       return this;
     }
     return AppColors(
-      transparentBorder:
-          Color.lerp(transparentBorder, other.transparentBorder, t)!,
+      transparentBorder: Color.lerp(
+        transparentBorder,
+        other.transparentBorder,
+        t,
+      )!,
       grey: Color.lerp(grey, other.grey, t)!,
       yana: Color.lerp(yana, other.yana, t)!,
       black: Color.lerp(black, other.black, t)!,
@@ -202,11 +207,17 @@ class AppColors extends ThemeExtension<AppColors> {
       gradientRed: Color.lerp(gradientRed, other.gradientRed, t)!,
       orange: Color.lerp(orange, other.orange, t)!,
       green: Color.lerp(green, other.green, t)!,
-      gradientRedOpacity:
-          Color.lerp(gradientRedOpacity, other.gradientRedOpacity, t)!,
+      gradientRedOpacity: Color.lerp(
+        gradientRedOpacity,
+        other.gradientRedOpacity,
+        t,
+      )!,
       gradientBlue: Color.lerp(gradientBlue, other.gradientBlue, t)!,
-      gradientBlueOpacity:
-          Color.lerp(gradientBlueOpacity, other.gradientBlueOpacity, t)!,
+      gradientBlueOpacity: Color.lerp(
+        gradientBlueOpacity,
+        other.gradientBlueOpacity,
+        t,
+      )!,
       yellow: Color.lerp(yellow, other.yellow, t)!,
       shadow: Color.lerp(shadow, other.shadow, t)!,
       cardShadow: Color.lerp(cardShadow, other.cardShadow, t)!,

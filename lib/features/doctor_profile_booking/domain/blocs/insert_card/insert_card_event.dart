@@ -7,5 +7,4 @@ abstract class InsertCardEvent extends Equatable {
   List<Object> get props => [];
 }
 
-
-class InsertCard extends InsertCardEvent{}
+class InsertCard extends InsertCardEvent {}

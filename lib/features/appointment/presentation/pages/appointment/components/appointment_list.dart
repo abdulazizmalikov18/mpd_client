@@ -70,14 +70,17 @@ class AppointmentList extends StatelessWidget {
               appointmentName: appointment.name,
               username: appointment.responsible?.username,
               phone: '',
-              avatar: appointment.currentWorkState?.specialist.avatar ??
+              avatar:
+                  appointment.currentWorkState?.specialist.avatar ??
                   appointment.responsible?.avatar,
               fullname: appointment.currentWorkState != null
                   ? '${appointment.currentWorkState?.specialist.name ?? '-'} ${appointment.currentWorkState?.specialist.lastname ?? '-'}'
                   : '${appointment.responsible?.name ?? '-'} ${appointment.responsible?.lastname ?? '-'}',
-              job: appointment.currentWorkState?.specialist.job ??
+              job:
+                  appointment.currentWorkState?.specialist.job ??
                   appointment.responsible?.job,
-              id: appointment.currentWorkState?.specialist.id ??
+              id:
+                  appointment.currentWorkState?.specialist.id ??
                   appointment.responsible?.id ??
                   0,
             ),
@@ -94,8 +97,11 @@ class AppointmentList extends StatelessWidget {
     );
   }
 
-  Widget getBottomWidget(Appointment appointment, List<AppoinmentInfo> infos,
-      BuildContext context) {
+  Widget getBottomWidget(
+    Appointment appointment,
+    List<AppoinmentInfo> infos,
+    BuildContext context,
+  ) {
     switch (infos[infoIndex].drCardInfo) {
       case DrCardInfo.pending:
         return AppointmentBottomInfo(
@@ -126,7 +132,9 @@ class AppointmentList extends StatelessWidget {
             context,
             AppRoutes.appointment,
             arguments: AppointmentArgModel(
-                appoinmentInfo: infos[infoIndex], appointment: appointment),
+              appoinmentInfo: infos[infoIndex],
+              appointment: appointment,
+            ),
           ),
           onLocationPressed: () => UiTools.openMapsSheet(
             context,
@@ -142,9 +150,13 @@ class AppointmentList extends StatelessWidget {
           price: appointment.cost!,
           meetDate: appointment.meetDate ?? "",
           onDetailPressed: () => Navigator.pushNamed(
-              context, AppRoutes.appointment,
-              arguments: AppointmentArgModel(
-                  appoinmentInfo: infos[infoIndex], appointment: appointment)),
+            context,
+            AppRoutes.appointment,
+            arguments: AppointmentArgModel(
+              appoinmentInfo: infos[infoIndex],
+              appointment: appointment,
+            ),
+          ),
           onLocationPressed: () => UiTools.openMapsSheet(
             context,
             appointment.responsible?.job ?? "--",

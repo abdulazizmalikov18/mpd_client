@@ -27,8 +27,9 @@ class MyCustomRadioButton<T> extends StatelessWidget {
       child: InkWell(
         enableFeedback: false,
         onTap: () => onChanged(value),
-        customBorder:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+        customBorder: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(100),
+        ),
         child: Container(
           height: 40.h,
           padding: EdgeInsets.only(left: 12.w, right: 12.w),
@@ -59,8 +60,9 @@ class MyCustomRadioButton<T> extends StatelessWidget {
               Text(
                 text!,
                 style: Styles.descSubtitle.copyWith(
-                  color:
-                      isSelected ? context.color.mainBlue : context.color.black,
+                  color: isSelected
+                      ? context.color.mainBlue
+                      : context.color.black,
                 ),
               ),
             ],

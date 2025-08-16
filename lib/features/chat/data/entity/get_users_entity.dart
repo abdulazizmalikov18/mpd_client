@@ -3,9 +3,5 @@ class GetChatUserEntity {
   int? offset;
   String? search;
 
-  GetChatUserEntity({
-    this.limit,
-    this.offset,
-    this.search,
-  });
+  GetChatUserEntity({this.limit, this.offset, this.search});
 }

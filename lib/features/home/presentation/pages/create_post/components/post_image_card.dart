@@ -9,8 +9,11 @@ import 'package:video_player/video_player.dart';
 class PostImageAndVideoView extends StatefulWidget {
   final FileModel filemodel;
   final VoidCallback onRemovePressed;
-  const PostImageAndVideoView(
-      {super.key, required this.filemodel, required this.onRemovePressed});
+  const PostImageAndVideoView({
+    super.key,
+    required this.filemodel,
+    required this.onRemovePressed,
+  });
 
   @override
   State<PostImageAndVideoView> createState() => _PostImageAndVideoViewState();
@@ -23,8 +26,9 @@ class _PostImageAndVideoViewState extends State<PostImageAndVideoView> {
   void initState() {
     super.initState();
     if (widget.filemodel.fileType == 'video') {
-      _videoPlayerController =
-          VideoPlayerController.file(widget.filemodel.file);
+      _videoPlayerController = VideoPlayerController.file(
+        widget.filemodel.file,
+      );
       _videoPlayerController.initialize().then((value) => setState(() {}));
     }
   }

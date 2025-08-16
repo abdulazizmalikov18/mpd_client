@@ -24,9 +24,9 @@ class ComentInput extends StatelessWidget {
         BlocListener<SendComentBloc, SendComentState>(
           listener: (context, state) {
             if (state is SendComentSuccess) {
-              context
-                  .read<PostComentBloc>()
-                  .add(InsertNewComent(state.coment!, isSuccess: true));
+              context.read<PostComentBloc>().add(
+                InsertNewComent(state.coment!, isSuccess: true),
+              );
               context.read<MediaControlBloc>().add(MediaComentCount(postIndex));
             }
           },
@@ -35,12 +35,12 @@ class ComentInput extends StatelessWidget {
               Flexible(
                 child: TextField(
                   controller: context.read<SendComentBloc>().comentController,
-                  onTap: () => context
-                      .read<SendComentBloc>()
-                      .add(const EmojiShowing(false)),
-                  onChanged: (coment) => context
-                      .read<SendComentBloc>()
-                      .add(ComentTextChanged(coment)),
+                  onTap: () => context.read<SendComentBloc>().add(
+                    const EmojiShowing(false),
+                  ),
+                  onChanged: (coment) => context.read<SendComentBloc>().add(
+                    ComentTextChanged(coment),
+                  ),
                   decoration: InputDecoration(
                     isDense: true,
                     contentPadding: EdgeInsets.only(
@@ -56,8 +56,9 @@ class ComentInput extends StatelessWidget {
                       ),
                     ),
                     hintText: context.l10n.lenth_write_comment,
-                    hintStyle: Styles.postTitle
-                        .copyWith(fontFamily: Styles.gilroyRegular),
+                    hintStyle: Styles.postTitle.copyWith(
+                      fontFamily: Styles.gilroyRegular,
+                    ),
                     fillColor: context.color.fillColor,
                     filled: true,
                   ),
@@ -71,41 +72,48 @@ class ComentInput extends StatelessWidget {
                     duration: const Duration(milliseconds: 200),
                     child: coment.isNotEmpty
                         ? IconCircleButton(
-                            size: const Size(44, 44),
-                            onPressed: () {
-                              FocusScope.of(context).unfocus();
-                              final userInfo =
-                                  context.read<UserInfoBloc>().state.userInfo;
-                              final coment = Coment(
-                                id: -1,
-                                text: context
-                                    .read<SendComentBloc>()
-                                    .comentController
-                                    .text,
-                                avatar: userInfo!.avatar,
-                                name: userInfo.name,
-                                lastname: userInfo.lastname,
-                                username: userInfo.username,
-                              );
-                              context
-                                  .read<SendComentBloc>()
-                                  .add(SendComment(postId, coment));
-                              context.read<PostComentBloc>().add(
-                                  InsertNewComent(coment, isSuccess: false));
-                            },
-                            icon: AppIcons.send,
-                            iconColor: context.color.white,
-                            color: context.color.mainBlue,
-                          )
-                            .animate()
-                            .fadeIn(duration: const Duration(milliseconds: 200))
-                            .scale(duration: const Duration(milliseconds: 200))
+                                size: const Size(44, 44),
+                                onPressed: () {
+                                  FocusScope.of(context).unfocus();
+                                  final userInfo = context
+                                      .read<UserInfoBloc>()
+                                      .state
+                                      .userInfo;
+                                  final coment = Coment(
+                                    id: -1,
+                                    text: context
+                                        .read<SendComentBloc>()
+                                        .comentController
+                                        .text,
+                                    avatar: userInfo!.avatar,
+                                    name: userInfo.name,
+                                    lastname: userInfo.lastname,
+                                    username: userInfo.username,
+                                  );
+                                  context.read<SendComentBloc>().add(
+                                    SendComment(postId, coment),
+                                  );
+                                  context.read<PostComentBloc>().add(
+                                    InsertNewComent(coment, isSuccess: false),
+                                  );
+                                },
+                                icon: AppIcons.send,
+                                iconColor: context.color.white,
+                                color: context.color.mainBlue,
+                              )
+                              .animate()
+                              .fadeIn(
+                                duration: const Duration(milliseconds: 200),
+                              )
+                              .scale(
+                                duration: const Duration(milliseconds: 200),
+                              )
                         : const SizedBox().animate().fadeOut(
-                              duration: const Duration(milliseconds: 150),
-                            ),
+                            duration: const Duration(milliseconds: 150),
+                          ),
                   );
                 },
-              )
+              ),
             ],
           ),
         ),

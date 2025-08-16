@@ -6,6 +6,6 @@ class Constants {
     'Thursday',
     'Friday',
     'Saturday',
-    'Sunday'
+    'Sunday',
   ];
 }

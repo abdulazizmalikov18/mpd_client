@@ -8,7 +8,7 @@ part 'doctor_profile_state.dart';
 
 class DoctorProfileBloc extends Bloc<DoctorProfileEvent, DoctorProfileState> {
   DoctorProfileBloc(this._profileRepository)
-      : super(DoctorProfileInitial(null, username: '')) {
+    : super(DoctorProfileInitial(null, username: '')) {
     on<GetDoctorPprofileData>(_onGetDoctorData);
     on<UpdateDoctorSubscription>(_onUpdateDoctorSubscription);
   }
@@ -16,12 +16,16 @@ class DoctorProfileBloc extends Bloc<DoctorProfileEvent, DoctorProfileState> {
   final DoctorProfileRepository _profileRepository;
 
   void _onUpdateDoctorSubscription(
-      UpdateDoctorSubscription event, Emitter<DoctorProfileState> emit) {
+    UpdateDoctorSubscription event,
+    Emitter<DoctorProfileState> emit,
+  ) {
     // state.doctor!.isWorking = event.doctorSubscribed;
   }
 
   Future<void> _onGetDoctorData(
-      GetDoctorPprofileData event, Emitter<DoctorProfileState> emit) async {
+    GetDoctorPprofileData event,
+    Emitter<DoctorProfileState> emit,
+  ) async {
     if (event.username == state.username) return;
     emit(DoctorProfileLoading(state.doctor, username: event.username));
 
@@ -29,9 +33,13 @@ class DoctorProfileBloc extends Bloc<DoctorProfileEvent, DoctorProfileState> {
     if (result.isRight) {
       emit(DoctorProfileSuccess(result.right, username: state.username));
     } else {
-      emit(DoctorProfileFailure(result.left.message, state.doctor,
-          username: state.username));
+      emit(
+        DoctorProfileFailure(
+          result.left.message,
+          state.doctor,
+          username: state.username,
+        ),
+      );
     }
   }
 }
-

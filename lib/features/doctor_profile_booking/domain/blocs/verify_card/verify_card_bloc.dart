@@ -8,18 +8,22 @@ part 'verify_card_state.dart';
 
 class VerifyCardBloc extends Bloc<VerifyCardEvent, VerifyCardState> {
   VerifyCardBloc(this._profileRepository)
-      : super(const VerifyCardInitial(null)) {
+    : super(const VerifyCardInitial(null)) {
     on<VerifyCard>(_onVerifyCard);
   }
 
   final DoctorProfileRepository _profileRepository;
 
   Future<void> _onVerifyCard(
-      VerifyCard event, Emitter<VerifyCardState> emit) async {
+    VerifyCard event,
+    Emitter<VerifyCardState> emit,
+  ) async {
     emit(VerifyCardLoading(state.card));
 
     final result = await _profileRepository.verifyCard(
-        code: event.code, cardId: event.cardId);
+      code: event.code,
+      cardId: event.cardId,
+    );
     if (result.isRight) {
       emit(VerifyCardSuccess(result.right));
     } else {

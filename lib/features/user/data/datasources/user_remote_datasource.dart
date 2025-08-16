@@ -18,20 +18,34 @@ import '../models/user_image_update_model.dart';
 abstract class IUserRemoteDataSource {
   Future<UserInfoModel> getUserInfo();
   Future<List<SpecialistModel>> getSpecialist();
-  Future<UserInfoUpdateModel> updateUserInfo({required UserInfoUpdateModel userInfoUpdateModel});
+  Future<UserInfoUpdateModel> updateUserInfo({
+    required UserInfoUpdateModel userInfoUpdateModel,
+  });
 
-  Future<UserImageUpdate> updateUserImage({required UserImageUpdate userImageUpdate});
-  Future<UserImageUpdate> updateUserBackImage({required UserImageUpdate userImageUpdate});
+  Future<UserImageUpdate> updateUserImage({
+    required UserImageUpdate userImageUpdate,
+  });
+  Future<UserImageUpdate> updateUserBackImage({
+    required UserImageUpdate userImageUpdate,
+  });
 
-  Future<UserSubscriptionsModel> getUserSubscriptions({required int limit, required int offset, String? query});
+  Future<UserSubscriptionsModel> getUserSubscriptions({
+    required int limit,
+    required int offset,
+    String? query,
+  });
 
-  Future<UserRecordModel> getUserRecords({int? limit, int? offset, String? query});
+  Future<UserRecordModel> getUserRecords({
+    int? limit,
+    int? offset,
+    String? query,
+  });
   Future<GenericPagination<SpecialistPositionModel>> getSpecialistPosition();
   Future<GenericPagination<SpecialistCatModel>> getSpecialistCat();
   Future<GenericPagination<SpecialistCategoryModel>> getSpecialistCategory();
   Future<bool> postSpecialist(SpecAddModel model);
   Future<int> isAddedSpecialist();
-// Future<Subscription>> subscribeToDr(String username);
+  // Future<Subscription>> subscribeToDr(String username);
 }
 
 class UserRemoteDataSource implements IUserRemoteDataSource {
@@ -47,7 +61,11 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
         return _client.get(
           "/UMS/api/v1.0/account/",
           options: Options(
-            headers: <String, dynamic>{if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'},
+            headers: <String, dynamic>{
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
           ),
         );
       },
@@ -58,7 +76,9 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
   }
 
   @override
-  Future<UserInfoUpdateModel> updateUserInfo({required UserInfoUpdateModel userInfoUpdateModel}) async {
+  Future<UserInfoUpdateModel> updateUserInfo({
+    required UserInfoUpdateModel userInfoUpdateModel,
+  }) async {
     final data = FormData.fromMap(userInfoUpdateModel.toJson());
     return _handle.apiControl(
       request: () {
@@ -66,7 +86,11 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
           "/UMS/api/v1.0/account/",
           data: data,
           options: Options(
-            headers: <String, dynamic>{if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'},
+            headers: <String, dynamic>{
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
           ),
         );
       },
@@ -77,14 +101,20 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
   }
 
   @override
-  Future<UserImageUpdate> updateUserImage({required UserImageUpdate userImageUpdate}) async {
+  Future<UserImageUpdate> updateUserImage({
+    required UserImageUpdate userImageUpdate,
+  }) async {
     return _handle.apiControl(
       request: () {
         return _client.post(
           "/UMS/api/v1.0/account/media/avatars/",
           data: userImageUpdate.toJson(false),
           options: Options(
-            headers: <String, dynamic>{if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'},
+            headers: <String, dynamic>{
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
           ),
         );
       },
@@ -95,14 +125,20 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
   }
 
   @override
-  Future<UserImageUpdate> updateUserBackImage({required UserImageUpdate userImageUpdate}) async {
+  Future<UserImageUpdate> updateUserBackImage({
+    required UserImageUpdate userImageUpdate,
+  }) async {
     return _handle.apiControl(
       request: () {
         return _client.post(
           "/UMS/api/v1.0/account/media/background/",
           data: userImageUpdate.toJson(true),
           options: Options(
-            headers: <String, dynamic>{if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'},
+            headers: <String, dynamic>{
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
           ),
         );
       },
@@ -113,12 +149,22 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
   }
 
   @override
-  Future<UserSubscriptionsModel> getUserSubscriptions({int? limit, required int? offset, String? query}) async {
+  Future<UserSubscriptionsModel> getUserSubscriptions({
+    int? limit,
+    required int? offset,
+    String? query,
+  }) async {
     return _handle.apiControl(
       request: () {
         return _client.get(
           "/SMMS/api/v1.0/public/subscriptions/",
-          options: Options(headers: {if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'}),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
           queryParameters: {
             if (query == null) "limit": limit,
             if (query == null) "offset": offset,
@@ -133,7 +179,11 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
   }
 
   @override
-  Future<UserRecordModel> getUserRecords({int? limit, int? offset, String? query}) async {
+  Future<UserRecordModel> getUserRecords({
+    int? limit,
+    int? offset,
+    String? query,
+  }) async {
     return _handle.apiControl(
       request: () {
         return _client.get(
@@ -144,7 +194,11 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
             if (query != null) "search": query,
           },
           options: Options(
-            headers: <String, dynamic>{if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'},
+            headers: <String, dynamic>{
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
           ),
         );
       },
@@ -160,7 +214,13 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
       request: () {
         return _client.get(
           "/BMS/api/v1.0/public/org/mpd/specialist_cat/",
-          options: Options(headers: {if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'}),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -178,7 +238,13 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
       request: () {
         return _client.get(
           "/BMS/api/v1.0/public/org/mpd/specialist_position/",
-          options: Options(headers: {if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'}),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -196,7 +262,13 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
       request: () {
         return _client.get(
           "/BMS/api/v1.0/public/org/mpd/specialist/category/",
-          options: Options(headers: {if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'}),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -216,7 +288,13 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
           return _client.post(
             "/UMS/api/v1.0/account/media/documents/",
             data: model.toJsonDocument,
-            options: Options(headers: {if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'}),
+            options: Options(
+              headers: {
+                if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                  'Authorization':
+                      'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+              },
+            ),
           );
         },
         body: (response) {
@@ -229,7 +307,13 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
         return _client.post(
           "/BMS/api/v1.0/public/org/mpd/specialist-add/",
           data: model.toJson(),
-          options: Options(headers: {if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'}),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -244,7 +328,13 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
       request: () {
         return _client.get(
           "/BMS/api/v1.0/public/specialist/status/",
-          options: Options(headers: {if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'}),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -259,7 +349,13 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
       request: () {
         return _client.get(
           "/UMS/api/v1.0/account/specialists/",
-          options: Options(headers: {if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) 'Authorization': 'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'}),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -270,23 +366,23 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
     );
   }
 
-// @override
-// Future<Subscription>> subscribeToDr(String username) async {
-//   final map = FormData.fromMap({"to_user": username});
-//   Subscription? subscription;
+  // @override
+  // Future<Subscription>> subscribeToDr(String username) async {
+  //   final map = FormData.fromMap({"to_user": username});
+  //   Subscription? subscription;
 
-//   try {
-//     final Response result =
-//         await _client.post("/SMMS/api/v1.0/public/subscriptions/", data: map);
+  //   try {
+  //     final Response result =
+  //         await _client.post("/SMMS/api/v1.0/public/subscriptions/", data: map);
 
-//     if (result.data is! List) {
-//       subscription = Subscription.fromJson(result.data);
-//     }
-//   } catch (error, stacktrace) {
-//     print("Exception custom occurred: $error stacktrace: $stacktrace");
-//     return ResponseHandler()
-//       ..setException(ServerError.withError(error: error as DioException));
-//   }
-//   return ResponseHandler()..data = subscription;
-// }
+  //     if (result.data is! List) {
+  //       subscription = Subscription.fromJson(result.data);
+  //     }
+  //   } catch (error, stacktrace) {
+  //     print("Exception custom occurred: $error stacktrace: $stacktrace");
+  //     return ResponseHandler()
+  //       ..setException(ServerError.withError(error: error as DioException));
+  //   }
+  //   return ResponseHandler()..data = subscription;
+  // }
 }

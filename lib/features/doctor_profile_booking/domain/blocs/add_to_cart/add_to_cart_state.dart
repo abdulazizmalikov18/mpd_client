@@ -2,11 +2,11 @@ part of 'add_to_cart_bloc.dart';
 
 abstract class AddToCartState extends Equatable {
   final List<int> cartIDs;
-   final List<Map<String, dynamic>> carts;
+  final List<Map<String, dynamic>> carts;
   const AddToCartState(this.cartIDs, this.carts);
 
   @override
-  List<Object> get props => [cartIDs,carts];
+  List<Object> get props => [cartIDs, carts];
 }
 
 class AddToCartInitial extends AddToCartState {
@@ -18,7 +18,6 @@ class AddToCartLoading extends AddToCartState {
 }
 
 class AddToCartSuccess extends AddToCartState {
-
   const AddToCartSuccess(super.cartIDs, super.carts);
 }
 

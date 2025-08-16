@@ -11,11 +11,11 @@ class ConnectionInfo implements IConnectionInfo {
   final Connectivity _connectivity;
   final InternetConnectionChecker _connectionChecker;
 
-  ConnectionInfo(
-      {required Connectivity connectivity,
-      required InternetConnectionChecker connectionChecker})
-      : _connectivity = connectivity,
-        _connectionChecker = connectionChecker;
+  ConnectionInfo({
+    required Connectivity connectivity,
+    required InternetConnectionChecker connectionChecker,
+  }) : _connectivity = connectivity,
+       _connectionChecker = connectionChecker;
 
   @override
   Future<bool> get isConnected async {

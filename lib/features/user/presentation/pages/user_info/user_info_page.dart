@@ -53,12 +53,15 @@ class _UserInfoState extends State<UserInfo> {
     firsNameController.text = widget.userLocalModel.name ?? "--";
     userLastNameController.text = widget.userLocalModel.lastname ?? "--";
     bioController.text = widget.userLocalModel.bio ?? "--";
-    birthController.text =
-        Utils.formatDateTime(widget.userLocalModel.birthday ?? DateTime.now());
-    gender =
-        widget.userLocalModel.gender == "female" ? Gender.female : Gender.male;
+    birthController.text = Utils.formatDateTime(
+      widget.userLocalModel.birthday ?? DateTime.now(),
+    );
+    gender = widget.userLocalModel.gender == "female"
+        ? Gender.female
+        : Gender.male;
     debugPrint(
-        "ppgender : ${context.read<UserInfoBloc>().state.userInfo?.gender}");
+      "ppgender : ${context.read<UserInfoBloc>().state.userInfo?.gender}",
+    );
     super.initState();
   }
 
@@ -73,7 +76,7 @@ class _UserInfoState extends State<UserInfo> {
           children: [
             Text(context.l10n.profile_personal_info),
             if (context.read<UserInfoBloc>().state.userInfo?.status == 2)
-              AppIcons.verify.svg()
+              AppIcons.verify.svg(),
           ],
         ),
         actions: [
@@ -93,24 +96,24 @@ class _UserInfoState extends State<UserInfo> {
                   ),
                   child: DisabledAccount(
                     onPress: () {
-                      context.read<RegisterBloc>().add(AccountDisabled(
+                      context.read<RegisterBloc>().add(
+                        AccountDisabled(
                           onSucces: () {
                             context.read<UserInfoBloc>().add(DeleteUserInfo());
                             context.read<AuthBloc>().add(DeleteToken());
-                            context
-                                .read<UserSubscriptionsBloc>()
-                                .add(CloseSubscriptionBloc());
+                            context.read<UserSubscriptionsBloc>().add(
+                              CloseSubscriptionBloc(),
+                            );
                           },
-                          onError: () {}));
+                          onError: () {},
+                        ),
+                      );
                     },
                   ),
                 ),
               );
             },
-            icon: Icon(
-              Icons.delete_outline,
-              color: context.color.red,
-            ),
+            icon: Icon(Icons.delete_outline, color: context.color.red),
           ),
         ],
       ),
@@ -132,7 +135,8 @@ class _UserInfoState extends State<UserInfo> {
                       );
                     }
                     return CachedNetworkImage(
-                     imageUrl: state.userInfo?.backgroundImage ??
+                      imageUrl:
+                          state.userInfo?.backgroundImage ??
                           "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
                       fit: BoxFit.cover,
                       height: 200.h,
@@ -160,34 +164,33 @@ class _UserInfoState extends State<UserInfo> {
                   ),
                 ),
                 Positioned(
-                    top: 88.h,
-                    left: 300.h,
-                    right: 0,
-                    bottom: 0,
-                    child: Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          context
-                              .read<UserInfoBloc>()
-                              .add(SelectUserBackImage());
-                        },
-                        child: Container(
-                          width: 48,
-                          height: 48,
-                          decoration: BoxDecoration(
-                            color: context.color.mainBlue,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Center(
-                            child: AppIcons.edit.svg(
-                              color: context.color.white,
-                              width: 24,
-                              height: 24,
-                            ),
+                  top: 88.h,
+                  left: 300.h,
+                  right: 0,
+                  bottom: 0,
+                  child: Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        context.read<UserInfoBloc>().add(SelectUserBackImage());
+                      },
+                      child: Container(
+                        width: 48,
+                        height: 48,
+                        decoration: BoxDecoration(
+                          color: context.color.mainBlue,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: AppIcons.edit.svg(
+                            color: context.color.white,
+                            width: 24,
+                            height: 24,
                           ),
                         ),
                       ),
-                    )),
+                    ),
+                  ),
+                ),
               ],
             ),
             TextButton(
@@ -197,8 +200,10 @@ class _UserInfoState extends State<UserInfo> {
               },
               child: Text(
                 context.l10n.profile_edit_photo,
-                style: Styles.headline7
-                    .copyWith(fontSize: 14.sp, color: context.color.mainBlue),
+                style: Styles.headline7.copyWith(
+                  fontSize: 14.sp,
+                  color: context.color.mainBlue,
+                ),
               ),
             ),
             ScreenUtil().setVerticalSpacing(24.h),
@@ -250,15 +255,21 @@ class _UserInfoState extends State<UserInfo> {
               selector: (state) => state.chosenProfession,
               builder: (context, chosenProfession) {
                 Profession? selected = chosenProfession;
-                return BlocSelector<SubProfessionsBloc, SubProfessionsState,
-                    Profession?>(
+                return BlocSelector<
+                  SubProfessionsBloc,
+                  SubProfessionsState,
+                  Profession?
+                >(
                   selector: (state) => state.selectedSubProfession,
                   builder: (context, selectedSubProfession) {
                     selected = chosenProfession ?? selectedSubProfession;
                     if (selected != null) {
-                      context.read<UserInfoBloc>().add(SelectedCategoryIdEvent(
+                      context.read<UserInfoBloc>().add(
+                        SelectedCategoryIdEvent(
                           MainCat(id: selected!.id, name: selected!.name),
-                          localCatName: ""));
+                          localCatName: "",
+                        ),
+                      );
                     }
                     return SelectVariantsWidget(
                       topHint: context.l10n.profile_profession,
@@ -274,11 +285,13 @@ class _UserInfoState extends State<UserInfo> {
                           builder: (ctx) => MultiBlocProvider(
                             providers: [
                               BlocProvider.value(
-                                  value:
-                                      BlocProvider.of<ProfessionBloc>(context)),
+                                value: BlocProvider.of<ProfessionBloc>(context),
+                              ),
                               BlocProvider.value(
-                                  value: BlocProvider.of<SubProfessionsBloc>(
-                                      context)),
+                                value: BlocProvider.of<SubProfessionsBloc>(
+                                  context,
+                                ),
+                              ),
                             ],
                             child: const ProfessionSheet(),
                           ),
@@ -294,10 +307,15 @@ class _UserInfoState extends State<UserInfo> {
               selector: (state) => state.selectedDistict,
               builder: (context, selectedDistict) {
                 if (selectedDistict != null) {
-                  context.read<UserInfoBloc>().add(SelectedRegionIdEvent(
+                  context.read<UserInfoBloc>().add(
+                    SelectedRegionIdEvent(
                       MainCat(
-                          id: selectedDistict.id, name: selectedDistict.name),
-                      localRegion: ""));
+                        id: selectedDistict.id,
+                        name: selectedDistict.name,
+                      ),
+                      localRegion: "",
+                    ),
+                  );
                 }
                 return SelectVariantsWidget(
                   onPressed: () {
@@ -310,9 +328,11 @@ class _UserInfoState extends State<UserInfo> {
                       builder: (ctx) => MultiBlocProvider(
                         providers: [
                           BlocProvider.value(
-                              value: BlocProvider.of<RegionBloc>(context)),
+                            value: BlocProvider.of<RegionBloc>(context),
+                          ),
                           BlocProvider.value(
-                              value: BlocProvider.of<DistrictBloc>(context)),
+                            value: BlocProvider.of<DistrictBloc>(context),
+                          ),
                         ],
                         child: const RegionSheet(),
                       ),
@@ -347,19 +367,19 @@ class _UserInfoState extends State<UserInfo> {
                   buttonName: context.l10n.profile_save_changes,
                   onPress: () {
                     if (state.userInfo?.status != 2) {
-                      context
-                          .read<UserInfoBloc>()
-                          .add((UpdateUserProfessionEvent(
-                            lastname: userLastNameController.text.trim(),
-                            name: firsNameController.text.trim(),
-                            birthday: birthController.text.trim(),
-                            gender: gender,
-                            bio: bioController.text.trim(),
-                          )));
+                      context.read<UserInfoBloc>().add(
+                        (UpdateUserProfessionEvent(
+                          lastname: userLastNameController.text.trim(),
+                          name: firsNameController.text.trim(),
+                          birthday: birthController.text.trim(),
+                          gender: gender,
+                          bio: bioController.text.trim(),
+                        )),
+                      );
                     } else {
-                      context
-                          .read<UserInfoBloc>()
-                          .add((UpdateUserVerifyEvent()));
+                      context.read<UserInfoBloc>().add(
+                        (UpdateUserVerifyEvent()),
+                      );
                     }
                     context.read<UserInfoBloc>().add((UpdateUserImage()));
                     Navigator.of(context).pop();

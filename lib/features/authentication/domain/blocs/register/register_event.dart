@@ -9,7 +9,6 @@ abstract class RegisterEvent extends Equatable {
 
 class PrivacyReatPressed extends RegisterEvent {}
 
-
 class AccountDisabled extends RegisterEvent {
   final VoidCallback onSucces;
   final VoidCallback onError;

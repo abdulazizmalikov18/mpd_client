@@ -6,7 +6,8 @@ class MyInheretedWidget extends InheritedWidget {
   final DoctorProfileModel doctor;
 
   static MyInheretedWidget of(BuildContext context) {
-    final MyInheretedWidget? result = context.dependOnInheritedWidgetOfExactType<MyInheretedWidget>();
+    final MyInheretedWidget? result = context
+        .dependOnInheritedWidgetOfExactType<MyInheretedWidget>();
     assert(result != null, 'No MyInheretedWidget found in context');
     return result!;
   }

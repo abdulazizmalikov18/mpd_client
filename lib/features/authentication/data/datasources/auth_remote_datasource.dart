@@ -13,8 +13,11 @@ import 'package:mpd_client/features/authentication/data/models/token_model.dart'
 import 'package:mpd_client/features/authentication/data/models/update_personal_data_model.dart';
 
 abstract class IAuthRemoteDataSource {
-  Future<TokenModel> login(
-      {String? phone, String? username, required String password});
+  Future<TokenModel> login({
+    String? phone,
+    String? username,
+    required String password,
+  });
 
   Future<bool> register(String phone);
 
@@ -23,11 +26,19 @@ abstract class IAuthRemoteDataSource {
 
   Future<TokenModel> verification(String phone, String code);
 
-  Future<ProfessionModel> getProffesions(
-      {int? limit, int? offset, int? parent, String? query});
+  Future<ProfessionModel> getProffesions({
+    int? limit,
+    int? offset,
+    int? parent,
+    String? query,
+  });
 
-  Future<RegionsModel> getRegions(
-      {int? limit, int? offset, int? parent, String? query});
+  Future<RegionsModel> getRegions({
+    int? limit,
+    int? offset,
+    int? parent,
+    String? query,
+  });
 
   Future<bool> checkUsername(String username);
 
@@ -37,8 +48,10 @@ abstract class IAuthRemoteDataSource {
 
   Future<bool> checkPassword({required String password});
 
-  Future<UpdatePersonalDataModel> updatePersonalData(
-      {required String passportSTIR, String? filePath});
+  Future<UpdatePersonalDataModel> updatePersonalData({
+    required String passportSTIR,
+    String? filePath,
+  });
 }
 
 class AuthRemoteDataSource implements IAuthRemoteDataSource {
@@ -48,15 +61,19 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
   AuthRemoteDataSource();
 
   @override
-  Future<TokenModel> login(
-      {String? phone, String? username, required String password}) async {
+  Future<TokenModel> login({
+    String? phone,
+    String? username,
+    required String password,
+  }) async {
     return _handle.apiControl(
       request: () {
         return _client.post(
           '/UMS/api/v1.0/account/auth/',
           queryParameters: {
-            'login_params':
-                phone != null ? 'phone_password' : 'username_password',
+            'login_params': phone != null
+                ? 'phone_password'
+                : 'username_password',
           },
           data: FormData.fromMap({
             if (phone != null) 'phone': phone else 'username': username,
@@ -117,7 +134,7 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
             headers: StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty
                 ? {
                     'Authorization':
-                        'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
+                        'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
                   }
                 : {},
           ),
@@ -134,17 +151,24 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
   }
 
   @override
-  Future<ProfessionModel> getProffesions(
-      {int? limit, int? offset, int? parent, String? query}) async {
+  Future<ProfessionModel> getProffesions({
+    int? limit,
+    int? offset,
+    int? parent,
+    String? query,
+  }) async {
     return _handle.apiControl(
       request: () {
-        return _client.get('/CDMS/api/v1.0/public/category/', queryParameters: {
-          "hide_from_users": false,
-          if (limit == null) "limit": limit,
-          if (offset == null) "offset": offset,
-          if (parent == null) "parent": parent ?? 0,
-          if (parent == null) "search": query,
-        });
+        return _client.get(
+          '/CDMS/api/v1.0/public/category/',
+          queryParameters: {
+            "hide_from_users": false,
+            if (limit == null) "limit": limit,
+            if (offset == null) "offset": offset,
+            if (parent == null) "parent": parent ?? 0,
+            if (parent == null) "search": query,
+          },
+        );
       },
       body: (response) {
         return ProfessionModel.fromJson(response);
@@ -153,8 +177,9 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
   }
 
   @override
-  Future<CreateUserModel> createUser(
-      {required CreateUserFormModel userModel}) async {
+  Future<CreateUserModel> createUser({
+    required CreateUserFormModel userModel,
+  }) async {
     final data = FormData.fromMap(userModel.toJson());
     return _handle.apiControl(
       request: () {
@@ -169,17 +194,21 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
   //  -------------------- CHANGE PASSWORD --------------------------  //
 
   @override
-  Future<bool> changePassword(
-      {required String password, String? oldPassword}) async {
+  Future<bool> changePassword({
+    required String password,
+    String? oldPassword,
+  }) async {
     final data = FormData.fromMap({
       "old_password": oldPassword,
       "password1": password,
-      "password2": password
+      "password2": password,
     });
     return _handle.apiControl(
       request: () {
-        return _client.post("/UMS/api/v1.0/account/change-password/",
-            data: data);
+        return _client.post(
+          "/UMS/api/v1.0/account/change-password/",
+          data: data,
+        );
       },
       body: (response) {
         return true;
@@ -188,16 +217,20 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
   }
 
   @override
-  Future<UpdatePersonalDataModel> updatePersonalData(
-      {required String passportSTIR, String? filePath}) async {
+  Future<UpdatePersonalDataModel> updatePersonalData({
+    required String passportSTIR,
+    String? filePath,
+  }) async {
     final data = FormData.fromMap({
       "passport_scan": await MultipartFile.fromFile(filePath!),
       "passport_stir": passportSTIR,
     });
     return _handle.apiControl(
       request: () {
-        return _client.patch("/UMS/api/v1.0/account/personal_data/",
-            data: data);
+        return _client.patch(
+          "/UMS/api/v1.0/account/personal_data/",
+          data: data,
+        );
       },
       body: (response) {
         return UpdatePersonalDataModel.fromJson(response);
@@ -235,10 +268,15 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
   }
 
   @override
-  Future<RegionsModel> getRegions(
-      {int? limit, int? offset, int? parent, String? query}) async {
-    final baseUrl =
-        StringBuffer('/GMS/api/v1.0/public/region/?parent=${parent ?? 1}');
+  Future<RegionsModel> getRegions({
+    int? limit,
+    int? offset,
+    int? parent,
+    String? query,
+  }) async {
+    final baseUrl = StringBuffer(
+      '/GMS/api/v1.0/public/region/?parent=${parent ?? 1}',
+    );
     // if (parent != null) baseUrl.write('&parent=$parent');
 
     if (query != null) baseUrl.write('&search=$query');

@@ -18,7 +18,8 @@ class _CustomLoadingIndicatorState extends State<CustomLoadingIndicator> {
     _timer = Timer.periodic(const Duration(milliseconds: 200), (Timer t) {
       setState(() {
         _firstLoadingIndicator++;
-        if (_firstLoadingIndicator == LoadingIndicator.indicatorPosition.length) {
+        if (_firstLoadingIndicator ==
+            LoadingIndicator.indicatorPosition.length) {
           _firstLoadingIndicator = 0;
         }
       });
@@ -43,20 +44,25 @@ class _CustomLoadingIndicatorState extends State<CustomLoadingIndicator> {
         children: List.generate(
           8,
           (index) => Positioned(
-              right: LoadingIndicator.indicatorPosition[index].right,
-              top: LoadingIndicator.indicatorPosition[index].top,
-              left: LoadingIndicator.indicatorPosition[index].left,
-              bottom: LoadingIndicator.indicatorPosition[index].bottom,
-              child: Container(
-                height: 8,
-                width: 8,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: _firstLoadingIndicator == index ? gradientColors(context)[1] : gradientColors(context)[0])),
-              )),
+            right: LoadingIndicator.indicatorPosition[index].right,
+            top: LoadingIndicator.indicatorPosition[index].top,
+            left: LoadingIndicator.indicatorPosition[index].left,
+            bottom: LoadingIndicator.indicatorPosition[index].bottom,
+            child: Container(
+              height: 8,
+              width: 8,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: _firstLoadingIndicator == index
+                      ? gradientColors(context)[1]
+                      : gradientColors(context)[0],
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -64,11 +70,8 @@ class _CustomLoadingIndicatorState extends State<CustomLoadingIndicator> {
 }
 
 List<List<Color>> gradientColors(BuildContext context) => [
-  [
-    const Color(0xFFD9D9D9),
-    const Color(0xFFD9D9D9),
-  ],
-  [context.color.gradientBlueOpacity, context.color.gradientBlue]
+  [const Color(0xFFD9D9D9), const Color(0xFFD9D9D9)],
+  [context.color.gradientBlueOpacity, context.color.gradientBlue],
 ];
 
 class LoadingIndicator {

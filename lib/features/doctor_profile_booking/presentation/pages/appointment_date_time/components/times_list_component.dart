@@ -65,26 +65,29 @@ class _TimesListComponentState extends State<TimesListComponent> {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-        itemCount: intervalList.length - 1,
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        scrollDirection: Axis.horizontal,
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 55,
-            childAspectRatio: 1 / 2.9,
-            mainAxisSpacing: 11.5.w,
-            crossAxisSpacing: 12.h),
-        itemBuilder: (context, index) {
-          final time = '${intervalList[index]} - ${intervalList[index + 1]}';
-          final isBooked = widget.bookedTimes
-              .any((bookedTime) => bookedTime.startTime == intervalList[index]);
-          return AppointmentTimeWidget(
-            isBooked: isBooked,
-            time: time,
-            selected: widget.selectedTime == time,
-            onTap: () {
-              context.read<TimetableBloc>().add(SelectTimeEvent(time: time));
-            },
-          );
-        });
+      itemCount: intervalList.length - 1,
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      scrollDirection: Axis.horizontal,
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 55,
+        childAspectRatio: 1 / 2.9,
+        mainAxisSpacing: 11.5.w,
+        crossAxisSpacing: 12.h,
+      ),
+      itemBuilder: (context, index) {
+        final time = '${intervalList[index]} - ${intervalList[index + 1]}';
+        final isBooked = widget.bookedTimes.any(
+          (bookedTime) => bookedTime.startTime == intervalList[index],
+        );
+        return AppointmentTimeWidget(
+          isBooked: isBooked,
+          time: time,
+          selected: widget.selectedTime == time,
+          onTap: () {
+            context.read<TimetableBloc>().add(SelectTimeEvent(time: time));
+          },
+        );
+      },
+    );
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:mpd_client/core/data/repository/storage_keys.dart';
 import 'package:mpd_client/core/data/repository/storage_repository.dart';
 
@@ -64,7 +63,7 @@ class MessageModel {
       file: json['file'] as String?,
       sender: json['sender'] as String?,
       isMe: json['sender'] == StorageRepository.getString(StorageKeys.USERNAME),
-      isRead : json['isRead'] as bool? ?? false,
+      isRead: json['isRead'] as bool? ?? false,
       isSend: true,
       isLocalFile: false,
     );
@@ -94,5 +93,15 @@ class MessageModel {
 
   @override
   int get hashCode =>
-      id.hashCode ^ sendId.hashCode ^ text.hashCode ^ groupSlug.hashCode ^ date.hashCode ^ file.hashCode ^ sender.hashCode ^ isRead.hashCode ^ isMe.hashCode ^ isSend.hashCode ^ isLocalFile.hashCode;
+      id.hashCode ^
+      sendId.hashCode ^
+      text.hashCode ^
+      groupSlug.hashCode ^
+      date.hashCode ^
+      file.hashCode ^
+      sender.hashCode ^
+      isRead.hashCode ^
+      isMe.hashCode ^
+      isSend.hashCode ^
+      isLocalFile.hashCode;
 }

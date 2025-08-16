@@ -7,7 +7,7 @@ part 'send_coment_state.dart';
 
 class SendComentBloc extends Bloc<SendComentEvent, SendComentState> {
   SendComentBloc(this._homeRepository, this._comentController)
-      : super(const SendComentInitial(null)) {
+    : super(const SendComentInitial(null)) {
     on<SendComment>(_onSendComent);
     on<ComentTextChanged>(_onComentChanged);
     on<EmojiShowing>(_onEmojiShowing);
@@ -19,23 +19,39 @@ class SendComentBloc extends Bloc<SendComentEvent, SendComentState> {
   TextEditingController get comentController => _comentController;
 
   void _onComentChanged(
-      ComentTextChanged event, Emitter<SendComentState> emit) {
-    emit(SendComentInitial(state.coment,
-        comentText: event.comentText, emojiShowing: state.emojiShowing));
+    ComentTextChanged event,
+    Emitter<SendComentState> emit,
+  ) {
+    emit(
+      SendComentInitial(
+        state.coment,
+        comentText: event.comentText,
+        emojiShowing: state.emojiShowing,
+      ),
+    );
   }
 
   void _onEmojiShowing(EmojiShowing event, Emitter<SendComentState> emit) {
-    emit(SendComentInitial(state.coment,
-        emojiShowing: event.emojiShow, comentText: state.comentText));
+    emit(
+      SendComentInitial(
+        state.coment,
+        emojiShowing: event.emojiShow,
+        comentText: state.comentText,
+      ),
+    );
   }
 
   Future<void> _onSendComent(
-      SendComment event, Emitter<SendComentState> emit) async {
+    SendComment event,
+    Emitter<SendComentState> emit,
+  ) async {
     if (event.coment.text!.isEmpty) return;
     _comentController.clear();
     emit(SendComentLoading(event.coment));
     final result = await _homeRepository.sendPostComent(
-        postId: event.postId, text: event.coment.text!);
+      postId: event.postId,
+      text: event.coment.text!,
+    );
     if (result.isRight) {
       emit(SendComentSuccess(result.right));
     } else {

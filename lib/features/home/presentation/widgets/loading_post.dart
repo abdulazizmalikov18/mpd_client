@@ -17,7 +17,9 @@ class LoadingPost extends StatelessWidget {
         height: 680.h,
         width: double.maxFinite,
         decoration: BoxDecoration(
-          boxShadow: [BoxShadow(color: context.color.cardShadow, blurRadius: 20.r)],
+          boxShadow: [
+            BoxShadow(color: context.color.cardShadow, blurRadius: 20.r),
+          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +31,10 @@ class LoadingPost extends StatelessWidget {
                   Container(
                     height: 48.h,
                     width: 48.h,
-                    decoration:  BoxDecoration(shape: BoxShape.circle, color: context.color.white),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: context.color.white,
+                    ),
                   ),
                   ScreenUtil().setHorizontalSpacing(8.w),
                   Column(
@@ -38,19 +43,28 @@ class LoadingPost extends StatelessWidget {
                       Container(
                         height: 16.h,
                         width: 107.w,
-                        decoration: BoxDecoration(color: context.color.white, borderRadius: BorderRadius.circular(10.r)),
+                        decoration: BoxDecoration(
+                          color: context.color.white,
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
                       ),
                       ScreenUtil().setVerticalSpacing(2.h),
                       Container(
                         height: 14.h,
                         width: 71.w,
-                        decoration: BoxDecoration(color: context.color.white, borderRadius: BorderRadius.circular(10.r)),
+                        decoration: BoxDecoration(
+                          color: context.color.white,
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
                       ),
                       ScreenUtil().setVerticalSpacing(2.h),
                       Container(
                         height: 14.h,
                         width: 71.w,
-                        decoration: BoxDecoration(color: context.color.white, borderRadius: BorderRadius.circular(10.r)),
+                        decoration: BoxDecoration(
+                          color: context.color.white,
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
                       ),
                     ],
                   ),
@@ -58,30 +72,36 @@ class LoadingPost extends StatelessWidget {
               ),
             ),
             ScreenUtil().setVerticalSpacing(8.h),
-            Container(
-              height: 460.h,
-              color: context.color.white,
-            ),
+            Container(height: 460.h, color: context.color.white),
             ScreenUtil().setVerticalSpacing(12.h),
             Row(
               children: [
                 Container(
                   height: 40.h,
                   width: 100.w,
-                  decoration: BoxDecoration(color: context.color.white, borderRadius: BorderRadius.circular(10.r)),
+                  decoration: BoxDecoration(
+                    color: context.color.white,
+                    borderRadius: BorderRadius.circular(10.r),
+                  ),
                 ),
                 const Spacer(),
                 Container(
                   height: 40.h,
                   width: 58.w,
-                  decoration: BoxDecoration(color: context.color.white, borderRadius: BorderRadius.circular(10.r)),
+                  decoration: BoxDecoration(
+                    color: context.color.white,
+                    borderRadius: BorderRadius.circular(10.r),
+                  ),
                 ),
               ],
             ),
             ScreenUtil().setVerticalSpacing(12.h),
             Container(
               height: 64.h,
-              decoration: BoxDecoration(color: context.color.white, borderRadius: BorderRadius.circular(10.r)),
+              decoration: BoxDecoration(
+                color: context.color.white,
+                borderRadius: BorderRadius.circular(10.r),
+              ),
             ),
           ],
         ),

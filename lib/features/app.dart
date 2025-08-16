@@ -56,8 +56,9 @@ class _MyAppState extends State<MyApp> {
         return MultiBlocProvider(
           providers: [
             BlocProvider(
-                create: (context) =>
-                    locator<RefreshtokenBloc>()..add(GetRefreshToken())),
+              create: (context) =>
+                  locator<RefreshtokenBloc>()..add(GetRefreshToken()),
+            ),
             BlocProvider(
               create: (context) => RegisterBloc(
                 GetIt.instance.get<AuthRepository>(),
@@ -66,16 +67,17 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
             BlocProvider(
-              create: (context) => AppoinmentsBloc(
-                GetIt.instance.get<AppoinmentRepository>(),
-              ),
+              create: (context) =>
+                  AppoinmentsBloc(GetIt.instance.get<AppoinmentRepository>()),
             ),
             BlocProvider(
-                create: (context) =>
-                    DoctorProfileBloc(locator.get<DoctorProfileRepository>())),
+              create: (context) =>
+                  DoctorProfileBloc(locator.get<DoctorProfileRepository>()),
+            ),
             BlocProvider(
-                create: (context) =>
-                    AddToCartBloc(locator.get<DoctorProfileRepository>())),
+              create: (context) =>
+                  AddToCartBloc(locator.get<DoctorProfileRepository>()),
+            ),
             BlocProvider(create: (context) => SocketOfferBloc()),
             BlocProvider<ChatGroupBloc>(
               create: (context) => locator<ChatGroupBloc>(),
@@ -85,9 +87,8 @@ class _MyAppState extends State<MyApp> {
               create: (context) => locator<ChatMessageBloc>(),
             ),
             BlocProvider(
-              create: (context) => SubscriptionBloc(
-                locator.get<DoctorProfileRepository>(),
-              ),
+              create: (context) =>
+                  SubscriptionBloc(locator.get<DoctorProfileRepository>()),
             ),
           ],
           child: PostInheritedNotifier(
@@ -102,9 +103,9 @@ class _MyAppState extends State<MyApp> {
                     behavior: RefreshScrollBehavior(),
                     child: KeyboardDismisser(
                       child: MediaQuery(
-                        data: MediaQuery.of(context).copyWith(
-                          textScaler: const TextScaler.linear(1.0),
-                        ),
+                        data: MediaQuery.of(
+                          context,
+                        ).copyWith(textScaler: const TextScaler.linear(1.0)),
                         child: child!,
                       ),
                     ),
@@ -118,13 +119,13 @@ class _MyAppState extends State<MyApp> {
                     // RefreshLocalizations.delegate,
                     GlobalMaterialLocalizations.delegate,
                     GlobalCupertinoLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate
+                    GlobalWidgetsLocalizations.delegate,
                   ],
                   locale: provider.locale,
                   localeResolutionCallback:
                       (Locale? locale, Iterable<Locale> supportedLocales) {
-                    return locale;
-                  },
+                        return locale;
+                      },
                   debugShowCheckedModeBanner: false,
                   initialRoute: AppRoutes.splash,
                   onGenerateRoute: _appPages.generateRoute,

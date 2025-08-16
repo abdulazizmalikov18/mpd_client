@@ -20,14 +20,13 @@ class ComentModel {
   });
 
   factory ComentModel.fromJson(Map<String, dynamic> json) => ComentModel(
-        count: json["count"],
-        next: json["next"],
-        nextOffset: json["next_offset"],
-        previousOffset: json["previous_offset"],
-        previous: json["previous"],
-        results:
-            List<Coment>.from(json["results"].map((x) => Coment.fromJson(x))),
-      );
+    count: json["count"],
+    next: json["next"],
+    nextOffset: json["next_offset"],
+    previousOffset: json["previous_offset"],
+    previous: json["previous"],
+    results: List<Coment>.from(json["results"].map((x) => Coment.fromJson(x))),
+  );
 }
 
 class Coment {
@@ -58,16 +57,16 @@ class Coment {
   });
 
   factory Coment.fromJson(Map<String, dynamic> json) => Coment(
-        id: json["id"],
-        user: json["user"],
-        org: json["org"],
-        text: json["text"],
-        date: DateTime.parse(json["date"]),
-        post: json["post"],
-        replyTo: json["reply_to"],
-        username: json["username"],
-        name: json["name"],
-        lastname: json["lastname"],
-        avatar: json["avatar"],
-      );
+    id: json["id"],
+    user: json["user"],
+    org: json["org"],
+    text: json["text"],
+    date: DateTime.parse(json["date"]),
+    post: json["post"],
+    replyTo: json["reply_to"],
+    username: json["username"],
+    name: json["name"],
+    lastname: json["lastname"],
+    avatar: json["avatar"],
+  );
 }

@@ -12,14 +12,14 @@ class ProfessionSubCategory extends StatelessWidget {
   final List<Profession> _professions;
   final VoidCallback onScrollEndBloc;
   final bool isEmpty;
-  const ProfessionSubCategory(
-      {super.key,
-      required ScrollController scrollController,
-      required List<Profession> professions,
-      required this.isEmpty,
-      required this.onScrollEndBloc})
-      : _scrollController = scrollController,
-        _professions = professions;
+  const ProfessionSubCategory({
+    super.key,
+    required ScrollController scrollController,
+    required List<Profession> professions,
+    required this.isEmpty,
+    required this.onScrollEndBloc,
+  }) : _scrollController = scrollController,
+       _professions = professions;
 
   @override
   Widget build(BuildContext context) {
@@ -41,23 +41,27 @@ class ProfessionSubCategory extends StatelessWidget {
             color: context.color.white,
             child: Theme(
               data: ThemeData(
-                  highlightColor:
-                      context.color.mainBlue.withValues(alpha: 0.1)),
+                highlightColor: context.color.mainBlue.withValues(alpha: 0.1),
+              ),
               child: ListTile(
-                  onTap: () {
-                    // context.read<ProfessionsBloc>().add(
-                    //     const SelectProfessionEvent(selectedProfessin: null));
-                    context.read<SubProfessionsBloc>().add(
-                        SelectSubProfessionEvent(
-                            selectedSubProfession: _professions[index]));
-                    Navigator.pop(context);
-                  },
-                  contentPadding: EdgeInsets.only(left: 32.w),
-                  title: Text(
-                    _professions[index].name!,
-                    style: Styles.descSubtitle
-                        .copyWith(color: context.color.black),
-                  )),
+                onTap: () {
+                  // context.read<ProfessionsBloc>().add(
+                  //     const SelectProfessionEvent(selectedProfessin: null));
+                  context.read<SubProfessionsBloc>().add(
+                    SelectSubProfessionEvent(
+                      selectedSubProfession: _professions[index],
+                    ),
+                  );
+                  Navigator.pop(context);
+                },
+                contentPadding: EdgeInsets.only(left: 32.w),
+                title: Text(
+                  _professions[index].name!,
+                  style: Styles.descSubtitle.copyWith(
+                    color: context.color.black,
+                  ),
+                ),
+              ),
             ),
           );
         },

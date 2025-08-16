@@ -6,7 +6,10 @@ import 'package:mpd_client/features/home/domain/blocs/socket_offer_bloc/socket_o
 
 class MainViewModal {
   Future<void> screenController(
-      AppLifecycleState state, BuildContext context, username) async {
+    AppLifecycleState state,
+    BuildContext context,
+    username,
+  ) async {
     switch (state) {
       case AppLifecycleState.paused: // screen off/navigate away
         {

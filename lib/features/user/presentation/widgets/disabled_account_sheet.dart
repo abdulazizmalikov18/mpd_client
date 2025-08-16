@@ -9,10 +9,7 @@ import '../../../../../../src/widgets/bottom_sheet_widget.dart';
 
 class DisabledAccount extends StatelessWidget {
   final VoidCallback onPress;
-  const DisabledAccount({
-    super.key,
-    required this.onPress,
-  });
+  const DisabledAccount({super.key, required this.onPress});
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +57,7 @@ class DisabledAccount extends StatelessWidget {
             },
           ),
         ),
-        ScreenUtil().setVerticalSpacing(32.h)
+        ScreenUtil().setVerticalSpacing(32.h),
       ],
     );
   }

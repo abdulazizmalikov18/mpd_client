@@ -4,8 +4,11 @@ abstract class SendComentState extends Equatable {
   final Coment? coment;
   final String comentText;
   final bool emojiShowing;
-  const SendComentState(this.coment,
-      {this.comentText = '', this.emojiShowing = false});
+  const SendComentState(
+    this.coment, {
+    this.comentText = '',
+    this.emojiShowing = false,
+  });
 
   @override
   List<Object?> get props => [coment, comentText, emojiShowing];

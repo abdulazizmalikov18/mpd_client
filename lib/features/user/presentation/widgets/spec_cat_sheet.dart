@@ -52,8 +52,8 @@ class _SpecCatSheetState extends State<SpecCatSheet> {
               ),
               trailing:
                   (widget.selection?.id ?? 0) == widget.specialistCat[index].id
-                      ? AppIcons.tickCircle.svg()
-                      : AppIcons.tickCircleOff.svg(),
+                  ? AppIcons.tickCircle.svg()
+                  : AppIcons.tickCircleOff.svg(),
             ),
           ),
         ),

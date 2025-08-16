@@ -15,12 +15,12 @@ class LocalService {
   });
 
   LocalService copyWith(final int count) => LocalService(
-        id: id,
-        name: name,
-        image: image,
-        count: count,
-        price: price,
-      );
+    id: id,
+    name: name,
+    image: image,
+    count: count,
+    price: price,
+  );
 
   static LocalService format(SpecialistProduct specialistProduct) {
     return LocalService(

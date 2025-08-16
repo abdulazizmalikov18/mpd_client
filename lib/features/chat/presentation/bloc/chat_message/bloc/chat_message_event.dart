@@ -29,6 +29,7 @@ class ChatReadAllMessage extends ChatMessageEvent {
   final String groupSlug;
   const ChatReadAllMessage(this.groupSlug);
 }
+
 class ChatSocketMessage extends ChatMessageEvent {
   final MessageModel message;
   const ChatSocketMessage(this.message);

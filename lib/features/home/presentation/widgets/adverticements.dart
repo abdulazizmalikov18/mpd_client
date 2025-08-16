@@ -32,8 +32,9 @@ class Adverticements extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 16.w),
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
-            border: Border.all(color: context.color.white)),
+          borderRadius: BorderRadius.circular(12.r),
+          border: Border.all(color: context.color.white),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -42,26 +43,29 @@ class Adverticements extends StatelessWidget {
               height: 24.h,
               width: 135.w,
               decoration: BoxDecoration(
-                  color: context.color.white,
-                  borderRadius: BorderRadius.circular(100)),
+                color: context.color.white,
+                borderRadius: BorderRadius.circular(100),
+              ),
             ),
             ScreenUtil().setVerticalSpacing(8.h),
             Container(
               height: 34.h,
               width: 236.w,
               decoration: BoxDecoration(
-                  color: context.color.white,
-                  borderRadius: BorderRadius.circular(100)),
+                color: context.color.white,
+                borderRadius: BorderRadius.circular(100),
+              ),
             ),
             const Spacer(),
             Container(
               height: 34.h,
               width: 110.w,
               decoration: BoxDecoration(
-                  color: context.color.white,
-                  borderRadius: BorderRadius.circular(100)),
+                color: context.color.white,
+                borderRadius: BorderRadius.circular(100),
+              ),
             ),
-            ScreenUtil().setVerticalSpacing(26.h)
+            ScreenUtil().setVerticalSpacing(26.h),
           ],
         ),
       ),
@@ -85,15 +89,16 @@ class Adverticements extends StatelessWidget {
                   autoPlay: true,
                   enlargeCenterPage: true,
                   onPageChanged: (index, reason) {
-                    AdverticementInheritedNotifier.of(context)
-                        .notifier!
-                        .advertChanged(index);
+                    AdverticementInheritedNotifier.of(
+                      context,
+                    ).notifier!.advertChanged(index);
                   },
                 ),
                 itemBuilder: (context, index, realIndex) => SizedBox(
                   width: double.maxFinite,
                   child: CachedNetworkImage(
-                    imageUrl: state.adverts[0].post!.media![0].image ??
+                    imageUrl:
+                        state.adverts[0].post!.media![0].image ??
                         'https://resources.comphealth.com/wp-content/uploads/2019/05/post-residency-career-tips.jpg',
                     fit: BoxFit.cover,
                   ),
@@ -105,28 +110,31 @@ class Adverticements extends StatelessWidget {
               right: 0,
               left: 0,
               child: SwipeIndicator(
-                  current: AdverticementInheritedNotifier.of(context)
-                      .notifier!
-                      .currentAdvertIndex,
-                  length: state.adverts.length),
+                current: AdverticementInheritedNotifier.of(
+                  context,
+                ).notifier!.currentAdvertIndex,
+                length: state.adverts.length,
+              ),
             ),
             Positioned(
               left: 16.w,
               bottom: 14.h,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: context.color.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100.r)),
-                    elevation: 0,
-                    minimumSize: Size(110.w, 34.h)),
+                  backgroundColor: context.color.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100.r),
+                  ),
+                  elevation: 0,
+                  minimumSize: Size(110.w, 34.h),
+                ),
                 onPressed: () {},
                 child: Text(
                   'Check now',
                   style: Styles.expTitle.copyWith(fontSize: 14.sp),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

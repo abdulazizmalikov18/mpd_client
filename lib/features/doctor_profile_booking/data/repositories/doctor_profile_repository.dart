@@ -18,7 +18,8 @@ class DoctorProfileRepository implements IDoctorProfileRepository {
 
   @override
   Future<Either<Failure, DoctorProfileModel>> getDoctorInfobyId(
-      String username) async {
+    String username,
+  ) async {
     try {
       final response = await remoteDataSource.getDoctorInfo(username);
       return Right(response);
@@ -32,8 +33,10 @@ class DoctorProfileRepository implements IDoctorProfileRepository {
   }
 
   @override
-  Future<Either<Failure, TimetableByDateModel>> getTimetable(
-      {required String date, required int id}) async {
+  Future<Either<Failure, TimetableByDateModel>> getTimetable({
+    required String date,
+    required int id,
+  }) async {
     try {
       final response = await remoteDataSource.getTimetable(date: date, id: id);
       return Right(response);
@@ -48,7 +51,8 @@ class DoctorProfileRepository implements IDoctorProfileRepository {
 
   @override
   Future<Either<Failure, Subscription>> subscribeToDoctor(
-      String usernmae) async {
+    String usernmae,
+  ) async {
     try {
       final response = await remoteDataSource.subscribeToDoctor(usernmae);
       return Right(response);
@@ -63,7 +67,8 @@ class DoctorProfileRepository implements IDoctorProfileRepository {
 
   @override
   Future<Either<Failure, List<CartRemoteModel>>> addToCart(
-      List<Map<String, dynamic>> carts) async {
+    List<Map<String, dynamic>> carts,
+  ) async {
     try {
       final response = await remoteDataSource.addToCart(carts);
       return Right(response);
@@ -78,7 +83,8 @@ class DoctorProfileRepository implements IDoctorProfileRepository {
 
   @override
   Future<Either<Failure, CardRemoteModel>> insertCard(
-      CardLocalModel card) async {
+    CardLocalModel card,
+  ) async {
     try {
       final response = await remoteDataSource.insertCard(card);
       return Right(response);
@@ -92,11 +98,15 @@ class DoctorProfileRepository implements IDoctorProfileRepository {
   }
 
   @override
-  Future<Either<Failure, CardRemoteModel>> verifyCard(
-      {required int code, required int cardId}) async {
+  Future<Either<Failure, CardRemoteModel>> verifyCard({
+    required int code,
+    required int cardId,
+  }) async {
     try {
-      final response =
-          await remoteDataSource.verifyCard(code: code, cardId: cardId);
+      final response = await remoteDataSource.verifyCard(
+        code: code,
+        cardId: cardId,
+      );
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -108,8 +118,9 @@ class DoctorProfileRepository implements IDoctorProfileRepository {
   }
 
   @override
-  Future<Either<Failure, Map<String, dynamic>>> resendverifyCode(
-      {required int cardId}) async {
+  Future<Either<Failure, Map<String, dynamic>>> resendverifyCode({
+    required int cardId,
+  }) async {
     try {
       final response = await remoteDataSource.resendVerifyCode(cardId: cardId);
       return Right(response);
@@ -138,7 +149,8 @@ class DoctorProfileRepository implements IDoctorProfileRepository {
 
   @override
   Future<Either<Failure, Map<String, dynamic>>> deleteSubscription(
-      String username) async {
+    String username,
+  ) async {
     try {
       final response = await remoteDataSource.deleteSubscription(username);
       return Right(response);
@@ -152,13 +164,17 @@ class DoctorProfileRepository implements IDoctorProfileRepository {
   }
 
   @override
-  Future<Either<Failure, Map<String, dynamic>>> createOrder(
-      {required List<Map<String, dynamic>> carts,
-      int? payment,
-      required String action}) async {
+  Future<Either<Failure, Map<String, dynamic>>> createOrder({
+    required List<Map<String, dynamic>> carts,
+    int? payment,
+    required String action,
+  }) async {
     try {
       final response = await remoteDataSource.createOrder(
-          carts: carts, action: action, payment: payment);
+        carts: carts,
+        action: action,
+        payment: payment,
+      );
       return Right(response);
     } on DioException {
       return Left(const DioFailure());

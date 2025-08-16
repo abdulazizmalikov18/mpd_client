@@ -4,12 +4,7 @@ import 'package:mpd_client/app/app_colors.dart';
 import 'package:shimmer/shimmer.dart';
 
 class WShimmer extends StatelessWidget {
-  const WShimmer({
-    super.key,
-    this.width,
-    this.height,
-    this.radius,
-  });
+  const WShimmer({super.key, this.width, this.height, this.radius});
 
   final double? width;
   final double? height;

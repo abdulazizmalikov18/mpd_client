@@ -24,13 +24,13 @@ class RecordsLabelPart extends StatelessWidget {
             Container(
               height: 8.h,
               width: 8.h,
-              decoration: BoxDecoration(shape: BoxShape.circle, color: context.color.gradientRedOpacity),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: context.color.gradientRedOpacity,
+              ),
             ),
           ScreenUtil().setHorizontalSpacing(8),
-          Text(
-            dateTime,
-            style: Styles.boldTopHint.copyWith(fontSize: 18.sp),
-          ),
+          Text(dateTime, style: Styles.boldTopHint.copyWith(fontSize: 18.sp)),
         ],
       ),
     );

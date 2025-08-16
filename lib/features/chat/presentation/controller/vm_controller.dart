@@ -25,8 +25,8 @@ class ChatVMController {
   factory ChatVMController() => instance;
   static final instance = ChatVMController._();
   ChatVMController._()
-      : messageController = TextEditingController(),
-        scrollController = ScrollController();
+    : messageController = TextEditingController(),
+      scrollController = ScrollController();
 
   static final ValueNotifier<String?> chatNotifier = ValueNotifier(null);
   final TextEditingController messageController;
@@ -39,12 +39,12 @@ class ChatVMController {
       File file = File(result!.files[0].path!);
       if (context.mounted) {
         context.read<ChatMessageBloc>().add(
-              ChatSendMessageEvent(
-                groupSlug: slugName,
-                file: file,
-                text: messageController.text,
-              ),
-            );
+          ChatSendMessageEvent(
+            groupSlug: slugName,
+            file: file,
+            text: messageController.text,
+          ),
+        );
       }
     }
   }
@@ -56,12 +56,12 @@ class ChatVMController {
       File file = File(result!.path);
       if (context.mounted) {
         context.read<ChatMessageBloc>().add(
-              ChatSendMessageEvent(
-                groupSlug: slugName,
-                file: file,
-                text: messageController.text,
-              ),
-            );
+          ChatSendMessageEvent(
+            groupSlug: slugName,
+            file: file,
+            text: messageController.text,
+          ),
+        );
       }
     }
   }
@@ -123,17 +123,15 @@ class ChatVMController {
 
   void onComingNewMessage(void Function(MessageModel message) onMessage) {
     try {
-      channel!.stream.listen(
-        (event) {
-          Log.i("New Chat Message $event \nType${event.runtimeType}");
-          final eventData = (jsonDecode(event));
-          if (eventData is Map<String, dynamic> &&
-              eventData.containsValue("notify_about_message")) {
-            Log.i("Message  Keldi");
-            onMessage(MessageModel.fromSocket(eventData));
-          }
-        },
-      );
+      channel!.stream.listen((event) {
+        Log.i("New Chat Message $event \nType${event.runtimeType}");
+        final eventData = (jsonDecode(event));
+        if (eventData is Map<String, dynamic> &&
+            eventData.containsValue("notify_about_message")) {
+          Log.i("Message  Keldi");
+          onMessage(MessageModel.fromSocket(eventData));
+        }
+      });
     } catch (e, s) {
       Log.e("error $e Stack $s");
       throw Exception("Modelga o'tkasa olmadi Message");
@@ -142,18 +140,16 @@ class ChatVMController {
 
   void onOnlineOrOffline(void Function(ChatUserState state) onMessage) {
     try {
-      channel!.stream.listen(
-        (event) {
-          Log.i("New Chat Message $event \nType${event.runtimeType}");
-          final eventData = (jsonDecode(event));
-          if (eventData is Map<String, dynamic> &&
-              eventData.containsValue("type") &&
-              event['type'] == "online_status") {
-            Log.i("Message  Keldi");
-            onMessage(ChatUserState.fromJson(eventData));
-          }
-        },
-      );
+      channel!.stream.listen((event) {
+        Log.i("New Chat Message $event \nType${event.runtimeType}");
+        final eventData = (jsonDecode(event));
+        if (eventData is Map<String, dynamic> &&
+            eventData.containsValue("type") &&
+            event['type'] == "online_status") {
+          Log.i("Message  Keldi");
+          onMessage(ChatUserState.fromJson(eventData));
+        }
+      });
     } catch (e, s) {
       Log.e("error $e Stack $s");
       throw Exception("Modelga o'tkasa olmadi Message");
@@ -177,10 +173,7 @@ class ChatVMController {
   //   }
   // }
 
-  Future<void> downloadAndSaveFile(
-    String fileUrl,
-    BuildContext context,
-  ) async {
+  Future<void> downloadAndSaveFile(String fileUrl, BuildContext context) async {
     try {
       // Ruxsatlar so‘rash
       if (Platform.isAndroid) {
@@ -203,7 +196,8 @@ class ChatVMController {
         if (await Permission.manageExternalStorage.isGranted) {
           directory = Directory("/storage/emulated/0/Download");
         } else {
-          directory = await getExternalStorageDirectory() ??
+          directory =
+              await getExternalStorageDirectory() ??
               await getApplicationDocumentsDirectory();
         }
       } else {

@@ -54,7 +54,8 @@ class PaginatorList extends StatelessWidget {
           }
           return itemBuilder(context, index);
         },
-        separatorBuilder: separatorBuilder ?? (context, index) => const SizedBox(),
+        separatorBuilder:
+            separatorBuilder ?? (context, index) => const SizedBox(),
         itemCount: itemCount + 1,
       );
     }

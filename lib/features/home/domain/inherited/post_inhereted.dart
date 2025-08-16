@@ -2,11 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:mpd_client/features/home/data/models/posts_model.dart';
 
 class PostInheritedNotifier extends InheritedNotifier<PostNotifier> {
-  const PostInheritedNotifier({super.key, required PostNotifier postNotifier, required super.child})
-      : super(notifier: postNotifier);
+  const PostInheritedNotifier({
+    super.key,
+    required PostNotifier postNotifier,
+    required super.child,
+  }) : super(notifier: postNotifier);
 
   static PostInheritedNotifier of(BuildContext context) {
-    final PostInheritedNotifier? result = context.dependOnInheritedWidgetOfExactType<PostInheritedNotifier>();
+    final PostInheritedNotifier? result = context
+        .dependOnInheritedWidgetOfExactType<PostInheritedNotifier>();
     assert(result != null, 'No PostInheritedNotifier found in context');
     return result!;
   }

@@ -4,15 +4,22 @@ class VerificationState extends Equatable {
   final String error;
   final bool showLoading;
   final bool isNewUser;
-  const VerificationState(
-      {this.error = '', this.showLoading = false, this.isNewUser = false});
+  const VerificationState({
+    this.error = '',
+    this.showLoading = false,
+    this.isNewUser = false,
+  });
 
-  VerificationState copyWith(
-      {final String? error, final bool? showLoading, final bool? isNewUser}) {
+  VerificationState copyWith({
+    final String? error,
+    final bool? showLoading,
+    final bool? isNewUser,
+  }) {
     return VerificationState(
-        error: error ?? this.error,
-        showLoading: showLoading ?? this.showLoading,
-        isNewUser: isNewUser ?? this.isNewUser);
+      error: error ?? this.error,
+      showLoading: showLoading ?? this.showLoading,
+      isNewUser: isNewUser ?? this.isNewUser,
+    );
   }
 
   @override

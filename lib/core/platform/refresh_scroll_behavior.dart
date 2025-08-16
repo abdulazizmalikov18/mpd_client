@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 class RefreshScrollBehavior extends ScrollBehavior {
   Widget? buildViewportChrome(
-      BuildContext context, Widget child, AxisDirection axisDirection) {
+    BuildContext context,
+    Widget child,
+    AxisDirection axisDirection,
+  ) {
     // When modifying this function, consider modifying the implementation in
     // _MaterialScrollBehavior as well.
     switch (getPlatform(context)) {

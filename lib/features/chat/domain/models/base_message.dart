@@ -1,4 +1,3 @@
-
 import 'message.dart';
 
 class BaseMessage {
@@ -8,8 +7,6 @@ class BaseMessage {
   final int? previousOffset;
   final String? previous;
   final List<MessageModel> results;
-
-
 
   const BaseMessage({
     this.count,
@@ -38,7 +35,11 @@ class BaseMessage {
       nextOffset: json['next_offset'] as int?,
       previousOffset: json['previous_offset'] as int?,
       previous: json['previous'] as String?,
-      results: json['results']!= null ? (json['results'] as List).map((e) => MessageModel.fromJson(e)).toList() : [],
+      results: json['results'] != null
+          ? (json['results'] as List)
+                .map((e) => MessageModel.fromJson(e))
+                .toList()
+          : [],
     );
   }
 
@@ -86,5 +87,3 @@ class BaseMessage {
     );
   }
 }
-
-

@@ -12,8 +12,11 @@ import '../../domain/blocs/yandex_doctor/yandex_doctor_bloc.dart';
 class AutoComplete extends StatelessWidget {
   final SearchBySpecialistState state;
   final BuildContext oldcontext;
-  const AutoComplete(
-      {super.key, required this.state, required this.oldcontext});
+  const AutoComplete({
+    super.key,
+    required this.state,
+    required this.oldcontext,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +50,16 @@ class AutoComplete extends StatelessWidget {
           return ListTile(
             onTap: () {
               FocusScope.of(context).unfocus();
-              context
-                  .read<SearchBySpecialistBloc>()
-                  .add(CloseSuggessionsEvent());
+              context.read<SearchBySpecialistBloc>().add(
+                CloseSuggessionsEvent(),
+              );
 
-              context.read<YandexDoctorBloc>().add(InsertSingleObjectEvent(
-                    specialist: specialist,
-                    context: oldcontext,
-                  ));
+              context.read<YandexDoctorBloc>().add(
+                InsertSingleObjectEvent(
+                  specialist: specialist,
+                  context: oldcontext,
+                ),
+              );
             },
             splashColor: context.color.background,
             minLeadingWidth: 0,
@@ -76,7 +81,9 @@ class AutoComplete extends StatelessWidget {
         return _buildResultInfo(context.l10n.appointment_server_error, context);
       }
       return _buildResultInfo(
-          context.l10n.error_connection_lost_title, context);
+        context.l10n.error_connection_lost_title,
+        context,
+      );
     }
   }
 

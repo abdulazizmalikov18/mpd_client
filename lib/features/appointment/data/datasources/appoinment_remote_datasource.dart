@@ -8,8 +8,10 @@ import '../models/pagination_model.dart';
 
 abstract class IAppoinmentRemoteDataSource {
   Future<AppointmentModel> getUserAppoinments(PaginationModel paginationModel);
-  Future<Map<String, dynamic>> cancelAppoinment(
-      {required String productid, required String cancelInfo});
+  Future<Map<String, dynamic>> cancelAppoinment({
+    required String productid,
+    required String cancelInfo,
+  });
 }
 
 class AppoinmentRemoteDataSource implements IAppoinmentRemoteDataSource {
@@ -20,19 +22,20 @@ class AppoinmentRemoteDataSource implements IAppoinmentRemoteDataSource {
 
   @override
   Future<AppointmentModel> getUserAppoinments(
-      PaginationModel paginationModel) async {
+    PaginationModel paginationModel,
+  ) async {
     return _handle.apiControl(
       request: () {
         return _client.get(
           '/OMS/api/v1.0/public/order-product/?limit=${paginationModel.limit}&offset=${paginationModel.offset}&status=${paginationModel.status}',
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
-          queryParameters: {
-            'org_slug': 'mpd',
-          },
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
+          queryParameters: {'org_slug': 'mpd'},
         );
       },
       body: (response) {
@@ -42,19 +45,23 @@ class AppoinmentRemoteDataSource implements IAppoinmentRemoteDataSource {
   }
 
   @override
-  Future<Map<String, dynamic>> cancelAppoinment(
-      {required String productid, required String cancelInfo}) async {
+  Future<Map<String, dynamic>> cancelAppoinment({
+    required String productid,
+    required String cancelInfo,
+  }) async {
     return _handle.apiControl(
       request: () {
         final body = {"cancel_info": cancelInfo};
         return _client.patch(
           '/OMS/api/v1.0/public/order-product/$productid/cancel/',
           data: body,
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {

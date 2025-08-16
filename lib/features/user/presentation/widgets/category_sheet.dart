@@ -48,7 +48,8 @@ class _CategorySheetState extends State<CategorySheet> {
                 Navigator.pop(context);
               },
               title: Text(widget.specialistCategory[index].name),
-              trailing: (widget.selection?.id ?? 0) ==
+              trailing:
+                  (widget.selection?.id ?? 0) ==
                       widget.specialistCategory[index].id
                   ? AppIcons.tickCircle.svg()
                   : AppIcons.tickCircleOff.svg(),

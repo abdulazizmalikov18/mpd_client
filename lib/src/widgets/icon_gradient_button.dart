@@ -8,12 +8,13 @@ class IconGradientButton extends StatelessWidget {
   final VoidCallback onPressed;
   final double height, width;
 
-  const IconGradientButton(
-      {super.key,
-      required this.icon,
-      required this.onPressed,
-      this.height = 50,
-      this.width = 50});
+  const IconGradientButton({
+    super.key,
+    required this.icon,
+    required this.onPressed,
+    this.height = 50,
+    this.width = 50,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +25,10 @@ class IconGradientButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.r),
         boxShadow: [
           BoxShadow(
-              blurRadius: 10,
-              offset: const Offset(0, 6),
-              color: context.color.mainBlue.withValues(alpha: 0.1))
+            blurRadius: 10,
+            offset: const Offset(0, 6),
+            color: context.color.mainBlue.withValues(alpha: 0.1),
+          ),
         ],
         color: context.color.mainBlue,
       ),
@@ -34,17 +36,19 @@ class IconGradientButton extends StatelessWidget {
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           elevation: 0,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.r),
+          ),
           padding: EdgeInsets.zero,
           foregroundColor: Colors.white30,
           backgroundColor: Colors.transparent,
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 7.h, horizontal: 7.w),
-          child: SvgPicture.asset(icon,
-              colorFilter:
-                  ColorFilter.mode(context.color.white, BlendMode.srcIn)),
+          child: SvgPicture.asset(
+            icon,
+            colorFilter: ColorFilter.mode(context.color.white, BlendMode.srcIn),
+          ),
         ),
       ),
     );

@@ -45,26 +45,27 @@ class Record extends StatelessWidget {
             if (record.conclusionFile != null)
               ScreenUtil().setVerticalSpacing(12.h),
             RecordDoctorCard(
-                buttonName: context.l10n.appointment_view_doctor_profile,
-                record: record,
-                onPress: () {
-                  if (record.writer?.username == null) {
-                    debugPrint("User Null Kelyapti");
-                  }
-                  Navigator.pushNamed(
-                    context,
-                    AppRoutes.drProfilebyid,
-                    arguments: SpecialistInfoModel(
-                      id: record.writer?.id ?? 0,
-                      phone: "",
-                      username: record.writer?.username ?? "--",
-                      job: record.writer?.job ?? "--",
-                      fullname:
-                          '${record.writer?.name ?? "--"} ${record.writer?.lastname ?? "--"}',
-                      avatar: record.writer?.avatar ?? "--",
-                    ),
-                  );
-                }),
+              buttonName: context.l10n.appointment_view_doctor_profile,
+              record: record,
+              onPress: () {
+                if (record.writer?.username == null) {
+                  debugPrint("User Null Kelyapti");
+                }
+                Navigator.pushNamed(
+                  context,
+                  AppRoutes.drProfilebyid,
+                  arguments: SpecialistInfoModel(
+                    id: record.writer?.id ?? 0,
+                    phone: "",
+                    username: record.writer?.username ?? "--",
+                    job: record.writer?.job ?? "--",
+                    fullname:
+                        '${record.writer?.name ?? "--"} ${record.writer?.lastname ?? "--"}',
+                    avatar: record.writer?.avatar ?? "--",
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),

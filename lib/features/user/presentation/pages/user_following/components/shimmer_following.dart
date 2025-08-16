@@ -15,8 +15,10 @@ class ShimmerFollowing extends StatelessWidget {
       child: Container(
         width: double.maxFinite,
         margin: EdgeInsets.symmetric(horizontal: 16.w),
-        decoration:
-            BoxDecoration(border: Border.all(color: context.color.white), borderRadius: BorderRadius.circular(12.r)),
+        decoration: BoxDecoration(
+          border: Border.all(color: context.color.white),
+          borderRadius: BorderRadius.circular(12.r),
+        ),
         child: Column(
           children: [
             ScreenUtil().setVerticalSpacing(16.h),
@@ -26,7 +28,10 @@ class ShimmerFollowing extends StatelessWidget {
                 Container(
                   height: 72.h,
                   width: 72.h,
-                  decoration:  BoxDecoration(shape: BoxShape.circle, color: context.color.white),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: context.color.white,
+                  ),
                 ),
                 ScreenUtil().setHorizontalSpacing(16.w),
                 Column(
@@ -38,15 +43,11 @@ class ShimmerFollowing extends StatelessWidget {
                     ScreenUtil().setVerticalSpacing(6.h),
                     const ShimmerContainer(size: Size(180, 16)),
                   ],
-                )
+                ),
               ],
             ),
             ScreenUtil().setVerticalSpacing(25.h),
-             Divider(
-              thickness: 0.5,
-              height: 0,
-              color: context.color.white,
-            ),
+            Divider(thickness: 0.5, height: 0, color: context.color.white),
             ScreenUtil().setVerticalSpacing(12.h),
             Row(
               children: [

@@ -50,10 +50,7 @@ class AppointmentItem extends StatelessWidget {
             ),
           ),
           ScreenUtil().setVerticalSpacing(16.h),
-          Divider(
-            height: 1.h,
-            color: context.color.dividerColor,
-          ),
+          Divider(height: 1.h, color: context.color.dividerColor),
           ScreenUtil().setVerticalSpacing(12.h),
           Padding(
             padding: EdgeInsets.only(left: 16.w, right: 16.w),
@@ -65,7 +62,7 @@ class AppointmentItem extends StatelessWidget {
     );
   }
 
-//doctor image method
+  //doctor image method
   ClipRRect _buildDrImage(String? image) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(36.r),
@@ -93,7 +90,7 @@ class AppointmentItem extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             if (appoinmentInfo.drCardInfo != DrCardInfo.following)
-              _buildStatusBar()
+              _buildStatusBar(),
           ],
         ),
         ScreenUtil().setVerticalSpacing(2.h),
@@ -101,8 +98,10 @@ class AppointmentItem extends StatelessWidget {
           constraints: BoxConstraints(maxWidth: 140.w),
           child: Text(
             specialist.job ?? "__",
-            style: Styles.headline7
-                .copyWith(fontSize: 14, color: context.color.mainBlue),
+            style: Styles.headline7.copyWith(
+              fontSize: 14,
+              color: context.color.mainBlue,
+            ),
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
           ),
@@ -113,8 +112,10 @@ class AppointmentItem extends StatelessWidget {
             constraints: const BoxConstraints(maxWidth: 220),
             child: Text(
               specialist.appointmentName ?? "--",
-              style: Styles.cardReview
-                  .copyWith(color: context.color.red, fontSize: 12),
+              style: Styles.cardReview.copyWith(
+                color: context.color.red,
+                fontSize: 12,
+              ),
             ),
           ),
         if (appoinmentInfo.drCardInfo == DrCardInfo.following)
@@ -125,8 +126,10 @@ class AppointmentItem extends StatelessWidget {
               ScreenUtil().setHorizontalSpacing(8.w),
               Text(
                 specialist.workingTime.toString(),
-                style: Styles.descSubtitle
-                    .copyWith(fontSize: 14.sp, color: context.color.grey),
+                style: Styles.descSubtitle.copyWith(
+                  fontSize: 14.sp,
+                  color: context.color.grey,
+                ),
               ),
             ],
           ),
@@ -135,20 +138,23 @@ class AppointmentItem extends StatelessWidget {
     );
   }
 
-// method statusbar
+  // method statusbar
   Widget _buildStatusBar() {
     return Container(
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100.r),
-          color: appoinmentInfo.color!.withValues(alpha: 0.1)),
+        borderRadius: BorderRadius.circular(100.r),
+        color: appoinmentInfo.color!.withValues(alpha: 0.1),
+      ),
       child: Row(
         children: [
           SvgPicture.asset(
             appoinmentInfo.statusIcon!,
-            colorFilter:
-                ColorFilter.mode(appoinmentInfo.color!, BlendMode.srcIn),
+            colorFilter: ColorFilter.mode(
+              appoinmentInfo.color!,
+              BlendMode.srcIn,
+            ),
             height: 12.h,
             width: 12.h,
           ),
@@ -159,7 +165,7 @@ class AppointmentItem extends StatelessWidget {
               color: appoinmentInfo.color,
               fontSize: 10.sp,
             ),
-          )
+          ),
         ],
       ),
     );

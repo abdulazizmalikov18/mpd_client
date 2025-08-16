@@ -44,9 +44,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     context.read<UserInfoBloc>().add(GetSpecialistUser());
 
     super.initState();
-    ChatVMController().connectSocket(
-      onError: (errorMessage) {},
-    );
+    ChatVMController().connectSocket(onError: (errorMessage) {});
     context.read<ChatGroupBloc>().add(const ChatGetGroupEvent());
 
     /// Attach a listener which will update the state and refresh the page index
@@ -70,25 +68,25 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     final bottomNavigationItems = {
       context.l10n.navbar_home: {
         'inactive': AppIcons.mainComponentUnfill,
-        'active': AppIcons.mainComponent
+        'active': AppIcons.mainComponent,
       },
       context.l10n.navbar_Doctor: {
         'inactive': AppIcons.searchStatus,
-        'active': AppIcons.searchStatusFilled
+        'active': AppIcons.searchStatusFilled,
       },
       // 'Market': {'inactive': shop, 'active': shop_filled},
       context.l10n.navbar_Appointment: {
         'inactive': AppIcons.calendar,
-        'active': AppIcons.calendarFilled
+        'active': AppIcons.calendarFilled,
       },
       context.l10n.chat: {
         'inactive': AppIcons.noActiveMessage,
-        'active': AppIcons.message
+        'active': AppIcons.message,
       },
       context.l10n.navbar_profile: {
         'inactive': AppIcons.user,
-        'active': AppIcons.userFilled
-      }
+        'active': AppIcons.userFilled,
+      },
     };
     return Scaffold(
       resizeToAvoidBottomInset: false,

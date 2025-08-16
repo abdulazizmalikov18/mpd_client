@@ -9,23 +9,32 @@ import 'package:mpd_client/features/user/data/models/user_subscriptions_model.da
 
 abstract class IDoctorProfileRepository {
   Future<Either<Failure, DoctorProfileModel>> getDoctorInfobyId(
-      String username);
-  Future<Either<Failure, TimetableByDateModel>> getTimetable(
-      {required String date, required int id});
+    String username,
+  );
+  Future<Either<Failure, TimetableByDateModel>> getTimetable({
+    required String date,
+    required int id,
+  });
   Future<Either<Failure, Subscription>> subscribeToDoctor(String username);
   Future<Either<Failure, List<CartRemoteModel>>> addToCart(
-      List<Map<String, dynamic>> carts);
+    List<Map<String, dynamic>> carts,
+  );
 
   Future<Either<Failure, CardRemoteModel>> insertCard(CardLocalModel card);
-  Future<Either<Failure, CardRemoteModel>> verifyCard(
-      {required int code, required int cardId});
-  Future<Either<Failure, Map<String, dynamic>>> resendverifyCode(
-      {required int cardId});
+  Future<Either<Failure, CardRemoteModel>> verifyCard({
+    required int code,
+    required int cardId,
+  });
+  Future<Either<Failure, Map<String, dynamic>>> resendverifyCode({
+    required int cardId,
+  });
   Future<Either<Failure, List<CardRemoteModel>>> getMyCards();
   Future<Either<Failure, Map<String, dynamic>>> deleteSubscription(
-      String username);
-  Future<Either<Failure, Map<String, dynamic>>> createOrder(
-      {required List<Map<String, dynamic>> carts,
-      int? payment,
-      required String action});
+    String username,
+  );
+  Future<Either<Failure, Map<String, dynamic>>> createOrder({
+    required List<Map<String, dynamic>> carts,
+    int? payment,
+    required String action,
+  });
 }

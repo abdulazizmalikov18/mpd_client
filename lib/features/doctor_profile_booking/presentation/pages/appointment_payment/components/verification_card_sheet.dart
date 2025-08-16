@@ -33,98 +33,107 @@ class _VerificationCardSheetState extends State<VerificationCardSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomSheetWidget(children: [
-      ScreenUtil().setVerticalSpacing(40.h),
-      Center(
-        child: Text('Verification code',
+    return BottomSheetWidget(
+      children: [
+        ScreenUtil().setVerticalSpacing(40.h),
+        Center(
+          child: Text(
+            'Verification code',
             textAlign: TextAlign.center,
-            style: Styles.boldTitle.copyWith(fontFamily: Styles.gilroyMedium)),
-      ),
-      ScreenUtil().setVerticalSpacing(8.h),
-      SizedBox(
-        height: 48.h,
-        width: 281.w,
-        child: Text('Please enter the 6 digit  code we sent you',
+            style: Styles.boldTitle.copyWith(fontFamily: Styles.gilroyMedium),
+          ),
+        ),
+        ScreenUtil().setVerticalSpacing(8.h),
+        SizedBox(
+          height: 48.h,
+          width: 281.w,
+          child: Text(
+            'Please enter the 6 digit  code we sent you',
             textAlign: TextAlign.center,
-            style: Styles.headline6.copyWith(color: context.color.grey)),
-      ),
-      ScreenUtil().setVerticalSpacing(32.h),
-      BlocConsumer<VerifyCardBloc, VerifyCardState>(
-        listener: (context, state) async {
-          if (state is VerifyCardLoading) {
-            showDialog(
+            style: Styles.headline6.copyWith(color: context.color.grey),
+          ),
+        ),
+        ScreenUtil().setVerticalSpacing(32.h),
+        BlocConsumer<VerifyCardBloc, VerifyCardState>(
+          listener: (context, state) async {
+            if (state is VerifyCardLoading) {
+              showDialog(
                 context: context,
                 barrierDismissible: true,
-                builder: (context) => const LoadingDialogWidget());
-          } else if (state is VerifyCardFailure) {
-            Navigator.pop(context);
-          } else {
-            Navigator.pop(context);
-            Navigator.pop(context);
-            context.read<MyCardsBloc>().add(InsertCardToAllEvent(state.card!));
-          }
-        },
-        builder: (context, state) {
-          return Pinput(
-            onCompleted: (code) {
-              context
-                  .read<VerifyCardBloc>()
-                  .add(VerifyCard(cardId: widget.id, code: int.parse(code)));
-            },
-            autofocus: true,
-            forceErrorState: state is VerifyCardFailure ? true : false,
-            errorText: '',
-            errorBuilder: (_, _) {
-              return _builtError(context);
-            },
-            length: 6,
-            cursor: Container(
-              height: 17.h,
-              width: 1.w,
-              color: context.color.mainBlue,
-            ),
-            defaultPinTheme: PinPutThemes.defaultPinPutTheme(context),
-            errorPinTheme: PinPutThemes.errorPinPutTheme(context),
-            submittedPinTheme: PinPutThemes.submittedPinPutTheme(context),
-          );
-        },
-      ),
-      ScreenUtil().setVerticalSpacing(36.h),
-      BlocConsumer<ResendVerifyCardBloc, ResendVerifyCardState>(
-        listener: (context, state) {
-          if (state is ResendVerifyCardSuccess) {
-            _btnController.reset();
-          }
-        },
-        builder: (context, state) {
-          return IgnorePointer(
-            ignoring: state.duration != '' && state.duration != '00:00',
-            child: RoundedLoadingButton(
-              color: context.color.mainBlue.withValues(alpha: 0.2),
-              elevation: 0,
-              height: 44.h,
-              width: 120.w,
-              controller: _btnController,
-              valueColor: context.color.mainBlue,
-              onPressed: () {
-                context
-                    .read<ResendVerifyCardBloc>()
-                    .add(ResendVerifyCard(widget.id));
+                builder: (context) => const LoadingDialogWidget(),
+              );
+            } else if (state is VerifyCardFailure) {
+              Navigator.pop(context);
+            } else {
+              Navigator.pop(context);
+              Navigator.pop(context);
+              context.read<MyCardsBloc>().add(
+                InsertCardToAllEvent(state.card!),
+              );
+            }
+          },
+          builder: (context, state) {
+            return Pinput(
+              onCompleted: (code) {
+                context.read<VerifyCardBloc>().add(
+                  VerifyCard(cardId: widget.id, code: int.parse(code)),
+                );
               },
-              disabledColor: context.color.gradientRed,
-              child: state.duration != '' && state.duration != '00:00'
-                  ? Text(state.duration.toString())
-                  : Text(
-                      'Send again',
-                      textAlign: TextAlign.center,
-                      style: Styles.headline7,
-                    ),
-            ),
-          );
-        },
-      ),
-      ScreenUtil().setVerticalSpacing(22.h)
-    ]);
+              autofocus: true,
+              forceErrorState: state is VerifyCardFailure ? true : false,
+              errorText: '',
+              errorBuilder: (_, _) {
+                return _builtError(context);
+              },
+              length: 6,
+              cursor: Container(
+                height: 17.h,
+                width: 1.w,
+                color: context.color.mainBlue,
+              ),
+              defaultPinTheme: PinPutThemes.defaultPinPutTheme(context),
+              errorPinTheme: PinPutThemes.errorPinPutTheme(context),
+              submittedPinTheme: PinPutThemes.submittedPinPutTheme(context),
+            );
+          },
+        ),
+        ScreenUtil().setVerticalSpacing(36.h),
+        BlocConsumer<ResendVerifyCardBloc, ResendVerifyCardState>(
+          listener: (context, state) {
+            if (state is ResendVerifyCardSuccess) {
+              _btnController.reset();
+            }
+          },
+          builder: (context, state) {
+            return IgnorePointer(
+              ignoring: state.duration != '' && state.duration != '00:00',
+              child: RoundedLoadingButton(
+                color: context.color.mainBlue.withValues(alpha: 0.2),
+                elevation: 0,
+                height: 44.h,
+                width: 120.w,
+                controller: _btnController,
+                valueColor: context.color.mainBlue,
+                onPressed: () {
+                  context.read<ResendVerifyCardBloc>().add(
+                    ResendVerifyCard(widget.id),
+                  );
+                },
+                disabledColor: context.color.gradientRed,
+                child: state.duration != '' && state.duration != '00:00'
+                    ? Text(state.duration.toString())
+                    : Text(
+                        'Send again',
+                        textAlign: TextAlign.center,
+                        style: Styles.headline7,
+                      ),
+              ),
+            );
+          },
+        ),
+        ScreenUtil().setVerticalSpacing(22.h),
+      ],
+    );
   }
 
   Column _builtError(BuildContext context) {
@@ -135,18 +144,14 @@ class _VerificationCardSheetState extends State<VerificationCardSheet> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.error,
-              color: context.color.red,
-              size: 21,
-            ),
+            Icon(Icons.error, color: context.color.red, size: 21),
             ScreenUtil().setHorizontalSpacing(6.5.w),
             Text(
               'You have entered an invalid code, please try again!',
               style: Styles.descSubtitle.copyWith(color: context.color.red),
-            )
+            ),
           ],
-        )
+        ),
       ],
     );
   }

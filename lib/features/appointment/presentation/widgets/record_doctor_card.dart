@@ -39,18 +39,13 @@ class RecordDoctorCard extends StatelessWidget {
               children: [
                 _buildDrImage(),
                 ScreenUtil().setHorizontalSpacing(16.w),
-                Expanded(
-                  child: _buildDrInfo(context),
-                ),
+                Expanded(child: _buildDrInfo(context)),
               ],
             ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Divider(
-              height: 1.h,
-              color: context.color.dividerColor,
-            ),
+            child: Divider(height: 1.h, color: context.color.dividerColor),
           ),
           Padding(
             padding: EdgeInsets.only(left: 16.w, right: 0),
@@ -63,7 +58,7 @@ class RecordDoctorCard extends StatelessWidget {
     );
   }
 
-//method viewdrprofile
+  //method viewdrprofile
   Row _buildViewDrProfile(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -71,23 +66,28 @@ class RecordDoctorCard extends StatelessWidget {
         MaterialButton(
           onPressed: onPress,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(100.r)),
+            borderRadius: BorderRadius.circular(100.r),
+          ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
                 buttonName,
-                style: Styles.headline7
-                    .copyWith(color: context.color.mainBlue, fontSize: 14.sp),
+                style: Styles.headline7.copyWith(
+                  color: context.color.mainBlue,
+                  fontSize: 14.sp,
+                ),
               ),
               SvgPicture.asset(
                 AppIcons.forward,
-                colorFilter:
-                    ColorFilter.mode(context.color.mainBlue, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(
+                  context.color.mainBlue,
+                  BlendMode.srcIn,
+                ),
                 height: 18.h,
                 width: 18.h,
-              )
+              ),
             ],
           ),
         ),
@@ -95,7 +95,7 @@ class RecordDoctorCard extends StatelessWidget {
     );
   }
 
-//doctor info method
+  //doctor info method
   Column _buildDrInfo(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,26 +114,31 @@ class RecordDoctorCard extends StatelessWidget {
         ScreenUtil().setVerticalSpacing(2.h),
         Text(
           record.writer?.job ?? "--",
-          style: Styles.headline7
-              .copyWith(fontSize: 14, color: context.color.mainBlue),
+          style: Styles.headline7.copyWith(
+            fontSize: 14,
+            color: context.color.mainBlue,
+          ),
         ),
         ScreenUtil().setVerticalSpacing(3.h),
         Text(
           record.product ?? '--',
-          style: Styles.cardReview
-              .copyWith(color: context.color.grey, fontSize: 12),
+          style: Styles.cardReview.copyWith(
+            color: context.color.grey,
+            fontSize: 12,
+          ),
         ),
         ScreenUtil().setVerticalSpacing(18.h),
       ],
     );
   }
 
-//doctor image method
+  //doctor image method
   ClipRRect _buildDrImage() {
     return ClipRRect(
-        borderRadius: BorderRadius.circular(100.r),
-        child: record.writer?.avatar != null
-            ? CachedImageWidget(size: 72, url: record.writer!.avatar!)
-            : const DefaultAvatar(containerSize: 72, imageSize: 54));
+      borderRadius: BorderRadius.circular(100.r),
+      child: record.writer?.avatar != null
+          ? CachedImageWidget(size: 72, url: record.writer!.avatar!)
+          : const DefaultAvatar(containerSize: 72, imageSize: 54),
+    );
   }
 }

@@ -72,8 +72,10 @@ class WTextField extends StatefulWidget {
     this.prefixIcon,
     this.title = '',
     this.greyTexts = '',
-    this.contentPadding =
-        const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+    this.contentPadding = const EdgeInsets.symmetric(
+      vertical: 8,
+      horizontal: 12,
+    ),
     this.inputFormatters,
     this.suffix,
     this.suffixIcon,
@@ -144,19 +146,21 @@ class _WTextFieldState extends State<WTextField>
       autofocus: widget.autoFocus,
       onChanged: widget.onChanged,
       textInputAction: widget.textInputAction,
-      style: widget.style ??
+      style:
+          widget.style ??
           Theme.of(context).textTheme.displayLarge!.copyWith(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                color: white.withValues(alpha: .5),
-              ),
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            color: white.withValues(alpha: .5),
+          ),
       inputFormatters: widget.inputFormatters,
       maxLength: widget.maxLength,
       maxLines: widget.isObscure ? 1 : widget.maxLines,
       minLines: widget.minLines,
       cursorColor: widget.cursorColor,
       cursorWidth: 1,
-      decoration: widget.inputDecoration ??
+      decoration:
+          widget.inputDecoration ??
           InputDecoration(
             constraints: BoxConstraints(
               maxHeight: widget.height ?? 48,
@@ -181,20 +185,22 @@ class _WTextFieldState extends State<WTextField>
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(widget.borderRadius!),
-              borderSide:
-                  BorderSide(color: widget.hasError ? red : widget.borderColor),
+              borderSide: BorderSide(
+                color: widget.hasError ? red : widget.borderColor,
+              ),
             ),
             hintText: widget.hintText,
-            hintStyle: widget.hintStyle ??
+            hintStyle:
+                widget.hintStyle ??
                 Theme.of(context).textTheme.headlineMedium!.copyWith(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color:
-                          widget.hasError ? red : white.withValues(alpha: .5),
-                    ),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: widget.hasError ? red : white.withValues(alpha: .5),
+                ),
             contentPadding: widget.contentPadding,
-            suffixIconConstraints:
-                BoxConstraints(maxWidth: widget.suffixMaxWidth),
+            suffixIconConstraints: BoxConstraints(
+              maxWidth: widget.suffixMaxWidth,
+            ),
             suffixIcon: widget.hasSuffixIcon
                 ? widget.suffixIcon ?? const SizedBox()
                 : Padding(
@@ -234,8 +240,9 @@ class _WTextFieldState extends State<WTextField>
             prefix: widget.prefix,
             fillColor: widget.fillColor,
             filled: true,
-            prefixIconConstraints:
-                BoxConstraints(maxWidth: widget.prefixMaxWidth),
+            prefixIconConstraints: BoxConstraints(
+              maxWidth: widget.prefixMaxWidth,
+            ),
             prefixIcon: widget.prefixIcon == null
                 ? null
                 : Padding(
@@ -243,7 +250,8 @@ class _WTextFieldState extends State<WTextField>
                     child: widget.prefixIcon,
                   ),
             counterText: widget.counterText,
-            counterStyle: widget.counterStyle ??
+            counterStyle:
+                widget.counterStyle ??
                 Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 12),
           ),
     );

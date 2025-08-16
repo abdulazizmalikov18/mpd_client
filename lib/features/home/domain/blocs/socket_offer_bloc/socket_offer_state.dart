@@ -21,20 +21,14 @@ class SocketOfferState extends Equatable {
     List<OrdersStreamModel>? orders,
     List<SpecialistOffer>? offers,
     String? type,
-  }) =>
-      SocketOfferState(
-        isConnect: isConnect ?? this.isConnect,
-        offers: offers ?? this.offers,
-        order: order ?? this.order,
-        orders: orders ?? this.orders,
-        type: type ?? this.type,
-      );
+  }) => SocketOfferState(
+    isConnect: isConnect ?? this.isConnect,
+    offers: offers ?? this.offers,
+    order: order ?? this.order,
+    orders: orders ?? this.orders,
+    type: type ?? this.type,
+  );
 
   @override
-  List<Object?> get props => [
-        isConnect,
-        order,orders,
-        offers,
-        type,
-      ];
+  List<Object?> get props => [isConnect, order, orders, offers, type];
 }

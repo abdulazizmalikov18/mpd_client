@@ -7,11 +7,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 class UserImageUpdate {
-  UserImageUpdate({
-    required this.image,
-    this.main,
-    this.businessAva,
-  });
+  UserImageUpdate({required this.image, this.main, this.businessAva});
 
   final String image;
   final bool? main;

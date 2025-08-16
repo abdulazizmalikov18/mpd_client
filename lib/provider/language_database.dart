@@ -2,7 +2,6 @@ import 'package:mpd_client/core/data/repository/storage_keys.dart';
 import 'package:mpd_client/core/data/repository/storage_repository.dart';
 
 class LanguageDatabase {
-
   Future<String?> get loadLanguage async {
     final language = StorageRepository.getString(StorageKeys.LANGUAGE);
     return language.isNotEmpty ? language : null;

@@ -34,7 +34,8 @@ class Utils {
 
     // Get today's date
     DateTime today = DateTime.now();
-    bool isToday = DateTime(dateTime.year, dateTime.month, dateTime.day) ==
+    bool isToday =
+        DateTime(dateTime.year, dateTime.month, dateTime.day) ==
         DateTime(today.year, today.month, today.day);
 
     // Format the date
@@ -66,10 +67,9 @@ class Utils {
 
   static String priceFormat(double? price) {
     if (price == null) return 'Free';
-    final formatted = NumberFormat.simpleCurrency(locale: 'uz')
-        .format(price)
-        .split(',')
-        .first;
+    final formatted = NumberFormat.simpleCurrency(
+      locale: 'uz',
+    ).format(price).split(',').first;
     return formatted;
   }
 
@@ -97,8 +97,10 @@ class Utils {
   }
 
   static String errorFormat(String error) {
-    final formated =
-        error.replaceAll('[', '').replaceAll(']', '').replaceAll('\'', '');
+    final formated = error
+        .replaceAll('[', '')
+        .replaceAll(']', '')
+        .replaceAll('\'', '');
     return formated;
   }
 

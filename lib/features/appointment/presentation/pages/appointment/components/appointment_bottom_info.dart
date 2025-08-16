@@ -13,13 +13,14 @@ class AppointmentBottomInfo extends StatelessWidget {
   final double price;
   final VoidCallback onLocationPressed, onDetailPressed;
   final bool isPending;
-  const AppointmentBottomInfo(
-      {super.key,
-      this.isPending = false,
-      this.price = 0,
-      required this.meetDate,
-      required this.onDetailPressed,
-      required this.onLocationPressed});
+  const AppointmentBottomInfo({
+    super.key,
+    this.isPending = false,
+    this.price = 0,
+    required this.meetDate,
+    required this.onDetailPressed,
+    required this.onLocationPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +60,7 @@ class AppointmentBottomInfo extends StatelessWidget {
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }
@@ -69,25 +70,30 @@ class AppointmentBottomInfo extends StatelessWidget {
       height: 34.h,
       padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
       decoration: BoxDecoration(
-          color: context.color.mainBlue.withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(10.r)),
+        color: context.color.mainBlue.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(10.r),
+      ),
       child: Row(
         children: [
           SvgPicture.asset(
             AppIcons.clockTransparent,
             height: 18.h,
             width: 18.h,
-            colorFilter:
-                ColorFilter.mode(context.color.mainBlue, BlendMode.srcIn),
+            colorFilter: ColorFilter.mode(
+              context.color.mainBlue,
+              BlendMode.srcIn,
+            ),
           ),
           ScreenUtil().setHorizontalSpacing(4.w),
           Text(
             meetDate.isEmpty
                 ? "--"
                 : Utils.appointMentDateFormat(meetDate, context),
-            style: Styles.descSubtitle
-                .copyWith(color: context.color.mainBlue, fontSize: 14.sp),
-          )
+            style: Styles.descSubtitle.copyWith(
+              color: context.color.mainBlue,
+              fontSize: 14.sp,
+            ),
+          ),
         ],
       ),
     );
@@ -96,18 +102,26 @@ class AppointmentBottomInfo extends StatelessWidget {
   //method price
   RichText _buildPrice(BuildContext context) {
     return RichText(
-      text: TextSpan(children: [
-        TextSpan(
+      text: TextSpan(
+        children: [
+          TextSpan(
             text: '${Utils.priceFormat(price)} UZS\n',
             style: Styles.descSubtitle.copyWith(
-                color: context.color.black, fontWeight: FontWeight.w600)),
-        TextSpan(
+              color: context.color.black,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          TextSpan(
             text: meetDate.isEmpty
                 ? "--"
                 : Utils.appointMentDateFormat(meetDate, context),
-            style: Styles.cardReview
-                .copyWith(color: context.color.grey, fontSize: 10.sp)),
-      ]),
+            style: Styles.cardReview.copyWith(
+              color: context.color.grey,
+              fontSize: 10.sp,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

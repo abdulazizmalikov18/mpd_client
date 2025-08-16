@@ -10,8 +10,10 @@ abstract class YandexDoctorEvent extends Equatable {
 class ClusterPlaceMarkEvent extends YandexDoctorEvent {
   final List<MapSpecialist> specialists;
   final BuildContext context;
-  const ClusterPlaceMarkEvent(
-      {required this.specialists, required this.context});
+  const ClusterPlaceMarkEvent({
+    required this.specialists,
+    required this.context,
+  });
 }
 
 class InsertSingleObjectEvent extends YandexDoctorEvent {
@@ -26,10 +28,7 @@ class InsertSingleObjectEvent extends YandexDoctorEvent {
 class AddSpecialistMap extends YandexDoctorEvent {
   final List<MapSpecialist> specialist;
   final BuildContext context;
-  const AddSpecialistMap({
-    required this.specialist,
-    required this.context,
-  });
+  const AddSpecialistMap({required this.specialist, required this.context});
 }
 
 class GetCurrentLocationEvent extends YandexDoctorEvent {}

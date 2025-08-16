@@ -21,10 +21,12 @@ class ChatGroupBloc extends Bloc<ChatGroupEvent, ChatGroupState> {
     emit(state.copyWith(status: FormzSubmissionStatus.initial));
     final result = await _repo.getGroups(const GetGroupChatEntity());
     if (result.isRight) {
-      emit(state.copyWith(
-        groups: result.right.results,
-        status: FormzSubmissionStatus.success,
-      ));
+      emit(
+        state.copyWith(
+          groups: result.right.results,
+          status: FormzSubmissionStatus.success,
+        ),
+      );
     } else {
       emit(state.copyWith(status: FormzSubmissionStatus.failure));
     }
@@ -32,13 +34,16 @@ class ChatGroupBloc extends Bloc<ChatGroupEvent, ChatGroupState> {
 
   void _onSearchGroup(ChatGroupSearchEvent event, Emitter emit) async {
     emit(state.copyWith(status: FormzSubmissionStatus.initial));
-    final result =
-        await _repo.getGroups(GetGroupChatEntity(search: event.search));
+    final result = await _repo.getGroups(
+      GetGroupChatEntity(search: event.search),
+    );
     if (result.isRight) {
-      emit(state.copyWith(
-        groups: result.right.results,
-        status: FormzSubmissionStatus.success,
-      ));
+      emit(
+        state.copyWith(
+          groups: result.right.results,
+          status: FormzSubmissionStatus.success,
+        ),
+      );
     } else {
       emit(state.copyWith(status: FormzSubmissionStatus.failure));
     }

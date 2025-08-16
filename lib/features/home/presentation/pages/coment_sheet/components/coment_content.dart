@@ -53,9 +53,9 @@ class _ComentContentState extends State<ComentContent> {
               scrollDirection: Axis.horizontal,
               itemCount: widget.media.length,
               onPageChanged: (index) {
-                PostInheritedNotifier.of(context)
-                    .notifier!
-                    .changeSelectedMediaIndex(index);
+                PostInheritedNotifier.of(
+                  context,
+                ).notifier!.changeSelectedMediaIndex(index);
               },
               itemBuilder: (context, index) {
                 return ComentMediaContent(
@@ -70,9 +70,9 @@ class _ComentContentState extends State<ComentContent> {
               right: 0,
               left: 0,
               child: SwipeIndicator(
-                current: PostInheritedNotifier.of(context)
-                    .notifier!
-                    .selectedMediaIndex,
+                current: PostInheritedNotifier.of(
+                  context,
+                ).notifier!.selectedMediaIndex,
                 length: widget.media.length,
               ),
             ),
@@ -84,10 +84,11 @@ class _ComentContentState extends State<ComentContent> {
                     ? '${PostInheritedNotifier.of(context).notifier!.selectedMediaIndex + 1}/${widget.media.length}'
                     : '',
                 style: Styles.semiboldTitle.copyWith(
-                    color: context.color.white,
-                    fontFamily: Styles.gilroyRegular),
+                  color: context.color.white,
+                  fontFamily: Styles.gilroyRegular,
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -120,9 +121,9 @@ class _ComentMediaContentState extends State<ComentMediaContent>
     if (widget.media.file == null) return;
     if (widget.flickManager == null) {
       flickManager = FlickManager(
-        videoPlayerController:
-            VideoPlayerController.networkUrl(Uri.parse(widget.media.file!))
-              ..setLooping(true),
+        videoPlayerController: VideoPlayerController.networkUrl(
+          Uri.parse(widget.media.file!),
+        )..setLooping(true),
         autoPlay: false,
       );
 
@@ -133,9 +134,9 @@ class _ComentMediaContentState extends State<ComentMediaContent>
     if (widget.media.file !=
         flickManager.flickVideoManager!.videoPlayerController!.dataSource) {
       flickManager = FlickManager(
-        videoPlayerController:
-            VideoPlayerController.networkUrl(Uri.parse(widget.media.file!))
-              ..setLooping(true),
+        videoPlayerController: VideoPlayerController.networkUrl(
+          Uri.parse(widget.media.file!),
+        )..setLooping(true),
         autoPlay: false,
       );
     }
@@ -154,7 +155,8 @@ class _ComentMediaContentState extends State<ComentMediaContent>
       },
       child: widget.media.file == null
           ? CachedNetworkImage(
-              imageUrl: widget.media.image ??
+              imageUrl:
+                  widget.media.image ??
                   "https://dwed.fra1.digitaloceanspaces.com/SMMS/media/PostMedia/image/a651706c-f6a0-45fe-9d40-46e9fb37271b.jpeg",
               fit: BoxFit.cover,
               // placeholder: (context, url) =>  Material(color: context.color.grey),

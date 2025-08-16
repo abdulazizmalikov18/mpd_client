@@ -6,11 +6,7 @@ class BottomSheetWidget extends StatelessWidget {
   final List<Widget> children;
   final EdgeInsetsGeometry? padding;
 
-  const BottomSheetWidget({
-    super.key,
-    required this.children,
-    this.padding,
-  });
+  const BottomSheetWidget({super.key, required this.children, this.padding});
 
   @override
   Widget build(BuildContext context) {
@@ -65,17 +61,33 @@ class MyClip extends CustomClipper<Path> {
     path0.lineTo(size.width, 0);
     path0.lineTo(size.width * 0.5923077, 0);
 
-    path0.quadraticBezierTo(size.width * 0.5800000, size.height * 0.0008857,
-        size.width * 0.5615385, 9);
+    path0.quadraticBezierTo(
+      size.width * 0.5800000,
+      size.height * 0.0008857,
+      size.width * 0.5615385,
+      9,
+    );
 
     path0.quadraticBezierTo(
-        size.width * 0.5562051, 12, size.width * 0.5000513, 12);
+      size.width * 0.5562051,
+      12,
+      size.width * 0.5000513,
+      12,
+    );
 
     path0.quadraticBezierTo(
-        size.width * 0.4427179, 12, size.width * 0.4384615, 9);
+      size.width * 0.4427179,
+      12,
+      size.width * 0.4384615,
+      9,
+    );
 
-    path0.quadraticBezierTo(size.width * 0.4232051, size.height * 0.0009143,
-        size.width * 0.4075897, 0);
+    path0.quadraticBezierTo(
+      size.width * 0.4232051,
+      size.height * 0.0009143,
+      size.width * 0.4075897,
+      0,
+    );
 
     return path0;
   }

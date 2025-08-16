@@ -32,21 +32,21 @@ class ChatGroupModel {
   });
 
   factory ChatGroupModel.fromJson(Map<String, Object?> json) => ChatGroupModel(
-        id: (json['id'] as int?) ?? 0,
-        name: (json['name'] as String?) ?? '',
-        slugName: (json['slug_name'] as String?) ?? '',
-        avatar: (json['avatar'] as String?) ?? '',
-        date: (json['date'] as String?) ?? '',
-        isPrivate: (json['is_private'] as bool?) ?? false,
-        creator: (json['creator'] as String?) ?? '',
-        lastMessage: (json['last_message'] as String?) ?? '',
-        lastFile: (json['last_file'] as String?) ?? '',
-        isUserToUser: (json['is_user_to_user'] as bool?) ??  true,
-        lastMessageSender: (json['last_message_sender'] as String?) ?? '',
-        isOnline: (json['is_online'] as bool?) ?? false,
-        lastMessageIsRead: (json['last_message_is_read'] as bool?) ?? false,
-        unreadMessageCount: (json['unread_message_count'] as int?) ?? 0,
-      );
+    id: (json['id'] as int?) ?? 0,
+    name: (json['name'] as String?) ?? '',
+    slugName: (json['slug_name'] as String?) ?? '',
+    avatar: (json['avatar'] as String?) ?? '',
+    date: (json['date'] as String?) ?? '',
+    isPrivate: (json['is_private'] as bool?) ?? false,
+    creator: (json['creator'] as String?) ?? '',
+    lastMessage: (json['last_message'] as String?) ?? '',
+    lastFile: (json['last_file'] as String?) ?? '',
+    isUserToUser: (json['is_user_to_user'] as bool?) ?? true,
+    lastMessageSender: (json['last_message_sender'] as String?) ?? '',
+    isOnline: (json['is_online'] as bool?) ?? false,
+    lastMessageIsRead: (json['last_message_is_read'] as bool?) ?? false,
+    unreadMessageCount: (json['unread_message_count'] as int?) ?? 0,
+  );
 
   ChatGroupModel copyWith({
     int? id,
@@ -64,19 +64,20 @@ class ChatGroupModel {
     int? unreadMessageCount,
   }) {
     return ChatGroupModel(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        slugName: slugName ?? this.slugName,
-        avatar: avatar ?? this.avatar,
-        date: date ?? this.date,
-        isPrivate: isPrivate ?? this.isPrivate,
-        creator: creator ?? this.creator,
-        lastMessage: lastMessage ?? this.lastMessage,
-        lastFile: lastFile ?? this.lastFile,
-        lastMessageSender: lastMessageSender ?? this.lastMessageSender,
-        isUserToUser: isUserToUser ?? this.isUserToUser,
-        isOnline: isOnline ?? this.isOnline,
-        unreadMessageCount: unreadMessageCount ?? this.unreadMessageCount);
+      id: id ?? this.id,
+      name: name ?? this.name,
+      slugName: slugName ?? this.slugName,
+      avatar: avatar ?? this.avatar,
+      date: date ?? this.date,
+      isPrivate: isPrivate ?? this.isPrivate,
+      creator: creator ?? this.creator,
+      lastMessage: lastMessage ?? this.lastMessage,
+      lastFile: lastFile ?? this.lastFile,
+      lastMessageSender: lastMessageSender ?? this.lastMessageSender,
+      isUserToUser: isUserToUser ?? this.isUserToUser,
+      isOnline: isOnline ?? this.isOnline,
+      unreadMessageCount: unreadMessageCount ?? this.unreadMessageCount,
+    );
   }
 
   @override

@@ -32,9 +32,10 @@ class CategoryWidget extends StatelessWidget {
                       scale: 1,
                       image: NetworkImage(categoryImagePath!),
                     )
-                  : const */
-                  DecorationImage(
-                      image: AssetImage(categoryImagePath!), scale: 2),
+                  : const */ DecorationImage(
+                image: AssetImage(categoryImagePath!),
+                scale: 2,
+              ),
               color: context.color.background,
             ),
           ),
@@ -42,10 +43,12 @@ class CategoryWidget extends StatelessWidget {
           Text(
             categoryName,
             textAlign: TextAlign.center,
-            style: Styles.headline7
-                .copyWith(color: context.color.black, fontSize: 12.sp),
+            style: Styles.headline7.copyWith(
+              color: context.color.black,
+              fontSize: 12.sp,
+            ),
             overflow: TextOverflow.ellipsis,
-          )
+          ),
         ],
       ),
     );

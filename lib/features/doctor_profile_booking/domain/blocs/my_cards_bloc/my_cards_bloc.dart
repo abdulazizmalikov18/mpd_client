@@ -8,7 +8,7 @@ part 'my_cards_state.dart';
 
 class MyCardsBloc extends Bloc<MyCardsEvent, MyCardsState> {
   MyCardsBloc(this._profileRepository)
-      : super(const MyCardsInitial(cards: [], selectId: -1)) {
+    : super(const MyCardsInitial(cards: [], selectId: -1)) {
     on<GetMyCardsEvent>(_onGetMyCards);
     on<SelectCardEvent>(_onSelectCard);
     on<InsertCardToAllEvent>(_onInsertCard);
@@ -22,10 +22,13 @@ class MyCardsBloc extends Bloc<MyCardsEvent, MyCardsState> {
   }
 
   void _onSelectPayment(SelectPaymentType event, Emitter<MyCardsState> emit) {
-    emit(MyCardsSuccess(
+    emit(
+      MyCardsSuccess(
         cards: state.cards,
         selectId: state.selectId,
-        paymentMethod: event.paymentMethod));
+        paymentMethod: event.paymentMethod,
+      ),
+    );
   }
 
   void _onInsertCard(InsertCardToAllEvent event, Emitter<MyCardsState> emit) {
@@ -35,15 +38,22 @@ class MyCardsBloc extends Bloc<MyCardsEvent, MyCardsState> {
   }
 
   Future<void> _onGetMyCards(
-      GetMyCardsEvent event, Emitter<MyCardsState> emit) async {
+    GetMyCardsEvent event,
+    Emitter<MyCardsState> emit,
+  ) async {
     emit(MyCardsLoading(cards: state.cards, selectId: state.selectId));
 
     final result = await _profileRepository.getMyCards();
     if (result.isRight) {
       emit(MyCardsSuccess(cards: result.right, selectId: state.selectId));
     } else {
-      emit(MyCardsFailure(result.left.message,
-          cards: state.cards, selectId: state.selectId));
+      emit(
+        MyCardsFailure(
+          result.left.message,
+          cards: state.cards,
+          selectId: state.selectId,
+        ),
+      );
     }
   }
 }

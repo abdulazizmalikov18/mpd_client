@@ -19,15 +19,29 @@ class ComentPostInfo extends StatelessWidget {
       child: Row(
         children: [
           ScreenUtil().setHorizontalSpacing(16.w),
-          AnimatedLikeIcon(isLiked: post.isLiked!, postId: post.id!, baseIndex: index),
+          AnimatedLikeIcon(
+            isLiked: post.isLiked!,
+            postId: post.id!,
+            baseIndex: index,
+          ),
           ScreenUtil().setHorizontalSpacing(8.w),
-          Text('${post.likesCount} ${context.l10n.lenth_likes}',
-              style: Styles.postTitle.copyWith(fontFamily: Styles.gilroyRegular, color: context.color.grey)),
+          Text(
+            '${post.likesCount} ${context.l10n.lenth_likes}',
+            style: Styles.postTitle.copyWith(
+              fontFamily: Styles.gilroyRegular,
+              color: context.color.grey,
+            ),
+          ),
           ScreenUtil().setHorizontalSpacing(24.w),
           SvgPicture.asset(AppIcons.coment),
           ScreenUtil().setHorizontalSpacing(8.w),
-          Text('${post.commentCount}  ${context.l10n.lenth_comment}',
-              style: Styles.postTitle.copyWith(fontFamily: Styles.gilroyRegular, color: context.color.grey)),
+          Text(
+            '${post.commentCount}  ${context.l10n.lenth_comment}',
+            style: Styles.postTitle.copyWith(
+              fontFamily: Styles.gilroyRegular,
+              color: context.color.grey,
+            ),
+          ),
           const Spacer(),
           Text(
             Utils.formatPostDate(post.date!, context),
@@ -36,7 +50,7 @@ class ComentPostInfo extends StatelessWidget {
               color: context.color.grey,
             ),
           ),
-          ScreenUtil().setHorizontalSpacing(16.w)
+          ScreenUtil().setHorizontalSpacing(16.w),
         ],
       ),
     );

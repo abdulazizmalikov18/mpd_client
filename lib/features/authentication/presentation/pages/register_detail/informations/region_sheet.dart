@@ -14,32 +14,38 @@ class RegionSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomSheetWidget(children: [
-      ScreenUtil().setVerticalSpacing(32.h),
-      Center(
-        child: Text(
-          context.l10n.register_region_title,
-          textAlign: TextAlign.center,
-          style: Styles.boldTitle.copyWith(color: context.color.black, fontSize: 24.sp, fontFamily: Styles.gilroyMedium),
+    return BottomSheetWidget(
+      children: [
+        ScreenUtil().setVerticalSpacing(32.h),
+        Center(
+          child: Text(
+            context.l10n.register_region_title,
+            textAlign: TextAlign.center,
+            style: Styles.boldTitle.copyWith(
+              color: context.color.black,
+              fontSize: 24.sp,
+              fontFamily: Styles.gilroyMedium,
+            ),
+          ),
         ),
-      ),
-      ScreenUtil().setVerticalSpacing(6.h),
-      Expanded(
-        child: BlocBuilder<RegionBloc, RegionState>(
-          builder: (context, state) {
-            if (state.regions.isEmpty && state is RegionSuccess) {
-              return const Text('Regions are empty');
-            }
-            if (state is RegionLoading) {
-              return const Center(child: LoadingPlatform());
-            }
-            return OpenCloseExpansionInheritedNotifier(
-              openCloseNotifier: OpenCloseNotifier(),
-              child: RegionCategory(regions: state.regions),
-            );
-          },
+        ScreenUtil().setVerticalSpacing(6.h),
+        Expanded(
+          child: BlocBuilder<RegionBloc, RegionState>(
+            builder: (context, state) {
+              if (state.regions.isEmpty && state is RegionSuccess) {
+                return const Text('Regions are empty');
+              }
+              if (state is RegionLoading) {
+                return const Center(child: LoadingPlatform());
+              }
+              return OpenCloseExpansionInheritedNotifier(
+                openCloseNotifier: OpenCloseNotifier(),
+                child: RegionCategory(regions: state.regions),
+              );
+            },
+          ),
         ),
-      )
-    ]);
+      ],
+    );
   }
 }

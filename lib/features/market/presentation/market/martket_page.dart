@@ -36,16 +36,21 @@ class MarketPage extends StatelessWidget {
               color: context.color.background,
               onPressed: () {},
               enableFeedback: false,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.r)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6.r),
+              ),
               child: SvgPicture.asset(
                 AppIcons.settings,
-                colorFilter:  ColorFilter.mode(context.color.black, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(
+                  context.color.black,
+                  BlendMode.srcIn,
+                ),
                 height: 16.h,
                 width: 16.h,
               ),
             ),
           ),
-          ScreenUtil().setHorizontalSpacing(16.w)
+          ScreenUtil().setHorizontalSpacing(16.w),
         ],
       ),
       body: SingleChildScrollView(
@@ -58,7 +63,10 @@ class MarketPage extends StatelessWidget {
                 children: [
                   Text(
                     'Categories',
-                    style: Styles.boldTopHint.copyWith(fontSize: 18.sp, color: context.color.black),
+                    style: Styles.boldTopHint.copyWith(
+                      fontSize: 18.sp,
+                      color: context.color.black,
+                    ),
                   ),
                   TextButton(
                     onPressed: () {
@@ -70,13 +78,19 @@ class MarketPage extends StatelessWidget {
                       // );
                     },
                     style: ButtonStyle(
-                        overlayColor: WidgetStateProperty.all(Colors.transparent),
-                        padding: WidgetStateProperty.all(EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h))),
+                      overlayColor: WidgetStateProperty.all(Colors.transparent),
+                      padding: WidgetStateProperty.all(
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+                      ),
+                    ),
                     child: Text(
                       'See all',
-                      style: Styles.boldTopHint.copyWith(fontSize: 16.sp, color: context.color.mainBlue),
+                      style: Styles.boldTopHint.copyWith(
+                        fontSize: 16.sp,
+                        color: context.color.mainBlue,
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -86,8 +100,10 @@ class MarketPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: List.generate(
                   4,
-                  (index) =>
-                      const CategoryWidget(categoryName: 'Skin Care', categoryImagePath: AppImages.marketCategory),
+                  (index) => const CategoryWidget(
+                    categoryName: 'Skin Care',
+                    categoryImagePath: AppImages.marketCategory,
+                  ),
                 ),
               ),
             ),
@@ -98,7 +114,10 @@ class MarketPage extends StatelessWidget {
                 children: [
                   Text(
                     'New products',
-                    style: Styles.boldTopHint.copyWith(fontSize: 18.sp, color: context.color.black),
+                    style: Styles.boldTopHint.copyWith(
+                      fontSize: 18.sp,
+                      color: context.color.black,
+                    ),
                   ),
                   TextButton(
                     onPressed: () {
@@ -110,22 +129,31 @@ class MarketPage extends StatelessWidget {
                       // );
                     },
                     style: ButtonStyle(
-                        overlayColor: WidgetStateProperty.all(Colors.transparent),
-                        padding: WidgetStateProperty.all(EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h))),
+                      overlayColor: WidgetStateProperty.all(Colors.transparent),
+                      padding: WidgetStateProperty.all(
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+                      ),
+                    ),
                     child: Text(
                       'See all',
-                      style: Styles.boldTopHint.copyWith(fontSize: 16.sp, color: context.color.mainBlue),
+                      style: Styles.boldTopHint.copyWith(
+                        fontSize: 16.sp,
+                        color: context.color.mainBlue,
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Wrap(
-                  spacing: 12.w, runSpacing: 12.h, children: List.generate(3, (index) => const MarketCardWidget())),
+                spacing: 12.w,
+                runSpacing: 12.h,
+                children: List.generate(3, (index) => const MarketCardWidget()),
+              ),
             ),
-            ScreenUtil().setVerticalSpacing(12.h)
+            ScreenUtil().setVerticalSpacing(12.h),
           ],
         ),
       ),

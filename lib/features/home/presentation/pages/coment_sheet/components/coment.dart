@@ -8,7 +8,11 @@ import 'package:mpd_client/src/themes/styles.dart';
 class ComentWidget extends StatelessWidget {
   final int? comentCount;
   final VoidCallback? onPressed;
-  const ComentWidget({super.key, required this.comentCount, required this.onPressed});
+  const ComentWidget({
+    super.key,
+    required this.comentCount,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +22,16 @@ class ComentWidget extends StatelessWidget {
         children: [
           SvgPicture.asset(
             AppIcons.coment,
-            colorFilter:  ColorFilter.mode(context.color.grey, BlendMode.srcIn),
+            colorFilter: ColorFilter.mode(context.color.grey, BlendMode.srcIn),
             height: 22.h,
           ),
           ScreenUtil().setHorizontalSpacing(8.w),
           Text(
             '$comentCount ${context.l10n.lenth_comment.toLowerCase()}',
-            style: Styles.postTitle.copyWith(color: context.color.grey, fontFamily: Styles.gilroyRegular),
+            style: Styles.postTitle.copyWith(
+              color: context.color.grey,
+              fontFamily: Styles.gilroyRegular,
+            ),
           ),
         ],
       ),

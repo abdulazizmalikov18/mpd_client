@@ -19,10 +19,7 @@ class CachedImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (url.isEmpty) {
-      return DefaultAvatar(
-        containerSize: size.h,
-        imageSize: size.h - 16,
-      );
+      return DefaultAvatar(containerSize: size.h, imageSize: size.h - 16);
     }
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius),

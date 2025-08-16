@@ -25,13 +25,12 @@ class FollowButton extends StatelessWidget {
     return OutlinedButton.icon(
       style: OutlinedButton.styleFrom(
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        backgroundColor:
-            isFollowing ? context.color.white : context.color.mainBlue,
+        backgroundColor: isFollowing
+            ? context.color.white
+            : context.color.mainBlue,
         side: BorderSide(color: context.color.mainBlue),
         minimumSize: Size(width ?? 136.w, height ?? 34.h),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.r),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
       ),
       onPressed: onTap,
       icon: SvgPicture.asset(
@@ -45,9 +44,10 @@ class FollowButton extends StatelessWidget {
             ? context.l10n.book_doctor_unfollow
             : context.l10n.book_doctor_follow,
         style: Styles.descSubtitle.copyWith(
-            color: isFollowing ? context.color.mainBlue : context.color.white,
-            fontSize: 12.sp,
-            fontWeight: FontWeight.w500),
+          color: isFollowing ? context.color.mainBlue : context.color.white,
+          fontSize: 12.sp,
+          fontWeight: FontWeight.w500,
+        ),
       ),
     );
   }

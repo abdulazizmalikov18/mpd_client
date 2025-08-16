@@ -21,11 +21,12 @@ class DoctorInfo extends StatelessWidget {
   final bool showDoctorInfo;
   final MapSpecialist? specialist;
   final String job;
-  const DoctorInfo(
-      {super.key,
-      required this.showDoctorInfo,
-      required this.specialist,
-      required this.job});
+  const DoctorInfo({
+    super.key,
+    required this.showDoctorInfo,
+    required this.specialist,
+    required this.job,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +42,13 @@ class DoctorInfo extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 6.w),
             child: IconCircleButton(
-                onPressed: () {
-                  context
-                      .read<YandexDoctorBloc>()
-                      .add(const ShowDoctorInfo(false));
-                },
-                icon: AppIcons.arrowLeft),
+              onPressed: () {
+                context.read<YandexDoctorBloc>().add(
+                  const ShowDoctorInfo(false),
+                );
+              },
+              icon: AppIcons.arrowLeft,
+            ),
           ),
           ScreenUtil().setVerticalSpacing(13.h),
           BlocBuilder<UserInfoBloc, UserInfoState>(
@@ -79,7 +81,7 @@ class DoctorInfo extends StatelessWidget {
                 specialist: specialist,
               );
             },
-          )
+          ),
         ],
       ),
     );
@@ -90,11 +92,12 @@ class MapDoctorCard extends StatelessWidget {
   final MapSpecialist? specialist;
   final VoidCallback onPressed;
   final String job;
-  const MapDoctorCard(
-      {super.key,
-      required this.specialist,
-      required this.onPressed,
-      required this.job});
+  const MapDoctorCard({
+    super.key,
+    required this.specialist,
+    required this.onPressed,
+    required this.job,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -102,8 +105,9 @@ class MapDoctorCard extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 16.w),
       padding: EdgeInsets.symmetric(vertical: 16.h),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
-          color: context.color.white),
+        borderRadius: BorderRadius.circular(12.r),
+        color: context.color.white,
+      ),
       child: Column(
         children: [
           Row(
@@ -126,8 +130,9 @@ class MapDoctorCard extends StatelessWidget {
                   Text(
                     specialist != null ? specialist?.job?.name ?? "--" : job,
                     style: Styles.postTitle.copyWith(
-                        fontFamily: Styles.gilroyMedium,
-                        color: context.color.mainBlue),
+                      fontFamily: Styles.gilroyMedium,
+                      color: context.color.mainBlue,
+                    ),
                   ),
                   ScreenUtil().setVerticalSpacing(8.h),
                   Row(
@@ -139,13 +144,14 @@ class MapDoctorCard extends StatelessWidget {
                             ? specialist?.locationDesc ?? "--"
                             : 'Tashkent, Amir Temur Avenue',
                         style: Styles.postSubtitle.copyWith(
-                            fontFamily: Styles.gilroyMedium,
-                            color: context.color.grey),
-                      )
+                          fontFamily: Styles.gilroyMedium,
+                          color: context.color.grey,
+                        ),
+                      ),
                     ],
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           ),
           ScreenUtil().setVerticalSpacing(12.h),
@@ -164,8 +170,9 @@ class MapDoctorCard extends StatelessWidget {
                   specialist != null
                       ? Text(
                           '${specialist!.minPrice != null ? Utils.priceFormat(specialist!.minPrice!) : 'Free'} ${specialist!.currencyCode != null ? specialist!.currencyCode!.toUpperCase() : ''}',
-                          style: Styles.semiboldTitle
-                              .copyWith(color: context.color.black),
+                          style: Styles.semiboldTitle.copyWith(
+                            color: context.color.black,
+                          ),
                         )
                       : const Text(''),
                 ],
@@ -180,7 +187,7 @@ class MapDoctorCard extends StatelessWidget {
               ),
               ScreenUtil().setHorizontalSpacing(16.w),
             ],
-          )
+          ),
         ],
       ),
     );

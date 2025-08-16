@@ -5,6 +5,8 @@ class AppointmentArgModel {
   final AppoinmentInfo appoinmentInfo;
   final Appointment appointment;
 
-  const AppointmentArgModel(
-      {required this.appoinmentInfo, required this.appointment});
+  const AppointmentArgModel({
+    required this.appoinmentInfo,
+    required this.appointment,
+  });
 }

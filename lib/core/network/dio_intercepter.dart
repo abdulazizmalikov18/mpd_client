@@ -15,11 +15,12 @@ Dio addInterceptor(DioInterceptors interceptors) {
   final dio = locator.get<Dio>();
   dio.interceptors.addAll([
     PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseBody: true,
-        error: true,
-        compact: true),
+      requestHeader: true,
+      requestBody: true,
+      responseBody: true,
+      error: true,
+      compact: true,
+    ),
     interceptors,
   ]);
 
@@ -60,8 +61,11 @@ class DioInterceptors extends Interceptor {
     if (_shouldRetry(err)) {
       debugPrint('Retrying -----------------------> 🥶🥶🥶🥶🥶🥶🥶🥶🥶');
       try {
-        return handler.resolve(await _connectivityRequestRetrier
-            .scheduleRequestRetry(err.requestOptions));
+        return handler.resolve(
+          await _connectivityRequestRetrier.scheduleRequestRetry(
+            err.requestOptions,
+          ),
+        );
       } catch (e) {
         return handler.next(err);
       }
@@ -69,15 +73,18 @@ class DioInterceptors extends Interceptor {
         err.response!.statusCode! < 500) {
       debugPrint('Refreshing -----------------------> 😉😉😉😉😉😉😉😉😉 ');
       if ((err.response!.data as List).length != 3) {
-        $navigatorKey.currentState!
-            .pushNamedAndRemoveUntil(AppRoutes.auth, (route) => false);
+        $navigatorKey.currentState!.pushNamedAndRemoveUntil(
+          AppRoutes.auth,
+          (route) => false,
+        );
         return handler.reject(err);
       }
       final isTokenRefreshed = await _updateToken();
       debugPrint("isTokenRefreshed: $isTokenRefreshed");
       if (isTokenRefreshed) {
         return handler.resolve(
-            await _retry(err.requestOptions, _connectivityRequestRetrier.dio));
+          await _retry(err.requestOptions, _connectivityRequestRetrier.dio),
+        );
       } else {
         return handler.reject(err);
       }
@@ -95,12 +102,15 @@ class DioInterceptors extends Interceptor {
       final newToken = await _remoteDataSource.refreshToken();
 
       debugPrint(
-          'New token -----------------------> 😏😏😏😏😏😏😏😏  $newToken');
+        'New token -----------------------> 😏😏😏😏😏😏😏😏  $newToken',
+      );
 
       if (newToken.statusCode! >= 200 && newToken.statusCode! < 300) {
         await StorageRepository.putString(StorageKeys.TOKEN, newToken.access!);
         await StorageRepository.putString(
-            StorageKeys.REFRESH, newToken.refresh!);
+          StorageKeys.REFRESH,
+          newToken.refresh!,
+        );
       } else if (newToken.statusCode! >= 400 && newToken.statusCode! < 500) {
         $navigatorKey.currentState!.popUntil((route) => false);
         $navigatorKey.currentState!.pushReplacementNamed(AppRoutes.auth);

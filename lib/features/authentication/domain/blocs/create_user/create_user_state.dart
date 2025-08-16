@@ -6,15 +6,22 @@ class CreateUserState extends Equatable {
   final Gender gender;
   final bool showLoading;
   final String error;
-  const CreateUserState(
-      {this.gender = Gender.male, this.showLoading = false, this.error = ''});
+  const CreateUserState({
+    this.gender = Gender.male,
+    this.showLoading = false,
+    this.error = '',
+  });
 
-  CreateUserState copyWith(
-      {final Gender? gender, final bool? showLoading, final String? error}) {
+  CreateUserState copyWith({
+    final Gender? gender,
+    final bool? showLoading,
+    final String? error,
+  }) {
     return CreateUserState(
-        gender: gender ?? this.gender,
-        showLoading: showLoading ?? this.showLoading,
-        error: error ?? this.error);
+      gender: gender ?? this.gender,
+      showLoading: showLoading ?? this.showLoading,
+      error: error ?? this.error,
+    );
   }
 
   @override

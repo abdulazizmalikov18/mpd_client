@@ -26,9 +26,9 @@ class _UserFollowingState extends State<UserFollowing> {
         (state is UserSubscriptionsFailure ||
             context.read<UserSubscriptionsBloc>().subscriptionCount !=
                 state.subscriptions.length)) {
-      context
-          .read<UserSubscriptionsBloc>()
-          .add(const GetUserSubscriptionsEvent(tryAgain: true));
+      context.read<UserSubscriptionsBloc>().add(
+        const GetUserSubscriptionsEvent(tryAgain: true),
+      );
     }
     super.initState();
   }
@@ -43,12 +43,13 @@ class _UserFollowingState extends State<UserFollowing> {
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
             child: SearchFieldWidget(
               searchHint: context.l10n.profile_following_doctors_search_doctor,
-              controller:
-                  context.read<UserSubscriptionsBloc>().searchController,
+              controller: context
+                  .read<UserSubscriptionsBloc>()
+                  .searchController,
               onChanged: (query) {
-                context
-                    .read<UserSubscriptionsBloc>()
-                    .add(SearchSubscriptionsEvent(query));
+                context.read<UserSubscriptionsBloc>().add(
+                  SearchSubscriptionsEvent(query),
+                );
               },
             ),
           ),
@@ -65,10 +66,10 @@ class _UserFollowingState extends State<UserFollowing> {
                           controller.jumpToPage(0);
                           Navigator.popUntil(context, (route) => route.isFirst);
                         },
-                        tryAgainPressed: () => context
-                            .read<UserSubscriptionsBloc>()
-                            .add(const GetUserSubscriptionsEvent(
-                                tryAgain: true)),
+                        tryAgainPressed: () =>
+                            context.read<UserSubscriptionsBloc>().add(
+                              const GetUserSubscriptionsEvent(tryAgain: true),
+                            ),
                         errorIcon: AppIcons.serverError,
                         errorSubtitle:
                             context.l10n.error_internal_server_subtitle,
@@ -81,20 +82,22 @@ class _UserFollowingState extends State<UserFollowing> {
                   child: Padding(
                     padding: EdgeInsets.only(top: 60.h),
                     child: ErrorTypeWidget(
-                        returnToHomePressed: () {
-                          FocusScope.of(context).unfocus();
-                          controller.jumpToPage(0);
-                          Navigator.popUntil(context, (route) => route.isFirst);
-                        },
-                        tryAgainPressed: () {
-                          FocusScope.of(context).unfocus();
-                          context.read<UserSubscriptionsBloc>().add(
-                              const GetUserSubscriptionsEvent(tryAgain: true));
-                        },
-                        errorIcon: AppIcons.connectionLostError,
-                        errorSubtitle:
-                            context.l10n.error_connection_lost_subtitle,
-                        errorTitle: context.l10n.error_connection_lost_title),
+                      returnToHomePressed: () {
+                        FocusScope.of(context).unfocus();
+                        controller.jumpToPage(0);
+                        Navigator.popUntil(context, (route) => route.isFirst);
+                      },
+                      tryAgainPressed: () {
+                        FocusScope.of(context).unfocus();
+                        context.read<UserSubscriptionsBloc>().add(
+                          const GetUserSubscriptionsEvent(tryAgain: true),
+                        );
+                      },
+                      errorIcon: AppIcons.connectionLostError,
+                      errorSubtitle:
+                          context.l10n.error_connection_lost_subtitle,
+                      errorTitle: context.l10n.error_connection_lost_title,
+                    ),
                   ),
                 );
               } else if (state is UserSubscriptionsSuccess) {

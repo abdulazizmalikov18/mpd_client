@@ -41,13 +41,23 @@ class PasswordPart extends StatelessWidget {
                     textInputAction: TextInputAction.next,
                     topHint: context.l10n.register_new_password,
                     inputHint: context.l10n.register_new_password,
-                    validator: (value) => Validators.createPassword(value, context),
+                    validator: (value) =>
+                        Validators.createPassword(value, context),
                     suffixIcon: IconButton(
-                        onPressed: () {
-                          context.read<ChangePasswordBloc>().add(MakeVisibleNewPassword());
-                        },
-                        icon: Icon(newPasswordEye ? Icons.visibility_off_outlined : Icons.visibility_outlined)),
-                    controller: context.read<ChangePasswordBloc>().password1Controller,
+                      onPressed: () {
+                        context.read<ChangePasswordBloc>().add(
+                          MakeVisibleNewPassword(),
+                        );
+                      },
+                      icon: Icon(
+                        newPasswordEye
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility_outlined,
+                      ),
+                    ),
+                    controller: context
+                        .read<ChangePasswordBloc>()
+                        .password1Controller,
                   );
                 },
               ),
@@ -62,20 +72,37 @@ class PasswordPart extends StatelessWidget {
                     topHint: context.l10n.register_new_password_confirm,
                     inputHint: context.l10n.register_new_password_confirm,
                     suffixIcon: IconButton(
-                        onPressed: () {
-                          context.read<ChangePasswordBloc>().add(MakeVisibleConfirmPassword());
-                        },
-                        icon: Icon(confirmPasswordEye ? Icons.visibility_off_outlined : Icons.visibility_outlined)),
+                      onPressed: () {
+                        context.read<ChangePasswordBloc>().add(
+                          MakeVisibleConfirmPassword(),
+                        );
+                      },
+                      icon: Icon(
+                        confirmPasswordEye
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility_outlined,
+                      ),
+                    ),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return context.l10n.register_error_code_password_cant_empty;
+                        return context
+                            .l10n
+                            .register_error_code_password_cant_empty;
                       }
-                      if (value != context.read<ChangePasswordBloc>().password1Controller.text) {
-                        return context.l10n.register_error_code_password_missmatch;
+                      if (value !=
+                          context
+                              .read<ChangePasswordBloc>()
+                              .password1Controller
+                              .text) {
+                        return context
+                            .l10n
+                            .register_error_code_password_missmatch;
                       }
                       return null;
                     },
-                    controller: context.read<ChangePasswordBloc>().password2Controller,
+                    controller: context
+                        .read<ChangePasswordBloc>()
+                        .password2Controller,
                   );
                 },
               ),
@@ -87,27 +114,41 @@ class PasswordPart extends StatelessWidget {
           listener: (context, state) async {
             if (state.showLoading) {
               showDialog(
-                  context: context, barrierDismissible: false, builder: (context) => const LoadingDialogWidget());
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => const LoadingDialogWidget(),
+              );
             }
 
             if (!state.showLoading && state.error == 'No' && state.isCorrect) {
               Navigator.pop(context);
-              await Future.delayed(const Duration(milliseconds: 300))
-                  .then((value) => valueNotifier.value = 1);
-            } else if (!state.showLoading && state.error != 'No' && state.error != '') {
+              await Future.delayed(
+                const Duration(milliseconds: 300),
+              ).then((value) => valueNotifier.value = 1);
+            } else if (!state.showLoading &&
+                state.error != 'No' &&
+                state.error != '') {
               Navigator.pop(context);
               ScaffoldMessenger.of(context)
                 ..hideCurrentSnackBar()
-                ..showSnackBar(UiTools.failSnackbar(title: Utils.errorFormat(state.error), context: context));
+                ..showSnackBar(
+                  UiTools.failSnackbar(
+                    title: Utils.errorFormat(state.error),
+                    context: context,
+                  ),
+                );
             }
           },
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: LongButton(
-                buttonName: context.l10n.register_password_continue,
-                onPress: () {
-                  context.read<ChangePasswordBloc>().add(OnlyCheckPasswordEvent());
-                }),
+              buttonName: context.l10n.register_password_continue,
+              onPress: () {
+                context.read<ChangePasswordBloc>().add(
+                  OnlyCheckPasswordEvent(),
+                );
+              },
+            ),
           ),
         ),
         ScreenUtil().setVerticalSpacing(20.h),
@@ -115,10 +156,14 @@ class PasswordPart extends StatelessWidget {
           info: context.l10n.register_have_account,
           buttonText: context.l10n.login_enter,
           onPressed: () {
-            Navigator.pushNamedAndRemoveUntil(context, AppRoutes.auth, (route) => false);
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              AppRoutes.auth,
+              (route) => false,
+            );
           },
         ),
-        ScreenUtil().setVerticalSpacing(40.h)
+        ScreenUtil().setVerticalSpacing(40.h),
       ],
     );
   }

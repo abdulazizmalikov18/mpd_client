@@ -18,12 +18,12 @@ class ProductSpecalistState extends Equatable {
 
   @override
   List<Object> get props => [
-        specialistProducts,
-        status,
-        count,
-        localProducts,
-        flas,
-      ];
+    specialistProducts,
+    status,
+    count,
+    localProducts,
+    flas,
+  ];
 
   ProductSpecalistState copyWith({
     List<SpecialistProduct>? specialistProducts,

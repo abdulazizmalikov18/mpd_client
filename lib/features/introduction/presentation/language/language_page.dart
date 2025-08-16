@@ -45,8 +45,10 @@ class LanguagePage extends StatelessWidget {
               imagePath: 'assets/images/uz.png',
               language: context.l10n.presentation_language_uz,
               onPressed: () {
-                final provider =
-                    Provider.of<LocalProvider>(context, listen: false);
+                final provider = Provider.of<LocalProvider>(
+                  context,
+                  listen: false,
+                );
                 provider.setLocale(const Locale("uz"));
                 Navigator.of(context).pushNamed(AppRoutes.splashTutorial);
               },
@@ -56,8 +58,10 @@ class LanguagePage extends StatelessWidget {
               imagePath: 'assets/images/ru.png',
               language: context.l10n.presentation_language_ru,
               onPressed: () {
-                final provider =
-                    Provider.of<LocalProvider>(context, listen: false);
+                final provider = Provider.of<LocalProvider>(
+                  context,
+                  listen: false,
+                );
                 provider.setLocale(const Locale("ru"));
 
                 Navigator.of(context).pushNamed(AppRoutes.splashTutorial);
@@ -68,13 +72,15 @@ class LanguagePage extends StatelessWidget {
               imagePath: 'assets/images/en.png',
               language: context.l10n.presentation_language_en,
               onPressed: () {
-                final provider =
-                    Provider.of<LocalProvider>(context, listen: false);
+                final provider = Provider.of<LocalProvider>(
+                  context,
+                  listen: false,
+                );
                 provider.setLocale(const Locale("en"));
                 Navigator.of(context).pushNamed(AppRoutes.splashTutorial);
               },
             ),
-            ScreenUtil().setVerticalSpacing(48.h)
+            ScreenUtil().setVerticalSpacing(48.h),
           ],
         ),
       ),

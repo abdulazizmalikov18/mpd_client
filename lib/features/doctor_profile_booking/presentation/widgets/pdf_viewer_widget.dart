@@ -29,7 +29,13 @@ class PdfViewerPage extends StatelessWidget {
         ),
         backgroundColor: context.color.white,
         centerTitle: true,
-        title: Text(name, style: Styles.title.copyWith(color: context.color.black, fontSize: 20.sp)),
+        title: Text(
+          name,
+          style: Styles.title.copyWith(
+            color: context.color.black,
+            fontSize: 20.sp,
+          ),
+        ),
       ),
       body: SfPdfViewer.network(url),
     );

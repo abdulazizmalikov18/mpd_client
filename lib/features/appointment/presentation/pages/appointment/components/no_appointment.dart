@@ -58,7 +58,7 @@ class NoAppointment extends StatelessWidget {
             TextButtonWidget(
               onPressed: onRefresh,
               text: context.l10n.appointment_server_error_reload,
-            )
+            ),
         ],
       ),
     );

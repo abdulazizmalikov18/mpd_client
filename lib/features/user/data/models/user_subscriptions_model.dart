@@ -23,7 +23,8 @@ class UserSubscriptionsModel {
         previousOffset: json["previous_offset"],
         previous: json["previous"],
         results: List<Subscription>.from(
-            json["results"].map((x) => Subscription.fromJson(x))),
+          json["results"].map((x) => Subscription.fromJson(x)),
+        ),
       );
 }
 
@@ -49,13 +50,13 @@ class Subscription {
   });
 
   factory Subscription.fromJson(Map<String, dynamic> json) => Subscription(
-        id: json["id"],
-        username: json["username"],
-        name: json["name"],
-        lastname: json["lastname"],
-        phone: json["phone"],
-        avatar: json["avatar"],
-        mainCat: json["main_cat"],
-        region: json["region"],
-      );
+    id: json["id"],
+    username: json["username"],
+    name: json["name"],
+    lastname: json["lastname"],
+    phone: json["phone"],
+    avatar: json["avatar"],
+    mainCat: json["main_cat"],
+    region: json["region"],
+  );
 }

@@ -14,10 +14,12 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
       final resault = await _homeRepository.getUser(username: event.username);
       if (resault.isRight) {
-        emit(state.copyWith(
-          userAccount: resault.right,
-          status: FormzSubmissionStatus.success,
-        ));
+        emit(
+          state.copyWith(
+            userAccount: resault.right,
+            status: FormzSubmissionStatus.success,
+          ),
+        );
       } else {
         emit(state.copyWith(status: FormzSubmissionStatus.failure));
       }

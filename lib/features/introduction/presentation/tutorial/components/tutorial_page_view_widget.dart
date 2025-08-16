@@ -31,8 +31,10 @@ class PageViewWidget extends StatelessWidget {
           child: Text(
             tutorial.title,
             textAlign: TextAlign.center,
-            style: Styles.title
-                .copyWith(color: context.color.black, letterSpacing: 1),
+            style: Styles.title.copyWith(
+              color: context.color.black,
+              letterSpacing: 1,
+            ),
           ),
         ),
         ScreenUtil().setVerticalSpacing(16.h),
@@ -45,7 +47,7 @@ class PageViewWidget extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             style: Styles.descSubtitle.copyWith(color: context.color.grey),
           ),
-        )
+        ),
       ],
     );
   }

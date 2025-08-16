@@ -10,10 +10,13 @@ part 'timetable_state.dart';
 
 class TimetableBloc extends Bloc<TimetableEvent, TimetableState> {
   TimetableBloc(this._repository)
-      : super(TimetableState(
-            specTimetable: null,
-            datetime: DateTime.now(),
-            focusedDay: DateTime.now())) {
+    : super(
+        TimetableState(
+          specTimetable: null,
+          datetime: DateTime.now(),
+          focusedDay: DateTime.now(),
+        ),
+      ) {
     on<SelectDayEvent>(_onSelectDay);
     on<SelectTimeEvent>(_onSelectTime);
 
@@ -26,77 +29,104 @@ class TimetableBloc extends Bloc<TimetableEvent, TimetableState> {
   String oldSelectedDate = '';
 
   void _onSelectDay(SelectDayEvent event, Emitter<TimetableState> emit) {
-    emit(state.copyWith(
+    emit(
+      state.copyWith(
         status: Status.initial,
         datetime: event.day,
         specTimetable: state.specTimetable,
         comment: state.comment,
         focusedDay: event.day,
-        calendarFormat: state.calendarFormat));
+        calendarFormat: state.calendarFormat,
+      ),
+    );
   }
 
   void _onSelectTime(SelectTimeEvent event, Emitter<TimetableState> emit) {
-    emit(state.copyWith(
+    emit(
+      state.copyWith(
         selectedTime: event.time,
         datetime: state.datetime,
         specTimetable: state.specTimetable,
         comment: state.comment,
         focusedDay: state.focusedDay,
-        calendarFormat: state.calendarFormat));
+        calendarFormat: state.calendarFormat,
+      ),
+    );
   }
 
   void _onChangedComment(
-      OnChangedCommentEvent event, Emitter<TimetableState> emit) {
-    emit(state.copyWith(
+    OnChangedCommentEvent event,
+    Emitter<TimetableState> emit,
+  ) {
+    emit(
+      state.copyWith(
         datetime: state.datetime,
         specTimetable: state.specTimetable,
         focusedDay: state.focusedDay,
         comment: event.value,
-        calendarFormat: state.calendarFormat));
+        calendarFormat: state.calendarFormat,
+      ),
+    );
   }
 
   void _onChangedCalFormat(
-      OnChangedCalFormatEvent event, Emitter<TimetableState> emit) {
+    OnChangedCalFormatEvent event,
+    Emitter<TimetableState> emit,
+  ) {
     if (event.format == state.calendarFormat) return;
-    emit(state.copyWith(
+    emit(
+      state.copyWith(
         datetime: state.datetime,
         specTimetable: state.specTimetable,
         focusedDay: state.focusedDay,
         comment: state.comment,
-        calendarFormat: event.format));
+        calendarFormat: event.format,
+      ),
+    );
   }
 
   Future<void> _onTimetablePressed(
-      GetTimetableByDay event, Emitter<TimetableState> emit) async {
+    GetTimetableByDay event,
+    Emitter<TimetableState> emit,
+  ) async {
     final formattedMonth = Utils.weekDayFormat(event.day);
 
-    emit(state.copyWith(
+    emit(
+      state.copyWith(
         specTimetable: state.specTimetable,
         datetime: state.datetime,
         focusedDay: state.focusedDay,
         selectedTime: '',
         specialistId: event.id,
-        status: Status.loading));
+        status: Status.loading,
+      ),
+    );
 
-    final result =
-        await _repository.getTimetable(date: formattedMonth, id: event.id);
+    final result = await _repository.getTimetable(
+      date: formattedMonth,
+      id: event.id,
+    );
     if (result.isRight) {
-      emit(state.copyWith(
-        specTimetable: result.right,
-        datetime: state.datetime,
-        focusedDay: state.focusedDay,
-        specialistId: event.id,
-        status: Status.success,
-      ));
+      emit(
+        state.copyWith(
+          specTimetable: result.right,
+          datetime: state.datetime,
+          focusedDay: state.focusedDay,
+          specialistId: event.id,
+          status: Status.success,
+        ),
+      );
     } else {
-      emit(state.copyWith(
-        specTimetable: null,
-        failure: result.left.message,
-        datetime: state.datetime,
-        specialistId: event.id,
-        focusedDay: state.focusedDay,
-        status: Status.failure,
-      ));
+      emit(
+        state.copyWith(
+          specTimetable: null,
+          failure: result.left.message,
+          datetime: state.datetime,
+          specialistId: event.id,
+          focusedDay: state.focusedDay,
+          status: Status.failure,
+        ),
+      );
     }
   }
 }

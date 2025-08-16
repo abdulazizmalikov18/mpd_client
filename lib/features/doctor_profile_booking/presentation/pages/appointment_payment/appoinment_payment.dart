@@ -15,44 +15,48 @@ class AppoinmentPayment extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-          child: BlocSelector<MyCardsBloc, MyCardsState, PaymentMethod>(
-        selector: (state) => state.paymentMethod,
-        builder: (context, payment) {
-          return Column(
-            children: [
-              ScreenUtil().setVerticalSpacing(12.h),
-              const BuildLabel(label: 'Select payment method'),
-              ScreenUtil().setVerticalSpacing(16.h),
-              MyPaymentRadioTile(
+        child: BlocSelector<MyCardsBloc, MyCardsState, PaymentMethod>(
+          selector: (state) => state.paymentMethod,
+          builder: (context, payment) {
+            return Column(
+              children: [
+                ScreenUtil().setVerticalSpacing(12.h),
+                const BuildLabel(label: 'Select payment method'),
+                ScreenUtil().setVerticalSpacing(16.h),
+                MyPaymentRadioTile(
                   extraText: 'Pay with add card',
                   value: PaymentMethod.paymeCard,
                   onChanged: (value) {
                     context.read<MyCardsBloc>().add(SelectPaymentType(value));
                   },
                   groupValue: payment,
-                  imagePath: AppImages.payMe),
-              ScreenUtil().setVerticalSpacing(12.h),
-              MyPaymentRadioTile(
+                  imagePath: AppImages.payMe,
+                ),
+                ScreenUtil().setVerticalSpacing(12.h),
+                MyPaymentRadioTile(
                   extraText: 'Pay in app',
                   value: PaymentMethod.paymeApp,
                   onChanged: (value) {
                     context.read<MyCardsBloc>().add(SelectPaymentType(value));
                   },
                   groupValue: payment,
-                  imagePath: AppImages.payMe),
-              ScreenUtil().setVerticalSpacing(12.h),
-              MyPaymentRadioTile(
+                  imagePath: AppImages.payMe,
+                ),
+                ScreenUtil().setVerticalSpacing(12.h),
+                MyPaymentRadioTile(
                   text: 'Cash',
                   value: PaymentMethod.cash,
                   onChanged: (value) {
                     context.read<MyCardsBloc>().add(SelectPaymentType(value));
                   },
                   groupValue: payment,
-                  imagePath: AppImages.cash),
-            ],
-          );
-        },
-      )),
+                  imagePath: AppImages.cash,
+                ),
+              ],
+            );
+          },
+        ),
+      ),
       appBar: const AppBarWidget(title: 'Payment'),
       bottomSheet: PinnedSheet(
         widget: BlocSelector<MyCardsBloc, MyCardsState, PaymentMethod>(

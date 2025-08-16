@@ -182,8 +182,9 @@ class JsonToHTML {
 
     // Handle the checkbox state
     var checked = data['data']?['checked'] ?? false;
-    var checkbox =
-        checked ? '<input type="checkbox" checked>' : '<input type="checkbox">';
+    var checkbox = checked
+        ? '<input type="checkbox" checked>'
+        : '<input type="checkbox">';
 
     if (data['data'] != null && data['data']!['delta'] is List) {
       String textLeable = '';

@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 
 class TutorialInheritedNotifier extends InheritedNotifier<TutorialNotifier> {
-  const TutorialInheritedNotifier(
-      {super.key,
-      required TutorialNotifier tutorialNotifier,
-      required super.child})
-      : super(notifier: tutorialNotifier);
+  const TutorialInheritedNotifier({
+    super.key,
+    required TutorialNotifier tutorialNotifier,
+    required super.child,
+  }) : super(notifier: tutorialNotifier);
 
   static TutorialInheritedNotifier of(BuildContext context) {
-    final TutorialInheritedNotifier? result =
-        context.dependOnInheritedWidgetOfExactType<TutorialInheritedNotifier>();
+    final TutorialInheritedNotifier? result = context
+        .dependOnInheritedWidgetOfExactType<TutorialInheritedNotifier>();
     assert(result != null, 'No TutorialInheritedNotifier found in context');
     return result!;
   }

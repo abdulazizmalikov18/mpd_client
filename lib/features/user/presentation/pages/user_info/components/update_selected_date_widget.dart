@@ -33,101 +33,115 @@ class UpdateSelectDateWidget extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: 16.w),
           child: RichText(
-            text: TextSpan(children: [
-              TextSpan(
+            text: TextSpan(
+              children: [
+                TextSpan(
                   text: context.l10n.profile_birth,
-                  style:
-                      Styles.boldTopHint.copyWith(color: context.color.black)),
-              TextSpan(
+                  style: Styles.boldTopHint.copyWith(
+                    color: context.color.black,
+                  ),
+                ),
+                TextSpan(
                   text: '*',
-                  style: Styles.boldTopHint.copyWith(color: context.color.red)),
-            ]),
+                  style: Styles.boldTopHint.copyWith(color: context.color.red),
+                ),
+              ],
+            ),
           ),
         ),
         ScreenUtil().setVerticalSpacing(8.h),
         Container(
           margin: EdgeInsets.symmetric(horizontal: 16.w),
           child: TextFormField(
-              onChanged: onChanged,
-              readOnly: isDisable,
-              style: Styles.headline7.copyWith(color: context.color.black),
-              validator: (value) => Validators.empty(value, context),
-              keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.done,
-              controller: _birthController,
-              inputFormatters: [
-                MaskTextInputFormatter(
-                  mask: '##.##.####',
-                  filter: {"#": RegExp(r'[0-9]')},
-                )
-              ],
-              decoration: InputDecoration(
-                  suffixIconColor: context.color.grey,
-                  suffixIcon: IconButton(
-                    onPressed: () async {
-                      if (!isDisable) {
-                        FocusScope.of(context).unfocus();
-                        if (!PlatformCheck.platform) {
-                          showDatePicker(
-                            initialEntryMode: DatePickerEntryMode.calendarOnly,
-                            initialDatePickerMode: DatePickerMode.day,
-                            context: context,
-                            builder: (context, child) {
-                              return Theme(
-                                data: ThemeData().copyWith(
-                                  dialogTheme: DialogThemeData(
-                                    backgroundColor: context.color.white,
-                                  ),
-                                  primaryColor: context.color.red,
-                                ),
-                                child: child!,
-                              );
-                            },
-                            initialDate: DateTime(DateTime.now().year,
-                                DateTime.now().month, DateTime.now().day),
-                            firstDate: DateTime(19),
-                            lastDate: DateTime(DateTime.now().year,
-                                DateTime.now().month, DateTime.now().day),
-                          ).then((date) {
-                            if (date != null) {
-                              if (context.mounted) {
-                                context
-                                    .read<UserInfoBloc>()
-                                    .add(UpdateUserBirthEvent(date));
-                              }
-                            }
-                          });
-                        }
-                        if (PlatformCheck.platform) {
-                          showCupertinoModalPopup<void>(
-                            context: context,
-                            builder: (ctx) {
-                              return BlocProvider.value(
-                                value: BlocProvider.of<UserInfoBloc>(context),
-                                child: _builtCupertinoDatePicker(context),
-                              );
-                            },
+            onChanged: onChanged,
+            readOnly: isDisable,
+            style: Styles.headline7.copyWith(color: context.color.black),
+            validator: (value) => Validators.empty(value, context),
+            keyboardType: TextInputType.number,
+            textInputAction: TextInputAction.done,
+            controller: _birthController,
+            inputFormatters: [
+              MaskTextInputFormatter(
+                mask: '##.##.####',
+                filter: {"#": RegExp(r'[0-9]')},
+              ),
+            ],
+            decoration: InputDecoration(
+              suffixIconColor: context.color.grey,
+              suffixIcon: IconButton(
+                onPressed: () async {
+                  if (!isDisable) {
+                    FocusScope.of(context).unfocus();
+                    if (!PlatformCheck.platform) {
+                      showDatePicker(
+                        initialEntryMode: DatePickerEntryMode.calendarOnly,
+                        initialDatePickerMode: DatePickerMode.day,
+                        context: context,
+                        builder: (context, child) {
+                          return Theme(
+                            data: ThemeData().copyWith(
+                              dialogTheme: DialogThemeData(
+                                backgroundColor: context.color.white,
+                              ),
+                              primaryColor: context.color.red,
+                            ),
+                            child: child!,
                           );
+                        },
+                        initialDate: DateTime(
+                          DateTime.now().year,
+                          DateTime.now().month,
+                          DateTime.now().day,
+                        ),
+                        firstDate: DateTime(19),
+                        lastDate: DateTime(
+                          DateTime.now().year,
+                          DateTime.now().month,
+                          DateTime.now().day,
+                        ),
+                      ).then((date) {
+                        if (date != null) {
+                          if (context.mounted) {
+                            context.read<UserInfoBloc>().add(
+                              UpdateUserBirthEvent(date),
+                            );
+                          }
                         }
-                      }
-                    },
-                    icon: SvgPicture.asset(
-                      AppIcons.arrowDown,
-                      colorFilter:
-                          ColorFilter.mode(context.color.grey, BlendMode.srcIn),
-                      height: 24.h,
-                      width: 24.h,
-                    ),
+                      });
+                    }
+                    if (PlatformCheck.platform) {
+                      showCupertinoModalPopup<void>(
+                        context: context,
+                        builder: (ctx) {
+                          return BlocProvider.value(
+                            value: BlocProvider.of<UserInfoBloc>(context),
+                            child: _builtCupertinoDatePicker(context),
+                          );
+                        },
+                      );
+                    }
+                  }
+                },
+                icon: SvgPicture.asset(
+                  AppIcons.arrowDown,
+                  colorFilter: ColorFilter.mode(
+                    context.color.grey,
+                    BlendMode.srcIn,
                   ),
-                  contentPadding: const EdgeInsets.only(left: 15),
-                  enabledBorder: Decorations.enabledBorder(context),
-                  focusedBorder: Decorations.focusedBorder(context),
-                  border: Decorations.enabledBorder(context),
-                  errorBorder: Decorations.errorBorder(context),
-                  hintText: '01.01.2000',
-                  hintStyle:
-                      Styles.headline7.copyWith(color: context.color.grey))),
-        )
+                  height: 24.h,
+                  width: 24.h,
+                ),
+              ),
+              contentPadding: const EdgeInsets.only(left: 15),
+              enabledBorder: Decorations.enabledBorder(context),
+              focusedBorder: Decorations.focusedBorder(context),
+              border: Decorations.enabledBorder(context),
+              errorBorder: Decorations.errorBorder(context),
+              hintText: '01.01.2000',
+              hintStyle: Styles.headline7.copyWith(color: context.color.grey),
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -135,9 +149,7 @@ class UpdateSelectDateWidget extends StatelessWidget {
   Container _builtCupertinoDatePicker(BuildContext context) {
     DateTime dateTime = DateTime.now();
     return Container(
-      margin: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-      ),
+      margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       color: CupertinoColors.systemBackground.resolveFrom(context),
       height: 260.h,
       padding: const EdgeInsets.only(top: 6.0),
@@ -152,13 +164,19 @@ class UpdateSelectDateWidget extends StatelessWidget {
                   context.read<UserInfoBloc>().add(UpdateUserBirthEvent(date));
                   dateTime = date;
                 },
-                initialDateTime: DateTime(DateTime.now().year,
-                    DateTime.now().month, DateTime.now().day),
+                initialDateTime: DateTime(
+                  DateTime.now().year,
+                  DateTime.now().month,
+                  DateTime.now().day,
+                ),
                 minimumYear: 1940,
                 maximumYear: DateTime.now().year,
                 minimumDate: DateTime(1940),
-                maximumDate: DateTime(DateTime.now().year, DateTime.now().month,
-                    DateTime.now().day),
+                maximumDate: DateTime(
+                  DateTime.now().year,
+                  DateTime.now().month,
+                  DateTime.now().day,
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -167,16 +185,16 @@ class UpdateSelectDateWidget extends StatelessWidget {
               child: LongButton(
                 buttonName: 'Saqlash',
                 onPress: () {
-                  _birthController!.text =
-                      DateFormat("dd.MM.yyyy").format(dateTime.toLocal());
+                  _birthController!.text = DateFormat(
+                    "dd.MM.yyyy",
+                  ).format(dateTime.toLocal());
                   Navigator.pop(context);
                 },
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
-
 }

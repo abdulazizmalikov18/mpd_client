@@ -17,12 +17,14 @@ class SocketOfferBloc extends Bloc<SocketOfferEvent, SocketOfferState> {
     on<SocketDataEvent>((event, emit) {
       List<OrdersStreamModel> orders = List.from(state.orders);
       orders.insert(0, event.order);
-      emit(state.copyWith(
-        order: event.order.message,
-        orders: orders,
-        offers: event.offers,
-        type: event.type,
-      ));
+      emit(
+        state.copyWith(
+          order: event.order.message,
+          orders: orders,
+          offers: event.offers,
+          type: event.type,
+        ),
+      );
     });
     on<ConnectSocketEvent>((event, emit) {
       final socketURl = Uri.parse(
@@ -40,21 +42,25 @@ class SocketOfferBloc extends Bloc<SocketOfferEvent, SocketOfferState> {
             case 'order-create':
               {
                 OrdersStreamModel order = OrdersStreamModel.fromJson(data);
-                add(SocketDataEvent(
-                  type: 'order-create',
-                  offers: state.offers,
-                  order: order,
-                ));
+                add(
+                  SocketDataEvent(
+                    type: 'order-create',
+                    offers: state.offers,
+                    order: order,
+                  ),
+                );
                 break;
               }
             case 'order-update':
               {
                 OrdersStreamModel order = OrdersStreamModel.fromJson(data);
-                add(SocketDataEvent(
-                  type: 'order-update',
-                  offers: state.offers,
-                  order: order,
-                ));
+                add(
+                  SocketDataEvent(
+                    type: 'order-update',
+                    offers: state.offers,
+                    order: order,
+                  ),
+                );
                 break;
               }
           }

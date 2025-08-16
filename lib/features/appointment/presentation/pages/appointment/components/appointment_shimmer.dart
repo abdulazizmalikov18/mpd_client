@@ -9,7 +9,9 @@ class AppointmentShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+      physics: const AlwaysScrollableScrollPhysics(
+        parent: BouncingScrollPhysics(),
+      ),
       padding: EdgeInsets.symmetric(vertical: 8.h),
       itemCount: 4,
       itemBuilder: (context, index) {
@@ -18,7 +20,13 @@ class AppointmentShimmer extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
             color: context.color.white,
-            boxShadow:  [BoxShadow(color: context.color.cardShadow, blurRadius: 20, offset: const Offset(0, 0))],
+            boxShadow: [
+              BoxShadow(
+                color: context.color.cardShadow,
+                blurRadius: 20,
+                offset: const Offset(0, 0),
+              ),
+            ],
           ),
           child: Shimmer.fromColors(
             baseColor: context.color.baseColor,
@@ -26,8 +34,10 @@ class AppointmentShimmer extends StatelessWidget {
             child: Container(
               width: 359.h,
               height: 175.h,
-              decoration:
-                   BoxDecoration(color: context.color.black, borderRadius: const BorderRadius.all(Radius.circular(12))),
+              decoration: BoxDecoration(
+                color: context.color.black,
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+              ),
             ),
             // child: Column(
             //   mainAxisSize: MainAxisSize.min,

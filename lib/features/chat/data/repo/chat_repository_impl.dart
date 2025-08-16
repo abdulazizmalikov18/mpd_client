@@ -17,13 +17,12 @@ import 'package:mpd_client/features/chat/domain/models/message.dart';
 class ChatRepositoryImpl implements ChatRepository {
   final ChatService _remote;
 
-  const ChatRepositoryImpl({
-    required ChatService remote,
-  }) : _remote = remote;
+  const ChatRepositoryImpl({required ChatService remote}) : _remote = remote;
 
   @override
   Future<Either<Failure, GenericPagination<ChatGroupModel>>> getGroups(
-      GetGroupChatEntity param) async {
+    GetGroupChatEntity param,
+  ) async {
     try {
       final response = await _remote.getGroups(param);
       if (response.data != null) {
@@ -42,7 +41,8 @@ class ChatRepositoryImpl implements ChatRepository {
 
   @override
   Future<Either<Failure, GenericPagination<MessageModel>>> getMessages(
-      GetChatEntity param) async {
+    GetChatEntity param,
+  ) async {
     try {
       final response = await _remote.getMessages(param);
       if (response.data != null) {
@@ -75,7 +75,8 @@ class ChatRepositoryImpl implements ChatRepository {
 
   @override
   Future<Either<Failure, GenericPagination<MessageModel>>> sendMessage(
-      SendMessageEntity param) async {
+    SendMessageEntity param,
+  ) async {
     try {
       final response = await _remote.sendMessage(param);
       if (response.data != null) {
@@ -94,7 +95,8 @@ class ChatRepositoryImpl implements ChatRepository {
 
   @override
   Future<Either<Failure, GenericPagination<ChatUserModel>>> getAllUsers(
-      GetChatUserEntity params) async {
+    GetChatUserEntity params,
+  ) async {
     try {
       final response = await _remote.getAllUsers(params);
       if (response.data != null) {
@@ -112,8 +114,9 @@ class ChatRepositoryImpl implements ChatRepository {
   }
 
   @override
-  Future<Either<Failure, ChatGroupModel>> createUserChat(
-      {required String username}) async {
+  Future<Either<Failure, ChatGroupModel>> createUserChat({
+    required String username,
+  }) async {
     try {
       final response = await _remote.createUserToUser(username: username);
       if (response.data != null) {
@@ -132,7 +135,8 @@ class ChatRepositoryImpl implements ChatRepository {
 
   @override
   Future<Either<Failure, ChatGroupModel>> createGroup(
-      CreateGroupModel params) async {
+    CreateGroupModel params,
+  ) async {
     try {
       final response = await _remote.groupCreate(params);
       if (response.data != null) {

@@ -38,7 +38,9 @@ class Like extends StatelessWidget {
         Text(
           '$likeCount ${context.l10n.lenth_likes}',
           style: Styles.postTitle.copyWith(
-              color: context.color.grey, fontFamily: Styles.gilroyRegular),
+            color: context.color.grey,
+            fontFamily: Styles.gilroyRegular,
+          ),
         ),
       ],
     );
@@ -87,16 +89,17 @@ class _AnimatedFollowIconState extends State<AnimatedLikeIcon>
     return IconButton(
       onPressed: () {
         if (!widget.isLiked) {
-          _animationController
-              .forward()
-              .then((value) => _animationController.reverse());
+          _animationController.forward().then(
+            (value) => _animationController.reverse(),
+          );
         }
-        context
-            .read<MediaControlBloc>()
-            .add(MediaLikePressed(widget.baseIndex));
+        context.read<MediaControlBloc>().add(
+          MediaLikePressed(widget.baseIndex),
+        );
         // context.read<PostUiBloc>().add(PostLikeUnlikeEvent());
         context.read<LikeUnlikeBloc>().add(
-            LikeUnlikePressed(postId: widget.postId, isLiked: widget.isLiked));
+          LikeUnlikePressed(postId: widget.postId, isLiked: widget.isLiked),
+        );
       },
       padding: EdgeInsets.zero,
       constraints: BoxConstraints(minHeight: 32.w, minWidth: 32.w),

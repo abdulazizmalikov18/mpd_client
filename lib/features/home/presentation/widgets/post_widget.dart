@@ -46,7 +46,7 @@ class _PostWidgetState extends State<PostWidget>
       decoration: BoxDecoration(
         color: context.color.white,
         boxShadow: [
-          BoxShadow(color: context.color.cardShadow, blurRadius: 20.r)
+          BoxShadow(color: context.color.cardShadow, blurRadius: 20.r),
         ],
       ),
       child: PostBody(
@@ -112,10 +112,12 @@ class _PostBodyState extends State<PostBody>
                 color: context.color.black,
               ),
               trimLines: 3,
-              moreStyle:
-                  Styles.postTitle.copyWith(color: context.color.mainBlue),
-              lessStyle:
-                  Styles.postTitle.copyWith(color: context.color.mainBlue),
+              moreStyle: Styles.postTitle.copyWith(
+                color: context.color.mainBlue,
+              ),
+              lessStyle: Styles.postTitle.copyWith(
+                color: context.color.mainBlue,
+              ),
               trimMode: TrimMode.Line,
               trimCollapsedText: context.l10n.lenth_read_more,
               trimExpandedText: context.l10n.lenth_show_less,
@@ -199,17 +201,15 @@ class _PostActions extends StatelessWidget {
                               padding: EdgeInsets.only(
                                 bottom:
                                     MediaQuery.of(context).viewInsets.bottom > 0
-                                        ? MediaQuery.of(context)
-                                            .viewInsets
-                                            .bottom
-                                        : 32.h,
+                                    ? MediaQuery.of(context).viewInsets.bottom
+                                    : 32.h,
                                 top: 8,
                               ),
                               child: ComentInput(
                                 postId: post.id!,
                                 postIndex: baseIndex,
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -252,48 +252,55 @@ class _PostHeader extends StatelessWidget {
                     final userInfoBloc = context.read<UserInfoBloc>();
                     final chatBloc = context.read<ChatBloc>();
 
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => MultiBlocProvider(
-                        providers: [
-                          BlocProvider(
-                            create: (context) =>
-                                UserProfileBloc(locator.get<HomeRepository>()),
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => MultiBlocProvider(
+                          providers: [
+                            BlocProvider(
+                              create: (context) => UserProfileBloc(
+                                locator.get<HomeRepository>(),
+                              ),
+                            ),
+                            BlocProvider(
+                              create: (context) =>
+                                  PostBloc(locator.get<HomeRepository>()),
+                            ),
+                            BlocProvider.value(value: sendComentBloc),
+                            BlocProvider.value(value: postComentBloc),
+                            BlocProvider.value(value: userInfoBloc),
+                            BlocProvider.value(value: chatBloc),
+                          ],
+                          child: UserAccountView(
+                            username: post.authorUser ?? "kabulov",
+                            name: post.authorFullname ?? "Фарход Кабулов",
+                            avatar:
+                                post.authorAvatar ??
+                                "https://dwed.fra1.digitaloceanspaces.com/SMMS/media/PostMedia/image/a651706c-f6a0-45fe-9d40-46e9fb37271b.jpeg",
+                            specialistId:
+                                int.tryParse(post.authorJob?.id ?? "0") ?? 0,
                           ),
-                          BlocProvider(
-                            create: (context) =>
-                                PostBloc(locator.get<HomeRepository>()),
-                          ),
-                          BlocProvider.value(value: sendComentBloc),
-                          BlocProvider.value(value: postComentBloc),
-                          BlocProvider.value(value: userInfoBloc),
-                          BlocProvider.value(value: chatBloc),
-                        ],
-                        child: UserAccountView(
-                          username: post.authorUser ?? "kabulov",
-                          name: post.authorFullname ?? "Фарход Кабулов",
-                          avatar: post.authorAvatar ??
-                              "https://dwed.fra1.digitaloceanspaces.com/SMMS/media/PostMedia/image/a651706c-f6a0-45fe-9d40-46e9fb37271b.jpeg",
-                          specialistId:
-                              int.tryParse(post.authorJob?.id ?? "0") ?? 0,
                         ),
                       ),
-                    ));
+                    );
                   }
                 },
                 child: Row(
                   children: [
-                    Builder(builder: (context) {
-                      return post.authorAvatar!.isNotEmpty
-                          ? CachedImageWidget(
-                              url: post.authorAvatar ??
-                                  "https://dwed.fra1.digitaloceanspaces.com/SMMS/media/PostMedia/image/a651706c-f6a0-45fe-9d40-46e9fb37271b.jpeg",
-                              size: 48,
-                            )
-                          : const DefaultAvatar(
-                              containerSize: 48,
-                              imageSize: 36,
-                            );
-                    }),
+                    Builder(
+                      builder: (context) {
+                        return post.authorAvatar!.isNotEmpty
+                            ? CachedImageWidget(
+                                url:
+                                    post.authorAvatar ??
+                                    "https://dwed.fra1.digitaloceanspaces.com/SMMS/media/PostMedia/image/a651706c-f6a0-45fe-9d40-46e9fb37271b.jpeg",
+                                size: 48,
+                              )
+                            : const DefaultAvatar(
+                                containerSize: 48,
+                                imageSize: 36,
+                              );
+                      },
+                    ),
                     ScreenUtil().setHorizontalSpacing(8.w),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -311,9 +318,9 @@ class _PostHeader extends StatelessWidget {
                             color: context.color.grey,
                             fontFamily: Styles.gilroyRegular,
                           ),
-                        )
+                        ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               );
@@ -327,11 +334,13 @@ class _PostHeader extends StatelessWidget {
             shape: const CircleBorder(),
             child: IconButton(
               onPressed: () async {
-                await SharePlus.instance.share(ShareParams(
-                  text:
-                      '${post.authorFullname} \n\n${post.text} \n\n${post.media?.first.image ?? ""} \n\n${post.media?.first.file ?? ""} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
-                  subject: post.authorFullname ?? "Mpd Client",
-                ));
+                await SharePlus.instance.share(
+                  ShareParams(
+                    text:
+                        '${post.authorFullname} \n\n${post.text} \n\n${post.media?.first.image ?? ""} \n\n${post.media?.first.file ?? ""} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
+                    subject: post.authorFullname ?? "Mpd Client",
+                  ),
+                );
               },
               padding: EdgeInsets.zero,
               icon: AppIcons.share.svg(
@@ -341,7 +350,7 @@ class _PostHeader extends StatelessWidget {
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }

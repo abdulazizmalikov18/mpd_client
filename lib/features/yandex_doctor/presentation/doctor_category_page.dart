@@ -81,8 +81,9 @@ class _DoctorCategoryPageState extends State<DoctorCategoryPage> {
                   Tab(
                     child: Text(
                       "Maxsulotlar",
-                      style: Styles.descSubtitle
-                          .copyWith(color: context.color.black),
+                      style: Styles.descSubtitle.copyWith(
+                        color: context.color.black,
+                      ),
                     ),
                   ),
                 ],
@@ -102,10 +103,7 @@ class _DoctorCategoryPageState extends State<DoctorCategoryPage> {
 }
 
 class AllDoctorsView extends StatelessWidget {
-  const AllDoctorsView({
-    super.key,
-    required this.widget,
-  });
+  const AllDoctorsView({super.key, required this.widget});
 
   final DoctorCategoryPage widget;
 
@@ -122,9 +120,9 @@ class AllDoctorsView extends StatelessWidget {
                 isMap: false,
                 onChanged: (query) {
                   onDebounce(() {
-                    context
-                        .read<SpecialistBloc>()
-                        .add(GetSpecialist(search: query));
+                    context.read<SpecialistBloc>().add(
+                      GetSpecialist(search: query),
+                    );
                   });
                 },
               ),
@@ -141,10 +139,7 @@ class AllDoctorsView extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text("See All"),
-                    )
+                    TextButton(onPressed: () {}, child: const Text("See All")),
                   ],
                 ),
               ),
@@ -162,10 +157,11 @@ class AllDoctorsView extends StatelessWidget {
                       itemBuilder: (context, index) => InkWell(
                         onTap: () {
                           context.read<SpecialistBloc>().add(
-                              SelectingCategory(state.categories[index].id!));
+                            SelectingCategory(state.categories[index].id!),
+                          );
                           context.read<SpecialistBloc>().add(
-                              GetSpecialistCategory(
-                                  state.categories[index].id!));
+                            GetSpecialistCategory(state.categories[index].id!),
+                          );
                         },
                         child: SizedBox(
                           width: 78.h,
@@ -177,21 +173,24 @@ class AllDoctorsView extends StatelessWidget {
                                 width: 76.h,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(76.h),
-                                  color: state.categoryId ==
+                                  color:
+                                      state.categoryId ==
                                           state.categories[index].id
                                       ? context.color.mainBlue
                                       : context.color.background,
                                 ),
                                 child: state.categories[index].image != null
-                                    ? state.categories[index].image!
-                                            .endsWith(".svg")
-                                        ? SvgPicture.network(
-                                            state.categories[index].image!,
+                                    ? state.categories[index].image!.endsWith(
+                                            ".svg",
                                           )
-                                        : CachedNetworkImage(
-                                            imageUrl:
-                                                state.categories[index].image!,
-                                          )
+                                          ? SvgPicture.network(
+                                              state.categories[index].image!,
+                                            )
+                                          : CachedNetworkImage(
+                                              imageUrl: state
+                                                  .categories[index]
+                                                  .image!,
+                                            )
                                     : const SizedBox(),
                               ),
                               Text(
@@ -225,10 +224,7 @@ class AllDoctorsView extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text("See All"),
-                    )
+                    TextButton(onPressed: () {}, child: const Text("See All")),
                   ],
                 ),
               ),
@@ -241,10 +237,8 @@ class AllDoctorsView extends StatelessWidget {
           if (state.status.isInProgress) {
             return ListView.separated(
               padding: const EdgeInsets.all(16),
-              itemBuilder: (context, index) => WShimmer(
-                height: 158,
-                width: double.infinity,
-              ),
+              itemBuilder: (context, index) =>
+                  WShimmer(height: 158, width: double.infinity),
               separatorBuilder: (context, index) => const SizedBox(height: 16),
               itemCount: 12,
             );
@@ -266,9 +260,8 @@ class AllDoctorsView extends StatelessWidget {
           }
           return ListView.separated(
             padding: const EdgeInsets.symmetric(vertical: 16),
-            itemBuilder: (context, index) => DoctorCardIteam(
-              specialists: state.specialist[index],
-            ),
+            itemBuilder: (context, index) =>
+                DoctorCardIteam(specialists: state.specialist[index]),
             separatorBuilder: (context, index) => const SizedBox(height: 16),
             itemCount: state.specialist.length,
           );
@@ -292,9 +285,9 @@ class OfferingView extends StatelessWidget {
               specialistProducts: state.specialistProducts,
               hasMoreToFetch: state.count > state.specialistProducts.length,
               fetchMoreFunction: () {
-                context
-                    .read<ProductSpecalistBloc>()
-                    .add(GetProductOfferingEvent(isMore: true));
+                context.read<ProductSpecalistBloc>().add(
+                  GetProductOfferingEvent(isMore: true),
+                );
               },
               paginatorStatus: state.status,
               localProducts: state.localProducts,
@@ -309,9 +302,9 @@ class OfferingView extends StatelessWidget {
                 errorTitle: context.l10n.error_internal_server_title,
                 hasReturnButton: false,
                 tryAgainPressed: () {
-                  context
-                      .read<ProductSpecalistBloc>()
-                      .add(GetProductOfferingEvent());
+                  context.read<ProductSpecalistBloc>().add(
+                    GetProductOfferingEvent(),
+                  );
                 },
               ),
             );
@@ -319,9 +312,9 @@ class OfferingView extends StatelessWidget {
           return Center(
             child: ErrorTypeWidget(
               tryAgainPressed: () {
-                context
-                    .read<ProductSpecalistBloc>()
-                    .add(GetProductOfferingEvent());
+                context.read<ProductSpecalistBloc>().add(
+                  GetProductOfferingEvent(),
+                );
               },
               hasReturnButton: false,
               errorIcon: AppIcons.connectionLostError,

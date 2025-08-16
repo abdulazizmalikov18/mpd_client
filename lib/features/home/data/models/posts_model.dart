@@ -16,15 +16,15 @@ class PostsModel {
   List<Post>? results;
 
   factory PostsModel.fromJson(Map<String, dynamic> json) => PostsModel(
-        count: json["count"],
-        next: json["next"],
-        nextOffset: json["next_offset"],
-        previousOffset: json["previous_offset"],
-        previous: json["previous"],
-        results: json["results"] == null
-            ? []
-            : List<Post>.from(json["results"]!.map((x) => Post.fromJson(x))),
-      );
+    count: json["count"],
+    next: json["next"],
+    nextOffset: json["next_offset"],
+    previousOffset: json["previous_offset"],
+    previous: json["previous"],
+    results: json["results"] == null
+        ? []
+        : List<Post>.from(json["results"]!.map((x) => Post.fromJson(x))),
+  );
 }
 
 class Post {
@@ -67,30 +67,30 @@ class Post {
   int? selectedIndex;
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
-        id: json["id"],
-        selectedIndex: 0,
-        text: json["text"],
-        commentCount: json["comment_count"],
-        likesCount: json["likes_count"],
-        isLiked: json["is_liked"],
-        isMine: json["is_mine"],
-        date: json["date"] == null ? null : DateTime.parse(json["date"]),
-        media: json["medias"] == null
-            ? []
-            : List<Media>.from(json["medias"]!.map((x) => Media.fromJson(x))),
-        repost: json["repost"],
-        products: json["products"] == null
-            ? []
-            : List<dynamic>.from(json["products"]!.map((x) => x)),
-        authorUser: json["author_user"],
-        username: json["username"],
-        authorFullname: json["author_fullname"],
-        authorJob: json["author_job"] == null
-            ? null
-            : AuthorJob.fromJson(json["author_job"]),
-        authorAvatar: json["author_avatar"] ?? '',
-        mainCat: json["main_cat"],
-      );
+    id: json["id"],
+    selectedIndex: 0,
+    text: json["text"],
+    commentCount: json["comment_count"],
+    likesCount: json["likes_count"],
+    isLiked: json["is_liked"],
+    isMine: json["is_mine"],
+    date: json["date"] == null ? null : DateTime.parse(json["date"]),
+    media: json["medias"] == null
+        ? []
+        : List<Media>.from(json["medias"]!.map((x) => Media.fromJson(x))),
+    repost: json["repost"],
+    products: json["products"] == null
+        ? []
+        : List<dynamic>.from(json["products"]!.map((x) => x)),
+    authorUser: json["author_user"],
+    username: json["username"],
+    authorFullname: json["author_fullname"],
+    authorJob: json["author_job"] == null
+        ? null
+        : AuthorJob.fromJson(json["author_job"]),
+    authorAvatar: json["author_avatar"] ?? '',
+    mainCat: json["main_cat"],
+  );
 }
 
 class Media {
@@ -113,14 +113,14 @@ class Media {
   });
 
   factory Media.fromJson(Map<String, dynamic> json) => Media(
-        id: json["id"],
-        image: json["image"],
-        file: json["file"],
-        screenshot: json["screenshot"],
-        main: json["main"],
-        type: json["type"],
-        post: json["post"],
-      );
+    id: json["id"],
+    image: json["image"],
+    file: json["file"],
+    screenshot: json["screenshot"],
+    main: json["main"],
+    type: json["type"],
+    post: json["post"],
+  );
 }
 
 class AuthorJob {

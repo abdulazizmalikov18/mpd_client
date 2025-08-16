@@ -52,7 +52,7 @@ class AddCardBotomSheet extends StatelessWidget {
                 ),
                 BlocProvider.value(
                   value: BlocProvider.of<MyCardsBloc>(contextCons),
-                )
+                ),
               ],
               child: VerificationCardSheet(id: state.card!.id!),
             ),
@@ -65,73 +65,80 @@ class AddCardBotomSheet extends StatelessWidget {
       },
       child: Form(
         key: context.read<InsertCardBloc>().formkey,
-        child: BottomSheetWidget(children: [
-          ScreenUtil().setVerticalSpacing(32.h),
-          Center(
-            child: Text(
-              'Add card',
-              style: Styles.boldTitle.copyWith(
+        child: BottomSheetWidget(
+          children: [
+            ScreenUtil().setVerticalSpacing(32.h),
+            Center(
+              child: Text(
+                'Add card',
+                style: Styles.boldTitle.copyWith(
                   color: context.color.black,
                   fontSize: 24.sp,
-                  fontFamily: Styles.gilroyMedium),
+                  fontFamily: Styles.gilroyMedium,
+                ),
+              ),
             ),
-          ),
-          ScreenUtil().setVerticalSpacing(32.h),
-          BlocBuilder<InsertCardBloc, InsertCardState>(
-            builder: (context, state) {
-              return LabelInputWidget(
-                topHint: 'Card number',
-                inputHint: '0000 0000 0000 0000',
-                validator: Validators.cardNumber,
-                errorText: state is InsertCardFailure ? state.failure : null,
-                textInputType: TextInputType.number,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                inputformater: [
-                  MaskTextInputFormatter(
+            ScreenUtil().setVerticalSpacing(32.h),
+            BlocBuilder<InsertCardBloc, InsertCardState>(
+              builder: (context, state) {
+                return LabelInputWidget(
+                  topHint: 'Card number',
+                  inputHint: '0000 0000 0000 0000',
+                  validator: Validators.cardNumber,
+                  errorText: state is InsertCardFailure ? state.failure : null,
+                  textInputType: TextInputType.number,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  inputformater: [
+                    MaskTextInputFormatter(
                       mask: '#### #### #### ####',
-                      filter: {"#": RegExp(r'[0-9]')})
-                ],
-                textInputAction: TextInputAction.next,
-                controller: context.read<InsertCardBloc>().cardController,
-                require: '*',
-              );
-            },
-          ),
-          ScreenUtil().setVerticalSpacing(20.h),
-          LabelInputWidget(
-            topHint: 'Expiry',
-            inputHint: 'mm/yy',
-            textInputType: TextInputType.number,
-            validator: Validators.expiryNumber,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            inputformater: [
-              MaskTextInputFormatter(
-                  mask: '##/##', filter: {"#": RegExp(r'[0-9]')})
-            ],
-            textInputAction: TextInputAction.next,
-            controller: context.read<InsertCardBloc>().expiryController,
-            require: '*',
-          ),
-          ScreenUtil().setVerticalSpacing(20.h),
-          LabelInputWidget(
-            topHint: 'Card name',
-            inputHint: 'Card name',
-            validator: (value) => Validators.empty(value, context),
-            textInputAction: TextInputAction.done,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            controller: context.read<InsertCardBloc>().nameController,
-          ),
-          ScreenUtil().setVerticalSpacing(32.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: LongButton(
+                      filter: {"#": RegExp(r'[0-9]')},
+                    ),
+                  ],
+                  textInputAction: TextInputAction.next,
+                  controller: context.read<InsertCardBloc>().cardController,
+                  require: '*',
+                );
+              },
+            ),
+            ScreenUtil().setVerticalSpacing(20.h),
+            LabelInputWidget(
+              topHint: 'Expiry',
+              inputHint: 'mm/yy',
+              textInputType: TextInputType.number,
+              validator: Validators.expiryNumber,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              inputformater: [
+                MaskTextInputFormatter(
+                  mask: '##/##',
+                  filter: {"#": RegExp(r'[0-9]')},
+                ),
+              ],
+              textInputAction: TextInputAction.next,
+              controller: context.read<InsertCardBloc>().expiryController,
+              require: '*',
+            ),
+            ScreenUtil().setVerticalSpacing(20.h),
+            LabelInputWidget(
+              topHint: 'Card name',
+              inputHint: 'Card name',
+              validator: (value) => Validators.empty(value, context),
+              textInputAction: TextInputAction.done,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              controller: context.read<InsertCardBloc>().nameController,
+            ),
+            ScreenUtil().setVerticalSpacing(32.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: LongButton(
                 buttonName: 'Add',
                 onPress: () {
                   context.read<InsertCardBloc>().add(InsertCard());
-                }),
-          ),
-          ScreenUtil().setVerticalSpacing(32.h),
-        ]),
+                },
+              ),
+            ),
+            ScreenUtil().setVerticalSpacing(32.h),
+          ],
+        ),
       ),
     );
   }

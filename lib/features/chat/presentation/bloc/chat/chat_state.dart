@@ -13,10 +13,7 @@ class ChatState extends Equatable {
     this.dataStatus = FormzSubmissionStatus.initial,
     this.error,
     this.groupContainer = const GroupContainer(),
-    this.usersContainer = const ChatUsersContainer(
-      users: [],
-      allUsers: [],
-    ),
+    this.usersContainer = const ChatUsersContainer(users: [], allUsers: []),
     this.createGroupContainer = const CreateGroupContainer(
       users: [],
       selectionUser: [],
@@ -27,14 +24,14 @@ class ChatState extends Equatable {
 
   @override
   List<Object?> get props => [
-        dataStatus,
-        error,
-        usersContainer,
-        createGroupContainer,
-        chatContainer,
-        groupContainer,
-        textForUpdate,
-      ];
+    dataStatus,
+    error,
+    usersContainer,
+    createGroupContainer,
+    chatContainer,
+    groupContainer,
+    textForUpdate,
+  ];
 
   ChatState copyWith({
     FormzSubmissionStatus? dataStatus,

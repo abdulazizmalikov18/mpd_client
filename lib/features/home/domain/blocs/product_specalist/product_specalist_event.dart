@@ -6,18 +6,13 @@ class GetProductSpecalistEvent extends ProductSpecalistEvent {
   final int specialistId;
   final bool isMore;
 
-  GetProductSpecalistEvent({
-    required this.specialistId,
-    this.isMore = false,
-  });
+  GetProductSpecalistEvent({required this.specialistId, this.isMore = false});
 }
 
 class GetProductOfferingEvent extends ProductSpecalistEvent {
   final bool isMore;
 
-  GetProductOfferingEvent({
-    this.isMore = false,
-  });
+  GetProductOfferingEvent({this.isMore = false});
 }
 
 class InsertProductEvent extends ProductSpecalistEvent {

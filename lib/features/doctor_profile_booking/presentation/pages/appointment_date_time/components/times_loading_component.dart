@@ -9,22 +9,27 @@ class TimesLoadingComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-        itemCount: 9,
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        scrollDirection: Axis.horizontal,
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 55, childAspectRatio: 1 / 2.9, mainAxisSpacing: 11.5.w, crossAxisSpacing: 12.h),
-        itemBuilder: (context, index) {
-          return Shimmer.fromColors(
-            baseColor: context.color.baseColor,
-            highlightColor: context.color.highlightColor,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.r),
-                color: context.color.white,
-              ),
+      itemCount: 9,
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      scrollDirection: Axis.horizontal,
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 55,
+        childAspectRatio: 1 / 2.9,
+        mainAxisSpacing: 11.5.w,
+        crossAxisSpacing: 12.h,
+      ),
+      itemBuilder: (context, index) {
+        return Shimmer.fromColors(
+          baseColor: context.color.baseColor,
+          highlightColor: context.color.highlightColor,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.r),
+              color: context.color.white,
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }

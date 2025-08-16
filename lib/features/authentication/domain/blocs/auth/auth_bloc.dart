@@ -43,12 +43,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FocusNode get phoneFocys => _phoneFocus;
 
   void _onPasswordTextFieldChanged(
-      PasswordTextFieldChanged event, Emitter<AuthState> emit) {
+    PasswordTextFieldChanged event,
+    Emitter<AuthState> emit,
+  ) {
     emit(state.copyWith(password: event.password));
   }
 
   void _onChangePhoneorUsername(
-      ChangePhoneorUsername event, Emitter<AuthState> emit) {
+    ChangePhoneorUsername event,
+    Emitter<AuthState> emit,
+  ) {
     if (event.value.length > 1) return;
     if (event.value.isEmpty) {
       emit(state.copyWith(phoneOrUsername: PhoneOrUsername.initial));
@@ -61,7 +65,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onDeleteToken(DeleteToken event, Emitter<AuthState> emit) async {
+  Future<void> _onDeleteToken(
+    DeleteToken event,
+    Emitter<AuthState> emit,
+  ) async {
     try {
       await StorageRepository.deleteString(StorageKeys.REFRESH);
       await StorageRepository.deleteString(StorageKeys.TOKEN);
@@ -71,7 +78,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onRefreshToken(RefreshToken event, Emitter<AuthState> emit) async {
+  Future<void> _onRefreshToken(
+    RefreshToken event,
+    Emitter<AuthState> emit,
+  ) async {
     try {
       final respons = await _repository.refreshToken();
       if (respons.isRight) {
@@ -85,7 +95,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _onLoginPressed(
-      LoginButtonPressed event, Emitter<AuthState> emit) async {
+    LoginButtonPressed event,
+    Emitter<AuthState> emit,
+  ) async {
     debugPrint("login");
     if (_formKey.currentState!.validate()) {
       emit(state.copyWith(showLoginButtonLoading: true, error: ''));
@@ -96,11 +108,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         debugPrint("failure");
         event.onError();
         if (result.left is NetworkFailure) {
-          emit(state.copyWith(
-              error: result.left.message, showLoginButtonLoading: false));
+          emit(
+            state.copyWith(
+              error: result.left.message,
+              showLoginButtonLoading: false,
+            ),
+          );
         } else {
-          emit(state.copyWith(
-              error: 'Unknown server error', showLoginButtonLoading: false));
+          emit(
+            state.copyWith(
+              error: 'Unknown server error',
+              showLoginButtonLoading: false,
+            ),
+          );
         }
       }
     }

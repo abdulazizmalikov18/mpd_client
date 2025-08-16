@@ -13,7 +13,10 @@ class CreateOrderBloc extends Bloc<CreateOrderEvent, CreateOrderState> {
 
   final DoctorProfileRepository _profileRepository;
 
-  Future<void> _onCreateOrder(CreateOrderProcess event, Emitter<CreateOrderState> emit) async {
+  Future<void> _onCreateOrder(
+    CreateOrderProcess event,
+    Emitter<CreateOrderState> emit,
+  ) async {
     emit(CreateOrderLoading());
     final result = await _profileRepository.createOrder(
       action: event.action,
@@ -21,7 +24,6 @@ class CreateOrderBloc extends Bloc<CreateOrderEvent, CreateOrderState> {
       payment: event.payment,
     );
     if (result.isRight) {
-
       emit(CreateOrderSuccess(result.right));
     } else {
       emit(CreateOrderFailure(result.left.message));

@@ -35,17 +35,18 @@ class CreatePostPage extends StatelessWidget {
                         ...List.generate(
                           state.files.length,
                           (index) => PostImageAndVideoView(
-                              filemodel: state.files[index],
-                              onRemovePressed: () {
-                                context
-                                    .read<CreatePostBloc>()
-                                    .add(RemoveImageEvent(state.files[index]));
-                              }),
+                            filemodel: state.files[index],
+                            onRemovePressed: () {
+                              context.read<CreatePostBloc>().add(
+                                RemoveImageEvent(state.files[index]),
+                              );
+                            },
+                          ),
                         ),
                       DottedAddImage(
-                        onPressed: () => context
-                            .read<CreatePostBloc>()
-                            .add(SelectImagesAndVideosEvent(context)),
+                        onPressed: () => context.read<CreatePostBloc>().add(
+                          SelectImagesAndVideosEvent(context),
+                        ),
                       ),
                     ],
                   ),
@@ -73,9 +74,10 @@ class CreatePostPage extends StatelessWidget {
               if (state is CreatePostLoading) {
                 FocusScope.of(context).unfocus();
                 showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (context) => const LoadingDialogWidget());
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) => const LoadingDialogWidget(),
+                );
               } else if (state is CreatePostSucces) {
                 Navigator.pop(context);
                 Navigator.of(context).pop(true);
@@ -83,8 +85,11 @@ class CreatePostPage extends StatelessWidget {
                 Navigator.pop(context);
                 if (state.failure.startsWith('<!')) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                      UiTools.failurefailureSnackBar(
-                          title: 'Oh snap', message: state.failure));
+                    UiTools.failurefailureSnackBar(
+                      title: 'Oh snap',
+                      message: state.failure,
+                    ),
+                  );
                 }
               }
             },
@@ -98,7 +103,7 @@ class CreatePostPage extends StatelessWidget {
               ),
             ),
           ),
-          ScreenUtil().setVerticalSpacing(24.h)
+          ScreenUtil().setVerticalSpacing(24.h),
         ],
       ),
     );

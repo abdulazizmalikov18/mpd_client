@@ -17,12 +17,18 @@ class CreatePostLoading extends CreatePostState {
 
 class CreatePostSucces extends CreatePostState {
   final Map<String, dynamic> createdPost;
-  const CreatePostSucces(super.files,
-      {required this.createdPost, super.isValidImage});
+  const CreatePostSucces(
+    super.files, {
+    required this.createdPost,
+    super.isValidImage,
+  });
 }
 
 class CreatePostFailure extends CreatePostState {
   final String failure;
-  const CreatePostFailure(super.files,
-      {required this.failure, super.isValidImage});
+  const CreatePostFailure(
+    super.files, {
+    required this.failure,
+    super.isValidImage,
+  });
 }

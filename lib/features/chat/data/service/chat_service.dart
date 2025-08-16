@@ -19,20 +19,25 @@ abstract interface class ChatService {
   factory ChatService.create() => ChatServiceImpl._();
 
   Future<ResponseHandler<GenericPagination<ChatGroupModel>>> getGroups(
-      GetGroupChatEntity param);
+    GetGroupChatEntity param,
+  );
 
   Future<ResponseHandler<GenericPagination<MessageModel>>> getMessages(
-      GetChatEntity param);
+    GetChatEntity param,
+  );
   Future<bool> readAllMessage(String groupSlug);
 
   Future<ResponseHandler<GenericPagination<MessageModel>>> sendMessage(
-      SendMessageEntity param);
+    SendMessageEntity param,
+  );
 
   Future<ResponseHandler<GenericPagination<ChatUserModel>>> getAllUsers(
-      GetChatUserEntity params);
+    GetChatUserEntity params,
+  );
 
-  Future<ResponseHandler<ChatGroupModel>> createUserToUser(
-      {required String username});
+  Future<ResponseHandler<ChatGroupModel>> createUserToUser({
+    required String username,
+  });
 
   Future<ResponseHandler<ChatGroupModel>> groupCreate(CreateGroupModel params);
 }
@@ -44,7 +49,8 @@ class ChatServiceImpl extends ChatService {
 
   @override
   Future<ResponseHandler<GenericPagination<ChatGroupModel>>> getGroups(
-      GetGroupChatEntity param) async {
+    GetGroupChatEntity param,
+  ) async {
     return _handle.apiCantrol(
       request: (client) {
         return client.get(
@@ -53,13 +59,12 @@ class ChatServiceImpl extends ChatService {
         );
       },
       body: (response) {
-        return ResponseHandler()
-          ..setData(
-            GenericPagination.fromJson(
-              response,
-              (p0) => ChatGroupModel.fromJson(p0 as Map<String, dynamic>),
-            ),
-          );
+        return ResponseHandler()..setData(
+          GenericPagination.fromJson(
+            response,
+            (p0) => ChatGroupModel.fromJson(p0 as Map<String, dynamic>),
+          ),
+        );
       },
     );
   }
@@ -76,11 +81,12 @@ class ChatServiceImpl extends ChatService {
         );
       },
       body: (response) {
-        return ResponseHandler()
-          ..setData(GenericPagination.fromJson(
+        return ResponseHandler()..setData(
+          GenericPagination.fromJson(
             response,
             (p0) => MessageModel.fromJson(p0 as Map<String, dynamic>),
-          ));
+          ),
+        );
       },
     );
   }
@@ -99,7 +105,8 @@ class ChatServiceImpl extends ChatService {
 
   @override
   Future<ResponseHandler<GenericPagination<MessageModel>>> sendMessage(
-      SendMessageEntity param) {
+    SendMessageEntity param,
+  ) {
     return _handle.apiCantrol(
       request: (client) {
         return client.post(
@@ -108,18 +115,20 @@ class ChatServiceImpl extends ChatService {
         );
       },
       body: (response) {
-        return ResponseHandler()
-          ..setData(GenericPagination.fromJson(
+        return ResponseHandler()..setData(
+          GenericPagination.fromJson(
             response,
             (p0) => MessageModel.fromJson(p0 as Map<String, dynamic>),
-          ));
+          ),
+        );
       },
     );
   }
 
   @override
   Future<ResponseHandler<GenericPagination<ChatUserModel>>> getAllUsers(
-      GetChatUserEntity params) {
+    GetChatUserEntity params,
+  ) {
     return _handle.apiCantrol(
       request: (client) {
         return client.get(
@@ -132,20 +141,20 @@ class ChatServiceImpl extends ChatService {
         );
       },
       body: (response) {
-        return ResponseHandler()
-          ..setData(
-            GenericPagination.fromJson(
-              response,
-              (users) => ChatUserModel.fromJson(jsonDecode(jsonEncode(users))),
-            ),
-          );
+        return ResponseHandler()..setData(
+          GenericPagination.fromJson(
+            response,
+            (users) => ChatUserModel.fromJson(jsonDecode(jsonEncode(users))),
+          ),
+        );
       },
     );
   }
 
   @override
-  Future<ResponseHandler<ChatGroupModel>> createUserToUser(
-      {required String username}) async {
+  Future<ResponseHandler<ChatGroupModel>> createUserToUser({
+    required String username,
+  }) async {
     return _handle.apiCantrol(
       request: (client) {
         return client.post(
@@ -154,17 +163,15 @@ class ChatServiceImpl extends ChatService {
         );
       },
       body: (response) {
-        return ResponseHandler()
-          ..setData(
-            ChatGroupModel.fromJson(response),
-          );
+        return ResponseHandler()..setData(ChatGroupModel.fromJson(response));
       },
     );
   }
 
   @override
   Future<ResponseHandler<ChatGroupModel>> groupCreate(
-      CreateGroupModel params) async {
+    CreateGroupModel params,
+  ) async {
     return _handle.apiCantrol(
       request: (client) {
         return client.post(
@@ -173,10 +180,7 @@ class ChatServiceImpl extends ChatService {
         );
       },
       body: (response) {
-        return ResponseHandler()
-          ..setData(
-            ChatGroupModel.fromJson(response),
-          );
+        return ResponseHandler()..setData(ChatGroupModel.fromJson(response));
       },
     );
   }

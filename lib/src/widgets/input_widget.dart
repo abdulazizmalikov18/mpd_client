@@ -43,14 +43,17 @@ class InputWidget extends StatelessWidget {
     this.validator,
     this.suffixIcon,
     this.errorText,
-    this.background ,
+    this.background,
     this.readOnly = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.r), color:( background ?? context.color.white)),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12.r),
+        color: (background ?? context.color.white),
+      ),
       margin: EdgeInsets.symmetric(horizontal: 16.w),
       child: TextFormField(
         autovalidateMode: autovalidateMode,
@@ -84,7 +87,10 @@ class InputWidget extends StatelessWidget {
 
   List<TextInputFormatter>? get inputFormatter => hasFormatter
       ? [
-          MaskTextInputFormatter(mask: '+998 (##) ###-##-##', filter: {"#": RegExp(r'[0-9]')})
+          MaskTextInputFormatter(
+            mask: '+998 (##) ###-##-##',
+            filter: {"#": RegExp(r'[0-9]')},
+          ),
         ]
       : null;
 
@@ -93,7 +99,10 @@ class InputWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             ScreenUtil().setHorizontalSpacing(15.w),
-            Text('+998', style: Styles.headline7.copyWith(color: context.color.grey)),
+            Text(
+              '+998',
+              style: Styles.headline7.copyWith(color: context.color.grey),
+            ),
             ScreenUtil().setHorizontalSpacing(10.w),
             Container(height: 19.h, width: 1, color: context.color.grey),
             ScreenUtil().setHorizontalSpacing(10.w),

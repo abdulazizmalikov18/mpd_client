@@ -47,9 +47,10 @@ class LongButton extends StatelessWidget {
           BoxShadow(
             blurRadius: 10,
             offset: const Offset(0, 6),
-            color:
-                (shadowColor ?? context.color.mainBlue).withValues(alpha: 0.1),
-          )
+            color: (shadowColor ?? context.color.mainBlue).withValues(
+              alpha: 0.1,
+            ),
+          ),
         ],
         borderRadius: BorderRadius.circular(10.r),
         border: border,
@@ -106,9 +107,7 @@ class LongButton extends StatelessWidget {
     }
     return Transform.scale(
       scale: 0.6,
-      child: CircularProgressIndicator(
-        color: context.color.white,
-      ),
+      child: CircularProgressIndicator(color: context.color.white),
     );
   }
 }

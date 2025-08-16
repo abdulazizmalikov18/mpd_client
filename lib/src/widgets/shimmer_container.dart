@@ -12,7 +12,10 @@ class ShimmerContainer extends StatelessWidget {
     return Container(
       height: size.height.h,
       width: size.width.w,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(radius.r), color: context.color.white),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(radius.r),
+        color: context.color.white,
+      ),
     );
   }
 }

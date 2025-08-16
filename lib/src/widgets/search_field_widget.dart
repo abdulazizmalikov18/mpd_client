@@ -44,8 +44,10 @@ class SearchFieldWidget extends StatelessWidget {
         onSubmitted: onSubmitted,
         textAlignVertical: TextAlignVertical.center,
         autofocus: autoFocus,
-        style: Styles.headline7
-            .copyWith(color: context.color.mainBlue, fontSize: 16.sp),
+        style: Styles.headline7.copyWith(
+          color: context.color.mainBlue,
+          fontSize: 16.sp,
+        ),
         decoration: InputDecoration(
           isDense: true,
           prefixIconConstraints: const BoxConstraints(),
@@ -66,17 +68,16 @@ class SearchFieldWidget extends StatelessWidget {
                     controller.clear();
                     onChanged!(controller.text);
                   },
-                  child: const Icon(
-                    Icons.close_rounded,
-                    size: 24,
-                  ),
+                  child: const Icon(Icons.close_rounded, size: 24),
                 ),
           enabledBorder: InputBorder.none,
           focusedBorder: Decorations.focusedBorder(context),
           alignLabelWithHint: false,
           hintText: searchHint,
-          hintStyle: Styles.cardReview
-              .copyWith(color: context.color.grey, fontSize: 16.sp),
+          hintStyle: Styles.cardReview.copyWith(
+            color: context.color.grey,
+            fontSize: 16.sp,
+          ),
         ),
       ),
     );

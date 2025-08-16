@@ -11,10 +11,7 @@ class UserProfileState extends Equatable {
   });
 
   @override
-  List<Object> get props => [
-        status,
-        userAccount,
-      ];
+  List<Object> get props => [status, userAccount];
 
   UserProfileState copyWith({
     FormzSubmissionStatus? status,

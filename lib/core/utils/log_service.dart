@@ -3,9 +3,7 @@
 import 'package:logger/logger.dart';
 
 class Log {
-  static final Logger _logger = Logger(
-    printer: PrettyPrinter(),
-  );
+  static final Logger _logger = Logger(printer: PrettyPrinter());
 
   static void d(dynamic message) {
     _logger.d(message);

@@ -7,11 +7,7 @@ class GetSpecialist extends SpecialistEvent {
   final int? jobId;
   final Function(List<MapSpecialist>? specialist)? onSucces;
 
-  GetSpecialist({
-    this.search,
-    this.jobId,
-    this.onSucces,
-  });
+  GetSpecialist({this.search, this.jobId, this.onSucces});
 }
 
 class GetSpecialistCategory extends SpecialistEvent {

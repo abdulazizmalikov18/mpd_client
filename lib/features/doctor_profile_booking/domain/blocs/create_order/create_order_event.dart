@@ -12,6 +12,9 @@ class CreateOrderProcess extends CreateOrderEvent {
   final int payment;
   final String action;
 
-  const CreateOrderProcess(
-      {required this.carts, required this.payment, required this.action});
+  const CreateOrderProcess({
+    required this.carts,
+    required this.payment,
+    required this.action,
+  });
 }

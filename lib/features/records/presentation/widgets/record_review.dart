@@ -25,25 +25,27 @@ class RecordReview extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
       width: double.maxFinite,
-      margin: EdgeInsets.symmetric(
-        horizontal: 16.w,
-      ),
+      margin: EdgeInsets.symmetric(horizontal: 16.w),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
-          color: context.color.white),
+        borderRadius: BorderRadius.circular(12.r),
+        color: context.color.white,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,
-            style: Styles.boldTopHint
-                .copyWith(fontSize: 16.sp, color: context.color.black),
+            style: Styles.boldTopHint.copyWith(
+              fontSize: 16.sp,
+              color: context.color.black,
+            ),
           ),
           ScreenUtil().setVerticalSpacing(4.h),
           if (subtitle.isNotEmpty && subtitle[0] == '{')
             HtmlWidget(
-              JsonToHTML(jsonDecode(subtitle)['document']['children'] as List)
-                  .getHtml(),
+              JsonToHTML(
+                jsonDecode(subtitle)['document']['children'] as List,
+              ).getHtml(),
               textStyle: TextStyle(color: context.color.grey),
             )
           else if (subtitle.isNotEmpty &&
@@ -59,7 +61,7 @@ class RecordReview extends StatelessWidget {
                 color: context.color.grey,
                 fontSize: 14.sp,
               ),
-            )
+            ),
         ],
       ),
     );

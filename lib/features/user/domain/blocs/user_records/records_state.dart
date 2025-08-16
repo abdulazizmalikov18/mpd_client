@@ -43,7 +43,12 @@ class RecordsState {
           status == other.status;
 
   @override
-  int get hashCode => records.hashCode ^ hasReachedMax.hashCode ^ isSearch.hashCode ^ failure.hashCode ^ status.hashCode;
+  int get hashCode =>
+      records.hashCode ^
+      hasReachedMax.hashCode ^
+      isSearch.hashCode ^
+      failure.hashCode ^
+      status.hashCode;
 
   @override
   String toString() {

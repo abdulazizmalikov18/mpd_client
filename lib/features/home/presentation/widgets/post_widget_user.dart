@@ -50,7 +50,7 @@ class _PostWidgetUserState extends State<PostWidgetUser>
       decoration: BoxDecoration(
         color: context.color.white,
         boxShadow: [
-          BoxShadow(color: context.color.cardShadow, blurRadius: 20.r)
+          BoxShadow(color: context.color.cardShadow, blurRadius: 20.r),
         ],
       ),
       child: PostBody(
@@ -106,29 +106,31 @@ class _PostBodyState extends State<PostBody>
                 },
                 child: Row(
                   children: [
-                    Builder(builder: (context) {
-                      debugPrint("========>>>>>>> ${widget.post.authorAvatar}");
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
-                        child: widget.post.authorAvatar!.isNotEmpty
-                            ? CachedImageWidget(
-                                url: widget.avatra,
-                                size: 48,
-                              )
-                            : const DefaultAvatar(
-                                containerSize: 48,
-                                imageSize: 36,
-                              ),
-                      );
-                    }),
+                    Builder(
+                      builder: (context) {
+                        debugPrint(
+                          "========>>>>>>> ${widget.post.authorAvatar}",
+                        );
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: widget.post.authorAvatar!.isNotEmpty
+                              ? CachedImageWidget(url: widget.avatra, size: 48)
+                              : const DefaultAvatar(
+                                  containerSize: 48,
+                                  imageSize: 36,
+                                ),
+                        );
+                      },
+                    ),
                     ScreenUtil().setHorizontalSpacing(8.w),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           widget.post.authorFullname ?? "--",
-                          style: Styles.postTitle
-                              .copyWith(color: context.color.black),
+                          style: Styles.postTitle.copyWith(
+                            color: context.color.black,
+                          ),
                         ),
                         // Text(
                         //   widget.post.authorJob ?? "--",
@@ -142,9 +144,9 @@ class _PostBodyState extends State<PostBody>
                             color: context.color.grey,
                             fontFamily: Styles.gilroyRegular,
                           ),
-                        )
+                        ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -184,7 +186,8 @@ class _PostBodyState extends State<PostBody>
                                   ShareParams(
                                     text:
                                         '${widget.post.authorFullname} \n\n${widget.post.text} \n\n${widget.post.media?.first.image ?? ""} \n\n${widget.post.media?.first.file ?? ""} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
-                                    subject: widget.post.authorFullname ??
+                                    subject:
+                                        widget.post.authorFullname ??
                                         "Mpd Client",
                                   ),
                                 );
@@ -201,7 +204,7 @@ class _PostBodyState extends State<PostBody>
                                       fontWeight: FontWeight.w500,
                                       color: context.color.white,
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
@@ -222,7 +225,7 @@ class _PostBodyState extends State<PostBody>
                                       fontWeight: FontWeight.w500,
                                       color: context.color.black,
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
@@ -232,16 +235,19 @@ class _PostBodyState extends State<PostBody>
                               builder: (context, state) {
                                 return LongButton(
                                   color: const Color(0xFFEB5757),
-                                  loading: bloc.state.deleteStatus ==
+                                  loading:
+                                      bloc.state.deleteStatus ==
                                       PostStatus.inProgress,
                                   onPress: () {
-                                    bloc.add(DeletePostEvent(
-                                      id: widget.post.id ?? 0,
-                                      index: widget.baseIndex,
-                                      onSucces: () {
-                                        Navigator.pop(context);
-                                      },
-                                    ));
+                                    bloc.add(
+                                      DeletePostEvent(
+                                        id: widget.post.id ?? 0,
+                                        index: widget.baseIndex,
+                                        onSucces: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    );
                                   },
                                   widget: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -255,7 +261,7 @@ class _PostBodyState extends State<PostBody>
                                           fontWeight: FontWeight.w500,
                                           color: context.color.white,
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 );
@@ -281,12 +287,14 @@ class _PostBodyState extends State<PostBody>
                     widget.isMyPost ? AppIcons.moreIcon : AppIcons.share,
                     height: 24.h,
                     width: 24.h,
-                    colorFilter:
-                        ColorFilter.mode(context.color.black, BlendMode.srcIn),
+                    colorFilter: ColorFilter.mode(
+                      context.color.black,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
         ScreenUtil().setVerticalSpacing(8.h),
@@ -359,9 +367,8 @@ class _PostBodyState extends State<PostBody>
                               Expanded(child: Coments(post: widget.post)),
                               Padding(
                                 padding: EdgeInsets.only(
-                                  bottom: MediaQuery.of(context)
-                                              .viewInsets
-                                              .bottom >
+                                  bottom:
+                                      MediaQuery.of(context).viewInsets.bottom >
                                           0
                                       ? MediaQuery.of(context).viewInsets.bottom
                                       : 32.h,
@@ -371,7 +378,7 @@ class _PostBodyState extends State<PostBody>
                                   postId: widget.post.id!,
                                   postIndex: widget.baseIndex,
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -382,7 +389,7 @@ class _PostBodyState extends State<PostBody>
               },
             ),
             const Spacer(),
-            ScreenUtil().setHorizontalSpacing(12.w)
+            ScreenUtil().setHorizontalSpacing(12.w),
           ],
         ),
         if (widget.post.text == null || widget.post.text!.isEmpty)
@@ -397,10 +404,12 @@ class _PostBodyState extends State<PostBody>
                 color: context.color.black,
               ),
               trimLines: 3,
-              moreStyle:
-                  Styles.postTitle.copyWith(color: context.color.mainBlue),
-              lessStyle:
-                  Styles.postTitle.copyWith(color: context.color.mainBlue),
+              moreStyle: Styles.postTitle.copyWith(
+                color: context.color.mainBlue,
+              ),
+              lessStyle: Styles.postTitle.copyWith(
+                color: context.color.mainBlue,
+              ),
               trimMode: TrimMode.Line,
               trimCollapsedText: context.l10n.lenth_read_more,
               trimExpandedText: context.l10n.lenth_show_less,

@@ -8,7 +8,12 @@ class LaguageButton extends StatelessWidget {
   final String imagePath;
   final String language;
   final VoidCallback onPressed;
-  const LaguageButton({super.key, required this.language, required this.onPressed, required this.imagePath});
+  const LaguageButton({
+    super.key,
+    required this.language,
+    required this.onPressed,
+    required this.imagePath,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,15 +22,12 @@ class LaguageButton extends StatelessWidget {
         alignment: Alignment.center,
         backgroundColor: context.color.background,
         minimumSize: Size(358.w, 50.h),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.r),
+        ),
       ),
       onPressed: onPressed,
-      icon: Image.asset(
-        imagePath,
-        height: 24.h,
-        width: 24.h,
-        fit: BoxFit.fill,
-      ),
+      icon: Image.asset(imagePath, height: 24.h, width: 24.h, fit: BoxFit.fill),
       label: Text(
         language,
         style: Styles.boldHeadline6.copyWith(color: context.color.black),

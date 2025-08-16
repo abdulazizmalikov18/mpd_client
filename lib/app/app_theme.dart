@@ -4,10 +4,7 @@ import 'package:mpd_client/app/app_colors.dart';
 class AppTheme {
   static ThemeData theme = ThemeData(
     useMaterial3: false,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.white,
-      elevation: 0,
-    ),
+    appBarTheme: const AppBarTheme(backgroundColor: Colors.white, elevation: 0),
   );
 
   static ThemeData light = theme.copyWith(

@@ -9,7 +9,7 @@ part 'district_state.dart';
 
 class DistrictBloc extends Bloc<DistrictEvent, DistrictState> {
   DistrictBloc(this._repository)
-      : super(const DistrictInitial(districts: [], selectedDistict: null)) {
+    : super(const DistrictInitial(districts: [], selectedDistict: null)) {
     on<GetDistrictsEvent>(
       _onGetDistricts,
       transformer: (events, mapper) {
@@ -27,36 +27,56 @@ class DistrictBloc extends Bloc<DistrictEvent, DistrictState> {
   int _offset = 0;
 
   void _onSelectDistrict(
-      SelectDistrictEvent event, Emitter<DistrictState> emit) {
-    emit(DistrictInitial(
-        districts: state.districts, selectedDistict: event.selectedDistrict));
+    SelectDistrictEvent event,
+    Emitter<DistrictState> emit,
+  ) {
+    emit(
+      DistrictInitial(
+        districts: state.districts,
+        selectedDistict: event.selectedDistrict,
+      ),
+    );
   }
 
   Future<void> _onGetDistricts(
-      GetDistrictsEvent event, Emitter<DistrictState> emit) async {
+    GetDistrictsEvent event,
+    Emitter<DistrictState> emit,
+  ) async {
     if (state.isEnd && state.oldParent == event.parent) return;
     // if (state is DistrictLoading) return;
 
     _clearOffset(event, state);
-    emit(DistrictLoading(
+    emit(
+      DistrictLoading(
         districts: state.districts,
         oldParent: event.parent,
-        selectedDistict: state.selectedDistict));
+        selectedDistict: state.selectedDistict,
+      ),
+    );
 
     final result = await _repository.getRegions(
-        limit: _limit, offset: _offset, parent: event.parent);
+      limit: _limit,
+      offset: _offset,
+      parent: event.parent,
+    );
     if (result.isRight) {
       _addOffset(result.right);
-      emit(DistrictSuccess(
+      emit(
+        DistrictSuccess(
           districts: _districts,
           isEnd: _districts.length < _offset,
           oldParent: state.oldParent,
-          selectedDistict: state.selectedDistict));
+          selectedDistict: state.selectedDistict,
+        ),
+      );
     } else {
-      emit(DistrictFailure(
+      emit(
+        DistrictFailure(
           districts: state.districts,
           error: result.left.message,
-          selectedDistict: state.selectedDistict));
+          selectedDistict: state.selectedDistict,
+        ),
+      );
     }
   }
 

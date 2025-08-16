@@ -10,7 +10,7 @@ class ResendPvcBloc extends Bloc<ResendPvcEvent, ResendPvcState> {
   final AuthRepository _repository;
   final Ticker _ticker;
   ResendPvcBloc(this._repository, this._ticker)
-      : super(const ResendPvcState(buttonState: ResendButton.initial)) {
+    : super(const ResendPvcState(buttonState: ResendButton.initial)) {
     on<ResendPvc>(_onResendPvc);
     on<StartTicker>(_startTicker);
   }
@@ -19,10 +19,14 @@ class ResendPvcBloc extends Bloc<ResendPvcEvent, ResendPvcState> {
     return emit.forEach(
       _ticker.tick(ticks: event.duration),
       onData: (duration) {
-        final String minutesStr =
-            ((duration / 60) % 60).floor().toString().padLeft(2, '0');
-        final String secondsStr =
-            (duration % 60).floor().toString().padLeft(2, '0');
+        final String minutesStr = ((duration / 60) % 60)
+            .floor()
+            .toString()
+            .padLeft(2, '0');
+        final String secondsStr = (duration % 60).floor().toString().padLeft(
+          2,
+          '0',
+        );
         return state.copyWith(duration: '$minutesStr:$secondsStr');
       },
     );
@@ -39,8 +43,12 @@ class ResendPvcBloc extends Bloc<ResendPvcEvent, ResendPvcState> {
       emit(state.copyWith(buttonState: ResendButton.timing, failure: 'No'));
       add(const StartTicker(50));
     } else {
-      emit(state.copyWith(
-          buttonState: ResendButton.timing, failure: result.left.message));
+      emit(
+        state.copyWith(
+          buttonState: ResendButton.timing,
+          failure: result.left.message,
+        ),
+      );
     }
   }
 }

@@ -8,11 +8,7 @@ class GetGroupChat extends ChatEvent {
   final String? username;
   final Function(ChatGroupModel model)? onSucces;
   final VoidCallback? onError;
-  const GetGroupChat({
-    this.username,
-    this.onSucces,
-    this.onError,
-  });
+  const GetGroupChat({this.username, this.onSucces, this.onError});
 }
 
 class PushToChatEvent extends ChatEvent {
@@ -40,17 +36,13 @@ class SendMessageEvent extends ChatEvent {
 class ChatNewComeEvent extends ChatEvent {
   final MessageModel newMessage;
 
-  const ChatNewComeEvent({
-    required this.newMessage,
-  });
+  const ChatNewComeEvent({required this.newMessage});
 }
 
 class ChatComingOnlineStatusEvent extends ChatEvent {
   final Map<String, Object?> status;
 
-  const ChatComingOnlineStatusEvent({
-    required this.status,
-  });
+  const ChatComingOnlineStatusEvent({required this.status});
 }
 
 class GroupSearchEvent extends ChatEvent {

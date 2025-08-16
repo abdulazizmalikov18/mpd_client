@@ -9,7 +9,7 @@ part 'region_state.dart';
 
 class RegionBloc extends Bloc<RegionEvent, RegionState> {
   RegionBloc(this._repository, this._searchController)
-      : super(const RegionInitial(regions: [], selectedRegion: null)) {
+    : super(const RegionInitial(regions: [], selectedRegion: null)) {
     on<GetRegionsEvent>(_onGetRegions);
     // on<GetRegionsFromSearch>(
     //   _onGetFromSearch,
@@ -35,35 +35,52 @@ class RegionBloc extends Bloc<RegionEvent, RegionState> {
   // Choose profession from all professions
 
   Future<void> _onCancelEvent(
-      CancelEvent event, Emitter<RegionState> emit) async {
+    CancelEvent event,
+    Emitter<RegionState> emit,
+  ) async {
     _clearFromSearch(state);
   }
 
   void _onSelectRegion(SelectRegionEvent event, Emitter<RegionState> emit) {
-    emit(RegionSuccess(
-        regions: state.regions, selectedRegion: event.selectedRegion));
+    emit(
+      RegionSuccess(
+        regions: state.regions,
+        selectedRegion: event.selectedRegion,
+      ),
+    );
   }
 
   // Get all professions from api
   Future<void> _onGetRegions(
-      GetRegionsEvent event, Emitter<RegionState> emit) async {
+    GetRegionsEvent event,
+    Emitter<RegionState> emit,
+  ) async {
     if (state.isEnd && !state.isSearch) return;
-    emit(RegionLoading(
+    emit(
+      RegionLoading(
         regions: state.regions,
         isSearch: false,
-        selectedRegion: state.selectedRegion));
+        selectedRegion: state.selectedRegion,
+      ),
+    );
     final result = await _repository.getRegions(limit: _limit, offset: _offset);
     if (result.isRight) {
       _addOffset(result.right);
-      emit(RegionSuccess(
+      emit(
+        RegionSuccess(
           regions: _regions,
           isEnd: _regions.length < _offset,
-          selectedRegion: state.selectedRegion));
+          selectedRegion: state.selectedRegion,
+        ),
+      );
     } else {
-      emit(RegionFailure(
+      emit(
+        RegionFailure(
           regions: state.regions,
           error: result.left.message,
-          selectedRegion: state.selectedRegion));
+          selectedRegion: state.selectedRegion,
+        ),
+      );
     }
   }
 

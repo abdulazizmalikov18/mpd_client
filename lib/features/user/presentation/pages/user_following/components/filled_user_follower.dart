@@ -11,20 +11,23 @@ class FilledUserFollowers extends StatelessWidget {
   final bool isSearch, hasReachedMax;
   final List<Subscription> subscriptions;
 
-  const FilledUserFollowers(
-      {super.key,
-      required this.subscriptions,
-      required this.scrollController,
-      required this.isSearch,
-      required this.hasReachedMax});
+  const FilledUserFollowers({
+    super.key,
+    required this.subscriptions,
+    required this.scrollController,
+    required this.isSearch,
+    required this.hasReachedMax,
+  });
 
   bool _handleScrollNotification(
-      ScrollNotification notification, BuildContext context) {
+    ScrollNotification notification,
+    BuildContext context,
+  ) {
     if (notification is ScrollEndNotification &&
         scrollController.position.extentAfter == 0) {
-      context
-          .read<UserSubscriptionsBloc>()
-          .add(const GetUserSubscriptionsEvent());
+      context.read<UserSubscriptionsBloc>().add(
+        const GetUserSubscriptionsEvent(),
+      );
     }
     return false;
   }
@@ -35,9 +38,9 @@ class FilledUserFollowers extends StatelessWidget {
       child: RefreshIndicator(
         notificationPredicate: isSearch ? (_) => false : (_) => true,
         onRefresh: () async {
-          context
-              .read<UserSubscriptionsBloc>()
-              .add(const GetUserSubscriptionsEvent(isRefresh: true));
+          context.read<UserSubscriptionsBloc>().add(
+            const GetUserSubscriptionsEvent(isRefresh: true),
+          );
           await context.read<UserSubscriptionsBloc>().stream.first;
         },
         child: NotificationListener<ScrollNotification>(
@@ -45,10 +48,12 @@ class FilledUserFollowers extends StatelessWidget {
               _handleScrollNotification(notification, context),
           child: ListView.builder(
             physics: const AlwaysScrollableScrollPhysics(
-                parent: BouncingScrollPhysics()),
+              parent: BouncingScrollPhysics(),
+            ),
             controller: scrollController,
-            itemCount:
-                hasReachedMax ? subscriptions.length : subscriptions.length + 1,
+            itemCount: hasReachedMax
+                ? subscriptions.length
+                : subscriptions.length + 1,
             padding: EdgeInsets.symmetric(vertical: 12.h),
             itemBuilder: (context, index) {
               if (index >= subscriptions.length) {
@@ -66,9 +71,10 @@ class FilledUserFollowers extends StatelessWidget {
                     ScreenUtil().setHorizontalSpacing(10.w),
                     Text(
                       'Loading...',
-                      style: Styles.headline7
-                          .copyWith(color: context.color.mainBlue),
-                    )
+                      style: Styles.headline7.copyWith(
+                        color: context.color.mainBlue,
+                      ),
+                    ),
                   ],
                 );
               }
@@ -88,15 +94,18 @@ class FilledUserFollowers extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: FilledGradientButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, AppRoutes.drProfilebyid,
-                          arguments: SpecialistInfoModel(
-                            id: subscription.id ?? 0,
-                            avatar: subscription.avatar,
-                            phone: "",
-                            fullname:
-                                '${subscription.name ?? "--"} ${subscription.lastname ?? "--"}',
-                            username: subscription.username,
-                          ));
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.drProfilebyid,
+                        arguments: SpecialistInfoModel(
+                          id: subscription.id ?? 0,
+                          avatar: subscription.avatar,
+                          phone: "",
+                          fullname:
+                              '${subscription.name ?? "--"} ${subscription.lastname ?? "--"}',
+                          username: subscription.username,
+                        ),
+                      );
                     },
                     text: Text(
                       'Book Now',

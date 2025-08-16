@@ -47,7 +47,7 @@ class DottedAddImage extends StatelessWidget {
                   fontFamily: Styles.gilroyMedium,
                   color: context.color.mainBlue,
                 ),
-              )
+              ),
             ],
           ),
         ),

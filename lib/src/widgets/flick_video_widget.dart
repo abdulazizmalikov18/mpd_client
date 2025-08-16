@@ -30,7 +30,8 @@ class FlickVideoWidget extends StatelessWidget {
               Positioned.fill(
                 child: screenShotVideo != null
                     ? CachedNetworkImage(
-                        imageUrl: screenShotVideo ??
+                        imageUrl:
+                            screenShotVideo ??
                             'https://resources.comphealth.com/wp-content/uploads/2019/05/post-residency-career-tips.jpg',
                         fit: BoxFit.cover,
                       )
@@ -65,17 +66,15 @@ class FlickVideoWidget extends StatelessWidget {
         playerLoadingFallback: Center(
           child: screenShotVideo != null
               ? CachedNetworkImage(
-                  imageUrl: screenShotVideo ??
+                  imageUrl:
+                      screenShotVideo ??
                       'https://resources.comphealth.com/wp-content/uploads/2019/05/post-residency-career-tips.jpg',
                   fit: BoxFit.fitWidth,
                 )
               : Image.asset(AppImages.logo),
         ),
         controls: const FlickLandscapeControls(),
-        iconThemeData: const IconThemeData(
-          size: 40,
-          color: Colors.white,
-        ),
+        iconThemeData: const IconThemeData(size: 40, color: Colors.white),
         textStyle: const TextStyle(fontSize: 16, color: Colors.white),
       ),
     );

@@ -15,9 +15,7 @@ class SelectGenderWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(
-            left: 16.w,
-          ),
+          padding: EdgeInsets.only(left: 16.w),
           child: Text(
             context.l10n.register_gender,
             style: Styles.boldTopHint.copyWith(color: context.color.black),
@@ -36,9 +34,9 @@ class SelectGenderWidget extends StatelessWidget {
                     value: Gender.male,
                     groupValue: state,
                     onChanged: (value) {
-                      context
-                          .read<CreateUserBloc>()
-                          .add(SelectingGenderEvent(value));
+                      context.read<CreateUserBloc>().add(
+                        SelectingGenderEvent(value),
+                      );
                     },
                     text: context.l10n.register_gender_man,
                     isSelected: Gender.male == state,
@@ -49,9 +47,9 @@ class SelectGenderWidget extends StatelessWidget {
                     groupValue: state,
                     onChanged: (value) {
                       FocusScope.of(context).unfocus();
-                      context
-                          .read<CreateUserBloc>()
-                          .add(SelectingGenderEvent(value));
+                      context.read<CreateUserBloc>().add(
+                        SelectingGenderEvent(value),
+                      );
                     },
                     text: context.l10n.register_gender_woman,
                     isSelected: Gender.female == state,
@@ -60,7 +58,7 @@ class SelectGenderWidget extends StatelessWidget {
               );
             },
           ),
-        )
+        ),
       ],
     );
   }

@@ -53,7 +53,10 @@ class AppointmentPlaceDate extends StatelessWidget {
                     ScreenUtil().setHorizontalSpacing(8.w),
                     Text(
                       date,
-                      style: Styles.boldHeadline6.copyWith(fontSize: 14.sp, color: context.color.grey),
+                      style: Styles.boldHeadline6.copyWith(
+                        fontSize: 14.sp,
+                        color: context.color.grey,
+                      ),
                     ),
                   ],
                 ),
@@ -66,11 +69,14 @@ class AppointmentPlaceDate extends StatelessWidget {
                       height: 18,
                       color: context.color.mainBlue,
                     ),
-                  
+
                     ScreenUtil().setHorizontalSpacing(8.w),
                     Text(
                       time,
-                      style: Styles.descSubtitle.copyWith(fontSize: 14.sp, color: context.color.grey),
+                      style: Styles.descSubtitle.copyWith(
+                        fontSize: 14.sp,
+                        color: context.color.grey,
+                      ),
                     ),
                   ],
                 ),
@@ -78,7 +84,7 @@ class AppointmentPlaceDate extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     AppIcons.location.svg(
+                    AppIcons.location.svg(
                       width: 18,
                       height: 18,
                       color: context.color.mainBlue,
@@ -86,7 +92,10 @@ class AppointmentPlaceDate extends StatelessWidget {
                     ScreenUtil().setHorizontalSpacing(8.w),
                     Text(
                       placeName,
-                      style: Styles.descSubtitle.copyWith(fontSize: 14.sp, color: context.color.grey),
+                      style: Styles.descSubtitle.copyWith(
+                        fontSize: 14.sp,
+                        color: context.color.grey,
+                      ),
                     ),
                   ],
                 ),
@@ -94,16 +103,22 @@ class AppointmentPlaceDate extends StatelessWidget {
             ),
           ),
           Positioned(
-              bottom: 0,
-              right: 0,
-              child: MaterialButton(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.r)),
-                onPressed: onPress,
-                child: Text(
-                  context.l10n.appointment_get_direction,
-                  style: Styles.descSubtitle.copyWith(color: context.color.mainBlue, fontSize: 14.sp),
+            bottom: 0,
+            right: 0,
+            child: MaterialButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(100.r),
+              ),
+              onPressed: onPress,
+              child: Text(
+                context.l10n.appointment_get_direction,
+                style: Styles.descSubtitle.copyWith(
+                  color: context.color.mainBlue,
+                  fontSize: 14.sp,
                 ),
-              ))
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -12,15 +12,20 @@ import 'package:mpd_client/features/yandex_doctor/domain/blocs/specialist/specia
 class AppPages {
   late final _userInfoBloc = UserInfoBloc(GetIt.instance.get<UserRepository>());
   late final _userSubscriptionsBloc = UserSubscriptionsBloc(
-      locator.get<UserRepository>(), TextEditingController());
+    locator.get<UserRepository>(),
+    TextEditingController(),
+  );
 
-  late final _timetableBloc =
-      TimetableBloc(locator.get<DoctorProfileRepository>());
+  late final _timetableBloc = TimetableBloc(
+    locator.get<DoctorProfileRepository>(),
+  );
 
   late final _myCardsBloc = MyCardsBloc(locator.get<DoctorProfileRepository>());
   late final _postComentBloc = PostComentBloc(locator.get<HomeRepository>());
-  late final _sendComentBloc =
-      SendComentBloc(locator.get<HomeRepository>(), TextEditingController());
+  late final _sendComentBloc = SendComentBloc(
+    locator.get<HomeRepository>(),
+    TextEditingController(),
+  );
 
   late final _likeUnlikeBloc = LikeUnlikeBloc(locator.get<HomeRepository>());
   late final _postBloc = PostBloc(locator.get<HomeRepository>());
@@ -37,7 +42,9 @@ class AppPages {
               ),
               BlocProvider(
                 create: (context) => SearchBySpecialistBloc(
-                    locator.get<YandexDoctorRepository>(), FocusNode()),
+                  locator.get<YandexDoctorRepository>(),
+                  FocusNode(),
+                ),
               ),
             ],
             child: const DoctorPage(),
@@ -155,9 +162,8 @@ class AppPages {
               BlocProvider.value(value: _timetableBloc),
               BlocProvider.value(value: _myCardsBloc),
               BlocProvider(
-                create: (context) => CreateOrderBloc(
-                  locator.get<DoctorProfileRepository>(),
-                ),
+                create: (context) =>
+                    CreateOrderBloc(locator.get<DoctorProfileRepository>()),
               ),
             ],
             child: ReviewAppoinmentDetail(
@@ -237,9 +243,8 @@ class AppPages {
                 ),
               ),
               BlocProvider(
-                create: (context) => SpecialistBloc(
-                  locator.get<YandexDoctorRepository>(),
-                ),
+                create: (context) =>
+                    SpecialistBloc(locator.get<YandexDoctorRepository>()),
               ),
               BlocProvider.value(value: _userInfoBloc),
               BlocProvider(create: (context) => _postComentBloc),
@@ -298,8 +303,9 @@ class AppPages {
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => RecordsBloc(
-                GetIt.instance.get<UserRepository>(), TextEditingController())
-              ..add(const GetRecordsEvent()),
+              GetIt.instance.get<UserRepository>(),
+              TextEditingController(),
+            )..add(const GetRecordsEvent()),
             child: const RecordsPage(),
           ),
         );
@@ -368,17 +374,19 @@ class AppPages {
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider.value(
-                  value: _postComentBloc
-                    ..add(GetComentPostEvent(args.post.id!, false))),
+                value: _postComentBloc
+                  ..add(GetComentPostEvent(args.post.id!, false)),
+              ),
               BlocProvider.value(value: _sendComentBloc),
               BlocProvider.value(value: _likeUnlikeBloc),
               BlocProvider.value(value: _mediaControlBloc),
               BlocProvider.value(value: _userInfoBloc),
             ],
             child: ComentPage(
-                index: args.index,
-                flickManager: args.flickManager,
-                post: args.post),
+              index: args.index,
+              flickManager: args.flickManager,
+              post: args.post,
+            ),
           ),
         );
       case AppRoutes.registerDetail:
@@ -388,12 +396,13 @@ class AppPages {
             providers: [
               BlocProvider(
                 create: (context) => CreateUserBloc(
-                    TextEditingController(),
-                    TextEditingController(),
-                    TextEditingController(),
-                    TextEditingController(),
-                    locator.get<AuthRepository>(),
-                    GlobalKey<FormState>()),
+                  TextEditingController(),
+                  TextEditingController(),
+                  TextEditingController(),
+                  TextEditingController(),
+                  locator.get<AuthRepository>(),
+                  GlobalKey<FormState>(),
+                ),
               ),
               // BlocProvider(
               //   create: (context) => ProfessionsBloc(
@@ -403,7 +412,9 @@ class AppPages {
               // ),
               BlocProvider(
                 create: (context) => ProfessionBloc(
-                    locator.get<AuthRepository>(), TextEditingController()),
+                  locator.get<AuthRepository>(),
+                  TextEditingController(),
+                ),
               ),
               BlocProvider(
                 create: (context) =>
@@ -411,17 +422,19 @@ class AppPages {
               ),
               BlocProvider(
                 create: (context) => ChangePasswordBloc(
-                    GetIt.instance.get<AuthRepository>(),
-                    GlobalKey<FormState>(),
-                    TextEditingController(),
-                    TextEditingController(),
-                    TextEditingController()),
+                  GetIt.instance.get<AuthRepository>(),
+                  GlobalKey<FormState>(),
+                  TextEditingController(),
+                  TextEditingController(),
+                  TextEditingController(),
+                ),
               ),
               BlocProvider(
                 create: (context) => PassportBloc(
-                    GetIt.instance.get<AuthRepository>(),
-                    GlobalKey<FormState>(),
-                    TextEditingController()),
+                  GetIt.instance.get<AuthRepository>(),
+                  GlobalKey<FormState>(),
+                  TextEditingController(),
+                ),
               ),
               BlocProvider(
                 create: (context) =>
@@ -429,8 +442,9 @@ class AppPages {
               ),
               BlocProvider(
                 create: (context) => RegionBloc(
-                    GetIt.instance.get<AuthRepository>(),
-                    TextEditingController()),
+                  GetIt.instance.get<AuthRepository>(),
+                  TextEditingController(),
+                ),
               ),
               BlocProvider(
                 create: (context) =>
@@ -456,9 +470,7 @@ class AppPages {
       //   );
 
       default:
-        return MaterialPageRoute(
-          builder: (_) => const Scaffold(),
-        );
+        return MaterialPageRoute(builder: (_) => const Scaffold());
     }
   }
 

@@ -15,10 +15,12 @@ class AppoinmentRepository implements IAppoinmentRepository {
   const AppoinmentRepository({required this.remoteDataSource});
   @override
   Future<Either<Failure, AppointmentModel>> getUserAppoinments(
-      PaginationModel paginationModel) async {
+    PaginationModel paginationModel,
+  ) async {
     try {
-      final response =
-          await remoteDataSource.getUserAppoinments(paginationModel);
+      final response = await remoteDataSource.getUserAppoinments(
+        paginationModel,
+      );
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -30,11 +32,15 @@ class AppoinmentRepository implements IAppoinmentRepository {
   }
 
   @override
-  Future<Either<Failure, Map<String, dynamic>>> cancelAppoinment(
-      {required String productid, required String cancelInfo}) async {
+  Future<Either<Failure, Map<String, dynamic>>> cancelAppoinment({
+    required String productid,
+    required String cancelInfo,
+  }) async {
     try {
       final response = await remoteDataSource.cancelAppoinment(
-          cancelInfo: cancelInfo, productid: productid);
+        cancelInfo: cancelInfo,
+        productid: productid,
+      );
       return Right(response);
     } on DioException {
       return Left(const DioFailure());

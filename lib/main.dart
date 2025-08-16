@@ -14,45 +14,50 @@ const String $baseUrlHttp = "https://sharq-api.sharqdarmon.uz/";
 const String $baseUrlSocket = "wss://sharq-api.sharqdarmon.uz";
 
 void main() {
-  runZonedGuarded(() async {
-    // EquatableConfig.stringify = kDebugMode;
-    // AndroidYandexMap.useAndroidViewSurface = false;
-    WidgetsFlutterBinding.ensureInitialized();
-    await StorageRepository.getInstance();
-    // await FcmService.init();
+  runZonedGuarded(
+    () async {
+      // EquatableConfig.stringify = kDebugMode;
+      // AndroidYandexMap.useAndroidViewSurface = false;
+      WidgetsFlutterBinding.ensureInitialized();
+      await StorageRepository.getInstance();
+      // await FcmService.init();
 
-    setupLocator();
-    if (kDebugMode) {
-      Bloc.observer = LogBlocObserver();
-    }
-    HttpOverrides.global = MyHttpOverrides();
+      setupLocator();
+      if (kDebugMode) {
+        Bloc.observer = LogBlocObserver();
+      }
+      HttpOverrides.global = MyHttpOverrides();
 
-    // if (Platform.isAndroid) {
-    //   Workmanager().initialize(
-    //     callbackDispatcher,
-    //     isInDebugMode: true,
-    //   );
-    //   Workmanager().registerOneOffTask("task-identifier", "nimadir");
-    // }
+      // if (Platform.isAndroid) {
+      //   Workmanager().initialize(
+      //     callbackDispatcher,
+      //     isInDebugMode: true,
+      //   );
+      //   Workmanager().registerOneOffTask("task-identifier", "nimadir");
+      // }
 
-    await SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+      await SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ]);
 
-    // debugRepaintRainbowEnabled = false;
-    runApp(const MyApp());
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarBrightness: Brightness.light,
-      systemNavigationBarColor: Colors.white,
-      systemNavigationBarIconBrightness: Brightness.dark,
-    ));
-  }, (error, stack) {
-    Log.e(error);
-    Log.e(stack);
-  });
+      // debugRepaintRainbowEnabled = false;
+      runApp(const MyApp());
+      SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.light,
+          systemNavigationBarColor: Colors.white,
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
+      );
+    },
+    (error, stack) {
+      Log.e(error);
+      Log.e(stack);
+    },
+  );
 }
 
 // @pragma('vm:entry-point')

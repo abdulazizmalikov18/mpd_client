@@ -17,8 +17,10 @@ abstract class IDoctorProfileRemoteDataSource {
 
   Future<Subscription> subscribeToDoctor(String username);
 
-  Future<TimetableByDateModel> getTimetable(
-      {required String date, required int id});
+  Future<TimetableByDateModel> getTimetable({
+    required String date,
+    required int id,
+  });
 
   Future<List<CartRemoteModel>> addToCart(List<Map<String, dynamic>> carts);
 
@@ -51,31 +53,37 @@ class DoctorProfileRemoteDataSource implements IDoctorProfileRemoteDataSource {
       request: () {
         return _client.get(
           "/BMS/api/v1.0/public/cluster/mpd/specialist/$username/?all=true",
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
         return DoctorProfileModel.fromMap(response);
-      },  
+      },
     );
   }
 
   @override
-  Future<TimetableByDateModel> getTimetable(
-      {required String date, required int id}) async {
+  Future<TimetableByDateModel> getTimetable({
+    required String date,
+    required int id,
+  }) async {
     return _handle.apiControl(
       request: () {
         return _client.get(
           "/BMS/api/v1.0/public/org/mpd/specialist/$id/timetable/$date/",
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -92,11 +100,13 @@ class DoctorProfileRemoteDataSource implements IDoctorProfileRemoteDataSource {
         return _client.post(
           "/SMMS/api/v1.0/public/subscriptions/",
           data: data,
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -107,17 +117,20 @@ class DoctorProfileRemoteDataSource implements IDoctorProfileRemoteDataSource {
 
   @override
   Future<List<CartRemoteModel>> addToCart(
-      List<Map<String, dynamic>> carts) async {
+    List<Map<String, dynamic>> carts,
+  ) async {
     return _handle.apiControl(
       request: () {
         return _client.post(
           "/OMS/api/v1.0/public/carts/",
           data: jsonEncode(carts),
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -136,11 +149,13 @@ class DoctorProfileRemoteDataSource implements IDoctorProfileRemoteDataSource {
         return _client.post(
           "/PMM/api/v1.0/public/paycom-subscriptions/",
           data: data,
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -150,19 +165,23 @@ class DoctorProfileRemoteDataSource implements IDoctorProfileRemoteDataSource {
   }
 
   @override
-  Future<CardRemoteModel> verifyCard(
-      {required int code, required int cardId}) async {
+  Future<CardRemoteModel> verifyCard({
+    required int code,
+    required int cardId,
+  }) async {
     final data = FormData.fromMap({"code": code});
     return _handle.apiControl(
       request: () {
         return _client.patch(
           "/PMM/api/v1.0/public/paycom-subscriptions/$cardId/verify/",
           data: data,
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -177,11 +196,13 @@ class DoctorProfileRemoteDataSource implements IDoctorProfileRemoteDataSource {
       request: () {
         return _client.get(
           "/PMM/api/v1.0/public/paycom-subscriptions/$cardId/resend_verify_code/",
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -196,11 +217,13 @@ class DoctorProfileRemoteDataSource implements IDoctorProfileRemoteDataSource {
       request: () {
         return _client.get(
           "/PMM/api/v1.0/public/paycom-subscriptions/",
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -217,11 +240,13 @@ class DoctorProfileRemoteDataSource implements IDoctorProfileRemoteDataSource {
       request: () {
         return _client.delete(
           "/SMMS/api/v1.0/public/subscriptions/$username/",
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {
@@ -241,11 +266,13 @@ class DoctorProfileRemoteDataSource implements IDoctorProfileRemoteDataSource {
         return _client.post(
           "/OMS/api/v1.0/public/order/create/",
           data: {"cart_products": carts, "payment": payment, "action": action},
-          options: Options(headers: {
-            if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-              'Authorization':
-                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-          }),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) {

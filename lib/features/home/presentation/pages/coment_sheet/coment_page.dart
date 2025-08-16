@@ -24,8 +24,11 @@ class ComentPageModel {
   final Post post;
   final FlickManager? flickManager;
   final int index;
-  const ComentPageModel(
-      {required this.flickManager, required this.post, required this.index});
+  const ComentPageModel({
+    required this.flickManager,
+    required this.post,
+    required this.index,
+  });
 }
 
 class ComentPage extends StatelessWidget {
@@ -48,9 +51,7 @@ class ComentPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           context.l10n.lenth_comment,
-          style: Styles.headline4.copyWith(
-            color: context.color.black,
-          ),
+          style: Styles.headline4.copyWith(color: context.color.black),
         ),
         toolbarHeight: 60.h,
         titleSpacing: 0,
@@ -60,16 +61,20 @@ class ComentPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              SharePlus.instance.share(ShareParams(
-                text:
-                    '${post.authorFullname} \n\n${post.text} \n\n${post.media?.first.image} \n\n${post.media?.first.file} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
-                subject: post.authorFullname ?? "Mpd Client",
-              ));
+              SharePlus.instance.share(
+                ShareParams(
+                  text:
+                      '${post.authorFullname} \n\n${post.text} \n\n${post.media?.first.image} \n\n${post.media?.first.file} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
+                  subject: post.authorFullname ?? "Mpd Client",
+                ),
+              );
             },
             icon: SvgPicture.asset(
               AppIcons.moreIcon,
-              colorFilter:
-                  ColorFilter.mode(context.color.black, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                context.color.black,
+                BlendMode.srcIn,
+              ),
             ),
           ),
         ],
@@ -108,11 +113,11 @@ class ComentPage extends StatelessWidget {
               padding: EdgeInsets.only(top: 12.h),
               sliver:
                   BlocSelector<MediaControlBloc, MediaControlState, List<Post>>(
-                selector: (state) => state.posts,
-                builder: (context, posts) {
-                  return ComentPostInfo(index: index, post: posts[index]);
-                },
-              ),
+                    selector: (state) => state.posts,
+                    builder: (context, posts) {
+                      return ComentPostInfo(index: index, post: posts[index]);
+                    },
+                  ),
             ),
             SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -125,10 +130,12 @@ class ComentPage extends StatelessWidget {
                           color: context.color.black,
                         ),
                         trimLines: 3,
-                        moreStyle: Styles.postTitle
-                            .copyWith(color: context.color.mainBlue),
-                        lessStyle: Styles.postTitle
-                            .copyWith(color: context.color.mainBlue),
+                        moreStyle: Styles.postTitle.copyWith(
+                          color: context.color.mainBlue,
+                        ),
+                        lessStyle: Styles.postTitle.copyWith(
+                          color: context.color.mainBlue,
+                        ),
                         trimMode: TrimMode.Line,
                         trimCollapsedText: context.l10n.lenth_read_more,
                         trimExpandedText: context.l10n.lenth_show_less,
@@ -138,15 +145,14 @@ class ComentPage extends StatelessWidget {
             ),
             SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
-              sliver: SliverToBoxAdapter(
-                child: Coments(post: post),
-              ),
-            )
+              sliver: SliverToBoxAdapter(child: Coments(post: post)),
+            ),
           ],
         ),
       ),
-      bottomSheet:
-          PinnedSheet(widget: ComentInput(postId: post.id!, postIndex: index)),
+      bottomSheet: PinnedSheet(
+        widget: ComentInput(postId: post.id!, postIndex: index),
+      ),
     );
   }
 

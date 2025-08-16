@@ -24,10 +24,7 @@ class _DoctorListPageState extends State<DoctorListPage> {
         iconTheme: IconThemeData(color: context.color.black),
         backgroundColor: context.color.white,
         elevation: 1,
-        title: Text(
-          widget.title,
-          style: TextStyle(color: context.color.black),
-        ),
+        title: Text(widget.title, style: TextStyle(color: context.color.black)),
       ),
       body: ListView.separated(
         padding: const EdgeInsets.symmetric(vertical: 16),

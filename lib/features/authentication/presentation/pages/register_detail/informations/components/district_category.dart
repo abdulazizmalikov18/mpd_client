@@ -12,14 +12,14 @@ class DistrictCategory extends StatelessWidget {
   final List<Region> _districts;
   final VoidCallback onScrollEndBloc;
   final bool isEmpty;
-  const DistrictCategory(
-      {super.key,
-      required ScrollController scrollController,
-      required List<Region> districts,
-      required this.isEmpty,
-      required this.onScrollEndBloc})
-      : _scrollController = scrollController,
-        _districts = districts;
+  const DistrictCategory({
+    super.key,
+    required ScrollController scrollController,
+    required List<Region> districts,
+    required this.isEmpty,
+    required this.onScrollEndBloc,
+  }) : _scrollController = scrollController,
+       _districts = districts;
 
   @override
   Widget build(BuildContext context) {
@@ -36,29 +36,33 @@ class DistrictCategory extends StatelessWidget {
               return const SizedBox();
             }
             return Center(
-                child: Padding(
-              padding: EdgeInsets.only(bottom: 10.h),
-              child: const LoadingPlatform(),
-            ));
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 10.h),
+                child: const LoadingPlatform(),
+              ),
+            );
           }
           return Material(
             color: context.color.white,
             child: Theme(
               data: ThemeData(
-                  highlightColor:
-                      context.color.mainBlue.withValues(alpha: 0.1)),
+                highlightColor: context.color.mainBlue.withValues(alpha: 0.1),
+              ),
               child: ListTile(
-                  onTap: () {
-                    context.read<DistrictBloc>().add(SelectDistrictEvent(
-                        selectedDistrict: _districts[index]));
-                    Navigator.pop(context);
-                  },
-                  contentPadding: EdgeInsets.only(left: 32.w),
-                  title: Text(
-                    _districts[index].name,
-                    style: Styles.descSubtitle
-                        .copyWith(color: context.color.black),
-                  )),
+                onTap: () {
+                  context.read<DistrictBloc>().add(
+                    SelectDistrictEvent(selectedDistrict: _districts[index]),
+                  );
+                  Navigator.pop(context);
+                },
+                contentPadding: EdgeInsets.only(left: 32.w),
+                title: Text(
+                  _districts[index].name,
+                  style: Styles.descSubtitle.copyWith(
+                    color: context.color.black,
+                  ),
+                ),
+              ),
             ),
           );
         },

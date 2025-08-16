@@ -23,6 +23,9 @@ class SubscriptionSuccess extends SubscriptionState {
 
 class SubscriptionFailure extends SubscriptionState {
   final String failure;
-  const SubscriptionFailure(this.failure, super.isSubscribed,
-      {super.subscription});
+  const SubscriptionFailure(
+    this.failure,
+    super.isSubscribed, {
+    super.subscription,
+  });
 }

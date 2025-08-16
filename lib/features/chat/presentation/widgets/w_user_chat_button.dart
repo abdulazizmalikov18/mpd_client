@@ -8,11 +8,7 @@ class WUserChatButton extends StatelessWidget {
   final void Function() onTap;
   final ChatGroupModel group;
 
-  const WUserChatButton({
-    super.key,
-    required this.onTap,
-    required this.group,
-  });
+  const WUserChatButton({super.key, required this.onTap, required this.group});
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +26,7 @@ class WUserChatButton extends StatelessWidget {
       subtitle: Text(
         group.lastMessage.isEmpty
             ? (group.lastFile.isEmpty ? "file" : "")
-            : (group.lastMessage.isNotEmpty
-                ? group.lastMessage
-                : ""),
+            : (group.lastMessage.isNotEmpty ? group.lastMessage : ""),
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
           color: group.unreadMessageCount == 0
@@ -50,20 +44,17 @@ class WUserChatButton extends StatelessWidget {
             CircleAvatar(
               radius: 28,
               backgroundColor: mainBlue.withValues(alpha: 0.1),
-              backgroundImage: CachedNetworkImageProvider(
-                group.avatar,
-              ),
+              backgroundImage: CachedNetworkImageProvider(group.avatar),
             ),
             Align(
               alignment: Alignment.bottomRight,
               child: CircleAvatar(
                 radius: 6,
-                backgroundColor: group.isOnline &&
-                        (group.isUserToUser)
+                backgroundColor: group.isOnline && (group.isUserToUser)
                     ? context.color.green
                     : Colors.transparent,
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -74,11 +65,7 @@ class WUserChatButton extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 8),
             child: Text(
-              parseDateToTime(
-                group.date.isNotEmpty
-                    ? group.date
-                    : "-",
-              ),
+              parseDateToTime(group.date.isNotEmpty ? group.date : "-"),
               style: TextStyle(
                 color: context.color.grey,
                 fontSize: 12,

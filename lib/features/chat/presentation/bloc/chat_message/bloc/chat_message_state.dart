@@ -17,12 +17,12 @@ class ChatMessageState extends Equatable {
 
   @override
   List<Object?> get props => [
-        messages,
-        status,
-        sendMessageStatus,
-        count,
-        offset,
-      ];
+    messages,
+    status,
+    sendMessageStatus,
+    count,
+    offset,
+  ];
 
   ChatMessageState copyWith({
     List<MessageModel>? messages,

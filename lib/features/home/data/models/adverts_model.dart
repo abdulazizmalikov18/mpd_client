@@ -16,26 +16,21 @@ class AdvertsModel {
   List<Adverticement>? results;
 
   factory AdvertsModel.fromJson(Map<String, dynamic> json) => AdvertsModel(
-        count: json["count"],
-        next: json["next"],
-        nextOffset: json["next_offset"],
-        previousOffset: json["previous_offset"],
-        previous: json["previous"],
-        results: json["results"] == null
-            ? []
-            : List<Adverticement>.from(
-                json["results"]!.map((x) => Adverticement.fromJson(x))),
-      );
+    count: json["count"],
+    next: json["next"],
+    nextOffset: json["next_offset"],
+    previousOffset: json["previous_offset"],
+    previous: json["previous"],
+    results: json["results"] == null
+        ? []
+        : List<Adverticement>.from(
+            json["results"]!.map((x) => Adverticement.fromJson(x)),
+          ),
+  );
 }
 
 class Adverticement {
-  Adverticement({
-    this.id,
-    this.post,
-    this.active,
-    this.base,
-    this.redirectUrl,
-  });
+  Adverticement({this.id, this.post, this.active, this.base, this.redirectUrl});
 
   int? id;
   AdverticementPost? post;
@@ -44,14 +39,14 @@ class Adverticement {
   String? redirectUrl;
 
   factory Adverticement.fromJson(Map<String, dynamic> json) => Adverticement(
-        id: json["id"],
-        post: json["post"] == null
-            ? null
-            : AdverticementPost.fromJson(json["post"]),
-        active: json["active"],
-        base: json["base"],
-        redirectUrl: json["redirect_url"],
-      );
+    id: json["id"],
+    post: json["post"] == null
+        ? null
+        : AdverticementPost.fromJson(json["post"]),
+    active: json["active"],
+    base: json["base"],
+    redirectUrl: json["redirect_url"],
+  );
 }
 
 class AdverticementPost {
@@ -83,26 +78,22 @@ class AdverticementPost {
         media: json["media"] == null
             ? []
             : List<AdverticementMedia>.from(
-                json["media"]!.map((x) => AdverticementMedia.fromJson(x))),
+                json["media"]!.map((x) => AdverticementMedia.fromJson(x)),
+              ),
         authorUser: json["author_user"],
         authorOrg: json["author_org"],
         action: json["action"],
         text: json["text"],
         date: json["date"] == null ? null : DateTime.parse(json["date"]),
-        updated:
-            json["updated"] == null ? null : DateTime.parse(json["updated"]),
+        updated: json["updated"] == null
+            ? null
+            : DateTime.parse(json["updated"]),
         repost: json["repost"],
       );
 }
 
 class AdverticementMedia {
-  AdverticementMedia({
-    this.id,
-    this.image,
-    this.file,
-    this.main,
-    this.post,
-  });
+  AdverticementMedia({this.id, this.image, this.file, this.main, this.post});
 
   int? id;
   String? image;

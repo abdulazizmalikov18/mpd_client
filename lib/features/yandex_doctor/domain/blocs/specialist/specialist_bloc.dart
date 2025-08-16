@@ -11,7 +11,7 @@ part 'specialist_state.dart';
 class SpecialistBloc extends Bloc<SpecialistEvent, SpecialistState> {
   final YandexDoctorRepository _yandexDoctorRepository;
   SpecialistBloc(this._yandexDoctorRepository)
-      : super(const SpecialistState()) {
+    : super(const SpecialistState()) {
     on<GetSpecialist>((event, emit) async {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
       final result = await _yandexDoctorRepository.getSearchedSpecialist(
@@ -19,11 +19,13 @@ class SpecialistBloc extends Bloc<SpecialistEvent, SpecialistState> {
         jobId: event.jobId,
       );
       if (result.isRight) {
-        emit(state.copyWith(
-          specialist: result.right.results,
-          status: FormzSubmissionStatus.success,
-        ));
-        if (event.onSucces!=null) {
+        emit(
+          state.copyWith(
+            specialist: result.right.results,
+            status: FormzSubmissionStatus.success,
+          ),
+        );
+        if (event.onSucces != null) {
           event.onSucces!(result.right.results);
         }
       } else {
@@ -32,13 +34,16 @@ class SpecialistBloc extends Bloc<SpecialistEvent, SpecialistState> {
     });
     on<GetSpecialistCategory>((event, emit) async {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-      final result =
-          await _yandexDoctorRepository.getSpecialistByCategory(id: event.id);
+      final result = await _yandexDoctorRepository.getSpecialistByCategory(
+        id: event.id,
+      );
       if (result.isRight) {
-        emit(state.copyWith(
-          specialist: result.right.results,
-          status: FormzSubmissionStatus.success,
-        ));
+        emit(
+          state.copyWith(
+            specialist: result.right.results,
+            status: FormzSubmissionStatus.success,
+          ),
+        );
       } else {
         emit(state.copyWith(status: FormzSubmissionStatus.failure));
       }
@@ -49,10 +54,12 @@ class SpecialistBloc extends Bloc<SpecialistEvent, SpecialistState> {
         emit(state.copyWith(statusCategory: FormzSubmissionStatus.inProgress));
         final result = await _yandexDoctorRepository.getPopularCategories();
         if (result.isRight) {
-          emit(state.copyWith(
-            categories: result.right.results,
-            statusCategory: FormzSubmissionStatus.success,
-          ));
+          emit(
+            state.copyWith(
+              categories: result.right.results,
+              statusCategory: FormzSubmissionStatus.success,
+            ),
+          );
         } else {
           emit(state.copyWith(statusCategory: FormzSubmissionStatus.failure));
         }
@@ -66,10 +73,10 @@ class SpecialistBloc extends Bloc<SpecialistEvent, SpecialistState> {
           selectedName: event.id == -1
               ? ""
               : state.categories
-                  .where((element) => element.id == event.id)
-                  .toList()
-                  .first
-                  .name,
+                    .where((element) => element.id == event.id)
+                    .toList()
+                    .first
+                    .name,
         ),
       ),
     );

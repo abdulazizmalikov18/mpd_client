@@ -23,6 +23,9 @@ class AdverticementSuccess extends AdverticementState {
 
 class AdverticementFailure extends AdverticementState {
   final String failure;
-  const AdverticementFailure(
-      {required super.adverts, required this.failure, super.isEnd});
+  const AdverticementFailure({
+    required super.adverts,
+    required this.failure,
+    super.isEnd,
+  });
 }

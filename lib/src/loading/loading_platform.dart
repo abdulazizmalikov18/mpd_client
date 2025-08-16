@@ -12,7 +12,7 @@ class LoadingPlatform extends StatelessWidget {
         ? const CupertinoActivityIndicator()
         : Transform.scale(
             scale: 0.8,
-            child:  CircularProgressIndicator(
+            child: CircularProgressIndicator(
               color: context.color.mainBlue,
               strokeWidth: 2,
             ),

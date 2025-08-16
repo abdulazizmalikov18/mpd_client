@@ -29,11 +29,16 @@ class DownloadFile {
         progress = 0;
       });
 
-      await Dio().download(file, filePath, onReceiveProgress: (count, total) {
-        setState(() {
-          progress = (count / total);
-        });
-      }, cancelToken: cancelToken);
+      await Dio().download(
+        file,
+        filePath,
+        onReceiveProgress: (count, total) {
+          setState(() {
+            progress = (count / total);
+          });
+        },
+        cancelToken: cancelToken,
+      );
       setState(() {
         dowloading = false;
         fileExists = true;

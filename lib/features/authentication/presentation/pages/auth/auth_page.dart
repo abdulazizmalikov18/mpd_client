@@ -13,77 +13,82 @@ class AuthPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AuthInheritedNotifier(
       authNotifier: AuthNotifier(),
-      child: Builder(builder: (context) {
-        final notifier = AuthInheritedNotifier.of(context).notifier!;
-        return PopScope(
-          canPop: false,
-          onPopInvokedWithResult: (didPop, result) async {
-            if (!didPop) {
-              if (notifier.isSignIn) {
-                if (Navigator.of(context).canPop()) {
-                  Navigator.of(context).pop();
+      child: Builder(
+        builder: (context) {
+          final notifier = AuthInheritedNotifier.of(context).notifier!;
+          return PopScope(
+            canPop: false,
+            onPopInvokedWithResult: (didPop, result) async {
+              if (!didPop) {
+                if (notifier.isSignIn) {
+                  if (Navigator.of(context).canPop()) {
+                    Navigator.of(context).pop();
+                  }
+                } else {
+                  notifier.setAuthPage();
                 }
-              } else {
-                notifier.setAuthPage();
               }
-            }
-          },
-          child: Scaffold(
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Stack(
-                    children: [
-                      SizedBox(height: 352.h),
-                      Image.asset(
-                        'assets/images/topimage.png',
-                        height: 290.h,
-                        width: double.maxFinite,
-                        fit: BoxFit.fill,
-                      ),
-                      Positioned(
-                        top: 90.h,
-                        left: 70.w,
-                        right: 70.w,
-                        child: Image.asset(
-                          AppImages.logo,
-                          height: 55.h,
-                          width: 250.w,
-                          color: context.color.white,
-                          fit: BoxFit.contain,
+            },
+            child: Scaffold(
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Stack(
+                      children: [
+                        SizedBox(height: 352.h),
+                        Image.asset(
+                          'assets/images/topimage.png',
+                          height: 290.h,
+                          width: double.maxFinite,
+                          fit: BoxFit.fill,
                         ),
-                      ),
-                      Positioned(
-                        top: 177.h,
-                        left: 108.w,
-                        right: 108.w,
-                        child: Image.asset(
-                          AppImages.doctorEntry,
-                          height: 175.h,
-                          width: 175.w,
+                        Positioned(
+                          top: 90.h,
+                          left: 70.w,
+                          right: 70.w,
+                          child: Image.asset(
+                            AppImages.logo,
+                            height: 55.h,
+                            width: 250.w,
+                            color: context.color.white,
+                            fit: BoxFit.contain,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Builder(builder: (context) {
-                    final notifier =
-                        AuthInheritedNotifier.of(context).notifier!;
-                    return AnimatedCrossFade(
-                      sizeCurve: Curves.easeInOut,
-                      firstChild: const LoginPart(),
-                      secondChild: const RegisterPart(),
-                      crossFadeState: notifier.isSignIn
-                          ? CrossFadeState.showFirst
-                          : CrossFadeState.showSecond,
-                      duration: const Duration(milliseconds: 300),
-                    );
-                  })
-                ],
+                        Positioned(
+                          top: 177.h,
+                          left: 108.w,
+                          right: 108.w,
+                          child: Image.asset(
+                            AppImages.doctorEntry,
+                            height: 175.h,
+                            width: 175.w,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Builder(
+                      builder: (context) {
+                        final notifier = AuthInheritedNotifier.of(
+                          context,
+                        ).notifier!;
+                        return AnimatedCrossFade(
+                          sizeCurve: Curves.easeInOut,
+                          firstChild: const LoginPart(),
+                          secondChild: const RegisterPart(),
+                          crossFadeState: notifier.isSignIn
+                              ? CrossFadeState.showFirst
+                              : CrossFadeState.showSecond,
+                          duration: const Duration(milliseconds: 300),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      }),
+          );
+        },
+      ),
     );
   }
 }

@@ -25,7 +25,8 @@ class TopSpecialistsModel {
         previousOffset: json["previous_offset"],
         previous: json["previous"],
         results: List<Specialist>.from(
-            json["results"].map((x) => Specialist.fromJson(x))),
+          json["results"].map((x) => Specialist.fromJson(x)),
+        ),
       );
 }
 
@@ -70,10 +71,9 @@ class Specialist {
 
   factory Specialist.fromJson(Map<String, dynamic> json) {
     final currency = json["min_price"] != null
-        ? NumberFormat.simpleCurrency(locale: 'uz')
-            .format(json["min_price"])
-            .split(',')
-            .first
+        ? NumberFormat.simpleCurrency(
+            locale: 'uz',
+          ).format(json["min_price"]).split(',').first
         : null;
     return Specialist(
       id: json["id"],
@@ -81,15 +81,17 @@ class Specialist {
       lastname: json["lastname"],
       avatar: json["avatar"],
       currentWorkplace: List<CurrentWorkplace>.from(
-          json["current_workplace"].map((x) => CurrentWorkplace.fromJson(x))),
+        json["current_workplace"].map((x) => CurrentWorkplace.fromJson(x)),
+      ),
       user: json["user"],
       job: Job.fromJson(json["job"]),
       specCat: SpecCat.fromJson(json["spec_cat"]),
       isWorking: json["is_working"],
       isCatHead: json["is_cat_head"],
       operatingMode: json["operating_mode"],
-      position:
-          json["position"] == null ? null : Position.fromJson(json["position"]),
+      position: json["position"] == null
+          ? null
+          : Position.fromJson(json["position"]),
       autoMode: json["auto_mode"],
       accepted: json["accepted"],
       todayTimetable: TodayTimetable.fromJson(json["today_timetable"]),
@@ -125,18 +127,13 @@ class CurrentWorkplace {
 }
 
 class SpecCat {
-  SpecCat({
-    required this.id,
-    required this.name,
-  });
+  SpecCat({required this.id, required this.name});
 
   int? id;
   String? name;
 
-  factory SpecCat.fromJson(Map<String, dynamic> json) => SpecCat(
-        id: json["id"],
-        name: json["name"],
-      );
+  factory SpecCat.fromJson(Map<String, dynamic> json) =>
+      SpecCat(id: json["id"], name: json["name"]);
 }
 
 class Job {
@@ -165,17 +162,17 @@ class Job {
   int? parent;
 
   factory Job.fromJson(Map<String, dynamic> json) => Job(
-        id: json["id"],
-        name: json["name"],
-        description: json["description"],
-        hideFromOrgs: json["hide_from_orgs"],
-        hideFromUsers: json["hide_from_users"],
-        image: json["image"],
-        status: json["status"],
-        firstLevelScore: json["first_level_score"],
-        levelProgressBy: json["level_progress_by"],
-        parent: json["parent"],
-      );
+    id: json["id"],
+    name: json["name"],
+    description: json["description"],
+    hideFromOrgs: json["hide_from_orgs"],
+    hideFromUsers: json["hide_from_users"],
+    image: json["image"],
+    status: json["status"],
+    firstLevelScore: json["first_level_score"],
+    levelProgressBy: json["level_progress_by"],
+    parent: json["parent"],
+  );
 }
 
 class Position {
@@ -196,13 +193,13 @@ class Position {
   int? org;
 
   factory Position.fromJson(Map<String, dynamic> json) => Position(
-        id: json["id"],
-        name: json["name"],
-        status: json["status"],
-        createDate: DateTime.parse(json["create_date"]),
-        updateDate: DateTime.parse(json["update_date"]),
-        org: json["org"],
-      );
+    id: json["id"],
+    name: json["name"],
+    status: json["status"],
+    createDate: DateTime.parse(json["create_date"]),
+    updateDate: DateTime.parse(json["update_date"]),
+    org: json["org"],
+  );
 }
 
 class TodayTimetable {
@@ -227,13 +224,13 @@ class TodayTimetable {
   int? spec;
 
   factory TodayTimetable.fromJson(Map<String, dynamic> json) => TodayTimetable(
-        id: json["id"],
-        dayOfWeek: json["day_of_week"]!,
-        startTime: json["start_time"],
-        endTime: json["end_time"],
-        isWorking: json["is_working"],
-        repeatDayOff: json["repeat_day_off"],
-        procInterval: json["proc_interval"],
-        spec: json["spec"],
-      );
+    id: json["id"],
+    dayOfWeek: json["day_of_week"]!,
+    startTime: json["start_time"],
+    endTime: json["end_time"],
+    isWorking: json["is_working"],
+    repeatDayOff: json["repeat_day_off"],
+    procInterval: json["proc_interval"],
+    spec: json["spec"],
+  );
 }

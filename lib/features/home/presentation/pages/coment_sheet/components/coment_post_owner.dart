@@ -8,12 +8,13 @@ class ComentPostOwner extends StatelessWidget {
   final VoidCallback onPressed;
   final String fullname, job;
   final String? avatar;
-  const ComentPostOwner(
-      {super.key,
-      required this.avatar,
-      required this.fullname,
-      required this.job,
-      required this.onPressed});
+  const ComentPostOwner({
+    super.key,
+    required this.avatar,
+    required this.fullname,
+    required this.job,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +27,17 @@ class ComentPostOwner extends StatelessWidget {
       leading: avatar!.isNotEmpty
           ? ClipRRect(
               borderRadius: BorderRadius.circular(40),
-              child: CachedImageWidget(url: avatar!, size: 40))
+              child: CachedImageWidget(url: avatar!, size: 40),
+            )
           : const DefaultAvatar(containerSize: 40, imageSize: 32),
       title: Text(
         fullname,
         style: Styles.postTitle.copyWith(fontFamily: Styles.gilroyRegular),
       ),
-      subtitle: Text(job,
-          style: Styles.postSubtitle.copyWith(fontFamily: Styles.gilroyLight)),
+      subtitle: Text(
+        job,
+        style: Styles.postSubtitle.copyWith(fontFamily: Styles.gilroyLight),
+      ),
     );
   }
 }

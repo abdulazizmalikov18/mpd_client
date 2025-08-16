@@ -9,7 +9,8 @@ part 'specialist_model.g.dart';
 
 List<SpecialistModel> specialistModelFromJson(String str) =>
     List<SpecialistModel>.from(
-        json.decode(str).map((x) => SpecialistModel.fromJson(x)));
+      json.decode(str).map((x) => SpecialistModel.fromJson(x)),
+    );
 
 String specialistModelToJson(List<SpecialistModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -63,10 +64,7 @@ class Job {
   @JsonKey(name: "name")
   final String name;
 
-  const Job({
-    this.id = "",
-    this.name = "",
-  });
+  const Job({this.id = "", this.name = ""});
 
   factory Job.fromJson(Map<String, dynamic> json) => _$JobFromJson(json);
 

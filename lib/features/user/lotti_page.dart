@@ -15,11 +15,7 @@ class _LottiPageState extends State<LottiPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Center(
-        child: LottieBuilder.asset(
-          AppAnim.anim4,
-        ),
-      ),
+      body: Center(child: LottieBuilder.asset(AppAnim.anim4)),
     );
   }
 }

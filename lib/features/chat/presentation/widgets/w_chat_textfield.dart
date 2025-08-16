@@ -29,10 +29,7 @@ class WChatTextField extends StatelessWidget {
                   //             InChatView.of(context)!.widget.group.slugName,
                   //       ),
                   //     ),
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                  ),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                   keyboardType: TextInputType.multiline,
                   // textInputAction: TextInputAction.newline,
                   decoration: InputDecoration(
@@ -48,10 +45,7 @@ class WChatTextField extends StatelessWidget {
                         context,
                         InChatView.of(context)!.widget.group.slugName,
                       ),
-                      child: const Icon(
-                        CupertinoIcons.paperclip,
-                        color: gray,
-                      ),
+                      child: const Icon(CupertinoIcons.paperclip, color: gray),
                     ),
                     hintText: "Type....",
                     hintStyle: TextStyle(
@@ -78,11 +72,11 @@ class WChatTextField extends StatelessWidget {
             const SizedBox(width: 8),
             WButton(
               onTap: () => context.read<ChatMessageBloc>().add(
-                    ChatSendMessageEvent(
-                      text: ChatVMController().messageController.text,
-                      groupSlug: InChatView.of(context)!.widget.group.slugName,
-                    ),
-                  ),
+                ChatSendMessageEvent(
+                  text: ChatVMController().messageController.text,
+                  groupSlug: InChatView.of(context)!.widget.group.slugName,
+                ),
+              ),
               width: 48,
               height: 48,
               child: AppIcons.send.svg(color: white),

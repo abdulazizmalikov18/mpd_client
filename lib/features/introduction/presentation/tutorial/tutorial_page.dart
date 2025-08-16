@@ -89,10 +89,12 @@ class _TutorialPageState extends State<TutorialPage> {
                   decoration: BoxDecoration(
                     color: context.color.background,
                     gradient: notifier.pageIndex == index
-                        ? LinearGradient(colors: [
-                            context.color.gradientBlueOpacity,
-                            context.color.gradientBlue
-                          ])
+                        ? LinearGradient(
+                            colors: [
+                              context.color.gradientBlueOpacity,
+                              context.color.gradientBlue,
+                            ],
+                          )
                         : null,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
@@ -133,17 +135,22 @@ class _TutorialPageState extends State<TutorialPage> {
                         Navigator.pushNamed(context, AppRoutes.auth);
                       },
                       style: TextButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.r))),
-                      child: Text(context.l10n.presentation_skip,
-                          textAlign: TextAlign.center,
-                          style: Styles.headline6
-                              .copyWith(color: context.color.black)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                      ),
+                      child: Text(
+                        context.l10n.presentation_skip,
+                        textAlign: TextAlign.center,
+                        style: Styles.headline6.copyWith(
+                          color: context.color.black,
+                        ),
+                      ),
                     ),
                   )
                 : SizedBox(height: 50.h),
           ),
-          ScreenUtil().setVerticalSpacing(40.h)
+          ScreenUtil().setVerticalSpacing(40.h),
         ],
       ),
     );

@@ -10,18 +10,22 @@ part 'cancel_appointment_state.dart';
 class CancelAppointmentBloc
     extends Bloc<CancelAppointmentEvent, CancelAppointmentState> {
   CancelAppointmentBloc(this._appoinmentRepository)
-      : super(CancelAppointmentInitial()) {
+    : super(CancelAppointmentInitial()) {
     on<CancelPressedEvent>(_onCancelPressed);
   }
 
   final AppoinmentRepository _appoinmentRepository;
 
   Future<void> _onCancelPressed(
-      CancelPressedEvent event, Emitter<CancelAppointmentState> emit) async {
+    CancelPressedEvent event,
+    Emitter<CancelAppointmentState> emit,
+  ) async {
     emit(CancelAppointmentLoading());
 
     final result = await _appoinmentRepository.cancelAppoinment(
-        cancelInfo: event.cancelInfo, productid: event.productid);
+      cancelInfo: event.cancelInfo,
+      productid: event.productid,
+    );
 
     if (result.isLeft) {
       emit(CancelAppointmentFailure(Utils.errorFormat(result.left.message)));

@@ -23,15 +23,13 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     Timer(const Duration(milliseconds: 1600), () async {
       if (StorageRepository.getString(StorageKeys.REFRESH).isNotEmpty &&
           StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) {
-        Navigator.of(context).pushNamedAndRemoveUntil(
-          AppRoutes.mainPage,
-          (route) => false,
-        );
+        Navigator.of(
+          context,
+        ).pushNamedAndRemoveUntil(AppRoutes.mainPage, (route) => false);
       } else {
-        Navigator.of(context).pushNamedAndRemoveUntil(
-          AppRoutes.splashLanguage,
-          (route) => false,
-        );
+        Navigator.of(
+          context,
+        ).pushNamedAndRemoveUntil(AppRoutes.splashLanguage, (route) => false);
       }
     });
     super.initState();
@@ -53,11 +51,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
           children: [
             Positioned(
               bottom: 470.h,
-              child: Image.asset(
-                AppImages.logo,
-                width: 250.w,
-                height: 55.h,
-              ),
+              child: Image.asset(AppImages.logo, width: 250.w, height: 55.h),
             ),
             Positioned(
               bottom: 24.h,
@@ -72,11 +66,8 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
             ),
             Positioned(
               bottom: 110,
-              child: SpinKitCircle(
-                size: 52,
-                color: context.color.mainBlue,
-              ),
-            )
+              child: SpinKitCircle(size: 52, color: context.color.mainBlue),
+            ),
           ],
         ),
       ),

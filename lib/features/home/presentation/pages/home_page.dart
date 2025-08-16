@@ -57,9 +57,7 @@ class _HomePageState extends State<HomePage> {
                   errorTitle: context.l10n.error_internal_server_title,
                   hasReturnButton: false,
                   tryAgainPressed: () {
-                    context.read<PostBloc>().add(
-                          PostFetched(true),
-                        );
+                    context.read<PostBloc>().add(PostFetched(true));
                   },
                 ),
               );

@@ -16,14 +16,14 @@ class ProfessionCategory extends StatefulWidget {
   final bool isEnd;
   final VoidCallback onScrollEndBloc;
 
-  const ProfessionCategory(
-      {super.key,
-      required ScrollController scrollController,
-      required List<Profession> professions,
-      required this.isEnd,
-      required this.onScrollEndBloc})
-      : _scrollController = scrollController,
-        _professions = professions;
+  const ProfessionCategory({
+    super.key,
+    required ScrollController scrollController,
+    required List<Profession> professions,
+    required this.isEnd,
+    required this.onScrollEndBloc,
+  }) : _scrollController = scrollController,
+       _professions = professions;
 
   @override
   State<ProfessionCategory> createState() => _ExpansionListState();
@@ -51,23 +51,29 @@ class _ExpansionListState extends State<ProfessionCategory>
 
           return widget._professions[index].isParent!
               ? _buildProfessionsList(
-                  expansionTileKey, widget._professions[index])
+                  expansionTileKey,
+                  widget._professions[index],
+                )
               : Material(
                   color: context.color.white,
                   child: Theme(
                     data: ThemeData(
-                        highlightColor:
-                            context.color.mainBlue.withValues(alpha: 0.1)),
+                      highlightColor: context.color.mainBlue.withValues(
+                        alpha: 0.1,
+                      ),
+                    ),
                     child: ListTile(
                       onTap: () {
                         context.read<ProfessionBloc>().add(
-                            ChooseProfessionEvent(widget._professions[index]));
+                          ChooseProfessionEvent(widget._professions[index]),
+                        );
                         Navigator.pop(context);
                       },
                       title: Text(
                         widget._professions[index].name!,
-                        style: Styles.expTitle
-                            .copyWith(color: context.color.black),
+                        style: Styles.expTitle.copyWith(
+                          color: context.color.black,
+                        ),
                       ),
                     ),
                   ),
@@ -86,46 +92,49 @@ class _ExpansionListState extends State<ProfessionCategory>
   }
 
   MyExpTile _buildProfessionsList(
-      GlobalKey<State<StatefulWidget>> expansionTileKey,
-      Profession profession) {
+    GlobalKey<State<StatefulWidget>> expansionTileKey,
+    Profession profession,
+  ) {
     return MyExpTile(
-        key: expansionTileKey,
-        initiallyExpanded: false,
-        onExpansionChanged: (value) {
-          _scrollToSelectedContent(expansionTileKey: expansionTileKey);
-          if (value) {
-            context
-                .read<SubProfessionsBloc>()
-                .add(GetSubProfessionsEvent(parent: profession.id!));
-          }
-        },
-        collapsedIconColor: context.color.black,
-        iconColor: context.color.black,
-        title: Text(
-          profession.name!,
-          style: Styles.expTitle.copyWith(color: context.color.black),
+      key: expansionTileKey,
+      initiallyExpanded: false,
+      onExpansionChanged: (value) {
+        _scrollToSelectedContent(expansionTileKey: expansionTileKey);
+        if (value) {
+          context.read<SubProfessionsBloc>().add(
+            GetSubProfessionsEvent(parent: profession.id!),
+          );
+        }
+      },
+      collapsedIconColor: context.color.black,
+      iconColor: context.color.black,
+      title: Text(
+        profession.name!,
+        style: Styles.expTitle.copyWith(color: context.color.black),
+      ),
+      children: [
+        SizedBox(
+          height: 500.h,
+          child: BlocBuilder<SubProfessionsBloc, SubProfessionsState>(
+            builder: (context, state) {
+              if (state.subProfessions.isEmpty) {
+                return const Center(child: LoadingPlatform());
+              }
+              return ProfessionSubCategory(
+                scrollController: ScrollController(),
+                professions: state.subProfessions,
+                isEmpty: state.isEnd,
+                onScrollEndBloc: () {
+                  context.read<SubProfessionsBloc>().add(
+                    GetSubProfessionsEvent(parent: profession.id!),
+                  );
+                },
+              );
+            },
+          ),
         ),
-        children: [
-          SizedBox(
-            height: 500.h,
-            child: BlocBuilder<SubProfessionsBloc, SubProfessionsState>(
-              builder: (context, state) {
-                if (state.subProfessions.isEmpty) {
-                  return const Center(child: LoadingPlatform());
-                }
-                return ProfessionSubCategory(
-                    scrollController: ScrollController(),
-                    professions: state.subProfessions,
-                    isEmpty: state.isEnd,
-                    onScrollEndBloc: () {
-                      context
-                          .read<SubProfessionsBloc>()
-                          .add(GetSubProfessionsEvent(parent: profession.id!));
-                    });
-              },
-            ),
-          )
-        ]);
+      ],
+    );
   }
 
   void _scrollToSelectedContent({required GlobalKey expansionTileKey}) {

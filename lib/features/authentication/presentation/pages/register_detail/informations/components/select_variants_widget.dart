@@ -9,7 +9,12 @@ class SelectVariantsWidget extends StatelessWidget {
   final String hint;
   final String topHint;
   final VoidCallback onPressed;
-  const SelectVariantsWidget({super.key, required this.hint, required this.topHint, required this.onPressed});
+  const SelectVariantsWidget({
+    super.key,
+    required this.hint,
+    required this.topHint,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +34,13 @@ class SelectVariantsWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.r), border: Border.all(color: context.color.border, width: 1)),
+              borderRadius: BorderRadius.circular(10.r),
+              border: Border.all(color: context.color.border, width: 1),
+            ),
             child: ListTile(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.r),
+              ),
               visualDensity: VisualDensity(vertical: -2.5.h),
               title: Text(
                 hint,
@@ -39,14 +48,17 @@ class SelectVariantsWidget extends StatelessWidget {
               ),
               trailing: SvgPicture.asset(
                 AppIcons.arrowDown,
-                colorFilter:  ColorFilter.mode(context.color.grey, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(
+                  context.color.grey,
+                  BlendMode.srcIn,
+                ),
                 height: 24.h,
                 width: 24.h,
               ),
               onTap: onPressed,
             ),
           ),
-        )
+        ),
       ],
     );
   }

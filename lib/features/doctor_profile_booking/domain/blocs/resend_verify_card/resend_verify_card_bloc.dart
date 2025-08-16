@@ -9,7 +9,7 @@ part 'resend_verify_card_state.dart';
 class ResendVerifyCardBloc
     extends Bloc<ResendVerifyCardEvent, ResendVerifyCardState> {
   ResendVerifyCardBloc(this._profileRepository, this._ticker)
-      : super(const ResendVerifyCardInitial('')) {
+    : super(const ResendVerifyCardInitial('')) {
     on<ResendVerifyCard>(_onResendVerifyCard);
     on<StartTicker>(_startTicker);
   }
@@ -18,14 +18,20 @@ class ResendVerifyCardBloc
   final Ticker _ticker;
 
   Future<void> _startTicker(
-      StartTicker event, Emitter<ResendVerifyCardState> emit) {
+    StartTicker event,
+    Emitter<ResendVerifyCardState> emit,
+  ) {
     return emit.forEach(
       _ticker.tick(ticks: event.duration),
       onData: (duration) {
-        final String minutesStr =
-            ((duration / 60) % 60).floor().toString().padLeft(2, '0');
-        final String secondsStr =
-            (duration % 60).floor().toString().padLeft(2, '0');
+        final String minutesStr = ((duration / 60) % 60)
+            .floor()
+            .toString()
+            .padLeft(2, '0');
+        final String secondsStr = (duration % 60).floor().toString().padLeft(
+          2,
+          '0',
+        );
 
         return ResendVerifyCardSuccess('$minutesStr:$secondsStr');
       },
@@ -33,7 +39,9 @@ class ResendVerifyCardBloc
   }
 
   Future<void> _onResendVerifyCard(
-      ResendVerifyCard event, Emitter<ResendVerifyCardState> emit) async {
+    ResendVerifyCard event,
+    Emitter<ResendVerifyCardState> emit,
+  ) async {
     emit(ResendVerifyCardLoading(state.duration));
 
     final result = await _profileRepository.resendverifyCode(cardId: event.id);

@@ -9,10 +9,7 @@ import 'package:mpd_client/src/widgets/default_avatar.dart';
 import 'package:mpd_client/src/widgets/filled_gradient_button.dart';
 
 class DoctorCardIteam extends StatelessWidget {
-  const DoctorCardIteam({
-    super.key,
-    required this.specialists,
-  });
+  const DoctorCardIteam({super.key, required this.specialists});
 
   final MapSpecialist specialists;
 
@@ -29,7 +26,7 @@ class DoctorCardIteam extends StatelessWidget {
             offset: Offset(0, 0),
             blurRadius: 20,
             color: Color.fromRGBO(0, 0, 0, 0.08),
-          )
+          ),
         ],
       ),
       child: Column(
@@ -41,7 +38,8 @@ class DoctorCardIteam extends StatelessWidget {
                   debugPrint("==========>>>> ${specialists.avatar}");
                   return specialists.avatar != null
                       ? CachedImageWidget(
-                          url: specialists.avatar ??
+                          url:
+                              specialists.avatar ??
                               "https://dwed.fra1.digitaloceanspaces.com/SMMS/media/PostMedia/image/a651706c-f6a0-45fe-9d40-46e9fb37271b.jpeg",
                           size: 56,
                         )
@@ -60,8 +58,9 @@ class DoctorCardIteam extends StatelessWidget {
                   Text(
                     specialists.job?.name ?? "--",
                     style: Styles.postTitle.copyWith(
-                        fontFamily: Styles.gilroyMedium,
-                        color: context.color.mainBlue),
+                      fontFamily: Styles.gilroyMedium,
+                      color: context.color.mainBlue,
+                    ),
                   ),
                   ScreenUtil().setVerticalSpacing(8.h),
                   Row(
@@ -75,13 +74,14 @@ class DoctorCardIteam extends StatelessWidget {
                       Text(
                         specialists.locationDesc ?? "--",
                         style: Styles.postSubtitle.copyWith(
-                            fontFamily: Styles.gilroyMedium,
-                            color: context.color.grey),
-                      )
+                          fontFamily: Styles.gilroyMedium,
+                          color: context.color.grey,
+                        ),
+                      ),
                     ],
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           ),
           ScreenUtil().setVerticalSpacing(12.h),
@@ -98,9 +98,10 @@ class DoctorCardIteam extends StatelessWidget {
                   ),
                   Text(
                     '${specialists.minPrice != null ? Utils.priceFormat(specialists.minPrice!) : 'Free'} ${specialists.currencyCode != null ? specialists.currencyCode!.toUpperCase() : ''}',
-                    style: Styles.semiboldTitle
-                        .copyWith(color: context.color.black),
-                  )
+                    style: Styles.semiboldTitle.copyWith(
+                      color: context.color.black,
+                    ),
+                  ),
                 ],
               ),
               const Spacer(),
@@ -125,7 +126,7 @@ class DoctorCardIteam extends StatelessWidget {
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );

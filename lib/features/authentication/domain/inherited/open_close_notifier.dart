@@ -9,11 +9,14 @@ class OpenCloseExpansionInheritedNotifier
   }) : super(notifier: openCloseNotifier);
 
   static OpenCloseExpansionInheritedNotifier of(BuildContext context) {
-    final OpenCloseExpansionInheritedNotifier? result =
-        context.dependOnInheritedWidgetOfExactType<
-            OpenCloseExpansionInheritedNotifier>();
-    assert(result != null,
-        'No OpenCloseExpansionInheritedNotifier found in context');
+    final OpenCloseExpansionInheritedNotifier? result = context
+        .dependOnInheritedWidgetOfExactType<
+          OpenCloseExpansionInheritedNotifier
+        >();
+    assert(
+      result != null,
+      'No OpenCloseExpansionInheritedNotifier found in context',
+    );
     return result!;
   }
 }

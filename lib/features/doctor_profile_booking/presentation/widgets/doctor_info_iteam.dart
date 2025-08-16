@@ -58,7 +58,7 @@ class DoctorInfoItem extends StatelessWidget {
                 label: context.l10n.book_doctor_patients_reviews,
                 iconName: AppIcons.message,
                 count: rundomReview,
-              )
+              ),
             ],
           ),
         ),
@@ -69,14 +69,14 @@ class DoctorInfoItem extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Text(
             doctor.bio != null ? doctor.bio.toString() : context.l10n.noData,
-            style: Styles.descSubtitle
-                .copyWith(fontSize: 14.sp, color: context.color.grey),
+            style: Styles.descSubtitle.copyWith(
+              fontSize: 14.sp,
+              color: context.color.grey,
+            ),
           ),
         ),
         ScreenUtil().setVerticalSpacing(20.h),
-        BuildLabel(
-          label: context.l10n.book_doctor_place_work_hours,
-        ),
+        BuildLabel(label: context.l10n.book_doctor_place_work_hours),
         ScreenUtil().setVerticalSpacing(5.h),
         DrProfileListile(
           title: doctor.job.name,
@@ -92,8 +92,10 @@ class DoctorInfoItem extends StatelessWidget {
             doctor.job.description.isNotEmpty
                 ? doctor.job.description
                 : context.l10n.noData,
-            style: Styles.descSubtitle
-                .copyWith(fontSize: 14.sp, color: context.color.grey),
+            style: Styles.descSubtitle.copyWith(
+              fontSize: 14.sp,
+              color: context.color.grey,
+            ),
           ),
         ),
 
@@ -169,7 +171,7 @@ class DoctorInfoItem extends StatelessWidget {
             borderColor: context.color.mainBlue,
           ),
         ),
-        ScreenUtil().setVerticalSpacing(20.h)
+        ScreenUtil().setVerticalSpacing(20.h),
       ],
     );
   }

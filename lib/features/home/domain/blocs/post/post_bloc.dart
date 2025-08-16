@@ -23,13 +23,15 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         username: event.username,
       );
       if (result.isRight) {
-        emit(state.copyWith(
-          statusUser: PostStatus.success,
-          postsUser: event.isMore
-              ? [...state.postsUser, ...result.right.results ?? []]
-              : result.right.results,
-          count: result.right.count,
-        ));
+        emit(
+          state.copyWith(
+            statusUser: PostStatus.success,
+            postsUser: event.isMore
+                ? [...state.postsUser, ...result.right.results ?? []]
+                : result.right.results,
+            count: result.right.count,
+          ),
+        );
       } else {
         emit(state.copyWith(statusUser: PostStatus.failure));
       }
@@ -40,7 +42,9 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   final int _limit = 5;
 
   void _onLikeUnlikePressed(
-      MediaLikePressedUser event, Emitter<PostState> emit) {
+    MediaLikePressedUser event,
+    Emitter<PostState> emit,
+  ) {
     final post = state.postsUser[event.index];
     post.isLiked = !post.isLiked!;
     if (post.isLiked!) {
@@ -53,7 +57,9 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   }
 
   Future<void> _onDeletePostEvent(
-      DeletePostEvent event, Emitter<PostState> emit) async {
+    DeletePostEvent event,
+    Emitter<PostState> emit,
+  ) async {
     emit(state.copyWith(deleteStatus: PostStatus.inProgress));
     final result = await _homeRepository.deletePost(postId: event.id);
     if (result.isRight) {
@@ -62,11 +68,13 @@ class PostBloc extends Bloc<PostEvent, PostState> {
 
       userPost.removeAt(event.index);
       count = count - 1;
-      emit(state.copyWith(
-        postsUser: userPost,
-        count: count,
-        deleteStatus: PostStatus.success,
-      ));
+      emit(
+        state.copyWith(
+          postsUser: userPost,
+          count: count,
+          deleteStatus: PostStatus.success,
+        ),
+      );
       event.onSucces();
     } else {
       emit(state.copyWith(deleteStatus: PostStatus.failure));
@@ -74,16 +82,20 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   }
 
   Future<void> _onPostFetched(
-      PostFetched event, Emitter<PostState> emit) async {
+    PostFetched event,
+    Emitter<PostState> emit,
+  ) async {
     if (state.status == PostStatus.initial) {
       Log.e("Nima gap");
       final result = await _homeRepository.getBanners(limit: _limit);
       if (result.isRight) {
-        emit(state.copyWith(
-          status: PostStatus.success,
-          posts: result.right.results,
-          hasReachedMax: false,
-        ));
+        emit(
+          state.copyWith(
+            status: PostStatus.success,
+            posts: result.right.results,
+            hasReachedMax: false,
+          ),
+        );
       } else {
         emit(state.copyWith(status: PostStatus.failure));
       }
@@ -91,18 +103,22 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     if (event.isRefresh) emit(state.copyWith(status: PostStatus.initial));
     Log.e("Nima Tuzuk");
     final result = await _homeRepository.getBanners(
-        limit: _limit, offset: event.isRefresh ? 0 : state.posts.length);
+      limit: _limit,
+      offset: event.isRefresh ? 0 : state.posts.length,
+    );
     if (result.isRight) {
       Log.e("Nima Tuzukn 2");
-      emit(result.right.results!.isEmpty
-          ? state.copyWith(hasReachedMax: true)
-          : state.copyWith(
-              status: PostStatus.success,
-              posts: event.isRefresh
-                  ? [...result.right.results!]
-                  : [...state.posts, ...result.right.results!],
-              hasReachedMax: false,
-            ));
+      emit(
+        result.right.results!.isEmpty
+            ? state.copyWith(hasReachedMax: true)
+            : state.copyWith(
+                status: PostStatus.success,
+                posts: event.isRefresh
+                    ? [...result.right.results!]
+                    : [...state.posts, ...result.right.results!],
+                hasReachedMax: false,
+              ),
+      );
     } else {
       emit(state.copyWith(status: PostStatus.failure));
     }

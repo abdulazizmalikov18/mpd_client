@@ -42,10 +42,12 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<Either<Failure, UserInfoUpdateModel>> updateUserInfo(
-      UserInfoUpdateModel userInfoUpdateModel) async {
+    UserInfoUpdateModel userInfoUpdateModel,
+  ) async {
     try {
       final response = await remoteDataSource.updateUserInfo(
-          userInfoUpdateModel: userInfoUpdateModel);
+        userInfoUpdateModel: userInfoUpdateModel,
+      );
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -58,10 +60,12 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<Either<Failure, UserImageUpdate>> updateUserImage(
-      UserImageUpdate userImageUpdate) async {
+    UserImageUpdate userImageUpdate,
+  ) async {
     try {
       final response = await remoteDataSource.updateUserImage(
-          userImageUpdate: userImageUpdate);
+        userImageUpdate: userImageUpdate,
+      );
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -74,10 +78,12 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<Either<Failure, UserImageUpdate>> updateUserBackImage(
-      UserImageUpdate userImageUpdate) async {
+    UserImageUpdate userImageUpdate,
+  ) async {
     try {
       final response = await remoteDataSource.updateUserBackImage(
-          userImageUpdate: userImageUpdate);
+        userImageUpdate: userImageUpdate,
+      );
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -89,11 +95,17 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<Either<Failure, UserSubscriptionsModel>> getUserSubscriptions(
-      {int? limit, int? offset, String? query}) async {
+  Future<Either<Failure, UserSubscriptionsModel>> getUserSubscriptions({
+    int? limit,
+    int? offset,
+    String? query,
+  }) async {
     try {
       final response = await remoteDataSource.getUserSubscriptions(
-          limit: limit, offset: offset, query: query);
+        limit: limit,
+        offset: offset,
+        query: query,
+      );
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -121,11 +133,17 @@ class UserRepository implements IUserRepository {
   // }
 
   @override
-  Future<Either<Failure, UserRecordModel>> getUserRecords(
-      {int? limit, int? offset, String? query}) async {
+  Future<Either<Failure, UserRecordModel>> getUserRecords({
+    int? limit,
+    int? offset,
+    String? query,
+  }) async {
     try {
       final response = await remoteDataSource.getUserRecords(
-          limit: limit, offset: offset, query: query);
+        limit: limit,
+        offset: offset,
+        query: query,
+      );
       return Right(response);
     } on DioException {
       return Left(const DioFailure());
@@ -138,7 +156,7 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<Either<Failure, GenericPagination<SpecialistCatModel>>>
-      getSpecialistCat() async {
+  getSpecialistCat() async {
     try {
       final response = await remoteDataSource.getSpecialistCat();
       return Right(response);
@@ -153,7 +171,7 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<Either<Failure, GenericPagination<SpecialistPositionModel>>>
-      getSpecialistPosition() async {
+  getSpecialistPosition() async {
     try {
       final response = await remoteDataSource.getSpecialistPosition();
       return Right(response);
@@ -168,7 +186,7 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<Either<Failure, GenericPagination<SpecialistCategoryModel>>>
-      getSpecialistCategory() async {
+  getSpecialistCategory() async {
     try {
       final response = await remoteDataSource.getSpecialistCategory();
       return Right(response);

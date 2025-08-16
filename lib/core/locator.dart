@@ -33,7 +33,8 @@ void setupLocator() {
   locator.registerLazySingleton<Connectivity>(() => Connectivity());
 
   locator.registerLazySingleton<AuthRemoteDataSource>(
-      () => AuthRemoteDataSource());
+    () => AuthRemoteDataSource(),
+  );
   locator.registerLazySingleton<ConnectionInfo>(
     () => ConnectionInfo(
       connectivity: locator<Connectivity>(),
@@ -93,7 +94,8 @@ void _chatRegister() {
   locator.registerSingleton<ChatService>(ChatService.create());
   //Repo
   locator.registerSingleton<ChatRepository>(
-      ChatRepositoryImpl(remote: locator<ChatService>()));
+    ChatRepositoryImpl(remote: locator<ChatService>()),
+  );
   // Bloc
   locator.registerFactory(() => ChatBloc(locator<ChatRepository>()));
   locator.registerFactory(() => ChatGroupBloc(locator<ChatRepository>()));
