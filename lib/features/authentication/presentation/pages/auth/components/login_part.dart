@@ -7,7 +7,6 @@ import 'package:mpd_client/app/app_export.dart';
 
 import 'package:mpd_client/core/validator/validators.dart';
 import 'package:mpd_client/features/authentication/presentation/widgets/have_account_text_widget.dart';
-import 'package:mpd_client/features/chat/presentation/widgets/message_widgets/w_tabbar.dart';
 import 'package:mpd_client/src/decorations/input_border.dart';
 import 'package:mpd_client/src/tools/formatters.dart';
 import 'package:mpd_client/src/widgets/input_widget.dart';
@@ -31,112 +30,65 @@ class LoginPart extends StatelessWidget {
               style: Styles.boldTitle,
             ),
             ScreenUtil().setVerticalSpacing(16.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: WTabBar(tabs: [Text('Telefon'), Text('Username')]),
-            ),
-            ScreenUtil().setVerticalSpacing(16.h),
+            // Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 16.w),
+            //   child: WTabBar(tabs: [Text('Telefon'), Text('Username')]),
+            // ),
+            // ScreenUtil().setVerticalSpacing(16.h),
             Form(
               key: context.read<AuthBloc>().formKey,
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 48.h,
-                    child: TabBarView(
-                      children: [
-                        BlocBuilder<AuthBloc, AuthState>(
-                          builder: (context, state) {
-                            return Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.r),
-                                color: context.color.white,
-                              ),
-                              margin: EdgeInsets.symmetric(horizontal: 16.w),
-                              child: TextFormField(
-                                style: Styles.descSubtitle,
-                                validator: (value) =>
-                                    Validators.usernameOrPhone(value, context),
-                                textInputAction: TextInputAction.next,
-                                controller: context
-                                    .read<AuthBloc>()
-                                    .phoneController,
-                                onChanged: (value) => context
-                                    .read<AuthBloc>()
-                                    .add(ChangePhoneorUsername(value)),
-                                keyboardType: TextInputType.phone,
-                                inputFormatters: [Formatters.phoneFormatter],
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(
-                                    left: 16.w,
-                                    top: 16.h,
-                                  ),
-                                  enabledBorder: Decorations.enabledBorder(
-                                    context,
-                                  ),
-                                  focusedBorder: Decorations.focusedBorder(
-                                    context,
-                                  ),
-                                  border: Decorations.enabledBorder(context),
-                                  errorText:
-                                      state.error !=
-                                          '[User with this credentials not found]'
-                                      ? null
-                                      : context.l10n.login_error,
-                                  hintText: "+998 (00) 000-00-00",
-                                  hintStyle: Styles.descSubtitle.copyWith(
-                                    color: context.color.grey,
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                        BlocBuilder<AuthBloc, AuthState>(
-                          builder: (context, state) {
-                            return Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.r),
-                                color: context.color.white,
-                              ),
-                              margin: EdgeInsets.symmetric(horizontal: 16.w),
-                              child: TextFormField(
-                                style: Styles.descSubtitle,
-                                validator: (value) =>
-                                    Validators.usernameOrPhone(value, context),
-                                textInputAction: TextInputAction.next,
-                                controller: context.read<AuthBloc>().username,
-                                onChanged: (value) => context
-                                    .read<AuthBloc>()
-                                    .add(ChangePhoneorUsername(value)),
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(
-                                    left: 16.w,
-                                    top: 16.h,
-                                  ),
-                                  enabledBorder: Decorations.enabledBorder(
-                                    context,
-                                  ),
-                                  focusedBorder: Decorations.focusedBorder(
-                                    context,
-                                  ),
-                                  border: Decorations.enabledBorder(context),
-                                  errorText:
-                                      state.error !=
-                                          '[User with this credentials not found]'
-                                      ? null
-                                      : context.l10n.login_error,
-                                  hintText: "Username",
-                                  hintStyle: Styles.descSubtitle.copyWith(
-                                    color: context.color.grey,
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
+                  // SizedBox(
+                  //   height: 48.h,
+                  //   child: TabBarView(
+                  //     children: [
+                  //         BlocBuilder<AuthBloc, AuthState>(
+                  //         builder: (context, state) {
+                  //           return Container(
+                  //             decoration: BoxDecoration(
+                  //               borderRadius: BorderRadius.circular(10.r),
+                  //               color: context.color.white,
+                  //             ),
+                  //             margin: EdgeInsets.symmetric(horizontal: 16.w),
+                  //             child: TextFormField(
+                  //               style: Styles.descSubtitle,
+                  //               validator: (value) =>
+                  //                   Validators.usernameOrPhone(value, context),
+                  //               textInputAction: TextInputAction.next,
+                  //               controller: context.read<AuthBloc>().username,
+                  //               onChanged: (value) => context
+                  //                   .read<AuthBloc>()
+                  //                   .add(ChangePhoneorUsername(value)),
+                  //               decoration: InputDecoration(
+                  //                 contentPadding: EdgeInsets.only(
+                  //                   left: 16.w,
+                  //                   top: 16.h,
+                  //                 ),
+                  //                 enabledBorder: Decorations.enabledBorder(
+                  //                   context,
+                  //                 ),
+                  //                 focusedBorder: Decorations.focusedBorder(
+                  //                   context,
+                  //                 ),
+                  //                 border: Decorations.enabledBorder(context),
+                  //                 errorText:
+                  //                     state.error !=
+                  //                         '[User with this credentials not found]'
+                  //                     ? null
+                  //                     : context.l10n.login_error,
+                  //                 hintText: "Username",
+                  //                 hintStyle: Styles.descSubtitle.copyWith(
+                  //                   color: context.color.grey,
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           );
+                  //         },
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   // BlocSelector<AuthBloc, AuthState, String>(
                   //   selector: (state) => state.error,
                   //   builder: (context, error) {
@@ -152,6 +104,48 @@ class LoginPart extends StatelessWidget {
                   //     );
                   //   },
                   // ),
+                  BlocBuilder<AuthBloc, AuthState>(
+                    builder: (context, state) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.r),
+                          color: context.color.white,
+                        ),
+                        margin: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: TextFormField(
+                          style: Styles.descSubtitle,
+                          validator: (value) =>
+                              Validators.usernameOrPhone(value, context),
+                          textInputAction: TextInputAction.next,
+                          controller: context.read<AuthBloc>().phoneController,
+                          onChanged: (value) => context.read<AuthBloc>().add(
+                            ChangePhoneorUsername(value),
+                          ),
+                          keyboardType: TextInputType.phone,
+                          inputFormatters: [Formatters.phoneFormatter],
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(
+                              left: 16.w,
+                              top: 16.h,
+                            ),
+                            enabledBorder: Decorations.enabledBorder(context),
+                            focusedBorder: Decorations.focusedBorder(context),
+                            border: Decorations.enabledBorder(context),
+                            errorText:
+                                state.error !=
+                                    '[User with this credentials not found]'
+                                ? null
+                                : context.l10n.login_error,
+                            hintText: "+998 (00) 000-00-00",
+                            hintStyle: Styles.descSubtitle.copyWith(
+                              color: context.color.grey,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+
                   ScreenUtil().setVerticalSpacing(16.h),
                   BlocBuilder<AuthBloc, AuthState>(
                     builder: (context, state) {
