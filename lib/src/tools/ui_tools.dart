@@ -1,4 +1,4 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+// import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:map_launcher/map_launcher.dart';
@@ -56,13 +56,14 @@ abstract class UiTools {
     elevation: 20,
     behavior: SnackBarBehavior.floating,
     backgroundColor: Colors.transparent,
-    content: AwesomeSnackbarContent(
-      title: title,
-      message: message,
+    content: Text(title),
+    // content: AwesomeSnackbarContent(
+    //   title: title,
+    //   message: message,
 
-      /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-      contentType: ContentType.failure,
-    ),
+    //   /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+    //   contentType: ContentType.failure,
+    // ),
   );
 
   static SnackBar failSnackbar({
