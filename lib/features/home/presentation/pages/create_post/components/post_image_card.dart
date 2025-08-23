@@ -26,11 +26,19 @@ class _PostImageAndVideoViewState extends State<PostImageAndVideoView> {
   void initState() {
     super.initState();
     if (widget.filemodel.fileType == 'video') {
-      _videoPlayerController = VideoPlayerController.file(
-        widget.filemodel.file,
-      );
-      _videoPlayerController.initialize().then((value) => setState(() {}));
+      _videoPlayerController = VideoPlayerController.file(widget.filemodel.file)
+        ..initialize().then((_) {
+          setState(() {});
+        });
     }
+  }
+
+  @override
+  void dispose() {
+    if (widget.filemodel.fileType == 'video') {
+      _videoPlayerController.dispose();
+    }
+    super.dispose();
   }
 
   @override

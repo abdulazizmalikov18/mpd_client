@@ -5,4 +5,14 @@ class Caller {
     final Uri launchUri = Uri(scheme: 'tel', path: phoneNumber);
     await launchUrl(launchUri);
   }
+
+  static Future<void> openPlayStore() async {
+    final url = Uri.parse(
+      "https://play.google.com/store/apps/details?id=uz.mpd.work",
+    );
+
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      throw Exception('Play Market ochilmadi: $url');
+    }
+  }
 }

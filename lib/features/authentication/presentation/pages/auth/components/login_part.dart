@@ -29,7 +29,7 @@ class LoginPart extends StatelessWidget {
               textAlign: TextAlign.center,
               style: Styles.boldTitle,
             ),
-            ScreenUtil().setVerticalSpacing(16.h),
+            ScreenUtil().setVerticalSpacing(32.h),
             // Padding(
             //   padding: EdgeInsets.symmetric(horizontal: 16.w),
             //   child: WTabBar(tabs: [Text('Telefon'), Text('Username')]),

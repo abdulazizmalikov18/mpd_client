@@ -11,9 +11,11 @@ import 'package:mpd_client/core/utils/utils.dart';
 import 'package:mpd_client/features/home/data/models/file_model.dart';
 import 'package:mpd_client/features/home/data/models/upload_post_model.dart';
 import 'package:mpd_client/features/home/data/repositories/home_repository.dart';
+import 'package:mpd_client/features/home/domain/musur.dart';
 import 'package:path/path.dart';
 import 'package:video_compress/video_compress.dart';
 import 'package:http_parser/http_parser.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 part 'create_post_event.dart';
 part 'create_post_state.dart';
@@ -38,19 +40,41 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostState> {
     Emitter<CreatePostState> emit,
   ) async {
     try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.media,
-        allowMultiple: true,
-      );
-      if (result == null) return;
+      if (Platform.isIOS) {
+        // iOS uchun eski FilePicket ishlatamiz
+        FilePickerResult? result = await FilePicker.platform.pickFiles(
+          type: FileType.media,
+          allowMultiple: true,
+        );
+        if (result == null) return;
 
-      for (var path in result.paths) {
-        _fileImagesAndVideos.add(
-          FileModel(
-            file: File(path!),
-            fileType: lookupMimeType(path)!.split('/').first,
+        for (var path in result.paths) {
+          _fileImagesAndVideos.add(
+            FileModel(
+              file: File(path!),
+              fileType: lookupMimeType(path)!.split('/').first,
+            ),
+          );
+        }
+      } else {
+        final List<AssetEntity>? result = await AssetPicker.pickAssets(
+          event.context,
+          pickerConfig: const AssetPickerConfig(
+            maxAssets: 9,
+            requestType: RequestType.common,
+            textDelegate: UzbekAssetPickerTextDelegate(),
           ),
         );
+
+        if (result == null) return;
+
+        for (var asset in result) {
+          final File? file = await asset.file;
+          if (file != null) {
+            String fileType = asset.type == AssetType.image ? 'image' : 'video';
+            _fileImagesAndVideos.add(FileModel(file: file, fileType: fileType));
+          }
+        }
       }
 
       emit(CreatePostInitial(_fileImagesAndVideos));

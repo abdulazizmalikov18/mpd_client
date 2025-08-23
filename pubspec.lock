@@ -345,6 +345,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.7"
+  extended_image:
+    dependency: transitive
+    description:
+      name: extended_image
+      sha256: f6cbb1d798f51262ed1a3d93b4f1f2aa0d76128df39af18ecb77fa740f88b2e0
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.0.1"
+  extended_image_library:
+    dependency: transitive
+    description:
+      name: extended_image_library
+      sha256: "1f9a24d3a00c2633891c6a7b5cab2807999eb2d5b597e5133b63f49d113811fe"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.1"
   fake_async:
     dependency: transitive
     description:
@@ -373,10 +389,10 @@ packages:
     dependency: "direct main"
     description:
       name: file_picker
-      sha256: ef7d2a085c1b1d69d17b6842d0734aad90156de08df6bd3c12496d0bd6ddf8e2
+      sha256: e7e16c9d15c36330b94ca0e2ad8cb61f93cd5282d0158c09805aed13b5452f22
       url: "https://pub.dev"
     source: hosted
-    version: "10.3.1"
+    version: "10.3.2"
   file_selector_linux:
     dependency: transitive
     description:
@@ -789,6 +805,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.0"
+  http_client_helper:
+    dependency: transitive
+    description:
+      name: http_client_helper
+      sha256: "8a9127650734da86b5c73760de2b404494c968a3fd55602045ffec789dac3cb1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   http_multi_server:
     dependency: transitive
     description:
@@ -893,6 +917,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  js:
+    dependency: transitive
+    description:
+      name: js
+      sha256: "53385261521cc4a0c4658fd0ad07a7d14591cf8fc33abbceae306ddb974888dc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.2"
   json_annotation:
     dependency: "direct main"
     description:
@@ -1001,10 +1033,10 @@ packages:
     dependency: "direct main"
     description:
       name: map_launcher
-      sha256: cf4a87f4d14e5843d2ad5068f596282fb937acc0116ad9bb0eab495d8029746d
+      sha256: "75e2742879228eb3147edb6604cc0dc105da1357eb6b4c1b938c52bc474f6088"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.0"
+    version: "4.4.0"
   mask_text_input_formatter:
     dependency: "direct main"
     description:
@@ -1277,6 +1309,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.0"
+  photo_manager:
+    dependency: "direct main"
+    description:
+      name: photo_manager
+      sha256: a0d9a7a9bc35eda02d33766412bde6d883a8b0acb86bbe37dac5f691a0894e8a
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.7.1"
+  photo_manager_image_provider:
+    dependency: transitive
+    description:
+      name: photo_manager_image_provider
+      sha256: b6015b67b32f345f57cf32c126f871bced2501236c405aafaefa885f7c821e4f
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   pinch_to_zoom_scrollable:
     dependency: "direct main"
     description:
@@ -1337,10 +1385,10 @@ packages:
     dependency: "direct main"
     description:
       name: provider
-      sha256: "4abbd070a04e9ddc287673bf5a030c7ca8b685ff70218720abab8b092f53dd84"
+      sha256: "4e82183fa20e5ca25703ead7e05de9e4cceed1fbd1eadc1ac3cb6f565a09f272"
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.5"
+    version: "6.1.5+1"
   pub_semver:
     dependency: transitive
     description:
@@ -1550,10 +1598,10 @@ packages:
     dependency: transitive
     description:
       name: sqflite_android
-      sha256: "2b3070c5fa881839f8b402ee4a39c1b4d561704d4ebbbcfb808a119bc2a1701b"
+      sha256: ecd684501ebc2ae9a83536e8b15731642b9570dc8623e0073d227d0ee2bfea88
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.1"
+    version: "2.4.2+2"
   sqflite_common:
     dependency: transitive
     description:
@@ -1614,74 +1662,74 @@ packages:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
-      sha256: ce02ce65f51db8e29edc9d2225872d927e001bd2b13c2490d176563bbb046fc7
+      sha256: "6b8b8cb5b4647e6a5858d47fceda9b7e5a9a2be57cff28120acb65edbd92a48c"
       url: "https://pub.dev"
     source: hosted
-    version: "30.2.5"
+    version: "30.2.6"
   syncfusion_flutter_pdf:
     dependency: transitive
     description:
       name: syncfusion_flutter_pdf
-      sha256: "7954811deb057e15287bd59e3d906fbe75017bfd8a5543cc2b203e9aa0af4870"
+      sha256: f1701c52ea5dd48654d8f4bd55ef72b3207bc17d179a0a3e1d05b8f33b0cd311
       url: "https://pub.dev"
     source: hosted
-    version: "30.2.5"
+    version: "30.2.6"
   syncfusion_flutter_pdfviewer:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_pdfviewer
-      sha256: f63d5da196816ec7ce6459adace6254e6a8a3cd23cc3807b7c8751a8b0cacf7c
+      sha256: "2af67421b2bcdf564d4034ef295f1a365dca8a8d29442bd9c54978a9b2a56edb"
       url: "https://pub.dev"
     source: hosted
-    version: "30.2.5"
+    version: "30.2.6"
   syncfusion_flutter_signaturepad:
     dependency: transitive
     description:
       name: syncfusion_flutter_signaturepad
-      sha256: "34db1589b021e554465178771a3ee4859a1378078da75d6ade6f252d88059b52"
+      sha256: d1a43d7714511445a1c9c92312430c20fd3554e4f414a43b321b57b8bf680aed
       url: "https://pub.dev"
     source: hosted
-    version: "30.2.5"
+    version: "30.2.6"
   syncfusion_pdfviewer_linux:
     dependency: transitive
     description:
       name: syncfusion_pdfviewer_linux
-      sha256: a50958bc9265570f04bc20b56b32783966a969caf505b047cd2fa45e8cf337d9
+      sha256: cd0464b3efe80d439f7e503aa9abc0574428d3dfb83e553917b54cbd086b8201
       url: "https://pub.dev"
     source: hosted
-    version: "30.2.5"
+    version: "30.2.6"
   syncfusion_pdfviewer_macos:
     dependency: transitive
     description:
       name: syncfusion_pdfviewer_macos
-      sha256: "63b3f046004668ad612d2d2bdb6b7e962a3ecf520108e027ea8788ecec3b122c"
+      sha256: "6b28cb21bd60dd26fb5e73f39b463ef1d2dc35822295f070c2080ff0149416c1"
       url: "https://pub.dev"
     source: hosted
-    version: "30.2.5"
+    version: "30.2.6"
   syncfusion_pdfviewer_platform_interface:
     dependency: transitive
     description:
       name: syncfusion_pdfviewer_platform_interface
-      sha256: e19b38d38ba9888c8ab2f06797e8cc9a45b7a06d1d0c213e94fd0cd1a8e10e4b
+      sha256: e4e04dd416f8cbad37f1af95950978e100cf4e7eb430ff0b23e3dc00e6156138
       url: "https://pub.dev"
     source: hosted
-    version: "30.2.5"
+    version: "30.2.6"
   syncfusion_pdfviewer_web:
     dependency: transitive
     description:
       name: syncfusion_pdfviewer_web
-      sha256: a3d7b81f17ba5ef7e56ab3cc73dfc7ba3fc0c7068acf2dec08f783af7b745ff4
+      sha256: "565f685abafab3f623f8d9f4968c8d2df5276fa89484f7b014e898eca50d2082"
       url: "https://pub.dev"
     source: hosted
-    version: "30.2.5"
+    version: "30.2.6"
   syncfusion_pdfviewer_windows:
     dependency: transitive
     description:
       name: syncfusion_pdfviewer_windows
-      sha256: "9e84cf9ed5162e5ed33103dd4a924a5b912d711fda7deb21186692f07a46d628"
+      sha256: "0d004ae3a53e7513f82cbce4e3bffd7a29c7852ea194d35ac9b6959a32c3ba6a"
       url: "https://pub.dev"
     source: hosted
-    version: "30.2.5"
+    version: "30.2.6"
   synchronized:
     dependency: transitive
     description:
@@ -2018,6 +2066,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.23.0"
+  wechat_assets_picker:
+    dependency: "direct main"
+    description:
+      name: wechat_assets_picker
+      sha256: c307e50394c1e6dfcd5c4701e84efb549fce71444fedcf2e671c50d809b3e2a1
+      url: "https://pub.dev"
+    source: hosted
+    version: "9.8.0"
+  wechat_picker_library:
+    dependency: transitive
+    description:
+      name: wechat_picker_library
+      sha256: "5cb61b9aa935b60da5b043f8446fbb9c5077419f20ccc4856bf444aec4f44bc1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.7"
   win32:
     dependency: transitive
     description:
@@ -2067,5 +2131,5 @@ packages:
     source: hosted
     version: "4.1.0"
 sdks:
-  dart: ">=3.8.1 <4.0.0"
+  dart: ">=3.9.0 <4.0.0"
   flutter: ">=3.32.0"
