@@ -16,8 +16,6 @@ const String $baseUrlSocket = "wss://sharq-api.sharqdarmon.uz";
 void main() {
   runZonedGuarded(
     () async {
-      // EquatableConfig.stringify = kDebugMode;
-      // AndroidYandexMap.useAndroidViewSurface = false;
       WidgetsFlutterBinding.ensureInitialized();
       await StorageRepository.getInstance();
       // await FcmService.init();
