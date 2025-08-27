@@ -78,6 +78,7 @@ abstract class AppIcons {
 
   // Call icon
   static const call = 'assets/icons/call.svg';
+  static const eye = 'assets/icons/eye.svg';
 
   // Post icons
   static const coment = 'assets/icons/coment.svg';

@@ -1791,6 +1791,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Can\'t be empty'**
   String get empty;
+
+  /// No description provided for @reset_password_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Password has been reset successfully'**
+  String get reset_password_success;
 }
 
 class _AppLocalizationsDelegate

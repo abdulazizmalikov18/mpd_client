@@ -41,15 +41,6 @@ void main() {
 
       // debugRepaintRainbowEnabled = false;
       runApp(const MyApp());
-      SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          statusBarIconBrightness: Brightness.dark,
-          statusBarBrightness: Brightness.light,
-          systemNavigationBarColor: Colors.white,
-          systemNavigationBarIconBrightness: Brightness.dark,
-        ),
-      );
     },
     (error, stack) {
       Log.e(error);

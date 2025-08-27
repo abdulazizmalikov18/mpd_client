@@ -9,6 +9,10 @@ class AppTheme {
 
   static ThemeData light = theme.copyWith(
     extensions: [AppColors.light],
+    bottomAppBarTheme: BottomAppBarThemeData(
+      padding: EdgeInsets.fromLTRB(16, 12, 16, 12),
+      height: 72,
+    ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,
       elevation: 0,
@@ -22,6 +26,10 @@ class AppTheme {
   );
   static ThemeData dark = theme.copyWith(
     extensions: [AppColors.dark],
+    bottomAppBarTheme: BottomAppBarThemeData(
+      padding: EdgeInsets.fromLTRB(16, 12, 16, 12),
+      height: 72,
+    ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,
       elevation: 0,

@@ -136,9 +136,14 @@ class _PostImageOrVideoState extends State<PostImageOrVideo>
       key: ObjectKey(widget.url),
       onVisibilityChanged: (visibilityInfo) {
         if (widget.isVideo ?? false) {
-          if (visibilityInfo.visibleFraction >= 0.9 && flickManager != null) {
-            widget.flickMultiManager.play(flickManager);
+          Log.d('Video visibility: ${visibilityInfo.visibleFraction}');
+          if (visibilityInfo.visibleFraction > 0.9) {
+            if (flickManager != null) {
+              Log.d('Playing video: ${widget.url}');
+              widget.flickMultiManager.play(flickManager);
+            }
           } else {
+            Log.d('Pausing video: ${widget.url}');
             widget.flickMultiManager.pause();
           }
         }
@@ -188,7 +193,6 @@ class _PostImageOrVideoState extends State<PostImageOrVideo>
   }
 
   Widget _buildVideo() {
-    // Error holati
     if (hasError) {
       return Container(
         height: 200,

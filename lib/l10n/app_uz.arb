@@ -301,5 +301,6 @@
   "well": "Yaxshi",
   "forgotPassword": "Parolni unutdingizmi?",
   "passwordShort": "Parol juda qisqa. U kamida 6 ta belgidan iborat bo‘lishi kerak.",
-  "empty": "Bo‘sh bo‘lishi mumkin emas"
+  "empty": "Bo‘sh bo‘lishi mumkin emas",
+  "reset_password_success": "Parol muvaffaqiyatli o'zgartirildi"
 }

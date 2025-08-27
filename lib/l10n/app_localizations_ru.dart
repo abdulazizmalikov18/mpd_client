@@ -864,9 +864,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get forgotPassword => 'Забыли пароль?';
 
   @override
-  String get passwordShort =>
-      'Этот пароль слишком короткий. Он должен содержать не менее 6 символов.';
+  String get passwordShort => 'Пароль слишком короткий. Минимум 6 символов.';
 
   @override
-  String get empty => 'Не может быть пустым';
+  String get empty => 'Поле не может быть пустым';
+
+  @override
+  String get reset_password_success => 'Пароль успешно изменен';
 }

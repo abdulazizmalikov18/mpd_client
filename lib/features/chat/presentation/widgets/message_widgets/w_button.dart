@@ -73,9 +73,11 @@ class WButton extends StatelessWidget {
             ? const Center(child: CupertinoActivityIndicator(color: white))
             : AnimatedDefaultTextStyle(
                 duration: const Duration(milliseconds: 200),
-                style: Theme.of(
-                  context,
-                ).textTheme.headlineSmall!.copyWith(color: white),
+                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                  color: white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
                 child:
                     child ??
                     Text(

@@ -871,4 +871,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get empty => 'Can\'t be empty';
+
+  @override
+  String get reset_password_success => 'Password has been reset successfully';
 }

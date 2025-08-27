@@ -43,4 +43,6 @@ abstract class AppRoutes {
   static const String postComent = '/postComent';
   static const String postUser = '/postUser';
   static const String postUserInfo = '/postUserInfo';
+
+  static const String forgotVerify = '/forgotVerify';
 }

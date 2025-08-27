@@ -301,5 +301,6 @@
   "well": "Well",
   "forgotPassword": "Forgot password?",
   "passwordShort": "This password is too short. It must contain at least 6 characters.",
-  "empty": "Can't be empty"
+  "empty": "Can't be empty",
+  "reset_password_success": "Password has been reset successfully"
 }

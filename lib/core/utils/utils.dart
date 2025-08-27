@@ -12,6 +12,22 @@ class Utils {
     return formattedDate;
   }
 
+ static String maskPhone(String phone) {
+    // faqat raqamlarni qoldiramiz
+    final digits = phone.replaceAll(RegExp(r'\D'), '');
+
+    if (digits.length != 12)
+      return phone; // noto'g'ri format bo'lsa, o'zini qaytaramiz
+
+    final country = digits.substring(0, 3); // 998
+    final operator = digits.substring(3, 5); // 90
+    final middle = "***"; // yashirish
+    final next = "**"; // yashirish
+    final last = digits.substring(10); // oxirgi 2 ta raqam
+
+    return "+$country ($operator) $middle-$next-$last";
+  }
+
   static String appointMentDateFormat(String dateTime, BuildContext context) {
     final date = DateTime.parse(dateTime).toLocal();
     String? formattedDate;

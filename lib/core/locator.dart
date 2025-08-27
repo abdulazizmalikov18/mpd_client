@@ -7,6 +7,7 @@ import 'package:mpd_client/features/appointment/data/datasources/appoinment_remo
 import 'package:mpd_client/features/appointment/data/repositories/appoinment_repository.dart';
 import 'package:mpd_client/features/authentication/data/datasources/auth_remote_datasource.dart';
 import 'package:mpd_client/features/authentication/data/repositories/auth_repository.dart';
+import 'package:mpd_client/features/authentication/domain/repositories/i_auth_repository.dart';
 import 'package:mpd_client/features/authentication/domain/blocs/refresh_token/refreshtoken_bloc.dart';
 import 'package:mpd_client/features/chat/data/repo/chat_repository.dart';
 import 'package:mpd_client/features/chat/data/repo/chat_repository_impl.dart';
@@ -47,6 +48,11 @@ void setupLocator() {
       remoteDataSource: locator<AuthRemoteDataSource>(),
       // connectionInfo: locator<ConnectionInfo>(),
     ),
+  );
+  
+  // Register IAuthRepository
+  locator.registerLazySingleton<IAuthRepository>(
+    () => locator<AuthRepository>(),
   );
   locator.registerSingletonAsync<YandexDoctorRepository>(
     () async => YandexDoctorRepository(

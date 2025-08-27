@@ -12,8 +12,6 @@ import 'package:mpd_client/features/authentication/domain/blocs/district/distric
 import 'package:mpd_client/features/authentication/domain/blocs/region/region_bloc.dart';
 import 'package:mpd_client/features/authentication/domain/blocs/sub_profession/sub_professions_bloc.dart';
 import 'package:mpd_client/features/authentication/domain/inherited/auth_notifier.dart';
-import 'package:mpd_client/features/authentication/presentation/pages/register_detail/informations/components/select_date_widget.dart';
-import 'package:mpd_client/features/authentication/presentation/pages/register_detail/informations/components/select_gender_widget.dart';
 import 'package:mpd_client/features/authentication/presentation/widgets/have_account_text_widget.dart';
 import 'package:mpd_client/provider/language.dart';
 import 'package:mpd_client/src/tools/ui_tools.dart';
@@ -89,24 +87,24 @@ class _FullnamePartState extends State<FullnamePart> {
                 inputHint: context.l10n.register_firstname,
               ),
               ScreenUtil().setVerticalSpacing(20.h),
-              LabelInputWidget(
-                require: '*',
-                validator: (value) => Validators.empty(value, context),
-                textCapitalization: TextCapitalization.words,
-                textInputAction: TextInputAction.next,
-                controller: context.read<CreateUserBloc>().lastNameController,
-                topHint: context.l10n.register_lastname,
-                inputHint: context.l10n.register_lastname,
-              ),
-              ScreenUtil().setVerticalSpacing(20.h),
-              SelectDateWidget(
-                birthController: context.read<CreateUserBloc>().birthController,
-              ),
+              // LabelInputWidget(
+              //   require: '*',
+              //   validator: (value) => Validators.empty(value, context),
+              //   textCapitalization: TextCapitalization.words,
+              //   textInputAction: TextInputAction.next,
+              //   controller: context.read<CreateUserBloc>().lastNameController,
+              //   topHint: context.l10n.register_lastname,
+              //   inputHint: context.l10n.register_lastname,
+              // ),
+              // ScreenUtil().setVerticalSpacing(20.h),
+              // SelectDateWidget(
+              //   birthController: context.read<CreateUserBloc>().birthController,
+              // ),
             ],
           ),
         ),
-        ScreenUtil().setVerticalSpacing(20.h),
-        const SelectGenderWidget(),
+        // ScreenUtil().setVerticalSpacing(20.h),
+        // const SelectGenderWidget(),
 
         // ScreenUtil().setVerticalSpacing(20.h),
         // BlocSelector<ProfessionBloc, ProfessionState, Profession?>(

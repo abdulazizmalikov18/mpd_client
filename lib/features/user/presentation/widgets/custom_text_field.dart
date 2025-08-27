@@ -137,9 +137,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 prefixIcon: widget.prefixIcon != null
                     ? IconButton(
                         icon: widget.prefixIcon!,
+                        padding: EdgeInsets.zero,
                         onPressed: widget.onprefixIconPressed ?? () {},
                       )
                     : null,
+
                 focusColor: context.color.white,
                 fillColor: widget.fillColor ?? context.color.white,
                 hoverColor: context.color.white,

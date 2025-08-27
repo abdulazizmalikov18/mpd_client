@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_it/get_it.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:mpd_client/app/app_pages.dart';
 import 'package:mpd_client/app/app_routes.dart';
@@ -53,84 +52,83 @@ class _MyAppState extends State<MyApp> {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) =>
-                  locator<RefreshtokenBloc>()..add(GetRefreshToken()),
-            ),
-            BlocProvider(
-              create: (context) => RegisterBloc(
-                GetIt.instance.get<AuthRepository>(),
-                GlobalKey<FormState>(),
-                TextEditingController(),
+        return Provider<AuthRepository>(
+          create: (context) => locator<AuthRepository>(),
+          child: MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => locator<RefreshtokenBloc>()..add(GetRefreshToken()),
               ),
-            ),
-            BlocProvider(
-              create: (context) =>
-                  AppoinmentsBloc(GetIt.instance.get<AppoinmentRepository>()),
-            ),
-            BlocProvider(
-              create: (context) =>
-                  DoctorProfileBloc(locator.get<DoctorProfileRepository>()),
-            ),
-            BlocProvider(
-              create: (context) =>
-                  AddToCartBloc(locator.get<DoctorProfileRepository>()),
-            ),
-            BlocProvider(create: (context) => SocketOfferBloc()),
-            BlocProvider<ChatGroupBloc>(
-              create: (context) => locator<ChatGroupBloc>(),
-            ),
-            BlocProvider<ChatBloc>(create: (context) => locator<ChatBloc>()),
-            BlocProvider<ChatMessageBloc>(
-              create: (context) => locator<ChatMessageBloc>(),
-            ),
-            BlocProvider(
-              create: (context) =>
-                  SubscriptionBloc(locator.get<DoctorProfileRepository>()),
-            ),
-          ],
-          child: PostInheritedNotifier(
-            postNotifier: PostNotifier(),
-            child: ChangeNotifierProvider(
-              create: (context) => LocalProvider(LanguageDatabase()),
-              builder: (context, child) {
-                final provider = Provider.of<LocalProvider>(context);
-                return MaterialApp(
-                  navigatorKey: $navigatorKey,
-                  builder: (context, child) => ScrollConfiguration(
-                    behavior: RefreshScrollBehavior(),
-                    child: KeyboardDismisser(
-                      child: MediaQuery(
-                        data: MediaQuery.of(
-                          context,
-                        ).copyWith(textScaler: const TextScaler.linear(1.0)),
-                        child: child!,
+              BlocProvider(
+                create: (context) => RegisterBloc(
+                  locator<AuthRepository>(),
+                  GlobalKey<FormState>(),
+                  TextEditingController(),
+                ),
+              ),
+              BlocProvider(
+                create: (context) => AppoinmentsBloc(locator<AppoinmentRepository>()),
+              ),
+              BlocProvider(
+                create: (context) => DoctorProfileBloc(locator<DoctorProfileRepository>()),
+              ),
+              BlocProvider(
+                create: (context) => AddToCartBloc(locator<DoctorProfileRepository>()),
+              ),
+              BlocProvider(create: (context) => SocketOfferBloc()),
+              BlocProvider<ChatGroupBloc>(
+                create: (context) => locator<ChatGroupBloc>(),
+              ),
+              BlocProvider<ChatBloc>(create: (context) => locator<ChatBloc>()),
+              BlocProvider<ChatMessageBloc>(
+                create: (context) => locator<ChatMessageBloc>(),
+              ),
+              BlocProvider(
+                create: (context) => SubscriptionBloc(locator<DoctorProfileRepository>()),
+              ),
+            ],
+            child: PostInheritedNotifier(
+              postNotifier: PostNotifier(),
+              child: ChangeNotifierProvider(
+                create: (context) => LocalProvider(LanguageDatabase()),
+                child: Builder(
+                  builder: (context) {
+                    final provider = Provider.of<LocalProvider>(context);
+                    return MaterialApp(
+                      navigatorKey: $navigatorKey,
+                      builder: (context, child) => ScrollConfiguration(
+                        behavior: RefreshScrollBehavior(),
+                        child: KeyboardDismisser(
+                          child: MediaQuery(
+                            data: MediaQuery.of(context).copyWith(
+                              textScaler: const TextScaler.linear(1.0),
+                            ),
+                            child: child!,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  theme: AppTheme.light,
-                  darkTheme: AppTheme.dark,
-                  themeMode: ThemeMode.light,
-                  supportedLocales: AppLocalizations.supportedLocales,
-                  localizationsDelegates: const [
-                    AppLocalizations.delegate,
-                    // RefreshLocalizations.delegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                  ],
-                  locale: provider.locale,
-                  localeResolutionCallback:
-                      (Locale? locale, Iterable<Locale> supportedLocales) {
+                      theme: AppTheme.light,
+                      darkTheme: AppTheme.dark,
+                      themeMode: ThemeMode.light,
+                      supportedLocales: AppLocalizations.supportedLocales,
+                      localizationsDelegates: const [
+                        AppLocalizations.delegate,
+                        GlobalMaterialLocalizations.delegate,
+                        GlobalCupertinoLocalizations.delegate,
+                        GlobalWidgetsLocalizations.delegate,
+                      ],
+                      locale: provider.locale,
+                      localeResolutionCallback:
+                          (Locale? locale, Iterable<Locale> supportedLocales) {
                         return locale;
                       },
-                  debugShowCheckedModeBanner: false,
-                  initialRoute: AppRoutes.splash,
-                  onGenerateRoute: _appPages.generateRoute,
-                );
-              },
+                      debugShowCheckedModeBanner: false,
+                      initialRoute: AppRoutes.splash,
+                      onGenerateRoute: _appPages.generateRoute,
+                    );
+                  },
+                ),
+              ),
             ),
           ),
         );

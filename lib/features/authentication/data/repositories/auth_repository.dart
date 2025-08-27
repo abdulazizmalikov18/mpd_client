@@ -248,4 +248,56 @@ class AuthRepository implements IAuthRepository {
       return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> requestPasswordReset(String phone) async {
+    try {
+      final response = await remoteDataSource.requestPasswordReset(phone);
+      return Right(response);
+    } on DioException {
+      return Left(const DioFailure());
+    } on ParsingException catch (e) {
+      return Left(ParsingFailure(message: e.message));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> verifyPasswordResetCode(String phone, String pvc) async {
+    try {
+      final response = await remoteDataSource.verifyPasswordResetCode(phone, pvc);
+      return Right(response);
+    } on DioException {
+      return Left(const DioFailure());
+    } on ParsingException catch (e) {
+      return Left(ParsingFailure(message: e.message));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> completePasswordReset({
+    required String phone,
+    required String pvc,
+    required String password1,
+    required String password2,
+  }) async {
+    try {
+      final response = await remoteDataSource.completePasswordReset(
+        phone: phone,
+        pvc: pvc,
+        password1: password1,
+        password2: password2,
+      );
+      return Right(response);
+    } on DioException {
+      return Left(const DioFailure());
+    } on ParsingException catch (e) {
+      return Left(ParsingFailure(message: e.message));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
+    }
+  }
 }

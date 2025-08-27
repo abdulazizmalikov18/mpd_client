@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mpd_client/app/app_colors.dart';
+import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/app/colors.dart';
+import 'package:mpd_client/src/themes/styles.dart';
+import 'package:mpd_client/src/widgets/stroke_paint.dart';
 
 class WTextField extends StatefulWidget {
   final TextEditingController? controller;
@@ -103,7 +107,7 @@ class WTextField extends StatefulWidget {
     super.key,
     this.onTap,
     this.onSubmitted,
-    this.borderColor = greyText,
+    this.borderColor = iron,
     this.textCapitalization = TextCapitalization.none,
   });
 
@@ -147,14 +151,10 @@ class _WTextFieldState extends State<WTextField>
       onChanged: widget.onChanged,
       textInputAction: widget.textInputAction,
       style:
-          widget.style ??
-          Theme.of(context).textTheme.displayLarge!.copyWith(
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            color: white.withValues(alpha: .5),
-          ),
+          widget.style ?? Styles.headline7.copyWith(color: context.color.black),
       inputFormatters: widget.inputFormatters,
       maxLength: widget.maxLength,
+      obscureText: widget.isObscure,
       maxLines: widget.isObscure ? 1 : widget.maxLines,
       minLines: widget.minLines,
       cursorColor: widget.cursorColor,
@@ -168,6 +168,7 @@ class _WTextFieldState extends State<WTextField>
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(widget.borderRadius!),
+              borderSide: BorderSide(color: widget.borderColor),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(widget.borderRadius!),
@@ -222,12 +223,14 @@ class _WTextFieldState extends State<WTextField>
                         child: Center(
                           child: AnimatedBuilder(
                             animation: animationController,
-                            // child: SvgPicture.asset(AppIcons.eye),
+                            child: AppIcons.eye.svg(color: iron),
                             builder: (context, child) => SizedBox(
                               width: 24,
                               height: 24,
                               child: CustomPaint(
-                                // foregroundPainter: StrokePaint(animationController.value),
+                                foregroundPainter: StrokePaint(
+                                  animationController.value,
+                                ),
                                 child: child,
                               ),
                             ),

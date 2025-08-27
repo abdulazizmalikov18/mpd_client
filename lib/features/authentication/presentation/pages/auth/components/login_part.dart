@@ -6,6 +6,9 @@ import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
 
 import 'package:mpd_client/core/validator/validators.dart';
+import 'package:mpd_client/features/authentication/domain/blocs/forgot_password/forgot_password_bloc.dart';
+import 'package:mpd_client/features/authentication/domain/repositories/i_auth_repository.dart';
+import 'package:mpd_client/features/authentication/presentation/pages/auth/forgot_password_page.dart';
 import 'package:mpd_client/features/authentication/presentation/widgets/have_account_text_widget.dart';
 import 'package:mpd_client/src/decorations/input_border.dart';
 import 'package:mpd_client/src/tools/formatters.dart';
@@ -15,6 +18,19 @@ import 'package:mpd_client/src/widgets/longbutton.dart';
 
 class LoginPart extends StatelessWidget {
   const LoginPart({super.key});
+
+  void showForgotPasswordSheet(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BlocProvider(
+          create: (context) =>
+              ForgotPasswordBloc(authRepository: locator<IAuthRepository>()),
+          child: const ForgotPasswordPage(),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -207,7 +223,9 @@ class LoginPart extends StatelessWidget {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    showForgotPasswordSheet(context);
+                  },
                   child: Text(
                     context.l10n.forgotPassword,
                     style: Styles.bottomLabel.copyWith(

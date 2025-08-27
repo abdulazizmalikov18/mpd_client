@@ -45,4 +45,14 @@ abstract class IAuthRepository {
 
   Future<Either<Failure, TokenModel>> refreshToken();
   Future<Either<Failure, bool>> disabledAccount();
+
+  // Forgot password flow
+  Future<Either<Failure, bool>> requestPasswordReset(String phone);
+  Future<Either<Failure, bool>> verifyPasswordResetCode(String phone, String pvc);
+  Future<Either<Failure, bool>> completePasswordReset({
+    required String phone,
+    required String pvc,
+    required String password1,
+    required String password2,
+  });
 }

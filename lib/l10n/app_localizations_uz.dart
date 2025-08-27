@@ -888,4 +888,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get empty => 'Bo‘sh bo‘lishi mumkin emas';
+
+  @override
+  String get reset_password_success => 'Parol muvaffaqiyatli o\'zgartirildi';
 }

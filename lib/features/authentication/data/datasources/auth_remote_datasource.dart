@@ -52,6 +52,16 @@ abstract class IAuthRemoteDataSource {
     required String passportSTIR,
     String? filePath,
   });
+
+  // Forgot password flow
+  Future<bool> requestPasswordReset(String phone);
+  Future<bool> verifyPasswordResetCode(String phone, String pvc);
+  Future<bool> completePasswordReset({
+    required String phone,
+    required String pvc,
+    required String password1,
+    required String password2,
+  });
 }
 
 class AuthRemoteDataSource implements IAuthRemoteDataSource {
@@ -87,6 +97,49 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
           refresh: response['refresh'],
         );
       },
+    );
+  }
+
+  @override
+  Future<bool> requestPasswordReset(String phone) async {
+    return _handle.apiControl<dynamic, bool>(
+      request: () => _client.post(
+        '/UMS/api/v1.0/account/enter-to-account-by-pvc',
+        data: {'phone': phone},
+      ),
+      body: (_) => true,
+    );
+  }
+
+  @override
+  Future<bool> verifyPasswordResetCode(String phone, String pvc) async {
+    return _handle.apiControl<dynamic, bool>(
+      request: () => _client.post(
+        '/UMS/api/v1.0/account/forget-password/',
+        data: {'phone': phone, 'pvc': pvc},
+      ),
+      body: (_) => true,
+    );
+  }
+
+  @override
+  Future<bool> completePasswordReset({
+    required String phone,
+    required String pvc,
+    required String password1,
+    required String password2,
+  }) async {
+    return _handle.apiControl<dynamic, bool>(
+      request: () => _client.post(
+        '/UMS/api/v1.0/account/forget-password-complete/',
+        data: {
+          'phone': phone,
+          'pvc': pvc,
+          'password1': password1,
+          'password2': password2,
+        },
+      ),
+      body: (_) => true,
     );
   }
 
