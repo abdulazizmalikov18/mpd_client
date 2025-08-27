@@ -13,7 +13,7 @@ class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
 
   @override
-  _ForgotPasswordPageState createState() => _ForgotPasswordPageState();
+  State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
 }
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
@@ -46,9 +46,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           );
         } else if (state.status == ForgotPasswordStatus.failure &&
             state.error != null) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.error!)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.error!)));
         }
       },
       child: Scaffold(
@@ -85,12 +85,17 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         if (_formKey.currentState?.validate() ?? false) {
                           context.read<ForgotPasswordBloc>().add(
                             RequestPasswordResetEvent(
-                              _phoneController.text.replaceAll(RegExp(r'\D'), ''),
+                              _phoneController.text.replaceAll(
+                                RegExp(r'\D'),
+                                '',
+                              ),
                             ),
                           );
                         }
                       },
-                      isLoading: state.status == ForgotPasswordStatus.requestInProgress,
+                      isLoading:
+                          state.status ==
+                          ForgotPasswordStatus.requestInProgress,
                       text: context.l10n.register_password_continue,
                     );
                   },

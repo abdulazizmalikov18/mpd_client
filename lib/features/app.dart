@@ -57,7 +57,8 @@ class _MyAppState extends State<MyApp> {
           child: MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) => locator<RefreshtokenBloc>()..add(GetRefreshToken()),
+                create: (context) =>
+                    locator<RefreshtokenBloc>()..add(GetRefreshToken()),
               ),
               BlocProvider(
                 create: (context) => RegisterBloc(
@@ -67,13 +68,16 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
               BlocProvider(
-                create: (context) => AppoinmentsBloc(locator<AppoinmentRepository>()),
+                create: (context) =>
+                    AppoinmentsBloc(locator<AppoinmentRepository>()),
               ),
               BlocProvider(
-                create: (context) => DoctorProfileBloc(locator<DoctorProfileRepository>()),
+                create: (context) =>
+                    DoctorProfileBloc(locator<DoctorProfileRepository>()),
               ),
               BlocProvider(
-                create: (context) => AddToCartBloc(locator<DoctorProfileRepository>()),
+                create: (context) =>
+                    AddToCartBloc(locator<DoctorProfileRepository>()),
               ),
               BlocProvider(create: (context) => SocketOfferBloc()),
               BlocProvider<ChatGroupBloc>(
@@ -84,7 +88,8 @@ class _MyAppState extends State<MyApp> {
                 create: (context) => locator<ChatMessageBloc>(),
               ),
               BlocProvider(
-                create: (context) => SubscriptionBloc(locator<DoctorProfileRepository>()),
+                create: (context) =>
+                    SubscriptionBloc(locator<DoctorProfileRepository>()),
               ),
             ],
             child: PostInheritedNotifier(
@@ -120,8 +125,8 @@ class _MyAppState extends State<MyApp> {
                       locale: provider.locale,
                       localeResolutionCallback:
                           (Locale? locale, Iterable<Locale> supportedLocales) {
-                        return locale;
-                      },
+                            return locale;
+                          },
                       debugShowCheckedModeBanner: false,
                       initialRoute: AppRoutes.splash,
                       onGenerateRoute: _appPages.generateRoute,

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:mpd_client/app/colors.dart';
 import 'package:mpd_client/src/widgets/intepolate.dart';

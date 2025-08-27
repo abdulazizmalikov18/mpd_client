@@ -1,6 +1,5 @@
 import 'dart:async';
 
-
 import 'package:equatable/equatable.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/features/authentication/domain/repositories/i_auth_repository.dart';

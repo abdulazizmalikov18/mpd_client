@@ -19,7 +19,7 @@ class ForgotVerifyPage extends StatefulWidget {
   const ForgotVerifyPage({super.key, required this.phone});
 
   @override
-  _ForgotVerifyPageState createState() => _ForgotVerifyPageState();
+  State<ForgotVerifyPage> createState() => _ForgotVerifyPageState();
 }
 
 class _ForgotVerifyPageState extends State<ForgotVerifyPage>
@@ -85,14 +85,13 @@ class _ForgotVerifyPageState extends State<ForgotVerifyPage>
       listener: (context, state) {
         if (state.status == ForgotPasswordStatus.verifySuccess) {
           final authRepository = locator<IAuthRepository>();
-          
+
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => BlocProvider(
-                create: (context) => ForgotPasswordBloc(
-                  authRepository: authRepository,
-                ),
+                create: (context) =>
+                    ForgotPasswordBloc(authRepository: authRepository),
                 child: ResetPasswordPage(
                   phone: widget.phone,
                   code: _codeController.text,
@@ -113,9 +112,9 @@ class _ForgotVerifyPageState extends State<ForgotVerifyPage>
           );
         } else if (state.status == ForgotPasswordStatus.failure &&
             state.error != null) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.error!)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.error!)));
         }
       },
       child: Scaffold(
@@ -178,7 +177,8 @@ class _ForgotVerifyPageState extends State<ForgotVerifyPage>
                           );
                         }
                       },
-                      isLoading: state.status == ForgotPasswordStatus.verifyInProgress,
+                      isLoading:
+                          state.status == ForgotPasswordStatus.verifyInProgress,
                       text: context.l10n.register_create_password,
                     );
                   },

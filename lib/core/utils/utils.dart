@@ -12,12 +12,13 @@ class Utils {
     return formattedDate;
   }
 
- static String maskPhone(String phone) {
+  static String maskPhone(String phone) {
     // faqat raqamlarni qoldiramiz
     final digits = phone.replaceAll(RegExp(r'\D'), '');
 
-    if (digits.length != 12)
+    if (digits.length != 12) {
       return phone; // noto'g'ri format bo'lsa, o'zini qaytaramiz
+    }
 
     final country = digits.substring(0, 3); // 998
     final operator = digits.substring(3, 5); // 90

@@ -264,9 +264,15 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> verifyPasswordResetCode(String phone, String pvc) async {
+  Future<Either<Failure, bool>> verifyPasswordResetCode(
+    String phone,
+    String pvc,
+  ) async {
     try {
-      final response = await remoteDataSource.verifyPasswordResetCode(phone, pvc);
+      final response = await remoteDataSource.verifyPasswordResetCode(
+        phone,
+        pvc,
+      );
       return Right(response);
     } on DioException {
       return Left(const DioFailure());

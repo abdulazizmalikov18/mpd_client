@@ -15,7 +15,7 @@ class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({super.key, required this.phone, required this.code});
 
   @override
-  _ResetPasswordPageState createState() => _ResetPasswordPageState();
+  State<ResetPasswordPage> createState() => _ResetPasswordPageState();
 }
 
 class _ResetPasswordPageState extends State<ResetPasswordPage> {

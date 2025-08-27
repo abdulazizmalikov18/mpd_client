@@ -3,7 +3,7 @@ description: "A new Flutter project."
 
 publish_to: "none"
 
-version: 1.0.0+10
+version: 1.0.0+11
 
 environment:
   sdk: ^3.8.1
@@ -21,7 +21,7 @@ dependencies:
   get_it: ^8.2.0
   pretty_dio_logger: ^1.4.0
   formz: ^0.8.0
-  flutter_svg: ^2.0.13
+  flutter_svg: ^2.2.0
   lottie: ^3.3.1
   mask_text_input_formatter: ^2.9.0
   share_plus: ^11.1.0
@@ -54,7 +54,7 @@ dependencies:
   flutter_image_compress: ^2.4.0
   rounded_loading_button_plus: ^3.0.1
   table_calendar: ^3.2.0
-  syncfusion_flutter_pdfviewer: ^30.2.6
+  syncfusion_flutter_pdfviewer: ^30.2.7
   flick_video_player: ^0.9.0
   readmore: ^3.0.0
   dotted_border: ^3.1.0
@@ -64,7 +64,7 @@ dependencies:
   rxdart: ^0.28.0
   # firebase_core: ^3.13.1
   # firebase_messaging: ^15.2.6
-  flutter_local_notifications: ^19.4.0
+  flutter_local_notifications: ^19.4.1
   # workmanager: ^0.5.2
   qr_flutter: ^4.1.0
   pinch_to_zoom_scrollable: ^0.1.2

@@ -49,7 +49,7 @@ void setupLocator() {
       // connectionInfo: locator<ConnectionInfo>(),
     ),
   );
-  
+
   // Register IAuthRepository
   locator.registerLazySingleton<IAuthRepository>(
     () => locator<AuthRepository>(),
