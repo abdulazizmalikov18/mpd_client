@@ -51,9 +51,9 @@ class _UserPostViewState extends State<UserPostView> {
             case PostStatus.success:
               if (state.postsUser.isEmpty) {
                 return NoAppointment(
-                  title: "No Posts",
-                  subtitle: "No Posts",
-                  buttonName: "Refresh",
+                  title: context.l10n.no_posts,
+                  subtitle: context.l10n.no_posts,
+                  buttonName: context.l10n.refresh,
                   onPressed: () {
                     context.read<PostBloc>().add(
                       PostFetchedUser(username: widget.username),

@@ -8,6 +8,7 @@ import 'package:mpd_client/features/user/presentation/widgets/language_sheet.dar
 import 'package:mpd_client/features/user/presentation/widgets/logout_sheet.dart';
 import 'package:mpd_client/features/user/presentation/widgets/user_name_surname_part.dart';
 import 'package:mpd_client/features/user/presentation/widgets/user_number_part.dart';
+import 'package:mpd_client/features/user/widgets/request_emergency_help_sheet.dart';
 import 'package:mpd_client/provider/local_provider.dart';
 import 'package:mpd_client/src/themes/styles.dart';
 import 'package:mpd_client/src/widgets/bottom_sheet_widget.dart';
@@ -79,7 +80,7 @@ class _UserPageState extends State<UserPage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'My QR code',
+                                    context.l10n.my_qr_code,
                                     style: Styles.emptyboldTitle,
                                   ),
                                   const CloseButton(),
@@ -100,7 +101,7 @@ class _UserPageState extends State<UserPage> {
                                             .state
                                             .userInfo
                                             ?.qrcode ??
-                                        "--",
+                                        context.l10n.notAvailable,
                                   ),
                                 ),
                               ),
@@ -315,8 +316,8 @@ class _UserPageState extends State<UserPage> {
                           ),
                           children: [
                             const SizedBox(height: 12),
-                            const Text(
-                              "Ma’lumotlaringiz saqlanishiga rozimisiz?",
+                            Text(
+                              context.l10n.specialist_registration_title,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 24,
@@ -324,7 +325,7 @@ class _UserPageState extends State<UserPage> {
                               ),
                             ),
                             Text(
-                              "Agar rozi bo’lsangiz bla bla bla, agar rozi bo’lmasangiz bla bla bla.",
+                              context.l10n.specialist_registration_description,
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -335,7 +336,8 @@ class _UserPageState extends State<UserPage> {
                             const SizedBox(height: 24),
                             LongButton(
                               height: 52,
-                              buttonName: "Xa, roziman",
+                              buttonName:
+                                  context.l10n.specialist_registration_agree,
                               onPress: () {
                                 Navigator.of(
                                   context,
@@ -345,7 +347,8 @@ class _UserPageState extends State<UserPage> {
                             const SizedBox(height: 12),
                             LongButton(
                               height: 52,
-                              buttonName: "Yo’q, rozi emasman",
+                              buttonName:
+                                  context.l10n.specialist_registration_disagree,
                               color: context.color.red,
                               onPress: () {
                                 Navigator.of(context).pop();
@@ -366,136 +369,14 @@ class _UserPageState extends State<UserPage> {
               leading: AppIcons.warning.svg(color: context.color.red),
               horizontalTitleGap: 0,
               title: Text(
-                "SOS",
+                context.l10n.sos,
                 style: Styles.headline5.copyWith(color: context.color.red),
               ),
               onTap: () {
                 showModalBottomSheet(
                   backgroundColor: Colors.transparent,
                   context: context,
-                  builder: (context) => BottomSheetWidget(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 20,
-                      horizontal: 16,
-                    ),
-                    children: [
-                      const SizedBox(height: 12),
-                      Text(
-                        context.l10n.requestEmergencyHelp,
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      Text(
-                        context.l10n.emergencyOnly,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: context.color.grey,
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: context.color.white,
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                              color: context.color.cardShadow,
-                              blurRadius: 8.r,
-                            ),
-                          ],
-                        ),
-                        child: ListTile(
-                          title: Text(
-                            context.l10n.accident,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: context.color.mainBlue,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: context.color.white,
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                              color: context.color.cardShadow,
-                              blurRadius: 8.r,
-                            ),
-                          ],
-                        ),
-                        child: const ListTile(
-                          title: Text(
-                            "DTP",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: context.color.white,
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                              color: context.color.cardShadow,
-                              blurRadius: 8.r,
-                            ),
-                          ],
-                        ),
-                        child: ListTile(
-                          title: Text(
-                            context.l10n.firstAid,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: context.color.white,
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                              color: context.color.cardShadow,
-                              blurRadius: 8.r,
-                            ),
-                          ],
-                        ),
-                        child: ListTile(
-                          title: Text(
-                            context.l10n.fainted,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      LongButton(
-                        height: 52,
-                        buttonName: "SOS",
-                        color: context.color.red,
-                        onPress: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      const SizedBox(height: 16),
-                    ],
-                  ),
+                  builder: (context) => const RequestEmergencyHelpSheet(),
                 );
               },
             ),

@@ -659,6 +659,97 @@ class AppLocalizationsUz extends AppLocalizations {
   String get cancel_appointment_not_want => 'Yo\'q, bekor qilmayman';
 
   @override
+  String get my_qr_code => 'My QR Code';
+
+  @override
+  String get sos => 'SOS';
+
+  @override
+  String get dtp => 'Yo\'l-transport hodisasi';
+
+  @override
+  String get specialist_registration_title =>
+      'Ma\'lumotlaringiz saqlanishiga rozimisiz?';
+
+  @override
+  String get specialist_registration_description =>
+      'Rozilik bildirish orqali siz mutaxassis sifatida ro\'yxatdan o\'tishni tasdiqlaysiz. Agar rozilik bermasangiz, ma\'lumotlaringiz saqlanmaydi.';
+
+  @override
+  String get specialist_registration_agree => 'Xa, roziman';
+
+  @override
+  String get specialist_registration_disagree => 'Yo\'q, rozi emasman';
+
+  @override
+  String get specialist_registration_register => 'Ro\'yxatdan o\'tish';
+
+  @override
+  String get specialist_registration_upload_files => 'Fayllaringizni yuklang';
+
+  @override
+  String get specialist_registration_select_category => 'Kategoriyani tanlang';
+
+  @override
+  String get specialist_registration_select_position => 'Lavozimni tanlang';
+
+  @override
+  String get specialist_registration_about_you => 'O\'zingiz haqingizda';
+
+  @override
+  String get specialist_registration_education => 'Ta\'lim va sertifikatlar';
+
+  @override
+  String get specialist_registration_add_file => 'Fayl qo\'shish';
+
+  @override
+  String get specialist_registration_file_upload_error =>
+      'Iltimos, fayllaringizni yuklang';
+
+  @override
+  String get specialist_registration_max_files =>
+      'Maksimal 1 ta fayl yuklash mumkin';
+
+  @override
+  String get specialist_register_error_max_files =>
+      'Faqat 1 ta fayl yuklash mumkin';
+
+  @override
+  String get specialist_register_error_upload_required =>
+      'Iltimos, fayllaringizni yuklang';
+
+  @override
+  String get specialist_register_register_button => 'Ro\'yxatdan o\'tish';
+
+  @override
+  String get specialist_register_category_hint => 'Mutaxassis kategoriyasi';
+
+  @override
+  String get specialist_register_position_hint => 'Mutaxassis lavozimi';
+
+  @override
+  String get specialist_register_job_hint => 'Mutaxassis ishi';
+
+  @override
+  String get specialist_register_write_here => 'Bu yerga yozing';
+
+  @override
+  String get specialist_register_education_title =>
+      'Ta\'lim va sertifikatlar (1)';
+
+  @override
+  String get specialist_register_add_file => 'Fayl qo\'shish';
+
+  @override
+  String get no_posts => 'Postlar mavjud emas';
+
+  @override
+  String get refresh => 'Yangilash';
+
+  @override
+  String get notAvailable => '--';
+
+  @override
   String get records_title => 'Xulosalar';
 
   @override

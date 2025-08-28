@@ -643,6 +643,97 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cancel_appointment_not_want => 'No, Keep It';
 
   @override
+  String get my_qr_code => 'My QR Code';
+
+  @override
+  String get sos => 'SOS';
+
+  @override
+  String get dtp => 'Accident';
+
+  @override
+  String get specialist_registration_title =>
+      'Do you agree to save your information?';
+
+  @override
+  String get specialist_registration_description =>
+      'By agreeing, you confirm that you want to register as a specialist. If you don\'t agree, your information won\'t be saved.';
+
+  @override
+  String get specialist_registration_agree => 'Yes, I agree';
+
+  @override
+  String get specialist_registration_disagree => 'No, I don\'t agree';
+
+  @override
+  String get specialist_registration_register => 'Register';
+
+  @override
+  String get specialist_registration_upload_files => 'Upload your files';
+
+  @override
+  String get specialist_registration_select_category => 'Select Category';
+
+  @override
+  String get specialist_registration_select_position => 'Select Position';
+
+  @override
+  String get specialist_registration_about_you => 'About you';
+
+  @override
+  String get specialist_registration_education => 'Education & certifications';
+
+  @override
+  String get specialist_registration_add_file => 'Add File';
+
+  @override
+  String get specialist_registration_file_upload_error =>
+      'Please upload your files';
+
+  @override
+  String get specialist_registration_max_files =>
+      'Maximum 1 file can be uploaded';
+
+  @override
+  String get specialist_register_error_max_files =>
+      'Only 1 file can be uploaded';
+
+  @override
+  String get specialist_register_error_upload_required =>
+      'Please upload your files';
+
+  @override
+  String get specialist_register_register_button => 'Register';
+
+  @override
+  String get specialist_register_category_hint => 'Specialist Category';
+
+  @override
+  String get specialist_register_position_hint => 'Specialist Position';
+
+  @override
+  String get specialist_register_job_hint => 'Specialist Job';
+
+  @override
+  String get specialist_register_write_here => 'Write here';
+
+  @override
+  String get specialist_register_education_title =>
+      'Education & certifications (1)';
+
+  @override
+  String get specialist_register_add_file => 'Add File';
+
+  @override
+  String get no_posts => 'No Posts';
+
+  @override
+  String get refresh => 'Refresh';
+
+  @override
+  String get notAvailable => '--';
+
+  @override
   String get records_title => 'Medical Records';
 
   @override

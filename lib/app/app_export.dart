@@ -26,6 +26,7 @@ export 'package:mpd_client/features/authentication/domain/blocs/change_password/
 export 'package:mpd_client/features/authentication/domain/blocs/passport/passport_bloc.dart';
 export 'package:mpd_client/features/yandex_doctor/data/models/top_specialists_model.dart';
 export 'package:mpd_client/features/home/data/repositories/home_repository.dart';
+export 'package:mpd_client/core/extension/context_ext.dart';
 export 'package:mpd_client/features/doctor_profile_booking/presentation/pages/appointment_payment/appoinment_payment.dart';
 export 'package:mpd_client/features/doctor_profile_booking/presentation/pages/appointment_date_time/appoinment_date_time.dart';
 export 'package:mpd_client/features/doctor_profile_booking/presentation/pages/review_appoinment/review_appoinment.dart';

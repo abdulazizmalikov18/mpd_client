@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/core/extension/context_ext.dart';
+import 'package:mpd_client/features/appointment/presentation/pages/appointment/components/no_appointment.dart';
 import 'package:mpd_client/features/home/domain/inherited/post_inhereted.dart';
 
 import 'package:mpd_client/features/home/domain/service/flick_multi_manger.dart';
@@ -63,7 +64,16 @@ class _HomePageState extends State<HomePage> {
               );
             case PostStatus.success:
               if (state.posts.isEmpty) {
-                return const Center(child: Text('no posts'));
+                return Center(
+                  child: NoAppointment(
+                    title: context.l10n.no_posts,
+                    subtitle: context.l10n.no_posts,
+                    buttonName: context.l10n.refresh,
+                    onPressed: () {
+                      context.read<PostBloc>().add(PostFetched(true));
+                    },
+                  ),
+                );
               }
               return RefreshIndicator.adaptive(
                 onRefresh: () async {

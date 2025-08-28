@@ -42,7 +42,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
 
   void _pickFiles() async {
     if ((_paths?.length ?? 0) >= 1) {
-      onError("1 tadan oshiq ma'lumotlar yuklanmaydu");
+      onError(context.l10n.specialist_register_error_max_files);
       return;
     }
     _resetState();
@@ -119,7 +119,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                       return LongButton(
                         onPress: () {
                           if (_paths?.isEmpty ?? false) {
-                            onError("Iltimos ma'lumotlaringizni yuklang");
+                            onError(context.l10n.specialist_register_error_upload_required);
                             return;
                           }
                           context.read<UserInfoBloc>().add(
@@ -146,7 +146,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                             specialistCategoryModel == null ||
                             specialistCatModel == null ||
                             specialistPositionModel == null,
-                        buttonName: "Register",
+                        buttonName: context.l10n.specialist_register_register_button,
                       );
                     },
                   ),
@@ -180,7 +180,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
               child: Column(
                 children: [
                   SelectVariantsWidget(
-                    topHint: "Specialist Category",
+                    topHint: context.l10n.specialist_register_category_hint,
                     hint: specialistCatModel?.name ?? "",
                     onPressed: () {
                       showModalBottomSheet(
@@ -201,7 +201,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                   ),
                   SizedBox(height: 16.h),
                   SelectVariantsWidget(
-                    topHint: "Specialist Position",
+                    topHint: context.l10n.specialist_register_position_hint,
                     hint: specialistPositionModel?.name ?? "",
                     onPressed: () {
                       showModalBottomSheet(
@@ -222,7 +222,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                   ),
                   SizedBox(height: 16.h),
                   SelectVariantsWidget(
-                    topHint: "Specialist Job",
+                    topHint: context.l10n.specialist_register_job_hint,
                     hint: specialistCategoryModel?.name ?? "",
                     onPressed: () {
                       showModalBottomSheet(
@@ -248,8 +248,8 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                       children: [
                         CustomTextField(
                           controller: bioController,
-                          title: "About you",
-                          hintText: "Write here ",
+                          title: context.l10n.aboutYou,
+                          hintText: "${context.l10n.specialist_register_write_here} ",
                           onChanged: (value) {},
                           minLines: 5,
                           maxLines: 8,
@@ -259,7 +259,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                         Row(
                           children: [
                             Text(
-                              "Education & certifications (1)",
+                              context.l10n.specialist_register_education_title,
                               style: Theme.of(
                                 context,
                               ).textTheme.titleSmall!.copyWith(),
@@ -272,7 +272,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                           ],
                         ),
                         CustomTextField(
-                          hintText: "Write here ",
+                          hintText: "${context.l10n.specialist_register_write_here} ",
                           onChanged: (value) {},
                           minLines: 1,
                           maxLines: 6,
@@ -388,9 +388,9 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                                     child: AppIcons.files.svg(),
                                   ),
                                   SizedBox(height: 4.h),
-                                  const Text(
-                                    "Add File",
-                                    style: TextStyle(
+                                  Text(
+                                    context.l10n.specialist_register_add_file,
+                                    style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400,
                                       color: Color(0xFF677294),

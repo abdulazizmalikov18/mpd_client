@@ -1342,6 +1342,174 @@ abstract class AppLocalizations {
   /// **'No, Keep It'**
   String get cancel_appointment_not_want;
 
+  /// No description provided for @my_qr_code.
+  ///
+  /// In en, this message translates to:
+  /// **'My QR Code'**
+  String get my_qr_code;
+
+  /// No description provided for @sos.
+  ///
+  /// In en, this message translates to:
+  /// **'SOS'**
+  String get sos;
+
+  /// No description provided for @dtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Accident'**
+  String get dtp;
+
+  /// No description provided for @specialist_registration_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you agree to save your information?'**
+  String get specialist_registration_title;
+
+  /// No description provided for @specialist_registration_description.
+  ///
+  /// In en, this message translates to:
+  /// **'By agreeing, you confirm that you want to register as a specialist. If you don\'t agree, your information won\'t be saved.'**
+  String get specialist_registration_description;
+
+  /// No description provided for @specialist_registration_agree.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, I agree'**
+  String get specialist_registration_agree;
+
+  /// No description provided for @specialist_registration_disagree.
+  ///
+  /// In en, this message translates to:
+  /// **'No, I don\'t agree'**
+  String get specialist_registration_disagree;
+
+  /// No description provided for @specialist_registration_register.
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get specialist_registration_register;
+
+  /// No description provided for @specialist_registration_upload_files.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload your files'**
+  String get specialist_registration_upload_files;
+
+  /// No description provided for @specialist_registration_select_category.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Category'**
+  String get specialist_registration_select_category;
+
+  /// No description provided for @specialist_registration_select_position.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Position'**
+  String get specialist_registration_select_position;
+
+  /// No description provided for @specialist_registration_about_you.
+  ///
+  /// In en, this message translates to:
+  /// **'About you'**
+  String get specialist_registration_about_you;
+
+  /// No description provided for @specialist_registration_education.
+  ///
+  /// In en, this message translates to:
+  /// **'Education & certifications'**
+  String get specialist_registration_education;
+
+  /// No description provided for @specialist_registration_add_file.
+  ///
+  /// In en, this message translates to:
+  /// **'Add File'**
+  String get specialist_registration_add_file;
+
+  /// No description provided for @specialist_registration_file_upload_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Please upload your files'**
+  String get specialist_registration_file_upload_error;
+
+  /// No description provided for @specialist_registration_max_files.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum 1 file can be uploaded'**
+  String get specialist_registration_max_files;
+
+  /// No description provided for @specialist_register_error_max_files.
+  ///
+  /// In en, this message translates to:
+  /// **'Only 1 file can be uploaded'**
+  String get specialist_register_error_max_files;
+
+  /// No description provided for @specialist_register_error_upload_required.
+  ///
+  /// In en, this message translates to:
+  /// **'Please upload your files'**
+  String get specialist_register_error_upload_required;
+
+  /// No description provided for @specialist_register_register_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get specialist_register_register_button;
+
+  /// No description provided for @specialist_register_category_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Specialist Category'**
+  String get specialist_register_category_hint;
+
+  /// No description provided for @specialist_register_position_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Specialist Position'**
+  String get specialist_register_position_hint;
+
+  /// No description provided for @specialist_register_job_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Specialist Job'**
+  String get specialist_register_job_hint;
+
+  /// No description provided for @specialist_register_write_here.
+  ///
+  /// In en, this message translates to:
+  /// **'Write here'**
+  String get specialist_register_write_here;
+
+  /// No description provided for @specialist_register_education_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Education & certifications (1)'**
+  String get specialist_register_education_title;
+
+  /// No description provided for @specialist_register_add_file.
+  ///
+  /// In en, this message translates to:
+  /// **'Add File'**
+  String get specialist_register_add_file;
+
+  /// No description provided for @no_posts.
+  ///
+  /// In en, this message translates to:
+  /// **'No Posts'**
+  String get no_posts;
+
+  /// No description provided for @refresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get refresh;
+
+  /// No description provided for @notAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'--'**
+  String get notAvailable;
+
   /// No description provided for @records_title.
   ///
   /// In en, this message translates to:

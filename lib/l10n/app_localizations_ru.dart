@@ -641,6 +641,97 @@ class AppLocalizationsRu extends AppLocalizations {
   String get cancel_appointment_not_want => 'Нет, оставить';
 
   @override
+  String get my_qr_code => 'Мой QR-код';
+
+  @override
+  String get sos => 'SOS';
+
+  @override
+  String get dtp => 'ДТП';
+
+  @override
+  String get specialist_registration_title =>
+      'Вы согласны сохранить ваши данные?';
+
+  @override
+  String get specialist_registration_description =>
+      'Соглашаясь, вы подтверждаете регистрацию в качестве специалиста. Если вы не согласны, ваши данные не будут сохранены.';
+
+  @override
+  String get specialist_registration_agree => 'Да, согласен';
+
+  @override
+  String get specialist_registration_disagree => 'Нет, не согласен';
+
+  @override
+  String get specialist_registration_register => 'Зарегистрироваться';
+
+  @override
+  String get specialist_registration_upload_files => 'Загрузите ваши файлы';
+
+  @override
+  String get specialist_registration_select_category => 'Выберите категорию';
+
+  @override
+  String get specialist_registration_select_position => 'Выберите должность';
+
+  @override
+  String get specialist_registration_about_you => 'О себе';
+
+  @override
+  String get specialist_registration_education => 'Образование и сертификаты';
+
+  @override
+  String get specialist_registration_add_file => 'Добавить файл';
+
+  @override
+  String get specialist_registration_file_upload_error =>
+      'Пожалуйста, загрузите ваши файлы';
+
+  @override
+  String get specialist_registration_max_files =>
+      'Максимально можно загрузить 1 файл';
+
+  @override
+  String get specialist_register_error_max_files =>
+      'Можно загрузить только 1 файл';
+
+  @override
+  String get specialist_register_error_upload_required =>
+      'Пожалуйста, загрузите ваши файлы';
+
+  @override
+  String get specialist_register_register_button => 'Зарегистрироваться';
+
+  @override
+  String get specialist_register_category_hint => 'Категория специалиста';
+
+  @override
+  String get specialist_register_position_hint => 'Должность специалиста';
+
+  @override
+  String get specialist_register_job_hint => 'Работа специалиста';
+
+  @override
+  String get specialist_register_write_here => 'Напишите здесь';
+
+  @override
+  String get specialist_register_education_title =>
+      'Образование и сертификаты (1)';
+
+  @override
+  String get specialist_register_add_file => 'Добавить файл';
+
+  @override
+  String get no_posts => 'Нет постов';
+
+  @override
+  String get refresh => 'Обновить';
+
+  @override
+  String get notAvailable => '--';
+
+  @override
   String get records_title => 'Медкарта';
 
   @override
