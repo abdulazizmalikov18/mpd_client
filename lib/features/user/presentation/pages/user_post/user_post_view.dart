@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:formz/formz.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
-import 'package:mpd_client/core/extension/context_ext.dart';
 import 'package:mpd_client/core/pagination/presentation/paginator.dart';
 import 'package:mpd_client/features/appointment/presentation/pages/appointment/components/no_appointment.dart';
 import 'package:mpd_client/features/home/domain/service/flick_multi_manger.dart';

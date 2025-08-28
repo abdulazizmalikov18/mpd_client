@@ -4,7 +4,6 @@ import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/app/app_images.dart';
 import 'package:mpd_client/app/colors.dart';
-import 'package:mpd_client/core/extension/context_ext.dart';
 import 'package:mpd_client/core/pagination/presentation/paginator_list.dart';
 import 'package:mpd_client/features/chat/presentation/bloc/chat_group/chat_group_bloc.dart';
 import 'package:mpd_client/features/chat/presentation/views/in_app_chat.dart';

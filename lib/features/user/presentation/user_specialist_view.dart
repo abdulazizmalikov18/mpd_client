@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
-import 'package:mpd_client/core/extension/context_ext.dart';
 import 'package:mpd_client/core/utils/caller.dart';
 
 class UserSpecialistView extends StatefulWidget {

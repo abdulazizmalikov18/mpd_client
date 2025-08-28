@@ -7,7 +7,6 @@ import 'package:lottie/lottie.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
-import 'package:mpd_client/core/extension/context_ext.dart';
 import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/features/authentication/presentation/pages/register_detail/informations/components/select_variants_widget.dart';
 import 'package:mpd_client/features/user/data/models/specialist_cat_model.dart';
@@ -119,7 +118,11 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                       return LongButton(
                         onPress: () {
                           if (_paths?.isEmpty ?? false) {
-                            onError(context.l10n.specialist_register_error_upload_required);
+                            onError(
+                              context
+                                  .l10n
+                                  .specialist_register_error_upload_required,
+                            );
                             return;
                           }
                           context.read<UserInfoBloc>().add(
@@ -146,7 +149,8 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                             specialistCategoryModel == null ||
                             specialistCatModel == null ||
                             specialistPositionModel == null,
-                        buttonName: context.l10n.specialist_register_register_button,
+                        buttonName:
+                            context.l10n.specialist_register_register_button,
                       );
                     },
                   ),
@@ -249,7 +253,8 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                         CustomTextField(
                           controller: bioController,
                           title: context.l10n.aboutYou,
-                          hintText: "${context.l10n.specialist_register_write_here} ",
+                          hintText:
+                              "${context.l10n.specialist_register_write_here} ",
                           onChanged: (value) {},
                           minLines: 5,
                           maxLines: 8,
@@ -272,7 +277,8 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                           ],
                         ),
                         CustomTextField(
-                          hintText: "${context.l10n.specialist_register_write_here} ",
+                          hintText:
+                              "${context.l10n.specialist_register_write_here} ",
                           onChanged: (value) {},
                           minLines: 1,
                           maxLines: 6,

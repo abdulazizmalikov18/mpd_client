@@ -1,5 +1,4 @@
 import 'package:mpd_client/app/app_export.dart';
-import 'package:mpd_client/core/extension/context_ext.dart';
 import 'package:mpd_client/provider/language_database.dart';
 
 class LocalProvider extends ChangeNotifier {
