@@ -52,51 +52,52 @@ class _DoctorCategoryPageState extends State<DoctorCategoryPage> {
           ),
           titleSpacing: 0,
           toolbarHeight: 56.h,
-          bottom: PreferredSize(
-            preferredSize: const Size(double.infinity, 64),
-            child: Container(
-              height: 50.h,
-              width: double.maxFinite,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.r),
-                color: context.color.background,
-              ),
-              margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-              child: TabBar(
-                padding: const EdgeInsets.all(4),
-                indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.r),
-                  color: context.color.white,
-                ),
-                indicatorColor: Colors.transparent,
-                tabs: [
-                  Tab(
-                    child: Text(
-                      "Doctors",
-                      style: Styles.descSubtitle.copyWith(
-                        color: context.color.black,
-                      ),
-                    ),
-                  ),
-                  Tab(
-                    child: Text(
-                      "Maxsulotlar",
-                      style: Styles.descSubtitle.copyWith(
-                        color: context.color.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // bottom: PreferredSize(
+          //   preferredSize: const Size(double.infinity, 64),
+          //   child: Container(
+          //     height: 50.h,
+          //     width: double.maxFinite,
+          //     decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(10.r),
+          //       color: context.color.background,
+          //     ),
+          //     margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+          //     child: TabBar(
+          //       padding: const EdgeInsets.all(4),
+          //       indicator: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(8.r),
+          //         color: context.color.white,
+          //       ),
+          //       indicatorColor: Colors.transparent,
+          //       tabs: [
+          //         Tab(
+          //           child: Text(
+          //             "Doctors",
+          //             style: Styles.descSubtitle.copyWith(
+          //               color: context.color.black,
+          //             ),
+          //           ),
+          //         ),
+          //         Tab(
+          //           child: Text(
+          //             "Maxsulotlar",
+          //             style: Styles.descSubtitle.copyWith(
+          //               color: context.color.black,
+          //             ),
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ),
-        body: TabBarView(
-          children: [
-            AllDoctorsView(widget: widget),
-            const OfferingView(),
-          ],
-        ),
+        body: AllDoctorsView(widget: widget),
+        // body: TabBarView(
+        //   children: [
+        //     AllDoctorsView(widget: widget),
+        //     const OfferingView(),
+        //   ],
+        // ),
       ),
     );
   }

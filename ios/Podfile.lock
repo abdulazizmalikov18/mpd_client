@@ -118,8 +118,8 @@ PODS:
     - FlutterMacOS
   - yandex_mapkit (0.0.1):
     - Flutter
-    - YandexMapsMobile (= 4.6.1-full)
-  - YandexMapsMobile (4.6.1-full)
+    - YandexMapsMobile (= 4.22.0-full)
+  - YandexMapsMobile (4.22.0-full)
 
 DEPENDENCIES:
   - audio_session (from `.symlinks/plugins/audio_session/ios`)
@@ -250,9 +250,9 @@ SPEC CHECKSUMS:
   video_player_avfoundation: 2cef49524dd1f16c5300b9cd6efd9611ce03639b
   video_thumbnail: b637e0ad5f588ca9945f6e2c927f73a69a661140
   wakelock_plus: e29112ab3ef0b318e58cfa5c32326458be66b556
-  webview_flutter_wkwebview: 1821ceac936eba6f7984d89a9f3bcb4dea99ebb2
-  yandex_mapkit: 50f3785c9074f049dfd3d15e3229f98eee662f2e
-  YandexMapsMobile: b5f4dfeb8d1fe324dc18afb33d772b04d04d34f6
+  webview_flutter_wkwebview: 8ebf4fded22593026f7dbff1fbff31ea98573c8d
+  yandex_mapkit: b0468cf6fdc2e5ef315e08c081cb48763db1edee
+  YandexMapsMobile: 27e6e45425bb61f0be2dbc2bf02d4e64926691a9
 
 PODFILE CHECKSUM: 85a77f16a4a12bfe6bbddd274556c4fa62f03a20
 
