@@ -13,7 +13,6 @@ import 'package:mpd_client/features/home/domain/blocs/product_specalist/product_
 import 'package:mpd_client/features/yandex_doctor/domain/blocs/specialist/specialist_bloc.dart';
 import 'package:mpd_client/features/yandex_doctor/presentation/widgets/doctor_card_iteam.dart';
 import 'package:mpd_client/features/yandex_doctor/presentation/widgets/search_field.dart';
-import 'package:mpd_client/src/themes/styles.dart';
 import 'package:mpd_client/src/widgets/error_type_widget.dart';
 import 'package:mpd_client/src/widgets/w_shimmer.dart';
 
