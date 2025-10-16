@@ -32,3 +32,8 @@ class PostFetchedUser extends PostEvent {
 
   PostFetchedUser({this.isMore = false, required this.username});
 }
+
+class ReportPostEvent extends PostEvent {
+  final String postId;
+  ReportPostEvent({required this.postId});
+}

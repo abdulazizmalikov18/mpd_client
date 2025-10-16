@@ -14,6 +14,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     on<PostFetched>(_onPostFetched, transformer: droppable());
     on<DeletePostEvent>(_onDeletePostEvent, transformer: droppable());
     on<MediaLikePressedUser>(_onLikeUnlikePressed);
+    on<ReportPostEvent>(_onReportPostEvent);
     on<PostFetchedUser>((event, emit) async {
       if (!event.isMore) {
         emit(state.copyWith(statusUser: PostStatus.inProgress));
@@ -122,5 +123,13 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     } else {
       emit(state.copyWith(status: PostStatus.failure));
     }
+  }
+
+  Future<void> _onReportPostEvent(
+    ReportPostEvent event,
+    Emitter<PostState> emit,
+  ) async {
+    List<Post>? posts = List.from(state.posts);
+    emit(state.copyWith(posts: posts, refresh: !state.refresh));
   }
 }

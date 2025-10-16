@@ -328,6 +328,7 @@ class _PostHeader extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {
+            final postBloc = context.read<PostBloc>();
             showModalBottomSheet(
               context: context,
               useSafeArea: true,
@@ -336,7 +337,10 @@ class _PostHeader extends StatelessWidget {
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
               ),
-              builder: (context) => PostModalBottomSheet(post: post),
+              builder: (context) => BlocProvider.value(
+                value: postBloc,
+                child: PostModalBottomSheet(post: post),
+              ),
             );
           },
           padding: EdgeInsets.zero,

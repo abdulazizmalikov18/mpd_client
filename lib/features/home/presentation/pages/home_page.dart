@@ -2,6 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_icons.dart';
+import 'package:mpd_client/core/data/repository/storage_keys.dart';
+import 'package:mpd_client/core/data/repository/storage_repository.dart';
 import 'package:mpd_client/core/extension/context_ext.dart';
 import 'package:mpd_client/features/appointment/presentation/pages/appointment/components/no_appointment.dart';
 import 'package:mpd_client/features/home/domain/inherited/post_inhereted.dart';
@@ -75,6 +77,15 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
               }
+
+              // Read reported posts from storage and keep as a Set for quick checks.
+              final reportedString = StorageRepository.getString(
+                StorageKeys.REPORTED_POSTS,
+              );
+              final reportedSet = reportedString.isEmpty
+                  ? <String>{}
+                  : reportedString.split(',').toSet();
+
               return RefreshIndicator.adaptive(
                 onRefresh: () async {
                   context.read<PostBloc>().add(PostFetched(true));
@@ -107,6 +118,12 @@ class _HomePageState extends State<HomePage> {
                         );
                       }
                       final post = state.posts[index];
+
+                      // If this post id is reported, don't render the post (keeps indices consistent)
+                      if (reportedSet.contains(post.id?.toString() ?? '')) {
+                        return const SizedBox.shrink();
+                      }
+
                       PostInheritedNotifier.of(context).notifier!.setPost =
                           post;
 

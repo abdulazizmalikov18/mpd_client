@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/app/colors.dart';
+import 'package:mpd_client/core/data/repository/storage_keys.dart';
+import 'package:mpd_client/core/data/repository/storage_repository.dart';
+import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/features/chat/presentation/bloc/chat/chat_bloc.dart';
 import 'package:mpd_client/features/chat/presentation/widgets/report_message_dialog.dart';
 import 'package:mpd_client/features/home/data/models/posts_model.dart';
@@ -16,7 +19,7 @@ class PostModalBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(16, 12, 16, 32),
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -36,7 +39,7 @@ class PostModalBottomSheet extends StatelessWidget {
               children: [
                 CupertinoListTile(
                   backgroundColor: white,
-                  title: Text("Share"),
+                  title: const Text("Share"),
                   leading: AppIcons.share2.svg(),
                   onTap: () async {
                     await SharePlus.instance.share(
@@ -50,7 +53,7 @@ class PostModalBottomSheet extends StatelessWidget {
                 ),
                 CupertinoListTile(
                   backgroundColor: white,
-                  title: Text("About this account"),
+                  title: const Text("About this account"),
                   leading: AppIcons.circleUserRound.svg(),
                   onTap: () {
                     final sendComentBloc = context.read<SendComentBloc>();
@@ -92,23 +95,51 @@ class PostModalBottomSheet extends StatelessWidget {
                 ),
                 CupertinoListTile(
                   backgroundColor: white,
-                  title: Text("Report", style: TextStyle(color: red)),
+                  title: const Text("Report", style: TextStyle(color: red)),
                   leading: AppIcons.messageCircleWarning.svg(color: red),
                   onTap: () async {
                     await ReportMessageDialog.show(
                       context,
                       onReportSubmitted: (reason) async {
-                        // Here you can handle the report submission
-                        // For example, you can call an API to report the message
-                        // await context.read<ChatMessageBloc>().add(ReportMessage(
-                        //   messageId: message?.id ?? '',
-                        //   reason: reason,
-                        // ));
+                        // Save reported post id to storage so it will be hidden on next builds
+                        try {
+                          final current = StorageRepository.getString(
+                            StorageKeys.REPORTED_POSTS,
+                          );
+                          final reported = current.isEmpty
+                              ? <String>{}
+                              : current.split(',').toSet();
+                          reported.add(post.id?.toString() ?? '');
+                          await StorageRepository.putString(
+                            StorageKeys.REPORTED_POSTS,
+                            reported.where((e) => e.isNotEmpty).join(','),
+                          );
 
-                        // Show confirmation dialog
+                          // Update PostBloc state immediately so UI hides the reported post
+                          if (context.mounted) {
+                            try {
+                              final postBloc = context.read<PostBloc>();
+                              postBloc.add(
+                                ReportPostEvent(
+                                  postId: post.id?.toString() ?? '',
+                                ),
+                              );
+                              Log.i("message");
+                            } catch (e) {
+                              // ignore if bloc not available in this context
+                              Log.e(e);
+                            }
+                          }
+                        } catch (e) {
+                          // ignore storage errors
+                          Log.e(e);
+                        }
 
-                        Navigator.pop(context);
-                        await ReportConfirmationDialog.show(context);
+                        // Close bottom sheet and show confirmation
+                        if (context.mounted) {
+                          Navigator.pop(context);
+                          await ReportConfirmationDialog.show(context);
+                        }
                       },
                     );
                   },

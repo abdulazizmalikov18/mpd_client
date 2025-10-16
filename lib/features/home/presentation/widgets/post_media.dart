@@ -83,19 +83,21 @@ class _PostMediaState extends State<PostMedia>
               );
             },
           ),
-          Positioned(
-            bottom: 10.h,
-            right: 0,
-            left: 0,
-            child: SwipeIndicator(
-              current: PostInheritedNotifier.of(context).notifier!.post.isEmpty
-                  ? 0
-                  : PostInheritedNotifier.of(
-                      context,
-                    ).notifier!.post[widget.baseIndex].selectedIndex!,
-              length: widget.postMedias!.length,
+          if (widget.postMedias!.length != 1)
+            Positioned(
+              bottom: 10.h,
+              right: 0,
+              left: 0,
+              child: SwipeIndicator(
+                current:
+                    PostInheritedNotifier.of(context).notifier!.post.isEmpty
+                    ? 0
+                    : PostInheritedNotifier.of(
+                        context,
+                      ).notifier!.post[widget.baseIndex].selectedIndex!,
+                length: widget.postMedias!.length,
+              ),
             ),
-          ),
           Positioned(
             top: 12.h,
             right: 12.w,

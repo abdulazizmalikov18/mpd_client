@@ -12,6 +12,7 @@ class PostState extends Equatable {
     this.statusUser = PostStatus.initial,
     this.deleteStatus = PostStatus.initial,
     this.count = 0,
+    this.refresh = false,
   });
 
   final PostStatus status;
@@ -21,6 +22,7 @@ class PostState extends Equatable {
   final PostStatus deleteStatus;
   final int count;
   final bool hasReachedMax;
+  final bool refresh;
 
   PostState copyWith({
     PostStatus? status,
@@ -30,6 +32,7 @@ class PostState extends Equatable {
     PostStatus? deleteStatus,
     int? count,
     bool? hasReachedMax,
+    bool? refresh,
   }) {
     return PostState(
       status: status ?? this.status,
@@ -39,6 +42,7 @@ class PostState extends Equatable {
       deleteStatus: deleteStatus ?? this.deleteStatus,
       count: count ?? this.count,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+      refresh: refresh ?? this.refresh,
     );
   }
 
@@ -56,5 +60,6 @@ class PostState extends Equatable {
     statusUser,
     count,
     deleteStatus,
+    refresh,
   ];
 }
