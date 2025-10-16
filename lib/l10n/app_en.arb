@@ -333,5 +333,36 @@
   "forgotPassword": "Forgot password?",
   "passwordShort": "This password is too short. It must contain at least 6 characters.",
   "empty": "Can't be empty",
-  "reset_password_success": "Password has been reset successfully"
+  "reset_password_success": "Password has been reset successfully",
+  
+  "notification_no_notification": "No Notification",
+  "notification_no_notification_description": "You have no notification",
+  
+  "no_data_title": "No Data",
+  "no_data_description": "No information has been entered yet",
+  
+  "chat_not_found_title": "Chat Not Found",
+  "chat_not_found_description": "The page you are looking\nfor doesn't exist",
+  
+  "notification_clear_all": "Clear All",
+  "notification_clear_all_description": "Are you sure you want to clear all notifications?",
+  "notification_clear_all_cancel": "Cancel",
+  "notification_clear_all_confirm": "Clear All",
+  
+  "report_title": "Report message",
+  "report_description": "Why are you reporting this message?",
+  "report_cancel": "Cancel",
+  "report_confirm": "Report",
+  "report_success_title": "Report Sent",
+  "report_success_message": "Thank you for your report. We'll review it and take appropriate action.",
+  "report_reason_spam": "Spam or misleading",
+  "report_reason_nudity": "Nudity or sexual content",
+  "report_reason_hate": "Hate speech or symbols",
+  "report_reason_violence": "Violence or dangerous organizations",
+  "report_reason_harassment": "Harassment or bullying",
+  "report_reason_copyright": "Intellectual property violation",
+  "report_reason_self_harm": "Suicide or self-injury",
+  "report_reason_scam": "Scam or fraud",
+  "report_reason_false_info": "False information",
+  "report_reason_other": "Something else"
 }

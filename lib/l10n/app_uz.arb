@@ -331,5 +331,36 @@
   "forgotPassword": "Parolni unutdingizmi?",
   "passwordShort": "Parol juda qisqa. U kamida 6 ta belgidan iborat bo‘lishi kerak.",
   "empty": "Bo‘sh bo‘lishi mumkin emas",
-  "reset_password_success": "Parol muvaffaqiyatli o'zgartirildi"
+  "reset_password_success": "Parol muvaffaqiyatli o'zgartirildi",
+  
+  "notification_no_notification": "Bildirishnoma yo'q",
+  "notification_no_notification_description": "Sizda bildirishnomalar mavjud emas",
+  
+  "no_data_title": "Ma'lumot yo'q",
+  "no_data_description": "Hech qanday ma'lumot kiritilmagan",
+  
+  "chat_not_found_title": "Chat topilmadi",
+  "chat_not_found_description": "Siz qidirgan sahifa\nmavjud emas",
+  
+  "notification_clear_all": "Barchasini tozalash",
+  "notification_clear_all_description": "Barcha bildirishnomalarni tozalashni xohlaysizmi?",
+  "notification_clear_all_cancel": "Bekor qilish",
+  "notification_clear_all_confirm": "Tozalash",
+  
+  "report_title": "Xabar haqida shikoyat",
+  "report_description": "Nima uchun ushbu xabar haqida shikoyat qilmoqchisiz?",
+  "report_cancel": "Bekor qilish",
+  "report_confirm": "Shikoyat qilish",
+  "report_success_title": "Shikoyat yuborildi",
+  "report_success_message": "Shikoyatingiz uchun rahmat. Biz uni ko'rib chiqamiz va kerakli choralarni ko'ramiz.",
+  "report_reason_spam": "Spam yoki aldov",
+  "report_reason_nudity": "Yalang'ochlik yoki jinsiy kontent",
+  "report_reason_hate": "Nafrat yoki taqiqlangan belgilar",
+  "report_reason_violence": "Zo'ravonlik yoki xavfli tashkilotlar",
+  "report_reason_harassment": "Taqiq qilish yoki zo'ravonlik",
+  "report_reason_copyright": "Mualliflik huquqini buzish",
+  "report_reason_self_harm": "O'z joniga qasd qilish yoki jarohat yetkazish",
+  "report_reason_scam": "Firibgarlik yoki aldash",
+  "report_reason_false_info": "Noto'g'ri ma'lumot",
+  "report_reason_other": "Boshqa sabab"
 }

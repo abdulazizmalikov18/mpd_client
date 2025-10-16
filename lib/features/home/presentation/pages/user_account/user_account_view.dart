@@ -6,6 +6,7 @@ import 'package:formz/formz.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
+import 'package:mpd_client/app/app_images.dart';
 import 'package:mpd_client/app/colors.dart';
 import 'package:mpd_client/core/presentation/paginator.dart';
 import 'package:mpd_client/core/utils/caller.dart';
@@ -837,7 +838,33 @@ class _UserAccountViewState extends State<UserAccountView> {
                                     );
                                   }
 
-                                  return const SizedBox();
+                                  return Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Image.asset(AppImages.chatNotFound),
+                                      const SizedBox(height: 32),
+                                      Text(
+                                        context.l10n.no_data_title,
+                                        style: TextStyle(
+                                          fontSize: 28,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        context.l10n.no_data_description,
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w400,
+                                          color: greyText,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      const SizedBox(height: 64),
+                                    ],
+                                  );
                                 },
                               ),
                               ScreenUtil().setVerticalSpacing(90.h),

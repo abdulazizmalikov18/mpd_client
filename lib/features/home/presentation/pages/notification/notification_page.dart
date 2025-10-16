@@ -39,13 +39,13 @@ class _NotificationPageState extends State<NotificationPage> {
         children: [
           Image.asset(AppImages.chatNotFound),
           const SizedBox(height: 32),
-          const Text(
-            "No Notification",
+          Text(
+            context.l10n.notification_no_notification,
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 8),
-          const Text(
-            "You have no notification",
+          Text(
+            context.l10n.notification_no_notification_description,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w400,

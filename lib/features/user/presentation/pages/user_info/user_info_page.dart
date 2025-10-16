@@ -8,14 +8,8 @@ import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/core/utils/utils.dart';
 import 'package:mpd_client/core/validator/validators.dart';
-import 'package:mpd_client/features/authentication/data/models/profession_model.dart';
-import 'package:mpd_client/features/authentication/data/models/regions_model.dart';
 import 'package:mpd_client/features/authentication/domain/blocs/register/register_bloc.dart';
-import 'package:mpd_client/features/authentication/presentation/pages/register_detail/informations/components/select_variants_widget.dart';
-import 'package:mpd_client/features/authentication/presentation/pages/register_detail/informations/profession_sheet.dart';
-import 'package:mpd_client/features/authentication/presentation/pages/register_detail/informations/region_sheet.dart';
 import 'package:mpd_client/features/user/data/models/user_info_model.dart';
-import 'package:mpd_client/features/user/presentation/pages/user_info/components/select_gender_user.dart';
 import 'package:mpd_client/features/user/presentation/widgets/disabled_account_sheet.dart';
 import 'package:mpd_client/src/themes/styles.dart';
 import 'package:mpd_client/src/widgets/default_avatar.dart';
@@ -23,7 +17,6 @@ import 'package:mpd_client/src/widgets/label_input_widget.dart';
 import 'package:mpd_client/src/widgets/longbutton.dart';
 import 'package:mpd_client/src/widgets/pinned_sheet.dart';
 
-import 'components/update_selected_date_widget.dart';
 
 class UserInfo extends StatefulWidget {
   final UserInfoModel userLocalModel;
@@ -221,130 +214,132 @@ class _UserInfoState extends State<UserInfo> {
                 context.read<UserInfoBloc>().add(const HasChangesEvent());
               },
             ),
-            ScreenUtil().setVerticalSpacing(20.h),
-            LabelInputWidget(
-              validator: (value) => Validators.empty(value, context),
-              textCapitalization: TextCapitalization.words,
-              textInputAction: TextInputAction.next,
-              topHint: context.l10n.profile_lastname,
-              inputHint: context.l10n.profile_lastname,
-              controller: userLastNameController,
-              require: '*',
-              readOnly:
-                  context.read<UserInfoBloc>().state.userInfo?.status == 2,
-              onChanged: (value) {
-                context.read<UserInfoBloc>().add(const HasChangesEvent());
-              },
-            ),
-            ScreenUtil().setVerticalSpacing(20.h),
-            SelectGenderUser(
-              isDisable:
-                  context.read<UserInfoBloc>().state.userInfo?.status == 2,
-            ),
-            ScreenUtil().setVerticalSpacing(20.h),
-            UpdateSelectDateWidget(
-              onChanged: (value) {
-                context.read<UserInfoBloc>().add(const HasChangesEvent());
-              },
-              birthController: birthController,
-              isDisable:
-                  context.read<UserInfoBloc>().state.userInfo?.status == 2,
-            ),
-            ScreenUtil().setVerticalSpacing(20.h),
-            BlocSelector<ProfessionBloc, ProfessionState, Profession?>(
-              selector: (state) => state.chosenProfession,
-              builder: (context, chosenProfession) {
-                Profession? selected = chosenProfession;
-                return BlocSelector<
-                  SubProfessionsBloc,
-                  SubProfessionsState,
-                  Profession?
-                >(
-                  selector: (state) => state.selectedSubProfession,
-                  builder: (context, selectedSubProfession) {
-                    selected = chosenProfession ?? selectedSubProfession;
-                    if (selected != null) {
-                      context.read<UserInfoBloc>().add(
-                        SelectedCategoryIdEvent(
-                          MainCat(id: selected!.id, name: selected!.name),
-                          localCatName: "",
-                        ),
-                      );
-                    }
-                    return SelectVariantsWidget(
-                      topHint: context.l10n.profile_profession,
-                      hint: selected != null
-                          ? selected!.name!
-                          : widget.userLocalModel.mainCat?.name ?? "--",
-                      onPressed: () {
-                        showModalBottomSheet(
-                          useSafeArea: true,
-                          backgroundColor: Colors.transparent,
-                          isScrollControlled: true,
-                          context: context,
-                          builder: (ctx) => MultiBlocProvider(
-                            providers: [
-                              BlocProvider.value(
-                                value: BlocProvider.of<ProfessionBloc>(context),
-                              ),
-                              BlocProvider.value(
-                                value: BlocProvider.of<SubProfessionsBloc>(
-                                  context,
-                                ),
-                              ),
-                            ],
-                            child: const ProfessionSheet(),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                );
-              },
-            ),
-            ScreenUtil().setVerticalSpacing(20.h),
-            BlocSelector<DistrictBloc, DistrictState, Region?>(
-              selector: (state) => state.selectedDistict,
-              builder: (context, selectedDistict) {
-                if (selectedDistict != null) {
-                  context.read<UserInfoBloc>().add(
-                    SelectedRegionIdEvent(
-                      MainCat(
-                        id: selectedDistict.id,
-                        name: selectedDistict.name,
-                      ),
-                      localRegion: "",
-                    ),
-                  );
-                }
-                return SelectVariantsWidget(
-                  onPressed: () {
-                    FocusScope.of(context).unfocus();
-                    showModalBottomSheet(
-                      useSafeArea: true,
-                      backgroundColor: Colors.transparent,
-                      isScrollControlled: true,
-                      context: context,
-                      builder: (ctx) => MultiBlocProvider(
-                        providers: [
-                          BlocProvider.value(
-                            value: BlocProvider.of<RegionBloc>(context),
-                          ),
-                          BlocProvider.value(
-                            value: BlocProvider.of<DistrictBloc>(context),
-                          ),
-                        ],
-                        child: const RegionSheet(),
-                      ),
-                    );
-                  },
-                  topHint: context.l10n.profile_region,
-                  hint: selectedDistict != null
-                      ? selectedDistict.name
-                      : widget.userLocalModel.region?.name ?? "--",
-                );
-              },
-            ),
+            // ScreenUtil().setVerticalSpacing(20.h),
+            // LabelInputWidget(
+            //   validator: (value) => Validators.empty(value, context),
+            //   textCapitalization: TextCapitalization.words,
+            //   textInputAction: TextInputAction.next,
+            //   topHint: context.l10n.profile_lastname,
+            //   inputHint: context.l10n.profile_lastname,
+            //   controller: userLastNameController,
+            //   // require: '*',
+            //   readOnly:
+            //       context.read<UserInfoBloc>().state.userInfo?.status == 2,
+            //   onChanged: (value) {
+            //     context.read<UserInfoBloc>().add(const HasChangesEvent());
+            //   },
+            // ),
+            // ScreenUtil().setVerticalSpacing(20.h),
+            // SelectGenderUser(
+            //   isDisable:
+            //       context.read<UserInfoBloc>().state.userInfo?.status == 2,
+            // ),
+            // ScreenUtil().setVerticalSpacing(20.h),
+            // UpdateSelectDateWidget(
+            //   onChanged: (value) {
+            //     context.read<UserInfoBloc>().add(const HasChangesEvent());
+            //   },
+            //   birthController: birthController,
+            //   isDisable:
+            //       context.read<UserInfoBloc>().state.userInfo?.status == 2,
+            // ),
+
+            // ScreenUtil().setVerticalSpacing(20.h),
+            // BlocSelector<ProfessionBloc, ProfessionState, Profession?>(
+            //   selector: (state) => state.chosenProfession,
+            //   builder: (context, chosenProfession) {
+            //     Profession? selected = chosenProfession;
+            //     return BlocSelector<
+            //       SubProfessionsBloc,
+            //       SubProfessionsState,
+            //       Profession?
+            //     >(
+            //       selector: (state) => state.selectedSubProfession,
+            //       builder: (context, selectedSubProfession) {
+            //         selected = chosenProfession ?? selectedSubProfession;
+            //         if (selected != null) {
+            //           context.read<UserInfoBloc>().add(
+            //             SelectedCategoryIdEvent(
+            //               MainCat(id: selected!.id, name: selected!.name),
+            //               localCatName: "",
+            //             ),
+            //           );
+            //         }
+            //         return SelectVariantsWidget(
+            //           topHint: context.l10n.profile_profession,
+            //           hint: selected != null
+            //               ? selected!.name!
+            //               : widget.userLocalModel.mainCat?.name ?? "--",
+            //           onPressed: () {
+            //             showModalBottomSheet(
+            //               useSafeArea: true,
+            //               backgroundColor: Colors.transparent,
+            //               isScrollControlled: true,
+            //               context: context,
+            //               builder: (ctx) => MultiBlocProvider(
+            //                 providers: [
+            //                   BlocProvider.value(
+            //                     value: BlocProvider.of<ProfessionBloc>(context),
+            //                   ),
+            //                   BlocProvider.value(
+            //                     value: BlocProvider.of<SubProfessionsBloc>(
+            //                       context,
+            //                     ),
+            //                   ),
+            //                 ],
+            //                 child: const ProfessionSheet(),
+            //               ),
+            //             );
+            //           },
+            //         );
+            //       },
+            //     );
+            //   },
+            // ),
+
+            // ScreenUtil().setVerticalSpacing(20.h),
+            // BlocSelector<DistrictBloc, DistrictState, Region?>(
+            //   selector: (state) => state.selectedDistict,
+            //   builder: (context, selectedDistict) {
+            //     if (selectedDistict != null) {
+            //       context.read<UserInfoBloc>().add(
+            //         SelectedRegionIdEvent(
+            //           MainCat(
+            //             id: selectedDistict.id,
+            //             name: selectedDistict.name,
+            //           ),
+            //           localRegion: "",
+            //         ),
+            //       );
+            //     }
+            //     return SelectVariantsWidget(
+            //       onPressed: () {
+            //         FocusScope.of(context).unfocus();
+            //         showModalBottomSheet(
+            //           useSafeArea: true,
+            //           backgroundColor: Colors.transparent,
+            //           isScrollControlled: true,
+            //           context: context,
+            //           builder: (ctx) => MultiBlocProvider(
+            //             providers: [
+            //               BlocProvider.value(
+            //                 value: BlocProvider.of<RegionBloc>(context),
+            //               ),
+            //               BlocProvider.value(
+            //                 value: BlocProvider.of<DistrictBloc>(context),
+            //               ),
+            //             ],
+            //             child: const RegionSheet(),
+            //           ),
+            //         );
+            //       },
+            //       topHint: context.l10n.profile_region,
+            //       hint: selectedDistict != null
+            //           ? selectedDistict.name
+            //           : widget.userLocalModel.region?.name ?? "--",
+            //     );
+            //   },
+            // ),
             const SizedBox(height: 120),
           ],
         ),

@@ -68,9 +68,7 @@ class ReviewWidget extends StatelessWidget {
         ),
         ScreenUtil().setVerticalSpacing(8.h),
         ReadMoreText(
-          coment != null
-              ? coment!.text!
-              : 'Lorem ipsum dolor sit amet consectetur. Risus faucibus euismod turpis faucibus euismod elit augue interdum lacus. Dictum urna tempus dui interdum elementum dui dui  dui dui  dui duisadasdasd  dui dui',
+          coment != null ? coment!.text! : '-',
           style: Styles.headline7.copyWith(
             color: context.color.grey,
             fontSize: 14.sp,

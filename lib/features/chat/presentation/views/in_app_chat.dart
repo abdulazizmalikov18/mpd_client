@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
 import 'package:mpd_client/app/app_colors.dart';
+import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/app/app_images.dart';
 import 'package:mpd_client/app/colors.dart';
 import 'package:mpd_client/core/pagination/presentation/paginator_list.dart';
@@ -13,7 +15,9 @@ import 'package:mpd_client/features/chat/domain/models/message.dart';
 import 'package:mpd_client/features/chat/presentation/bloc/chat_message/bloc/chat_message_bloc.dart';
 import 'package:mpd_client/features/chat/presentation/controller/vm_controller.dart';
 import 'package:mpd_client/features/chat/presentation/widgets/message_widgets/w_message.dart';
+import 'package:mpd_client/features/chat/presentation/widgets/report_message_dialog.dart';
 import 'package:mpd_client/features/chat/presentation/widgets/w_chat_textfield.dart';
+import 'package:mpd_client/features/user/domain/blocs/user_info/user_info_bloc.dart';
 
 class InChatView extends StatefulWidget {
   final ChatGroupModel group;
@@ -122,6 +126,12 @@ class _InChatViewState extends State<InChatView> {
                           context,
                           index,
                           state.messages[index],
+                          (state.messages[index].sender ==
+                              context
+                                  .read<UserInfoBloc>()
+                                  .state
+                                  .userInfo
+                                  ?.username),
                         ),
                         child: WMessage(message: state.messages[index]),
                       ),
@@ -163,54 +173,106 @@ class _InChatViewState extends State<InChatView> {
     BuildContext context,
     int index,
     MessageModel? message,
+    bool isUserToUser,
   ) {
     showModalBottomSheet(
       context: context,
-      builder: (_) => SafeArea(
-        child: Wrap(
+      useSafeArea: true,
+      useRootNavigator: true,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (_) => Padding(
+        padding: EdgeInsets.fromLTRB(16, 12, 16, 32),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            if (message?.text != null && (message?.text ?? "").isNotEmpty)
-              ListTile(
-                leading: const Icon(Icons.copy),
-                title: const Text('Copy'),
-                onTap: () async {
-                  Navigator.pop(context);
-                  await Clipboard.setData(
-                    ClipboardData(text: message?.text ?? ''),
-                  );
-                },
+            Container(
+              width: 60,
+              height: 2,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                color: grey,
               ),
-            if (message?.file != null)
-              ListTile(
-                leading: const Icon(Icons.download),
-                title: const Text('Download'),
-                onTap: () {
-                  Navigator.pop(context);
-                  ChatVMController().downloadAndSaveFile(
-                    message?.file ?? "",
-                    context,
-                  );
-                },
-              ),
-            ListTile(
-              leading: const Icon(Icons.edit),
-              title: const Text('Edit'),
-              onTap: () {
-                Navigator.pop(context);
-                // _startEditing(index);
-              },
             ),
-            // ListTile(
-            //   leading: const Icon(Icons.delete, color: Colors.red),
-            //   title: const Text('Delete'),
-            //   onTap: () {
-            //     Navigator.pop(context);
-            //     // _deleteMessage(index);
-            //   },
-            // ),
+            const SizedBox(height: 16),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Column(
+                children: [
+                  if (message?.text != null && (message?.text ?? "").isNotEmpty)
+                    CupertinoListTile(
+                      leading: AppIcons.copy.svg(),
+                      title: const Text('Copy'),
+                      backgroundColor: white,
+                      onTap: () async {
+                        Navigator.pop(context);
+                        await Clipboard.setData(
+                          ClipboardData(text: message?.text ?? ''),
+                        );
+                      },
+                    ),
+                  if (message?.file != null)
+                    CupertinoListTile(
+                      leading: AppIcons.download.svg(),
+                      title: const Text('Download'),
+                      backgroundColor: white,
+                      onTap: () {
+                        Navigator.pop(context);
+                        ChatVMController().downloadAndSaveFile(
+                          message?.file ?? "",
+                          context,
+                        );
+                      },
+                    ),
+                  if (isUserToUser)
+                    CupertinoListTile(
+                      leading: AppIcons.pencil.svg(),
+                      title: const Text('Edit'),
+                      backgroundColor: white,
+                      onTap: () {
+                        Navigator.pop(context);
+                        // _startEditing(index);
+                      },
+                    ),
+                  if (!isUserToUser)
+                    CupertinoListTile(
+                      leading: AppIcons.messageCircleWarning.svg(color: red),
+                      title: const Text('Report', style: TextStyle(color: red)),
+                      backgroundColor: white,
+                      onTap: () {
+                        Navigator.pop(context);
+                        _showReportDialog(context, message);
+                      },
+                    ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+Future<void> _showReportDialog(
+  BuildContext context,
+  MessageModel? message,
+) async {
+  await ReportMessageDialog.show(
+    context,
+    onReportSubmitted: (reason) async {
+      // Here you can handle the report submission
+      // For example, you can call an API to report the message
+      // await context.read<ChatMessageBloc>().add(ReportMessage(
+      //   messageId: message?.id ?? '',
+      //   reason: reason,
+      // ));
+
+      // Show confirmation dialog
+
+      await ReportConfirmationDialog.show(context);
+    },
+  );
 }

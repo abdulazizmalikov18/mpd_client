@@ -7,6 +7,7 @@ import 'package:mpd_client/app/colors.dart';
 import 'package:mpd_client/core/pagination/presentation/paginator_list.dart';
 import 'package:mpd_client/features/chat/presentation/bloc/chat_group/chat_group_bloc.dart';
 import 'package:mpd_client/features/chat/presentation/views/in_app_chat.dart';
+import 'package:mpd_client/features/chat/presentation/widgets/message_widgets/w_button.dart';
 import 'package:mpd_client/features/chat/presentation/widgets/w_user_chat_button.dart';
 import 'package:mpd_client/src/widgets/w_shimmer.dart';
 import 'package:mpd_client/src/widgets/w_text_field.dart';
@@ -81,18 +82,29 @@ class _ChatViewState extends State<ChatView> {
                   Image.asset(AppImages.chatNotFound),
                   const SizedBox(height: 32),
                   Text(
-                    'Chat Not Found',
+                    context.l10n.chat_not_found_title,
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'The page you are looking\nfor doesn’t exits',
+                    context.l10n.chat_not_found_description,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
                       color: context.color.grey,
                     ),
+                  ),
+                  const SizedBox(height: 24),
+                  WButton(
+                    onTap: () {
+                      context.read<ChatGroupBloc>().add(
+                        const ChatGetGroupEvent(),
+                      );
+                    },
+                    text: context.l10n.refresh,
+                    margin: EdgeInsets.symmetric(horizontal: 24),
+                    height: 48,
                   ),
                   const Spacer(),
                 ],

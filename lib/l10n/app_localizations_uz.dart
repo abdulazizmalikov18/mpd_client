@@ -982,4 +982,87 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get reset_password_success => 'Parol muvaffaqiyatli o\'zgartirildi';
+
+  @override
+  String get notification_no_notification => 'Bildirishnoma yo\'q';
+
+  @override
+  String get notification_no_notification_description =>
+      'Sizda bildirishnomalar mavjud emas';
+
+  @override
+  String get no_data_title => 'Ma\'lumot yo\'q';
+
+  @override
+  String get no_data_description => 'Hech qanday ma\'lumot kiritilmagan';
+
+  @override
+  String get chat_not_found_title => 'Chat topilmadi';
+
+  @override
+  String get chat_not_found_description => 'Siz qidirgan sahifa\nmavjud emas';
+
+  @override
+  String get notification_clear_all => 'Barchasini tozalash';
+
+  @override
+  String get notification_clear_all_description =>
+      'Barcha bildirishnomalarni tozalashni xohlaysizmi?';
+
+  @override
+  String get notification_clear_all_cancel => 'Bekor qilish';
+
+  @override
+  String get notification_clear_all_confirm => 'Tozalash';
+
+  @override
+  String get report_title => 'Xabar haqida shikoyat';
+
+  @override
+  String get report_description =>
+      'Nima uchun ushbu xabar haqida shikoyat qilmoqchisiz?';
+
+  @override
+  String get report_cancel => 'Bekor qilish';
+
+  @override
+  String get report_confirm => 'Shikoyat qilish';
+
+  @override
+  String get report_success_title => 'Shikoyat yuborildi';
+
+  @override
+  String get report_success_message =>
+      'Shikoyatingiz uchun rahmat. Biz uni ko\'rib chiqamiz va kerakli choralarni ko\'ramiz.';
+
+  @override
+  String get report_reason_spam => 'Spam yoki aldov';
+
+  @override
+  String get report_reason_nudity => 'Yalang\'ochlik yoki jinsiy kontent';
+
+  @override
+  String get report_reason_hate => 'Nafrat yoki taqiqlangan belgilar';
+
+  @override
+  String get report_reason_violence => 'Zo\'ravonlik yoki xavfli tashkilotlar';
+
+  @override
+  String get report_reason_harassment => 'Taqiq qilish yoki zo\'ravonlik';
+
+  @override
+  String get report_reason_copyright => 'Mualliflik huquqini buzish';
+
+  @override
+  String get report_reason_self_harm =>
+      'O\'z joniga qasd qilish yoki jarohat yetkazish';
+
+  @override
+  String get report_reason_scam => 'Firibgarlik yoki aldash';
+
+  @override
+  String get report_reason_false_info => 'Noto\'g\'ri ma\'lumot';
+
+  @override
+  String get report_reason_other => 'Boshqa sabab';
 }

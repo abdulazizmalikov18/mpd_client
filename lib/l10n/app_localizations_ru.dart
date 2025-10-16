@@ -962,4 +962,87 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get reset_password_success => 'Пароль успешно изменен';
+
+  @override
+  String get notification_no_notification => 'Нет уведомлений';
+
+  @override
+  String get notification_no_notification_description =>
+      'You have no notification';
+
+  @override
+  String get no_data_title => 'No Data';
+
+  @override
+  String get no_data_description => 'No information has been entered yet';
+
+  @override
+  String get chat_not_found_title => 'Чат не найден';
+
+  @override
+  String get chat_not_found_description =>
+      'Страница, которую вы ищете,\nне существует';
+
+  @override
+  String get notification_clear_all => 'Очистить все';
+
+  @override
+  String get notification_clear_all_description =>
+      'Вы уверены, что хотите очистить все уведомления?';
+
+  @override
+  String get notification_clear_all_cancel => 'Отмена';
+
+  @override
+  String get notification_clear_all_confirm => 'Очистить все';
+
+  @override
+  String get report_title => 'Пожаловаться на сообщение';
+
+  @override
+  String get report_description => 'Почему вы жалуетесь на это сообщение?';
+
+  @override
+  String get report_cancel => 'Отмена';
+
+  @override
+  String get report_confirm => 'Пожаловаться';
+
+  @override
+  String get report_success_title => 'Жалоба отправлена';
+
+  @override
+  String get report_success_message =>
+      'Спасибо за ваше сообщение. Мы рассмотрим его и примем соответствующие меры.';
+
+  @override
+  String get report_reason_spam => 'Спам или введение в заблуждение';
+
+  @override
+  String get report_reason_nudity => 'Обнаженное тело или сексуальный контент';
+
+  @override
+  String get report_reason_hate =>
+      'Разжигание ненависти или запрещенные символы';
+
+  @override
+  String get report_reason_violence => 'Насилие или опасные организации';
+
+  @override
+  String get report_reason_harassment => 'Домогательства или травля';
+
+  @override
+  String get report_reason_copyright => 'Нарушение авторских прав';
+
+  @override
+  String get report_reason_self_harm => 'Суицид или самоповреждение';
+
+  @override
+  String get report_reason_scam => 'Мошенничество или обман';
+
+  @override
+  String get report_reason_false_info => 'Ложная информация';
+
+  @override
+  String get report_reason_other => 'Другая причина';
 }

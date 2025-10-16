@@ -1,7 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
-import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/core/utils/utils.dart';
 import 'package:mpd_client/features/chat/presentation/bloc/chat/chat_bloc.dart';
 import 'package:mpd_client/features/home/data/models/posts_model.dart';
@@ -13,11 +12,11 @@ import 'package:mpd_client/features/home/presentation/pages/user_account/user_ac
 import 'package:mpd_client/features/home/presentation/widgets/animated_like.dart';
 import 'package:mpd_client/features/home/presentation/pages/coment_sheet/components/coment.dart';
 import 'package:mpd_client/features/home/presentation/widgets/post_media.dart';
+import 'package:mpd_client/features/home/presentation/widgets/post_modal_bottom_sheet.dart';
 import 'package:mpd_client/src/themes/styles.dart';
 import 'package:mpd_client/src/widgets/cached_image_widget.dart';
 import 'package:mpd_client/src/widgets/default_avatar.dart';
 import 'package:readmore/readmore.dart';
-import 'package:share_plus/share_plus.dart';
 
 class PostWidget extends StatefulWidget {
   final Post post;
@@ -327,29 +326,21 @@ class _PostHeader extends StatelessWidget {
             },
           ),
         ),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(100),
-          child: Material(
-            color: Colors.transparent,
-            shape: const CircleBorder(),
-            child: IconButton(
-              onPressed: () async {
-                await SharePlus.instance.share(
-                  ShareParams(
-                    text:
-                        '${post.authorFullname} \n\n${post.text} \n\n${post.media?.first.image ?? ""} \n\n${post.media?.first.file ?? ""} \nhttps://play.google.com/store/apps/details?id=com.mpd.mpdclient',
-                    subject: post.authorFullname ?? "Mpd Client",
-                  ),
-                );
-              },
-              padding: EdgeInsets.zero,
-              icon: AppIcons.share.svg(
-                height: 24.h,
-                width: 24.h,
-                color: context.color.black,
+        IconButton(
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              useSafeArea: true,
+              useRootNavigator: true,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
               ),
-            ),
-          ),
+              builder: (context) => PostModalBottomSheet(post: post),
+            );
+          },
+          padding: EdgeInsets.zero,
+          icon: const Icon(Icons.more_vert),
         ),
       ],
     );

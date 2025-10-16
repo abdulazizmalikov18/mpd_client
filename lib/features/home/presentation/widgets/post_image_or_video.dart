@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:mpd_client/app/app_images.dart';
 import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/features/home/domain/service/flick_multi_manger.dart';
 import 'package:mpd_client/src/widgets/flick_video_widget.dart';
@@ -194,31 +195,9 @@ class _PostImageOrVideoState extends State<PostImageOrVideo>
 
   Widget _buildVideo() {
     if (hasError) {
-      return Container(
-        height: 200,
-        color: Colors.black,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.error, color: Colors.red, size: 48),
-            SizedBox(height: 8),
-            Text(
-              'Video yuklashda xatolik',
-              style: TextStyle(color: Colors.white),
-            ),
-            SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  hasError = false;
-                  isInitializing = false;
-                });
-                _initializeVideoIfNeeded();
-              },
-              child: Text('Qayta urinish'),
-            ),
-          ],
-        ),
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Image.asset(AppImages.logo),
       );
     }
 

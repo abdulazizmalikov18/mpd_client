@@ -124,6 +124,14 @@ abstract class AppIcons {
 
   static const circleCheck = "assets/icons/circle-check.svg";
   static const circleCheckBig = "assets/icons/circle-check-big.svg";
+
+  static const share2 = "assets/icons/share-2.svg";
+  static const userMinus = "assets/icons/user-minus.svg";
+  static const circleUserRound = "assets/icons/circle-user-round.svg";
+  static const messageCircleWarning = "assets/icons/message-circle-warning.svg";
+  static const copy = "assets/icons/copy.svg";
+  static const download = "assets/icons/download.svg";
+  static const pencil = "assets/icons/pencil.svg";
 }
 
 extension SvgExt on String {

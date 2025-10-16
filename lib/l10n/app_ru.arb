@@ -333,5 +333,31 @@
   "forgotPassword": "Забыли пароль?",
   "passwordShort": "Пароль слишком короткий. Минимум 6 символов.",
   "empty": "Поле не может быть пустым",
-  "reset_password_success": "Пароль успешно изменен"
+  "reset_password_success": "Пароль успешно изменен",
+  
+  "notification_no_notification": "Нет уведомлений",
+  "notification_clear_all": "Очистить все",
+  "notification_clear_all_description": "Вы уверены, что хотите очистить все уведомления?",
+  "notification_clear_all_cancel": "Отмена",
+  "notification_clear_all_confirm": "Очистить все",
+  
+  "report_title": "Пожаловаться на сообщение",
+  "report_description": "Почему вы жалуетесь на это сообщение?",
+  "report_cancel": "Отмена",
+  "report_confirm": "Пожаловаться",
+  "report_success_title": "Жалоба отправлена",
+  "report_success_message": "Спасибо за ваше сообщение. Мы рассмотрим его и примем соответствующие меры.",
+  "report_reason_spam": "Спам или введение в заблуждение",
+  "report_reason_nudity": "Обнаженное тело или сексуальный контент",
+  "report_reason_hate": "Разжигание ненависти или запрещенные символы",
+  "report_reason_violence": "Насилие или опасные организации",
+  "report_reason_harassment": "Домогательства или травля",
+  "report_reason_copyright": "Нарушение авторских прав",
+  "report_reason_self_harm": "Суицид или самоповреждение",
+  "report_reason_scam": "Мошенничество или обман",
+  "report_reason_false_info": "Ложная информация",
+  "report_reason_other": "Другая причина",
+  
+  "chat_not_found_title": "Чат не найден",
+  "chat_not_found_description": "Страница, которую вы ищете,\nне существует"
 }

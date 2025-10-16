@@ -9,7 +9,6 @@ import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/app/app_routes.dart';
 import 'package:mpd_client/app/colors.dart';
-import 'package:mpd_client/features/home/domain/blocs/post/post_bloc.dart';
 import 'package:mpd_client/features/home/domain/service/flick_multi_manger.dart';
 import 'package:mpd_client/features/user/domain/blocs/user_info/user_info_bloc.dart';
 import 'package:mpd_client/provider/language.dart';
@@ -108,37 +107,38 @@ class HomeAppbarComponent extends StatelessWidget implements PreferredSize {
             color: context.color.black,
           ),
         ),
-        BlocBuilder<UserInfoBloc, UserInfoState>(
-          builder: (context, state) {
-            if (state.specailistModel.isEmpty) {
-              return const SizedBox();
-            }
-            return IconButton(
-              splashRadius: 26,
-              constraints: const BoxConstraints(),
-              onPressed: () {
-                Navigator.of(context).pushNamed(AppRoutes.createPost).then((
-                  value,
-                ) {
-                  if (value != null) {
-                    if (value as bool) {
-                      if (context.mounted) {
-                        context.read<PostBloc>().add(PostFetched(true));
-                      }
-                    }
-                  }
-                });
-              },
-              icon: SvgPicture.asset(
-                AppIcons.plusCircle,
-                colorFilter: ColorFilter.mode(
-                  context.color.black,
-                  BlendMode.srcIn,
-                ),
-              ),
-            );
-          },
-        ),
+
+        // BlocBuilder<UserInfoBloc, UserInfoState>(
+        //   builder: (context, state) {
+        //     if (state.specailistModel.isEmpty) {
+        //       return const SizedBox();
+        //     }
+        //     return IconButton(
+        //       splashRadius: 26,
+        //       constraints: const BoxConstraints(),
+        //       onPressed: () {
+        //         Navigator.of(context).pushNamed(AppRoutes.createPost).then((
+        //           value,
+        //         ) {
+        //           if (value != null) {
+        //             if (value as bool) {
+        //               if (context.mounted) {
+        //                 context.read<PostBloc>().add(PostFetched(true));
+        //               }
+        //             }
+        //           }
+        //         });
+        //       },
+        //       icon: SvgPicture.asset(
+        //         AppIcons.plusCircle,
+        //         colorFilter: ColorFilter.mode(
+        //           context.color.black,
+        //           BlendMode.srcIn,
+        //         ),
+        //       ),
+        //     );
+        //   },
+        // ),
       ],
     );
   }

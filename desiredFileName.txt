@@ -1,1 +1,7 @@
-{}
+{
+  "ru": [
+    "notification_no_notification_description",
+    "no_data_title",
+    "no_data_description"
+  ]
+}

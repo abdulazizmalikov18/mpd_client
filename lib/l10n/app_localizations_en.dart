@@ -965,4 +965,86 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reset_password_success => 'Password has been reset successfully';
+
+  @override
+  String get notification_no_notification => 'No Notification';
+
+  @override
+  String get notification_no_notification_description =>
+      'You have no notification';
+
+  @override
+  String get no_data_title => 'No Data';
+
+  @override
+  String get no_data_description => 'No information has been entered yet';
+
+  @override
+  String get chat_not_found_title => 'Chat Not Found';
+
+  @override
+  String get chat_not_found_description =>
+      'The page you are looking\nfor doesn\'t exist';
+
+  @override
+  String get notification_clear_all => 'Clear All';
+
+  @override
+  String get notification_clear_all_description =>
+      'Are you sure you want to clear all notifications?';
+
+  @override
+  String get notification_clear_all_cancel => 'Cancel';
+
+  @override
+  String get notification_clear_all_confirm => 'Clear All';
+
+  @override
+  String get report_title => 'Report message';
+
+  @override
+  String get report_description => 'Why are you reporting this message?';
+
+  @override
+  String get report_cancel => 'Cancel';
+
+  @override
+  String get report_confirm => 'Report';
+
+  @override
+  String get report_success_title => 'Report Sent';
+
+  @override
+  String get report_success_message =>
+      'Thank you for your report. We\'ll review it and take appropriate action.';
+
+  @override
+  String get report_reason_spam => 'Spam or misleading';
+
+  @override
+  String get report_reason_nudity => 'Nudity or sexual content';
+
+  @override
+  String get report_reason_hate => 'Hate speech or symbols';
+
+  @override
+  String get report_reason_violence => 'Violence or dangerous organizations';
+
+  @override
+  String get report_reason_harassment => 'Harassment or bullying';
+
+  @override
+  String get report_reason_copyright => 'Intellectual property violation';
+
+  @override
+  String get report_reason_self_harm => 'Suicide or self-injury';
+
+  @override
+  String get report_reason_scam => 'Scam or fraud';
+
+  @override
+  String get report_reason_false_info => 'False information';
+
+  @override
+  String get report_reason_other => 'Something else';
 }

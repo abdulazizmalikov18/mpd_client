@@ -1965,6 +1965,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password has been reset successfully'**
   String get reset_password_success;
+
+  /// No description provided for @notification_no_notification.
+  ///
+  /// In en, this message translates to:
+  /// **'No Notification'**
+  String get notification_no_notification;
+
+  /// No description provided for @notification_no_notification_description.
+  ///
+  /// In en, this message translates to:
+  /// **'You have no notification'**
+  String get notification_no_notification_description;
+
+  /// No description provided for @no_data_title.
+  ///
+  /// In en, this message translates to:
+  /// **'No Data'**
+  String get no_data_title;
+
+  /// No description provided for @no_data_description.
+  ///
+  /// In en, this message translates to:
+  /// **'No information has been entered yet'**
+  String get no_data_description;
+
+  /// No description provided for @chat_not_found_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat Not Found'**
+  String get chat_not_found_title;
+
+  /// No description provided for @chat_not_found_description.
+  ///
+  /// In en, this message translates to:
+  /// **'The page you are looking\nfor doesn\'t exist'**
+  String get chat_not_found_description;
+
+  /// No description provided for @notification_clear_all.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear All'**
+  String get notification_clear_all;
+
+  /// No description provided for @notification_clear_all_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to clear all notifications?'**
+  String get notification_clear_all_description;
+
+  /// No description provided for @notification_clear_all_cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get notification_clear_all_cancel;
+
+  /// No description provided for @notification_clear_all_confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear All'**
+  String get notification_clear_all_confirm;
+
+  /// No description provided for @report_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Report message'**
+  String get report_title;
+
+  /// No description provided for @report_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Why are you reporting this message?'**
+  String get report_description;
+
+  /// No description provided for @report_cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get report_cancel;
+
+  /// No description provided for @report_confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Report'**
+  String get report_confirm;
+
+  /// No description provided for @report_success_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Report Sent'**
+  String get report_success_title;
+
+  /// No description provided for @report_success_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you for your report. We\'ll review it and take appropriate action.'**
+  String get report_success_message;
+
+  /// No description provided for @report_reason_spam.
+  ///
+  /// In en, this message translates to:
+  /// **'Spam or misleading'**
+  String get report_reason_spam;
+
+  /// No description provided for @report_reason_nudity.
+  ///
+  /// In en, this message translates to:
+  /// **'Nudity or sexual content'**
+  String get report_reason_nudity;
+
+  /// No description provided for @report_reason_hate.
+  ///
+  /// In en, this message translates to:
+  /// **'Hate speech or symbols'**
+  String get report_reason_hate;
+
+  /// No description provided for @report_reason_violence.
+  ///
+  /// In en, this message translates to:
+  /// **'Violence or dangerous organizations'**
+  String get report_reason_violence;
+
+  /// No description provided for @report_reason_harassment.
+  ///
+  /// In en, this message translates to:
+  /// **'Harassment or bullying'**
+  String get report_reason_harassment;
+
+  /// No description provided for @report_reason_copyright.
+  ///
+  /// In en, this message translates to:
+  /// **'Intellectual property violation'**
+  String get report_reason_copyright;
+
+  /// No description provided for @report_reason_self_harm.
+  ///
+  /// In en, this message translates to:
+  /// **'Suicide or self-injury'**
+  String get report_reason_self_harm;
+
+  /// No description provided for @report_reason_scam.
+  ///
+  /// In en, this message translates to:
+  /// **'Scam or fraud'**
+  String get report_reason_scam;
+
+  /// No description provided for @report_reason_false_info.
+  ///
+  /// In en, this message translates to:
+  /// **'False information'**
+  String get report_reason_false_info;
+
+  /// No description provided for @report_reason_other.
+  ///
+  /// In en, this message translates to:
+  /// **'Something else'**
+  String get report_reason_other;
 }
 
 class _AppLocalizationsDelegate

@@ -12,7 +12,6 @@ import 'package:mpd_client/features/user/widgets/request_emergency_help_sheet.da
 import 'package:mpd_client/provider/local_provider.dart';
 import 'package:mpd_client/src/themes/styles.dart';
 import 'package:mpd_client/src/widgets/bottom_sheet_widget.dart';
-import 'package:mpd_client/src/widgets/longbutton.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shimmer/shimmer.dart';
 import 'presentation/widgets/user_avatar_part.dart';
@@ -161,31 +160,31 @@ class _UserPageState extends State<UserPage> {
               },
             ),
 
-            BlocBuilder<UserInfoBloc, UserInfoState>(
-              builder: (context, state) {
-                final disabled = state.status.isInProgress ? true : false;
-                return ListTile(
-                  leading: AppIcons.likeDislike.svg(
-                    color: !disabled
-                        ? context.color.black
-                        : context.color.black.withValues(alpha: 0.5),
-                  ),
-                  horizontalTitleGap: 0,
-                  title: Text(
-                    context.l10n.personalPosts,
-                    style: Styles.headline5,
-                  ),
-                  onTap: state.status.isInProgress || state.status.isFailure
-                      ? null
-                      : () {
-                          Navigator.of(context).pushNamed(
-                            AppRoutes.postUser,
-                            arguments: state.userInfo?.username ?? "",
-                          );
-                        },
-                );
-              },
-            ),
+            // BlocBuilder<UserInfoBloc, UserInfoState>(
+            //   builder: (context, state) {
+            //     final disabled = state.status.isInProgress ? true : false;
+            //     return ListTile(
+            //       leading: AppIcons.likeDislike.svg(
+            //         color: !disabled
+            //             ? context.color.black
+            //             : context.color.black.withValues(alpha: 0.5),
+            //       ),
+            //       horizontalTitleGap: 0,
+            //       title: Text(
+            //         context.l10n.personalPosts,
+            //         style: Styles.headline5,
+            //       ),
+            //       onTap: state.status.isInProgress || state.status.isFailure
+            //           ? null
+            //           : () {
+            //               Navigator.of(context).pushNamed(
+            //                 AppRoutes.postUser,
+            //                 arguments: state.userInfo?.username ?? "",
+            //               );
+            //             },
+            //     );
+            //   },
+            // ),
             BlocBuilder<UserInfoBloc, UserInfoState>(
               builder: (context, state) {
                 final disabled = state.status.isInProgress ? true : false;
@@ -291,80 +290,81 @@ class _UserPageState extends State<UserPage> {
                 );
               },
             ),
-            BlocBuilder<UserInfoBloc, UserInfoState>(
-              builder: (context, state) {
-                return ListTile(
-                  leading: AppIcons.briefcaseLite.svg(
-                    color: context.color.black,
-                  ),
-                  horizontalTitleGap: 0,
-                  title: Text(
-                    state.specailistModel.isEmpty
-                        ? context.l10n.doctorProfile
-                        : context.l10n.mySpecialties,
-                    style: Styles.headline5,
-                  ),
-                  onTap: () {
-                    if (state.specailistModel.isEmpty) {
-                      showModalBottomSheet(
-                        backgroundColor: Colors.transparent,
-                        context: context,
-                        builder: (context) => BottomSheetWidget(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 20,
-                            horizontal: 16,
-                          ),
-                          children: [
-                            const SizedBox(height: 12),
-                            Text(
-                              context.l10n.specialist_registration_title,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            Text(
-                              context.l10n.specialist_registration_description,
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: context.color.grey,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 24),
-                            LongButton(
-                              height: 52,
-                              buttonName:
-                                  context.l10n.specialist_registration_agree,
-                              onPress: () {
-                                Navigator.of(
-                                  context,
-                                ).pushNamed(AppRoutes.registerSpecialist);
-                              },
-                            ),
-                            const SizedBox(height: 12),
-                            LongButton(
-                              height: 52,
-                              buttonName:
-                                  context.l10n.specialist_registration_disagree,
-                              color: context.color.red,
-                              onPress: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                            const SizedBox(height: 16),
-                          ],
-                        ),
-                      );
-                    } else {
-                      Navigator.of(context).pushNamed(AppRoutes.userSpecialist);
-                    }
-                  },
-                );
-              },
-            ),
+
+            // BlocBuilder<UserInfoBloc, UserInfoState>(
+            //   builder: (context, state) {
+            //     return ListTile(
+            //       leading: AppIcons.briefcaseLite.svg(
+            //         color: context.color.black,
+            //       ),
+            //       horizontalTitleGap: 0,
+            //       title: Text(
+            //         state.specailistModel.isEmpty
+            //             ? context.l10n.doctorProfile
+            //             : context.l10n.mySpecialties,
+            //         style: Styles.headline5,
+            //       ),
+            //       onTap: () {
+            //         if (state.specailistModel.isEmpty) {
+            //           showModalBottomSheet(
+            //             backgroundColor: Colors.transparent,
+            //             context: context,
+            //             builder: (context) => BottomSheetWidget(
+            //               padding: const EdgeInsets.symmetric(
+            //                 vertical: 20,
+            //                 horizontal: 16,
+            //               ),
+            //               children: [
+            //                 const SizedBox(height: 12),
+            //                 Text(
+            //                   context.l10n.specialist_registration_title,
+            //                   textAlign: TextAlign.center,
+            //                   style: TextStyle(
+            //                     fontSize: 24,
+            //                     fontWeight: FontWeight.w700,
+            //                   ),
+            //                 ),
+            //                 Text(
+            //                   context.l10n.specialist_registration_description,
+            //                   style: TextStyle(
+            //                     fontSize: 14,
+            //                     fontWeight: FontWeight.w400,
+            //                     color: context.color.grey,
+            //                   ),
+            //                   textAlign: TextAlign.center,
+            //                 ),
+            //                 const SizedBox(height: 24),
+            //                 LongButton(
+            //                   height: 52,
+            //                   buttonName:
+            //                       context.l10n.specialist_registration_agree,
+            //                   onPress: () {
+            //                     Navigator.of(
+            //                       context,
+            //                     ).pushNamed(AppRoutes.registerSpecialist);
+            //                   },
+            //                 ),
+            //                 const SizedBox(height: 12),
+            //                 LongButton(
+            //                   height: 52,
+            //                   buttonName:
+            //                       context.l10n.specialist_registration_disagree,
+            //                   color: context.color.red,
+            //                   onPress: () {
+            //                     Navigator.of(context).pop();
+            //                   },
+            //                 ),
+            //                 const SizedBox(height: 16),
+            //               ],
+            //             ),
+            //           );
+            //         } else {
+            //           Navigator.of(context).pushNamed(AppRoutes.userSpecialist);
+            //         }
+            //       },
+            //     );
+            //   },
+            // ),
             ListTile(
               leading: AppIcons.warning.svg(color: context.color.red),
               horizontalTitleGap: 0,
