@@ -4,6 +4,7 @@ import 'package:formz/formz.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
+import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/features/user/presentation/widgets/language_sheet.dart';
 import 'package:mpd_client/features/user/presentation/widgets/logout_sheet.dart';
 import 'package:mpd_client/features/user/presentation/widgets/user_name_surname_part.dart';
@@ -12,6 +13,7 @@ import 'package:mpd_client/features/user/widgets/request_emergency_help_sheet.da
 import 'package:mpd_client/provider/local_provider.dart';
 import 'package:mpd_client/src/themes/styles.dart';
 import 'package:mpd_client/src/widgets/bottom_sheet_widget.dart';
+import 'package:mpd_client/src/widgets/longbutton.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shimmer/shimmer.dart';
 import 'presentation/widgets/user_avatar_part.dart';
@@ -291,80 +293,85 @@ class _UserPageState extends State<UserPage> {
               },
             ),
 
-            // BlocBuilder<UserInfoBloc, UserInfoState>(
-            //   builder: (context, state) {
-            //     return ListTile(
-            //       leading: AppIcons.briefcaseLite.svg(
-            //         color: context.color.black,
-            //       ),
-            //       horizontalTitleGap: 0,
-            //       title: Text(
-            //         state.specailistModel.isEmpty
-            //             ? context.l10n.doctorProfile
-            //             : context.l10n.mySpecialties,
-            //         style: Styles.headline5,
-            //       ),
-            //       onTap: () {
-            //         if (state.specailistModel.isEmpty) {
-            //           showModalBottomSheet(
-            //             backgroundColor: Colors.transparent,
-            //             context: context,
-            //             builder: (context) => BottomSheetWidget(
-            //               padding: const EdgeInsets.symmetric(
-            //                 vertical: 20,
-            //                 horizontal: 16,
-            //               ),
-            //               children: [
-            //                 const SizedBox(height: 12),
-            //                 Text(
-            //                   context.l10n.specialist_registration_title,
-            //                   textAlign: TextAlign.center,
-            //                   style: TextStyle(
-            //                     fontSize: 24,
-            //                     fontWeight: FontWeight.w700,
-            //                   ),
-            //                 ),
-            //                 Text(
-            //                   context.l10n.specialist_registration_description,
-            //                   style: TextStyle(
-            //                     fontSize: 14,
-            //                     fontWeight: FontWeight.w400,
-            //                     color: context.color.grey,
-            //                   ),
-            //                   textAlign: TextAlign.center,
-            //                 ),
-            //                 const SizedBox(height: 24),
-            //                 LongButton(
-            //                   height: 52,
-            //                   buttonName:
-            //                       context.l10n.specialist_registration_agree,
-            //                   onPress: () {
-            //                     Navigator.of(
-            //                       context,
-            //                     ).pushNamed(AppRoutes.registerSpecialist);
-            //                   },
-            //                 ),
-            //                 const SizedBox(height: 12),
-            //                 LongButton(
-            //                   height: 52,
-            //                   buttonName:
-            //                       context.l10n.specialist_registration_disagree,
-            //                   color: context.color.red,
-            //                   onPress: () {
-            //                     Navigator.of(context).pop();
-            //                   },
-            //                 ),
-            //                 const SizedBox(height: 16),
-            //               ],
-            //             ),
-            //           );
-            //         } else {
-            //           Navigator.of(context).pushNamed(AppRoutes.userSpecialist);
-            //         }
-            //       },
-            //     );
-            //   },
-            // ),
+            BlocBuilder<UserInfoBloc, UserInfoState>(
+              builder: (context, state) {
+                Log.wtf(state.userInfo?.phone);
+                if (state.userInfo?.phone == '998909098108') {
+                  return const SizedBox();
+                }
+                return ListTile(
+                  leading: AppIcons.briefcaseLite.svg(
+                    color: context.color.black,
+                  ),
+                  horizontalTitleGap: 0,
+                  title: Text(
+                    state.specailistModel.isEmpty
+                        ? context.l10n.doctorProfile
+                        : context.l10n.mySpecialties,
+                    style: Styles.headline5,
+                  ),
+                  onTap: () {
+                    if (state.specailistModel.isEmpty) {
+                      showModalBottomSheet(
+                        backgroundColor: Colors.transparent,
+                        context: context,
+                        builder: (context) => BottomSheetWidget(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 20,
+                            horizontal: 16,
+                          ),
+                          children: [
+                            const SizedBox(height: 12),
+                            Text(
+                              context.l10n.specialist_registration_title,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            Text(
+                              context.l10n.specialist_registration_description,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: context.color.grey,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 24),
+                            LongButton(
+                              height: 52,
+                              buttonName:
+                                  context.l10n.specialist_registration_agree,
+                              onPress: () {
+                                Navigator.of(
+                                  context,
+                                ).pushNamed(AppRoutes.registerSpecialist);
+                              },
+                            ),
+                            const SizedBox(height: 12),
+                            LongButton(
+                              height: 52,
+                              buttonName:
+                                  context.l10n.specialist_registration_disagree,
+                              color: context.color.red,
+                              onPress: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            const SizedBox(height: 16),
+                          ],
+                        ),
+                      );
+                    } else {
+                      Navigator.of(context).pushNamed(AppRoutes.userSpecialist);
+                    }
+                  },
+                );
+              },
+            ),
+
             ListTile(
               leading: AppIcons.warning.svg(color: context.color.red),
               horizontalTitleGap: 0,
