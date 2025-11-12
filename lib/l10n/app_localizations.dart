@@ -2121,6 +2121,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something else'**
   String get report_reason_other;
+
+  /// No description provided for @termsOfUseTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Use'**
+  String get termsOfUseTitle;
+
+  /// No description provided for @termsLastUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Last updated: November 12, 2025'**
+  String get termsLastUpdated;
+
+  /// No description provided for @termsIntroduction.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to MPD. By accessing or using our application, you agree to be bound by these Terms of Use.'**
+  String get termsIntroduction;
+
+  /// No description provided for @termsAcceptanceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'1. Acceptance of Terms'**
+  String get termsAcceptanceTitle;
+
+  /// No description provided for @termsAcceptanceContent.
+  ///
+  /// In en, this message translates to:
+  /// **'By using the MPD application, you agree to comply with all applicable laws and these Terms of Use. If you do not agree, please do not use our services.'**
+  String get termsAcceptanceContent;
+
+  /// No description provided for @termsUserConductTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'2. User Conduct'**
+  String get termsUserConductTitle;
+
+  /// No description provided for @termsUserConductContent.
+  ///
+  /// In en, this message translates to:
+  /// **'You agree not to use the application to post or transmit any material that is unlawful, threatening, abusive, defamatory, invasive of privacy, or otherwise objectionable.'**
+  String get termsUserConductContent;
+
+  /// No description provided for @termsContentPolicyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'3. Content Policy'**
+  String get termsContentPolicyTitle;
+
+  /// No description provided for @termsContentPolicyContent.
+  ///
+  /// In en, this message translates to:
+  /// **'MPD reserves the right to remove any content that violates these terms. We may also terminate or suspend access to our services immediately for any violation.'**
+  String get termsContentPolicyContent;
+
+  /// No description provided for @termsAccountTerminationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'4. Account Termination'**
+  String get termsAccountTerminationTitle;
+
+  /// No description provided for @termsAccountTerminationContent.
+  ///
+  /// In en, this message translates to:
+  /// **'We may terminate or suspend your account immediately, without prior notice, for conduct that we believe violates these Terms of Use or is harmful to other users.'**
+  String get termsAccountTerminationContent;
+
+  /// No description provided for @termsDisclaimersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'5. Disclaimers'**
+  String get termsDisclaimersTitle;
+
+  /// No description provided for @termsDisclaimersContent.
+  ///
+  /// In en, this message translates to:
+  /// **'The application is provided \"as is\" without any warranties. MPD does not guarantee that the service will be uninterrupted or error-free.'**
+  String get termsDisclaimersContent;
+
+  /// No description provided for @termsLimitationLiabilityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'6. Limitation of Liability'**
+  String get termsLimitationLiabilityTitle;
+
+  /// No description provided for @termsLimitationLiabilityContent.
+  ///
+  /// In en, this message translates to:
+  /// **'In no event shall MPD be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of the application.'**
+  String get termsLimitationLiabilityContent;
+
+  /// No description provided for @termsContactUs.
+  ///
+  /// In en, this message translates to:
+  /// **'If you have any questions about these Terms, please contact us at support@mpdinfo.uz'**
+  String get termsContactUs;
 }
 
 class _AppLocalizationsDelegate

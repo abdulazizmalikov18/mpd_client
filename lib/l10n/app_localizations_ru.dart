@@ -1045,4 +1045,61 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get report_reason_other => 'Другая причина';
+
+  @override
+  String get termsOfUseTitle => 'Условия использования';
+
+  @override
+  String get termsLastUpdated => 'Последнее обновление: 12 ноября 2025';
+
+  @override
+  String get termsIntroduction =>
+      'Добро пожаловать в MPD. Используя наше приложение, вы соглашаетесь с настоящими Условиями использования.';
+
+  @override
+  String get termsAcceptanceTitle => '1. Принятие условий';
+
+  @override
+  String get termsAcceptanceContent =>
+      'Используя приложение MPD, вы соглашаетесь соблюдать все применимые законы и настоящие Условия использования. Если вы не согласны, пожалуйста, не используйте наши услуги.';
+
+  @override
+  String get termsUserConductTitle => '2. Поведение пользователей';
+
+  @override
+  String get termsUserConductContent =>
+      'Вы соглашаетесь не использовать приложение для публикации или передачи материалов, которые являются незаконными, угрожающими, оскорбительными, клеветническими, нарушающими конфиденциальность или иным образом неприемлемыми.';
+
+  @override
+  String get termsContentPolicyTitle => '3. Политика контента';
+
+  @override
+  String get termsContentPolicyContent =>
+      'MPD оставляет за собой право удалять любой контент, нарушающий эти условия. Мы также можем немедленно приостановить или прекратить доступ к нашим услугам за любое нарушение.';
+
+  @override
+  String get termsAccountTerminationTitle =>
+      '4. Прекращение действия учетной записи';
+
+  @override
+  String get termsAccountTerminationContent =>
+      'Мы можем немедленно приостановить или прекратить действие вашей учетной записи без предварительного уведомления за действия, которые, по нашему мнению, нарушают настоящие Условия использования или наносят вред другим пользователям.';
+
+  @override
+  String get termsDisclaimersTitle => '5. Отказ от ответственности';
+
+  @override
+  String get termsDisclaimersContent =>
+      'Приложение предоставляется \"как есть\" без каких-либо гарантий. MPD не гарантирует, что сервис будет работать бесперебойно или без ошибок.';
+
+  @override
+  String get termsLimitationLiabilityTitle => '6. Ограничение ответственности';
+
+  @override
+  String get termsLimitationLiabilityContent =>
+      'Ни при каких обстоятельствах MPD не несет ответственности за любые косвенные, случайные, специальные, косвенные или карательные убытки, возникшие в результате использования вами приложения.';
+
+  @override
+  String get termsContactUs =>
+      'Если у вас есть вопросы по этим Условиям, пожалуйста, свяжитесь с нами по адресу support@mpdinfo.uz';
 }

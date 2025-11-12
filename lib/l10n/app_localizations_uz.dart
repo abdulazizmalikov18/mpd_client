@@ -1065,4 +1065,60 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get report_reason_other => 'Boshqa sabab';
+
+  @override
+  String get termsOfUseTitle => 'Foydalanish shartlari';
+
+  @override
+  String get termsLastUpdated => 'So\'nggi yangilanish: 12-noyabr, 2025';
+
+  @override
+  String get termsIntroduction =>
+      'MPD ilovasiga xush kelibsiz. Ilovamizdan foydalanish orqali siz ushbu Foydalanish shartlariga rozi bo\'lasiz.';
+
+  @override
+  String get termsAcceptanceTitle => '1. Shartlarni qabul qilish';
+
+  @override
+  String get termsAcceptanceContent =>
+      'MPD ilovasidan foydalanish orqali siz amaldagi barcha qonunlarga va ushbu Foydalanish shartlariga rioya qilishga rozilik bildirasiz. Agar rozilik bermasangiz, iltimos, xizmatlarimizdan foydalanmang.';
+
+  @override
+  String get termsUserConductTitle => '2. Foydalanuvchi xulq-atvori';
+
+  @override
+  String get termsUserConductContent =>
+      'Siz ilovadan noqonuniy, tahdidli, haqoratli, tuhmatli, shaxsiy hayotga tajovuz qiluvchi yoki boshqa tarzda nojo\'ya bo\'lgan materiallarni joylashtirish yoki uzatish uchun foydalanmaslikka rozilik bildirasiz.';
+
+  @override
+  String get termsContentPolicyTitle => '3. Kontent siyosati';
+
+  @override
+  String get termsContentPolicyContent =>
+      'MPD ushbu shartlarni buzadigan har qanday kontentni olib tashlash huquqini o\'zida saqlab qoladi. Shuningdek, biz har qanday buzilish holatida xizmatlarimizdan foydalanishni darhol to\'xtatishimiz yoki to\'xtatib qo\'yishimiz mumkin.';
+
+  @override
+  String get termsAccountTerminationTitle => '4. Hisobni to\'xtatish';
+
+  @override
+  String get termsAccountTerminationContent =>
+      'Biz ushbu Foydalanish shartlarini buzgan yoki boshqa foydalanuvchilarga zarar etkazadigan harakatlar uchun oldindan ogohlantirmasdan hisobingizni darhol to\'xtatishimiz yoki to\'xtatib qo\'yishimiz mumkin.';
+
+  @override
+  String get termsDisclaimersTitle => '5. Kafolatlarsizlik';
+
+  @override
+  String get termsDisclaimersContent =>
+      'Ilova \"qanday bo\'lsa shunday\" holatida taqdim etiladi va hech qanday kafolat bilan birga kelmaydi. MPD xizmat uzluksiz yoki xatosiz bo\'lishini kafolatlamaydi.';
+
+  @override
+  String get termsLimitationLiabilityTitle => '6. Javobgarlik cheklovi';
+
+  @override
+  String get termsLimitationLiabilityContent =>
+      'Hech qanday holatda ham MPD ilovasidan foydalanish natijasida yuzaga kelgan bilvosita, tasodifiy, maxsus, natijaviy yoki jazolovchi zararlar uchun javobgar bo\'lmaydi.';
+
+  @override
+  String get termsContactUs =>
+      'Agar ushbu Shartlar haqida savollaringiz bo\'lsa, iltimos, biz bilan support@mpdinfo.uz orqali bog\'laning.';
 }

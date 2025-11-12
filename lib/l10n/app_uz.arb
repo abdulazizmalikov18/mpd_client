@@ -362,5 +362,22 @@
   "report_reason_self_harm": "O'z joniga qasd qilish yoki jarohat yetkazish",
   "report_reason_scam": "Firibgarlik yoki aldash",
   "report_reason_false_info": "Noto'g'ri ma'lumot",
-  "report_reason_other": "Boshqa sabab"
+  "report_reason_other": "Boshqa sabab",
+
+  "termsOfUseTitle": "Foydalanish shartlari",
+  "termsLastUpdated": "So'nggi yangilanish: 12-noyabr, 2025",
+  "termsIntroduction": "MPD ilovasiga xush kelibsiz. Ilovamizdan foydalanish orqali siz ushbu Foydalanish shartlariga rozi bo'lasiz.",
+  "termsAcceptanceTitle": "1. Shartlarni qabul qilish",
+  "termsAcceptanceContent": "MPD ilovasidan foydalanish orqali siz amaldagi barcha qonunlarga va ushbu Foydalanish shartlariga rioya qilishga rozilik bildirasiz. Agar rozilik bermasangiz, iltimos, xizmatlarimizdan foydalanmang.",
+  "termsUserConductTitle": "2. Foydalanuvchi xulq-atvori",
+  "termsUserConductContent": "Siz ilovadan noqonuniy, tahdidli, haqoratli, tuhmatli, shaxsiy hayotga tajovuz qiluvchi yoki boshqa tarzda nojo'ya bo'lgan materiallarni joylashtirish yoki uzatish uchun foydalanmaslikka rozilik bildirasiz.",
+  "termsContentPolicyTitle": "3. Kontent siyosati",
+  "termsContentPolicyContent": "MPD ushbu shartlarni buzadigan har qanday kontentni olib tashlash huquqini o'zida saqlab qoladi. Shuningdek, biz har qanday buzilish holatida xizmatlarimizdan foydalanishni darhol to'xtatishimiz yoki to'xtatib qo'yishimiz mumkin.",
+  "termsAccountTerminationTitle": "4. Hisobni to'xtatish",
+  "termsAccountTerminationContent": "Biz ushbu Foydalanish shartlarini buzgan yoki boshqa foydalanuvchilarga zarar etkazadigan harakatlar uchun oldindan ogohlantirmasdan hisobingizni darhol to'xtatishimiz yoki to'xtatib qo'yishimiz mumkin.",
+  "termsDisclaimersTitle": "5. Kafolatlarsizlik",
+  "termsDisclaimersContent": "Ilova \"qanday bo'lsa shunday\" holatida taqdim etiladi va hech qanday kafolat bilan birga kelmaydi. MPD xizmat uzluksiz yoki xatosiz bo'lishini kafolatlamaydi.",
+  "termsLimitationLiabilityTitle": "6. Javobgarlik cheklovi",
+  "termsLimitationLiabilityContent": "Hech qanday holatda ham MPD ilovasidan foydalanish natijasida yuzaga kelgan bilvosita, tasodifiy, maxsus, natijaviy yoki jazolovchi zararlar uchun javobgar bo'lmaydi.",
+  "termsContactUs": "Agar ushbu Shartlar haqida savollaringiz bo'lsa, iltimos, biz bilan support@mpdinfo.uz orqali bog'laning."
 }

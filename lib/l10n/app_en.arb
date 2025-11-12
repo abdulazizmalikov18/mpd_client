@@ -364,5 +364,22 @@
   "report_reason_self_harm": "Suicide or self-injury",
   "report_reason_scam": "Scam or fraud",
   "report_reason_false_info": "False information",
-  "report_reason_other": "Something else"
+  "report_reason_other": "Something else",
+
+  "termsOfUseTitle": "Terms of Use",
+  "termsLastUpdated": "Last updated: November 12, 2025",
+  "termsIntroduction": "Welcome to MPD. By accessing or using our application, you agree to be bound by these Terms of Use.",
+  "termsAcceptanceTitle": "1. Acceptance of Terms",
+  "termsAcceptanceContent": "By using the MPD application, you agree to comply with all applicable laws and these Terms of Use. If you do not agree, please do not use our services.",
+  "termsUserConductTitle": "2. User Conduct",
+  "termsUserConductContent": "You agree not to use the application to post or transmit any material that is unlawful, threatening, abusive, defamatory, invasive of privacy, or otherwise objectionable.",
+  "termsContentPolicyTitle": "3. Content Policy",
+  "termsContentPolicyContent": "MPD reserves the right to remove any content that violates these terms. We may also terminate or suspend access to our services immediately for any violation.",
+  "termsAccountTerminationTitle": "4. Account Termination",
+  "termsAccountTerminationContent": "We may terminate or suspend your account immediately, without prior notice, for conduct that we believe violates these Terms of Use or is harmful to other users.",
+  "termsDisclaimersTitle": "5. Disclaimers",
+  "termsDisclaimersContent": "The application is provided \"as is\" without any warranties. MPD does not guarantee that the service will be uninterrupted or error-free.",
+  "termsLimitationLiabilityTitle": "6. Limitation of Liability",
+  "termsLimitationLiabilityContent": "In no event shall MPD be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of the application.",
+  "termsContactUs": "If you have any questions about these Terms, please contact us at support@mpdinfo.uz"
 }

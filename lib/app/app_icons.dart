@@ -132,6 +132,7 @@ abstract class AppIcons {
   static const copy = "assets/icons/copy.svg";
   static const download = "assets/icons/download.svg";
   static const pencil = "assets/icons/pencil.svg";
+  static const scrollText = "assets/icons/scroll-text.svg";
 }
 
 extension SvgExt on String {

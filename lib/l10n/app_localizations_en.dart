@@ -1047,4 +1047,60 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get report_reason_other => 'Something else';
+
+  @override
+  String get termsOfUseTitle => 'Terms of Use';
+
+  @override
+  String get termsLastUpdated => 'Last updated: November 12, 2025';
+
+  @override
+  String get termsIntroduction =>
+      'Welcome to MPD. By accessing or using our application, you agree to be bound by these Terms of Use.';
+
+  @override
+  String get termsAcceptanceTitle => '1. Acceptance of Terms';
+
+  @override
+  String get termsAcceptanceContent =>
+      'By using the MPD application, you agree to comply with all applicable laws and these Terms of Use. If you do not agree, please do not use our services.';
+
+  @override
+  String get termsUserConductTitle => '2. User Conduct';
+
+  @override
+  String get termsUserConductContent =>
+      'You agree not to use the application to post or transmit any material that is unlawful, threatening, abusive, defamatory, invasive of privacy, or otherwise objectionable.';
+
+  @override
+  String get termsContentPolicyTitle => '3. Content Policy';
+
+  @override
+  String get termsContentPolicyContent =>
+      'MPD reserves the right to remove any content that violates these terms. We may also terminate or suspend access to our services immediately for any violation.';
+
+  @override
+  String get termsAccountTerminationTitle => '4. Account Termination';
+
+  @override
+  String get termsAccountTerminationContent =>
+      'We may terminate or suspend your account immediately, without prior notice, for conduct that we believe violates these Terms of Use or is harmful to other users.';
+
+  @override
+  String get termsDisclaimersTitle => '5. Disclaimers';
+
+  @override
+  String get termsDisclaimersContent =>
+      'The application is provided \"as is\" without any warranties. MPD does not guarantee that the service will be uninterrupted or error-free.';
+
+  @override
+  String get termsLimitationLiabilityTitle => '6. Limitation of Liability';
+
+  @override
+  String get termsLimitationLiabilityContent =>
+      'In no event shall MPD be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of the application.';
+
+  @override
+  String get termsContactUs =>
+      'If you have any questions about these Terms, please contact us at support@mpdinfo.uz';
 }

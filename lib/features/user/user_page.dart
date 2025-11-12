@@ -5,6 +5,7 @@ import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/core/utils/log_service.dart';
+import 'package:mpd_client/features/user/presentation/pages/terms_of_use_view.dart';
 import 'package:mpd_client/features/user/presentation/widgets/language_sheet.dart';
 import 'package:mpd_client/features/user/presentation/widgets/logout_sheet.dart';
 import 'package:mpd_client/features/user/presentation/widgets/user_name_surname_part.dart';
@@ -368,6 +369,18 @@ class _UserPageState extends State<UserPage> {
                       Navigator.of(context).pushNamed(AppRoutes.userSpecialist);
                     }
                   },
+                );
+              },
+            ),
+            ListTile(
+              leading: AppIcons.scrollText.svg(),
+              horizontalTitleGap: 0,
+              title: Text("Terms of Use", style: Styles.headline5),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const TermsOfUseView(),
+                  ),
                 );
               },
             ),

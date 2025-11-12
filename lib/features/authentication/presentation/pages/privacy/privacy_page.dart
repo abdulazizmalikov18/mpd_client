@@ -14,6 +14,7 @@ class PrivacyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 60.h,
@@ -55,22 +56,57 @@ class PrivacyPage extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ScreenUtil().setVerticalSpacing(16.h),
               Text(
-                '1914 translation by H. Rackham "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC',
-                style: Styles.headline6,
+                context.l10n.termsLastUpdated,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.hintColor,
+                  fontStyle: FontStyle.italic,
+                ),
               ),
-              ScreenUtil().setVerticalSpacing(8.h),
+              const SizedBox(height: 16),
               Text(
-                '1914 translation by H. Rackham "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC',
-                style: Styles.headline6,
+                context.l10n.termsIntroduction,
+                style: theme.textTheme.bodyLarge,
               ),
-              ScreenUtil().setVerticalSpacing(8.h),
+              const SizedBox(height: 24),
+              _buildSection(
+                context,
+                title: context.l10n.termsAcceptanceTitle,
+                content: context.l10n.termsAcceptanceContent,
+              ),
+              _buildSection(
+                context,
+                title: context.l10n.termsUserConductTitle,
+                content: context.l10n.termsUserConductContent,
+              ),
+              _buildSection(
+                context,
+                title: context.l10n.termsContentPolicyTitle,
+                content: context.l10n.termsContentPolicyContent,
+              ),
+              _buildSection(
+                context,
+                title: context.l10n.termsAccountTerminationTitle,
+                content: context.l10n.termsAccountTerminationContent,
+              ),
+              _buildSection(
+                context,
+                title: context.l10n.termsDisclaimersTitle,
+                content: context.l10n.termsDisclaimersContent,
+              ),
+              _buildSection(
+                context,
+                title: context.l10n.termsLimitationLiabilityTitle,
+                content: context.l10n.termsLimitationLiabilityContent,
+              ),
+              const SizedBox(height: 24),
               Text(
-                '1914 translation by H. Rackham "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC',
-                style: Styles.headline6,
+                context.l10n.termsContactUs,
+                style: theme.textTheme.bodyMedium,
               ),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   BlocSelector<RegisterBloc, RegisterState, bool>(
@@ -100,6 +136,33 @@ class PrivacyPage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildSection(
+    BuildContext context, {
+    required String title,
+    required String content,
+  }) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: theme.primaryColor,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(content, style: textTheme.bodyMedium),
+        ],
       ),
     );
   }
