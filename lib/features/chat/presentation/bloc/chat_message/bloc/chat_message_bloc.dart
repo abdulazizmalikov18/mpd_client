@@ -9,6 +9,7 @@ import 'package:mpd_client/features/chat/data/entity/send_message_entity.dart';
 import 'package:mpd_client/features/chat/data/repo/chat_repository.dart';
 import 'package:mpd_client/features/chat/domain/models/chat_group.dart';
 import 'package:mpd_client/features/chat/domain/models/message.dart';
+import 'package:mpd_client/core/utils/profanity_filter.dart';
 import 'package:mpd_client/features/chat/presentation/controller/vm_controller.dart';
 
 part 'chat_message_event.dart';
@@ -64,11 +65,23 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
   }
 
   void _onSendMessage(ChatSendMessageEvent event, Emitter emit) async {
+    if (event.text.trim().isEmpty) return;
+
+    // Check for profanity
+    if (ProfanityFilter.hasProfanity(event.text)) {
+      event.isProfanity();
+      return;
+    }
+
+    // Filter out any profanity (alternative approach - uncomment if you want to filter instead of block)
+    // final filteredText = ProfanityFilter.filterProfanity(event.text);
+
     ChatVMController().messageController.clear();
 
     await _repo.sendMessage(
       SendMessageEntity(
-        text: event.text,
+        text: event
+            .text, // or use filteredText if you choose to filter instead of block
         slugName: event.groupSlug,
         file: event.file,
       ),

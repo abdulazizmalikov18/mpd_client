@@ -7,6 +7,7 @@ import 'package:mpd_client/features/chat/presentation/bloc/chat_message/bloc/cha
 import 'package:mpd_client/features/chat/presentation/controller/vm_controller.dart';
 import 'package:mpd_client/features/chat/presentation/views/in_app_chat.dart';
 import 'package:mpd_client/features/chat/presentation/widgets/message_widgets/w_button.dart';
+import 'package:mpd_client/src/widgets/top_snackbar.dart';
 
 class WChatTextField extends StatelessWidget {
   const WChatTextField({super.key});
@@ -75,6 +76,9 @@ class WChatTextField extends StatelessWidget {
                 ChatSendMessageEvent(
                   text: ChatVMController().messageController.text,
                   groupSlug: InChatView.of(context)!.widget.group.slugName,
+                  isProfanity: () {
+                    TopSnackbar.show(context, "Profanity detected");
+                  },
                 ),
               ),
               width: 48,

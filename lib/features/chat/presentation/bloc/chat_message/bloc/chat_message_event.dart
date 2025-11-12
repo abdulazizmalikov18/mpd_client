@@ -18,10 +18,12 @@ class ChatSendMessageEvent extends ChatMessageEvent {
   final String text;
   final String groupSlug;
   final File? file;
+  final Function() isProfanity;
   const ChatSendMessageEvent({
     required this.text,
     required this.groupSlug,
     this.file,
+    required this.isProfanity,
   });
 }
 

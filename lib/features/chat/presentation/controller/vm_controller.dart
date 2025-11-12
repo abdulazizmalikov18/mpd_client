@@ -14,6 +14,7 @@ import 'package:mpd_client/features/chat/domain/models/chat_user_state.dart';
 import 'package:mpd_client/features/chat/domain/models/message.dart';
 import 'package:mpd_client/features/chat/presentation/bloc/chat_message/bloc/chat_message_bloc.dart';
 import 'package:mpd_client/src/widgets/custom_snackbar.dart';
+import 'package:mpd_client/src/widgets/top_snackbar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -43,6 +44,9 @@ class ChatVMController {
             groupSlug: slugName,
             file: file,
             text: messageController.text,
+            isProfanity: () {
+              TopSnackbar.show(context, "Profanity detected");
+            },
           ),
         );
       }
@@ -60,6 +64,9 @@ class ChatVMController {
             groupSlug: slugName,
             file: file,
             text: messageController.text,
+            isProfanity: () {
+              TopSnackbar.show(context, "Profanity detected");
+            },
           ),
         );
       }
