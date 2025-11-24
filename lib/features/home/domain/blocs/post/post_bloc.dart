@@ -95,7 +95,8 @@ class PostBloc extends Bloc<PostEvent, PostState> {
             status: PostStatus.success,
             posts: result.right.results,
             hasReachedMax:
-                (result.right.results?.length ?? 0) < (result.right.count ?? 0),
+                (result.right.results?.length ?? 0) >=
+                (result.right.count ?? 0),
           ),
         );
       } else {

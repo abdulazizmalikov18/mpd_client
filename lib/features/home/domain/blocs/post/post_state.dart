@@ -7,7 +7,7 @@ class PostState extends Equatable {
   const PostState({
     this.status = PostStatus.initial,
     this.posts = const <Post>[],
-    this.hasReachedMax = false,
+    this.hasReachedMax = true,
     this.postsUser = const [],
     this.statusUser = PostStatus.initial,
     this.deleteStatus = PostStatus.initial,
