@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_icons.dart';
+import 'package:mpd_client/core/utils/profanity_filter.dart';
 import 'package:mpd_client/features/home/data/models/coment_model.dart';
 import 'package:mpd_client/features/home/domain/blocs/media_control/media_control_bloc.dart';
 import 'package:mpd_client/features/home/domain/blocs/post_coment/post_coment_bloc.dart';
@@ -11,6 +12,7 @@ import 'package:mpd_client/features/user/domain/blocs/user_info/user_info_bloc.d
 import 'package:mpd_client/provider/language.dart';
 import 'package:mpd_client/src/themes/styles.dart';
 import 'package:mpd_client/src/widgets/icon_circle_button.dart';
+import 'package:mpd_client/src/widgets/top_snackbar.dart';
 
 class ComentInput extends StatelessWidget {
   final int postId, postIndex;
@@ -74,28 +76,35 @@ class ComentInput extends StatelessWidget {
                         ? IconCircleButton(
                                 size: const Size(44, 44),
                                 onPressed: () {
-                                  FocusScope.of(context).unfocus();
-                                  final userInfo = context
-                                      .read<UserInfoBloc>()
-                                      .state
-                                      .userInfo;
-                                  final coment = Coment(
-                                    id: -1,
-                                    text: context
-                                        .read<SendComentBloc>()
-                                        .comentController
-                                        .text,
-                                    avatar: userInfo!.avatar,
-                                    name: userInfo.name,
-                                    lastname: userInfo.lastname,
-                                    username: userInfo.username,
-                                  );
-                                  context.read<SendComentBloc>().add(
-                                    SendComment(postId, coment),
-                                  );
-                                  context.read<PostComentBloc>().add(
-                                    InsertNewComent(coment, isSuccess: false),
-                                  );
+                                  if (ProfanityFilter.hasProfanity(coment)) {
+                                    TopSnackbar.show(
+                                      context,
+                                      "Profanity detected",
+                                    );
+                                  } else {
+                                    FocusScope.of(context).unfocus();
+                                    final userInfo = context
+                                        .read<UserInfoBloc>()
+                                        .state
+                                        .userInfo;
+                                    final coment = Coment(
+                                      id: -1,
+                                      text: context
+                                          .read<SendComentBloc>()
+                                          .comentController
+                                          .text,
+                                      avatar: userInfo!.avatar,
+                                      name: userInfo.name,
+                                      lastname: userInfo.lastname,
+                                      username: userInfo.username,
+                                    );
+                                    context.read<SendComentBloc>().add(
+                                      SendComment(postId, coment),
+                                    );
+                                    context.read<PostComentBloc>().add(
+                                      InsertNewComent(coment, isSuccess: false),
+                                    );
+                                  }
                                 },
                                 icon: AppIcons.send,
                                 iconColor: context.color.white,

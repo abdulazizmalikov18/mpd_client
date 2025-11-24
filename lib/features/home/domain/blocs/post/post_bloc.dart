@@ -94,34 +94,36 @@ class PostBloc extends Bloc<PostEvent, PostState> {
           state.copyWith(
             status: PostStatus.success,
             posts: result.right.results,
-            hasReachedMax: false,
+            hasReachedMax:
+                (result.right.results?.length ?? 0) < (result.right.count ?? 0),
           ),
         );
       } else {
         emit(state.copyWith(status: PostStatus.failure));
       }
-    }
-    if (event.isRefresh) emit(state.copyWith(status: PostStatus.initial));
-    Log.e("Nima Tuzuk");
-    final result = await _homeRepository.getBanners(
-      limit: _limit,
-      offset: event.isRefresh ? 0 : state.posts.length,
-    );
-    if (result.isRight) {
-      Log.e("Nima Tuzukn 2");
-      emit(
-        result.right.results!.isEmpty
-            ? state.copyWith(hasReachedMax: true)
-            : state.copyWith(
-                status: PostStatus.success,
-                posts: event.isRefresh
-                    ? [...result.right.results!]
-                    : [...state.posts, ...result.right.results!],
-                hasReachedMax: false,
-              ),
+    } else if (!state.hasReachedMax) {
+      if (event.isRefresh) emit(state.copyWith(status: PostStatus.initial));
+      Log.e("Nima Tuzuk");
+      final result = await _homeRepository.getBanners(
+        limit: _limit,
+        offset: event.isRefresh ? 0 : state.posts.length,
       );
-    } else {
-      emit(state.copyWith(status: PostStatus.failure));
+      if (result.isRight) {
+        Log.e("Nima Tuzukn 2");
+        emit(
+          result.right.results!.isEmpty
+              ? state.copyWith(hasReachedMax: true)
+              : state.copyWith(
+                  status: PostStatus.success,
+                  posts: event.isRefresh
+                      ? [...result.right.results!]
+                      : [...state.posts, ...result.right.results!],
+                  hasReachedMax: false,
+                ),
+        );
+      } else {
+        emit(state.copyWith(status: PostStatus.failure));
+      }
     }
   }
 

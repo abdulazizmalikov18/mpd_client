@@ -18,10 +18,10 @@ dependencies:
   bloc_concurrency: ^0.3.0
   dio: ^5.9.0
   shared_preferences: ^2.5.3
-  get_it: ^9.0.5
+  get_it: ^9.1.0
   pretty_dio_logger: ^1.4.0
   formz: ^0.8.0
-  flutter_svg: ^2.2.2
+  flutter_svg: ^2.2.3
   lottie: ^3.3.2
   mask_text_input_formatter: ^2.9.0
   share_plus: ^12.0.1
@@ -42,10 +42,10 @@ dependencies:
   flutter_screenutil: ^5.9.3
   visibility_detector: ^0.4.0+2
   path: ^1.9.1
-  file_picker: ^10.3.3
-  video_player: ^2.10.0
-  wechat_assets_picker: ^9.8.0
-  photo_manager: ^3.7.1
+  file_picker: ^10.3.7
+  video_player: ^2.10.1
+  wechat_assets_picker: ^10.0.0
+  photo_manager: ^3.8.0
   path_provider: ^2.1.5
   cached_network_image: ^3.4.1
   map_launcher: ^4.4.2
@@ -54,7 +54,7 @@ dependencies:
   flutter_image_compress: ^2.4.0
   rounded_loading_button_plus: ^3.0.1
   table_calendar: ^3.2.0
-  syncfusion_flutter_pdfviewer: ^31.2.5
+  syncfusion_flutter_pdfviewer: ^31.2.12
   flick_video_player: ^0.9.0
   readmore: ^3.0.0
   dotted_border: ^3.1.0
@@ -84,9 +84,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^5.0.0
-  build_runner: ^2.10.2
-  json_serializable: ^6.11.1
+  flutter_lints: ^6.0.0
+  build_runner: ^2.10.4
+  json_serializable: ^6.11.3
 
 flutter:
   uses-material-design: true

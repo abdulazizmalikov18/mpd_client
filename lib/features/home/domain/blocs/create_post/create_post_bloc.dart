@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:file_picker/file_picker.dart';
@@ -93,82 +94,148 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostState> {
     CreatePostPressed event,
     Emitter<CreatePostState> emit,
   ) async {
-    // ? Validate image has or not
+    // 1. Rasmlar borligini tekshirish
     if (_fileImagesAndVideos.isEmpty) {
       return emit(CreatePostInitial(state.files, isValidImage: false));
     }
 
     emit(CreatePostLoading(state.files, isValidImage: state.isValidImage));
+
     final List<MultipartFile> postImages = [];
     final List<MultipartFile> postVideos = [];
     final List<MultipartFile> postVideosScreenshot = [];
 
-    for (var file in _fileImagesAndVideos) {
-      if (file.fileType == 'image') {
-        final compressedImage = await MediaCompresser.compressAndTryCatchImage(
-          file.file.path,
-        );
+    // 2. Qurilma turini aniqlash (Simulator vs Real Device)
+    final deviceInfo = DeviceInfoPlugin();
+    bool isSimulator = false;
 
-        postImages.add(
-          MultipartFile.fromBytes(
-            compressedImage,
-            filename: basename(file.file.path),
-          ),
-        );
-        for (var element in postImages) {
-          Log.e(element.filename);
-        }
-      } else if (file.fileType == 'video') {
-        final mimeType = lookupMimeType(file.file.path) ?? 'video/mp4';
-        final mediaType = MediaType.parse(mimeType);
-
-        final uint8list = await VideoCompress.getByteThumbnail(
-          file.file.path,
-          position: -1,
-          quality: 75,
-        );
-        final noCompressed = await file.file.readAsBytes();
-
-        postVideosScreenshot.add(
-          MultipartFile.fromBytes(
-            uint8list!,
-            filename: 'thumbnail_${basename(file.file.path)}.jpg',
-          ),
-        );
-
-        postVideos.add(
-          MultipartFile.fromBytes(
-            noCompressed,
-            filename: basename(file.file.path),
-            contentType: mediaType,
-          ),
-        );
+    if (Platform.isIOS) {
+      try {
+        final iosInfo = await deviceInfo.iosInfo;
+        isSimulator = !iosInfo.isPhysicalDevice;
+      } catch (e) {
+        Log.e("Device info olishda xatolik: $e");
       }
     }
 
-    final result = await _homeRepository.createPost(
-      UploadPost(
-        text: descriptionController.text,
-        images: postImages,
-        screenshots: postVideosScreenshot,
-        // aspectRatio: '4x3',
-        files: postVideos,
-      ),
-    );
+    try {
+      for (var file in _fileImagesAndVideos) {
+        // ----------------- Rasm Logikasi -----------------
+        if (file.fileType == 'image') {
+          List<int>? finalImageBytes;
+          String fileName;
+          MediaType contentType;
 
-    if (result.isRight) {
-      emit(
-        CreatePostSucces(
-          state.files,
-          createdPost: result.right,
-          isValidImage: state.isValidImage,
+          if (isSimulator) {
+            // A) SIMULYATOR: Crash bermasligi uchun siqishni o'tkazib yuboramiz
+            Log.w("Simulyator aniqlandi: Rasm siqilmadi.");
+            finalImageBytes = await file.file.readAsBytes();
+
+            // Server 400 xato bermasligi uchun nomini va tipini JPG qilamiz
+            // (Aslida HEIC bo'lsa ham, serverni aldash uchun)
+            String nameWithoutExt = basenameWithoutExtension(file.file.path);
+            fileName = "$nameWithoutExt.jpg";
+            contentType = MediaType('image', 'jpeg');
+          } else {
+            // B) REAL QURILMA: Rasmni siqamiz (Compress)
+            try {
+              final result = await MediaCompresser.compressAndTryCatchImage(
+                file.file.path,
+              );
+
+              if (result.isNotEmpty) {
+                finalImageBytes = result;
+              } else {
+                // Agar compress o'xshamasa originalni olamiz
+                finalImageBytes = await file.file.readAsBytes();
+              }
+            } catch (e) {
+              Log.e("Compress error: $e");
+              finalImageBytes = await file.file.readAsBytes();
+            }
+
+            // Real fayl nomini va tipini olamiz
+            fileName = basename(file.file.path);
+            final mimeType = lookupMimeType(file.file.path) ?? 'image/jpeg';
+            contentType = MediaType.parse(mimeType);
+          }
+
+          // Fayl baytlari bo'lsa ro'yxatga qo'shamiz
+          postImages.add(
+            MultipartFile.fromBytes(
+              finalImageBytes,
+              filename: fileName,
+              contentType: contentType,
+            ),
+          );
+        }
+        // ----------------- Video Logikasi -----------------
+        else if (file.fileType == 'video') {
+          final mimeType = lookupMimeType(file.file.path) ?? 'video/mp4';
+          final mediaType = MediaType.parse(mimeType);
+
+          // Thumbnail yaratish
+          final uint8list = await VideoCompress.getByteThumbnail(
+            file.file.path,
+            position: -1,
+            quality: 75,
+          );
+
+          if (uint8list != null) {
+            postVideosScreenshot.add(
+              MultipartFile.fromBytes(
+                uint8list,
+                filename: 'thumbnail_${basename(file.file.path)}.jpg',
+                contentType: MediaType('image', 'jpeg'),
+              ),
+            );
+          }
+
+          // Videoni o'zini o'qish
+          final noCompressed = await file.file.readAsBytes();
+          postVideos.add(
+            MultipartFile.fromBytes(
+              noCompressed,
+              filename: basename(file.file.path),
+              contentType: mediaType,
+            ),
+          );
+        }
+      }
+
+      // 3. API ga yuborish
+      final result = await _homeRepository.createPost(
+        UploadPost(
+          text: descriptionController.text,
+          images: postImages,
+          screenshots: postVideosScreenshot,
+          files: postVideos,
         ),
       );
-    } else {
+
+      if (result.isRight) {
+        emit(
+          CreatePostSucces(
+            state.files,
+            createdPost: result.right,
+            isValidImage: state.isValidImage,
+          ),
+        );
+      } else {
+        emit(
+          CreatePostFailure(
+            state.files,
+            failure: Utils.errorFormat(result.left.message),
+            isValidImage: state.isValidImage,
+          ),
+        );
+      }
+    } catch (e) {
+      Log.e("Global xatolik CreatePostBloc: $e");
       emit(
         CreatePostFailure(
           state.files,
-          failure: Utils.errorFormat(result.left.message),
+          failure: "Noma'lum xatolik yuz berdi: $e",
           isValidImage: state.isValidImage,
         ),
       );

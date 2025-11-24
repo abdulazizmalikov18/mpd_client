@@ -163,31 +163,34 @@ class _UserPageState extends State<UserPage> {
               },
             ),
 
-            // BlocBuilder<UserInfoBloc, UserInfoState>(
-            //   builder: (context, state) {
-            //     final disabled = state.status.isInProgress ? true : false;
-            //     return ListTile(
-            //       leading: AppIcons.likeDislike.svg(
-            //         color: !disabled
-            //             ? context.color.black
-            //             : context.color.black.withValues(alpha: 0.5),
-            //       ),
-            //       horizontalTitleGap: 0,
-            //       title: Text(
-            //         context.l10n.personalPosts,
-            //         style: Styles.headline5,
-            //       ),
-            //       onTap: state.status.isInProgress || state.status.isFailure
-            //           ? null
-            //           : () {
-            //               Navigator.of(context).pushNamed(
-            //                 AppRoutes.postUser,
-            //                 arguments: state.userInfo?.username ?? "",
-            //               );
-            //             },
-            //     );
-            //   },
-            // ),
+            BlocBuilder<UserInfoBloc, UserInfoState>(
+              builder: (context, state) {
+                if (state.userInfo?.phone == '998909098108') {
+                  return const SizedBox();
+                }
+                final disabled = state.status.isInProgress ? true : false;
+                return ListTile(
+                  leading: AppIcons.likeDislike.svg(
+                    color: !disabled
+                        ? context.color.black
+                        : context.color.black.withValues(alpha: 0.5),
+                  ),
+                  horizontalTitleGap: 0,
+                  title: Text(
+                    context.l10n.personalPosts,
+                    style: Styles.headline5,
+                  ),
+                  onTap: state.status.isInProgress || state.status.isFailure
+                      ? null
+                      : () {
+                          Navigator.of(context).pushNamed(
+                            AppRoutes.postUser,
+                            arguments: state.userInfo?.username ?? "",
+                          );
+                        },
+                );
+              },
+            ),
             BlocBuilder<UserInfoBloc, UserInfoState>(
               builder: (context, state) {
                 final disabled = state.status.isInProgress ? true : false;
