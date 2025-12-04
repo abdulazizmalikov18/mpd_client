@@ -6,6 +6,7 @@ import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/features/home/data/models/order_stream_model.dart';
 import 'package:mpd_client/features/home/data/models/specialist_offer_model.dart';
 import 'package:mpd_client/features/home/data/models/specialist_order_model.dart';
+import 'package:mpd_client/main.dart';
 import 'package:web_socket_channel/io.dart';
 
 part 'socket_offer_event.dart';
@@ -28,7 +29,7 @@ class SocketOfferBloc extends Bloc<SocketOfferEvent, SocketOfferState> {
     });
     on<ConnectSocketEvent>((event, emit) {
       final socketURl = Uri.parse(
-        "wss://sharq-api.sharqdarmon.uz/OMS/ws/work/?specialist_id=942&org_slug=mpd&lang=ru",
+        "${$baseUrlSocket}/OMS/ws/work/?specialist_id=942&org_slug=mpd&lang=ru",
       );
       socketChannel = IOWebSocketChannel.connect(socketURl);
       emit(state.copyWith(isConnect: true, type: "null"));

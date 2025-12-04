@@ -42,8 +42,8 @@ class _UserInfoState extends State<UserInfo> {
 
   @override
   void initState() {
-    context.read<RegionBloc>().add(GetRegionsEvent());
-    context.read<ProfessionBloc>().add(GetProfessionEvent());
+    // context.read<RegionBloc>().add(GetRegionsEvent());
+    // context.read<ProfessionBloc>().add(GetProfessionEvent());
     firsNameController.text = widget.userLocalModel.name ?? "--";
     userLastNameController.text = widget.userLocalModel.lastname ?? "--";
     bioController.text = widget.userLocalModel.bio ?? "--";

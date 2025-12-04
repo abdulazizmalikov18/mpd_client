@@ -13,6 +13,7 @@ import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/features/chat/domain/models/chat_user_state.dart';
 import 'package:mpd_client/features/chat/domain/models/message.dart';
 import 'package:mpd_client/features/chat/presentation/bloc/chat_message/bloc/chat_message_bloc.dart';
+import 'package:mpd_client/main.dart';
 import 'package:mpd_client/src/widgets/custom_snackbar.dart';
 import 'package:mpd_client/src/widgets/top_snackbar.dart';
 import 'package:path_provider/path_provider.dart';
@@ -115,7 +116,7 @@ class ChatVMController {
   }) async {
     try {
       final wsUrl = Uri.parse(
-        "wss://sharq-api.sharqdarmon.uz/SMMS/ws/chat/?token=${StorageRepository.getString(StorageKeys.TOKEN)}",
+        "${$baseUrlSocket}/SMMS/ws/chat/?token=${StorageRepository.getString(StorageKeys.TOKEN)}",
       );
       channel = WebSocketChannel.connect(wsUrl);
       await channel!.ready;

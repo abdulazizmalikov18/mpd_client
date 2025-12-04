@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:mpd_client/core/data/repository/storage_keys.dart';
+import 'package:mpd_client/core/data/repository/storage_repository.dart';
 import 'package:mpd_client/core/exceptions/error_handle_new.dart';
 import 'package:mpd_client/core/pagination/models/generic_pagination.dart';
 import 'package:mpd_client/features/chat/data/entity/get_chat_entity.dart';
@@ -55,6 +57,12 @@ class ChatServiceImpl extends ChatService {
       request: (client) {
         return client.get(
           "SMMS/api/v1.0/chat/chat-group/",
+          options: Options(
+            headers: {
+              'Authorization':
+                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
           queryParameters: param.toJson(),
         );
       },
@@ -77,6 +85,12 @@ class ChatServiceImpl extends ChatService {
       request: (client) {
         return client.get(
           "SMMS/api/v1.0/chat/${param.groupSlug}/chat/",
+          options: Options(
+            headers: {
+              'Authorization':
+                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
           queryParameters: param.toJson(),
         );
       },
@@ -97,6 +111,12 @@ class ChatServiceImpl extends ChatService {
       request: (client) {
         return client.post(
           "/SMMS/api/v1.0/chat/$groupSlug/chat/mark_all_message/",
+          options: Options(
+            headers: {
+              'Authorization':
+                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
         );
       },
       body: (response) => true,
@@ -111,6 +131,12 @@ class ChatServiceImpl extends ChatService {
       request: (client) {
         return client.post(
           "SMMS/api/v1.0/chat/${param.slugName}/chat/",
+          options: Options(
+            headers: {
+              'Authorization':
+                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
           data: param.toData(),
         );
       },
@@ -133,6 +159,12 @@ class ChatServiceImpl extends ChatService {
       request: (client) {
         return client.get(
           "SMMS/api/v1.0/chat/users/",
+          options: Options(
+            headers: {
+              'Authorization':
+                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
           queryParameters: {
             "limit": params.limit,
             "offset": params.offset,
@@ -159,6 +191,12 @@ class ChatServiceImpl extends ChatService {
       request: (client) {
         return client.post(
           "SMMS/api/v1.0/chat/chat-group/user_to_user/",
+          options: Options(
+            headers: {
+              'Authorization':
+                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
           data: FormData.fromMap({"username": username}),
         );
       },
@@ -176,6 +214,12 @@ class ChatServiceImpl extends ChatService {
       request: (client) {
         return client.post(
           "SMMS/api/v1.0/chat/chat-group/",
+          options: Options(
+            headers: {
+              'Authorization':
+                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
           data: params.toJsonFormData(),
         );
       },
