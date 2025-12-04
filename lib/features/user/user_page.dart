@@ -151,7 +151,7 @@ class _UserPageState extends State<UserPage> {
                                 AppRoutes.userInfo,
                                 arguments: state.userInfo,
                               )
-                              .whenComplete(() {
+                              .then((value) {
                                 if (context.mounted) {
                                   context.read<UserInfoBloc>().add(
                                     GetUserInfoEvent(),

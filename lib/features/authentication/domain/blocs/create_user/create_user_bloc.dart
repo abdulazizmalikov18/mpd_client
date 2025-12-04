@@ -56,37 +56,35 @@ class CreateUserBloc extends Bloc<CreateUserEvent, CreateUserState> {
     Emitter<CreateUserState> emit,
   ) async {
     emit(state.copyWith(error: '', gender: state.gender));
-    if (_formKey.currentState!.validate()) {
-      emit(state.copyWith(showLoading: true, gender: state.gender));
+    emit(state.copyWith(showLoading: true, gender: state.gender));
 
-      final result = await _repository.createUser(
-        CreateUserFormModel(
-          // username: _userNameController.text,
-          name: _firstNameController.text,
-          lastname: _lastNameController.text,
-          surname: _lastNameController.text,
-          birthday: _birthController.text,
-          gender: state.gender.name[0],
-          mainCat: event.mainCategory,
-          region: event.region,
-          phone: event.phone,
-          password: event.password,
+    final result = await _repository.createUser(
+      CreateUserFormModel(
+        // username: _userNameController.text,
+        name: _firstNameController.text,
+        lastname: _lastNameController.text,
+        surname: _lastNameController.text,
+        birthday: _birthController.text,
+        gender: state.gender.name[0],
+        mainCat: event.mainCategory,
+        region: event.region,
+        phone: event.phone,
+        password: event.password,
+      ),
+    );
+
+    if (result.isRight) {
+      emit(
+        state.copyWith(showLoading: false, error: 'No', gender: state.gender),
+      );
+    } else {
+      emit(
+        state.copyWith(
+          error: result.left.message,
+          showLoading: false,
+          gender: state.gender,
         ),
       );
-
-      if (result.isRight) {
-        emit(
-          state.copyWith(showLoading: false, error: 'No', gender: state.gender),
-        );
-      } else {
-        emit(
-          state.copyWith(
-            error: result.left.message,
-            showLoading: false,
-            gender: state.gender,
-          ),
-        );
-      }
     }
   }
 }

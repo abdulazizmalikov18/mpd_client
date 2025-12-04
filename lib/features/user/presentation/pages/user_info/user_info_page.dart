@@ -10,13 +10,14 @@ import 'package:mpd_client/core/utils/utils.dart';
 import 'package:mpd_client/core/validator/validators.dart';
 import 'package:mpd_client/features/authentication/domain/blocs/register/register_bloc.dart';
 import 'package:mpd_client/features/user/data/models/user_info_model.dart';
+import 'package:mpd_client/features/user/presentation/pages/user_info/components/select_gender_user.dart';
+import 'package:mpd_client/features/user/presentation/pages/user_info/components/update_selected_date_widget.dart';
 import 'package:mpd_client/features/user/presentation/widgets/disabled_account_sheet.dart';
 import 'package:mpd_client/src/themes/styles.dart';
 import 'package:mpd_client/src/widgets/default_avatar.dart';
 import 'package:mpd_client/src/widgets/label_input_widget.dart';
 import 'package:mpd_client/src/widgets/longbutton.dart';
 import 'package:mpd_client/src/widgets/pinned_sheet.dart';
-
 
 class UserInfo extends StatefulWidget {
   final UserInfoModel userLocalModel;
@@ -207,42 +208,42 @@ class _UserInfoState extends State<UserInfo> {
               topHint: context.l10n.profile_firstname,
               inputHint: context.l10n.profile_firstname,
               controller: firsNameController,
-              require: '*',
+              // require: '*',
               readOnly:
                   context.read<UserInfoBloc>().state.userInfo?.status == 2,
               onChanged: (value) {
                 context.read<UserInfoBloc>().add(const HasChangesEvent());
               },
             ),
-            // ScreenUtil().setVerticalSpacing(20.h),
-            // LabelInputWidget(
-            //   validator: (value) => Validators.empty(value, context),
-            //   textCapitalization: TextCapitalization.words,
-            //   textInputAction: TextInputAction.next,
-            //   topHint: context.l10n.profile_lastname,
-            //   inputHint: context.l10n.profile_lastname,
-            //   controller: userLastNameController,
-            //   // require: '*',
-            //   readOnly:
-            //       context.read<UserInfoBloc>().state.userInfo?.status == 2,
-            //   onChanged: (value) {
-            //     context.read<UserInfoBloc>().add(const HasChangesEvent());
-            //   },
-            // ),
-            // ScreenUtil().setVerticalSpacing(20.h),
-            // SelectGenderUser(
-            //   isDisable:
-            //       context.read<UserInfoBloc>().state.userInfo?.status == 2,
-            // ),
-            // ScreenUtil().setVerticalSpacing(20.h),
-            // UpdateSelectDateWidget(
-            //   onChanged: (value) {
-            //     context.read<UserInfoBloc>().add(const HasChangesEvent());
-            //   },
-            //   birthController: birthController,
-            //   isDisable:
-            //       context.read<UserInfoBloc>().state.userInfo?.status == 2,
-            // ),
+            ScreenUtil().setVerticalSpacing(20.h),
+            LabelInputWidget(
+              validator: (value) => Validators.empty(value, context),
+              textCapitalization: TextCapitalization.words,
+              textInputAction: TextInputAction.next,
+              topHint: context.l10n.profile_lastname,
+              inputHint: context.l10n.profile_lastname,
+              controller: userLastNameController,
+              // require: '*',
+              readOnly:
+                  context.read<UserInfoBloc>().state.userInfo?.status == 2,
+              onChanged: (value) {
+                context.read<UserInfoBloc>().add(const HasChangesEvent());
+              },
+            ),
+            ScreenUtil().setVerticalSpacing(20.h),
+            SelectGenderUser(
+              isDisable:
+                  context.read<UserInfoBloc>().state.userInfo?.status == 2,
+            ),
+            ScreenUtil().setVerticalSpacing(20.h),
+            UpdateSelectDateWidget(
+              onChanged: (value) {
+                context.read<UserInfoBloc>().add(const HasChangesEvent());
+              },
+              birthController: birthController,
+              isDisable:
+                  context.read<UserInfoBloc>().state.userInfo?.status == 2,
+            ),
 
             // ScreenUtil().setVerticalSpacing(20.h),
             // BlocSelector<ProfessionBloc, ProfessionState, Profession?>(
@@ -348,7 +349,7 @@ class _UserInfoState extends State<UserInfo> {
         listener: (context, state) async {
           if (!state.showLoading && state.error == 'No') {
             context.read<UserInfoBloc>().add(UpdateUserInfoLocal());
-            Navigator.of(context).maybePop();
+            Navigator.of(context).pop();
           }
         },
         builder: (context, state) {
@@ -363,20 +364,18 @@ class _UserInfoState extends State<UserInfo> {
                   onPress: () {
                     if (state.userInfo?.status != 2) {
                       context.read<UserInfoBloc>().add(
-                        (UpdateUserProfessionEvent(
+                        UpdateUserProfessionEvent(
                           lastname: userLastNameController.text.trim(),
                           name: firsNameController.text.trim(),
                           birthday: birthController.text.trim(),
                           gender: gender,
                           bio: bioController.text.trim(),
-                        )),
+                        ),
                       );
                     } else {
-                      context.read<UserInfoBloc>().add(
-                        (UpdateUserVerifyEvent()),
-                      );
+                      context.read<UserInfoBloc>().add(UpdateUserVerifyEvent());
                     }
-                    context.read<UserInfoBloc>().add((UpdateUserImage()));
+                    context.read<UserInfoBloc>().add(UpdateUserImage());
                     Navigator.of(context).pop();
                   },
                 ),

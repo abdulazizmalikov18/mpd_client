@@ -1,9 +1,11 @@
+// In password_part.dart
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/app/app_routes.dart';
 import 'package:mpd_client/core/utils/utils.dart';
 import 'package:mpd_client/core/validator/validators.dart';
 import 'package:mpd_client/features/authentication/domain/blocs/change_password/change_password_bloc.dart';
+import 'package:mpd_client/features/authentication/domain/blocs/create_user/create_user_bloc.dart';
 import 'package:mpd_client/features/authentication/presentation/widgets/have_account_text_widget.dart';
 import 'package:mpd_client/provider/language.dart';
 import 'package:mpd_client/src/tools/ui_tools.dart';
@@ -12,9 +14,35 @@ import 'package:mpd_client/src/themes/styles.dart';
 import 'package:mpd_client/src/widgets/loading_dialog_widget.dart';
 import 'package:mpd_client/src/widgets/longbutton.dart';
 
-class PasswordPart extends StatelessWidget {
-  const PasswordPart({super.key, required this.valueNotifier});
+class PasswordPart extends StatefulWidget {
+  final String phone;
   final ValueNotifier valueNotifier;
+
+  const PasswordPart({
+    super.key,
+    required this.phone,
+    required this.valueNotifier,
+  });
+
+  @override
+  State<PasswordPart> createState() => _PasswordPartState();
+}
+
+class _PasswordPartState extends State<PasswordPart> {
+  @override
+  void initState() {
+    super.initState();
+    // Set default values for hidden fields
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final createUserBloc = context.read<CreateUserBloc>();
+      // Generate a random username based on phone number
+      final username =
+          'user_${widget.phone.substring(widget.phone.length - 4)}';
+      createUserBloc.userNameController.text = username;
+      createUserBloc.firsNameController.text = 'User';
+      createUserBloc.lastNameController.text = '';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +60,7 @@ class PasswordPart extends StatelessWidget {
           key: context.read<ChangePasswordBloc>().formKey,
           child: Column(
             children: [
+              // Only show password fields
               BlocSelector<ChangePasswordBloc, ChangePasswordState, bool>(
                 selector: (state) => state.newPasswordEye,
                 builder: (context, newPasswordEye) {
@@ -122,9 +151,21 @@ class PasswordPart extends StatelessWidget {
 
             if (!state.showLoading && state.error == 'No' && state.isCorrect) {
               Navigator.pop(context);
-              await Future.delayed(
-                const Duration(milliseconds: 300),
-              ).then((value) => valueNotifier.value = 1);
+              // Submit user creation with default values
+              _submitUserCreation(context);
+            } else if (!state.showLoading && state.error == 'No') {
+              // Navigator.pop(context);
+              await Future.delayed(const Duration(milliseconds: 250)).then((
+                value,
+              ) {
+                if (context.mounted) {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AppRoutes.mainPage,
+                    (route) => false,
+                  );
+                }
+              });
             } else if (!state.showLoading &&
                 state.error != 'No' &&
                 state.error != '') {
@@ -165,6 +206,19 @@ class PasswordPart extends StatelessWidget {
         ),
         ScreenUtil().setVerticalSpacing(40.h),
       ],
+    );
+  }
+
+  void _submitUserCreation(BuildContext context) {
+    final password = context
+        .read<ChangePasswordBloc>()
+        .password1Controller
+        .text;
+    final createUserBloc = context.read<CreateUserBloc>();
+
+    // Submit with default values
+    createUserBloc.add(
+      ForCreateUserEvent(phone: widget.phone, password: password),
     );
   }
 }

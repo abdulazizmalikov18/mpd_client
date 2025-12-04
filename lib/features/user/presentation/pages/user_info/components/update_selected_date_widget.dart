@@ -41,10 +41,10 @@ class UpdateSelectDateWidget extends StatelessWidget {
                     color: context.color.black,
                   ),
                 ),
-                TextSpan(
-                  text: '*',
-                  style: Styles.boldTopHint.copyWith(color: context.color.red),
-                ),
+                // TextSpan(
+                //   text: '*',
+                //   style: Styles.boldTopHint.copyWith(color: context.color.red),
+                // ),
               ],
             ),
           ),
