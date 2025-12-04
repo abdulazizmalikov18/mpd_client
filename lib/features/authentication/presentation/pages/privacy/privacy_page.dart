@@ -43,9 +43,10 @@ class PrivacyPage extends StatelessWidget {
           selector: (state) => state.isPrivacyReat,
           builder: (context, isReat) {
             return LongButton(
-              isDisable: !isReat,
+              isDisable: isReat,
               buttonName: context.l10n.register_agree_privacy_and_policy,
               onPress: () {
+                context.read<RegisterBloc>().add(PrivacyReatPressed());
                 Navigator.pop(context);
               },
             );
@@ -107,31 +108,32 @@ class PrivacyPage extends StatelessWidget {
                 style: theme.textTheme.bodyMedium,
               ),
               const SizedBox(height: 16),
-              Row(
-                children: [
-                  BlocSelector<RegisterBloc, RegisterState, bool>(
-                    selector: (state) => state.isPrivacyReat,
-                    builder: (context, isReat) {
-                      return Checkbox(
-                        side: BorderSide(color: context.color.border),
-                        value: isReat,
-                        onChanged: (value) => context.read<RegisterBloc>().add(
-                          PrivacyReatPressed(),
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.r),
-                        ),
-                      );
-                    },
-                  ),
-                  Text(
-                    context.l10n.register_terms_of_use,
-                    style: Styles.headline7.copyWith(
-                      color: context.color.black,
-                    ),
-                  ),
-                ],
-              ),
+
+              // Row(
+              //   children: [
+              //     BlocSelector<RegisterBloc, RegisterState, bool>(
+              //       selector: (state) => state.isPrivacyReat,
+              //       builder: (context, isReat) {
+              //         return Checkbox(
+              //           side: BorderSide(color: context.color.border),
+              //           value: isReat,
+              //           onChanged: (value) => context.read<RegisterBloc>().add(
+              //             PrivacyReatPressed(),
+              //           ),
+              //           shape: RoundedRectangleBorder(
+              //             borderRadius: BorderRadius.circular(4.r),
+              //           ),
+              //         );
+              //       },
+              //     ),
+              //     Text(
+              //       context.l10n.register_terms_of_use,
+              //       style: Styles.headline7.copyWith(
+              //         color: context.color.black,
+              //       ),
+              //     ),
+              //   ],
+              // ),
               ScreenUtil().setVerticalSpacing(100.h),
             ],
           ),

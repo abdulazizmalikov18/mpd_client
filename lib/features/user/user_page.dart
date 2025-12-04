@@ -378,7 +378,10 @@ class _UserPageState extends State<UserPage> {
             ListTile(
               leading: AppIcons.scrollText.svg(),
               horizontalTitleGap: 0,
-              title: Text("Terms of Use", style: Styles.headline5),
+              title: Text(
+                context.l10n.termsOfUseTitle,
+                style: Styles.headline5,
+              ),
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(

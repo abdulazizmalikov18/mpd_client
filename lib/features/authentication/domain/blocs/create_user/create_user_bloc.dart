@@ -61,7 +61,7 @@ class CreateUserBloc extends Bloc<CreateUserEvent, CreateUserState> {
 
       final result = await _repository.createUser(
         CreateUserFormModel(
-          username: _userNameController.text,
+          // username: _userNameController.text,
           name: _firstNameController.text,
           lastname: _lastNameController.text,
           surname: _lastNameController.text,
