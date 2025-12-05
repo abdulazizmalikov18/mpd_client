@@ -8,7 +8,6 @@ import 'package:mpd_client/features/doctor_profile_booking/presentation/pages/se
 import 'package:mpd_client/features/doctor_profile_booking/presentation/pages/services/components/service_success.dart';
 import 'package:mpd_client/features/home/domain/blocs/product_specalist/product_specalist_bloc.dart';
 import 'package:mpd_client/provider/language.dart';
-import 'package:mpd_client/src/widgets/appbar_widget.dart';
 import 'package:mpd_client/src/widgets/error_type_widget.dart';
 
 class ServicesPage extends StatefulWidget {
@@ -32,7 +31,7 @@ class _ServicesPageState extends State<ServicesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomSheet: ServicePinnedSheet(specialistId: widget.specialistId),
-      appBar: AppBarWidget(title: context.l10n.book_appointment_page),
+      appBar: AppBar(title: Text(context.l10n.book_appointment_page)),
       body: BlocBuilder<ProductSpecalistBloc, ProductSpecalistState>(
         builder: (context, state) {
           if (state.status.isSuccess) {

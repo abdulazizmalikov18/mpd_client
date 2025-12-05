@@ -40,17 +40,6 @@ class _DoctorCategoryPageState extends State<DoctorCategoryPage> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Doctors"),
-          centerTitle: false,
-          elevation: 0,
-          iconTheme: IconThemeData(color: context.color.black),
-          backgroundColor: context.color.white,
-          titleTextStyle: TextStyle(
-            color: context.color.black,
-            fontSize: 20,
-            fontWeight: FontWeight.w500,
-          ),
-          titleSpacing: 0,
-          toolbarHeight: 56.h,
           // bottom: PreferredSize(
           //   preferredSize: const Size(double.infinity, 64),
           //   child: Container(

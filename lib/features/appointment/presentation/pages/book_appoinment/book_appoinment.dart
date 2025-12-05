@@ -12,7 +12,6 @@ import 'package:mpd_client/features/appointment/presentation/widgets/appoinment_
 import 'package:mpd_client/features/appointment/presentation/widgets/appointment_place_date.dart';
 import 'package:mpd_client/features/home/data/models/local_service_model.dart';
 import 'package:mpd_client/src/tools/ui_tools.dart';
-import 'package:mpd_client/src/widgets/appbar_widget.dart';
 import 'package:mpd_client/src/widgets/longbutton.dart';
 import 'package:mpd_client/src/widgets/pinned_sheet.dart';
 import 'package:mpd_client/src/widgets/transparent_long_button.dart';
@@ -35,8 +34,8 @@ class BookAppoinment extends StatelessWidget {
   Widget build(BuildContext context) {
     final totalCost = Utils.priceFormat(appointment.cost! * appointment.qty!);
     return Scaffold(
-      backgroundColor: context.color.background,
-      appBar: AppBarWidget(title: context.l10n.appointment_appointment_list),
+      // backgroundColor: context.color.background,
+      appBar: AppBar(title: Text(context.l10n.appointment_appointment_list)),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(
           parent: BouncingScrollPhysics(),

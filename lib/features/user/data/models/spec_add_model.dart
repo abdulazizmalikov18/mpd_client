@@ -2,11 +2,6 @@
 //
 //     final specAddModel = specAddModelFromJson(jsonString);
 
-import 'package:dio/dio.dart';
-import 'package:mpd_client/core/data/repository/storage_keys.dart';
-
-import 'package:mpd_client/core/data/repository/storage_repository.dart';
-
 // SpecAddModel specAddModelFromJson(String str) => SpecAddModel.fromJson(json.decode(str));
 
 // String specAddModelToJson(SpecAddModel data) => json.encode(data.toJson());
@@ -42,13 +37,13 @@ class SpecAddModel {
     'bio': bio,
   };
 
-  FormData? get toJsonDocument {
-    final data = FormData.fromMap({
-      'user': StorageRepository.getInt(StorageKeys.USERID),
-      'type': 1,
-    });
-    if (avatar == null) return null;
-    data.files.add(MapEntry('avatar', MultipartFile.fromFileSync(avatar!)));
-    return data;
-  }
+  // FormData? get toJsonDocument {
+  //   final data = FormData.fromMap({
+  //     'user': StorageRepository.getInt(StorageKeys.USERID),
+  //     'type': 1,
+  //   });
+  //   if (avatar == null) return null;
+  //   data.files.add(MapEntry('avatar', MultipartFile.fromFileSync(avatar!)));
+  //   return data;
+  // }
 }

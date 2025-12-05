@@ -14,7 +14,6 @@ import 'package:mpd_client/features/home/presentation/widgets/build_label.dart';
 import 'package:mpd_client/features/main_page.dart';
 import 'package:mpd_client/provider/language.dart';
 import 'package:mpd_client/src/themes/styles.dart';
-import 'package:mpd_client/src/widgets/appbar_widget.dart';
 import 'package:mpd_client/src/widgets/comment_input_widget.dart';
 import 'package:mpd_client/src/widgets/loading_dialog_widget.dart';
 import 'package:mpd_client/src/widgets/longbutton.dart';
@@ -115,7 +114,7 @@ class _AppoinmentDateTimePageState extends State<AppoinmentDateTimePage> {
           ),
         ),
       ),
-      appBar: AppBarWidget(title: context.l10n.book_appointment_date_page),
+      appBar: AppBar(title: Text(context.l10n.book_appointment_date_page)),
       body: SingleChildScrollView(
         reverse: true,
         child: Column(

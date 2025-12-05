@@ -28,9 +28,11 @@ class _ChatViewState extends State<ChatView> {
       appBar: AppBar(
         title: Text(context.l10n.chat),
         bottom: PreferredSize(
-          preferredSize: Size(double.infinity, 52),
+          preferredSize: Size(double.infinity, 56),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+            ).copyWith(bottom: 8),
             child: WTextField(
               onChanged: (searchText) {
                 context.read<ChatGroupBloc>().add(

@@ -40,62 +40,58 @@ class _AppointmentPageState extends State<AppointmentPage>
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          elevation: .0,
-          backgroundColor: context.color.white,
-          automaticallyImplyLeading: false,
-          toolbarHeight: 56.h,
-          centerTitle: false,
-          title: Text(
-            context.l10n.appointment_main_page,
-            style: Styles.headline4.copyWith(color: context.color.black),
-          ),
+          title: Text(context.l10n.appointment_main_page),
           bottom: PreferredSize(
-            preferredSize: Size(double.maxFinite, 56.h),
-            child: Container(
-              height: 50.h,
-              width: double.maxFinite,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.r),
-                color: context.color.background,
-              ),
-              margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-              child: TabBar(
-                isScrollable:
-                    context.read<LocalProvider>().locale == const Locale('en')
-                    ? false
-                    : true,
-                padding: const EdgeInsets.all(4),
-                indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.r),
-                  color: context.color.white,
+            preferredSize: Size(double.maxFinite, 56),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+              ).copyWith(bottom: 8),
+              child: Container(
+                height: 48,
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.r),
+                  color: context.color.background,
                 ),
-                indicatorColor: Colors.transparent,
-                tabs: [
-                  Tab(
-                    child: Text(
-                      context.l10n.appointment_upcoming,
-                      style: Styles.descSubtitle.copyWith(
-                        color: context.color.black,
+                child: TabBar(
+                  isScrollable:
+                      context.read<LocalProvider>().locale == const Locale('en')
+                      ? false
+                      : true,
+                  padding: const EdgeInsets.all(4),
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.r),
+                    color: context.color.white,
+                  ),
+                  indicatorColor: Colors.transparent,
+                  tabs: [
+                    Tab(
+                      child: Text(
+                        context.l10n.appointment_upcoming,
+                        style: Styles.descSubtitle.copyWith(
+                          color: context.color.black,
+                        ),
                       ),
                     ),
-                  ),
-                  Tab(
-                    child: Text(
-                      context.l10n.appointment_complited,
-                      style: Styles.descSubtitle.copyWith(
-                        color: context.color.black,
+                    Tab(
+                      child: Text(
+                        context.l10n.appointment_complited,
+                        style: Styles.descSubtitle.copyWith(
+                          color: context.color.black,
+                        ),
                       ),
                     ),
-                  ),
-                  Tab(
-                    child: Text(
-                      context.l10n.appointment_canceled,
-                      style: Styles.descSubtitle.copyWith(
-                        color: context.color.black,
+                    Tab(
+                      child: Text(
+                        context.l10n.appointment_canceled,
+                        style: Styles.descSubtitle.copyWith(
+                          color: context.color.black,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

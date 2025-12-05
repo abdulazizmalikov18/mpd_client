@@ -7,7 +7,6 @@ import 'package:mpd_client/core/data/repository/storage_keys.dart';
 import 'package:mpd_client/core/data/repository/storage_repository.dart';
 import 'package:mpd_client/core/extension/context_ext.dart';
 import 'package:mpd_client/src/themes/styles.dart';
-import 'package:mpd_client/src/widgets/appbar_widget.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
@@ -20,8 +19,8 @@ class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(
-        title: context.l10n.notification,
+      appBar: AppBar(
+        title: Text(context.l10n.notification),
         actions: [
           if (kDebugMode)
             IconButton(

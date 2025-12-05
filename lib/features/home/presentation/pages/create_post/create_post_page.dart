@@ -6,7 +6,6 @@ import 'package:mpd_client/features/home/presentation/pages/create_post/componen
 import 'package:mpd_client/provider/language.dart';
 import 'package:mpd_client/src/themes/styles.dart';
 import 'package:mpd_client/src/tools/ui_tools.dart';
-import 'package:mpd_client/src/widgets/appbar_widget.dart';
 import 'package:mpd_client/src/widgets/comment_input_widget.dart';
 import 'package:mpd_client/src/widgets/loading_dialog_widget.dart';
 import 'package:mpd_client/src/widgets/longbutton.dart';
@@ -18,7 +17,7 @@ class CreatePostPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBarWidget(title: context.l10n.lenth_create_post),
+      appBar: AppBar(title: Text(context.l10n.lenth_create_post)),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

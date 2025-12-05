@@ -94,6 +94,7 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
       specCat: event.idCat,
       job: event.idJob,
       avatar: event.file,
+      bio: event.bio,
     );
     final response = await _userRepository.postSpecialist(model);
     if (response.isRight) {

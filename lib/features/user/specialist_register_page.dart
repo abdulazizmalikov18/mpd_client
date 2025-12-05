@@ -1,11 +1,12 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart';
+import 'dart:convert';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:formz/formz.dart';
-import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
-import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/features/authentication/presentation/pages/register_detail/informations/components/select_variants_widget.dart';
 import 'package:mpd_client/features/user/data/models/specialist_cat_model.dart';
@@ -13,7 +14,6 @@ import 'package:mpd_client/features/user/data/models/specialist_category_model.d
 import 'package:mpd_client/features/user/presentation/widgets/category_sheet.dart';
 import 'package:mpd_client/features/user/presentation/widgets/custom_text_field.dart';
 import 'package:mpd_client/features/user/presentation/widgets/spec_cat_sheet.dart';
-import 'package:mpd_client/src/widgets/appbar_widget.dart';
 import 'package:mpd_client/src/widgets/longbutton.dart';
 
 class SpecialistRegisterPage extends StatefulWidget {
@@ -28,40 +28,56 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
   SpecialistCategoryModel? specialistCategoryModel;
   SpecialistCatModel? specialistCatModel;
   // SpecialistPositionModel? specialistPositionModel;
-  String? _fileName;
+
   List<PlatformFile>? _paths;
-  String? _extension;
+  String? _base64Image;
 
   int status = -10;
 
   void onError(String text) {}
 
-  void _pickFiles() async {
+  Future<void> _pickFiles() async {
     if ((_paths?.length ?? 0) >= 1) {
       onError(context.l10n.specialist_register_error_max_files);
       return;
     }
     _resetState();
+
     try {
-      _paths = (await FilePicker.platform.pickFiles(
-        type: FileType.any,
-        // allowMultiple: true,
-        onFileLoading: (FilePickerStatus status) => Log.i(status),
-        allowedExtensions: (_extension?.isNotEmpty ?? false)
-            ? _extension?.replaceAll(' ', '').split(',')
-            : null,
-      ))?.files;
+      final ImagePicker picker = ImagePicker();
+      final XFile? image = await picker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 80,
+      );
+
+      if (image != null) {
+        final bytes = await image.readAsBytes();
+        _base64Image = base64Encode(bytes);
+
+        // Create a temporary file to store the image
+        final tempFile = File(image.path);
+        final fileSize = await tempFile.length();
+
+        if (!mounted) return;
+
+        setState(() {
+          _paths = [
+            PlatformFile(
+              name: image.name,
+              path: tempFile.path,
+              size: fileSize,
+              bytes: bytes,
+            ),
+          ];
+        });
+      }
     } on PlatformException catch (e) {
-      Log.e('Unsupported operation$e');
+      Log.e('Image picker error: $e');
+      onError('Failed to pick image: ${e.message}');
     } catch (e) {
-      Log.e(e.toString());
+      Log.e('Error picking image: $e');
+      onError('Failed to process image');
     }
-    if (!mounted) return;
-    setState(() {
-      _fileName = _paths != null
-          ? _paths!.map((e) => e.name).toString()
-          : '...';
-    });
   }
 
   void _resetState() {
@@ -69,9 +85,45 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
       return;
     }
     setState(() {
-      _fileName = null;
       _paths = null;
+      _base64Image = null;
     });
+  }
+
+  Future<void> _pickOrReplaceImage() async {
+    if (_paths?.isNotEmpty == true) {
+      // If image is already selected, show option to remove or replace
+      final result = await showModalBottomSheet<bool>(
+        context: context,
+        builder: (context) => Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.delete),
+              title: const Text('O\'chirish'),
+              onTap: () => Navigator.pop(context, true),
+            ),
+            ListTile(
+              leading: const Icon(Icons.image),
+              title: const Text('Boshqa rasm tanlash'),
+              onTap: () => Navigator.pop(context, false),
+            ),
+          ],
+        ),
+      );
+
+      if (result == null) return;
+
+      if (result == true) {
+        // Remove image
+        _resetState();
+        return;
+      }
+      // Continue to pick new image
+    }
+
+    // If no image or user wants to replace, pick a new one
+    await _pickFiles();
   }
 
   @override
@@ -95,7 +147,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(title: context.l10n.aboutYou),
+      appBar: AppBar(title: Text(context.l10n.aboutYou)),
       extendBody: true,
       resizeToAvoidBottomInset: false,
       bottomNavigationBar: AnimatedContainer(
@@ -118,7 +170,8 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                     idCat: specialistCatModel!.id,
                     // idPos: specialistPositionModel!.id,
                     idJob: specialistCategoryModel!.id,
-                    file: _paths?.first.path,
+                    file: _base64Image,
+                    bio: bioController.text,
                     onSucces: () {
                       Navigator.of(context)
                         ..pop()
@@ -149,49 +202,96 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16),
                   child: InkWell(
+                    borderRadius: BorderRadius.circular(50.r),
                     onTap: () {
-                      _pickFiles();
+                      _pickOrReplaceImage();
                     },
-                    child: DottedBorder(
-                      options: RoundedRectDottedBorderOptions(
-                        radius: Radius.circular(20.r),
-                        strokeWidth: 2,
-                        color: Colors.grey,
-                        dashPattern: const [10, 10],
-                      ),
-                      child: SizedBox(
-                        height: 106.h,
-                        width: double.infinity,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 48.h,
-                              width: 48.h,
-                              padding: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: context.color.border.withValues(
-                                  alpha: .5,
+                    child: _paths?.isNotEmpty == true
+                        ? Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Container(
+                                width: 108.r,
+                                height: 108.r,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: Colors.grey.shade300,
+                                    width: 1.0,
+                                  ),
+                                ),
+                                child: ClipOval(
+                                  child: Image.file(
+                                    File(_paths!.first.path!),
+                                    width: 108.r,
+                                    height: 108.r,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
-                              child: AppIcons.files.svg(),
+                              Positioned(
+                                bottom: 0,
+                                right: 0,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _resetState();
+                                    });
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).primaryColor,
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.white,
+                                        width: 2.0,
+                                      ),
+                                    ),
+                                    child: const Icon(
+                                      Icons.close,
+                                      color: Colors.white,
+                                      size: 16,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        : DottedBorder(
+                            options: RoundedRectDottedBorderOptions(
+                              radius: Radius.circular(54.r),
+                              strokeWidth: 2,
+                              color: Colors.grey,
+                              dashPattern: const [10, 10],
                             ),
-                            SizedBox(height: 4.h),
-                            Text(
-                              "Rasim yuklash",
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xFF677294),
+                            child: SizedBox(
+                              height: 108.h,
+                              width: 108.w,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.add_a_photo_outlined,
+                                    size: 24.sp,
+                                    color: Colors.grey.shade500,
+                                  ),
+                                  SizedBox(height: 4.h),
+                                  Text(
+                                    "Rasm yuklash",
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      color: Colors.grey.shade600,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
+                          ),
                   ),
                 ),
+
                 SizedBox(height: 16.h),
                 SelectVariantsWidget(
                   topHint: context.l10n.specialist_register_category_hint,

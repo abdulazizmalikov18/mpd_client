@@ -8,7 +8,6 @@ import 'package:mpd_client/features/records/presentation/widgets/record_file.dar
 import 'package:mpd_client/features/user/data/models/specialist_info_model.dart';
 import 'package:mpd_client/features/user/data/models/user_records_model.dart';
 import 'package:mpd_client/provider/language.dart';
-import 'package:mpd_client/src/widgets/appbar_widget.dart';
 import '../../../../records/presentation/widgets/record_review.dart';
 
 class Record extends StatelessWidget {
@@ -19,7 +18,7 @@ class Record extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(title: record.title ?? "--"),
+      appBar: AppBar(title: Text(record.title ?? "--")),
       backgroundColor: context.color.background,
       body: SingleChildScrollView(
         child: Column(
