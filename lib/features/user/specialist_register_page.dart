@@ -156,7 +156,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
         duration: const Duration(milliseconds: 300),
         child: BlocSelector<UserInfoBloc, UserInfoState, FormzSubmissionStatus>(
           selector: (state) => state.statusCreate,
-          builder: (context, state) {
+          builder: (context, statusCreate) {
             return LongButton(
               onPress: () {
                 if (_paths?.isEmpty ?? false) {
@@ -185,7 +185,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                   ),
                 );
               },
-              loading: state.isInProgress,
+              loading: statusCreate.isInProgress,
               isDisable:
                   specialistCategoryModel == null || specialistCatModel == null,
               buttonName: context.l10n.specialist_register_register_button,
