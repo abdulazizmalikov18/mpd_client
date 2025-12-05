@@ -14,6 +14,7 @@ import 'package:mpd_client/features/user/presentation/pages/user_info/components
 import 'package:mpd_client/features/user/presentation/pages/user_info/components/update_selected_date_widget.dart';
 import 'package:mpd_client/features/user/presentation/widgets/disabled_account_sheet.dart';
 import 'package:mpd_client/src/themes/styles.dart';
+import 'package:mpd_client/src/widgets/custom_snackbar.dart';
 import 'package:mpd_client/src/widgets/default_avatar.dart';
 import 'package:mpd_client/src/widgets/label_input_widget.dart';
 import 'package:mpd_client/src/widgets/longbutton.dart';
@@ -345,13 +346,7 @@ class _UserInfoState extends State<UserInfo> {
           ],
         ),
       ),
-      bottomSheet: BlocConsumer<UserInfoBloc, UserInfoState>(
-        listener: (context, state) async {
-          if (!state.showLoading && state.error == 'No') {
-            context.read<UserInfoBloc>().add(UpdateUserInfoLocal());
-            Navigator.of(context).pop();
-          }
-        },
+      bottomSheet: BlocBuilder<UserInfoBloc, UserInfoState>(
         builder: (context, state) {
           return Padding(
             padding: EdgeInsets.only(bottom: Platform.isIOS ? 12 : 0),
@@ -370,13 +365,24 @@ class _UserInfoState extends State<UserInfo> {
                           birthday: birthController.text.trim(),
                           gender: gender,
                           bio: bioController.text.trim(),
+                          onSuccess: () {
+                            Navigator.of(context).pop(true);
+                            context.read<UserInfoBloc>().add(
+                              UpdateUserInfoLocal(),
+                            );
+                          },
+                          onError: () {
+                            CustomSnackbar.show(
+                              context,
+                              "Ma'lumot yangilanmadi",
+                            );
+                          },
                         ),
                       );
                     } else {
                       context.read<UserInfoBloc>().add(UpdateUserVerifyEvent());
                     }
                     context.read<UserInfoBloc>().add(UpdateUserImage());
-                    Navigator.of(context).pop();
                   },
                 ),
               ),

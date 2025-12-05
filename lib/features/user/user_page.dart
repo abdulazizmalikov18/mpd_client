@@ -129,9 +129,21 @@ class _UserPageState extends State<UserPage> {
             const UserNameSurnamePart(),
             const UserNumberPart(),
             ScreenUtil().setVerticalSpacing(8.h),
-            BlocBuilder<UserInfoBloc, UserInfoState>(
+            BlocConsumer<UserInfoBloc, UserInfoState>(
+              listener: (context, state) {
+                if (state.status.isSuccess) {
+                  debugPrint(
+                    '✅ User info yangilandi: ${state.userInfo?.lastname}',
+                  );
+                }
+              },
+              buildWhen: (previous, current) {
+                // Faqat kerakli o'zgarishlarda rebuild qilish
+                return previous.userInfo != current.userInfo ||
+                    previous.status != current.status;
+              },
               builder: (context, state) {
-                final disabled = state.status.isInProgress ? true : false;
+                final disabled = state.status.isInProgress;
                 return ListTile(
                   leading: AppIcons.user.svg(
                     color: !disabled
@@ -143,21 +155,13 @@ class _UserPageState extends State<UserPage> {
                     context.l10n.profile_personal_info,
                     style: Styles.headline5,
                   ),
-                  onTap: state.status.isInProgress || state.status.isFailure
+                  onTap: disabled
                       ? null
                       : () {
-                          Navigator.of(context)
-                              .pushNamed(
-                                AppRoutes.userInfo,
-                                arguments: state.userInfo,
-                              )
-                              .then((value) {
-                                if (context.mounted) {
-                                  context.read<UserInfoBloc>().add(
-                                    GetUserInfoEvent(),
-                                  );
-                                }
-                              });
+                          Navigator.of(context).pushNamed(
+                            AppRoutes.userInfo,
+                            arguments: state.userInfo,
+                          );
                         },
                 );
               },

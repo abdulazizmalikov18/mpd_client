@@ -57,6 +57,8 @@ class UpdateUserProfessionEvent extends UserInfoEvent {
   final String birthday;
   final String bio;
   final Gender gender;
+  final Function onSuccess;
+  final Function onError;
 
   const UpdateUserProfessionEvent({
     required this.lastname,
@@ -64,6 +66,8 @@ class UpdateUserProfessionEvent extends UserInfoEvent {
     required this.birthday,
     required this.gender,
     required this.bio,
+    required this.onSuccess,
+    required this.onError,
   });
 }
 

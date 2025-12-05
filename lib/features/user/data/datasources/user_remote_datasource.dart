@@ -349,6 +349,7 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
       request: () {
         return _client.get(
           "/UMS/api/v1.0/account/specialists/",
+          queryParameters: {"with_status": true},
           options: Options(
             headers: {
               if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)

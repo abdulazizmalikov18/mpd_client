@@ -188,8 +188,8 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
     if (result.isRight) {
       emit(
         state.copyWith(
-          status: FormzSubmissionStatus.success,
           userInfo: result.right,
+          status: FormzSubmissionStatus.success,
         ),
       );
     } else {
@@ -375,7 +375,9 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
     );
     if (result.isRight) {
       emit(state.copyWith(showLoading: false, error: 'No'));
+      event.onSuccess();
     } else {
+      event.onError();
       emit(state.copyWith(error: result.left.message, showLoading: false));
     }
   }
