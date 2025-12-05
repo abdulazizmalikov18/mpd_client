@@ -90,10 +90,10 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
   ) async {
     emit(state.copyWith(statusCreate: FormzSubmissionStatus.inProgress));
     final model = SpecAddModel(
-      position: event.idPos,
+      // position: event.idPos,
       specCat: event.idCat,
       job: event.idJob,
-      file: event.file,
+      avatar: event.file,
     );
     final response = await _userRepository.postSpecialist(model);
     if (response.isRight) {

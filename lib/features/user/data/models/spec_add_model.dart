@@ -12,28 +12,34 @@ import 'package:mpd_client/core/data/repository/storage_repository.dart';
 // String specAddModelToJson(SpecAddModel data) => json.encode(data.toJson());
 
 class SpecAddModel {
-  final int position;
+  // final int position;
   final int specCat;
   final int job;
-  final String? file;
+  final String? avatar;
+  final String? bio;
 
   SpecAddModel({
-    required this.position,
+    // required this.position,
     required this.specCat,
     required this.job,
-    this.file,
+    this.avatar,
+    this.bio,
   });
 
   factory SpecAddModel.fromJson(Map<String, dynamic> json) => SpecAddModel(
-    position: (json['position'] as num).toInt(),
+    // position: (json['position'] as num).toInt(),
     specCat: (json['spec_cat'] as num).toInt(),
     job: (json['job'] as num).toInt(),
+    avatar: json['avatar'] != null ? json['avatar'] as String : null,
+    bio: json['bio'] != null ? json['bio'] as String : null,
   );
 
   Map<String, dynamic> toJson() => {
-    'position': position,
+    // 'position': position,
     'spec_cat': specCat,
     'job': job,
+    'avatar': avatar,
+    'bio': bio,
   };
 
   FormData? get toJsonDocument {
@@ -41,8 +47,8 @@ class SpecAddModel {
       'user': StorageRepository.getInt(StorageKeys.USERID),
       'type': 1,
     });
-    if (file == null) return null;
-    data.files.add(MapEntry('file', MultipartFile.fromFileSync(file!)));
+    if (avatar == null) return null;
+    data.files.add(MapEntry('avatar', MultipartFile.fromFileSync(avatar!)));
     return data;
   }
 }

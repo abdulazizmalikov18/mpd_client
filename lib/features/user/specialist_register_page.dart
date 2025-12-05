@@ -10,10 +10,8 @@ import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/features/authentication/presentation/pages/register_detail/informations/components/select_variants_widget.dart';
 import 'package:mpd_client/features/user/data/models/specialist_cat_model.dart';
 import 'package:mpd_client/features/user/data/models/specialist_category_model.dart';
-import 'package:mpd_client/features/user/data/models/specialist_position_model.dart';
 import 'package:mpd_client/features/user/presentation/widgets/category_sheet.dart';
 import 'package:mpd_client/features/user/presentation/widgets/custom_text_field.dart';
-import 'package:mpd_client/features/user/presentation/widgets/position_sheet.dart';
 import 'package:mpd_client/features/user/presentation/widgets/spec_cat_sheet.dart';
 import 'package:mpd_client/src/widgets/appbar_widget.dart';
 import 'package:mpd_client/src/widgets/longbutton.dart';
@@ -29,7 +27,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
   TextEditingController bioController = TextEditingController();
   SpecialistCategoryModel? specialistCategoryModel;
   SpecialistCatModel? specialistCatModel;
-  SpecialistPositionModel? specialistPositionModel;
+  // SpecialistPositionModel? specialistPositionModel;
   String? _fileName;
   List<PlatformFile>? _paths;
   String? _extension;
@@ -118,7 +116,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                 context.read<UserInfoBloc>().add(
                   PostSpecialist(
                     idCat: specialistCatModel!.id,
-                    idPos: specialistPositionModel!.id,
+                    // idPos: specialistPositionModel!.id,
                     idJob: specialistCategoryModel!.id,
                     file: _paths?.first.path,
                     onSucces: () {
@@ -136,9 +134,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
               },
               loading: state.isInProgress,
               isDisable:
-                  specialistCategoryModel == null ||
-                  specialistCatModel == null ||
-                  specialistPositionModel == null,
+                  specialistCategoryModel == null || specialistCatModel == null,
               buttonName: context.l10n.specialist_register_register_button,
             );
           },
@@ -150,6 +146,53 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
             padding: const EdgeInsets.symmetric(vertical: 16),
             child: Column(
               children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: InkWell(
+                    onTap: () {
+                      _pickFiles();
+                    },
+                    child: DottedBorder(
+                      options: RoundedRectDottedBorderOptions(
+                        radius: Radius.circular(20.r),
+                        strokeWidth: 2,
+                        color: Colors.grey,
+                        dashPattern: const [10, 10],
+                      ),
+                      child: SizedBox(
+                        height: 106.h,
+                        width: double.infinity,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 48.h,
+                              width: 48.h,
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: context.color.border.withValues(
+                                  alpha: .5,
+                                ),
+                              ),
+                              child: AppIcons.files.svg(),
+                            ),
+                            SizedBox(height: 4.h),
+                            Text(
+                              "Rasim yuklash",
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xFF677294),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16.h),
                 SelectVariantsWidget(
                   topHint: context.l10n.specialist_register_category_hint,
                   hint: specialistCatModel?.name ?? "",
@@ -171,27 +214,27 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                   },
                 ),
                 SizedBox(height: 16.h),
-                SelectVariantsWidget(
-                  topHint: context.l10n.specialist_register_position_hint,
-                  hint: specialistPositionModel?.name ?? "",
-                  onPressed: () {
-                    showModalBottomSheet(
-                      useSafeArea: true,
-                      backgroundColor: Colors.transparent,
-                      isScrollControlled: true,
-                      context: context,
-                      builder: (ctx) => PositionSheet(
-                        specialistPosition: state.specialistPosition,
-                        selection: specialistPositionModel,
-                        onPress: (SpecialistPositionModel value) {
-                          specialistPositionModel = value;
-                          setState(() {});
-                        },
-                      ),
-                    );
-                  },
-                ),
-                SizedBox(height: 16.h),
+                // SelectVariantsWidget(
+                //   topHint: context.l10n.specialist_register_position_hint,
+                //   hint: specialistPositionModel?.name ?? "",
+                //   onPressed: () {
+                //     showModalBottomSheet(
+                //       useSafeArea: true,
+                //       backgroundColor: Colors.transparent,
+                //       isScrollControlled: true,
+                //       context: context,
+                //       builder: (ctx) => PositionSheet(
+                //         specialistPosition: state.specialistPosition,
+                //         selection: specialistPositionModel,
+                //         onPress: (SpecialistPositionModel value) {
+                //           specialistPositionModel = value;
+                //           setState(() {});
+                //         },
+                //       ),
+                //     );
+                //   },
+                // ),
+                // SizedBox(height: 16.h),
                 SelectVariantsWidget(
                   topHint: context.l10n.specialist_register_job_hint,
                   hint: specialistCategoryModel?.name ?? "",
@@ -228,152 +271,153 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                         noHeight: true,
                         expands: false,
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            context.l10n.specialist_register_education_title,
-                            style: Theme.of(
-                              context,
-                            ).textTheme.titleSmall!.copyWith(),
-                          ),
-                          const Spacer(),
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.add),
-                          ),
-                        ],
-                      ),
-                      CustomTextField(
-                        hintText:
-                            "${context.l10n.specialist_register_write_here} ",
-                        onChanged: (value) {},
-                        minLines: 1,
-                        maxLines: 6,
-                        noHeight: true,
-                        expands: false,
-                      ),
-                      SizedBox(height: 16.h),
-                      Builder(
-                        builder: (context) =>
-                            _paths != null && _paths!.isNotEmpty
-                            ? ListView.separated(
-                                shrinkWrap: true,
-                                padding: EdgeInsets.only(bottom: 16.h),
-                                itemCount: _paths != null && _paths!.isNotEmpty
-                                    ? _paths!.length
-                                    : 1,
-                                itemBuilder: (context, index) {
-                                  final bool isMultiPath =
-                                      _paths != null && _paths!.isNotEmpty;
-                                  final String name = isMultiPath
-                                      ? _paths!
-                                            .map((e) => e.name)
-                                            .toList()[index]
-                                      : _fileName ?? '...';
+                      // Row(
+                      //   children: [
+                      //     Text(
+                      //       context.l10n.specialist_register_education_title,
+                      //       style: Theme.of(
+                      //         context,
+                      //       ).textTheme.titleSmall!.copyWith(),
+                      //     ),
+                      //     const Spacer(),
+                      //     IconButton(
+                      //       onPressed: () {},
+                      //       icon: const Icon(Icons.add),
+                      //     ),
+                      //   ],
+                      // ),
+                      // CustomTextField(
+                      //   hintText:
+                      //       "${context.l10n.specialist_register_write_here} ",
+                      //   onChanged: (value) {},
+                      //   minLines: 1,
+                      //   maxLines: 6,
+                      //   noHeight: true,
+                      //   expands: false,
+                      // ),
+                      // SizedBox(height: 16.h),
+                      // Builder(
+                      //   builder: (context) =>
+                      //       _paths != null && _paths!.isNotEmpty
+                      //       ? ListView.separated(
+                      //           shrinkWrap: true,
+                      //           padding: EdgeInsets.only(bottom: 16.h),
+                      //           itemCount: _paths != null && _paths!.isNotEmpty
+                      //               ? _paths!.length
+                      //               : 1,
+                      //           itemBuilder: (context, index) {
+                      //             final bool isMultiPath =
+                      //                 _paths != null && _paths!.isNotEmpty;
+                      //             final String name = isMultiPath
+                      //                 ? _paths!
+                      //                       .map((e) => e.name)
+                      //                       .toList()[index]
+                      //                 : _fileName ?? '...';
 
-                                  return Container(
-                                    padding: const EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                      color: context.color.white,
-                                      border: Border.all(
-                                        color: context.color.border,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          padding: const EdgeInsets.all(8),
-                                          decoration: BoxDecoration(
-                                            color: context.color.grey,
-                                            border: Border.all(
-                                              color: context.color.border,
-                                            ),
-                                            borderRadius: BorderRadius.circular(
-                                              8,
-                                            ),
-                                          ),
-                                          child: AppIcons.files.svg(),
-                                        ),
-                                        const SizedBox(width: 12),
-                                        Expanded(
-                                          child: Text(
-                                            name,
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w600,
-                                              color: context.color.black,
-                                            ),
-                                          ),
-                                        ),
-                                        IconButton(
-                                          onPressed: () {
-                                            if (_paths!.length > 1) {
-                                              _paths!.removeAt(index);
-                                            } else {
-                                              _paths!.clear();
-                                            }
-                                            setState(() {});
-                                          },
-                                          icon: Icon(
-                                            Icons.delete_outline,
-                                            color: context.color.red,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                                separatorBuilder: (context, index) =>
-                                    const Divider(),
-                              )
-                            : const SizedBox(),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          _pickFiles();
-                        },
-                        child: DottedBorder(
-                          options: RoundedRectDottedBorderOptions(
-                            radius: Radius.circular(20.r),
-                            strokeWidth: 2,
-                            color: Colors.grey,
-                            dashPattern: const [10, 10],
-                          ),
-                          child: SizedBox(
-                            height: 106.h,
-                            width: double.infinity,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  height: 48.h,
-                                  width: 48.h,
-                                  padding: const EdgeInsets.all(12),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    color: context.color.border.withValues(
-                                      alpha: .5,
-                                    ),
-                                  ),
-                                  child: AppIcons.files.svg(),
-                                ),
-                                SizedBox(height: 4.h),
-                                Text(
-                                  context.l10n.specialist_register_add_file,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xFF677294),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+                      //             return Container(
+                      //               padding: const EdgeInsets.all(8),
+                      //               decoration: BoxDecoration(
+                      //                 color: context.color.white,
+                      //                 border: Border.all(
+                      //                   color: context.color.border,
+                      //                 ),
+                      //                 borderRadius: BorderRadius.circular(8),
+                      //               ),
+                      //               child: Row(
+                      //                 children: [
+                      //                   Container(
+                      //                     padding: const EdgeInsets.all(8),
+                      //                     decoration: BoxDecoration(
+                      //                       color: context.color.grey,
+                      //                       border: Border.all(
+                      //                         color: context.color.border,
+                      //                       ),
+                      //                       borderRadius: BorderRadius.circular(
+                      //                         8,
+                      //                       ),
+                      //                     ),
+                      //                     child: AppIcons.files.svg(),
+                      //                   ),
+                      //                   const SizedBox(width: 12),
+                      //                   Expanded(
+                      //                     child: Text(
+                      //                       name,
+                      //                       maxLines: 1,
+                      //                       overflow: TextOverflow.ellipsis,
+                      //                       style: TextStyle(
+                      //                         fontSize: 17,
+                      //                         fontWeight: FontWeight.w600,
+                      //                         color: context.color.black,
+                      //                       ),
+                      //                     ),
+                      //                   ),
+                      //                   IconButton(
+                      //                     onPressed: () {
+                      //                       if (_paths!.length > 1) {
+                      //                         _paths!.removeAt(index);
+                      //                       } else {
+                      //                         _paths!.clear();
+                      //                       }
+                      //                       setState(() {});
+                      //                     },
+                      //                     icon: Icon(
+                      //                       Icons.delete_outline,
+                      //                       color: context.color.red,
+                      //                     ),
+                      //                   ),
+                      //                 ],
+                      //               ),
+                      //             );
+                      //           },
+                      //           separatorBuilder: (context, index) =>
+                      //               const Divider(),
+                      //         )
+                      //       : const SizedBox(),
+                      // ),
+
+                      // InkWell(
+                      //   onTap: () {
+                      //     _pickFiles();
+                      //   },
+                      //   child: DottedBorder(
+                      //     options: RoundedRectDottedBorderOptions(
+                      //       radius: Radius.circular(20.r),
+                      //       strokeWidth: 2,
+                      //       color: Colors.grey,
+                      //       dashPattern: const [10, 10],
+                      //     ),
+                      //     child: SizedBox(
+                      //       height: 106.h,
+                      //       width: double.infinity,
+                      //       child: Column(
+                      //         mainAxisAlignment: MainAxisAlignment.center,
+                      //         children: [
+                      //           Container(
+                      //             height: 48.h,
+                      //             width: 48.h,
+                      //             padding: const EdgeInsets.all(12),
+                      //             decoration: BoxDecoration(
+                      //               borderRadius: BorderRadius.circular(12),
+                      //               color: context.color.border.withValues(
+                      //                 alpha: .5,
+                      //               ),
+                      //             ),
+                      //             child: AppIcons.files.svg(),
+                      //           ),
+                      //           SizedBox(height: 4.h),
+                      //           Text(
+                      //             context.l10n.specialist_register_add_file,
+                      //             style: const TextStyle(
+                      //               fontSize: 16,
+                      //               fontWeight: FontWeight.w400,
+                      //               color: Color(0xFF677294),
+                      //             ),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

@@ -8,16 +8,18 @@ class GetUserInfoEvent extends UserInfoEvent {}
 
 class PostSpecialist extends UserInfoEvent {
   final int idCat;
-  final int idPos;
+  // final int idPos;
   final int idJob;
   final String? file;
+  final String? bio;
   final VoidCallback onSucces;
   final VoidCallback onError;
 
   PostSpecialist({
     required this.idCat,
-    required this.idPos,
+    // required this.idPos,
     required this.idJob,
+    this.bio,
     required this.onSucces,
     required this.onError,
     this.file,

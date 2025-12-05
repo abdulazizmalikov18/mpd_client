@@ -47,9 +47,7 @@ class _SpecCatSheetState extends State<SpecCatSheet> {
                 widget.onPress(widget.specialistCat[index]);
                 Navigator.pop(context);
               },
-              title: Text(
-                "${widget.specialistCat[index].name}/${widget.specialistCat[index].specialistCount}",
-              ),
+              title: Text(widget.specialistCat[index].name),
               trailing:
                   (widget.selection?.id ?? 0) == widget.specialistCat[index].id
                   ? AppIcons.tickCircle.svg()

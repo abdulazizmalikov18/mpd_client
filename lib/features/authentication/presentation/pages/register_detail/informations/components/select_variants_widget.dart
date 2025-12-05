@@ -35,6 +35,7 @@ class SelectVariantsWidget extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.r),
+              color: context.color.white,
               border: Border.all(color: context.color.border, width: 1),
             ),
             child: ListTile(
