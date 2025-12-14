@@ -1,7 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart';
-import 'dart:convert';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,7 +29,6 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
   // SpecialistPositionModel? specialistPositionModel;
 
   List<PlatformFile>? _paths;
-  String? _base64Image;
 
   int status = -10;
 
@@ -51,10 +49,6 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
       );
 
       if (image != null) {
-        final bytes = await image.readAsBytes();
-        _base64Image = base64Encode(bytes);
-
-        // Create a temporary file to store the image
         final tempFile = File(image.path);
         final fileSize = await tempFile.length();
 
@@ -62,12 +56,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
 
         setState(() {
           _paths = [
-            PlatformFile(
-              name: image.name,
-              path: tempFile.path,
-              size: fileSize,
-              bytes: bytes,
-            ),
+            PlatformFile(name: image.name, path: tempFile.path, size: fileSize),
           ];
         });
       }
@@ -86,7 +75,6 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
     }
     setState(() {
       _paths = null;
-      _base64Image = null;
     });
   }
 
@@ -159,7 +147,15 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
           builder: (context, statusCreate) {
             return LongButton(
               onPress: () {
-                if (_paths?.isEmpty ?? false) {
+                if (_paths?.isEmpty ?? true) {
+                  onError(
+                    context.l10n.specialist_register_error_upload_required,
+                  );
+                  return;
+                }
+
+                final filePath = _paths!.first.path;
+                if (filePath == null || filePath.isEmpty) {
                   onError(
                     context.l10n.specialist_register_error_upload_required,
                   );
@@ -170,7 +166,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                     idCat: specialistCatModel!.id,
                     // idPos: specialistPositionModel!.id,
                     idJob: specialistCategoryModel!.id,
-                    file: _base64Image,
+                    file: filePath,
                     bio: bioController.text,
                     onSucces: () {
                       Navigator.of(context)

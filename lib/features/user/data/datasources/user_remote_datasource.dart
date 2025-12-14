@@ -282,31 +282,11 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
 
   @override
   Future<bool> postSpecialist(SpecAddModel model) {
-    // if (model.toJsonDocument != null) {
-    //   _handle.apiControl(
-    //     request: () {
-    //       return _client.post(
-    //         "/UMS/api/v1.0/account/media/documents/",
-    //         data: model.toJsonDocument,
-    //         options: Options(
-    //           headers: {
-    //             if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
-    //               'Authorization':
-    //                   'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
-    //           },
-    //         ),
-    //       );
-    //     },
-    //     body: (response) {
-    //       return true;
-    //     },
-    //   );
-    // }
     return _handle.apiControl(
       request: () {
         return _client.post(
           "/BMS/api/v1.0/public/org/mpd/specialist-add/",
-          data: model.toJson(),
+          data: model.toJsonDocument,
           options: Options(
             headers: {
               if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)

@@ -6,6 +6,8 @@
 
 // String specAddModelToJson(SpecAddModel data) => json.encode(data.toJson());
 
+import 'package:dio/dio.dart';
+
 class SpecAddModel {
   // final int position;
   final int specCat;
@@ -37,13 +39,16 @@ class SpecAddModel {
     'bio': bio,
   };
 
-  // FormData? get toJsonDocument {
-  //   final data = FormData.fromMap({
-  //     'user': StorageRepository.getInt(StorageKeys.USERID),
-  //     'type': 1,
-  //   });
-  //   if (avatar == null) return null;
-  //   data.files.add(MapEntry('avatar', MultipartFile.fromFileSync(avatar!)));
-  //   return data;
-  // }
+  FormData get toJsonDocument {
+    final data = FormData.fromMap({
+      'spec_cat': specCat,
+      'job': job,
+      'bio': bio,
+    });
+
+    if (avatar != null && avatar!.isNotEmpty) {
+      data.files.add(MapEntry('avatar', MultipartFile.fromFileSync(avatar!)));
+    }
+    return data;
+  }
 }

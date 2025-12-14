@@ -60,7 +60,7 @@ class _UserSpecialistViewState extends State<UserSpecialistView> {
                       CircleAvatar(
                         radius: 28,
                         backgroundImage: CachedNetworkImageProvider(
-                          state.specailistModel[index].org.logo,
+                          state.specailistModel[index].avatar,
                         ),
                       ),
                       const SizedBox(width: 12),

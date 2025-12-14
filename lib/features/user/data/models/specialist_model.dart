@@ -29,6 +29,10 @@ class SpecialistModel {
   final String lastname;
   @JsonKey(name: "job")
   final Job job;
+  @JsonKey(name: "role")
+  final String? role;
+  @JsonKey(name: "status")
+  final String? status;
   @JsonKey(name: "auto")
   final bool auto;
   @JsonKey(name: "avatar")
@@ -45,6 +49,8 @@ class SpecialistModel {
     this.name = '',
     this.lastname = '',
     this.job = const Job(),
+    this.role,
+    this.status,
     this.auto = false,
     this.avatar = '',
     this.locationDesc = '',
