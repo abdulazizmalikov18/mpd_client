@@ -53,18 +53,44 @@
 
 		<!-- Clear and Apple-compliant purpose strings -->
 		<key>NSCameraUsageDescription</key>
-		<string>This app requires access to your camera to allow you to take and upload photos related to your health or profile.</string>
+		<string>This app requires access to your camera to allow you to take and upload photos
+			related to your health or profile.</string>
 		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-		<string>This app uses your location to show nearby doctors, clinics, and health services even when the app is not active.</string>
+		<string>This app uses your location to show nearby doctors, clinics, and health services
+			even when the app is not active.</string>
 		<key>NSLocationWhenInUseUsageDescription</key>
-		<string>This app needs your location while in use to find nearby medical providers and relevant services.</string>
+		<string>This app needs your location while in use to find nearby medical providers and
+			relevant services.</string>
 		<key>NSMicrophoneUsageDescription</key>
-		<string>This app uses your microphone for video or voice consultations with doctors or to record health-related notes.</string>
+		<string>This app uses your microphone for video or voice consultations with doctors or to
+			record health-related notes.</string>
 		<key>NSMotionUsageDescription</key>
-		<string>This app uses motion data to monitor your physical activity and provide personalized health insights and recommendations.</string>
+		<string>This app uses motion data to monitor your physical activity and provide personalized
+			health insights and recommendations.</string>
 		<key>NSPhotoLibraryUsageDescription</key>
-		<string>This app accesses your photo library so you can upload profile images or health-related documents and reports.</string>
-
+		<string>This app accesses your photo library so you can upload profile images or
+			health-related documents and reports.</string>
+		<key>UIApplicationSceneManifest</key>
+		<dict>
+			<key>UIApplicationSupportsMultipleScenes</key>
+			<false />
+			<key>UISceneConfigurations</key>
+			<dict>
+				<key>UIWindowSceneSessionRoleApplication</key>
+				<array>
+					<dict>
+						<key>UISceneClassName</key>
+						<string>UIWindowScene</string>
+						<key>UISceneConfigurationName</key>
+						<string>flutter</string>
+						<key>UISceneDelegateClassName</key>
+						<string>FlutterSceneDelegate</string>
+						<key>UISceneStoryboardFile</key>
+						<string>Main</string>
+					</dict>
+				</array>
+			</dict>
+		</dict>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true />
 		<key>UILaunchStoryboardName</key>

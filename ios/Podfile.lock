@@ -72,15 +72,16 @@ PODS:
   - Mantle/extobjc (2.2.0)
   - map_launcher (0.0.1):
     - Flutter
-  - objective_c (0.0.1):
-    - Flutter
   - open_file_ios (0.0.1):
     - Flutter
   - package_info_plus (0.4.5):
     - Flutter
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
   - permission_handler_apple (9.3.0):
     - Flutter
-  - photo_manager (3.8.0):
+  - photo_manager (3.8.3):
     - Flutter
     - FlutterMacOS
   - SDWebImage (5.21.3):
@@ -132,9 +133,9 @@ DEPENDENCIES:
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - just_audio (from `.symlinks/plugins/just_audio/darwin`)
   - map_launcher (from `.symlinks/plugins/map_launcher/ios`)
-  - objective_c (from `.symlinks/plugins/objective_c/ios`)
   - open_file_ios (from `.symlinks/plugins/open_file_ios/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - photo_manager (from `.symlinks/plugins/photo_manager/darwin`)
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
@@ -183,12 +184,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/just_audio/darwin"
   map_launcher:
     :path: ".symlinks/plugins/map_launcher/ios"
-  objective_c:
-    :path: ".symlinks/plugins/objective_c/ios"
   open_file_ios:
     :path: ".symlinks/plugins/open_file_ios/ios"
   package_info_plus:
     :path: ".symlinks/plugins/package_info_plus/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
   photo_manager:
@@ -232,11 +233,11 @@ SPEC CHECKSUMS:
   libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
   Mantle: c5aa8794a29a022dfbbfc9799af95f477a69b62d
   map_launcher: 8051ad5783913cafce93f2414c6858f2904fd8df
-  objective_c: 89e720c30d716b036faf9c9684022048eee1eee2
   open_file_ios: 5ff7526df64e4394b4fe207636b67a95e83078bb
   package_info_plus: af8e2ca6888548050f16fa2f1938db7b5a5df499
+  path_provider_foundation: bb55f6dbba17d0dccd6737fe6f7f34fbd0376880
   permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
-  photo_manager: 343d78032bf7ebe944d2ab9702204dc2eda07338
+  photo_manager: fe4cbb0808b96f8be4af7ce6ae18dcd9c9b983c6
   SDWebImage: 16309af6d214ba3f77a7c6f6fdda888cb313a50a
   SDWebImageWebPCoder: e38c0a70396191361d60c092933e22c20d5b1380
   share_plus: 50da8cb520a8f0f65671c6c6a99b3617ed10a58a
