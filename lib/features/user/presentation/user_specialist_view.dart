@@ -13,6 +13,33 @@ class UserSpecialistView extends StatefulWidget {
 }
 
 class _UserSpecialistViewState extends State<UserSpecialistView> {
+  Widget _statusChip(BuildContext context, String? status) {
+    final isPending = status == '0';
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: isPending
+            ? context.color.orange.withValues(alpha: .12)
+            : context.color.green.withValues(alpha: .12),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: isPending ? context.color.orange : context.color.green,
+          width: 1,
+        ),
+      ),
+      child: Text(
+        isPending
+            ? context.l10n.specialist_status_pending
+            : context.l10n.specialist_status_approved,
+        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+          color: isPending ? context.color.orange : context.color.green,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,29 +83,70 @@ class _UserSpecialistViewState extends State<UserSpecialistView> {
                     ],
                   ),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CircleAvatar(
                         radius: 28,
-                        backgroundImage: CachedNetworkImageProvider(
-                          state.specailistModel[index].avatar,
-                        ),
+                        backgroundImage:
+                            state.specailistModel[index].avatar.isNotEmpty
+                            ? CachedNetworkImageProvider(
+                                state.specailistModel[index].avatar,
+                              )
+                            : null,
+                        backgroundColor: context.color.border,
+                        child: state.specailistModel[index].avatar.isEmpty
+                            ? Icon(Icons.person, color: context.color.white)
+                            : null,
                       ),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "ORG: ${state.specailistModel[index].org.name}",
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    '${state.specailistModel[index].name} ${state.specailistModel[index].lastname}',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleSmall
+                                        ?.copyWith(fontWeight: FontWeight.w700),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                _statusChip(
+                                  context,
+                                  state.specailistModel[index].status,
+                                ),
+                              ],
                             ),
+
                             Text(
-                              "${context.l10n.register_firstname}: ${state.specailistModel[index].name} ${state.specailistModel[index].lastname}",
+                              state.specailistModel[index].org.name,
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(color: context.color.grey),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
+                            const SizedBox(height: 4),
                             Text(
-                              "${context.l10n.category}: ${state.specailistModel[index].specCat.name}",
+                              '${context.l10n.category}: ${state.specailistModel[index].specCat.name}',
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(color: context.color.grey),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
+                            const SizedBox(height: 4),
                             Text(
-                              "${context.l10n.job}: ${state.specailistModel[index].job.name}",
+                              '${context.l10n.job}: ${state.specailistModel[index].job.name}',
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(color: context.color.grey),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ],
                         ),

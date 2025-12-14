@@ -19,11 +19,13 @@ class SearchField extends StatefulWidget {
   final TextEditingController controller;
   final bool isMap;
   final Function(String)? onChanged;
+  final double margin;
   const SearchField({
     super.key,
     required this.controller,
     this.isMap = true,
     this.onChanged,
+    this.margin = 16,
   });
 
   @override
@@ -34,7 +36,7 @@ class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16.w),
+      margin: EdgeInsets.symmetric(horizontal: widget.margin.w),
       padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
       decoration: BoxDecoration(
         color: context.color.white,

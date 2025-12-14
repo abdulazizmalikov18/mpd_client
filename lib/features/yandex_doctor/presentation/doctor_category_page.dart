@@ -1,8 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:formz/formz.dart';
-import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/core/utils/debounce.dart';
@@ -40,44 +36,21 @@ class _DoctorCategoryPageState extends State<DoctorCategoryPage> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Doctors"),
-          // bottom: PreferredSize(
-          //   preferredSize: const Size(double.infinity, 64),
-          //   child: Container(
-          //     height: 50.h,
-          //     width: double.maxFinite,
-          //     decoration: BoxDecoration(
-          //       borderRadius: BorderRadius.circular(10.r),
-          //       color: context.color.background,
-          //     ),
-          //     margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-          //     child: TabBar(
-          //       padding: const EdgeInsets.all(4),
-          //       indicator: BoxDecoration(
-          //         borderRadius: BorderRadius.circular(8.r),
-          //         color: context.color.white,
-          //       ),
-          //       indicatorColor: Colors.transparent,
-          //       tabs: [
-          //         Tab(
-          //           child: Text(
-          //             "Doctors",
-          //             style: Styles.descSubtitle.copyWith(
-          //               color: context.color.black,
-          //             ),
-          //           ),
-          //         ),
-          //         Tab(
-          //           child: Text(
-          //             "Maxsulotlar",
-          //             style: Styles.descSubtitle.copyWith(
-          //               color: context.color.black,
-          //             ),
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
+          bottom: PreferredSize(
+            preferredSize: const Size(double.infinity, 64),
+            child: SearchField(
+              controller: widget.controller,
+              isMap: false,
+              margin: 8,
+              onChanged: (query) {
+                onDebounce(() {
+                  context.read<SpecialistBloc>().add(
+                    GetSpecialist(search: query),
+                  );
+                });
+              },
+            ),
+          ),
         ),
         body: AllDoctorsView(widget: widget),
         // body: TabBarView(
@@ -98,165 +71,166 @@ class AllDoctorsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NestedScrollView(
-      headerSliverBuilder: (context, innerBoxIsScrolled) => [
-        SliverToBoxAdapter(
-          child: Column(
-            children: [
-              SizedBox(height: 12.h),
-              SearchField(
-                controller: widget.controller,
-                isMap: false,
-                onChanged: (query) {
-                  onDebounce(() {
-                    context.read<SpecialistBloc>().add(
-                      GetSpecialist(search: query),
-                    );
-                  });
-                },
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Popular Categories",
-                      style: TextStyle(
-                        color: context.color.black,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    TextButton(onPressed: () {}, child: const Text("See All")),
-                  ],
-                ),
-              ),
-              SizedBox(
-                width: double.infinity,
-                height: 100.h,
-                child: BlocBuilder<SpecialistBloc, SpecialistState>(
-                  builder: (context, state) {
-                    return ListView.separated(
-                      itemCount: state.categories.length,
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      scrollDirection: Axis.horizontal,
-                      separatorBuilder: (context, index) =>
-                          SizedBox(width: 12.w),
-                      itemBuilder: (context, index) => InkWell(
-                        onTap: () {
-                          context.read<SpecialistBloc>().add(
-                            SelectingCategory(state.categories[index].id!),
-                          );
-                          context.read<SpecialistBloc>().add(
-                            GetSpecialistCategory(state.categories[index].id!),
-                          );
-                        },
-                        child: SizedBox(
-                          width: 78.h,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                height: 76.h,
-                                width: 76.h,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(76.h),
-                                  color:
-                                      state.categoryId ==
-                                          state.categories[index].id
-                                      ? context.color.mainBlue
-                                      : context.color.background,
-                                ),
-                                child: state.categories[index].image != null
-                                    ? state.categories[index].image!.endsWith(
-                                            ".svg",
-                                          )
-                                          ? SvgPicture.network(
-                                              state.categories[index].image!,
-                                            )
-                                          : CachedNetworkImage(
-                                              imageUrl: state
-                                                  .categories[index]
-                                                  .image!,
-                                            )
-                                    : const SizedBox(),
-                              ),
-                              Text(
-                                state.categories[index].name ?? "--",
-                                style: TextStyle(
-                                  color: context.color.black,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Doctors",
-                      style: TextStyle(
-                        color: context.color.black,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    TextButton(onPressed: () {}, child: const Text("See All")),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-      body: BlocBuilder<SpecialistBloc, SpecialistState>(
-        builder: (context, state) {
-          if (state.status.isInProgress) {
-            return ListView.separated(
-              padding: const EdgeInsets.all(16),
-              itemBuilder: (context, index) =>
-                  WShimmer(height: 158, width: double.infinity),
-              separatorBuilder: (context, index) => const SizedBox(height: 16),
-              itemCount: 12,
-            );
-          } else if (state.status.isFailure) {
-            return Center(
-              child: ErrorTypeWidget(
-                errorIcon: AppIcons.serverError,
-                errorSubtitle: context.l10n.error_internal_server_subtitle,
-                errorTitle: context.l10n.error_internal_server_title,
-                hasReturnButton: false,
-                tryAgainPressed: () {
-                  context.read<SpecialistBloc>().add(GetSpecialist());
-                },
-              ),
-            );
-          }
-          if (state.specialist.isEmpty) {
-            return const Center(child: Text("No data found"));
-          }
+    return BlocBuilder<SpecialistBloc, SpecialistState>(
+      builder: (context, state) {
+        if (state.status.isInProgress) {
           return ListView.separated(
-            padding: const EdgeInsets.symmetric(vertical: 16),
+            padding: const EdgeInsets.all(16),
             itemBuilder: (context, index) =>
-                DoctorCardIteam(specialists: state.specialist[index]),
+                WShimmer(height: 158, width: double.infinity),
             separatorBuilder: (context, index) => const SizedBox(height: 16),
-            itemCount: state.specialist.length,
+            itemCount: 12,
           );
-        },
-      ),
+        } else if (state.status.isFailure) {
+          return Center(
+            child: ErrorTypeWidget(
+              errorIcon: AppIcons.serverError,
+              errorSubtitle: context.l10n.error_internal_server_subtitle,
+              errorTitle: context.l10n.error_internal_server_title,
+              hasReturnButton: false,
+              tryAgainPressed: () {
+                context.read<SpecialistBloc>().add(GetSpecialist());
+              },
+            ),
+          );
+        }
+        if (state.specialist.isEmpty) {
+          return const Center(child: Text("No data found"));
+        }
+        return ListView.separated(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          itemBuilder: (context, index) =>
+              DoctorCardIteam(specialists: state.specialist[index]),
+          separatorBuilder: (context, index) => const SizedBox(height: 16),
+          itemCount: state.specialist.length,
+        );
+      },
     );
+    // return NestedScrollView(
+    //   headerSliverBuilder: (context, innerBoxIsScrolled) => [
+    //     SliverToBoxAdapter(
+    //       child: SearchField(
+    //         controller: widget.controller,
+    //         isMap: false,
+    //         onChanged: (query) {
+    //           onDebounce(() {
+    //             context.read<SpecialistBloc>().add(
+    //               GetSpecialist(search: query),
+    //             );
+    //           });
+    //         },
+    //       ),
+    //       // child: Column(
+    //       //   children: [
+    //       //     SizedBox(height: 12.h),
+
+    //       //     // Padding(
+    //       //     //   padding: const EdgeInsets.symmetric(horizontal: 16),
+    //       //     //   child: Row(
+    //       //     //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //       //     //     children: [
+    //       //     //       Text(
+    //       //     //         "Popular Categories",
+    //       //     //         style: TextStyle(
+    //       //     //           color: context.color.black,
+    //       //     //           fontSize: 18,
+    //       //     //           fontWeight: FontWeight.w500,
+    //       //     //         ),
+    //       //     //       ),
+    //       //     //       TextButton(onPressed: () {}, child: const Text("See All")),
+    //       //     //     ],
+    //       //     //   ),
+    //       //     // ),
+    //       //     // SizedBox(
+    //       //     //   width: double.infinity,
+    //       //     //   height: 100.h,
+    //       //     //   child: BlocBuilder<SpecialistBloc, SpecialistState>(
+    //       //     //     builder: (context, state) {
+    //       //     //       return ListView.separated(
+    //       //     //         itemCount: state.categories.length,
+    //       //     //         padding: const EdgeInsets.symmetric(horizontal: 16),
+    //       //     //         scrollDirection: Axis.horizontal,
+    //       //     //         separatorBuilder: (context, index) =>
+    //       //     //             SizedBox(width: 12.w),
+    //       //     //         itemBuilder: (context, index) => InkWell(
+    //       //     //           onTap: () {
+    //       //     //             context.read<SpecialistBloc>().add(
+    //       //     //               SelectingCategory(state.categories[index].id!),
+    //       //     //             );
+    //       //     //             context.read<SpecialistBloc>().add(
+    //       //     //               GetSpecialistCategory(state.categories[index].id!),
+    //       //     //             );
+    //       //     //           },
+    //       //     //           child: SizedBox(
+    //       //     //             width: 78.h,
+    //       //     //             child: Column(
+    //       //     //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //       //     //               children: [
+    //       //     //                 Container(
+    //       //     //                   height: 76.h,
+    //       //     //                   width: 76.h,
+    //       //     //                   decoration: BoxDecoration(
+    //       //     //                     borderRadius: BorderRadius.circular(76.h),
+    //       //     //                     color:
+    //       //     //                         state.categoryId ==
+    //       //     //                             state.categories[index].id
+    //       //     //                         ? context.color.mainBlue
+    //       //     //                         : context.color.background,
+    //       //     //                   ),
+    //       //     //                   child: state.categories[index].image != null
+    //       //     //                       ? state.categories[index].image!.endsWith(
+    //       //     //                               ".svg",
+    //       //     //                             )
+    //       //     //                             ? SvgPicture.network(
+    //       //     //                                 state.categories[index].image!,
+    //       //     //                               )
+    //       //     //                             : CachedNetworkImage(
+    //       //     //                                 imageUrl: state
+    //       //     //                                     .categories[index]
+    //       //     //                                     .image!,
+    //       //     //                               )
+    //       //     //                       : const SizedBox(),
+    //       //     //                 ),
+    //       //     //                 Text(
+    //       //     //                   state.categories[index].name ?? "--",
+    //       //     //                   style: TextStyle(
+    //       //     //                     color: context.color.black,
+    //       //     //                     fontSize: 12,
+    //       //     //                     fontWeight: FontWeight.w400,
+    //       //     //                   ),
+    //       //     //                   overflow: TextOverflow.ellipsis,
+    //       //     //                   maxLines: 1,
+    //       //     //                 ),
+    //       //     //               ],
+    //       //     //             ),
+    //       //     //           ),
+    //       //     //         ),
+    //       //     //       );
+    //       //     //     },
+    //       //     //   ),
+    //       //     // ),
+    //       //     // Padding(
+    //       //     //   padding: const EdgeInsets.symmetric(horizontal: 16),
+    //       //     //   child: Row(
+    //       //     //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //       //     //     children: [
+    //       //     //       Text(
+    //       //     //         "Doctors",
+    //       //     //         style: TextStyle(
+    //       //     //           color: context.color.black,
+    //       //     //           fontSize: 18,
+    //       //     //           fontWeight: FontWeight.w500,
+    //       //     //         ),
+    //       //     //       ),
+    //       //     //       TextButton(onPressed: () {}, child: const Text("See All")),
+    //       //     //     ],
+    //       //     //   ),
+    //       //     // ),
+    //       //   ],
+    //       // ),
+    //     ),
+    //   ],
+    //   body:  );
   }
 }
 

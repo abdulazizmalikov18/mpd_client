@@ -336,6 +336,11 @@
   "reset_password_success": "Пароль успешно изменен",
   
   "notification_no_notification": "Нет уведомлений",
+  "notification_no_notification_description": "У вас нет уведомлений",
+  "no_data_title": "Нет данных",
+  "no_data_description": "Данные отсутствуют",
+  "specialist_status_pending": "В ожидании",
+  "specialist_status_approved": "Подтверждено",
   "notification_clear_all": "Очистить все",
   "notification_clear_all_description": "Вы уверены, что хотите очистить все уведомления?",
   "notification_clear_all_cancel": "Отмена",

@@ -968,13 +968,19 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get notification_no_notification_description =>
-      'You have no notification';
+      'У вас нет уведомлений';
 
   @override
-  String get no_data_title => 'No Data';
+  String get specialist_status_pending => 'В ожидании';
 
   @override
-  String get no_data_description => 'No information has been entered yet';
+  String get specialist_status_approved => 'Подтверждено';
+
+  @override
+  String get no_data_title => 'Нет данных';
+
+  @override
+  String get no_data_description => 'Данные отсутствуют';
 
   @override
   String get chat_not_found_title => 'Чат не найден';

@@ -1978,6 +1978,18 @@ abstract class AppLocalizations {
   /// **'You have no notification'**
   String get notification_no_notification_description;
 
+  /// No description provided for @specialist_status_pending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get specialist_status_pending;
+
+  /// No description provided for @specialist_status_approved.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved'**
+  String get specialist_status_approved;
+
   /// No description provided for @no_data_title.
   ///
   /// In en, this message translates to:

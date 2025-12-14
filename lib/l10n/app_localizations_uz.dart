@@ -988,7 +988,13 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get notification_no_notification_description =>
-      'Sizda bildirishnomalar mavjud emas';
+      'Sizda xabarnomalar mavjud emas';
+
+  @override
+  String get specialist_status_pending => 'Kutilmoqda';
+
+  @override
+  String get specialist_status_approved => 'Tasdiqlangan';
 
   @override
   String get no_data_title => 'Ma\'lumot yo\'q';

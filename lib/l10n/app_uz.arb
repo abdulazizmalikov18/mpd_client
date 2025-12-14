@@ -334,7 +334,9 @@
   "reset_password_success": "Parol muvaffaqiyatli o'zgartirildi",
   
   "notification_no_notification": "Bildirishnoma yo'q",
-  "notification_no_notification_description": "Sizda bildirishnomalar mavjud emas",
+  "notification_no_notification_description": "Sizda xabarnomalar mavjud emas",
+  "specialist_status_pending": "Kutilmoqda",
+  "specialist_status_approved": "Tasdiqlangan",
   
   "no_data_title": "Ma'lumot yo'q",
   "no_data_description": "Hech qanday ma'lumot kiritilmagan",

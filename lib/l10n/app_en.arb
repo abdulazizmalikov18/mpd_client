@@ -337,6 +337,8 @@
   
   "notification_no_notification": "No Notification",
   "notification_no_notification_description": "You have no notification",
+  "specialist_status_pending": "Pending",
+  "specialist_status_approved": "Approved",
   
   "no_data_title": "No Data",
   "no_data_description": "No information has been entered yet",

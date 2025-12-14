@@ -974,6 +974,12 @@ class AppLocalizationsEn extends AppLocalizations {
       'You have no notification';
 
   @override
+  String get specialist_status_pending => 'Pending';
+
+  @override
+  String get specialist_status_approved => 'Approved';
+
+  @override
   String get no_data_title => 'No Data';
 
   @override

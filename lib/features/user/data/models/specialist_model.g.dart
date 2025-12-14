@@ -20,6 +20,8 @@ SpecialistModel _$SpecialistModelFromJson(Map<String, dynamic> json) =>
       job: json['job'] == null
           ? const Job()
           : Job.fromJson(json['job'] as Map<String, dynamic>),
+      role: json['role'] as String?,
+      status: json['status'] as String?,
       auto: json['auto'] as bool? ?? false,
       avatar: json['avatar'] as String? ?? '',
       locationDesc: json['location_desc'] as String? ?? '',
@@ -34,6 +36,8 @@ Map<String, dynamic> _$SpecialistModelToJson(SpecialistModel instance) =>
       'name': instance.name,
       'lastname': instance.lastname,
       'job': instance.job,
+      'role': instance.role,
+      'status': instance.status,
       'auto': instance.auto,
       'avatar': instance.avatar,
       'location_desc': instance.locationDesc,
