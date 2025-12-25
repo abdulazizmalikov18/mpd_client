@@ -1055,6 +1055,45 @@ class AppLocalizationsEn extends AppLocalizations {
   String get report_reason_other => 'Something else';
 
   @override
+  String get block_user => 'Block User';
+
+  @override
+  String get block_user_title => 'Block User';
+
+  @override
+  String get block_user_message =>
+      'Are you sure you want to block this user? You won\'t see their messages or posts anymore.';
+
+  @override
+  String get block_user_confirm => 'Block';
+
+  @override
+  String get block_user_cancel => 'Cancel';
+
+  @override
+  String get block_user_success =>
+      'User has been blocked successfully. Their content will be hidden from your feed.';
+
+  @override
+  String get unblock_user => 'Unblock User';
+
+  @override
+  String get unblock_user_title => 'Unblock User';
+
+  @override
+  String get unblock_user_message =>
+      'Are you sure you want to unblock this user?';
+
+  @override
+  String get unblock_user_confirm => 'Unblock';
+
+  @override
+  String get blocked_users => 'Blocked Users';
+
+  @override
+  String get no_blocked_users => 'You haven\'t blocked any users yet.';
+
+  @override
   String get termsOfUseTitle => 'Terms of Use';
 
   @override
@@ -1076,14 +1115,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get termsUserConductContent =>
-      'You agree not to use the application to post or transmit any material that is unlawful, threatening, abusive, defamatory, invasive of privacy, or otherwise objectionable.';
+      'You agree not to use the application to post or transmit any material that is unlawful, threatening, abusive, defamatory, invasive of privacy, or otherwise objectionable. MPD has ZERO TOLERANCE for objectionable content or abusive users. Any user who posts objectionable content will be immediately removed from the service and may face legal consequences.';
 
   @override
   String get termsContentPolicyTitle => '3. Content Policy';
 
   @override
   String get termsContentPolicyContent =>
-      'MPD reserves the right to remove any content that violates these terms. We may also terminate or suspend access to our services immediately for any violation.';
+      'MPD reserves the right to remove any content that violates these terms. We may also terminate or suspend access to our services immediately for any violation. All reported content will be reviewed within 24 hours, and violating content will be removed immediately. Users who post objectionable content will be permanently banned from the platform.';
 
   @override
   String get termsAccountTerminationTitle => '4. Account Termination';

@@ -16,8 +16,12 @@ import 'package:mpd_client/features/chat/presentation/bloc/chat_message/bloc/cha
 import 'package:mpd_client/features/chat/presentation/controller/vm_controller.dart';
 import 'package:mpd_client/features/chat/presentation/widgets/message_widgets/w_message.dart';
 import 'package:mpd_client/features/chat/presentation/widgets/report_message_dialog.dart';
+import 'package:mpd_client/features/chat/presentation/widgets/block_user_dialog.dart';
 import 'package:mpd_client/features/chat/presentation/widgets/w_chat_textfield.dart';
 import 'package:mpd_client/features/user/domain/blocs/user_info/user_info_bloc.dart';
+import 'package:mpd_client/core/data/repository/storage_keys.dart';
+import 'package:mpd_client/core/data/repository/storage_repository.dart';
+import 'package:mpd_client/core/extension/context_ext.dart';
 
 class InChatView extends StatefulWidget {
   final ChatGroupModel group;
@@ -37,12 +41,19 @@ class _InChatViewState extends State<InChatView> {
 
   @override
   void initState() {
+    super.initState();
     context.read<ChatMessageBloc>().add(ChatGetMessages(widget.group));
     context.read<ChatMessageBloc>().add(
       ChatReadAllMessage(widget.group.slugName),
     );
 
-    super.initState();
+    // Initialize message listener only if channel is ready
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final chatController = ChatVMController();
+      if (chatController.channel != null) {
+        context.read<ChatMessageBloc>().onComingMessage();
+      }
+    });
   }
 
   @override
@@ -104,6 +115,48 @@ class _InChatViewState extends State<InChatView> {
             );
           },
         ),
+        actions: widget.group.isUserToUser
+            ? [
+                PopupMenuButton<String>(
+                  icon: Icon(Icons.more_vert, color: black),
+                  onSelected: (value) {
+                    if (value == 'block') {
+                      final blockedUsers = StorageRepository.getString(
+                        StorageKeys.BLOCKED_USERS,
+                      );
+                      final isBlocked = blockedUsers
+                          .split(',')
+                          .contains(widget.group.slugName);
+                      BlockUserDialog.show(
+                        context,
+                        username: widget.group.slugName,
+                        userName: widget.group.name,
+                        isBlocked: isBlocked,
+                        onBlocked: () {
+                          // Refresh chat list or navigate back
+                          Navigator.pop(context);
+                        },
+                      );
+                    }
+                  },
+                  itemBuilder: (context) => [
+                    PopupMenuItem<String>(
+                      value: 'block',
+                      child: Row(
+                        children: [
+                          Icon(Icons.block, color: context.color.red, size: 20),
+                          const SizedBox(width: 8),
+                          Text(
+                            context.l10n.block_user,
+                            style: TextStyle(color: context.color.red),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ]
+            : null,
       ),
       body: Column(
         children: [

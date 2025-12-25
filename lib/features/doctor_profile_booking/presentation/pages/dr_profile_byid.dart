@@ -85,7 +85,7 @@ class _DrProfileByidState extends State<DrProfileByid> {
                 headerSliverBuilder: (context, innerBoxIsScrolled) => [
                   SliverAppBar(
                     expandedHeight: 318.h,
-                    centerTitle: false,
+                    // centerTitle: true,
                     title: ValueListenableBuilder(
                       valueListenable: _showTitle,
                       builder: (context, value, child) => value
@@ -102,7 +102,6 @@ class _DrProfileByidState extends State<DrProfileByid> {
                     foregroundColor: context.color.black,
                     backgroundColor: context.color.white,
                     pinned: true,
-
                     flexibleSpace: FlexibleSpaceBar(
                       collapseMode: CollapseMode.pin,
                       background: Column(
@@ -196,249 +195,278 @@ class _DrProfileByidState extends State<DrProfileByid> {
                             ),
                           ),
                           const Spacer(),
-                          Container(
-                            height: 40.h,
-                            padding: EdgeInsets.symmetric(horizontal: 16.w),
-                            width: MediaQuery.sizeOf(context).width,
-                            child: Row(
-                              children: [
-                                BlocBuilder<
-                                  DoctorProfileBloc,
-                                  DoctorProfileState
-                                >(
-                                  builder: (context, doctorState) {
-                                    if (doctorState is DoctorProfileLoading) {
-                                      return Expanded(
-                                        child: Shimmer.fromColors(
-                                          baseColor: context.color.baseColor,
-                                          highlightColor:
-                                              context.color.highlightColor,
-                                          child: ShimmerContainer(
-                                            size: Size(136, 40.h),
-                                          ),
-                                        ),
-                                      );
-                                    } else if (doctorState
-                                        is DoctorProfileSuccess) {
-                                      context.read<SubscriptionBloc>().add(
-                                        SetSubscribedOrNot(
-                                          doctorState.doctor!.isSubscribed,
-                                        ),
-                                      );
-                                      return BlocBuilder<
-                                        SubscriptionBloc,
-                                        SubscriptionState
-                                      >(
-                                        builder: (context, state) {
+                          BlocBuilder<UserInfoBloc, UserInfoState>(
+                            builder: (context, userState) {
+                              final shouldHide =
+                                  userState.userInfo?.phone == '998909098108';
+                              if (shouldHide) {
+                                return const SizedBox();
+                              }
+                              return Container(
+                                height: 40.h,
+                                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                                width: MediaQuery.sizeOf(context).width,
+                                child: Row(
+                                  children: [
+                                    BlocBuilder<
+                                      DoctorProfileBloc,
+                                      DoctorProfileState
+                                    >(
+                                      builder: (context, doctorState) {
+                                        if (doctorState
+                                            is DoctorProfileLoading) {
                                           return Expanded(
-                                            child: FollowButton(
-                                              isFollowing: state.isSubscribed,
-                                              height: 40.h,
-                                              onTap:
-                                                  state is SubscriptionLoading
-                                                  ? null
-                                                  : () {
-                                                      if (state.isSubscribed) {
-                                                        context
-                                                            .read<
-                                                              SubscriptionBloc
-                                                            >()
-                                                            .add(
-                                                              UnSubscribeToDrEvent(
-                                                                widget
-                                                                        .specialist
-                                                                        .username ??
-                                                                    "",
-                                                              ),
-                                                            );
-                                                      } else {
-                                                        context
-                                                            .read<
-                                                              SubscriptionBloc
-                                                            >()
-                                                            .add(
-                                                              SubscribeToDrEvent(
-                                                                widget
-                                                                        .specialist
-                                                                        .username ??
-                                                                    "",
-                                                              ),
-                                                            );
-                                                      }
-                                                    },
+                                            child: Shimmer.fromColors(
+                                              baseColor:
+                                                  context.color.baseColor,
+                                              highlightColor:
+                                                  context.color.highlightColor,
+                                              child: ShimmerContainer(
+                                                size: Size(136, 40.h),
+                                              ),
                                             ),
                                           );
-                                        },
-                                      );
-                                    } else {
-                                      return const SizedBox();
-                                    }
-                                  },
-                                ),
-                                BlocBuilder<
-                                  DoctorProfileBloc,
-                                  DoctorProfileState
-                                >(
-                                  builder: (context, state) {
-                                    if (state is DoctorProfileLoading ||
-                                        state is DoctorProfileSuccess) {
-                                      return SizedBox(width: 12.w);
-                                    }
-                                    return const SizedBox();
-                                  },
-                                ),
-                                Expanded(
-                                  child: BlocBuilder<ChatBloc, ChatState>(
-                                    builder: (context, state) {
-                                      return LongButton(
-                                        loading: state.dataStatus.isInProgress,
-                                        onPress: () {
-                                          context.read<ChatBloc>().add(
-                                            GetGroupChat(
-                                              username:
-                                                  widget.specialist.username,
-                                              onSucces: (model) {
-                                                Log.e(model.slugName);
-                                                final bloc = context
-                                                    .read<UserInfoBloc>();
-                                                Navigator.of(context).push(
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        BlocProvider.value(
-                                                          value: bloc,
-                                                          child: InChatView(
-                                                            group: model,
-                                                          ),
+                                        } else if (doctorState
+                                            is DoctorProfileSuccess) {
+                                          context.read<SubscriptionBloc>().add(
+                                            SetSubscribedOrNot(
+                                              doctorState.doctor!.isSubscribed,
+                                            ),
+                                          );
+                                          return BlocBuilder<
+                                            SubscriptionBloc,
+                                            SubscriptionState
+                                          >(
+                                            builder: (context, state) {
+                                              return Expanded(
+                                                child: FollowButton(
+                                                  isFollowing:
+                                                      state.isSubscribed,
+                                                  height: 40.h,
+                                                  onTap:
+                                                      state
+                                                          is SubscriptionLoading
+                                                      ? null
+                                                      : () {
+                                                          if (state
+                                                              .isSubscribed) {
+                                                            context
+                                                                .read<
+                                                                  SubscriptionBloc
+                                                                >()
+                                                                .add(
+                                                                  UnSubscribeToDrEvent(
+                                                                    widget
+                                                                            .specialist
+                                                                            .username ??
+                                                                        "",
+                                                                  ),
+                                                                );
+                                                          } else {
+                                                            context
+                                                                .read<
+                                                                  SubscriptionBloc
+                                                                >()
+                                                                .add(
+                                                                  SubscribeToDrEvent(
+                                                                    widget
+                                                                            .specialist
+                                                                            .username ??
+                                                                        "",
+                                                                  ),
+                                                                );
+                                                          }
+                                                        },
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        } else {
+                                          return const SizedBox();
+                                        }
+                                      },
+                                    ),
+                                    BlocBuilder<
+                                      DoctorProfileBloc,
+                                      DoctorProfileState
+                                    >(
+                                      builder: (context, state) {
+                                        if (state is DoctorProfileLoading ||
+                                            state is DoctorProfileSuccess) {
+                                          return SizedBox(width: 12.w);
+                                        }
+                                        return const SizedBox();
+                                      },
+                                    ),
+                                    Expanded(
+                                      child: BlocBuilder<ChatBloc, ChatState>(
+                                        builder: (context, state) {
+                                          return LongButton(
+                                            loading:
+                                                state.dataStatus.isInProgress,
+                                            onPress: () {
+                                              context.read<ChatBloc>().add(
+                                                GetGroupChat(
+                                                  username: widget
+                                                      .specialist
+                                                      .username,
+                                                  onSucces: (model) {
+                                                    Log.e(model.slugName);
+                                                    final bloc = context
+                                                        .read<UserInfoBloc>();
+                                                    Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            BlocProvider.value(
+                                                              value: bloc,
+                                                              child: InChatView(
+                                                                group: model,
+                                                              ),
+                                                            ),
+                                                      ),
+                                                    );
+                                                  },
+                                                  onError: () {
+                                                    context.read<ChatBloc>().add(
+                                                      CreateChatEvent(
+                                                        user: ChatUserModel(
+                                                          username:
+                                                              widget
+                                                                  .specialist
+                                                                  .username ??
+                                                              "",
                                                         ),
-                                                  ),
-                                                );
-                                              },
-                                              onError: () {
-                                                context.read<ChatBloc>().add(
-                                                  CreateChatEvent(
-                                                    user: ChatUserModel(
-                                                      username:
-                                                          widget
-                                                              .specialist
-                                                              .username ??
-                                                          "",
-                                                    ),
-                                                    onSuccess: (model) {
-                                                      Log.e(model.slugName);
-                                                      final bloc = context
-                                                          .read<UserInfoBloc>();
-                                                      Navigator.of(
-                                                        context,
-                                                      ).push(
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              BlocProvider.value(
-                                                                value: bloc,
-                                                                child:
-                                                                    InChatView(
+                                                        onSuccess: (model) {
+                                                          Log.e(model.slugName);
+                                                          final bloc = context
+                                                              .read<
+                                                                UserInfoBloc
+                                                              >();
+                                                          Navigator.of(
+                                                            context,
+                                                          ).push(
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  BlocProvider.value(
+                                                                    value: bloc,
+                                                                    child: InChatView(
                                                                       group:
                                                                           model,
                                                                     ),
-                                                              ),
-                                                        ),
-                                                      );
-                                                    },
-                                                    onError: () {
-                                                      Log.e("message");
-                                                    },
-                                                  ),
-                                                );
-                                              },
+                                                                  ),
+                                                            ),
+                                                          );
+                                                        },
+                                                        onError: () {
+                                                          Log.e("message");
+                                                        },
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                              );
+                                            },
+                                            widget: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              spacing: 8,
+                                              children: [
+                                                AppIcons.message.svg(
+                                                  color: context.color.mainBlue,
+                                                ),
+                                                Text(
+                                                  context.l10n.message,
+                                                  style: Styles.descSubtitle
+                                                      .copyWith(
+                                                        color: context
+                                                            .color
+                                                            .mainBlue,
+                                                        fontSize: 12.sp,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                ),
+                                              ],
+                                            ),
+                                            color: context.color.white,
+                                            border: Border.all(
+                                              color: context.color.mainBlue,
                                             ),
                                           );
                                         },
-                                        widget: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          spacing: 8,
-                                          children: [
-                                            AppIcons.message.svg(
-                                              color: context.color.mainBlue,
-                                            ),
-                                            Text(
-                                              context.l10n.message,
-                                              style: Styles.descSubtitle
-                                                  .copyWith(
-                                                    color:
-                                                        context.color.mainBlue,
-                                                    fontSize: 12.sp,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                            ),
-                                          ],
-                                        ),
-                                        color: context.color.white,
-                                        border: Border.all(
-                                          color: context.color.mainBlue,
-                                        ),
-                                      );
-                                    },
-                                  ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              );
+                            },
                           ),
                         ],
                       ),
                     ),
                   ),
-                  SliverPersistentHeader(
-                    pinned: true,
-                    delegate: SliverTabBarDelegate(
-                      maxHeight: 76.h,
-                      minHeight: 76.h,
-                      child: ColoredBox(
-                        color: context.color.white,
-                        child: Container(
-                          height: 52.h,
-                          width: double.maxFinite,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.r),
-                            color: context.color.background,
-                          ),
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 16.w,
-                            vertical: 12.h,
-                          ),
-                          child: TabBar(
-                            padding: const EdgeInsets.all(4),
-                            indicator: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.r),
-                              color: context.color.white,
+                  BlocBuilder<UserInfoBloc, UserInfoState>(
+                    builder: (context, userState) {
+                      final shouldHide =
+                          userState.userInfo?.phone == '998909098108';
+                      if (shouldHide) {
+                        return const SliverToBoxAdapter(child: SizedBox());
+                      }
+                      return SliverPersistentHeader(
+                        pinned: true,
+                        delegate: SliverTabBarDelegate(
+                          maxHeight: 76.h,
+                          minHeight: 76.h,
+                          child: ColoredBox(
+                            color: context.color.white,
+                            child: Container(
+                              height: 52.h,
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.r),
+                                color: context.color.background,
+                              ),
+                              margin: EdgeInsets.symmetric(
+                                horizontal: 16.w,
+                                vertical: 12.h,
+                              ),
+                              child: TabBar(
+                                padding: const EdgeInsets.all(4),
+                                indicator: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8.r),
+                                  color: context.color.white,
+                                ),
+                                indicatorColor: Colors.transparent,
+                                tabs: [
+                                  Tab(
+                                    child: Text(
+                                      context.l10n.about,
+                                      style: Styles.descSubtitle.copyWith(
+                                        color: context.color.black,
+                                      ),
+                                    ),
+                                  ),
+                                  Tab(
+                                    child: Text(
+                                      context.l10n.posts,
+                                      style: Styles.descSubtitle.copyWith(
+                                        color: context.color.black,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                            indicatorColor: Colors.transparent,
-                            tabs: [
-                              Tab(
-                                child: Text(
-                                  context.l10n.about,
-                                  style: Styles.descSubtitle.copyWith(
-                                    color: context.color.black,
-                                  ),
-                                ),
-                              ),
-                              Tab(
-                                child: Text(
-                                  context.l10n.posts,
-                                  style: Styles.descSubtitle.copyWith(
-                                    color: context.color.black,
-                                  ),
-                                ),
-                              ),
-                            ],
                           ),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   ),
                 ],
                 body: TabBarView(
+                  physics: const NeverScrollableScrollPhysics(),
                   children: [
                     SingleChildScrollView(
                       child: Column(

@@ -48,4 +48,5 @@ class StorageKeys {
   static const THEMEISDARK = 'theme_is_dark';
   static const NOTIFICATIONS = 'notifications';
   static const REPORTED_POSTS = 'reported_posts';
+  static const BLOCKED_USERS = 'blocked_users';
 }

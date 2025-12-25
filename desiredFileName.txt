@@ -1,1 +1,31 @@
-{}
+{
+  "ru": [
+    "block_user",
+    "block_user_title",
+    "block_user_message",
+    "block_user_confirm",
+    "block_user_cancel",
+    "block_user_success",
+    "unblock_user",
+    "unblock_user_title",
+    "unblock_user_message",
+    "unblock_user_confirm",
+    "blocked_users",
+    "no_blocked_users"
+  ],
+
+  "uz": [
+    "block_user",
+    "block_user_title",
+    "block_user_message",
+    "block_user_confirm",
+    "block_user_cancel",
+    "block_user_success",
+    "unblock_user",
+    "unblock_user_title",
+    "unblock_user_message",
+    "unblock_user_confirm",
+    "blocked_users",
+    "no_blocked_users"
+  ]
+}

@@ -131,6 +131,10 @@ class ChatVMController {
 
   void onComingNewMessage(void Function(MessageModel message) onMessage) {
     try {
+      if (channel == null) {
+        Log.e("Channel is null, cannot listen to messages");
+        return;
+      }
       channel!.stream.listen((event) {
         Log.i("New Chat Message $event \nType${event.runtimeType}");
         final eventData = (jsonDecode(event));
@@ -142,7 +146,8 @@ class ChatVMController {
       });
     } catch (e, s) {
       Log.e("error $e Stack $s");
-      throw Exception("Modelga o'tkasa olmadi Message");
+      // Don't throw exception, just log the error
+      // throw Exception("Modelga o'tkasa olmadi Message");
     }
   }
 

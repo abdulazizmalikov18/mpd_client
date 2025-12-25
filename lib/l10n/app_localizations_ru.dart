@@ -1053,6 +1053,45 @@ class AppLocalizationsRu extends AppLocalizations {
   String get report_reason_other => 'Другая причина';
 
   @override
+  String get block_user => 'Block User';
+
+  @override
+  String get block_user_title => 'Block User';
+
+  @override
+  String get block_user_message =>
+      'Are you sure you want to block this user? You won\'t see their messages or posts anymore.';
+
+  @override
+  String get block_user_confirm => 'Block';
+
+  @override
+  String get block_user_cancel => 'Cancel';
+
+  @override
+  String get block_user_success =>
+      'User has been blocked successfully. Their content will be hidden from your feed.';
+
+  @override
+  String get unblock_user => 'Unblock User';
+
+  @override
+  String get unblock_user_title => 'Unblock User';
+
+  @override
+  String get unblock_user_message =>
+      'Are you sure you want to unblock this user?';
+
+  @override
+  String get unblock_user_confirm => 'Unblock';
+
+  @override
+  String get blocked_users => 'Blocked Users';
+
+  @override
+  String get no_blocked_users => 'You haven\'t blocked any users yet.';
+
+  @override
   String get termsOfUseTitle => 'Условия использования';
 
   @override

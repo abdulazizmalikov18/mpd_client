@@ -2134,6 +2134,78 @@ abstract class AppLocalizations {
   /// **'Something else'**
   String get report_reason_other;
 
+  /// No description provided for @block_user.
+  ///
+  /// In en, this message translates to:
+  /// **'Block User'**
+  String get block_user;
+
+  /// No description provided for @block_user_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Block User'**
+  String get block_user_title;
+
+  /// No description provided for @block_user_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to block this user? You won\'t see their messages or posts anymore.'**
+  String get block_user_message;
+
+  /// No description provided for @block_user_confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Block'**
+  String get block_user_confirm;
+
+  /// No description provided for @block_user_cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get block_user_cancel;
+
+  /// No description provided for @block_user_success.
+  ///
+  /// In en, this message translates to:
+  /// **'User has been blocked successfully. Their content will be hidden from your feed.'**
+  String get block_user_success;
+
+  /// No description provided for @unblock_user.
+  ///
+  /// In en, this message translates to:
+  /// **'Unblock User'**
+  String get unblock_user;
+
+  /// No description provided for @unblock_user_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Unblock User'**
+  String get unblock_user_title;
+
+  /// No description provided for @unblock_user_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to unblock this user?'**
+  String get unblock_user_message;
+
+  /// No description provided for @unblock_user_confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Unblock'**
+  String get unblock_user_confirm;
+
+  /// No description provided for @blocked_users.
+  ///
+  /// In en, this message translates to:
+  /// **'Blocked Users'**
+  String get blocked_users;
+
+  /// No description provided for @no_blocked_users.
+  ///
+  /// In en, this message translates to:
+  /// **'You haven\'t blocked any users yet.'**
+  String get no_blocked_users;
+
   /// No description provided for @termsOfUseTitle.
   ///
   /// In en, this message translates to:
@@ -2173,7 +2245,7 @@ abstract class AppLocalizations {
   /// No description provided for @termsUserConductContent.
   ///
   /// In en, this message translates to:
-  /// **'You agree not to use the application to post or transmit any material that is unlawful, threatening, abusive, defamatory, invasive of privacy, or otherwise objectionable.'**
+  /// **'You agree not to use the application to post or transmit any material that is unlawful, threatening, abusive, defamatory, invasive of privacy, or otherwise objectionable. MPD has ZERO TOLERANCE for objectionable content or abusive users. Any user who posts objectionable content will be immediately removed from the service and may face legal consequences.'**
   String get termsUserConductContent;
 
   /// No description provided for @termsContentPolicyTitle.
@@ -2185,7 +2257,7 @@ abstract class AppLocalizations {
   /// No description provided for @termsContentPolicyContent.
   ///
   /// In en, this message translates to:
-  /// **'MPD reserves the right to remove any content that violates these terms. We may also terminate or suspend access to our services immediately for any violation.'**
+  /// **'MPD reserves the right to remove any content that violates these terms. We may also terminate or suspend access to our services immediately for any violation. All reported content will be reviewed within 24 hours, and violating content will be removed immediately. Users who post objectionable content will be permanently banned from the platform.'**
   String get termsContentPolicyContent;
 
   /// No description provided for @termsAccountTerminationTitle.

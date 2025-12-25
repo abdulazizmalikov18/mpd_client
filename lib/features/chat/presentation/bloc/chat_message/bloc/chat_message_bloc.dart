@@ -17,9 +17,11 @@ part 'chat_message_state.dart';
 
 class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
   final ChatRepository _repo;
+  bool _isMessageListenerInitialized = false;
 
   ChatMessageBloc(this._repo) : super(const ChatMessageState()) {
-    onComingMessage();
+    // Don't call onComingMessage() in constructor - channel might not be ready yet
+    // It will be called when channel is connected in main_page.dart
     on<ChatGetMessages>(_onGetMessages);
     on<ChatGetMoreMessages>(_onGetMoreMessages);
     on<ChatSendMessageEvent>(_onSendMessage);
@@ -102,6 +104,10 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
   }
 
   void onComingMessage() {
+    if (_isMessageListenerInitialized) {
+      return; // Already initialized, don't create duplicate listeners
+    }
+    _isMessageListenerInitialized = true;
     ChatVMController().onComingNewMessage((message) {
       Log.e("NewMessage");
       add(ChatSocketMessage(message));
