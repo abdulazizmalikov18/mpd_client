@@ -320,6 +320,14 @@ class AppPages {
         );
       case AppRoutes.postUser:
         final username = settings.arguments as String;
+        // Block access if phone matches restricted number
+        if (_userInfoBloc.state.userInfo?.phone == '998909098108') {
+          return MaterialPageRoute(
+            builder: (_) => const Scaffold(
+              body: Center(child: SizedBox()),
+            ),
+          );
+        }
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
