@@ -152,4 +152,48 @@ class ChatRepositoryImpl implements ChatRepository {
       return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> reportMessage({
+    required int messageId,
+    required String reason,
+  }) async {
+    try {
+      final response = await _remote.reportMessage(
+        messageId: messageId,
+        reason: reason,
+      );
+      if (response.data != null) {
+        return Right(response.data!);
+      } else {
+        return Left(response.getException()!.getErrorFailure());
+      }
+    } on DioException {
+      return Left(const DioFailure());
+    } on ParsingException catch (e) {
+      return Left(ParsingFailure(message: e.message));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> blockUser({
+    required String username,
+  }) async {
+    try {
+      final response = await _remote.blockUser(username: username);
+      if (response.data != null) {
+        return Right(response.data!);
+      } else {
+        return Left(response.getException()!.getErrorFailure());
+      }
+    } on DioException {
+      return Left(const DioFailure());
+    } on ParsingException catch (e) {
+      return Left(ParsingFailure(message: e.message));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
+    }
+  }
 }

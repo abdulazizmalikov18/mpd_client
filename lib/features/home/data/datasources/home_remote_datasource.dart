@@ -30,6 +30,8 @@ abstract class IHomeRemoteDataSource {
   Future<bool> deletePost({required int postId});
   Future<UserAccountModel> getUser({required String username});
   Future<Map<String, dynamic>> sendLikeOrUnlike({required int postId});
+  Future<bool> reportPost({required int postId, required String reason});
+  Future<bool> blockUser({required String username});
 }
 
 class HomeRemoteDataSource implements IHomeRemoteDataSource {
@@ -246,6 +248,50 @@ class HomeRemoteDataSource implements IHomeRemoteDataSource {
       },
       body: (response) {
         return UserAccountModel.fromJson(response);
+      },
+    );
+  }
+
+  @override
+  Future<bool> reportPost({required int postId, required String reason}) async {
+    return _handle.apiControl(
+      request: () {
+        return _client.post(
+          "/SMMS/api/v1.0/public/post/$postId/report/",
+          data: FormData.fromMap({'reason': reason}),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
+        );
+      },
+      body: (response) {
+        return true;
+      },
+    );
+  }
+
+  @override
+  Future<bool> blockUser({required String username}) async {
+    return _handle.apiControl(
+      request: () {
+        return _client.post(
+          "/UMS/api/v1.0/account/block-user/",
+          data: FormData.fromMap({'username': username}),
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
+        );
+      },
+      body: (response) {
+        return true;
       },
     );
   }

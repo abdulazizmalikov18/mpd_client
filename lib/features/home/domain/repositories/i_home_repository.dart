@@ -42,4 +42,13 @@ abstract class IHomeRepository {
   Future<Either<Failure, Map<String, dynamic>>> sendLikeOrUnlike({
     required int postId,
   });
+
+  Future<Either<Failure, bool>> reportPost({
+    required int postId,
+    required String reason,
+  });
+
+  Future<Either<Failure, bool>> blockUser({
+    required String username,
+  });
 }

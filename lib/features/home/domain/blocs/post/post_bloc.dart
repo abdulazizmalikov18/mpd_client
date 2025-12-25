@@ -2,6 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:mpd_client/core/utils/log_service.dart';
+import 'package:mpd_client/core/data/repository/storage_keys.dart';
+import 'package:mpd_client/core/data/repository/storage_repository.dart';
 
 import '../../../data/models/posts_model.dart';
 import '../../../data/repositories/home_repository.dart';
@@ -15,6 +17,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     on<DeletePostEvent>(_onDeletePostEvent, transformer: droppable());
     on<MediaLikePressedUser>(_onLikeUnlikePressed);
     on<ReportPostEvent>(_onReportPostEvent);
+    on<BlockUserEvent>(_onBlockUserEvent);
     on<PostFetchedUser>((event, emit) async {
       if (!event.isMore) {
         emit(state.copyWith(statusUser: PostStatus.inProgress));
@@ -24,12 +27,13 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         username: event.username,
       );
       if (result.isRight) {
+        final filteredPosts = _filterBlockedUsers(result.right.results);
         emit(
           state.copyWith(
             statusUser: PostStatus.success,
             postsUser: event.isMore
-                ? [...state.postsUser, ...result.right.results ?? []]
-                : result.right.results,
+                ? [...state.postsUser, ...(filteredPosts ?? [])]
+                : filteredPosts,
             count: result.right.count,
           ),
         );
@@ -41,6 +45,22 @@ class PostBloc extends Bloc<PostEvent, PostState> {
 
   final HomeRepository _homeRepository;
   final int _limit = 5;
+
+  // Helper method to filter out blocked users' posts
+  List<Post>? _filterBlockedUsers(List<Post>? posts) {
+    if (posts == null) return null;
+    try {
+      final blockedUsersStr = StorageRepository.getString(StorageKeys.BLOCKED_USERS);
+      if (blockedUsersStr.isEmpty) return posts;
+      final blockedUsers = blockedUsersStr.split(',').toSet();
+      return posts.where((post) => 
+        post.authorUser == null || !blockedUsers.contains(post.authorUser)
+      ).toList();
+    } catch (e) {
+      Log.e('Error filtering blocked users: $e');
+      return posts;
+    }
+  }
 
   void _onLikeUnlikePressed(
     MediaLikePressedUser event,
@@ -90,12 +110,13 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       Log.e("Nima gap");
       final result = await _homeRepository.getBanners(limit: _limit);
       if (result.isRight) {
+        final filteredPosts = _filterBlockedUsers(result.right.results);
         emit(
           state.copyWith(
             status: PostStatus.success,
-            posts: result.right.results,
+            posts: filteredPosts,
             hasReachedMax:
-                (result.right.results?.length ?? 0) >=
+                (filteredPosts?.length ?? 0) >=
                 (result.right.count ?? 0),
           ),
         );
@@ -111,14 +132,15 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       );
       if (result.isRight) {
         Log.e("Nima Tuzukn 2");
+        final filteredPosts = _filterBlockedUsers(result.right.results);
         emit(
-          result.right.results!.isEmpty
+          (filteredPosts?.isEmpty ?? true)
               ? state.copyWith(hasReachedMax: true)
               : state.copyWith(
                   status: PostStatus.success,
                   posts: event.isRefresh
-                      ? [...result.right.results!]
-                      : [...state.posts, ...result.right.results!],
+                      ? filteredPosts!
+                      : [...state.posts, ...filteredPosts!],
                   hasReachedMax: false,
                 ),
         );
@@ -132,7 +154,81 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     ReportPostEvent event,
     Emitter<PostState> emit,
   ) async {
-    List<Post>? posts = List.from(state.posts);
-    emit(state.copyWith(posts: posts, refresh: !state.refresh));
+    final postId = int.tryParse(event.postId);
+    if (postId == null) {
+      event.onError?.call('Invalid post ID');
+      return;
+    }
+
+    final result = await _homeRepository.reportPost(
+      postId: postId,
+      reason: event.reason,
+    );
+
+    if (result.isRight) {
+      // Save reported post id to storage so it will be hidden on next builds
+      try {
+        final current = StorageRepository.getString(
+          StorageKeys.REPORTED_POSTS,
+        );
+        final reported = current.isEmpty
+            ? <String>{}
+            : current.split(',').toSet();
+        reported.add(event.postId);
+        await StorageRepository.putString(
+          StorageKeys.REPORTED_POSTS,
+          reported.where((e) => e.isNotEmpty).join(','),
+        );
+      } catch (e) {
+        Log.e('Error saving reported post: $e');
+      }
+
+      // Remove reported post from current state immediately
+      final posts = state.posts.where((p) => p.id?.toString() != event.postId).toList();
+      emit(state.copyWith(posts: posts, refresh: !state.refresh));
+      event.onSuccess?.call();
+    } else {
+      event.onError?.call(result.left.message.isNotEmpty 
+          ? result.left.message 
+          : 'Failed to report post');
+    }
+  }
+
+  Future<void> _onBlockUserEvent(
+    BlockUserEvent event,
+    Emitter<PostState> emit,
+  ) async {
+    final result = await _homeRepository.blockUser(username: event.username);
+
+    if (result.isRight) {
+      // Save blocked user to storage
+      try {
+        final current = StorageRepository.getString(StorageKeys.BLOCKED_USERS);
+        final blocked = current.isEmpty
+            ? <String>{}
+            : current.split(',').toSet();
+        blocked.add(event.username);
+        await StorageRepository.putString(
+          StorageKeys.BLOCKED_USERS,
+          blocked.where((e) => e.isNotEmpty).join(','),
+        );
+      } catch (e) {
+        Log.e('Error saving blocked user: $e');
+      }
+
+      // Remove blocked user's posts from current state immediately
+      final posts = state.posts.where((p) => p.authorUser != event.username).toList();
+      final userPosts = state.postsUser.where((p) => p.authorUser != event.username).toList();
+      emit(state.copyWith(
+        posts: posts,
+        postsUser: userPosts,
+        refresh: !state.refresh,
+      ));
+      event.onSuccess?.call();
+    } else {
+      event.onError?.call(result.left.message.isNotEmpty 
+          ? result.left.message 
+          : 'Failed to block user');
+    }
   }
 }

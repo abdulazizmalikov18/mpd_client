@@ -34,4 +34,13 @@ abstract interface class ChatRepository {
   });
 
   Future<Either<Failure, ChatGroupModel>> createGroup(CreateGroupModel params);
+
+  Future<Either<Failure, bool>> reportMessage({
+    required int messageId,
+    required String reason,
+  });
+
+  Future<Either<Failure, bool>> blockUser({
+    required String username,
+  });
 }

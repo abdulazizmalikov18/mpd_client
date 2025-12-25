@@ -36,3 +36,27 @@ class ChatSocketMessage extends ChatMessageEvent {
   final MessageModel message;
   const ChatSocketMessage(this.message);
 }
+
+class ChatReportMessageEvent extends ChatMessageEvent {
+  final int messageId;
+  final String reason;
+  final Function()? onSuccess;
+  final Function(String)? onError;
+  const ChatReportMessageEvent({
+    required this.messageId,
+    required this.reason,
+    this.onSuccess,
+    this.onError,
+  });
+}
+
+class ChatBlockUserEvent extends ChatMessageEvent {
+  final String username;
+  final Function()? onSuccess;
+  final Function(String)? onError;
+  const ChatBlockUserEvent({
+    required this.username,
+    this.onSuccess,
+    this.onError,
+  });
+}

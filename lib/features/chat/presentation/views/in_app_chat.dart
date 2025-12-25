@@ -246,6 +246,16 @@ class _InChatViewState extends State<InChatView> {
                         _showReportDialog(context, message);
                       },
                     ),
+                  if (message?.sender != null)
+                    CupertinoListTile(
+                      leading: AppIcons.userMinus.svg(color: red),
+                      title: const Text('Block User', style: TextStyle(color: red)),
+                      backgroundColor: white,
+                      onTap: () {
+                        Navigator.pop(context);
+                        _showBlockUserDialog(context, message!.sender!);
+                      },
+                    ),
                 ],
               ),
             ),
@@ -260,19 +270,89 @@ Future<void> _showReportDialog(
   BuildContext context,
   MessageModel? message,
 ) async {
+  if (message?.id == null) return;
+
   await ReportMessageDialog.show(
     context,
     onReportSubmitted: (reason) async {
-      // Here you can handle the report submission
-      // For example, you can call an API to report the message
-      // await context.read<ChatMessageBloc>().add(ReportMessage(
-      //   messageId: message?.id ?? '',
-      //   reason: reason,
-      // ));
-
-      // Show confirmation dialog
-
-      await ReportConfirmationDialog.show(context);
+      if (context.mounted) {
+        try {
+          context.read<ChatMessageBloc>().add(
+            ChatReportMessageEvent(
+              messageId: message!.id!,
+              reason: reason,
+              onSuccess: () {
+                ReportConfirmationDialog.show(context);
+              },
+              onError: (error) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Error: $error')),
+                );
+              },
+            ),
+          );
+        } catch (e) {
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Failed to report message')),
+            );
+          }
+        }
+      }
     },
   );
+}
+
+Future<void> _showBlockUserDialog(
+  BuildContext context,
+  String username,
+) async {
+  final shouldBlock = await showDialog<bool>(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: const Text('Block User'),
+      content: Text(
+        'Are you sure you want to block $username? You will no longer see their messages or posts.',
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context, false),
+          child: const Text('Cancel'),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(context, true),
+          style: TextButton.styleFrom(
+            foregroundColor: red,
+          ),
+          child: const Text('Block'),
+        ),
+      ],
+    ),
+  );
+
+  if (shouldBlock == true && context.mounted) {
+    try {
+      context.read<ChatMessageBloc>().add(
+        ChatBlockUserEvent(
+          username: username,
+          onSuccess: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('User blocked successfully')),
+            );
+          },
+          onError: (error) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Error: $error')),
+            );
+          },
+        ),
+      );
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Failed to block user')),
+        );
+      }
+    }
+  }
 }

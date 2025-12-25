@@ -42,6 +42,15 @@ abstract interface class ChatService {
   });
 
   Future<ResponseHandler<ChatGroupModel>> groupCreate(CreateGroupModel params);
+
+  Future<ResponseHandler<bool>> reportMessage({
+    required int messageId,
+    required String reason,
+  });
+
+  Future<ResponseHandler<bool>> blockUser({
+    required String username,
+  });
 }
 
 class ChatServiceImpl extends ChatService {
@@ -225,6 +234,53 @@ class ChatServiceImpl extends ChatService {
       },
       body: (response) {
         return ResponseHandler()..setData(ChatGroupModel.fromJson(response));
+      },
+    );
+  }
+
+  @override
+  Future<ResponseHandler<bool>> reportMessage({
+    required int messageId,
+    required String reason,
+  }) async {
+    return _handle.apiCantrol(
+      request: (client) {
+        return client.post(
+          "SMMS/api/v1.0/chat/message/$messageId/report/",
+          options: Options(
+            headers: {
+              'Authorization':
+                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
+          data: FormData.fromMap({'reason': reason}),
+        );
+      },
+      body: (response) {
+        return ResponseHandler()..setData(true);
+      },
+    );
+  }
+
+  @override
+  Future<ResponseHandler<bool>> blockUser({
+    required String username,
+  }) async {
+    return _handle.apiCantrol(
+      request: (client) {
+        return client.post(
+          "UMS/api/v1.0/account/block-user/",
+          options: Options(
+            headers: {
+              'Authorization':
+                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
+          data: FormData.fromMap({'username': username}),
+        );
+      },
+      body: (response) {
+        return ResponseHandler()..setData(true);
       },
     );
   }

@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/app/colors.dart';
-import 'package:mpd_client/core/data/repository/storage_keys.dart';
-import 'package:mpd_client/core/data/repository/storage_repository.dart';
 import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/features/chat/presentation/bloc/chat/chat_bloc.dart';
 import 'package:mpd_client/features/chat/presentation/widgets/report_message_dialog.dart';
@@ -101,49 +99,104 @@ class PostModalBottomSheet extends StatelessWidget {
                     await ReportMessageDialog.show(
                       context,
                       onReportSubmitted: (reason) async {
-                        // Save reported post id to storage so it will be hidden on next builds
-                        try {
-                          final current = StorageRepository.getString(
-                            StorageKeys.REPORTED_POSTS,
-                          );
-                          final reported = current.isEmpty
-                              ? <String>{}
-                              : current.split(',').toSet();
-                          reported.add(post.id?.toString() ?? '');
-                          await StorageRepository.putString(
-                            StorageKeys.REPORTED_POSTS,
-                            reported.where((e) => e.isNotEmpty).join(','),
-                          );
-
-                          // Update PostBloc state immediately so UI hides the reported post
-                          if (context.mounted) {
-                            try {
-                              final postBloc = context.read<PostBloc>();
-                              postBloc.add(
-                                ReportPostEvent(
-                                  postId: post.id?.toString() ?? '',
+                        if (context.mounted) {
+                          try {
+                            final postBloc = context.read<PostBloc>();
+                            postBloc.add(
+                              ReportPostEvent(
+                                postId: post.id?.toString() ?? '',
+                                reason: reason,
+                                onSuccess: () {
+                                  Navigator.pop(context);
+                                  ReportConfirmationDialog.show(context);
+                                },
+                                onError: (error) {
+                                  Navigator.pop(context);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text('Error: $error')),
+                                  );
+                                },
+                              ),
+                            );
+                          } catch (e) {
+                            Log.e(e);
+                            if (context.mounted) {
+                              Navigator.pop(context);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Failed to report post'),
                                 ),
                               );
-                              Log.i("message");
-                            } catch (e) {
-                              // ignore if bloc not available in this context
-                              Log.e(e);
                             }
                           }
-                        } catch (e) {
-                          // ignore storage errors
-                          Log.e(e);
-                        }
-
-                        // Close bottom sheet and show confirmation
-                        if (context.mounted) {
-                          Navigator.pop(context);
-                          await ReportConfirmationDialog.show(context);
                         }
                       },
                     );
                   },
                 ),
+                if (post.authorUser != null)
+                  CupertinoListTile(
+                    backgroundColor: white,
+                    title: const Text("Block User", style: TextStyle(color: red)),
+                    leading: AppIcons.userMinus.svg(color: red),
+                    onTap: () async {
+                      Navigator.pop(context);
+                      final shouldBlock = await showDialog<bool>(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('Block User'),
+                          content: Text(
+                            'Are you sure you want to block ${post.authorFullname ?? post.authorUser}? You will no longer see their posts or messages.',
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, false),
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, true),
+                              style: TextButton.styleFrom(
+                                foregroundColor: red,
+                              ),
+                              child: const Text('Block'),
+                            ),
+                          ],
+                        ),
+                      );
+
+                      if (shouldBlock == true && context.mounted) {
+                        try {
+                          final postBloc = context.read<PostBloc>();
+                          postBloc.add(
+                            BlockUserEvent(
+                              username: post.authorUser!,
+                              onSuccess: () {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('User blocked successfully'),
+                                  ),
+                                );
+                              },
+                              onError: (error) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Error: $error')),
+                                );
+                              },
+                            ),
+                          );
+                        } catch (e) {
+                          Log.e(e);
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Failed to block user'),
+                              ),
+                            );
+                          }
+                        }
+                      }
+                    },
+                  ),
               ],
             ),
           ),

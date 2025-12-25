@@ -184,4 +184,40 @@ class HomeRepository implements IHomeRepository {
       return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> reportPost({
+    required int postId,
+    required String reason,
+  }) async {
+    try {
+      final response = await remoteDataSource.reportPost(
+        postId: postId,
+        reason: reason,
+      );
+      return Right(response);
+    } on DioException {
+      return Left(const DioFailure());
+    } on ParsingException catch (e) {
+      return Left(ParsingFailure(message: e.message));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> blockUser({
+    required String username,
+  }) async {
+    try {
+      final response = await remoteDataSource.blockUser(username: username);
+      return Right(response);
+    } on DioException {
+      return Left(const DioFailure());
+    } on ParsingException catch (e) {
+      return Left(ParsingFailure(message: e.message));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
+    }
+  }
 }

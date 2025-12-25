@@ -10,6 +10,8 @@ import 'package:mpd_client/features/chat/data/repo/chat_repository.dart';
 import 'package:mpd_client/features/chat/domain/models/chat_group.dart';
 import 'package:mpd_client/features/chat/domain/models/message.dart';
 import 'package:mpd_client/core/utils/profanity_filter.dart';
+import 'package:mpd_client/core/data/repository/storage_keys.dart';
+import 'package:mpd_client/core/data/repository/storage_repository.dart';
 import 'package:mpd_client/features/chat/presentation/controller/vm_controller.dart';
 
 part 'chat_message_event.dart';
@@ -25,6 +27,23 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     on<ChatSendMessageEvent>(_onSendMessage);
     on<ChatReadAllMessage>(_onReadAllMessage);
     on<ChatSocketMessage>(_onSocketMessage);
+    on<ChatReportMessageEvent>(_onReportMessage);
+    on<ChatBlockUserEvent>(_onBlockUser);
+  }
+
+  // Helper method to filter out blocked users' messages
+  List<MessageModel> _filterBlockedUsers(List<MessageModel> messages) {
+    try {
+      final blockedUsersStr = StorageRepository.getString(StorageKeys.BLOCKED_USERS);
+      if (blockedUsersStr.isEmpty) return messages;
+      final blockedUsers = blockedUsersStr.split(',').toSet();
+      return messages.where((message) => 
+        message.sender == null || !blockedUsers.contains(message.sender)
+      ).toList();
+    } catch (e) {
+      Log.e('Error filtering blocked users: $e');
+      return messages;
+    }
   }
 
   void _onGetMessages(ChatGetMessages event, Emitter emit) async {
@@ -33,10 +52,11 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       GetChatEntity(groupSlug: event.group.slugName),
     );
     if (result.isRight) {
+      final filteredMessages = _filterBlockedUsers(result.right.results);
       emit(
         state.copyWith(
           status: FormzSubmissionStatus.success,
-          messages: result.right.results,
+          messages: filteredMessages,
           count: result.right.count,
           offset: result.right.nextOffset,
         ),
@@ -52,9 +72,10 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       GetChatEntity(groupSlug: event.group.slugName, offset: state.offset),
     );
     if (result.isRight) {
+      final filteredMessages = _filterBlockedUsers(result.right.results);
       emit(
         state.copyWith(
-          messages: [...state.messages, ...result.right.results],
+          messages: [...state.messages, ...filteredMessages],
           status: FormzSubmissionStatus.success,
           offset: result.right.nextOffset,
         ),
@@ -93,6 +114,21 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
   }
 
   void _onSocketMessage(ChatSocketMessage event, Emitter emit) async {
+    // Filter out blocked users' messages
+    try {
+      final blockedUsersStr = StorageRepository.getString(StorageKeys.BLOCKED_USERS);
+      if (blockedUsersStr.isNotEmpty) {
+        final blockedUsers = blockedUsersStr.split(',').toSet();
+        if (event.message.sender != null && 
+            blockedUsers.contains(event.message.sender)) {
+          // Don't add message from blocked user
+          return;
+        }
+      }
+    } catch (e) {
+      Log.e('Error checking blocked user: $e');
+    }
+
     emit(
       state.copyWith(
         messages: [event.message, ...state.messages],
@@ -106,5 +142,80 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       Log.e("NewMessage");
       add(ChatSocketMessage(message));
     });
+  }
+
+  Future<void> _onReportMessage(
+    ChatReportMessageEvent event,
+    Emitter emit,
+  ) async {
+    final result = await _repo.reportMessage(
+      messageId: event.messageId,
+      reason: event.reason,
+    );
+
+    if (result.isRight) {
+      // Save reported message id to storage
+      try {
+        final current = StorageRepository.getString(
+          StorageKeys.REPORTED_MESSAGES,
+        );
+        final reported = current.isEmpty
+            ? <String>{}
+            : current.split(',').toSet();
+        reported.add(event.messageId.toString());
+        await StorageRepository.putString(
+          StorageKeys.REPORTED_MESSAGES,
+          reported.where((e) => e.isNotEmpty).join(','),
+        );
+      } catch (e) {
+        Log.e('Error saving reported message: $e');
+      }
+
+      // Remove reported message from current state immediately
+      final messages = state.messages
+          .where((m) => m.id != event.messageId)
+          .toList();
+      emit(state.copyWith(messages: messages));
+      event.onSuccess?.call();
+    } else {
+      event.onError?.call(result.left.message.isNotEmpty 
+          ? result.left.message 
+          : 'Failed to report message');
+    }
+  }
+
+  Future<void> _onBlockUser(
+    ChatBlockUserEvent event,
+    Emitter emit,
+  ) async {
+    final result = await _repo.blockUser(username: event.username);
+
+    if (result.isRight) {
+      // Save blocked user to storage
+      try {
+        final current = StorageRepository.getString(StorageKeys.BLOCKED_USERS);
+        final blocked = current.isEmpty
+            ? <String>{}
+            : current.split(',').toSet();
+        blocked.add(event.username);
+        await StorageRepository.putString(
+          StorageKeys.BLOCKED_USERS,
+          blocked.where((e) => e.isNotEmpty).join(','),
+        );
+      } catch (e) {
+        Log.e('Error saving blocked user: $e');
+      }
+
+      // Remove blocked user's messages from current state immediately
+      final messages = state.messages
+          .where((m) => m.sender != event.username)
+          .toList();
+      emit(state.copyWith(messages: messages));
+      event.onSuccess?.call();
+    } else {
+      event.onError?.call(result.left.message.isNotEmpty 
+          ? result.left.message 
+          : 'Failed to block user');
+    }
   }
 }
