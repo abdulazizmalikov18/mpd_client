@@ -11,6 +11,7 @@ import 'package:mpd_client/features/doctor_profile_booking/data/models/cart_remo
 import 'package:mpd_client/features/doctor_profile_booking/data/models/doctor_profile_model.dart';
 import 'package:mpd_client/features/doctor_profile_booking/data/models/timetable_by_day.dart';
 import 'package:mpd_client/features/user/data/models/user_subscriptions_model.dart';
+import 'package:mpd_client/main.dart';
 
 abstract class IDoctorProfileRemoteDataSource {
   Future<DoctorProfileModel> getDoctorInfo(String username);
@@ -52,7 +53,7 @@ class DoctorProfileRemoteDataSource implements IDoctorProfileRemoteDataSource {
     return _handle.apiControl(
       request: () {
         return _client.get(
-          "/BMS/api/v1.0/public/cluster/mpd/specialist/$username/?all=true",
+          "/BMS/api/v1.0/public/cluster/${$appType.cluster}/specialist/$username/?all=true",
           options: Options(
             headers: {
               if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
@@ -76,7 +77,7 @@ class DoctorProfileRemoteDataSource implements IDoctorProfileRemoteDataSource {
     return _handle.apiControl(
       request: () {
         return _client.get(
-          "/BMS/api/v1.0/public/org/mpd/specialist/$id/timetable/$date/",
+          "/BMS/api/v1.0/public/org/${$appType.cluster}/specialist/$id/timetable/$date/",
           options: Options(
             headers: {
               if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)

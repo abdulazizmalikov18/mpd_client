@@ -1,6 +1,8 @@
 abstract class AppImages {
   AppImages._();
   static const String logo = 'assets/images/logo.png';
+  static const String tmed = 'assets/images/tmed.png';
+  static const String dwed = 'assets/images/dwed.png';
   static const String tutorial_1 = 'assets/images/tutorial_1.png';
   static const String tutorial_2 = 'assets/images/tutorial_2.png';
   static const String tutorial_3 = 'assets/images/tutorial_3.png';

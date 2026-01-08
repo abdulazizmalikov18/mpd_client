@@ -323,9 +323,7 @@ class AppPages {
         // Block access if phone matches restricted number
         if (_userInfoBloc.state.userInfo?.phone == '998909098108') {
           return MaterialPageRoute(
-            builder: (_) => const Scaffold(
-              body: Center(child: SizedBox()),
-            ),
+            builder: (_) => const Scaffold(body: Center(child: SizedBox())),
           );
         }
         return MaterialPageRoute(

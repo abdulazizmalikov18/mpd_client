@@ -29,7 +29,7 @@ class SocketOfferBloc extends Bloc<SocketOfferEvent, SocketOfferState> {
     });
     on<ConnectSocketEvent>((event, emit) {
       final socketURl = Uri.parse(
-        "${$baseUrlSocket}/OMS/ws/work/?specialist_id=942&org_slug=mpd&lang=ru",
+        "${$appType.socketUrl}/OMS/ws/work/?specialist_id=942&org_slug=mpd&lang=ru",
       );
       socketChannel = IOWebSocketChannel.connect(socketURl);
       emit(state.copyWith(isConnect: true, type: "null"));

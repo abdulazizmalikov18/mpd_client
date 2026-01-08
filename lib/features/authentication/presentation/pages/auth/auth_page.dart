@@ -7,6 +7,7 @@ import 'package:mpd_client/features/authentication/domain/inherited/auth_notifie
 import 'package:mpd_client/features/authentication/domain/repositories/i_auth_repository.dart';
 import 'package:mpd_client/features/authentication/presentation/pages/auth/components/login_part.dart';
 import 'package:mpd_client/features/authentication/presentation/pages/auth/components/register_part.dart';
+import 'package:mpd_client/main.dart';
 import 'package:provider/provider.dart';
 
 class AuthPage extends StatelessWidget {
@@ -52,7 +53,7 @@ class AuthPage extends StatelessWidget {
                             left: 70.w,
                             right: 70.w,
                             child: Image.asset(
-                              AppImages.logo,
+                              $appType.logoImage,
                               height: 55.h,
                               width: 250.w,
                               color: context.color.white,

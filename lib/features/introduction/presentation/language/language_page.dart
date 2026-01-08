@@ -1,7 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/app/app_colors.dart';
-import 'package:mpd_client/app/app_images.dart';
 import 'package:mpd_client/app/app_routes.dart';
+import 'package:mpd_client/main.dart';
 import 'package:mpd_client/provider/language.dart';
 import 'package:mpd_client/provider/local_provider.dart';
 import 'package:mpd_client/src/themes/styles.dart';
@@ -20,7 +20,7 @@ class LanguagePage extends StatelessWidget {
             ScreenUtil().setVerticalSpacing(100.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 70.w),
-              child: Image.asset(AppImages.logo),
+              child: Image.asset($appType.logoImage),
             ),
             ScreenUtil().setVerticalSpacing(56.h),
             Padding(

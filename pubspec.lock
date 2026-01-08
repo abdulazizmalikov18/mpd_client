@@ -53,10 +53,10 @@ packages:
     dependency: transitive
     description:
       name: bloc
-      sha256: a2cebb899f91d36eeeaa55c7b20b5915db5a9df1b8fd4a3c9c825e22e474537d
+      sha256: a48653a82055a900b88cd35f92429f068c5a8057ae9b136d197b3d56c57efb81
       url: "https://pub.dev"
     source: hosted
-    version: "9.1.0"
+    version: "9.2.0"
   bloc_concurrency:
     dependency: "direct main"
     description:
@@ -197,10 +197,10 @@ packages:
     dependency: transitive
     description:
       name: code_builder
-      sha256: "11654819532ba94c34de52ff5feb52bd81cba1de00ef2ed622fd50295f9d4243"
+      sha256: "6a6cab2ba4680d6423f34a9b972a4c9a94ebe1b62ecec4e1a1f2cba91fd1319d"
       url: "https://pub.dev"
     source: hosted
-    version: "4.11.0"
+    version: "4.11.1"
   collection:
     dependency: transitive
     description:
@@ -213,10 +213,10 @@ packages:
     dependency: "direct main"
     description:
       name: connectivity_plus
-      sha256: b5e72753cf63becce2c61fd04dfe0f1c430cc5278b53a1342dc5ad839eab29ec
+      sha256: "33bae12a398f841c6cda09d1064212957265869104c478e5ad51e2fb26c3973c"
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.5"
+    version: "7.0.0"
   connectivity_plus_platform_interface:
     dependency: transitive
     description:
@@ -325,10 +325,10 @@ packages:
     dependency: "direct main"
     description:
       name: equatable
-      sha256: "567c64b3cb4cf82397aac55f4f0cbd3ca20d77c6c03bedbc4ceaddc08904aef7"
+      sha256: "3e0141505477fd8ad55d6eb4e7776d3fe8430be8e497ccb1521370c3f21a3e2b"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.7"
+    version: "2.0.8"
   extended_image:
     dependency: transitive
     description:
@@ -357,10 +357,10 @@ packages:
     dependency: transitive
     description:
       name: ffi
-      sha256: "289279317b4b16eb2bb7e271abccd4bf84ec9bdcbe999e278a94b804f5630418"
+      sha256: d07d37192dbf97461359c1518788f203b0c9102cfd2c35a716b823741219542c
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.4"
+    version: "2.1.5"
   file:
     dependency: transitive
     description:
@@ -373,10 +373,10 @@ packages:
     dependency: "direct main"
     description:
       name: file_picker
-      sha256: "7872545770c277236fd32b022767576c562ba28366204ff1a5628853cf8f2200"
+      sha256: d974b6ba2606371ac71dd94254beefb6fa81185bde0b59bdc1df09885da85fde
       url: "https://pub.dev"
     source: hosted
-    version: "10.3.7"
+    version: "10.3.8"
   file_selector_linux:
     dependency: transitive
     description:
@@ -869,14 +869,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.2"
-  internet_connection_checker:
-    dependency: "direct main"
-    description:
-      name: internet_connection_checker
-      sha256: ee08f13d8b13b978affe226e9274ca3ba7a9bed07c9479e8ae245f785b7a488a
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.1"
   intl:
     dependency: "direct main"
     description:
@@ -1081,10 +1073,10 @@ packages:
     dependency: "direct main"
     description:
       name: open_file
-      sha256: d17e2bddf5b278cb2ae18393d0496aa4f162142ba97d1a9e0c30d476adf99c0e
+      sha256: b22decdae85b459eac24aeece48f33845c6f16d278a9c63d75c5355345ca236b
       url: "https://pub.dev"
     source: hosted
-    version: "3.5.10"
+    version: "3.5.11"
   open_file_android:
     dependency: transitive
     description:
@@ -1097,10 +1089,10 @@ packages:
     dependency: transitive
     description:
       name: open_file_ios
-      sha256: "02996f01e5f6863832068e97f8f3a5ef9b613516db6897f373b43b79849e4d07"
+      sha256: a5acd07ba1f304f807a97acbcc489457e1ad0aadff43c467987dd9eef814098f
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.3"
+    version: "1.0.4"
   open_file_linux:
     dependency: transitive
     description:
@@ -1113,10 +1105,10 @@ packages:
     dependency: transitive
     description:
       name: open_file_mac
-      sha256: "1440b1e37ceb0642208cfeb2c659c6cda27b25187a90635c9d1acb7d0584d324"
+      sha256: cd293f6750de6438ab2390513c99128ade8c974825d4d8128886d1cda8c64d01
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.3"
+    version: "1.0.4"
   open_file_platform_interface:
     dependency: transitive
     description:
@@ -1630,74 +1622,74 @@ packages:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
-      sha256: e1fdfcc3ed7e1f040ba95838780b2eb1857e3e5eccb817fbe94ea2b09c35eac4
+      sha256: "7363e3a7489c71874c624945d8dcbbe1e2486bb7bce7ee5b7693f14c00581f52"
       url: "https://pub.dev"
     source: hosted
-    version: "31.2.18"
+    version: "32.1.22"
   syncfusion_flutter_pdf:
     dependency: transitive
     description:
       name: syncfusion_flutter_pdf
-      sha256: "4077abff3d3dcae757317c0a85cb607b98cc6ea8f3b47c7d8488d4144ef01a9f"
+      sha256: c84959387f720dd6ab517d00af22ad38cf75f0e2d982b28bdcd89602f61754e7
       url: "https://pub.dev"
     source: hosted
-    version: "31.2.18"
+    version: "32.1.22"
   syncfusion_flutter_pdfviewer:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_pdfviewer
-      sha256: "4bc26c493a017ea615a2c232031f3aa46642ddb22d82a8d88d8c5e5ea7fe4c7d"
+      sha256: "4db457d8500c6ecad602a89bcb3556e866568d7991d7f48b90a0f9c0165c2ef7"
       url: "https://pub.dev"
     source: hosted
-    version: "31.2.18"
+    version: "32.1.22"
   syncfusion_flutter_signaturepad:
     dependency: transitive
     description:
       name: syncfusion_flutter_signaturepad
-      sha256: "56c35321879b900f59a91e0758af7ca66973447bfdaeb643fe1da0084cbc5b22"
+      sha256: "56d35aadb3cf985f7ea34890b828e36c13f8f28f24560cc058a5812ac6fb8ae4"
       url: "https://pub.dev"
     source: hosted
-    version: "31.2.18"
+    version: "32.1.22"
   syncfusion_pdfviewer_linux:
     dependency: transitive
     description:
       name: syncfusion_pdfviewer_linux
-      sha256: bae7feb109b38ecf9f8be99bd032503adf98e56da048307a17af8515d0f9d2ed
+      sha256: "047376b4a8c39cec081f07f360c30937e672838e4f1a82bfe2523b7734d293c7"
       url: "https://pub.dev"
     source: hosted
-    version: "31.2.18"
+    version: "32.1.22"
   syncfusion_pdfviewer_macos:
     dependency: transitive
     description:
       name: syncfusion_pdfviewer_macos
-      sha256: "5c02ead2a430cd3f203639ede38ce2e06fb6c8aab6791b0d15c01436f882f482"
+      sha256: "0d6831a06eef8e2afb60b0ecadd78bd53e57de6fa78788391be02e59081ba1b8"
       url: "https://pub.dev"
     source: hosted
-    version: "31.2.18"
+    version: "32.1.22"
   syncfusion_pdfviewer_platform_interface:
     dependency: transitive
     description:
       name: syncfusion_pdfviewer_platform_interface
-      sha256: "65641e064385ac65253930ec96a6edc2eea781c9e15bf3d5fa15e459037817e7"
+      sha256: "808aa57e4e14f77f3a7e578f5ef076023daa7568b919a61c67f83609d1f322d7"
       url: "https://pub.dev"
     source: hosted
-    version: "31.2.18"
+    version: "32.1.22"
   syncfusion_pdfviewer_web:
     dependency: transitive
     description:
       name: syncfusion_pdfviewer_web
-      sha256: c55201d9eda49f543b9ad21f539b0f5fbe45ca1a3b30081ee471eb4dff7132f4
+      sha256: d91bf5d62dee354efcf02c5b5d473ba01e1dabdcc58f98ab32cc94e2c9b4853c
       url: "https://pub.dev"
     source: hosted
-    version: "31.2.18"
+    version: "32.1.22"
   syncfusion_pdfviewer_windows:
     dependency: transitive
     description:
       name: syncfusion_pdfviewer_windows
-      sha256: "1b706e58a95c794687d037e055cf0580370ceee27a59a8cd4e14368534161af8"
+      sha256: "70af39243d6485f9f54c8e0e5f139e1aae614b226987affb7db270c2935da829"
       url: "https://pub.dev"
     source: hosted
-    version: "31.2.18"
+    version: "32.1.22"
   synchronized:
     dependency: transitive
     description:
@@ -1886,10 +1878,10 @@ packages:
     dependency: transitive
     description:
       name: video_player_android
-      sha256: d74b66f283afff135d5be0ceccca2ca74dff7df1e9b1eaca6bd4699875d3ae60
+      sha256: ee4fd520b0cafa02e4a867a0f882092e727cdaa1a2d24762171e787f8a502b0a
       url: "https://pub.dev"
     source: hosted
-    version: "2.8.22"
+    version: "2.9.1"
   video_player_avfoundation:
     dependency: transitive
     description:
@@ -1958,10 +1950,10 @@ packages:
     dependency: transitive
     description:
       name: watcher
-      sha256: f52385d4f73589977c80797e60fe51014f7f2b957b5e9a62c3f6ada439889249
+      sha256: "1398c9f081a753f9226febe8900fce8f7d0a67163334e1c94a2438339d79d635"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.0"
+    version: "1.2.1"
   web:
     dependency: transitive
     description:
@@ -1990,10 +1982,10 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter
-      sha256: c3e4fe614b1c814950ad07186007eff2f2e5dd2935eba7b9a9a1af8e5885f1ba
+      sha256: a3da219916aba44947d3a5478b1927876a09781174b5a2b67fa5be0555154bf9
       url: "https://pub.dev"
     source: hosted
-    version: "4.13.0"
+    version: "4.13.1"
   webview_flutter_android:
     dependency: transitive
     description:
@@ -2022,10 +2014,10 @@ packages:
     dependency: "direct main"
     description:
       name: wechat_assets_picker
-      sha256: a503da460be2bb558f3331b76b2995fb1e16e9e442c80834a9633e13364b8050
+      sha256: e718fc1593e7afa9f01f8bc8b0a9831859b4ca8caf359eeb1aece4825305103b
       url: "https://pub.dev"
     source: hosted
-    version: "10.0.0"
+    version: "10.1.0"
   wechat_picker_library:
     dependency: transitive
     description:

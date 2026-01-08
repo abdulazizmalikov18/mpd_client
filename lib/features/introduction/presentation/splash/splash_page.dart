@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/app/app_colors.dart';
-import 'package:mpd_client/app/app_images.dart';
 import 'package:mpd_client/app/app_routes.dart';
 import 'package:mpd_client/core/data/repository/storage_keys.dart';
 import 'package:mpd_client/core/data/repository/storage_repository.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:mpd_client/main.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -51,7 +51,12 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
           children: [
             Positioned(
               bottom: 470.h,
-              child: Image.asset(AppImages.logo, width: 250.w, height: 55.h),
+              child: Image.asset(
+                $appType.logoImage,
+                width: 250.w,
+                height: 55.h,
+                color: context.color.mainBlue,
+              ),
             ),
             Positioned(
               bottom: 24.h,

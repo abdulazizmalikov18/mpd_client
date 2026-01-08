@@ -277,7 +277,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   void _chatListenerConnect() async {
     chatSocket = IOWebSocketChannel.connect(
       Uri.parse(
-        "${$baseUrlSocket}:80/SMMS/ws/chat/?token=${StorageRepository.getString(StorageKeys.TOKEN)}",
+        "${$appType.socketUrl}/SMMS/ws/chat/?token=${StorageRepository.getString(StorageKeys.TOKEN)}",
       ),
     );
     await chatSocket?.ready;

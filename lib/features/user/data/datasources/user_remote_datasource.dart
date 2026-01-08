@@ -12,6 +12,7 @@ import 'package:mpd_client/features/user/data/models/specialist_position_model.d
 import 'package:mpd_client/features/user/data/models/user_info_model.dart';
 import 'package:mpd_client/features/user/data/models/user_info_update_model.dart';
 import 'package:mpd_client/features/user/data/models/user_subscriptions_model.dart';
+import 'package:mpd_client/main.dart';
 
 import '../models/user_image_update_model.dart';
 
@@ -213,7 +214,7 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
     return _handle.apiControl(
       request: () {
         return _client.get(
-          "/BMS/api/v1.0/public/org/mpd/specialist_cat/",
+          "/BMS/api/v1.0/public/org/${$appType.cluster}/specialist_cat/",
           options: Options(
             headers: {
               if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
@@ -237,7 +238,7 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
     return _handle.apiControl(
       request: () {
         return _client.get(
-          "/BMS/api/v1.0/public/org/mpd/specialist_position/",
+          "/BMS/api/v1.0/public/org/${$appType.cluster}/specialist_position/",
           options: Options(
             headers: {
               if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
@@ -261,7 +262,7 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
     return _handle.apiControl(
       request: () {
         return _client.get(
-          "/BMS/api/v1.0/public/org/mpd/specialist/category/",
+          "/BMS/api/v1.0/public/org/${$appType.cluster}/specialist/category/",
           options: Options(
             headers: {
               if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
@@ -285,7 +286,7 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
     return _handle.apiControl(
       request: () {
         return _client.post(
-          "/BMS/api/v1.0/public/org/mpd/specialist-add/",
+          "/BMS/api/v1.0/public/org/${$appType.cluster}/specialist-add/",
           data: model.toJsonDocument,
           options: Options(
             headers: {

@@ -116,7 +116,7 @@ class ChatVMController {
   }) async {
     try {
       final wsUrl = Uri.parse(
-        "${$baseUrlSocket}/SMMS/ws/chat/?token=${StorageRepository.getString(StorageKeys.TOKEN)}",
+        "${$appType.socketUrl}/SMMS/ws/chat/?token=${StorageRepository.getString(StorageKeys.TOKEN)}",
       );
       channel = WebSocketChannel.connect(wsUrl);
       await channel!.ready;

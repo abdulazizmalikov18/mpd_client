@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:mpd_client/app/app_colors.dart';
-import 'package:mpd_client/app/app_images.dart';
 import 'package:mpd_client/app/colors.dart';
 import 'package:mpd_client/features/home/domain/service/flick_multi_manger.dart';
 import 'package:mpd_client/features/home/presentation/widgets/porttrait_controls.dart';
+import 'package:mpd_client/main.dart';
 
 class FlickVideoWidget extends StatelessWidget {
   const FlickVideoWidget({
@@ -37,7 +37,7 @@ class FlickVideoWidget extends StatelessWidget {
                       )
                     : Padding(
                         padding: const EdgeInsets.all(32),
-                        child: Image.asset(AppImages.logo, color: white),
+                        child: Image.asset($appType.logoImage, color: white),
                       ),
               ),
               Positioned(
@@ -71,7 +71,7 @@ class FlickVideoWidget extends StatelessWidget {
                       'https://resources.comphealth.com/wp-content/uploads/2019/05/post-residency-career-tips.jpg',
                   fit: BoxFit.fitWidth,
                 )
-              : Image.asset(AppImages.logo),
+              : Image.asset($appType.logoImage),
         ),
         controls: const FlickLandscapeControls(),
         iconThemeData: const IconThemeData(size: 40, color: Colors.white),

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_images.dart';
 import 'package:mpd_client/features/authentication/domain/inherited/auth_notifier.dart';
+import 'package:mpd_client/main.dart';
 
 class AuthUIWidget extends StatelessWidget {
   final Widget child;
@@ -33,7 +34,7 @@ class AuthUIWidget extends StatelessWidget {
                     left: 70.w,
                     right: 70.w,
                     child: Image.asset(
-                      AppImages.logo,
+                      $appType.logoImage,
                       height: 55.h,
                       width: 250.w,
                       color: context.color.white,

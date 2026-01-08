@@ -6,15 +6,10 @@ import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/bloc_logger.dart';
 import 'package:mpd_client/core/data/repository/storage_repository.dart';
 import 'package:mpd_client/core/utils/log_service.dart';
+import 'package:mpd_client/enum.dart';
 import 'package:mpd_client/features/app.dart';
-// import 'package:workmanager/workmanager.dart';
-// import 'package:yandex_mapkit/yandex_mapkit.dart';
 
-const String $baseUrlHttp = "https://api.mpdinfo.uz/";
-const String $baseUrlSocket = "wss://api.mpdinfo.uz";
-
-// const String $baseUrlHttp = "https://sharq-api.sharqdarmon.uz/";
-// const String $baseUrlSocket = "wss://sharq-api.sharqdarmon.uz";
+const AppType $appType = AppType.tmed;
 
 void main() {
   runZonedGuarded(

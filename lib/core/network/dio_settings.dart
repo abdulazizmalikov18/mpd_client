@@ -10,7 +10,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioSettings {
   BaseOptions _dioBaseOptions = BaseOptions(
-    baseUrl: $baseUrlHttp,
+    baseUrl: $appType.baseUrl,
     connectTimeout: const Duration(milliseconds: 35000),
     receiveTimeout: const Duration(milliseconds: 35000),
     followRedirects: false,
@@ -28,7 +28,7 @@ class DioSettings {
 
   void setBaseOptions({String? lang}) {
     _dioBaseOptions = BaseOptions(
-      baseUrl: $baseUrlHttp,
+      baseUrl: $appType.baseUrl,
       connectTimeout: const Duration(milliseconds: 35000),
       receiveTimeout: const Duration(milliseconds: 35000),
       headers: <String, dynamic>{
@@ -45,7 +45,7 @@ class DioSettings {
   }
 
   final BaseOptions _dioBaseOptionsForAuth = BaseOptions(
-    baseUrl: $baseUrlHttp,
+    baseUrl: $appType.baseUrl,
     connectTimeout: const Duration(milliseconds: 35000),
     receiveTimeout: const Duration(milliseconds: 35000),
     followRedirects: false,
@@ -63,7 +63,7 @@ class DioSettings {
 
   void setBaseOptionsForAuth({String? lang}) {
     _dioBaseOptions = BaseOptions(
-      baseUrl: $baseUrlHttp,
+      baseUrl: $appType.baseUrl,
       connectTimeout: const Duration(milliseconds: 35000),
       receiveTimeout: const Duration(milliseconds: 35000),
       headers: <String, dynamic>{'Accept-Language': lang},
