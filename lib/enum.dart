@@ -8,7 +8,7 @@ enum AppType {
   dwed;
 
   String get cluster => switch (this) {
-    AppType.tmed => "tmed",
+    AppType.tmed => "t-med",
     AppType.dasuty => "dasuty",
     AppType.dwed => "dwed",
     AppType.mpd => "mpd",

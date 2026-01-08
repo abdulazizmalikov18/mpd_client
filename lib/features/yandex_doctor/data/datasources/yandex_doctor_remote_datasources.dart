@@ -3,7 +3,6 @@ import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/core/data/repository/storage_keys.dart';
 import 'package:mpd_client/core/data/repository/storage_repository.dart';
 import 'package:mpd_client/core/exceptions/error_handle.dart';
-import 'package:mpd_client/enum.dart';
 import 'package:mpd_client/features/home/data/models/product_filter_model.dart';
 import 'package:mpd_client/features/home/data/models/specialist_product_model.dart';
 import 'package:mpd_client/main.dart';
@@ -71,9 +70,7 @@ class YandexDoctorRemoteDataSource implements IYandexDoctorRemoteDataSource {
     return _handle.apiControl(
       request: () {
         return _client.get(
-          $appType != AppType.mpd
-              ? "/BMS/api/v1.0/public/category/"
-              : "/BMS/api/v1.0/public/org/${$appType.cluster}/specialist/category/",
+          "/BMS/api/v1.0/public/org/${$appType.cluster}/specialist/category/",
           queryParameters: {if (query != null) 'search': query},
           options: Options(
             headers: {
@@ -99,9 +96,7 @@ class YandexDoctorRemoteDataSource implements IYandexDoctorRemoteDataSource {
     CancelToken? cancelToken,
   }) async {
     final baseUrl = StringBuffer(
-      $appType != AppType.mpd
-          ? "/BMS/api/v1.0/public/public/specialist/"
-          : 'http://213.230.125.177/BMS/api/v1.0/public/cluster/${$appType.cluster}/specialist/?limit=$limit&offset=$offset&bff_price=true',
+      'http://213.230.125.177/BMS/api/v1.0/public/cluster/${$appType.cluster}/specialist/?limit=$limit&offset=$offset&bff_price=true',
     );
     if (query != null) baseUrl.write('&search=$query');
     return _handle.apiControl(
@@ -132,9 +127,7 @@ class YandexDoctorRemoteDataSource implements IYandexDoctorRemoteDataSource {
     return _handle.apiControl(
       request: () {
         return _client.get(
-          $appType != AppType.mpd
-              ? "/BMS/api/v1.0/public/public/specialist/?search=$query"
-              : "/BMS/api/v1.0/public/cluster/${$appType.cluster}/specialist/?search=$query",
+          "/BMS/api/v1.0/public/cluster/${$appType.cluster}/specialist/?search=$query",
           queryParameters: {if (jobId != null) 'job': jobId},
           options: Options(
             headers: {
