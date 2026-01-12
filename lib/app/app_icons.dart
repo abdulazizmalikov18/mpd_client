@@ -133,6 +133,21 @@ abstract class AppIcons {
   static const download = "assets/icons/download.svg";
   static const pencil = "assets/icons/pencil.svg";
   static const scrollText = "assets/icons/scroll-text.svg";
+
+  // Meet icons
+  static const icChat = "assets/icons/meet/ic_chat.svg";
+  static const icChevronDown = "assets/icons/meet/ic_chevron_down.svg";
+  static const icEnd = "assets/icons/meet/ic_end.svg";
+  static const icLeave = "assets/icons/meet/ic_leave.svg";
+  static const icMic = "assets/icons/meet/ic_mic.svg";
+  static const icMicOff = "assets/icons/meet/ic_mic_off.svg";
+  static const icParticipants = "assets/icons/meet/ic_participants.svg";
+  static const icRecording = "assets/icons/meet/ic_recording.svg";
+  static const icScreenShare = "assets/icons/meet/ic_screen_share.svg";
+  static const icStopScreenShare = "assets/icons/meet/ic_stop_screen_share.svg";
+  static const icSwitchCamera = "assets/icons/meet/ic_switch_camera.svg";
+  static const icVideo = "assets/icons/meet/ic_video.svg";
+  static const icVideoOff = "assets/icons/meet/ic_video_off.svg";
 }
 
 extension SvgExt on String {

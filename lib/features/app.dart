@@ -25,6 +25,7 @@ import 'package:mpd_client/features/home/domain/blocs/socket_offer_bloc/socket_o
 import 'package:mpd_client/provider/language_database.dart';
 import 'package:mpd_client/provider/local_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'authentication/data/repositories/auth_repository.dart';
 import 'home/domain/inherited/post_inhereted.dart';
 
@@ -101,17 +102,42 @@ class _MyAppState extends State<MyApp> {
                     final provider = Provider.of<LocalProvider>(context);
                     return MaterialApp(
                       navigatorKey: $navigatorKey,
-                      builder: (context, child) => ScrollConfiguration(
-                        behavior: RefreshScrollBehavior(),
-                        child: KeyboardDismisser(
-                          child: MediaQuery(
-                            data: MediaQuery.of(context).copyWith(
-                              textScaler: const TextScaler.linear(1.0),
+                      builder: (context, child) =>
+                          ResponsiveBreakpoints.builder(
+                            breakpoints: [
+                              const Breakpoint(
+                                start: 0,
+                                end: 450,
+                                name: MOBILE,
+                              ),
+                              const Breakpoint(
+                                start: 451,
+                                end: 800,
+                                name: TABLET,
+                              ),
+                              const Breakpoint(
+                                start: 801,
+                                end: 1920,
+                                name: DESKTOP,
+                              ),
+                              const Breakpoint(
+                                start: 1921,
+                                end: double.infinity,
+                                name: '4K',
+                              ),
+                            ],
+                            child: ScrollConfiguration(
+                              behavior: RefreshScrollBehavior(),
+                              child: KeyboardDismisser(
+                                child: MediaQuery(
+                                  data: MediaQuery.of(context).copyWith(
+                                    textScaler: const TextScaler.linear(1.0),
+                                  ),
+                                  child: child!,
+                                ),
+                              ),
                             ),
-                            child: child!,
                           ),
-                        ),
-                      ),
                       theme: AppTheme.light,
                       darkTheme: AppTheme.dark,
                       themeMode: ThemeMode.light,

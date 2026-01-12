@@ -1,7 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:mpd_client/core/connection/connection_info.dart';
+// import 'package:internet_connection_checker/internet_connection_checker.dart';
+
 import 'package:mpd_client/core/network/dio_settings.dart';
 import 'package:mpd_client/features/appointment/data/datasources/appoinment_remote_datasource.dart';
 import 'package:mpd_client/features/appointment/data/repositories/appoinment_repository.dart';
@@ -36,12 +36,12 @@ void setupLocator() {
   locator.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSource(),
   );
-  locator.registerLazySingleton<ConnectionInfo>(
-    () => ConnectionInfo(
-      connectivity: locator<Connectivity>(),
-      connectionChecker: InternetConnectionChecker.instance,
-    ),
-  );
+  // locator.registerLazySingleton<ConnectionInfo>(
+  //   () => ConnectionInfo(
+  //     connectivity: locator<Connectivity>(),
+  //     connectionChecker: InternetConnectionChecker.instance,
+  //   ),
+  // );
 
   locator.registerLazySingleton<AuthRepository>(
     () => AuthRepository(
