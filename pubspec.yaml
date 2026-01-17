@@ -32,7 +32,7 @@ dependencies:
   keyboard_dismisser: ^3.0.0
   pinput: ^6.0.1
   shimmer: ^3.0.0
-  geolocator: ^14.0.1
+  geolocator: ^14.0.2
   yandex_mapkit: ^4.2.1
   url_launcher: ^6.3.2
   flutter_animate: ^4.5.2
@@ -90,7 +90,7 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^6.0.0
-  build_runner: ^2.10.4
+  build_runner: ^2.10.5
   json_serializable: ^6.11.2
 
 flutter:
