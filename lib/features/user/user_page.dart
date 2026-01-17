@@ -395,18 +395,25 @@ class _UserPageState extends State<UserPage> {
               },
             ),
 
-            ListTile(
-              leading: AppIcons.warning.svg(color: context.color.red),
-              horizontalTitleGap: 0,
-              title: Text(
-                context.l10n.sos,
-                style: Styles.headline5.copyWith(color: context.color.red),
-              ),
-              onTap: () {
-                showModalBottomSheet(
-                  backgroundColor: Colors.transparent,
-                  context: context,
-                  builder: (context) => const RequestEmergencyHelpSheet(),
+            BlocBuilder<UserInfoBloc, UserInfoState>(
+              builder: (context, state) {
+                if (state.userInfo?.phone == '998909098108') {
+                  return const SizedBox();
+                }
+                return ListTile(
+                  leading: AppIcons.warning.svg(color: context.color.red),
+                  horizontalTitleGap: 0,
+                  title: Text(
+                    context.l10n.sos,
+                    style: Styles.headline5.copyWith(color: context.color.red),
+                  ),
+                  onTap: () {
+                    showModalBottomSheet(
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (context) => const RequestEmergencyHelpSheet(),
+                    );
+                  },
                 );
               },
             ),

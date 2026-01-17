@@ -1,36 +1,5 @@
 class ProfanityFilter {
   static const List<String> _bannedWords = [
-    // 🔹 Uzbek (Lotin)
-    'yomon', 'ahmoq', 'tentak', 'jinni', 'jin', 'jinlar', 'la’nat',
-    'iflos', 'ahmaq', 'axmaq', 'ahmaqona', 'beodob', 'beor', 'yaramas', 'xunuk',
-    'nofaol',
-    'axloqsiz',
-    'ablah',
-    'ahmoqlik',
-    'nazoratsiz',
-    'haqorat',
-    'nima',
-    'tuhmat',
-
-    // 🔹 Uzbek (Кирилл)
-    'жинни',
-    'жин',
-    'жини',
-    'жинилар',
-    'лаънат',
-    'ифлос',
-    'аҳмоқ',
-    'аҳмақ',
-    'беодоб',
-    'беор',
-    'ярамас',
-    'аҳмоқлик',
-    'аблах',
-    'наҳс',
-    'ҳақорат',
-    'тӯҳмат',
-    'бефаросат',
-
     // 🔹 English - Common Profanity / Hate / Slurs (cleaned for policy)
     'stupid', 'idiot', 'dumb', 'crazy', 'fool', 'mad', 'ugly', 'hate', 'trash',
     'kill',
