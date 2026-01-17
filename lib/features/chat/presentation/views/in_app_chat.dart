@@ -47,13 +47,22 @@ class _InChatViewState extends State<InChatView> {
       ChatReadAllMessage(widget.group.slugName),
     );
 
-    // Initialize message listener only if channel is ready
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final chatController = ChatVMController();
-      if (chatController.channel != null) {
-        context.read<ChatMessageBloc>().onComingMessage();
-      }
-    });
+    // Initialize message listener - wait for socket connection if needed
+    _initializeSocketListener();
+  }
+
+  void _initializeSocketListener() async {
+    final chatController = ChatVMController();
+    // Wait for socket connection with retries
+    int retries = 0;
+    while (chatController.channel == null && retries < 10) {
+      await Future.delayed(const Duration(milliseconds: 300));
+      retries++;
+    }
+
+    if (mounted && chatController.channel != null) {
+      context.read<ChatMessageBloc>().onComingMessage();
+    }
   }
 
   @override

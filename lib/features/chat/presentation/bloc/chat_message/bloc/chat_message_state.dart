@@ -6,6 +6,7 @@ class ChatMessageState extends Equatable {
   final FormzSubmissionStatus status;
   final FormzSubmissionStatus sendMessageStatus;
   final int count;
+  final String? currentGroupSlug;
 
   const ChatMessageState({
     this.messages = const [],
@@ -13,6 +14,7 @@ class ChatMessageState extends Equatable {
     this.sendMessageStatus = FormzSubmissionStatus.initial,
     this.count = -1,
     this.offset = 0,
+    this.currentGroupSlug,
   });
 
   @override
@@ -22,6 +24,7 @@ class ChatMessageState extends Equatable {
     sendMessageStatus,
     count,
     offset,
+    currentGroupSlug,
   ];
 
   ChatMessageState copyWith({
@@ -30,6 +33,7 @@ class ChatMessageState extends Equatable {
     FormzSubmissionStatus? sendMessageStatus,
     int? count,
     int? offset,
+    String? currentGroupSlug,
   }) {
     return ChatMessageState(
       messages: messages ?? this.messages,
@@ -37,6 +41,7 @@ class ChatMessageState extends Equatable {
       sendMessageStatus: sendMessageStatus ?? this.sendMessageStatus,
       count: count ?? this.count,
       offset: offset ?? this.offset,
+      currentGroupSlug: currentGroupSlug ?? this.currentGroupSlug,
     );
   }
 }

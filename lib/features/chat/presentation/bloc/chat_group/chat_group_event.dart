@@ -17,3 +17,8 @@ class ChatMarkGroupAsRead extends ChatGroupEvent {
   final String groupSlug;
   const ChatMarkGroupAsRead({required this.groupSlug});
 }
+
+class ChatSocketMessageGroup extends ChatGroupEvent {
+  final MessageModel message;
+  const ChatSocketMessageGroup({required this.message});
+}

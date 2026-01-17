@@ -24,6 +24,7 @@ typedef $chatController = ChatVMController;
 
 class ChatVMController {
   WebSocketChannel? channel;
+  Stream? _broadcastStream;
   factory ChatVMController() => instance;
   static final instance = ChatVMController._();
   ChatVMController._()
@@ -120,28 +121,34 @@ class ChatVMController {
       );
       channel = WebSocketChannel.connect(wsUrl);
       await channel!.ready;
-      channel!.stream.asBroadcastStream();
+      // Create broadcast stream to allow multiple listeners
+      _broadcastStream = channel!.stream.asBroadcastStream();
+      Log.i("Socket connected successfully");
     } catch (e, s) {
       Log.e("ChatSocket Error ------------------------ $e  Stack: $s");
       onError(e.toString());
     }
   }
 
-  Stream get getStream => channel!.stream;
+  Stream get getStream => _broadcastStream ?? channel!.stream;
 
   void onComingNewMessage(void Function(MessageModel message) onMessage) {
     try {
-      if (channel == null) {
-        Log.e("Channel is null, cannot listen to messages");
+      if (channel == null || _broadcastStream == null) {
+        Log.e("Channel or broadcast stream is null, cannot listen to messages");
         return;
       }
-      channel!.stream.listen((event) {
+      _broadcastStream!.listen((event) {
         Log.i("New Chat Message $event \nType${event.runtimeType}");
-        final eventData = (jsonDecode(event));
-        if (eventData is Map<String, dynamic> &&
-            eventData.containsValue("notify_about_message")) {
-          Log.i("Message  Keldi");
-          onMessage(MessageModel.fromSocket(eventData));
+        try {
+          final eventData = (jsonDecode(event));
+          if (eventData is Map<String, dynamic> &&
+              eventData.containsValue("notify_about_message")) {
+            Log.i("Message  Keldi");
+            onMessage(MessageModel.fromSocket(eventData));
+          }
+        } catch (e, s) {
+          Log.e("Error parsing socket message: $e Stack: $s");
         }
       });
     } catch (e, s) {

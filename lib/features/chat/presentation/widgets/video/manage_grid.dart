@@ -1,11 +1,11 @@
 import 'package:videosdk/videosdk.dart';
 
-enum device_type { mobile, tablet, desktop }
+enum DeviceType { mobile, tablet, desktop }
 
 class ManageGrid {
   static Map<String, int>? getGridRowsAndColumns({
     required int participantsCount,
-    required device_type device,
+    required DeviceType device,
     bool isPresenting = false,
   }) {
     if (isPresenting) {
@@ -58,11 +58,11 @@ class ManageGrid {
     Map<int, Map<String, int>> grid = {};
     int maxCount = 6;
 
-    if (device == device_type.mobile) {
+    if (device == DeviceType.mobile) {
       grid = mobilePortrait;
-    } else if (device == device_type.tablet) {
+    } else if (device == DeviceType.tablet) {
       grid = tabPortrait;
-    } else if (device == device_type.desktop) {
+    } else if (device == DeviceType.desktop) {
       grid = smallDesktop;
     }
 

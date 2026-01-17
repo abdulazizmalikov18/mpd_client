@@ -74,7 +74,21 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
           _hasConnectedChat = true;
           // Only connect to chat if user phone is not the restricted one
           if (userState.userInfo?.phone != '998909098108') {
-            ChatVMController().connectSocket(onError: (errorMessage) {});
+            final chatController = ChatVMController();
+            // Connect socket and wait for connection
+            chatController.connectSocket(onError: (errorMessage) {}).then((_) {
+              // Set up socket listener for chat messages to update chat list
+              if (context.mounted) {
+                chatController.onComingNewMessage((message) {
+                  // Update chat group list when new message arrives
+                  if (context.mounted) {
+                    context.read<ChatGroupBloc>().add(
+                      ChatSocketMessageGroup(message: message),
+                    );
+                  }
+                });
+              }
+            });
             context.read<ChatGroupBloc>().add(const ChatGetGroupEvent());
           }
         }

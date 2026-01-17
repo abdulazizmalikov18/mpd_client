@@ -177,12 +177,12 @@ class _ConferenceParticipantGridState extends State<ConferenceParticipantGrid> {
   void updateOnScreenParticipants() {
     gridInfo = ManageGrid.getGridRowsAndColumns(
       participantsCount: participants.length,
-      device: ResponsiveValue<device_type>(
+      device: ResponsiveValue<DeviceType>(
         context,
         conditionalValues: [
-          Condition.equals(name: MOBILE, value: device_type.mobile),
-          Condition.equals(name: TABLET, value: device_type.tablet),
-          Condition.largerThan(name: TABLET, value: device_type.desktop),
+          Condition.equals(name: MOBILE, value: DeviceType.mobile),
+          Condition.equals(name: TABLET, value: DeviceType.tablet),
+          Condition.largerThan(name: TABLET, value: DeviceType.desktop),
         ],
       ).value,
       isPresenting: isPresenting,

@@ -337,7 +337,7 @@ class _MeetStratViewState extends State<MeetStratView>
         body: SafeArea(
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints viewportConstraints) {
-              Widget _buildContent() {
+              Widget buildContent() {
                 return IntrinsicHeight(
                   child: kIsWeb || Platform.isWindows || Platform.isMacOS
                       ? Container(
@@ -517,14 +517,14 @@ class _MeetStratViewState extends State<MeetStratView>
                       constraints: BoxConstraints(
                         minHeight: viewportConstraints.maxHeight,
                       ),
-                      child: _buildContent(),
+                      child: buildContent(),
                     )
                   : SingleChildScrollView(
                       child: ConstrainedBox(
                         constraints: BoxConstraints(
                           minHeight: viewportConstraints.maxHeight,
                         ),
-                        child: _buildContent(),
+                        child: buildContent(),
                       ),
                     );
             },
@@ -592,7 +592,7 @@ class _MeetStratViewState extends State<MeetStratView>
     joinMeeting("GROUP", displayName, widget.meetingId);
   }
 
-  Future<void> joinMeeting(callType, displayName, meetingId) async {
+  Future<void> joinMeeting(String callType, String displayName, String meetingId) async {
     if (meetingId.isEmpty) {
       CustomSnackbar.show(context, "Please enter Valid Meeting ID");
       return;

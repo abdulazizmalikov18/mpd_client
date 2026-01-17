@@ -104,7 +104,7 @@ class _ConferenceMeetingScreenState extends State<ConferenceMeetingScreen> {
 
     return PopScope(
       canPop: false,
-      onPopInvoked: (didPop) async {
+      onPopInvoked: (bool didPop) async {
         if (didPop) {
           return;
         }
@@ -196,50 +196,52 @@ class _ConferenceMeetingScreenState extends State<ConferenceMeetingScreen> {
                                 await VideoSDK.getAudioDevices();
 
                             double bottomMargin = (70.0 * outputDevice!.length);
-                            final screenSize = MediaQuery.of(context).size;
-                            await showMenu(
-                              context: context,
-                              color: black700,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              position: RelativeRect.fromLTRB(
-                                screenSize.width - details.globalPosition.dx,
-                                details.globalPosition.dy - bottomMargin,
-                                details.globalPosition.dx,
-                                (bottomMargin),
-                              ),
-                              items: outputDevice.map((e) {
-                                return PopupMenuItem(
-                                  padding: EdgeInsets.zero,
-                                  value: e,
-                                  child: Container(
-                                    color:
-                                        e.deviceId ==
-                                            meeting.selectedSpeaker?.deviceId
-                                        ? Color.fromRGBO(109, 110, 113, 1)
-                                        : Colors.transparent,
-                                    child: SizedBox(
-                                      width: double.infinity,
-                                      child: Padding(
-                                        padding: EdgeInsets.fromLTRB(
-                                          16,
-                                          10,
-                                          5,
-                                          10,
-                                        ), // Ensure no padding
-                                        child: Text(e.label),
+                            if (context.mounted) {
+                              final screenSize = MediaQuery.of(context).size;
+                              await showMenu(
+                                context: context,
+                                color: black700,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                position: RelativeRect.fromLTRB(
+                                  screenSize.width - details.globalPosition.dx,
+                                  details.globalPosition.dy - bottomMargin,
+                                  details.globalPosition.dx,
+                                  (bottomMargin),
+                                ),
+                                items: outputDevice.map((e) {
+                                  return PopupMenuItem(
+                                    padding: EdgeInsets.zero,
+                                    value: e,
+                                    child: Container(
+                                      color:
+                                          e.deviceId ==
+                                              meeting.selectedSpeaker?.deviceId
+                                          ? Color.fromRGBO(109, 110, 113, 1)
+                                          : Colors.transparent,
+                                      child: SizedBox(
+                                        width: double.infinity,
+                                        child: Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                            16,
+                                            10,
+                                            5,
+                                            10,
+                                          ), // Ensure no padding
+                                          child: Text(e.label),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                );
-                              }).toList(),
-                              elevation: 8.0,
-                            ).then((value) {
-                              if (value != null) {
-                                meeting.switchAudioDevice(value);
-                              }
-                            });
+                                  );
+                                }).toList(),
+                                elevation: 8.0,
+                              ).then((value) {
+                                if (value != null) {
+                                  meeting.switchAudioDevice(value);
+                                }
+                              });
+                            }
                           },
 
                           onChatButtonPressed: () {

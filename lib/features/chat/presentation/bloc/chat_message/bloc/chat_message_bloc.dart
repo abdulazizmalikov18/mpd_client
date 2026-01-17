@@ -30,7 +30,10 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
   }
 
   void _onGetMessages(ChatGetMessages event, Emitter emit) async {
-    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+    emit(state.copyWith(
+      status: FormzSubmissionStatus.inProgress,
+      currentGroupSlug: event.group.slugName,
+    ));
     final result = await _repo.getMessages(
       GetChatEntity(groupSlug: event.group.slugName),
     );
@@ -41,6 +44,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
           messages: result.right.results,
           count: result.right.count,
           offset: result.right.nextOffset,
+          currentGroupSlug: event.group.slugName,
         ),
       );
       return;
@@ -95,17 +99,35 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
   }
 
   void _onSocketMessage(ChatSocketMessage event, Emitter emit) async {
-    emit(
-      state.copyWith(
-        messages: [event.message, ...state.messages],
-        status: FormzSubmissionStatus.success,
-      ),
+    final message = event.message;
+    
+    // Only process messages for the current group
+    if (state.currentGroupSlug == null || 
+        message.groupSlug != state.currentGroupSlug) {
+      return;
+    }
+    
+    // Check if message already exists (avoid duplicates)
+    final exists = state.messages.any(
+      (m) => m.id == message.id && m.id != null && m.id! > 0,
     );
+    
+    if (!exists) {
+      // Add new message from socket
+      emit(
+        state.copyWith(
+          messages: [message, ...state.messages],
+          status: FormzSubmissionStatus.success,
+        ),
+      );
+    }
   }
 
   void onComingMessage() {
+    // Note: onComingNewMessage uses broadcast stream, so multiple listeners are supported
+    // We still check flag to avoid adding the same listener multiple times from the same bloc instance
     if (_isMessageListenerInitialized) {
-      return; // Already initialized, don't create duplicate listeners
+      return; // Already initialized for this bloc instance
     }
     _isMessageListenerInitialized = true;
     ChatVMController().onComingNewMessage((message) {
