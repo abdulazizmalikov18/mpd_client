@@ -15,6 +15,7 @@ class ChatGroupBloc extends Bloc<ChatGroupEvent, ChatGroupState> {
   ChatGroupBloc(this._repo) : super(const ChatGroupState()) {
     on<ChatGetGroupEvent>(_onGetGroup);
     on<ChatGroupSearchEvent>(_onSearchGroup);
+    on<ChatMarkGroupAsRead>(_onMarkGroupAsRead);
   }
 
   void _onGetGroup(ChatGetGroupEvent event, Emitter emit) async {
@@ -47,5 +48,16 @@ class ChatGroupBloc extends Bloc<ChatGroupEvent, ChatGroupState> {
     } else {
       emit(state.copyWith(status: FormzSubmissionStatus.failure));
     }
+  }
+
+  void _onMarkGroupAsRead(ChatMarkGroupAsRead event, Emitter emit) {
+    final updatedGroups = state.groups.map((group) {
+      if (group.slugName == event.groupSlug) {
+        return group.copyWith(unreadMessageCount: 0);
+      }
+      return group;
+    }).toList();
+
+    emit(state.copyWith(groups: updatedGroups));
   }
 }

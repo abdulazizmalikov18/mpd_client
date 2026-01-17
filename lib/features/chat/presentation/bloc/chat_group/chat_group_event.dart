@@ -12,3 +12,8 @@ class ChatGroupSearchEvent extends ChatGroupEvent {
   final String search;
   const ChatGroupSearchEvent({required this.search});
 }
+
+class ChatMarkGroupAsRead extends ChatGroupEvent {
+  final String groupSlug;
+  const ChatMarkGroupAsRead({required this.groupSlug});
+}

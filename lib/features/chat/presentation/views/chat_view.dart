@@ -127,16 +127,28 @@ class _ChatViewState extends State<ChatView> {
                       : context.color.background,
                 ),
                 child: WUserChatButton(
-                  onTap: () {
-                    final bloc = context.read<UserInfoBloc>();
-                    Navigator.of(context).push(
+                  onTap: () async {
+                    final userInfoBloc = context.read<UserInfoBloc>();
+                    final chatGroupBloc = context.read<ChatGroupBloc>();
+                    await Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => BlocProvider.value(
-                          value: bloc,
+                        builder: (context) => MultiBlocProvider(
+                          providers: [
+                            BlocProvider.value(value: userInfoBloc),
+                            BlocProvider.value(value: chatGroupBloc),
+                          ],
                           child: InChatView(group: state.groups[index]),
                         ),
                       ),
                     );
+                    // Refresh groups list when returning from chat to ensure read status is updated
+                    if (context.mounted) {
+                      context.read<ChatGroupBloc>().add(
+                        ChatMarkGroupAsRead(
+                          groupSlug: state.groups[index].slugName,
+                        ),
+                      );
+                    }
                   },
                   group: state.groups[index],
                 ),
