@@ -18,51 +18,55 @@ class WChatMediaView extends StatelessWidget {
 
   bool get isMobile => Platform.isAndroid || Platform.isIOS;
 
+  /// Telegram-style max size for chat image (compact in bubble)
+  static const double _maxChatImageWidth = 260.0;
+  static const double _maxChatImageHeight = 260.0;
+
   @override
   Widget build(BuildContext context) {
     if (file.endsWith(".jpg") || file.endsWith(".png")) {
-      return ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
-        child: GestureDetector(
-          onTap: () {
-            isMobile
-                ? Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ChatImageScreen(file: file, isLocalFile: isLocalFile),
+      final screenWidth = MediaQuery.sizeOf(context).width;
+      final maxW = screenWidth * 0.75;
+      final maxWidth = maxW > _maxChatImageWidth ? _maxChatImageWidth : maxW;
+
+      return GestureDetector(
+        onTap: () {
+          isMobile
+              ? Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        ChatImageScreen(file: file, isLocalFile: isLocalFile),
+                  ),
+                )
+              : showDialog(
+                  context: context,
+                  builder: (context) => Dialog(
+                    child: PinchToZoomScrollableWidget(
+                      maxScale: 2.5,
+                      child: switch (isLocalFile) {
+                        true => Image.file(
+                          File(file),
+                          fit: BoxFit.contain,
+                          width: MediaQuery.of(context).size.width * 0.7,
+                          height: MediaQuery.of(context).size.height * 0.7,
+                        ),
+                        false => CachedNetworkImage(
+                          imageUrl: file,
+                          fit: BoxFit.contain,
+                        ),
+                      },
                     ),
-                  )
-                : showDialog(
-                    context: context,
-                    builder: (context) => Dialog(
-                      child: PinchToZoomScrollableWidget(
-                        maxScale: 2.5,
-                        child: switch (isLocalFile) {
-                          true => Image.file(
-                            File(file),
-                            fit: BoxFit.cover,
-                            width: MediaQuery.of(context).size.width * 0.7,
-                            height: MediaQuery.of(context).size.height * 0.7,
-                          ),
-                          false => CachedNetworkImage(
-                            imageUrl: file,
-                            fit: BoxFit.cover,
-                          ),
-                        },
-                      ),
-                    ),
-                  );
-          },
+                  ),
+                );
+        },
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: maxWidth,
+            maxHeight: _maxChatImageHeight,
+          ),
           child: switch (isLocalFile) {
-            true => Image.file(
-              File(file),
-              fit: BoxFit.cover,
-              width: double.infinity,
-            ),
-            false => CachedNetworkImage(imageUrl: file, fit: BoxFit.cover),
+            true => Image.file(File(file), fit: BoxFit.contain),
+            false => CachedNetworkImage(imageUrl: file, fit: BoxFit.contain),
           },
         ),
       );
@@ -101,7 +105,7 @@ class ChatImageScreen extends StatelessWidget {
             ),
             false => CachedNetworkImage(
               imageUrl: file,
-              fit: BoxFit.cover,
+              // fit: BoxFit.cover,
               width: double.infinity,
             ),
           },
