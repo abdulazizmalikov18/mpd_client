@@ -10,7 +10,6 @@ import 'package:mpd_client/features/user/presentation/widgets/language_sheet.dar
 import 'package:mpd_client/features/user/presentation/widgets/logout_sheet.dart';
 import 'package:mpd_client/features/user/presentation/widgets/user_name_surname_part.dart';
 import 'package:mpd_client/features/user/presentation/widgets/user_number_part.dart';
-import 'package:mpd_client/features/user/widgets/request_emergency_help_sheet.dart';
 import 'package:mpd_client/provider/local_provider.dart';
 import 'package:mpd_client/src/themes/styles.dart';
 import 'package:mpd_client/src/widgets/bottom_sheet_widget.dart';
@@ -395,28 +394,28 @@ class _UserPageState extends State<UserPage> {
               },
             ),
 
-            BlocBuilder<UserInfoBloc, UserInfoState>(
-              builder: (context, state) {
-                if (state.userInfo?.phone == '998909098108') {
-                  return const SizedBox();
-                }
-                return ListTile(
-                  leading: AppIcons.warning.svg(color: context.color.red),
-                  horizontalTitleGap: 0,
-                  title: Text(
-                    context.l10n.sos,
-                    style: Styles.headline5.copyWith(color: context.color.red),
-                  ),
-                  onTap: () {
-                    showModalBottomSheet(
-                      backgroundColor: Colors.transparent,
-                      context: context,
-                      builder: (context) => const RequestEmergencyHelpSheet(),
-                    );
-                  },
-                );
-              },
-            ),
+            // BlocBuilder<UserInfoBloc, UserInfoState>(
+            //   builder: (context, state) {
+            //     if (state.userInfo?.phone == '998909098108') {
+            //       return const SizedBox();
+            //     }
+            //     return ListTile(
+            //       leading: AppIcons.warning.svg(color: context.color.red),
+            //       horizontalTitleGap: 0,
+            //       title: Text(
+            //         context.l10n.sos,
+            //         style: Styles.headline5.copyWith(color: context.color.red),
+            //       ),
+            //       onTap: () {
+            //         showModalBottomSheet(
+            //           backgroundColor: Colors.transparent,
+            //           context: context,
+            //           builder: (context) => const RequestEmergencyHelpSheet(),
+            //         );
+            //       },
+            //     );
+            //   },
+            // ),
             // TextButton(
             //   onPressed: () {
             //     Navigator.of(context).push(MaterialPageRoute(

@@ -28,6 +28,7 @@ class _TutorialPageState extends State<TutorialPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Store compliance: emergency slide removed to avoid Health App classification (Apple/Google).
     final List<Widget> pageViewPages = [
       PageViewWidget(
         tutorial: TutorialModel(
@@ -48,13 +49,6 @@ class _TutorialPageState extends State<TutorialPage> {
           AppIcons.tutorial_3,
           context.l10n.presentation_third_page,
           context.l10n.presentation_third_description,
-        ),
-      ),
-      PageViewWidget(
-        tutorial: TutorialModel(
-          AppIcons.tutorial_4,
-          context.l10n.presentation_four_page,
-          context.l10n.presentation_four_page_description,
         ),
       ),
     ];
@@ -106,11 +100,11 @@ class _TutorialPageState extends State<TutorialPage> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: LongButton(
-              buttonName: notifier.pageIndex != 3
+              buttonName: notifier.pageIndex != 2
                   ? context.l10n.presentation_next
                   : context.l10n.presentation_get_started,
               onPress: () {
-                if (notifier.pageIndex == 3) {
+                if (notifier.pageIndex == 2) {
                   Navigator.pushNamed(context, AppRoutes.auth);
                 } else {
                   _pageController.animateToPage(
@@ -125,7 +119,7 @@ class _TutorialPageState extends State<TutorialPage> {
           ScreenUtil().setVerticalSpacing(20.h),
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 300),
-            child: notifier.pageIndex != 3
+            child: notifier.pageIndex != 2
                 ? Container(
                     height: 50.h,
                     width: double.maxFinite,
