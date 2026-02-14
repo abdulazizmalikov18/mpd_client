@@ -15,8 +15,10 @@ class _RecordingIndicatorState extends State<RecordingIndicator>
 
   @override
   void initState() {
-    _animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
     if (widget.recordingState == "RECORDING_STARTING" ||
         widget.recordingState == "RECORDING_STOPPING") {
       _animationController.repeat(reverse: true);
@@ -39,8 +41,9 @@ class _RecordingIndicatorState extends State<RecordingIndicator>
   @override
   Widget build(BuildContext context) {
     return FadeTransition(
-        opacity: _animationController,
-        child: Lottie.asset('assets/recording_lottie.json', height: 35));
+      opacity: _animationController,
+      child: Lottie.asset('assets/recording_lottie.json', height: 35),
+    );
   }
 
   @override

@@ -4,11 +4,11 @@ import 'package:videosdk/videosdk.dart';
 
 class SelectVideoDevice extends StatefulWidget {
   final bool? isCameraPermissionAllowed;
-  VideoDeviceInfo? selectedVideoDevice;
-  List<VideoDeviceInfo>? videoDevices;
+  final VideoDeviceInfo? selectedVideoDevice;
+  final List<VideoDeviceInfo>? videoDevices;
   final Function(VideoDeviceInfo?) onVideoDeviceSelected;
 
-  SelectVideoDevice({
+  const SelectVideoDevice({
     super.key,
     required this.isCameraPermissionAllowed,
     this.selectedVideoDevice,
@@ -64,9 +64,6 @@ class _SelectVideoDeviceState extends State<SelectVideoDevice> {
                           style: TextStyle(color: Colors.white),
                         ),
                         onTap: () {
-                          setState(() {
-                            widget.selectedVideoDevice = device;
-                          });
                           widget.onVideoDeviceSelected(device);
                           Navigator.pop(context);
                         },

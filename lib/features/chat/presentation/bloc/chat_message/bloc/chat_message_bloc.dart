@@ -30,10 +30,12 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
   }
 
   void _onGetMessages(ChatGetMessages event, Emitter emit) async {
-    emit(state.copyWith(
-      status: FormzSubmissionStatus.inProgress,
-      currentGroupSlug: event.group.slugName,
-    ));
+    emit(
+      state.copyWith(
+        status: FormzSubmissionStatus.inProgress,
+        currentGroupSlug: event.group.slugName,
+      ),
+    );
     final result = await _repo.getMessages(
       GetChatEntity(groupSlug: event.group.slugName),
     );
@@ -100,18 +102,18 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
 
   void _onSocketMessage(ChatSocketMessage event, Emitter emit) async {
     final message = event.message;
-    
+
     // Only process messages for the current group
-    if (state.currentGroupSlug == null || 
+    if (state.currentGroupSlug == null ||
         message.groupSlug != state.currentGroupSlug) {
       return;
     }
-    
+
     // Check if message already exists (avoid duplicates)
     final exists = state.messages.any(
       (m) => m.id == message.id && m.id != null && m.id! > 0,
     );
-    
+
     if (!exists) {
       // Add new message from socket
       emit(

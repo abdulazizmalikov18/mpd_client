@@ -592,7 +592,11 @@ class _MeetStratViewState extends State<MeetStratView>
     joinMeeting("GROUP", displayName, widget.meetingId);
   }
 
-  Future<void> joinMeeting(String callType, String displayName, String meetingId) async {
+  Future<void> joinMeeting(
+    String callType,
+    String displayName,
+    String meetingId,
+  ) async {
     if (meetingId.isEmpty) {
       CustomSnackbar.show(context, "Please enter Valid Meeting ID");
       return;

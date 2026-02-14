@@ -104,7 +104,7 @@ class _ConferenceMeetingScreenState extends State<ConferenceMeetingScreen> {
 
     return PopScope(
       canPop: false,
-      onPopInvoked: (bool didPop) async {
+      onPopInvokedWithResult: (didPop, result) async {
         if (didPop) {
           return;
         }
@@ -322,23 +322,23 @@ class _ConferenceMeetingScreenState extends State<ConferenceMeetingScreen> {
     );
   }
 
-  void registerMeetingEvents(Room _meeting) {
+  void registerMeetingEvents(Room meeting) {
     // Called when joined in meeting
-    _meeting.on(Events.roomJoined, () {
+    meeting.on(Events.roomJoined, () {
       setState(() {
-        meeting = _meeting;
+        meeting = meeting;
         _joined = true;
       });
 
       if (kIsWeb || Platform.isWindows || Platform.isMacOS) {
-        _meeting.switchAudioDevice(widget.selectedAudioOutputDevice!);
+        meeting.switchAudioDevice(widget.selectedAudioOutputDevice!);
       }
 
-      subscribeToChatMessages(_meeting);
+      subscribeToChatMessages(meeting);
     });
 
     // Called when meeting is ended
-    _meeting.on(Events.roomLeft, (String? errorMsg) {
+    meeting.on(Events.roomLeft, (String? errorMsg) {
       if (errorMsg != null) {
         CustomSnackbar.show(context, "Meeting left due to $errorMsg !!");
       }
@@ -348,7 +348,7 @@ class _ConferenceMeetingScreenState extends State<ConferenceMeetingScreen> {
     });
 
     // Called when recording is started
-    _meeting.on(Events.recordingStateChanged, (String status) {
+    meeting.on(Events.recordingStateChanged, (String status) {
       CustomSnackbar.show(
         context,
         "Meeting recording ${status == "RECORDING_STARTING"
@@ -366,33 +366,33 @@ class _ConferenceMeetingScreenState extends State<ConferenceMeetingScreen> {
     });
 
     // Called when stream is enabled
-    _meeting.localParticipant.on(Events.streamEnabled, (Stream _stream) {
-      if (_stream.kind == 'video') {
+    meeting.localParticipant.on(Events.streamEnabled, (Stream stream) {
+      if (stream.kind == 'video') {
         setState(() {
-          videoStream = _stream;
+          videoStream = stream;
         });
-      } else if (_stream.kind == 'audio') {
+      } else if (stream.kind == 'audio') {
         setState(() {
-          audioStream = _stream;
+          audioStream = stream;
         });
-      } else if (_stream.kind == 'share') {
+      } else if (stream.kind == 'share') {
         setState(() {
-          shareStream = _stream;
+          shareStream = stream;
         });
       }
     });
 
     // Called when stream is disabled
-    _meeting.localParticipant.on(Events.streamDisabled, (Stream _stream) {
-      if (_stream.kind == 'video' && videoStream?.id == _stream.id) {
+    meeting.localParticipant.on(Events.streamDisabled, (Stream stream) {
+      if (stream.kind == 'video' && videoStream?.id == stream.id) {
         setState(() {
           videoStream = null;
         });
-      } else if (_stream.kind == 'audio' && audioStream?.id == _stream.id) {
+      } else if (stream.kind == 'audio' && audioStream?.id == stream.id) {
         setState(() {
           audioStream = null;
         });
-      } else if (_stream.kind == 'share' && shareStream?.id == _stream.id) {
+      } else if (stream.kind == 'share' && shareStream?.id == stream.id) {
         setState(() {
           shareStream = null;
         });
@@ -400,19 +400,19 @@ class _ConferenceMeetingScreenState extends State<ConferenceMeetingScreen> {
     });
 
     // Called when presenter is changed
-    _meeting.on(Events.presenterChanged, (_activePresenterId) {
+    meeting.on(Events.presenterChanged, (activePresenterId) {
       Participant? activePresenterParticipant =
-          _meeting.participants[_activePresenterId];
+          meeting.participants[activePresenterId];
 
       // Get Share Stream
-      Stream? _stream = activePresenterParticipant?.streams.values.singleWhere(
+      Stream? stream = activePresenterParticipant?.streams.values.singleWhere(
         (e) => e.kind == "share",
       );
 
-      setState(() => remoteParticipantShareStream = _stream);
+      setState(() => remoteParticipantShareStream = stream);
     });
 
-    _meeting.on(
+    meeting.on(
       Events.error,
       (error) => {
         CustomSnackbar.show(context, "${error['name']} :: ${error['message']}"),

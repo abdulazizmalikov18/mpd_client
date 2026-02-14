@@ -70,7 +70,7 @@ class YandexDoctorRemoteDataSource implements IYandexDoctorRemoteDataSource {
       request: () {
         return _client.get(
           "/BMS/api/v1.0/public/org/mpd/specialist/category/",
-          queryParameters: {if (query != null) 'search': query},
+          queryParameters: {'search': ?query},
           options: Options(
             headers: {
               'Accept-Language': langCode,
@@ -127,7 +127,7 @@ class YandexDoctorRemoteDataSource implements IYandexDoctorRemoteDataSource {
       request: () {
         return _client.get(
           "/BMS/api/v1.0/public/cluster/mpd/specialist/?search=$query",
-          queryParameters: {if (jobId != null) 'job': jobId},
+          queryParameters: {'job': ?jobId},
           options: Options(
             headers: {
               if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)

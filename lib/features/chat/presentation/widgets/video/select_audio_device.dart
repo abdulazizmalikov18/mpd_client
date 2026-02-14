@@ -4,11 +4,11 @@ import 'package:videosdk/videosdk.dart';
 
 class SelectAudioDevice extends StatefulWidget {
   final bool? isMicrophonePermissionAllowed;
-  AudioDeviceInfo? selectedAudioOutputDevice;
-  List<AudioDeviceInfo>? audioDevices;
+  final AudioDeviceInfo? selectedAudioOutputDevice;
+  final List<AudioDeviceInfo>? audioDevices;
   final Function(AudioDeviceInfo?) onAudioDeviceSelected;
 
-  SelectAudioDevice({
+  const SelectAudioDevice({
     super.key,
     required this.isMicrophonePermissionAllowed,
     this.selectedAudioOutputDevice,
@@ -64,9 +64,6 @@ class _SelectAudioOutputState extends State<SelectAudioDevice> {
                           style: TextStyle(color: Colors.white),
                         ),
                         onTap: () {
-                          setState(() {
-                            widget.selectedAudioOutputDevice = device;
-                          });
                           widget.onAudioDeviceSelected(device);
                           Navigator.pop(context);
                         },

@@ -9,8 +9,7 @@ class ManageGrid {
     bool isPresenting = false,
   }) {
     if (isPresenting) {
-      if(participantsCount == 1)
-      {
+      if (participantsCount == 1) {
         return {'r': 1, 'c': 1, 'r0': 1};
       }
 
@@ -72,8 +71,10 @@ class ManageGrid {
     return myGrid;
   }
 
-  static Map<int, List<Participant>> getGridForMainParticipants(
-      {Map<String, Participant>? participants, Map<String, int>? gridInfo}) {
+  static Map<int, List<Participant>> getGridForMainParticipants({
+    Map<String, Participant>? participants,
+    Map<String, int>? gridInfo,
+  }) {
     List<Participant> currentParticipants = [];
     if (participants != null) {
       for (var element in participants.entries) {
@@ -93,12 +94,17 @@ class ManageGrid {
         });
       } else {
         columns[index] = currentParticipants.sublist(
-            participantList.length, participantList.length + columnForCurrentRow!);
+          participantList.length,
+          participantList.length + columnForCurrentRow!,
+        );
         currentParticipants
-            .sublist(participantList.length, participantList.length + columnForCurrentRow)
+            .sublist(
+              participantList.length,
+              participantList.length + columnForCurrentRow,
+            )
             .forEach((element) {
-          participantList.add(element);
-        });
+              participantList.add(element);
+            });
       }
     }
     return columns;

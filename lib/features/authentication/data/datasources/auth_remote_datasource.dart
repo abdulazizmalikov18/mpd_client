@@ -311,7 +311,7 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
       request: () {
         return _client.post(
           "/UMS/api/v1.0/account/check-password/",
-          
+
           data: data,
         );
       },
