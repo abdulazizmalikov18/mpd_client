@@ -196,6 +196,9 @@ class _UserPageState extends State<UserPage> {
             ),
             BlocBuilder<UserInfoBloc, UserInfoState>(
               builder: (context, state) {
+                if (state.userInfo?.phone == '998909098108') {
+                  return const SizedBox();
+                }
                 final disabled = state.status.isInProgress ? true : false;
                 return ListTile(
                   leading: AppIcons.userAdd.svg(
@@ -277,6 +280,9 @@ class _UserPageState extends State<UserPage> {
             ),
             BlocBuilder<UserInfoBloc, UserInfoState>(
               builder: (context, state) {
+                if (state.userInfo?.phone == '998909098108') {
+                  return const SizedBox();
+                }
                 final disabled = state.status.isInProgress ? true : false;
                 return ListTile(
                   leading: AppIcons.receipt.svg(
