@@ -44,8 +44,6 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final withmy = MediaQuery.of(context).size.width;
-    debugPrint("=====>>> $withmy");
     return ScreenUtilInit(
       designSize: Responsive.isMediumScreen(context)
           ? const Size(820, 1180)
@@ -57,10 +55,7 @@ class _MyAppState extends State<MyApp> {
           create: (context) => locator<AuthRepository>(),
           child: MultiBlocProvider(
             providers: [
-              BlocProvider(
-                create: (context) =>
-                    locator<RefreshtokenBloc>()..add(GetRefreshToken()),
-              ),
+              BlocProvider(create: (context) => locator<RefreshtokenBloc>()),
               BlocProvider(
                 create: (context) => RegisterBloc(
                   locator<AuthRepository>(),
@@ -93,71 +88,76 @@ class _MyAppState extends State<MyApp> {
                     SubscriptionBloc(locator<DoctorProfileRepository>()),
               ),
             ],
-            child: PostInheritedNotifier(
-              postNotifier: PostNotifier(),
-              child: ChangeNotifierProvider(
-                create: (context) => LocalProvider(LanguageDatabase()),
-                child: Builder(
-                  builder: (context) {
-                    final provider = Provider.of<LocalProvider>(context);
-                    return MaterialApp(
-                      navigatorKey: $navigatorKey,
-                      builder: (context, child) =>
-                          ResponsiveBreakpoints.builder(
-                            breakpoints: [
-                              const Breakpoint(
-                                start: 0,
-                                end: 450,
-                                name: MOBILE,
-                              ),
-                              const Breakpoint(
-                                start: 451,
-                                end: 800,
-                                name: TABLET,
-                              ),
-                              const Breakpoint(
-                                start: 801,
-                                end: 1920,
-                                name: DESKTOP,
-                              ),
-                              const Breakpoint(
-                                start: 1921,
-                                end: double.infinity,
-                                name: '4K',
-                              ),
-                            ],
-                            child: ScrollConfiguration(
-                              behavior: RefreshScrollBehavior(),
-                              child: KeyboardDismisser(
-                                child: MediaQuery(
-                                  data: MediaQuery.of(context).copyWith(
-                                    textScaler: const TextScaler.linear(1.0),
+            child: _DeferRefreshToken(
+              child: PostInheritedNotifier(
+                postNotifier: PostNotifier(),
+                child: ChangeNotifierProvider(
+                  create: (context) => LocalProvider(LanguageDatabase()),
+                  child: Builder(
+                    builder: (context) {
+                      final provider = Provider.of<LocalProvider>(context);
+                      return MaterialApp(
+                        navigatorKey: $navigatorKey,
+                        builder: (context, child) =>
+                            ResponsiveBreakpoints.builder(
+                              breakpoints: [
+                                const Breakpoint(
+                                  start: 0,
+                                  end: 450,
+                                  name: MOBILE,
+                                ),
+                                const Breakpoint(
+                                  start: 451,
+                                  end: 800,
+                                  name: TABLET,
+                                ),
+                                const Breakpoint(
+                                  start: 801,
+                                  end: 1920,
+                                  name: DESKTOP,
+                                ),
+                                const Breakpoint(
+                                  start: 1921,
+                                  end: double.infinity,
+                                  name: '4K',
+                                ),
+                              ],
+                              child: ScrollConfiguration(
+                                behavior: RefreshScrollBehavior(),
+                                child: KeyboardDismisser(
+                                  child: MediaQuery(
+                                    data: MediaQuery.of(context).copyWith(
+                                      textScaler: const TextScaler.linear(1.0),
+                                    ),
+                                    child: child!,
                                   ),
-                                  child: child!,
                                 ),
                               ),
                             ),
-                          ),
-                      theme: AppTheme.light,
-                      darkTheme: AppTheme.dark,
-                      themeMode: ThemeMode.light,
-                      supportedLocales: AppLocalizations.supportedLocales,
-                      localizationsDelegates: const [
-                        AppLocalizations.delegate,
-                        GlobalMaterialLocalizations.delegate,
-                        GlobalCupertinoLocalizations.delegate,
-                        GlobalWidgetsLocalizations.delegate,
-                      ],
-                      locale: provider.locale,
-                      localeResolutionCallback:
-                          (Locale? locale, Iterable<Locale> supportedLocales) {
-                            return locale;
-                          },
-                      debugShowCheckedModeBanner: false,
-                      initialRoute: AppRoutes.splash,
-                      onGenerateRoute: _appPages.generateRoute,
-                    );
-                  },
+                        theme: AppTheme.light,
+                        darkTheme: AppTheme.dark,
+                        themeMode: ThemeMode.light,
+                        supportedLocales: AppLocalizations.supportedLocales,
+                        localizationsDelegates: const [
+                          AppLocalizations.delegate,
+                          GlobalMaterialLocalizations.delegate,
+                          GlobalCupertinoLocalizations.delegate,
+                          GlobalWidgetsLocalizations.delegate,
+                        ],
+                        locale: provider.locale,
+                        localeResolutionCallback:
+                            (
+                              Locale? locale,
+                              Iterable<Locale> supportedLocales,
+                            ) {
+                              return locale;
+                            },
+                        debugShowCheckedModeBanner: false,
+                        initialRoute: AppRoutes.splash,
+                        onGenerateRoute: _appPages.generateRoute,
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
@@ -172,4 +172,29 @@ class _MyAppState extends State<MyApp> {
     _appPages.dispose();
     super.dispose();
   }
+}
+
+/// Sends [GetRefreshToken] after the first frame to avoid blocking startup.
+class _DeferRefreshToken extends StatefulWidget {
+  const _DeferRefreshToken({required this.child});
+
+  final Widget child;
+
+  @override
+  State<_DeferRefreshToken> createState() => _DeferRefreshTokenState();
+}
+
+class _DeferRefreshTokenState extends State<_DeferRefreshToken> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && context.mounted) {
+        context.read<RefreshtokenBloc>().add(GetRefreshToken());
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
 }

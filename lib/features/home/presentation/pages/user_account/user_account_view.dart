@@ -438,7 +438,7 @@ class _UserAccountViewState extends State<UserAccountView> {
                             children: [
                               Stack(
                                 children: [
-                                  SizedBox(height: 260.h),
+                                  SizedBox(height: 255.h),
                                   CachedNetworkImage(
                                     imageUrl: state.userAccount.backgroundImage,
                                     fit: BoxFit.cover,

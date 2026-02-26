@@ -53,36 +53,41 @@ class DoctorProfileModel {
 
   factory DoctorProfileModel.fromMap(Map<String, dynamic> json) =>
       DoctorProfileModel(
-        id: json["id"],
-        isSubscribed: json["username"],
-        name: json["name"],
-        lastname: json["lastname"],
-        avatar: json["avatar"],
-        phone: json["phone"],
-        currentWorkplace: List<dynamic>.from(
-          json["current_workplace"].map((x) => x),
-        ),
-        user: json["user"],
+        id: json["id"] ?? 0,
+        username: json["username"] ?? "",
+        isSubscribed: json["is_subscribed"] ?? false,
+        name: json["name"] ?? "",
+        lastname: json["lastname"] ?? "",
+        avatar: json["avatar"] ?? "",
+        phone: json["phone"] ?? "",
+        currentWorkplace: json["current_workplace"] != null
+            ? List<dynamic>.from(json["current_workplace"].map((x) => x))
+            : [],
+        user: json["user"] ?? "",
         job: json["job"] == null ? const Job() : Job.fromMap(json["job"]),
         specCat: json["spec_cat"] != null
             ? SpecCat.fromMap(json["spec_cat"])
             : const SpecCat(),
-        specialistOrders: List<SpecialistOrder>.from(
-          json["specialist_orders"].map((x) => SpecialistOrder.fromMap(x)),
-        ),
-        isWorking: json["is_working"],
-        isCatHead: json["is_cat_head"],
+        specialistOrders: json["specialist_orders"] != null
+            ? List<SpecialistOrder>.from(
+                json["specialist_orders"].map(
+                  (x) => SpecialistOrder.fromMap(x),
+                ),
+              )
+            : [],
+        isWorking: json["is_working"] ?? false,
+        isCatHead: json["is_cat_head"] ?? false,
         operatingMode: json["operating_mode"] ?? "",
         position: json["position"],
-        autoMode: json["auto_mode"],
-        accepted: json["accepted"],
+        autoMode: json["auto_mode"] ?? false,
+        accepted: json["accepted"] ?? false,
         todayTimetable: json["today_timetable"] != null
             ? TodayTimetable.fromMap(json["today_timetable"])
             : const TodayTimetable(),
         experience: json["experience"],
         bio: json["bio"],
         location: json["location"],
-        orderCount: json["order_count"],
+        orderCount: json["order_count"] ?? 0,
         lastLocation: json["last_location"],
       );
 
@@ -210,14 +215,14 @@ class TodayTimetable {
   });
 
   factory TodayTimetable.fromMap(Map<String, dynamic> json) => TodayTimetable(
-    id: json["id"],
-    dayOfWeek: json["day_of_week"],
-    startTime: json["start_time"],
-    endTime: json["end_time"],
-    isWorking: json["is_working"],
-    repeatDayOff: json["repeat_day_off"],
-    procInterval: json["proc_interval"],
-    spec: json["spec"],
+    id: json["id"] ?? 0,
+    dayOfWeek: json["day_of_week"] ?? "",
+    startTime: json["start_time"] ?? "",
+    endTime: json["end_time"] ?? "",
+    isWorking: json["is_working"] ?? false,
+    repeatDayOff: json["repeat_day_off"] ?? 0,
+    procInterval: (json["proc_interval"] ?? 0).toDouble(),
+    spec: json["spec"] ?? 0,
   );
 
   Map<String, dynamic> toMap() => {

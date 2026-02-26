@@ -3,7 +3,7 @@ description: "A new Flutter project."
 
 publish_to: "none"
 
-version: 1.0.0+21
+version: 1.0.0+23
 
 environment:
   sdk: ^3.11.0
@@ -18,7 +18,7 @@ dependencies:
   bloc_concurrency: ^0.3.0
   dio: ^5.9.1
   shared_preferences: ^2.5.4
-  get_it: ^9.2.0
+  get_it: ^9.2.1
   pretty_dio_logger: ^1.4.0
   formz: ^0.8.0
   flutter_svg: ^2.2.3
@@ -26,7 +26,7 @@ dependencies:
   mask_text_input_formatter: ^2.9.0
   share_plus: ^12.0.1
   web_socket_channel: ^3.0.3
-  json_annotation: ^4.10.0
+  json_annotation: ^4.11.0
   connectivity_plus: ^7.0.0
   # internet_connection_checker: ^3.0.1
   keyboard_dismisser: ^3.0.0
@@ -54,7 +54,7 @@ dependencies:
   flutter_image_compress: ^2.4.0
   rounded_loading_button_plus: ^3.0.1
   table_calendar: ^3.2.0
-  syncfusion_flutter_pdfviewer: ^32.2.4
+  syncfusion_flutter_pdfviewer: ^32.2.7
   flick_video_player: ^0.9.0
   readmore: ^3.0.0
   dotted_border: ^3.1.0
@@ -80,7 +80,7 @@ dependencies:
   http: ^1.6.0
   image_picker: ^1.2.1
   responsive_framework: ^1.5.1
-  videosdk: ^3.6.1
+  videosdk: ^3.7.0
   flutter_dotenv: ^6.0.0
   date_time_format: ^2.0.1
   touch_ripple_effect: ^3.0.0
@@ -91,7 +91,7 @@ dev_dependencies:
 
   flutter_lints: ^6.0.0
   build_runner: ^2.11.1
-  json_serializable: ^6.12.0
+  json_serializable: ^6.13.0
 
 flutter:
   uses-material-design: true

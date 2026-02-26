@@ -19,7 +19,7 @@ class DrProfileInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 114.h,
+      height: 116.h,
       child: Column(
         children: [
           Container(

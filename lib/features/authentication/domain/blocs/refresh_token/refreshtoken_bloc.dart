@@ -15,8 +15,15 @@ class RefreshtokenBloc extends Bloc<RefreshtokenEvent, RefreshtokenState> {
           'New token -----------------------> 😏😏😏😏😏😏😏😏  ${result.right.access}',
         );
       } else {
-        $navigatorKey.currentState!.popUntil((route) => false);
-        $navigatorKey.currentState!.pushReplacementNamed(AppRoutes.auth);
+        if ($navigatorKey.currentState?.canPop() == true) {
+          $navigatorKey.currentState!.popUntil((route) => false);
+        }
+        if ($navigatorKey.currentContext != null) {
+          $navigatorKey.currentState!.pushNamedAndRemoveUntil(
+            AppRoutes.auth,
+            (route) => false,
+          );
+        }
       }
     });
   }

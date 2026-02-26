@@ -37,13 +37,14 @@ void main() {
       //   Workmanager().registerOneOffTask("task-identifier", "nimadir");
       // }
 
-      await SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-      ]);
-
-      // debugRepaintRainbowEnabled = false;
       runApp(const MyApp());
+      // Defer orientation lock so first frame paints faster
+      unawaited(
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.portraitUp,
+          DeviceOrientation.portraitDown,
+        ]),
+      );
     },
     (error, stack) {
       Log.e(error);

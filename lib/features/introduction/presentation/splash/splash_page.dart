@@ -20,19 +20,25 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   @override
   void initState() {
+    super.initState();
     Timer(const Duration(milliseconds: 1600), () async {
+      if (!mounted) return;
+
       if (StorageRepository.getString(StorageKeys.REFRESH).isNotEmpty &&
           StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty) {
-        Navigator.of(
-          context,
-        ).pushNamedAndRemoveUntil(AppRoutes.mainPage, (route) => false);
+        if (mounted) {
+          Navigator.of(
+            context,
+          ).pushNamedAndRemoveUntil(AppRoutes.mainPage, (route) => false);
+        }
       } else {
-        Navigator.of(
-          context,
-        ).pushNamedAndRemoveUntil(AppRoutes.splashLanguage, (route) => false);
+        if (mounted) {
+          Navigator.of(
+            context,
+          ).pushNamedAndRemoveUntil(AppRoutes.splashLanguage, (route) => false);
+        }
       }
     });
-    super.initState();
   }
 
   @override
