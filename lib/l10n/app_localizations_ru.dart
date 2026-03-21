@@ -1192,4 +1192,13 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get chat_report => 'Пожаловаться';
+
+  @override
+  String get post_share => 'Поделиться';
+
+  @override
+  String get post_about_account => 'Об этом аккаунте';
+
+  @override
+  String get post_report => 'Пожаловаться';
 }

@@ -396,5 +396,8 @@
   "chat_copy": "Копировать",
   "chat_download": "Скачать",
   "chat_edit": "Редактировать",
-  "chat_report": "Пожаловаться"
+  "chat_report": "Пожаловаться",
+  "post_share": "Поделиться",
+  "post_about_account": "Об этом аккаунте",
+  "post_report": "Пожаловаться"
 }

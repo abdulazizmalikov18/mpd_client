@@ -1193,4 +1193,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chat_report => 'Report';
+
+  @override
+  String get post_share => 'Share';
+
+  @override
+  String get post_about_account => 'About this account';
+
+  @override
+  String get post_report => 'Report';
 }

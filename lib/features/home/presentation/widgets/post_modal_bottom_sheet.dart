@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:share_plus/share_plus.dart';
+
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/app/colors.dart';
@@ -10,7 +12,6 @@ import 'package:mpd_client/features/chat/presentation/widgets/report_message_dia
 import 'package:mpd_client/features/home/data/models/posts_model.dart';
 import 'package:mpd_client/features/home/domain/blocs/bloc/user_profile_bloc.dart';
 import 'package:mpd_client/features/home/presentation/pages/user_account/user_account_view.dart';
-import 'package:share_plus/share_plus.dart';
 
 class PostModalBottomSheet extends StatelessWidget {
   final Post post;
@@ -39,7 +40,7 @@ class PostModalBottomSheet extends StatelessWidget {
               children: [
                 CupertinoListTile(
                   backgroundColor: white,
-                  title: const Text("Share"),
+                  title: Text(context.l10n.post_share),
                   leading: AppIcons.share2.svg(),
                   onTap: () async {
                     await SharePlus.instance.share(
@@ -53,7 +54,7 @@ class PostModalBottomSheet extends StatelessWidget {
                 ),
                 CupertinoListTile(
                   backgroundColor: white,
-                  title: const Text("About this account"),
+                  title: Text(context.l10n.post_about_account),
                   leading: AppIcons.circleUserRound.svg(),
                   onTap: () {
                     final sendComentBloc = context.read<SendComentBloc>();
@@ -95,7 +96,10 @@ class PostModalBottomSheet extends StatelessWidget {
                 ),
                 CupertinoListTile(
                   backgroundColor: white,
-                  title: const Text("Report", style: TextStyle(color: red)),
+                  title: Text(
+                    context.l10n.post_report,
+                    style: TextStyle(color: red),
+                  ),
                   leading: AppIcons.messageCircleWarning.svg(color: red),
                   onTap: () async {
                     await ReportMessageDialog.show(

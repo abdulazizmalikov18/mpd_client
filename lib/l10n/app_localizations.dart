@@ -2385,6 +2385,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Report'**
   String get chat_report;
+
+  /// No description provided for @post_share.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get post_share;
+
+  /// No description provided for @post_about_account.
+  ///
+  /// In en, this message translates to:
+  /// **'About this account'**
+  String get post_about_account;
+
+  /// No description provided for @post_report.
+  ///
+  /// In en, this message translates to:
+  /// **'Report'**
+  String get post_report;
 }
 
 class _AppLocalizationsDelegate

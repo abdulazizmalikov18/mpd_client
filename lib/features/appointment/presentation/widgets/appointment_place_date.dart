@@ -26,6 +26,13 @@ class AppointmentPlaceDate extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.r),
         color: context.color.white,
+        boxShadow: [
+          BoxShadow(
+            color: context.color.cardShadow,
+            blurRadius: 20,
+            offset: const Offset(0, 0),
+          ),
+        ],
       ),
       child: Stack(
         children: [

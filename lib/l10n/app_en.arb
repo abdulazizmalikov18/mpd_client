@@ -411,5 +411,8 @@
   "chat_copy": "Copy",
   "chat_download": "Download",
   "chat_edit": "Edit",
-  "chat_report": "Report"
+  "chat_report": "Report",
+  "post_share": "Share",
+  "post_about_account": "About this account",
+  "post_report": "Report"
 }

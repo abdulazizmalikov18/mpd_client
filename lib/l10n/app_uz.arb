@@ -396,5 +396,8 @@
   "chat_copy": "Nusxalash",
   "chat_download": "Yuklab olish",
   "chat_edit": "Tahrirlash",
-  "chat_report": "Shikoyat qilish"
+  "chat_report": "Shikoyat qilish",
+  "post_share": "Ulashish",
+  "post_about_account": "Bu akkaunt haqida",
+  "post_report": "Shikoyat qilish"
 }

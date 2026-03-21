@@ -1211,4 +1211,13 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get chat_report => 'Shikoyat qilish';
+
+  @override
+  String get post_share => 'Ulashish';
+
+  @override
+  String get post_about_account => 'Bu akkaunt haqida';
+
+  @override
+  String get post_report => 'Shikoyat qilish';
 }
