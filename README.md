@@ -38,7 +38,7 @@ build runner:
 dart run build_runner build --delete-conflicting-outputs
 
 rename app:
-rename setAppName --targets ios,android --value "MPD CLIENT"
+rename setAppName --targets android --value "TMED CLIENT"
 rename setBundleId --targets android --value "uz.mpd.client"
 
 generation eyse:

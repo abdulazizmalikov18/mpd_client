@@ -30,7 +30,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "uz.mpd.client"
+        applicationId = "uz.tmed.client"
         minSdk = 26
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

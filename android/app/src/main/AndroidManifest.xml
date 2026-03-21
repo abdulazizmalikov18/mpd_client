@@ -54,7 +54,7 @@
     </queries>
 
     <application
-        android:label="MPD CLIENT"
+        android:label="TMED CLIENT"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:hardwareAccelerated="true"

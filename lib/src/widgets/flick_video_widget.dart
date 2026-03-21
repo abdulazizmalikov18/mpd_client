@@ -37,7 +37,7 @@ class FlickVideoWidget extends StatelessWidget {
                       )
                     : Padding(
                         padding: const EdgeInsets.all(32),
-                        child: Image.asset(AppImages.logo, color: white),
+                        child: Image.asset(AppImages.tmed, color: white),
                       ),
               ),
               Positioned(
@@ -71,7 +71,7 @@ class FlickVideoWidget extends StatelessWidget {
                       'https://resources.comphealth.com/wp-content/uploads/2019/05/post-residency-career-tips.jpg',
                   fit: BoxFit.fitWidth,
                 )
-              : Image.asset(AppImages.logo),
+              : Image.asset(AppImages.tmed),
         ),
         controls: const FlickLandscapeControls(),
         iconThemeData: const IconThemeData(size: 40, color: Colors.white),

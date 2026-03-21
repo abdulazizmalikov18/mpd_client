@@ -52,7 +52,7 @@ class AuthPage extends StatelessWidget {
                             left: 70.w,
                             right: 70.w,
                             child: Image.asset(
-                              AppImages.logo,
+                              AppImages.tmed,
                               height: 55.h,
                               width: 250.w,
                               color: context.color.white,

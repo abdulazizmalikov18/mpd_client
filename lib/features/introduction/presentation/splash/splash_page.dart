@@ -57,7 +57,12 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
           children: [
             Positioned(
               bottom: 470.h,
-              child: Image.asset(AppImages.logo, width: 250.w, height: 55.h),
+              child: Image.asset(
+                AppImages.tmed,
+                width: 250.w,
+                height: 55.h,
+                color: context.color.mainBlue,
+              ),
             ),
             Positioned(
               bottom: 24.h,

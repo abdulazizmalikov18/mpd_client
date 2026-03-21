@@ -197,7 +197,7 @@ class _PostImageOrVideoState extends State<PostImageOrVideo>
     if (hasError) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Image.asset(AppImages.logo),
+        child: Image.asset(AppImages.tmed),
       );
     }
 

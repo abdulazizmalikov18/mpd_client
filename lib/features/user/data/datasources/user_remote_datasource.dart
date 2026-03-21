@@ -213,7 +213,7 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
     return _handle.apiControl(
       request: () {
         return _client.get(
-          "/BMS/api/v1.0/public/org/mpd/specialist_cat/",
+          "/BMS/api/v1.0/public/org/samarqand_temir_yol_shifoxonasi/specialist_cat/",
           options: Options(
             headers: {
               if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
@@ -237,7 +237,7 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
     return _handle.apiControl(
       request: () {
         return _client.get(
-          "/BMS/api/v1.0/public/org/mpd/specialist_position/",
+          "/BMS/api/v1.0/public/org/samarqand_temir_yol_shifoxonasi/specialist_position/",
           options: Options(
             headers: {
               if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
@@ -261,7 +261,7 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
     return _handle.apiControl(
       request: () {
         return _client.get(
-          "/BMS/api/v1.0/public/org/mpd/specialist/category/",
+          "/BMS/api/v1.0/public/org/samarqand_temir_yol_shifoxonasi/specialist/category/",
           options: Options(
             headers: {
               if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
@@ -285,7 +285,7 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
     return _handle.apiControl(
       request: () {
         return _client.post(
-          "/BMS/api/v1.0/public/org/mpd/specialist-add/",
+          "/BMS/api/v1.0/public/org/samarqand_temir_yol_shifoxonasi/specialist-add/",
           data: model.toJsonDocument,
           options: Options(
             headers: {

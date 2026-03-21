@@ -20,7 +20,7 @@ class LanguagePage extends StatelessWidget {
             ScreenUtil().setVerticalSpacing(100.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 70.w),
-              child: Image.asset(AppImages.logo),
+              child: Image.asset(AppImages.tmed),
             ),
             ScreenUtil().setVerticalSpacing(56.h),
             Padding(

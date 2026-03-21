@@ -42,6 +42,7 @@ abstract class AppImages {
   // Entry doctor image
   static const String doctorEntry = 'assets/images/doctor_entry.png';
   static const String chatNotFound = 'assets/images/chat_not_found.png';
+  static const String tmed = 'assets/images/tmed.png';
 
   static const networkAvatar =
       "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png";

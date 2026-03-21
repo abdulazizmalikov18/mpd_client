@@ -52,7 +52,7 @@ class DoctorProfileRemoteDataSource implements IDoctorProfileRemoteDataSource {
     return _handle.apiControl(
       request: () {
         return _client.get(
-          "/BMS/api/v1.0/public/cluster/mpd/specialist/$username/?all=true",
+          "/BMS/api/v1.0/public/cluster/t-med/specialist/$username/?all=true",
           options: Options(
             headers: {
               if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
@@ -76,7 +76,7 @@ class DoctorProfileRemoteDataSource implements IDoctorProfileRemoteDataSource {
     return _handle.apiControl(
       request: () {
         return _client.get(
-          "/BMS/api/v1.0/public/org/mpd/specialist/$id/timetable/$date/",
+          "/BMS/api/v1.0/public/org/samarqand_temir_yol_shifoxonasi/specialist/$id/timetable/$date/",
           options: Options(
             headers: {
               if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)

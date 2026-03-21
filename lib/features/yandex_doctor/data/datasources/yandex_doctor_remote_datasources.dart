@@ -69,7 +69,7 @@ class YandexDoctorRemoteDataSource implements IYandexDoctorRemoteDataSource {
     return _handle.apiControl(
       request: () {
         return _client.get(
-          "/BMS/api/v1.0/public/org/mpd/specialist/category/",
+          "/BMS/api/v1.0/public/org/samarqand_temir_yol_shifoxonasi/specialist/category/",
           queryParameters: {'search': ?query},
           options: Options(
             headers: {
@@ -95,7 +95,7 @@ class YandexDoctorRemoteDataSource implements IYandexDoctorRemoteDataSource {
     CancelToken? cancelToken,
   }) async {
     final baseUrl = StringBuffer(
-      'http://213.230.125.177/BMS/api/v1.0/public/cluster/mpd/specialist/?limit=$limit&offset=$offset&bff_price=true',
+      'http://213.230.125.177/BMS/api/v1.0/public/cluster/t-med/specialist/?limit=$limit&offset=$offset&bff_price=true',
     );
     if (query != null) baseUrl.write('&search=$query');
     return _handle.apiControl(
@@ -126,7 +126,7 @@ class YandexDoctorRemoteDataSource implements IYandexDoctorRemoteDataSource {
     return _handle.apiControl(
       request: () {
         return _client.get(
-          "/BMS/api/v1.0/public/cluster/mpd/specialist/?search=$query",
+          "/BMS/api/v1.0/public/cluster/t-med/specialist/?search=$query",
           queryParameters: {'job': ?jobId},
           options: Options(
             headers: {
@@ -148,7 +148,7 @@ class YandexDoctorRemoteDataSource implements IYandexDoctorRemoteDataSource {
     return _handle.apiControl(
       request: () {
         return _client.get(
-          '/BMS/api/v1.0/public/cluster/mpd/specialist/location/?job=$id&bff_price=true',
+          '/BMS/api/v1.0/public/cluster/t-med/specialist/location/?job=$id&bff_price=true',
           options: Options(
             headers: {
               if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
