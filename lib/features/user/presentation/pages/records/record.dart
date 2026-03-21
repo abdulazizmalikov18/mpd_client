@@ -18,14 +18,15 @@ class Record extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(record.title ?? "--")),
+      appBar: AppBar(title: Text(record.title ?? record.product ?? "--")),
       backgroundColor: context.color.background,
       body: SingleChildScrollView(
         child: Column(
           children: [
             ScreenUtil().setVerticalSpacing(16.h),
             RecordReview(
-              title: 'Medical records full name ${record.id}',
+              title:
+                  '${context.l10n.record_medical_records_full_name} ${record.id}',
               subtitle: Utils.commentDateFormat(
                 record.date ?? DateTime.now(),
                 context,
@@ -34,7 +35,7 @@ class Record extends StatelessWidget {
             ScreenUtil().setVerticalSpacing(12.h),
             if (record.conclusion != null)
               RecordReview(
-                title: 'Medical records',
+                title: context.l10n.record_medical_records,
                 subtitle: (record.conclusion ?? "Nomalum"),
                 // isHtml: true,
               ),

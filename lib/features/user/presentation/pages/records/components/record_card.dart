@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/core/utils/utils.dart';
 import 'package:mpd_client/features/user/data/models/user_records_model.dart';
+import 'package:mpd_client/provider/language.dart';
 
 import '../../../../../../app/app_colors.dart';
 import '../../../../../../src/themes/styles.dart';
@@ -73,8 +74,8 @@ class RecordsCard extends StatelessWidget {
                     ScreenUtil().setVerticalSpacing(6.h),
                     Text(
                       record.writer != null
-                          ? 'Written by ${record.writer!.name!}${record.writer!.lastname!}'
-                          : 'Written by Dr. Watamaniuk',
+                          ? '${context.l10n.common_written_by} ${record.writer!.name!}${record.writer!.lastname!}'
+                          : '${context.l10n.common_written_by} Dr. Watamaniuk',
                       maxLines: 1,
                       style: Styles.descSubtitle.copyWith(
                         color: context.color.mainBlue,
@@ -83,7 +84,7 @@ class RecordsCard extends StatelessWidget {
                     ),
                     ScreenUtil().setVerticalSpacing(6.h),
                     Text(
-                      '${record.conclusionFile ?? ''} Prescription',
+                      '${record.conclusionFile ?? ''} ${context.l10n.common_prescription}',
                       style: Styles.cardReview.copyWith(
                         color: context.color.grey,
                         fontSize: 12.sp,

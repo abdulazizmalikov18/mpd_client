@@ -396,5 +396,20 @@
   "termsDisclaimersContent": "The application is provided \"as is\" without any warranties. MPD does not guarantee that the service will be uninterrupted or error-free.",
   "termsLimitationLiabilityTitle": "6. Limitation of Liability",
   "termsLimitationLiabilityContent": "In no event shall MPD be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of the application.",
-  "termsContactUs": "If you have any questions about these Terms, please contact us at support@mpdinfo.uz"
+  "termsContactUs": "If you have any questions about these Terms, please contact us at support@mpdinfo.uz",
+
+  "profile_following_doctors_empty_title": "You are not following anyone yet",
+  "profile_following_doctors_empty_description": "Follow doctors and avail their services easily",
+  "common_loading": "Loading...",
+  "common_book_now": "Book Now",
+  "common_written_by": "Written by",
+  "common_prescription": "Prescription",
+  "record_medical_records_full_name": "Medical records full name",
+  "record_medical_records": "Medical records",
+  "service_doctor_no_services": "The doctor does not have any type of service",
+  "chat_unknown_period": "Unknown period",
+  "chat_copy": "Copy",
+  "chat_download": "Download",
+  "chat_edit": "Edit",
+  "chat_report": "Report"
 }

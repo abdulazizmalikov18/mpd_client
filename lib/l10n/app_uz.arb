@@ -381,5 +381,20 @@
   "termsDisclaimersContent": "Ilova \"qanday bo'lsa shunday\" holatida taqdim etiladi va hech qanday kafolat bilan birga kelmaydi. MPD xizmat uzluksiz yoki xatosiz bo'lishini kafolatlamaydi.",
   "termsLimitationLiabilityTitle": "6. Javobgarlik cheklovi",
   "termsLimitationLiabilityContent": "Hech qanday holatda ham MPD ilovasidan foydalanish natijasida yuzaga kelgan bilvosita, tasodifiy, maxsus, natijaviy yoki jazolovchi zararlar uchun javobgar bo'lmaydi.",
-  "termsContactUs": "Agar ushbu Shartlar haqida savollaringiz bo'lsa, iltimos, biz bilan support@mpdinfo.uz orqali bog'laning."
+  "termsContactUs": "Agar ushbu Shartlar haqida savollaringiz bo'lsa, iltimos, biz bilan support@mpdinfo.uz orqali bog'laning.",
+
+  "profile_following_doctors_empty_title": "Siz hali hech kimni kuzatmaysiz",
+  "profile_following_doctors_empty_description": "Shifokorlarni kuzating va ularning xizmatlaridan oson foydalaning",
+  "common_loading": "Yuklanmoqda...",
+  "common_book_now": "Hozir bron qilish",
+  "common_written_by": "Yozgan",
+  "common_prescription": "Retsept",
+  "record_medical_records_full_name": "Tibbiy yozuvlar to'liq nomi",
+  "record_medical_records": "Tibbiy yozuvlar",
+  "service_doctor_no_services": "Shifokorda hech qanday xizmat turi yo'q",
+  "chat_unknown_period": "Noma'lum davr",
+  "chat_copy": "Nusxalash",
+  "chat_download": "Yuklab olish",
+  "chat_edit": "Tahrirlash",
+  "chat_report": "Shikoyat qilish"
 }

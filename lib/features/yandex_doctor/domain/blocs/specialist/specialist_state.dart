@@ -4,6 +4,7 @@ class SpecialistState extends Equatable {
   final FormzSubmissionStatus status;
   final FormzSubmissionStatus statusCategory;
   final List<MapSpecialist> specialist;
+  final int specialistCount;
   final List<PopularCategories> categories;
   final int categoryId;
   final String selectedName;
@@ -12,6 +13,7 @@ class SpecialistState extends Equatable {
     this.status = FormzSubmissionStatus.initial,
     this.statusCategory = FormzSubmissionStatus.initial,
     this.specialist = const [],
+    this.specialistCount = 0,
     this.categories = const [],
     this.categoryId = -1,
     this.selectedName = "",
@@ -24,6 +26,7 @@ class SpecialistState extends Equatable {
     FormzSubmissionStatus? statusCategory,
     int? categoryId,
     String? selectedName,
+    int? specialistCount,
   }) => SpecialistState(
     specialist: specialist ?? this.specialist,
     status: status ?? this.status,
@@ -31,6 +34,7 @@ class SpecialistState extends Equatable {
     statusCategory: statusCategory ?? this.statusCategory,
     categoryId: categoryId ?? this.categoryId,
     selectedName: selectedName ?? this.selectedName,
+    specialistCount: specialistCount ?? this.specialistCount,
   );
 
   @override
@@ -41,5 +45,6 @@ class SpecialistState extends Equatable {
     statusCategory,
     categoryId,
     selectedName,
+    specialistCount,
   ];
 }

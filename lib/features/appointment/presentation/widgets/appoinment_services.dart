@@ -71,27 +71,26 @@ class AppointmentService extends StatelessWidget {
                           ),
                   ),
                   ScreenUtil().setHorizontalSpacing(16.w),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 250.w,
-                        child: Text(
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
                           localProducts[i].name,
                           style: Styles.descSubtitle.copyWith(height: null),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                         ),
-                      ),
-                      ScreenUtil().setVerticalSpacing(2.h),
-                      Text(
-                        '${Utils.priceFormat(localProducts[i].price)} UZS',
-                        style: Styles.headline7Sp14.copyWith(
-                          fontFamily: Styles.gilroyMedium,
-                          color: context.color.mainBlue,
+                        ScreenUtil().setVerticalSpacing(2.h),
+                        Text(
+                          '${Utils.priceFormat(localProducts[i].price)} UZS',
+                          style: Styles.headline7Sp14.copyWith(
+                            fontFamily: Styles.gilroyMedium,
+                            color: context.color.mainBlue,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   const Spacer(),
                   Text(

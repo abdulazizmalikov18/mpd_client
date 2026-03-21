@@ -13,7 +13,9 @@ class SpecialistBloc extends Bloc<SpecialistEvent, SpecialistState> {
   SpecialistBloc(this._yandexDoctorRepository)
     : super(const SpecialistState()) {
     on<GetSpecialist>((event, emit) async {
-      emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+      if (!event.isLoadMore) {
+        emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+      }
       final result = await _yandexDoctorRepository.getSearchedSpecialist(
         query: event.search ?? "",
         jobId: event.jobId,
@@ -21,7 +23,10 @@ class SpecialistBloc extends Bloc<SpecialistEvent, SpecialistState> {
       if (result.isRight) {
         emit(
           state.copyWith(
-            specialist: result.right.results,
+            specialist: event.isLoadMore
+                ? [...state.specialist, ...result.right.results ?? []]
+                : result.right.results,
+            specialistCount: result.right.count,
             status: FormzSubmissionStatus.success,
           ),
         );
@@ -41,6 +46,7 @@ class SpecialistBloc extends Bloc<SpecialistEvent, SpecialistState> {
         emit(
           state.copyWith(
             specialist: result.right.results,
+            specialistCount: result.right.count,
             status: FormzSubmissionStatus.success,
           ),
         );

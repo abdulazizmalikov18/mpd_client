@@ -1166,4 +1166,49 @@ class AppLocalizationsUz extends AppLocalizations {
   @override
   String get termsContactUs =>
       'Agar ushbu Shartlar haqida savollaringiz bo\'lsa, iltimos, biz bilan support@mpdinfo.uz orqali bog\'laning.';
+
+  @override
+  String get profile_following_doctors_empty_title =>
+      'Siz hali hech kimni kuzatmaysiz';
+
+  @override
+  String get profile_following_doctors_empty_description =>
+      'Shifokorlarni kuzating va ularning xizmatlaridan oson foydalaning';
+
+  @override
+  String get common_loading => 'Yuklanmoqda...';
+
+  @override
+  String get common_book_now => 'Hozir bron qilish';
+
+  @override
+  String get common_written_by => 'Yozgan';
+
+  @override
+  String get common_prescription => 'Retsept';
+
+  @override
+  String get record_medical_records_full_name => 'Tibbiy yozuvlar to\'liq nomi';
+
+  @override
+  String get record_medical_records => 'Tibbiy yozuvlar';
+
+  @override
+  String get service_doctor_no_services =>
+      'Shifokorda hech qanday xizmat turi yo\'q';
+
+  @override
+  String get chat_unknown_period => 'Noma\'lum davr';
+
+  @override
+  String get chat_copy => 'Nusxalash';
+
+  @override
+  String get chat_download => 'Yuklab olish';
+
+  @override
+  String get chat_edit => 'Tahrirlash';
+
+  @override
+  String get chat_report => 'Shikoyat qilish';
 }

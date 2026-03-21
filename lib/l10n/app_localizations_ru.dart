@@ -1147,4 +1147,49 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get termsContactUs =>
       'Если у вас есть вопросы по этим Условиям, пожалуйста, свяжитесь с нами по адресу support@mpdinfo.uz';
+
+  @override
+  String get profile_following_doctors_empty_title =>
+      'Вы еще ни на кого не подписаны';
+
+  @override
+  String get profile_following_doctors_empty_description =>
+      'Подпишитесь на врачей и легко пользуйтесь их услугами';
+
+  @override
+  String get common_loading => 'Загрузка...';
+
+  @override
+  String get common_book_now => 'Записаться';
+
+  @override
+  String get common_written_by => 'Написал';
+
+  @override
+  String get common_prescription => 'Рецепт';
+
+  @override
+  String get record_medical_records_full_name =>
+      'Полное название медицинских записей';
+
+  @override
+  String get record_medical_records => 'Медицинские записи';
+
+  @override
+  String get service_doctor_no_services => 'У врача нет никаких типов услуг';
+
+  @override
+  String get chat_unknown_period => 'Неизвестный период';
+
+  @override
+  String get chat_copy => 'Копировать';
+
+  @override
+  String get chat_download => 'Скачать';
+
+  @override
+  String get chat_edit => 'Редактировать';
+
+  @override
+  String get chat_report => 'Пожаловаться';
 }

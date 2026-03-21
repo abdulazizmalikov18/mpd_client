@@ -21,14 +21,14 @@ class EmptyUserFollowers extends StatelessWidget {
           ),
           ScreenUtil().setVerticalSpacing(24.h),
           Text(
-            'You are not following anyone yet',
+            context.l10n.profile_following_doctors_empty_title,
             style: Styles.emptyboldTitle,
           ),
           ScreenUtil().setVerticalSpacing(8.h),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 56.w),
             child: Text(
-              'Follow doctors and avail their services easily',
+              context.l10n.profile_following_doctors_empty_description,
               textAlign: TextAlign.center,
               style: Styles.descSubtitle.copyWith(color: context.color.grey),
             ),

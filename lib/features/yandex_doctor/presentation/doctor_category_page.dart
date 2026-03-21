@@ -1,6 +1,7 @@
 import 'package:formz/formz.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
+import 'package:mpd_client/core/presentation/paginator_list.dart';
 import 'package:mpd_client/core/utils/debounce.dart';
 import 'package:mpd_client/features/doctor_profile_booking/presentation/pages/services/components/service_loading.dart';
 import 'package:mpd_client/features/doctor_profile_booking/presentation/pages/services/components/service_pinned_sheet.dart';
@@ -97,12 +98,17 @@ class AllDoctorsView extends StatelessWidget {
         if (state.specialist.isEmpty) {
           return const Center(child: Text("No data found"));
         }
-        return ListView.separated(
+        return PaginatorList(
           padding: const EdgeInsets.symmetric(vertical: 16),
           itemBuilder: (context, index) =>
               DoctorCardIteam(specialists: state.specialist[index]),
           separatorBuilder: (context, index) => const SizedBox(height: 16),
           itemCount: state.specialist.length,
+          paginatorStatus: state.status,
+          fetchMoreFunction: () {
+            context.read<SpecialistBloc>().add(GetSpecialist(isLoadMore: true));
+          },
+          hasMoreToFetch: state.specialist.length < state.specialistCount,
         );
       },
     );

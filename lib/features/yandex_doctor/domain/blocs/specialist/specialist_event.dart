@@ -5,9 +5,15 @@ sealed class SpecialistEvent {}
 class GetSpecialist extends SpecialistEvent {
   final String? search;
   final int? jobId;
+  final bool isLoadMore;
   final Function(List<MapSpecialist>? specialist)? onSucces;
 
-  GetSpecialist({this.search, this.jobId, this.onSucces});
+  GetSpecialist({
+    this.search,
+    this.jobId,
+    this.isLoadMore = false,
+    this.onSucces,
+  });
 }
 
 class GetSpecialistCategory extends SpecialistEvent {

@@ -1148,4 +1148,49 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get termsContactUs =>
       'If you have any questions about these Terms, please contact us at support@mpdinfo.uz';
+
+  @override
+  String get profile_following_doctors_empty_title =>
+      'You are not following anyone yet';
+
+  @override
+  String get profile_following_doctors_empty_description =>
+      'Follow doctors and avail their services easily';
+
+  @override
+  String get common_loading => 'Loading...';
+
+  @override
+  String get common_book_now => 'Book Now';
+
+  @override
+  String get common_written_by => 'Written by';
+
+  @override
+  String get common_prescription => 'Prescription';
+
+  @override
+  String get record_medical_records_full_name => 'Medical records full name';
+
+  @override
+  String get record_medical_records => 'Medical records';
+
+  @override
+  String get service_doctor_no_services =>
+      'The doctor does not have any type of service';
+
+  @override
+  String get chat_unknown_period => 'Unknown period';
+
+  @override
+  String get chat_copy => 'Copy';
+
+  @override
+  String get chat_download => 'Download';
+
+  @override
+  String get chat_edit => 'Edit';
+
+  @override
+  String get chat_report => 'Report';
 }

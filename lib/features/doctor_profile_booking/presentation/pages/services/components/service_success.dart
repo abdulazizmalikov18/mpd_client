@@ -41,7 +41,7 @@ class ServiceSuccess extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 44.w),
             child: Text(
-              'The doctor does not have any type of service',
+              context.l10n.service_doctor_no_services,
               textAlign: TextAlign.center,
               style: Styles.emptyboldTitle,
             ),

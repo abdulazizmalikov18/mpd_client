@@ -381,5 +381,20 @@
   "termsDisclaimersContent": "Приложение предоставляется \"как есть\" без каких-либо гарантий. MPD не гарантирует, что сервис будет работать бесперебойно или без ошибок.",
   "termsLimitationLiabilityTitle": "6. Ограничение ответственности",
   "termsLimitationLiabilityContent": "Ни при каких обстоятельствах MPD не несет ответственности за любые косвенные, случайные, специальные, косвенные или карательные убытки, возникшие в результате использования вами приложения.",
-  "termsContactUs": "Если у вас есть вопросы по этим Условиям, пожалуйста, свяжитесь с нами по адресу support@mpdinfo.uz"
+  "termsContactUs": "Если у вас есть вопросы по этим Условиям, пожалуйста, свяжитесь с нами по адресу support@mpdinfo.uz",
+
+  "profile_following_doctors_empty_title": "Вы еще ни на кого не подписаны",
+  "profile_following_doctors_empty_description": "Подпишитесь на врачей и легко пользуйтесь их услугами",
+  "common_loading": "Загрузка...",
+  "common_book_now": "Записаться",
+  "common_written_by": "Написал",
+  "common_prescription": "Рецепт",
+  "record_medical_records_full_name": "Полное название медицинских записей",
+  "record_medical_records": "Медицинские записи",
+  "service_doctor_no_services": "У врача нет никаких типов услуг",
+  "chat_unknown_period": "Неизвестный период",
+  "chat_copy": "Копировать",
+  "chat_download": "Скачать",
+  "chat_edit": "Редактировать",
+  "chat_report": "Пожаловаться"
 }

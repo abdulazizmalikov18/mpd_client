@@ -2301,6 +2301,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'If you have any questions about these Terms, please contact us at support@mpdinfo.uz'**
   String get termsContactUs;
+
+  /// No description provided for @profile_following_doctors_empty_title.
+  ///
+  /// In en, this message translates to:
+  /// **'You are not following anyone yet'**
+  String get profile_following_doctors_empty_title;
+
+  /// No description provided for @profile_following_doctors_empty_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow doctors and avail their services easily'**
+  String get profile_following_doctors_empty_description;
+
+  /// No description provided for @common_loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get common_loading;
+
+  /// No description provided for @common_book_now.
+  ///
+  /// In en, this message translates to:
+  /// **'Book Now'**
+  String get common_book_now;
+
+  /// No description provided for @common_written_by.
+  ///
+  /// In en, this message translates to:
+  /// **'Written by'**
+  String get common_written_by;
+
+  /// No description provided for @common_prescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Prescription'**
+  String get common_prescription;
+
+  /// No description provided for @record_medical_records_full_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Medical records full name'**
+  String get record_medical_records_full_name;
+
+  /// No description provided for @record_medical_records.
+  ///
+  /// In en, this message translates to:
+  /// **'Medical records'**
+  String get record_medical_records;
+
+  /// No description provided for @service_doctor_no_services.
+  ///
+  /// In en, this message translates to:
+  /// **'The doctor does not have any type of service'**
+  String get service_doctor_no_services;
+
+  /// No description provided for @chat_unknown_period.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown period'**
+  String get chat_unknown_period;
+
+  /// No description provided for @chat_copy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get chat_copy;
+
+  /// No description provided for @chat_download.
+  ///
+  /// In en, this message translates to:
+  /// **'Download'**
+  String get chat_download;
+
+  /// No description provided for @chat_edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get chat_edit;
+
+  /// No description provided for @chat_report.
+  ///
+  /// In en, this message translates to:
+  /// **'Report'**
+  String get chat_report;
 }
 
 class _AppLocalizationsDelegate

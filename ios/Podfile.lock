@@ -80,7 +80,7 @@ PODS:
     - Flutter
   - permission_handler_apple (9.3.0):
     - Flutter
-  - photo_manager (3.8.3):
+  - photo_manager (3.9.0):
     - Flutter
     - FlutterMacOS
   - SDWebImage (5.21.6):
@@ -113,7 +113,7 @@ PODS:
   - videosdk (0.0.1):
     - Flutter
     - videosdk_webrtc
-  - videosdk_webrtc (0.0.16):
+  - videosdk_webrtc (0.0.17):
     - Flutter
     - WebRTC-SDK (= 137.7151.04)
   - wakelock_plus (0.0.1):
@@ -250,7 +250,7 @@ SPEC CHECKSUMS:
   open_file_ios: 46184d802ee7959203f6392abcfa0dd49fdb5be0
   package_info_plus: af8e2ca6888548050f16fa2f1938db7b5a5df499
   permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
-  photo_manager: fe4cbb0808b96f8be4af7ce6ae18dcd9c9b983c6
+  photo_manager: 25fd77df14f4f0ba5ef99e2c61814dde77e2bceb
   SDWebImage: 1bb6a1b84b6fe87b972a102bdc77dd589df33477
   SDWebImageWebPCoder: 0e06e365080397465cc73a7a9b472d8a3bd0f377
   share_plus: 50da8cb520a8f0f65671c6c6a99b3617ed10a58a
@@ -263,7 +263,7 @@ SPEC CHECKSUMS:
   video_player_avfoundation: dd410b52df6d2466a42d28550e33e4146928280a
   video_thumbnail: b637e0ad5f588ca9945f6e2c927f73a69a661140
   videosdk: 54cf046d46212a7de6d45720e83a6c9281a49e3d
-  videosdk_webrtc: b2483fabf14939461c1aa1ad3cc9e4d28d077c8c
+  videosdk_webrtc: 9c550ad9271ba4af07a48af6570ec74883faef4f
   wakelock_plus: e29112ab3ef0b318e58cfa5c32326458be66b556
   WebRTC-SDK: 40d4f5ba05cadff14e4db5614aec402a633f007e
   webview_flutter_wkwebview: 8ebf4fded22593026f7dbff1fbff31ea98573c8d

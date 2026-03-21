@@ -70,7 +70,7 @@ class FilledUserFollowers extends StatelessWidget {
                     ),
                     ScreenUtil().setHorizontalSpacing(10.w),
                     Text(
-                      'Loading...',
+                      context.l10n.common_loading,
                       style: Styles.headline7.copyWith(
                         color: context.color.mainBlue,
                       ),
@@ -108,7 +108,7 @@ class FilledUserFollowers extends StatelessWidget {
                       );
                     },
                     text: Text(
-                      'Book Now',
+                      context.l10n.common_book_now,
                       style: Styles.boldHeadline6.copyWith(
                         color: context.color.white,
                         fontSize: 14.sp,

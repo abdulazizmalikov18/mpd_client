@@ -22,6 +22,7 @@ import 'package:mpd_client/features/user/domain/blocs/user_info/user_info_bloc.d
 import 'package:mpd_client/core/data/repository/storage_keys.dart';
 import 'package:mpd_client/core/data/repository/storage_repository.dart';
 import 'package:mpd_client/core/extension/context_ext.dart';
+import 'package:mpd_client/provider/language.dart';
 
 class InChatView extends StatefulWidget {
   final ChatGroupModel group;
@@ -113,7 +114,7 @@ class _InChatViewState extends State<InChatView> {
                 ),
               ),
               subtitle: Text(
-                "Unknown period",
+                context.l10n.chat_unknown_period,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: 12,
@@ -266,7 +267,7 @@ class _InChatViewState extends State<InChatView> {
                   if (message?.text != null && (message?.text ?? "").isNotEmpty)
                     CupertinoListTile(
                       leading: AppIcons.copy.svg(),
-                      title: const Text('Copy'),
+                      title: Text(context.l10n.chat_copy),
                       backgroundColor: white,
                       onTap: () async {
                         Navigator.pop(context);
@@ -278,7 +279,7 @@ class _InChatViewState extends State<InChatView> {
                   if (message?.file != null)
                     CupertinoListTile(
                       leading: AppIcons.download.svg(),
-                      title: const Text('Download'),
+                      title: Text(context.l10n.chat_download),
                       backgroundColor: white,
                       onTap: () {
                         Navigator.pop(context);
@@ -291,7 +292,7 @@ class _InChatViewState extends State<InChatView> {
                   if (isUserToUser)
                     CupertinoListTile(
                       leading: AppIcons.pencil.svg(),
-                      title: const Text('Edit'),
+                      title: Text(context.l10n.chat_edit),
                       backgroundColor: white,
                       onTap: () {
                         Navigator.pop(context);
@@ -301,7 +302,10 @@ class _InChatViewState extends State<InChatView> {
                   if (!isUserToUser)
                     CupertinoListTile(
                       leading: AppIcons.messageCircleWarning.svg(color: red),
-                      title: const Text('Report', style: TextStyle(color: red)),
+                      title: Text(
+                        context.l10n.chat_report,
+                        style: TextStyle(color: red),
+                      ),
                       backgroundColor: white,
                       onTap: () {
                         Navigator.pop(context);
