@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/src/themes/styles.dart';
+import 'package:mpd_client/provider/language.dart';
 
 class InfiniteLoadingWidget extends StatelessWidget {
   const InfiniteLoadingWidget({super.key});
@@ -21,7 +22,7 @@ class InfiniteLoadingWidget extends StatelessWidget {
         ),
         ScreenUtil().setHorizontalSpacing(10.w),
         Text(
-          'Loading...',
+          context.l10n.common_loading,
           style: Styles.headline7.copyWith(color: context.color.mainBlue),
         ),
       ],

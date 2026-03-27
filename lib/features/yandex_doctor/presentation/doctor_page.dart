@@ -224,8 +224,8 @@ class _DoctorPageState extends State<DoctorPage>
                         hideKeyboardOnDrag: true,
                         keepSuggestionsOnLoading: false,
                         hideSuggestionsOnKeyboardHide: false,
-                        loadingBuilder: (context) => const Text(
-                          'Loading...',
+                        loadingBuilder: (context) => Text(
+                          context.l10n.common_loading,
                           textAlign: TextAlign.center,
                         ),
                         debounceDuration: const Duration(milliseconds: 500),

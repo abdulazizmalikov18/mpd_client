@@ -414,5 +414,12 @@
   "chat_report": "Report",
   "post_share": "Share",
   "post_about_account": "About this account",
-  "post_report": "Report"
+  "post_report": "Report",
+  "chat_type_message": "Type....",
+  "chat_images": "Images",
+  "chat_files": "Files",
+  "doctors_title": "Doctors",
+  "upload_image": "Upload image",
+  "error_no_data_available": "No data available",
+  "error_not_selected": "Not selected"
 }

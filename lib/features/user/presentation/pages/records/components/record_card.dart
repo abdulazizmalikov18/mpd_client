@@ -84,7 +84,7 @@ class RecordsCard extends StatelessWidget {
                     ),
                     ScreenUtil().setVerticalSpacing(6.h),
                     Text(
-                      '${record.conclusionFile ?? ''} ${context.l10n.common_prescription}',
+                      '${record.conclusion ?? ""} ${context.l10n.common_prescription}',
                       style: Styles.cardReview.copyWith(
                         color: context.color.grey,
                         fontSize: 12.sp,

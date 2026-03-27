@@ -2403,6 +2403,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Report'**
   String get post_report;
+
+  /// No description provided for @chat_type_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Type....'**
+  String get chat_type_message;
+
+  /// No description provided for @chat_images.
+  ///
+  /// In en, this message translates to:
+  /// **'Images'**
+  String get chat_images;
+
+  /// No description provided for @chat_files.
+  ///
+  /// In en, this message translates to:
+  /// **'Files'**
+  String get chat_files;
+
+  /// No description provided for @doctors_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctors'**
+  String get doctors_title;
+
+  /// No description provided for @upload_image.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload image'**
+  String get upload_image;
+
+  /// No description provided for @error_no_data_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No data available'**
+  String get error_no_data_available;
+
+  /// No description provided for @error_not_selected.
+  ///
+  /// In en, this message translates to:
+  /// **'Not selected'**
+  String get error_not_selected;
 }
 
 class _AppLocalizationsDelegate

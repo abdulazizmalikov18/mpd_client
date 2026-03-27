@@ -68,7 +68,7 @@ class RecordList extends StatelessWidget {
                     ),
                     ScreenUtil().setHorizontalSpacing(10.w),
                     Text(
-                      'Loading...',
+                      context.l10n.common_loading,
                       style: Styles.headline7.copyWith(
                         color: context.color.mainBlue,
                       ),

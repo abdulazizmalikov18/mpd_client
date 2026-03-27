@@ -399,5 +399,12 @@
   "chat_report": "Shikoyat qilish",
   "post_share": "Ulashish",
   "post_about_account": "Bu akkaunt haqida",
-  "post_report": "Shikoyat qilish"
+  "post_report": "Shikoyat qilish",
+  "chat_type_message": "Yozing....",
+  "chat_images": "Rasmlar",
+  "chat_files": "Fayllar",
+  "doctors_title": "Shifokorlar",
+  "upload_image": "Rasm yuklash",
+  "error_no_data_available": "Ma'lumot mavjud emas",
+  "error_not_selected": "Tanlanmagan"
 }

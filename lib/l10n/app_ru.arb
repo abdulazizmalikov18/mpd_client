@@ -399,5 +399,12 @@
   "chat_report": "Пожаловаться",
   "post_share": "Поделиться",
   "post_about_account": "Об этом аккаунте",
-  "post_report": "Пожаловаться"
+  "post_report": "Пожаловаться",
+  "chat_type_message": "Напишите....",
+  "chat_images": "Изображения",
+  "chat_files": "Файлы",
+  "doctors_title": "Врачи",
+  "upload_image": "Загрузить изображение",
+  "error_no_data_available": "Нет доступных данных",
+  "error_not_selected": "Не выбрано"
 }

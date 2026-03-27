@@ -1220,4 +1220,25 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get post_report => 'Shikoyat qilish';
+
+  @override
+  String get chat_type_message => 'Yozing....';
+
+  @override
+  String get chat_images => 'Rasmlar';
+
+  @override
+  String get chat_files => 'Fayllar';
+
+  @override
+  String get doctors_title => 'Shifokorlar';
+
+  @override
+  String get upload_image => 'Rasm yuklash';
+
+  @override
+  String get error_no_data_available => 'Ma\'lumot mavjud emas';
+
+  @override
+  String get error_not_selected => 'Tanlanmagan';
 }

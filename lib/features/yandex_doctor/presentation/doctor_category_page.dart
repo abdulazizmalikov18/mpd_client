@@ -36,7 +36,7 @@ class _DoctorCategoryPageState extends State<DoctorCategoryPage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Doctors"),
+          title: Text(context.l10n.doctors_title),
           bottom: PreferredSize(
             preferredSize: const Size(double.infinity, 64),
             child: SearchField(

@@ -5,6 +5,7 @@ import 'package:mpd_client/features/appointment/presentation/pages/appointment/c
 import 'package:mpd_client/features/user/data/models/user_subscriptions_model.dart';
 import 'package:mpd_client/src/themes/styles.dart';
 import 'package:mpd_client/src/widgets/filled_gradient_button.dart';
+import 'package:mpd_client/provider/language.dart';
 
 class FilledUserFollowers extends StatelessWidget {
   final ScrollController scrollController;
@@ -86,7 +87,7 @@ class FilledUserFollowers extends StatelessWidget {
                   workingTime: subscription.region,
                   avatar: subscription.avatar,
                   fullname:
-                      '${subscription.name ?? "__1"} ${subscription.lastname ?? "__"}',
+                      '${subscription.name ?? context.l10n.error_not_selected} ${subscription.lastname ?? context.l10n.error_not_selected}',
                   job: subscription.mainCat,
                 ),
                 appoinmentInfo: AppoinmentInfo.infos(context)[3],
@@ -102,7 +103,7 @@ class FilledUserFollowers extends StatelessWidget {
                           avatar: subscription.avatar,
                           phone: "",
                           fullname:
-                              '${subscription.name ?? "--"} ${subscription.lastname ?? "--"}',
+                              '${subscription.name ?? context.l10n.error_not_selected} ${subscription.lastname ?? context.l10n.error_not_selected}',
                           username: subscription.username,
                         ),
                       );

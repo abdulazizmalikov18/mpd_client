@@ -7,12 +7,8 @@ import 'package:mpd_client/app/app_images.dart';
 import 'package:mpd_client/core/utils/utils.dart';
 import 'package:mpd_client/features/doctor_profile_booking/data/models/doctor_profile_model.dart';
 import 'package:mpd_client/features/doctor_profile_booking/presentation/widgets/dr_profile_listile.dart';
-import 'package:mpd_client/features/home/domain/blocs/send_coment/send_coment_bloc.dart';
 import 'package:mpd_client/provider/language.dart';
-import 'package:mpd_client/src/widgets/review_widget.dart';
 import 'package:mpd_client/src/themes/styles.dart';
-import 'package:mpd_client/src/widgets/bottom_sheet_widget.dart';
-import 'package:mpd_client/src/widgets/transparent_long_button.dart';
 
 import '../../../home/presentation/widgets/build_label.dart';
 import '../widgets/dr_profile_info.dart';
@@ -126,52 +122,52 @@ class DoctorInfoItem extends StatelessWidget {
         //         arguments: PdfViewerModel(pdfUrl: doctor.documents![i].file!, name: doctor.documents![i].type!.name!)),
         //   ),
         ScreenUtil().setVerticalSpacing(20.h),
-        BuildLabel(label: context.l10n.book_doctor_reviews),
+        // BuildLabel(label: context.l10n.book_doctor_reviews),
         // ScreenUtil().setVerticalSpacing(8.h),
         // Padding(
         //     padding: EdgeInsets.symmetric(horizontal: 16.w),
         //     child: const ReviewWidget(status: SendComentInitial(null))),
-        ScreenUtil().setVerticalSpacing(20.h),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: TransparentLongButton(
-            buttonName:
-                '${context.l10n.book_doctor_reviews_all} $rundomReview ${context.l10n.book_doctor_reviews.toLowerCase()}',
-            onPress: () {
-              showModalBottomSheet(
-                isScrollControlled: true,
-                backgroundColor: Colors.transparent,
-                context: context,
-                builder: (_) => BottomSheetWidget(
-                  children: [
-                    ScreenUtil().setVerticalSpacing(32.h),
-                    Center(
-                      child: Text(
-                        context.l10n.book_doctor_reviews,
-                        style: Styles.boldTitle.copyWith(
-                          color: context.color.black,
-                          fontSize: 24.sp,
-                          fontFamily: Styles.gilroyMedium,
-                        ),
-                      ),
-                    ),
-                    ScreenUtil().setVerticalSpacing(28.h),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      child: const ReviewWidget(
-                        status: SendComentInitial(null),
-                      ),
-                    ),
-                    ScreenUtil().setVerticalSpacing(32.h),
-                  ],
-                ),
-              );
-            },
-            textColor: context.color.mainBlue,
-            borderColor: context.color.mainBlue,
-          ),
-        ),
-        ScreenUtil().setVerticalSpacing(20.h),
+        // ScreenUtil().setVerticalSpacing(20.h),
+        // Padding(
+        //   padding: EdgeInsets.symmetric(horizontal: 16.w),
+        //   child: TransparentLongButton(
+        //     buttonName:
+        //         '${context.l10n.book_doctor_reviews_all} $rundomReview ${context.l10n.book_doctor_reviews.toLowerCase()}',
+        //     onPress: () {
+        //       showModalBottomSheet(
+        //         isScrollControlled: true,
+        //         backgroundColor: Colors.transparent,
+        //         context: context,
+        //         builder: (_) => BottomSheetWidget(
+        //           children: [
+        //             ScreenUtil().setVerticalSpacing(32.h),
+        //             Center(
+        //               child: Text(
+        //                 context.l10n.book_doctor_reviews,
+        //                 style: Styles.boldTitle.copyWith(
+        //                   color: context.color.black,
+        //                   fontSize: 24.sp,
+        //                   fontFamily: Styles.gilroyMedium,
+        //                 ),
+        //               ),
+        //             ),
+        //             ScreenUtil().setVerticalSpacing(28.h),
+        //             Padding(
+        //               padding: EdgeInsets.symmetric(horizontal: 16.w),
+        //               child: const ReviewWidget(
+        //                 status: SendComentInitial(null),
+        //               ),
+        //             ),
+        //             ScreenUtil().setVerticalSpacing(32.h),
+        //           ],
+        //         ),
+        //       );
+        //     },
+        //     textColor: context.color.mainBlue,
+        //     borderColor: context.color.mainBlue,
+        //   ),
+        // ),
+        // ScreenUtil().setVerticalSpacing(20.h),
       ],
     );
   }

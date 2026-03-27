@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mpd_client/core/data/repository/storage_keys.dart';
 import 'package:mpd_client/core/data/repository/storage_repository.dart';
+import 'package:mpd_client/core/extension/context_ext.dart';
 import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/features/chat/domain/models/chat_user_state.dart';
 import 'package:mpd_client/features/chat/domain/models/message.dart';
@@ -19,6 +20,7 @@ import 'package:mpd_client/src/widgets/top_snackbar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:mpd_client/provider/language.dart';
 
 typedef $chatController = ChatVMController;
 
@@ -83,7 +85,7 @@ class ChatVMController {
           children: [
             ListTile(
               leading: const Icon(Icons.image),
-              title: const Text('Images'),
+              title: Text(context.l10n.chat_images),
               onTap: () {
                 Navigator.pop(context);
                 sendImage(context, slugName);
@@ -91,7 +93,7 @@ class ChatVMController {
             ),
             ListTile(
               leading: const Icon(Icons.file_copy),
-              title: const Text('Files'),
+              title: Text(context.l10n.chat_files),
               onTap: () {
                 Navigator.pop(context);
                 sendMedia(context, slugName);

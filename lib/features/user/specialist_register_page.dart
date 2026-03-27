@@ -15,6 +15,7 @@ import 'package:mpd_client/features/user/presentation/widgets/custom_text_field.
 import 'package:mpd_client/features/user/presentation/widgets/spec_cat_sheet.dart';
 import 'package:mpd_client/src/widgets/longbutton.dart';
 
+
 class SpecialistRegisterPage extends StatefulWidget {
   const SpecialistRegisterPage({super.key});
 
@@ -274,7 +275,7 @@ class _SpecialistRegisterPageState extends State<SpecialistRegisterPage> {
                                   ),
                                   SizedBox(height: 4.h),
                                   Text(
-                                    "Rasm yuklash",
+                                    context.l10n.upload_image,
                                     style: TextStyle(
                                       fontSize: 12.sp,
                                       color: Colors.grey.shade600,

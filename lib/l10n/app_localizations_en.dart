@@ -1202,4 +1202,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get post_report => 'Report';
+
+  @override
+  String get chat_type_message => 'Type....';
+
+  @override
+  String get chat_images => 'Images';
+
+  @override
+  String get chat_files => 'Files';
+
+  @override
+  String get doctors_title => 'Doctors';
+
+  @override
+  String get upload_image => 'Upload image';
+
+  @override
+  String get error_no_data_available => 'No data available';
+
+  @override
+  String get error_not_selected => 'Not selected';
 }

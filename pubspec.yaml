@@ -3,7 +3,7 @@ description: "A new Flutter project."
 
 publish_to: "none"
 
-version: 1.0.0+23
+version: 1.0.0+25
 
 environment:
   sdk: ^3.11.0
@@ -11,13 +11,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.8
+  cupertino_icons: ^1.0.9
   flutter_localizations:
     sdk: flutter
   flutter_bloc: ^9.1.1
   bloc_concurrency: ^0.3.0
   dio: ^5.9.2
-  shared_preferences: ^2.5.4
+  shared_preferences: ^2.5.5
   get_it: ^9.2.1
   pretty_dio_logger: ^1.4.0
   formz: ^0.8.0
@@ -54,7 +54,7 @@ dependencies:
   flutter_image_compress: ^2.4.0
   rounded_loading_button_plus: ^3.0.1
   table_calendar: ^3.2.0
-  syncfusion_flutter_pdfviewer: ^33.1.44
+  syncfusion_flutter_pdfviewer: ^33.1.45
   flick_video_player: ^0.9.0
   readmore: ^3.0.0
   dotted_border: ^3.1.0

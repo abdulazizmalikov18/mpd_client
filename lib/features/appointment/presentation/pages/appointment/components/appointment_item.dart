@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
+import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/features/appointment/presentation/pages/appointment/appoinment.dart';
 import 'package:mpd_client/src/widgets/cached_image_widget.dart';
 import 'package:mpd_client/src/widgets/default_avatar.dart';
@@ -64,6 +65,7 @@ class AppointmentItem extends StatelessWidget {
 
   //doctor image method
   ClipRRect _buildDrImage(String? image) {
+    Log.e(image);
     return ClipRRect(
       borderRadius: BorderRadius.circular(36.r),
       child: image != null

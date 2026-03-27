@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/app/colors.dart';
+import 'package:mpd_client/core/extension/context_ext.dart';
 import 'package:mpd_client/features/chat/presentation/bloc/chat_message/bloc/chat_message_bloc.dart';
 import 'package:mpd_client/features/chat/presentation/controller/vm_controller.dart';
 import 'package:mpd_client/features/chat/presentation/views/in_app_chat.dart';
 import 'package:mpd_client/features/chat/presentation/widgets/message_widgets/w_button.dart';
 import 'package:mpd_client/src/widgets/top_snackbar.dart';
+import 'package:mpd_client/provider/language.dart';
 
 class WChatTextField extends StatelessWidget {
   const WChatTextField({super.key});
@@ -48,7 +50,7 @@ class WChatTextField extends StatelessWidget {
                       ),
                       child: const Icon(CupertinoIcons.paperclip, color: gray),
                     ),
-                    hintText: "Type....",
+                    hintText: context.l10n.chat_type_message,
                     hintStyle: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,

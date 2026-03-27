@@ -1201,4 +1201,25 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get post_report => 'Пожаловаться';
+
+  @override
+  String get chat_type_message => 'Напишите....';
+
+  @override
+  String get chat_images => 'Изображения';
+
+  @override
+  String get chat_files => 'Файлы';
+
+  @override
+  String get doctors_title => 'Врачи';
+
+  @override
+  String get upload_image => 'Загрузить изображение';
+
+  @override
+  String get error_no_data_available => 'Нет доступных данных';
+
+  @override
+  String get error_not_selected => 'Не выбрано';
 }
