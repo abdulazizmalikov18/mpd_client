@@ -20,26 +20,41 @@ import 'package:mpd_client/main.dart';
 import 'package:mpd_client/src/widgets/custom_snackbar.dart';
 import 'package:mpd_client/src/widgets/top_snackbar.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:mpd_client/provider/language.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 typedef $chatController = ChatVMController;
 
 class ChatVMController {
-  WebSocketChannel? channel;
-  Stream? _broadcastStream;
+  // ─────────────────────────── Singleton ───────────────────────────
   factory ChatVMController() => instance;
   static final instance = ChatVMController._();
   ChatVMController._()
     : messageController = TextEditingController(),
       scrollController = ScrollController();
-  bool _isPicking = false;
 
-  static final ValueNotifier<String?> chatNotifier = ValueNotifier(null);
+  // ─────────────────────────── Socket ───────────────────────────
+  WebSocketChannel? channel;
+  Stream? _broadcastStream;
+
+  // ─────────────────────────── Controllers ───────────────────────────
   final TextEditingController messageController;
-  bool get isMobile => Platform.isAndroid || Platform.isIOS;
   final ScrollController scrollController;
+
+  // ─────────────────────────── State ───────────────────────────
+  static final ValueNotifier<String?> chatNotifier = ValueNotifier(null);
+
+  /// Tanlangan fayllar — UI ga reaktiv ko'rsatish uchun
+  final ValueNotifier<List<File>> selectedFiles = ValueNotifier([]);
+
+  /// Picker band ekanligini kuzatish
+  Completer<void>? _pickerCompleter;
+  bool get _isPickerBusy =>
+      _pickerCompleter != null && !_pickerCompleter!.isCompleted;
+
+  bool get isMobile => Platform.isAndroid || Platform.isIOS;
+
+  // ─────────────────────────── Device ───────────────────────────
 
   Future<bool> _isPhysicalDevice() async {
     try {
@@ -53,98 +68,172 @@ class ChatVMController {
     }
   }
 
-  void sendMedia(BuildContext context, String slugName) async {
-    if (_isPicking) return;
-    _isPicking = true;
-    try {
-      final isPhysical = await _isPhysicalDevice();
-      if (isPhysical) {
-        final status = await Permission.photos.request();
-        if (status.isPermanentlyDenied) {
-          if (context.mounted) {
-            CustomSnackbar.show(
-              context,
-              "Galereyaga ruxsat berilmagan. Sozlamalardan yoqing.",
-            );
-          }
-          return;
-        }
-        if (!status.isGranted && !status.isLimited) return;
-      }
+  // ─────────────────────────── Permission ───────────────────────────
 
-      final result = await FilePicker.platform.pickFiles();
-      if (result?.files[0].path != null) {
-        File file = File(result!.files[0].path!);
-        if (context.mounted) {
-          context.read<ChatMessageBloc>().add(
-            ChatSendMessageEvent(
-              groupSlug: slugName,
-              file: file,
-              text: messageController.text,
-              isProfanity: () {
-                TopSnackbar.show(context, "Profanity detected");
-              },
-            ),
-          );
-        }
-      }
-    } on PlatformException catch (e) {
-      if (e.code == 'multiple_request') {
-        Log.w("Picker busy: multiple_request caught and ignored.");
-      } else {
-        Log.e("FilePicker Error: $e");
-      }
-    } finally {
-      _isPicking = false;
+  /// Simulatorda permission so'ramaymiz — conflict sababi shu edi
+  Future<bool> _requestPermission(BuildContext context) async {
+    final isPhysical = await _isPhysicalDevice();
+    if (!isPhysical) return true;
+
+    PermissionStatus status;
+    if (Platform.isAndroid) {
+      final androidInfo = await DeviceInfoPlugin().androidInfo;
+      status = androidInfo.version.sdkInt >= 33
+          ? await Permission.photos.request()
+          : await Permission.storage.request();
+    } else {
+      status = await Permission.photos.request();
     }
+
+    if (status.isPermanentlyDenied) {
+      if (context.mounted) {
+        CustomSnackbar.show(
+          context,
+          "Galereyaga ruxsat berilmagan. Sozlamalardan yoqing.",
+        );
+      }
+      return false;
+    }
+    return status.isGranted || status.isLimited;
   }
 
-  void sendImage(BuildContext context, String slugName) async {
-    if (_isPicking) return;
-    _isPicking = true;
-    try {
-      final isPhysical = await _isPhysicalDevice();
-      if (isPhysical) {
-        final status = await Permission.photos.request();
-        if (status.isPermanentlyDenied) {
-          if (context.mounted) {
-            CustomSnackbar.show(
-              context,
-              "Galereyaga ruxsat berilmagan. Sozlamalardan yoqing.",
-            );
-          }
-          return;
-        }
-        if (!status.isGranted && !status.isLimited) return;
-      }
+  // ─────────────────────────── File list ───────────────────────────
 
-      final ImagePicker picker = ImagePicker();
-      final result = await picker.pickMedia();
-      if (result?.path != null) {
-        File file = File(result!.path);
-        if (context.mounted) {
-          context.read<ChatMessageBloc>().add(
-            ChatSendMessageEvent(
-              groupSlug: slugName,
-              file: file,
-              text: messageController.text,
-              isProfanity: () {
-                TopSnackbar.show(context, "Profanity detected");
-              },
-            ),
-          );
-        }
+  void _addFile(File file) {
+    selectedFiles.value = [file];
+  }
+
+  void removeFile(File file) {
+    final current = List<File>.from(selectedFiles.value);
+    current.remove(file);
+    selectedFiles.value = current;
+  }
+
+  void clearFiles() => selectedFiles.value = [];
+
+  // ─────────────────────────── Rasm tanlash ───────────────────────────
+
+  /// Rasm / Video — ko'p tanlash, barcha qurilmalarda ishlaydi
+  void sendImage(BuildContext context, String slugName) async {
+    if (_isPickerBusy) return;
+    _pickerCompleter = Completer<void>();
+
+    try {
+      final hasPermission = await _requestPermission(context);
+      if (!hasPermission) return;
+      if (!context.mounted) return;
+
+      // ✅ Faqat bitta rasm/video tanlash
+      final XFile? result = await ImagePicker().pickMedia();
+
+      if (result != null) {
+        _addFile(File(result.path));
       }
     } on PlatformException catch (e) {
       if (e.code == 'multiple_request') {
-        Log.w("Picker busy: multiple_request caught and ignored.");
+        Log.w("ImagePicker busy: ignored.");
       } else {
         Log.e("ImagePicker Error: $e");
+        if (context.mounted) {
+          CustomSnackbar.show(context, "Rasm tanlashda xatolik: ${e.message}");
+        }
       }
+    } catch (e) {
+      Log.e("ImagePicker unexpected: $e");
     } finally {
-      _isPicking = false;
+      _pickerCompleter?.complete();
     }
   }
+
+  // ─────────────────────────── Fayl tanlash ───────────────────────────
+
+  /// Fayl tanlash:
+  /// - Simulatorda: ImagePicker (FilePicker simulatorda ishlamaydi)
+  /// - Real qurilmada: FilePicker
+  void sendMedia(BuildContext context, String slugName) async {
+    if (_isPickerBusy) return;
+    _pickerCompleter = Completer<void>();
+
+    try {
+      final isPhysical = await _isPhysicalDevice();
+      final hasPermission = await _requestPermission(context);
+      if (!hasPermission) return;
+      if (!context.mounted) return;
+
+      await Future.delayed(const Duration(milliseconds: 150));
+
+      if (!isPhysical) {
+        // ✅ SIMULYATOR: FilePicker ishlamaydi, ImagePicker ishlatamiz
+        Log.w("Simulyator: FilePicker o'rniga ImagePicker ishlatilmoqda.");
+        final XFile? result = await ImagePicker().pickMedia();
+        if (result != null) {
+          _addFile(File(result.path));
+        }
+      } else {
+        // ✅ REAL QURILMA: FilePicker — faqat bitta fayl
+        final result = await FilePicker.platform.pickFiles(
+          type: FileType.any,
+          allowMultiple: false,
+        );
+        if (result != null && result.files.isNotEmpty) {
+          final path = result.files.first.path;
+          if (path != null) _addFile(File(path));
+        }
+      }
+    } on PlatformException catch (e) {
+      if (e.code == 'multiple_request') {
+        Log.w("Picker busy: multiple_request ignored.");
+      } else {
+        Log.e("Picker Error: $e");
+        if (context.mounted) {
+          CustomSnackbar.show(context, "Fayl tanlashda xatolik: ${e.message}");
+        }
+      }
+    } catch (e) {
+      Log.e("Picker unexpected: $e");
+    } finally {
+      _pickerCompleter?.complete();
+    }
+  }
+
+  // ─────────────────────────── Yuborish ───────────────────────────
+
+  /// Tanlangan barcha fayllar + text ni yuborish
+  void sendAllFiles(BuildContext context, String slugName) {
+    final files = selectedFiles.value;
+    final text = messageController.text.trim();
+
+    if (files.isEmpty && text.isEmpty) return;
+
+    if (files.isEmpty) {
+      // Faqat text
+      context.read<ChatMessageBloc>().add(
+        ChatSendMessageEvent(
+          groupSlug: slugName,
+          file: null,
+          text: text,
+          isProfanity: () => TopSnackbar.show(context, "Profanity detected"),
+        ),
+      );
+    } else {
+      // ✅ Har bir fayl alohida event — birinchisiga text, qolganlari bo'sh
+      for (int i = 0; i < files.length; i++) {
+        context.read<ChatMessageBloc>().add(
+          ChatSendMessageEvent(
+            groupSlug: slugName,
+            file: files[i],
+            text: i == 0 ? text : '', // Faqat birinchisiga text
+            isProfanity: () => TopSnackbar.show(context, "Profanity detected"),
+          ),
+        );
+      }
+    }
+
+    messageController.clear();
+    clearFiles();
+  }
+
+  // ─────────────────────────── Bottom sheet ───────────────────────────
 
   void showFileOptions(BuildContext context, String slugName) {
     showModalBottomSheet(
@@ -155,34 +244,32 @@ class ChatVMController {
             ListTile(
               leading: const Icon(Icons.image),
               title: Text(context.l10n.chat_images),
-              onTap: () {
+              onTap: () async {
                 Navigator.pop(context);
-                sendImage(context, slugName);
+                // ✅ Bottom sheet yopilish animatsiyasi tugaguncha kutamiz
+                await Future.delayed(const Duration(milliseconds: 400));
+                if (context.mounted) sendImage(context, slugName);
               },
             ),
             ListTile(
               leading: const Icon(Icons.file_copy),
               title: Text(context.l10n.chat_files),
-              onTap: () {
+              onTap: () async {
                 Navigator.pop(context);
-                sendMedia(context, slugName);
+                await Future.delayed(const Duration(milliseconds: 400));
+                if (context.mounted) sendMedia(context, slugName);
               },
             ),
-            // ListTile(
-            //   leading: const Icon(Icons.delete, color: Colors.red),
-            //   title: const Text('Delete'),
-            //   onTap: () {
-            //     Navigator.pop(context);
-            //     // _deleteMessage(index);
-            //   },
-            // ),
           ],
         ),
       ),
     );
   }
 
+  // ─────────────────────────── Socket ───────────────────────────
+
   static ChatVMController of(BuildContext context) => ChatVMController();
+
   Future<void> connectSocket({
     required void Function(String errorMessage) onError,
   }) async {
@@ -192,11 +279,10 @@ class ChatVMController {
       );
       channel = WebSocketChannel.connect(wsUrl);
       await channel!.ready;
-      // Create broadcast stream to allow multiple listeners
       _broadcastStream = channel!.stream.asBroadcastStream();
       Log.i("Socket connected successfully");
     } catch (e, s) {
-      Log.e("ChatSocket Error ------------------------ $e  Stack: $s");
+      Log.e("ChatSocket Error: $e Stack: $s");
       onError(e.toString());
     }
   }
@@ -206,108 +292,79 @@ class ChatVMController {
   void onComingNewMessage(void Function(MessageModel message) onMessage) {
     try {
       if (channel == null || _broadcastStream == null) {
-        Log.e("Channel or broadcast stream is null, cannot listen to messages");
+        Log.e("Channel or broadcast stream is null");
         return;
       }
       _broadcastStream!.listen((event) {
-        Log.i("New Chat Message $event \nType${event.runtimeType}");
         try {
-          final eventData = (jsonDecode(event));
+          final eventData = jsonDecode(event);
           if (eventData is Map<String, dynamic> &&
               eventData.containsValue("notify_about_message")) {
-            Log.i("Message  Keldi");
+            Log.i("Message keldi");
             onMessage(MessageModel.fromSocket(eventData));
           }
         } catch (e, s) {
-          Log.e("Error parsing socket message: $e Stack: $s");
+          Log.e("Socket parse error: $e Stack: $s");
         }
       });
     } catch (e, s) {
-      Log.e("error $e Stack $s");
-      // Don't throw exception, just log the error
-      // throw Exception("Modelga o'tkasa olmadi Message");
+      Log.e("onComingNewMessage error: $e Stack: $s");
     }
   }
 
   void onOnlineOrOffline(void Function(ChatUserState state) onMessage) {
     try {
       channel!.stream.listen((event) {
-        Log.i("New Chat Message $event \nType${event.runtimeType}");
-        final eventData = (jsonDecode(event));
+        final eventData = jsonDecode(event);
         if (eventData is Map<String, dynamic> &&
-            eventData.containsValue("type") &&
-            event['type'] == "online_status") {
-          Log.i("Message  Keldi");
+            eventData.containsKey("type") &&
+            eventData['type'] == "online_status") {
           onMessage(ChatUserState.fromJson(eventData));
         }
       });
     } catch (e, s) {
-      Log.e("error $e Stack $s");
-      throw Exception("Modelga o'tkasa olmadi Message");
+      Log.e("onOnlineOrOffline error: $e Stack: $s");
     }
   }
 
-  // void onComingNewGroup(void Function(ChatGroupModel grouponMessage) onGroup) {
-  //   try {
-  //     channel!.stream.listen(
-  //       (event) {
-  //         Log.i("New Chat Message $event \nType${event.runtimeType}");
-  //         final eventData = (jsonDecode(event));
-  //         if (eventData is Map<String, dynamic> && eventData.containsValue("notify_about_message")) {
-  //           // onMessage(MessageModel.fromSocket(eventData));
-  //         }
-  //       },
-  //     );
-  //   } catch (e, s) {
-  //     Log.e("error $e Stack $s");
-  //     throw Exception("Modelga o'tkasa olmadi Message");
-  //   }
-  // }
+  // ─────────────────────────── Download ───────────────────────────
 
   Future<void> downloadAndSaveFile(String fileUrl, BuildContext context) async {
     try {
-      // Ruxsatlar so‘rash
       if (Platform.isAndroid) {
-        var status = await Permission.storage.request();
-        if (!status.isGranted) {
-          Log.i('❌ Storage ruxsat berilmadi');
-          return;
+        final androidInfo = await DeviceInfoPlugin().androidInfo;
+        if (androidInfo.version.sdkInt < 33) {
+          final status = await Permission.storage.request();
+          if (!status.isGranted) {
+            Log.i('Storage ruxsat berilmadi');
+            return;
+          }
         }
       } else if (Platform.isIOS) {
-        var status = await Permission.photos.request(); // iOS uchun
+        final status = await Permission.photos.request();
         if (!status.isGranted) {
-          Log.i('❌ iOS uchun ruxsat berilmadi');
+          Log.i('iOS ruxsat berilmadi');
           return;
         }
       }
 
-      // Platformaga qarab saqlash joyini aniqlash
-      Directory directory;
-      if (Platform.isAndroid) {
-        if (await Permission.manageExternalStorage.isGranted) {
-          directory = Directory("/storage/emulated/0/Download");
-        } else {
-          directory =
-              await getExternalStorageDirectory() ??
-              await getApplicationDocumentsDirectory();
-        }
-      } else {
-        directory = await getApplicationDocumentsDirectory(); // iOS
-      }
+      final Directory directory = Platform.isAndroid
+          ? await getExternalStorageDirectory() ??
+                await getApplicationDocumentsDirectory()
+          : await getApplicationDocumentsDirectory();
 
-      String fullPath = "${directory.path}/${fileUrl.split('/').last}";
-      Log.i("📥 Yuklanmoqda: $fullPath");
+      final fullPath = "${directory.path}/${fileUrl.split('/').last}";
+      Log.i("Yuklanmoqda: $fullPath");
 
-      // Faylni yuklab olish
-      Dio dio = Dio();
-      await dio.download(fileUrl, fullPath);
+      await Dio().download(fileUrl, fullPath);
 
       if (context.mounted) {
         CustomSnackbar.show(context, "✅ Fayl saqlandi");
       }
     } catch (e) {
+      Log.e("Download error: $e");
       if (context.mounted) {
-        CustomSnackbar.show(context, "❌ Xatolik yuz berdi: $e");
+        CustomSnackbar.show(context, "❌ Xatolik: $e");
       }
     }
   }

@@ -65,8 +65,8 @@ class WChatMediaView extends StatelessWidget {
             maxHeight: _maxChatImageHeight,
           ),
           child: switch (isLocalFile) {
-            true => Image.file(File(file), fit: BoxFit.contain),
-            false => CachedNetworkImage(imageUrl: file, fit: BoxFit.contain),
+            true => Image.file(File(file), fit: BoxFit.cover),
+            false => CachedNetworkImage(imageUrl: file, fit: BoxFit.cover),
           },
         ),
       );

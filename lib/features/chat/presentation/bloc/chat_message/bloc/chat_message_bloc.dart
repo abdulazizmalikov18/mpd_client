@@ -88,8 +88,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
 
     await _repo.sendMessage(
       SendMessageEntity(
-        text: event
-            .text, // or use filteredText if you choose to filter instead of block
+        text: event.text,
         slugName: event.groupSlug,
         file: event.file,
       ),
