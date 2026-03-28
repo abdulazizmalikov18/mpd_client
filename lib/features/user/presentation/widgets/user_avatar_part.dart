@@ -4,6 +4,7 @@ import 'package:formz/formz.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_icons.dart';
 import 'package:mpd_client/app/app_images.dart';
+import 'package:mpd_client/app/colors.dart';
 import 'package:mpd_client/src/widgets/gradient_icon.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../../../app/app_export.dart';
@@ -61,19 +62,15 @@ class UserAvatarPart extends StatelessWidget {
 
   Widget setImage(bool isLocal, dynamic image, BuildContext context) {
     if (image is String) {
-      return Container(
-        height: 100.h,
-        width: 100.h,
-        decoration: BoxDecoration(
-          border: Border.all(color: context.color.white, width: 4),
-          shape: BoxShape.circle,
-          image: DecorationImage(
-            image: CachedNetworkImageProvider(image),
-            onError: (exception, stackTrace) => CachedNetworkImage(
-              imageUrl: "https://www.no5.com/media/1772/place-holder-image.png",
-            ),
-            fit: BoxFit.cover,
-          ),
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(48.r),
+        child: CachedNetworkImage(
+          imageUrl: image,
+          errorWidget: (context, url, error) =>
+              Image.asset(AppImages.mapProfileDefault, color: mainBlue),
+          height: 100.h,
+          width: 100.h,
+          fit: BoxFit.cover,
         ),
       );
     }
@@ -84,7 +81,11 @@ class UserAvatarPart extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(color: context.color.black),
           borderRadius: BorderRadius.circular(48.r),
-          image: DecorationImage(image: MemoryImage(image), fit: BoxFit.cover),
+          image: DecorationImage(
+            image: MemoryImage(image),
+            fit: BoxFit.cover,
+            onError: (exception, stackTrace) => Image.asset(AppImages.place),
+          ),
         ),
       );
     } else if (!isLocal && image != null) {
@@ -96,9 +97,7 @@ class UserAvatarPart extends StatelessWidget {
           borderRadius: BorderRadius.circular(48.r),
           image: DecorationImage(
             image: CachedNetworkImageProvider(image),
-            onError: (exception, stackTrace) => CachedNetworkImage(
-              imageUrl: "https://www.no5.com/media/1772/place-holder-image.png",
-            ),
+            onError: (exception, stackTrace) => Image.asset(AppImages.place),
             fit: BoxFit.cover,
           ),
         ),

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:mpd_client/core/utils/log_service.dart';
 
 class JsonToHTML {
@@ -222,5 +224,68 @@ class JsonToHTML {
     }
     text += '</ol>';
     return text;
+  }
+}
+
+/// Compact plain text for list previews (strips HTML / rich JSON conclusions).
+class HtmlPlainText {
+  HtmlPlainText._();
+
+  static String toPlainPreview(String? raw, {int maxLen = 200}) {
+    if (raw == null || raw.trim().isEmpty) return '';
+    final trimmed = raw.trim();
+
+    if (trimmed.startsWith('{')) {
+      try {
+        final decoded = jsonDecode(trimmed);
+        if (decoded is Map<String, dynamic>) {
+          final doc = decoded['document'];
+          if (doc is Map<String, dynamic> && doc['children'] is List) {
+            final html = JsonToHTML(doc['children'] as List).getHtml();
+            return _stripHtmlToPlain(html, maxLen);
+          }
+        }
+      } catch (e, st) {
+        Log.i('HtmlPlainText JSON conclusion parse: $e\n$st');
+      }
+    }
+
+    if (trimmed.contains('<')) {
+      return _stripHtmlToPlain(trimmed, maxLen);
+    }
+
+    return _truncate(trimmed, maxLen);
+  }
+
+  static String _stripHtmlToPlain(String html, int maxLen) {
+    var s = html;
+    const ci = false; // case-insensitive
+    s = s.replaceAll(
+      RegExp(r'<script[^>]*>[\s\S]*?</script>', caseSensitive: ci),
+      ' ',
+    );
+    s = s.replaceAll(
+      RegExp(r'<style[^>]*>[\s\S]*?</style>', caseSensitive: ci),
+      ' ',
+    );
+    s = s.replaceAll(RegExp(r'<br\s*/?>', caseSensitive: ci), ' ');
+    s = s.replaceAll(RegExp(r'</p>', caseSensitive: ci), ' ');
+    s = s.replaceAll(RegExp(r'</div>', caseSensitive: ci), ' ');
+    s = s.replaceAll(RegExp(r'<[^>]+>', caseSensitive: ci), ' ');
+    s = s
+        .replaceAll('&nbsp;', ' ')
+        .replaceAll('&amp;', '&')
+        .replaceAll('&lt;', '<')
+        .replaceAll('&gt;', '>')
+        .replaceAll('&quot;', '"')
+        .replaceAll('&#39;', "'")
+        .replaceAll(RegExp(r'&#(\d+);'), ' ');
+    s = s.replaceAll(RegExp(r'\s+'), ' ').trim();
+    return _truncate(s, maxLen);
+  }
+
+  static String _truncate(String s, int maxLen) {
+    if (maxLen <= 0 || s.length <= maxLen) return s;
+    return '${s.substring(0, maxLen)}…';
   }
 }

@@ -3,8 +3,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mpd_client/core/data/repository/storage_keys.dart';
@@ -32,48 +34,115 @@ class ChatVMController {
   ChatVMController._()
     : messageController = TextEditingController(),
       scrollController = ScrollController();
+  bool _isPicking = false;
 
   static final ValueNotifier<String?> chatNotifier = ValueNotifier(null);
   final TextEditingController messageController;
   bool get isMobile => Platform.isAndroid || Platform.isIOS;
   final ScrollController scrollController;
 
-  void sendMedia(BuildContext context, String slugName) async {
-    final result = await FilePicker.platform.pickFiles();
-    if (result?.files[0].path != null) {
-      File file = File(result!.files[0].path!);
-      if (context.mounted) {
-        context.read<ChatMessageBloc>().add(
-          ChatSendMessageEvent(
-            groupSlug: slugName,
-            file: file,
-            text: messageController.text,
-            isProfanity: () {
-              TopSnackbar.show(context, "Profanity detected");
-            },
-          ),
-        );
+  Future<bool> _isPhysicalDevice() async {
+    try {
+      if (Platform.isIOS) {
+        final info = await DeviceInfoPlugin().iosInfo;
+        return info.isPhysicalDevice;
       }
+      return true;
+    } catch (_) {
+      return true;
+    }
+  }
+
+  void sendMedia(BuildContext context, String slugName) async {
+    if (_isPicking) return;
+    _isPicking = true;
+    try {
+      final isPhysical = await _isPhysicalDevice();
+      if (isPhysical) {
+        final status = await Permission.photos.request();
+        if (status.isPermanentlyDenied) {
+          if (context.mounted) {
+            CustomSnackbar.show(
+              context,
+              "Galereyaga ruxsat berilmagan. Sozlamalardan yoqing.",
+            );
+          }
+          return;
+        }
+        if (!status.isGranted && !status.isLimited) return;
+      }
+
+      final result = await FilePicker.platform.pickFiles();
+      if (result?.files[0].path != null) {
+        File file = File(result!.files[0].path!);
+        if (context.mounted) {
+          context.read<ChatMessageBloc>().add(
+            ChatSendMessageEvent(
+              groupSlug: slugName,
+              file: file,
+              text: messageController.text,
+              isProfanity: () {
+                TopSnackbar.show(context, "Profanity detected");
+              },
+            ),
+          );
+        }
+      }
+    } on PlatformException catch (e) {
+      if (e.code == 'multiple_request') {
+        Log.w("Picker busy: multiple_request caught and ignored.");
+      } else {
+        Log.e("FilePicker Error: $e");
+      }
+    } finally {
+      _isPicking = false;
     }
   }
 
   void sendImage(BuildContext context, String slugName) async {
-    final ImagePicker picker = ImagePicker();
-    final result = await picker.pickMedia();
-    if (result?.path != null) {
-      File file = File(result!.path);
-      if (context.mounted) {
-        context.read<ChatMessageBloc>().add(
-          ChatSendMessageEvent(
-            groupSlug: slugName,
-            file: file,
-            text: messageController.text,
-            isProfanity: () {
-              TopSnackbar.show(context, "Profanity detected");
-            },
-          ),
-        );
+    if (_isPicking) return;
+    _isPicking = true;
+    try {
+      final isPhysical = await _isPhysicalDevice();
+      if (isPhysical) {
+        final status = await Permission.photos.request();
+        if (status.isPermanentlyDenied) {
+          if (context.mounted) {
+            CustomSnackbar.show(
+              context,
+              "Galereyaga ruxsat berilmagan. Sozlamalardan yoqing.",
+            );
+          }
+          return;
+        }
+        if (!status.isGranted && !status.isLimited) return;
       }
+
+      final ImagePicker picker = ImagePicker();
+      final result = await picker.pickMedia();
+      if (result?.path != null) {
+        File file = File(result!.path);
+        if (context.mounted) {
+          context.read<ChatMessageBloc>().add(
+            ChatSendMessageEvent(
+              groupSlug: slugName,
+              file: file,
+              text: messageController.text,
+              isProfanity: () {
+                TopSnackbar.show(context, "Profanity detected");
+              },
+            ),
+          );
+        }
+      }
+    } on PlatformException catch (e) {
+      if (e.code == 'multiple_request') {
+        Log.w("Picker busy: multiple_request caught and ignored.");
+      } else {
+        Log.e("ImagePicker Error: $e");
+      }
+    } finally {
+      _isPicking = false;
     }
   }
 

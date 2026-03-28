@@ -32,7 +32,14 @@ class BookAppoinment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final totalCost = Utils.priceFormat(appointment.cost! * appointment.qty!);
+    final isProduct =
+        appointment.responsible == null &&
+        (appointment.currentWorkState == null ||
+            appointment.currentWorkState!.specialist.id == 0);
+
+    final totalCost = Utils.priceFormat(
+      (appointment.cost ?? 0.0) * (appointment.qty ?? 0),
+    );
     return Scaffold(
       // backgroundColor: context.color.background,
       appBar: AppBar(title: Text(context.l10n.appointment_appointment_list)),
@@ -43,40 +50,45 @@ class BookAppoinment extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 12.h),
         child: Column(
           children: [
-            AppointmentItem(
-              specialist: SpecialistInfoModel(
-                phone: "",
-                appointmentName: appointment.name,
-                avatar:
-                    appointment.currentWorkState?.specialist.avatar ??
-                    appointment.responsible?.avatar,
-                fullname: appointment.currentWorkState != null
-                    ? '${appointment.currentWorkState?.specialist.name ?? "__"} ${appointment.currentWorkState?.specialist.lastname ?? "__"}'
-                    : '${appointment.responsible?.name ?? "__"} ${appointment.responsible?.lastname ?? "__"}',
-                job:
-                    appointment.currentWorkState?.specialist.job ??
-                    appointment.responsible?.job ??
-                    "__",
-                id:
-                    appointment.currentWorkState?.specialist.id ??
-                    appointment.responsible?.id ??
-                    0,
+            if (!isProduct)
+              AppointmentItem(
+                specialist: SpecialistInfoModel(
+                  phone: "",
+                  appointmentName: appointment.name,
+                  avatar:
+                      appointment.currentWorkState?.specialist.avatar ??
+                      appointment.responsible?.avatar,
+                  fullname: appointment.currentWorkState != null
+                      ? '${appointment.currentWorkState?.specialist.name ?? "__"} ${appointment.currentWorkState?.specialist.lastname ?? "__"}'
+                      : '${appointment.responsible?.name ?? "__"} ${appointment.responsible?.lastname ?? "__"}',
+                  job:
+                      appointment.currentWorkState?.specialist.job ??
+                      appointment.responsible?.job ??
+                      "__",
+                  id:
+                      appointment.currentWorkState?.specialist.id ??
+                      appointment.responsible?.id ??
+                      0,
+                ),
+                appoinmentInfo: appoinmentInfo,
+                bottomInfo: ViewDoctorProfileBottom(appointment: appointment),
               ),
-              appoinmentInfo: appoinmentInfo,
-              bottomInfo: ViewDoctorProfileBottom(appointment: appointment),
-            ),
             AppointmentPlaceDate(
               onPress: () => UiTools.openMapsSheet(
                 context,
-                appointment.currentWorkState?.specialist.job ?? "--",
+                isProduct
+                    ? (appointment.name ?? "MPD")
+                    : (appointment.currentWorkState?.specialist.job ?? "--"),
                 Coords(
                   appointment.currentWorkState?.specialist.location?.latitude ??
+                      appointment.responsible?.location?.latitude ??
                       41.311015,
                   appointment
                           .currentWorkState
                           ?.specialist
                           .location
                           ?.longitude ??
+                      appointment.responsible?.location?.longitude ??
                       69.279760,
                 ),
               ),

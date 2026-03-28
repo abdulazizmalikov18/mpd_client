@@ -362,7 +362,20 @@
   "report_reason_scam": "Мошенничество или обман",
   "report_reason_false_info": "Ложная информация",
   "report_reason_other": "Другая причина",
-  
+
+  "block_user": "Заблокировать",
+  "block_user_title": "Заблокировать пользователя",
+  "block_user_message": "Вы уверены, что хотите заблокировать {userName}? Вы больше не увидите сообщения и публикации этого пользователя.",
+  "block_user_confirm": "Заблокировать",
+  "block_user_cancel": "Отмена",
+  "block_user_success": "Пользователь заблокирован. Его контент будет скрыт из вашей ленты.",
+  "unblock_user": "Разблокировать",
+  "unblock_user_title": "Разблокировать пользователя",
+  "unblock_user_message": "Вы уверены, что хотите разблокировать {userName}?",
+  "unblock_user_confirm": "Разблокировать",
+  "blocked_users": "Заблокированные",
+  "no_blocked_users": "Вы ещё никого не заблокировали.",
+
   "chat_not_found_title": "Чат не найден",
   "chat_not_found_description": "Страница, которую вы ищете,\nне существует",
 
@@ -406,5 +419,7 @@
   "doctors_title": "Врачи",
   "upload_image": "Загрузить изображение",
   "error_no_data_available": "Нет доступных данных",
-  "error_not_selected": "Не выбрано"
+  "error_not_selected": "Не выбрано",
+  "no_data_available": "Нет доступных данных",
+  "not_specified": "Не указано"
 }

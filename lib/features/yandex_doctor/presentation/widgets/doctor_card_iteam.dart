@@ -97,7 +97,7 @@ class DoctorCardIteam extends StatelessWidget {
                     style: Styles.headline8.copyWith(color: context.color.grey),
                   ),
                   Text(
-                    '${specialists.minPrice != null ? Utils.priceFormat(specialists.minPrice!) : 'Free'} ${specialists.currencyCode != null ? specialists.currencyCode!.toUpperCase() : ''}',
+                    '${specialists.minPrice != null ? Utils.priceFormat(specialists.minPrice!) : context.l10n.search_filter_free} ${specialists.currencyCode != null ? specialists.currencyCode!.toUpperCase() : ''}',
                     style: Styles.semiboldTitle.copyWith(
                       color: context.color.black,
                     ),

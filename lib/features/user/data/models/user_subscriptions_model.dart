@@ -30,33 +30,70 @@ class UserSubscriptionsModel {
 
 class Subscription {
   final int? id;
+  /// API: `to_user`
   final String? username;
+  final String? followerUser;
   final String? name;
   final String? lastname;
-  final String? phone;
-  final dynamic avatar;
-  final String? mainCat;
-  final String? region;
+  final String? avatar;
+  final SubscriptionJob? job;
 
   Subscription({
     this.id,
     this.username,
+    this.followerUser,
     this.name,
     this.lastname,
-    this.phone,
     this.avatar,
-    this.mainCat,
-    this.region,
+    this.job,
   });
 
   factory Subscription.fromJson(Map<String, dynamic> json) => Subscription(
     id: json["id"],
-    username: json["username"],
+    // Backward-compat with old field name used in UI
+    username: json["to_user"] ?? json["username"],
+    followerUser: json["follower_user"],
     name: json["name"],
     lastname: json["lastname"],
-    phone: json["phone"],
     avatar: json["avatar"],
-    mainCat: json["main_cat"],
-    region: json["region"],
+    job: json["job"] == null
+        ? null
+        : SubscriptionJob.fromJson(json["job"] as Map<String, dynamic>),
+  );
+
+  /// Backward-compat with old UI usage (`mainCat` shown as job).
+  String? get mainCat => job?.name;
+
+  /// API does not currently provide region; keep for old UI.
+  String? get region => null;
+}
+
+class SubscriptionJob {
+  final String? id;
+  final String? name;
+  final String? image;
+  final int? status;
+  final String? description;
+  final int? firstLevelScore;
+  final int? levelProgressBy;
+
+  SubscriptionJob({
+    this.id,
+    this.name,
+    this.image,
+    this.status,
+    this.description,
+    this.firstLevelScore,
+    this.levelProgressBy,
+  });
+
+  factory SubscriptionJob.fromJson(Map<String, dynamic> json) => SubscriptionJob(
+    id: json["id"]?.toString(),
+    name: json["name"],
+    image: json["image"],
+    status: json["status"],
+    description: json["description"],
+    firstLevelScore: json["first_level_score"],
+    levelProgressBy: json["level_progress_by"],
   );
 }

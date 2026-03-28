@@ -2,27 +2,36 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
-import 'package:mpd_client/core/utils/log_service.dart';
+import 'package:mpd_client/features/appointment/data/models/appoinment_model.dart';
 import 'package:mpd_client/features/appointment/presentation/pages/appointment/appoinment.dart';
+import 'package:mpd_client/src/themes/styles.dart';
 import 'package:mpd_client/src/widgets/cached_image_widget.dart';
-import 'package:mpd_client/src/widgets/default_avatar.dart';
+import 'package:mpd_client/core/utils/utils.dart';
 
-import '../../../../../../src/themes/styles.dart';
-
-class AppointmentItem extends StatelessWidget {
-  final SpecialistInfoModel specialist;
+/// Bron ro‘yxatida shifokor (`responsible`) bo‘lmaganda — mahsulot / xizmat qatori.
+class AppointmentProductItem extends StatelessWidget {
+  final Appointment appointment;
   final AppoinmentInfo appoinmentInfo;
   final Widget bottomInfo;
 
-  const AppointmentItem({
+  const AppointmentProductItem({
     super.key,
-    required this.specialist,
+    required this.appointment,
     required this.appoinmentInfo,
     required this.bottomInfo,
   });
 
+  String _title(BuildContext context) {
+    final n = appointment.name?.trim();
+    if (n != null && n.isNotEmpty) return n;
+    if (appointment.product != null) return '#${appointment.product}';
+    return context.l10n.error_no_data_available;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final title = _title(context);
+
     return Container(
       margin: EdgeInsets.fromLTRB(16.w, 0, 16.w, 12.h),
       width: double.infinity,
@@ -42,10 +51,11 @@ class AppointmentItem extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 16.w, top: 16.h, right: 16.w),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildDrImage(specialist.avatar),
+                _buildLeadImage(context),
                 ScreenUtil().setHorizontalSpacing(16.w),
-                Expanded(child: _buildDrInfo(specialist, context)),
+                Expanded(child: _buildInfo(context, title)),
               ],
             ),
           ),
@@ -62,19 +72,30 @@ class AppointmentItem extends StatelessWidget {
     );
   }
 
-  //doctor image method
-  ClipRRect _buildDrImage(String? image) {
-    Log.e(image);
+  Widget _buildLeadImage(BuildContext context) {
+    final url = appointment.image?.trim();
+    if (url != null && url.isNotEmpty) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(36.r),
+        child: CachedImageWidget(url: url, size: 72),
+      );
+    }
     return ClipRRect(
       borderRadius: BorderRadius.circular(36.r),
-      child: image != null
-          ? CachedImageWidget(url: image, size: 72)
-          : const DefaultAvatar(containerSize: 72, imageSize: 60),
+      child: Container(
+        width: 72,
+        height: 72,
+        color: context.color.mainBlue.withValues(alpha: 0.08),
+        child: Icon(
+          Icons.medical_information_outlined,
+          size: 32,
+          color: context.color.mainBlue,
+        ),
+      ),
     );
   }
 
-  //doctor info method
-  Column _buildDrInfo(SpecialistInfoModel specialist, BuildContext context) {
+  Column _buildInfo(BuildContext context, String title) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -83,65 +104,38 @@ class AppointmentItem extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                specialist.fullname ?? '-',
+                title,
                 style: Styles.expTitle.copyWith(color: context.color.black),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
             const SizedBox(width: 8),
-            if (appoinmentInfo.drCardInfo != DrCardInfo.following)
+            if (appoinmentInfo.drCardInfo != DrCardInfo.following) ...[
               _buildStatusBar(),
+            ],
           ],
         ),
-        ScreenUtil().setVerticalSpacing(2.h),
-        Container(
-          constraints: BoxConstraints(maxWidth: 140.w),
-          child: Text(
-            (specialist.job?.trim().isNotEmpty ?? false)
-                ? specialist.job!
-                : context.l10n.not_specified,
-            style: Styles.headline7.copyWith(
-              fontSize: 14,
-              color: context.color.mainBlue,
-            ),
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
+        ScreenUtil().setVerticalSpacing(6.h),
+        Text(
+          '${Utils.priceFormat(appointment.cost ?? 0.0)} UZS',
+          style: Styles.boldHeadline6.copyWith(
+            fontSize: 14.sp,
+            color: context.color.mainBlue,
           ),
         ),
-        ScreenUtil().setVerticalSpacing(3.h),
-        if (appoinmentInfo.drCardInfo != DrCardInfo.following)
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 220),
-            child: Text(
-              specialist.appointmentName ?? context.l10n.not_specified,
-              style: Styles.cardReview.copyWith(
-                color: context.color.red,
-                fontSize: 12,
-              ),
-            ),
+        ScreenUtil().setVerticalSpacing(4.h),
+        Text(
+          '${context.l10n.appointment_amount}: ${appointment.qty ?? 0}',
+          style: Styles.cardReview.copyWith(
+            color: context.color.grey,
+            fontSize: 12.sp,
           ),
-        // if (appoinmentInfo.drCardInfo == DrCardInfo.following)
-        //   Row(
-        //     crossAxisAlignment: CrossAxisAlignment.start,
-        //     children: [
-        //       AppIcons.location.svg(color: context.color.mainBlue),
-        //       ScreenUtil().setHorizontalSpacing(8.w),
-        //       Text(
-        //         specialist.workingTime.toString(),
-        //         style: Styles.descSubtitle.copyWith(
-        //           fontSize: 14.sp,
-        //           color: context.color.grey,
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ScreenUtil().setVerticalSpacing(12.h),
+        ),
       ],
     );
   }
 
-  // method statusbar
   Widget _buildStatusBar() {
     return Container(
       alignment: Alignment.center,

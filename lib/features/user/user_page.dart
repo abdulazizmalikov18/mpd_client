@@ -4,6 +4,7 @@ import 'package:formz/formz.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
+import 'package:mpd_client/app/app_images.dart';
 import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/features/user/presentation/pages/terms_of_use_view.dart';
 import 'package:mpd_client/features/user/presentation/widgets/language_sheet.dart';
@@ -54,12 +55,14 @@ class _UserPageState extends State<UserPage> {
                       );
                     }
                     return CachedNetworkImage(
-                      imageUrl:
-                          state.userInfo?.backgroundImage ??
-                          "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
+                      imageUrl: state.userInfo?.backgroundImage ?? "",
                       fit: BoxFit.cover,
                       height: 200.h,
                       width: double.maxFinite,
+                      errorWidget: (context, url, error) => Padding(
+                        padding: const EdgeInsets.all(32),
+                        child: Image.asset(AppImages.logo),
+                      ),
                     );
                   },
                 ),

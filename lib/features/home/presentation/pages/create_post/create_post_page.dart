@@ -81,15 +81,15 @@ class CreatePostPage extends StatelessWidget {
                 Navigator.pop(context);
                 Navigator.of(context).pop(true);
               } else if (state is CreatePostFailure) {
-                Navigator.pop(context);
-                if (state.failure.startsWith('<!')) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    UiTools.failurefailureSnackBar(
-                      title: 'Oh snap',
-                      message: state.failure,
-                    ),
-                  );
+                if (state.isActionFailure) {
+                  Navigator.pop(context);
                 }
+                ScaffoldMessenger.of(context).showSnackBar(
+                  UiTools.failurefailureSnackBar(
+                    title: 'Xatolik',
+                    message: state.failure,
+                  ),
+                );
               }
             },
             child: Padding(

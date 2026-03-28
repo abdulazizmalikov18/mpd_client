@@ -1061,8 +1061,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get block_user_title => 'Block User';
 
   @override
-  String get block_user_message =>
-      'Are you sure you want to block this user? You won\'t see their messages or posts anymore.';
+  String block_user_message(String userName) {
+    return 'Are you sure you want to block $userName? You won\'t see their messages or posts anymore.';
+  }
 
   @override
   String get block_user_confirm => 'Block';
@@ -1081,8 +1082,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get unblock_user_title => 'Unblock User';
 
   @override
-  String get unblock_user_message =>
-      'Are you sure you want to unblock this user?';
+  String unblock_user_message(String userName) {
+    return 'Are you sure you want to unblock $userName?';
+  }
 
   @override
   String get unblock_user_confirm => 'Unblock';
@@ -1223,4 +1225,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get error_not_selected => 'Not selected';
+
+  @override
+  String get no_data_available => 'No data available';
+
+  @override
+  String get not_specified => 'Not specified';
 }

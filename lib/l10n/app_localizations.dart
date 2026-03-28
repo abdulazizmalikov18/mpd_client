@@ -2149,8 +2149,8 @@ abstract class AppLocalizations {
   /// No description provided for @block_user_message.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to block this user? You won\'t see their messages or posts anymore.'**
-  String get block_user_message;
+  /// **'Are you sure you want to block {userName}? You won\'t see their messages or posts anymore.'**
+  String block_user_message(String userName);
 
   /// No description provided for @block_user_confirm.
   ///
@@ -2185,8 +2185,8 @@ abstract class AppLocalizations {
   /// No description provided for @unblock_user_message.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to unblock this user?'**
-  String get unblock_user_message;
+  /// **'Are you sure you want to unblock {userName}?'**
+  String unblock_user_message(String userName);
 
   /// No description provided for @unblock_user_confirm.
   ///
@@ -2445,6 +2445,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Not selected'**
   String get error_not_selected;
+
+  /// No description provided for @no_data_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No data available'**
+  String get no_data_available;
+
+  /// No description provided for @not_specified.
+  ///
+  /// In en, this message translates to:
+  /// **'Not specified'**
+  String get not_specified;
 }
 
 class _AppLocalizationsDelegate

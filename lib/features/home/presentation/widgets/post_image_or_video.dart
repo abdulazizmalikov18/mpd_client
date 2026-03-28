@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:mpd_client/app/app_images.dart';
+import 'package:mpd_client/app/colors.dart';
 import 'package:mpd_client/core/utils/log_service.dart';
 import 'package:mpd_client/features/home/domain/service/flick_multi_manger.dart';
 import 'package:mpd_client/src/widgets/flick_video_widget.dart';
@@ -197,7 +198,7 @@ class _PostImageOrVideoState extends State<PostImageOrVideo>
     if (hasError) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Image.asset(AppImages.logo),
+        child: Image.asset(AppImages.logo, color: mainBlue),
       );
     }
 

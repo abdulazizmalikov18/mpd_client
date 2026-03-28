@@ -15,6 +15,7 @@ import 'package:mpd_client/src/tools/ui_tools.dart';
 import '../../../../data/models/appointment_arg_model.dart';
 import 'appointment_bottom_info.dart';
 import 'appointment_item.dart';
+import 'appointment_product_item.dart';
 
 class AppointmentList extends StatelessWidget {
   final int infoIndex;
@@ -65,6 +66,16 @@ class AppointmentList extends StatelessWidget {
         itemCount: appointments.length,
         itemBuilder: (context, index) {
           final appointment = appointments[index];
+          final bottom = getBottomWidget(appointment, infos, context);
+
+          if (appointment.responsible == null) {
+            return AppointmentProductItem(
+              appointment: appointment,
+              appoinmentInfo: infos[infoIndex],
+              bottomInfo: bottom,
+            );
+          }
+
           return AppointmentItem(
             specialist: SpecialistInfoModel(
               appointmentName: appointment.name,
@@ -85,7 +96,7 @@ class AppointmentList extends StatelessWidget {
                   0,
             ),
             appoinmentInfo: infos[infoIndex],
-            bottomInfo: getBottomWidget(appointments[index], infos, context),
+            bottomInfo: bottom,
           );
         },
         paginatorStatus: paginatorStatus,

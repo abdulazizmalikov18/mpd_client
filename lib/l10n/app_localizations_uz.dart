@@ -1073,43 +1073,45 @@ class AppLocalizationsUz extends AppLocalizations {
   String get report_reason_other => 'Boshqa sabab';
 
   @override
-  String get block_user => 'Block User';
+  String get block_user => 'Foydalanuvchini bloklash';
 
   @override
-  String get block_user_title => 'Block User';
+  String get block_user_title => 'Foydalanuvchini bloklash';
 
   @override
-  String get block_user_message =>
-      'Are you sure you want to block this user? You won\'t see their messages or posts anymore.';
+  String block_user_message(String userName) {
+    return 'Haqiqatan ham $userName ni bloklamoqchimisiz? Uning xabarlari va postlari endi ko‘rinmaydi.';
+  }
 
   @override
-  String get block_user_confirm => 'Block';
+  String get block_user_confirm => 'Bloklash';
 
   @override
-  String get block_user_cancel => 'Cancel';
+  String get block_user_cancel => 'Bekor qilish';
 
   @override
   String get block_user_success =>
-      'User has been blocked successfully. Their content will be hidden from your feed.';
+      'Foydalanuvchi bloklandi. Uning kontenti tasmingizdan yashiriladi.';
 
   @override
-  String get unblock_user => 'Unblock User';
+  String get unblock_user => 'Blokdan chiqarish';
 
   @override
-  String get unblock_user_title => 'Unblock User';
+  String get unblock_user_title => 'Blokdan chiqarish';
 
   @override
-  String get unblock_user_message =>
-      'Are you sure you want to unblock this user?';
+  String unblock_user_message(String userName) {
+    return 'Haqiqatan ham $userName uchun blokni yechmoqchimisiz?';
+  }
 
   @override
-  String get unblock_user_confirm => 'Unblock';
+  String get unblock_user_confirm => 'Blokni yechish';
 
   @override
-  String get blocked_users => 'Blocked Users';
+  String get blocked_users => 'Bloklangan foydalanuvchilar';
 
   @override
-  String get no_blocked_users => 'You haven\'t blocked any users yet.';
+  String get no_blocked_users => 'Hali hech kimni bloklamagansiz.';
 
   @override
   String get termsOfUseTitle => 'Foydalanish shartlari';
@@ -1241,4 +1243,10 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get error_not_selected => 'Tanlanmagan';
+
+  @override
+  String get no_data_available => 'Ma\'lumot mavjud emas';
+
+  @override
+  String get not_specified => 'Ko\'rsatilmagan';
 }

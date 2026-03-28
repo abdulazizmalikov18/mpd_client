@@ -93,8 +93,8 @@ class BlockUserDialog extends StatelessWidget {
       ),
       content: Text(
         isBlocked
-            ? context.l10n.unblock_user_message
-            : context.l10n.block_user_message.replaceAll('this user', userName),
+            ? context.l10n.unblock_user_message(userName)
+            : context.l10n.block_user_message(userName),
       ),
       actions: [
         TextButton(

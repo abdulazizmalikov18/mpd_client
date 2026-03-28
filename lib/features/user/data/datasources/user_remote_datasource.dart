@@ -168,7 +168,7 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
           queryParameters: {
             if (query == null) "limit": limit,
             if (query == null) "offset": offset,
-            "search": ?query,
+            "search": query,
           },
         );
       },
@@ -191,7 +191,7 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
           queryParameters: {
             if (query == null) "limit": limit,
             if (query == null) "offset": offset,
-            "search": ?query,
+            "search": query,
           },
           options: Options(
             headers: <String, dynamic>{

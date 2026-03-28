@@ -1053,43 +1053,45 @@ class AppLocalizationsRu extends AppLocalizations {
   String get report_reason_other => 'Другая причина';
 
   @override
-  String get block_user => 'Block User';
+  String get block_user => 'Заблокировать';
 
   @override
-  String get block_user_title => 'Block User';
+  String get block_user_title => 'Заблокировать пользователя';
 
   @override
-  String get block_user_message =>
-      'Are you sure you want to block this user? You won\'t see their messages or posts anymore.';
+  String block_user_message(String userName) {
+    return 'Вы уверены, что хотите заблокировать $userName? Вы больше не увидите сообщения и публикации этого пользователя.';
+  }
 
   @override
-  String get block_user_confirm => 'Block';
+  String get block_user_confirm => 'Заблокировать';
 
   @override
-  String get block_user_cancel => 'Cancel';
+  String get block_user_cancel => 'Отмена';
 
   @override
   String get block_user_success =>
-      'User has been blocked successfully. Their content will be hidden from your feed.';
+      'Пользователь заблокирован. Его контент будет скрыт из вашей ленты.';
 
   @override
-  String get unblock_user => 'Unblock User';
+  String get unblock_user => 'Разблокировать';
 
   @override
-  String get unblock_user_title => 'Unblock User';
+  String get unblock_user_title => 'Разблокировать пользователя';
 
   @override
-  String get unblock_user_message =>
-      'Are you sure you want to unblock this user?';
+  String unblock_user_message(String userName) {
+    return 'Вы уверены, что хотите разблокировать $userName?';
+  }
 
   @override
-  String get unblock_user_confirm => 'Unblock';
+  String get unblock_user_confirm => 'Разблокировать';
 
   @override
-  String get blocked_users => 'Blocked Users';
+  String get blocked_users => 'Заблокированные';
 
   @override
-  String get no_blocked_users => 'You haven\'t blocked any users yet.';
+  String get no_blocked_users => 'Вы ещё никого не заблокировали.';
 
   @override
   String get termsOfUseTitle => 'Условия использования';
@@ -1222,4 +1224,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get error_not_selected => 'Не выбрано';
+
+  @override
+  String get no_data_available => 'Нет доступных данных';
+
+  @override
+  String get not_specified => 'Не указано';
 }

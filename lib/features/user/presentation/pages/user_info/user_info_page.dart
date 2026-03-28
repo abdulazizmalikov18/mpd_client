@@ -6,6 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpd_client/app/app_colors.dart';
 import 'package:mpd_client/app/app_export.dart';
 import 'package:mpd_client/app/app_icons.dart';
+import 'package:mpd_client/app/app_images.dart';
+import 'package:mpd_client/app/colors.dart';
 import 'package:mpd_client/core/utils/utils.dart';
 import 'package:mpd_client/core/validator/validators.dart';
 import 'package:mpd_client/features/authentication/domain/blocs/register/register_bloc.dart';
@@ -130,9 +132,11 @@ class _UserInfoState extends State<UserInfo> {
                       );
                     }
                     return CachedNetworkImage(
-                      imageUrl:
-                          state.userInfo?.backgroundImage ??
-                          "https://avatars.mds.yandex.net/i?id=e002a4f0a9bf62b531dc38e481d078dcb0ff2ed3-4011696-images-thumbs&n=13",
+                      imageUrl: state.userInfo?.backgroundImage ?? "",
+                      errorWidget: (context, url, error) => Padding(
+                        padding: const EdgeInsets.all(32),
+                        child: Image.asset(AppImages.logo, color: mainBlue),
+                      ),
                       fit: BoxFit.cover,
                       height: 200.h,
                       width: double.maxFinite,
@@ -412,17 +416,21 @@ class _UserInfoState extends State<UserInfo> {
         ),
       );
     } else if (memoryImage != null) {
-      return Container(
-        height: 100.h,
-        width: 100.h,
-        decoration: BoxDecoration(
-          border: Border.all(color: context.color.white, width: 4),
-          shape: BoxShape.circle,
-          image: DecorationImage(
-            image: CachedNetworkImageProvider(memoryImage),
-            onError: (exception, stackTrace) =>
-                const DefaultAvatar(containerSize: 96, imageSize: 72),
-            fit: BoxFit.cover,
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(48.r),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            border: Border.all(color: mainBlue, width: 4),
+            shape: BoxShape.circle,
+          ),
+          child: CachedNetworkImage(
+            imageUrl: memoryImage,
+            height: 100.h,
+            width: 100.h,
+            errorWidget: (context, url, error) => Padding(
+              padding: const EdgeInsets.all(8),
+              child: Image.asset(AppImages.mapProfileDefault, color: mainBlue),
+            ),
           ),
         ),
       );

@@ -182,17 +182,27 @@ class _DrProfileByidState extends State<DrProfileByid> {
                           ScreenUtil().setVerticalSpacing(6.h),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 48.w),
-                            child: Text(
-                              widget.specialist.job != null
-                                  ? "--"
-                                  : widget.specialist.job ?? "",
-                              style: Styles.descSubtitle.copyWith(
-                                color: context.color.grey,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.center,
-                            ),
+                            child:
+                                BlocBuilder<
+                                  DoctorProfileBloc,
+                                  DoctorProfileState
+                                >(
+                                  builder: (context, state) {
+                                    String job = widget.specialist.job ?? "";
+                                    if (state is DoctorProfileSuccess) {
+                                      job = state.doctor?.job.name ?? job;
+                                    }
+                                    return Text(
+                                      job.isNotEmpty ? job : "--",
+                                      style: Styles.descSubtitle.copyWith(
+                                        color: context.color.grey,
+                                      ),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.center,
+                                    );
+                                  },
+                                ),
                           ),
                           const Spacer(),
                           BlocBuilder<UserInfoBloc, UserInfoState>(

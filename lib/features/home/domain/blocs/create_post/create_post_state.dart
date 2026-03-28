@@ -26,9 +26,11 @@ class CreatePostSucces extends CreatePostState {
 
 class CreatePostFailure extends CreatePostState {
   final String failure;
+  final bool isActionFailure;
   const CreatePostFailure(
     super.files, {
     required this.failure,
+    this.isActionFailure = false,
     super.isValidImage,
   });
 }
