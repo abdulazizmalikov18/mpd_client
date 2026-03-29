@@ -3,6 +3,7 @@
 //     final userInfoUpdateModel = userInfoUpdateModelFromJson(jsonString);
 
 import 'dart:convert';
+import 'package:dio/dio.dart';
 
 UserInfoUpdateModel userInfoUpdateModelFromJson(String str) =>
     UserInfoUpdateModel.fromJson(json.decode(str));
@@ -26,6 +27,11 @@ class UserInfoUpdateModel {
     this.imageAvatar,
     this.mainCat,
     this.region,
+    this.diplom,
+    this.pinfl,
+    this.course,
+    this.education,
+    this.currentPlace,
   });
 
   String? username;
@@ -44,6 +50,11 @@ class UserInfoUpdateModel {
   String? avatar;
   String? backgroundImage;
   dynamic region;
+  String? diplom;
+  String? pinfl;
+  String? course;
+  String? education;
+  String? currentPlace;
 
   factory UserInfoUpdateModel.fromJson(Map<String, dynamic> json) =>
       UserInfoUpdateModel(
@@ -67,12 +78,20 @@ class UserInfoUpdateModel {
     final birthDayFormated = birthday?.split('.').reversed.join('-');
     Map<String, dynamic> map = {
       if (name != null) "name": name,
+      if (surname != null) "surname": surname,
       if (lastname != null) "lastname": lastname,
       if (birthday != null) "birthday": birthDayFormated,
       if (bio != null && bio!.isNotEmpty) "bio": bio,
       if (gender != null) "gender": gender,
       if (mainCat != null) "main_cat": mainCat,
       if (region != null) "region": region,
+      if (diplom != null && diplom!.isNotEmpty && !diplom!.startsWith('http')) 
+        "diplom": MultipartFile.fromFileSync(diplom!, filename: diplom!.split('/').last),
+      if (pinfl != null && pinfl!.isNotEmpty) "pinfl": pinfl,
+      if (course != null && course!.isNotEmpty && !course!.startsWith('http')) 
+        "course": MultipartFile.fromFileSync(course!, filename: course!.split('/').last),
+      if (education != null && education!.isNotEmpty) "education": education,
+      if (currentPlace != null && currentPlace!.isNotEmpty) "current_place": currentPlace,
     };
     return map;
   }

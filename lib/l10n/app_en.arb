@@ -16,7 +16,6 @@
   "presentation_four_page": "Quick emergency access",
   "presentation_four_page_description": "Connect to emergency services instantly through the app.",
   "presentation_get_started": "Get Started",
-
   "login_text": "Welcome Back!\nLogin to continue",
   "login_phone": "Phone number or username",
   "login_password": "Password",
@@ -27,11 +26,9 @@
   "login_register": "Sign Up",
   "login_error_account": "User not found",
   "login_error": "Incorrect credentials",
-
   "restore_account": "Account Recovery",
   "restore_phone": "Enter your phone number",
   "restore_button_restore": "Recover Account",
-
   "register_title": "Join MPD!\nCreate your account",
   "register_phone": "Phone number",
   "register_terms_of_use": "I agree to the Terms of Use",
@@ -40,13 +37,11 @@
   "register_privacy_policy": "Privacy Policy",
   "register_agree_privacy_and_policy": "I agree and continue",
   "register_error_number_format": "Invalid phone number",
-
   "register_verify_code": "Verification Code",
   "register_verify_code_description": "Enter the 6-digit code sent to your phone",
   "register_verify_code_sent_again": "Resend Code",
   "register_verify_code_from_message": "Paste from SMS",
   "register_verify_code_error_code_write": "Invalid code",
-
   "register_create_password": "Create Password",
   "register_new_password": "New Password",
   "register_new_password_confirm": "Confirm Password",
@@ -54,7 +49,6 @@
   "register_error_code_password_missmatch": "Passwords don't match",
   "register_error_code_password_cant_empty": "Field cannot be empty",
   "register_error_code_password_mistake": "Password must be at least 8 characters",
-
   "register_user_info": "Complete your profile",
   "register_login": "Username",
   "register_firstname": "First Name",
@@ -76,12 +70,10 @@
   "register_error_code_text_cant_empty": "Field cannot be empty",
   "register_error_code_text_short": "Must be at least 6 characters",
   "register_error_code_username_exist": "Username already exists!",
-
   "navbar_home": "Home",
   "navbar_Doctor": "Doctors",
   "navbar_Appointment": "Appointments",
   "navbar_profile": "Profile",
-
   "lenth_hello": "Hello",
   "lenth_likes": "Likes",
   "lenth_comment": "Comments",
@@ -101,13 +93,11 @@
   "lenth_days_ago": "days ago",
   "lenth_hours_ago": "hours ago",
   "lenth_minutes_ago": "minutes ago",
-
   "lenth_create_post": "Create Post",
   "lenth_image_add": "Add Image/Video",
   "lenth_post_description": "Description",
   "lenth_postwrite": "Write something...",
   "lenth_publish_post": "Publish",
-
   "search_doctor": "Find a Specialist",
   "search_doctor_loading": "Loading...",
   "search_doctor_showing": "Showing results",
@@ -122,7 +112,6 @@
   "search_filter_free": "Free",
   "search_filter_reset": "Reset",
   "search_filter_apply": "Apply",
-
   "book_doctor_follow": "Follow",
   "book_doctor_unfollow": "Unfollow",
   "book_doctor_book": "Book Appointment",
@@ -155,9 +144,7 @@
   "book_doctor_reviews_cancel_subtitle": "This appointment was cancelled. Please book a new slot.",
   "book_doctor_reviews_cancel_first_button": "Re-book",
   "book_doctor_reviews_cancel_second_button": "Choose Another",
-
   "select_the_map": "Select on Map",
-
   "book_appointment_page": "Select Service",
   "book_appointment_select": "Choose the service you need",
   "book_appointment_selected": "services selected",
@@ -172,7 +159,6 @@
   "book_appointment_comment_write": "Add notes (optional)",
   "book_appointment_time_error": "This slot is already booked",
   "book_appointment_date_error": "Not available on this day",
-
   "pay_appointment_page": "Payment",
   "pay_appointment_page_title": "Select Payment Method",
   "pay_appointment_payme_subscribe": "Pay with Card",
@@ -186,7 +172,6 @@
   "pay_appointment_card_name": "Cardholder Name",
   "pay_appointment_card_add": "Add Card",
   "pay_appointment_card_empty": "Field cannot be empty",
-
   "appointment_main_page": "My Appointments",
   "appointment_upcoming": "Upcoming",
   "appointment_upcoming_title": "No Appointments",
@@ -214,7 +199,6 @@
   "appointment_discount_coupons": "Discounts & Coupons",
   "appointment_payment_method": "Payment Method",
   "appointment_total": "Total",
-
   "cancel_appointment": "Cancel Appointment",
   "cancel_appointment_are_you_sure": "Are you sure you want to cancel?",
   "cancel_appointment_change_my_mind": "Change My Mind",
@@ -222,7 +206,6 @@
   "cancel_appointment_desctiption": "Reason for cancellation",
   "cancel_appointment_confirm": "Yes, Cancel",
   "cancel_appointment_not_want": "No, Keep It",
-  
   "my_qr_code": "My QR Code",
   "sos": "SOS",
   "dtp": "Accident",
@@ -251,9 +234,6 @@
   "no_posts": "No Posts",
   "refresh": "Refresh",
   "notAvailable": "--",
-  "sos": "SOS",
-  "dtp": "Accident",
-
   "records_title": "Medical Records",
   "records_seach": "Search Records",
   "records_not_found": "No Records Found",
@@ -262,7 +242,6 @@
   "records_prescription": "Prescriptions",
   "records_record": "Records",
   "records_view_doctor_profile": "View Doctor",
-
   "profile_language_uz": "Uzbek",
   "profile_language_ru": "Russian",
   "profile_language_en": "English",
@@ -297,7 +276,6 @@
   "profile_logout_page": "Are you sure you want to log out?",
   "profile_logout_yes": "Log Out",
   "profile_logout_cancel": "Cancel",
-
   "error_internal_server_title": "Server Error",
   "error_internal_server_subtitle": "MPD is temporarily unavailable. Please try again later.",
   "error_connection_lost_title": "No Internet",
@@ -306,7 +284,6 @@
   "error_pagenot_found_subtitle": "The page you requested doesn't exist",
   "error_try_again": "Try Again",
   "error_return_tohome": "Go Home",
-
   "posts": "Posts",
   "about": "About",
   "aboutYou": "About you",
@@ -327,30 +304,24 @@
   "search": "Search",
   "notification": "Notification",
   "noData": "No data",
-
   "userExists": "This user still exists",
   "well": "Well",
   "forgotPassword": "Forgot password?",
   "passwordShort": "This password is too short. It must contain at least 6 characters.",
   "empty": "Can't be empty",
   "reset_password_success": "Password has been reset successfully",
-  
   "notification_no_notification": "No Notification",
   "notification_no_notification_description": "You have no notification",
   "specialist_status_pending": "Pending",
   "specialist_status_approved": "Approved",
-  
   "no_data_title": "No Data",
   "no_data_description": "No information has been entered yet",
-  
   "chat_not_found_title": "Chat Not Found",
   "chat_not_found_description": "The page you are looking\nfor doesn't exist",
-  
   "notification_clear_all": "Clear All",
   "notification_clear_all_description": "Are you sure you want to clear all notifications?",
   "notification_clear_all_cancel": "Cancel",
   "notification_clear_all_confirm": "Clear All",
-  
   "report_title": "Report message",
   "report_description": "Why are you reporting this message?",
   "report_cancel": "Cancel",
@@ -367,7 +338,6 @@
   "report_reason_scam": "Scam or fraud",
   "report_reason_false_info": "False information",
   "report_reason_other": "Something else",
-
   "block_user": "Block User",
   "block_user_title": "Block User",
   "block_user_message": "Are you sure you want to block {userName}? You won't see their messages or posts anymore.",
@@ -394,7 +364,6 @@
   "unblock_user_confirm": "Unblock",
   "blocked_users": "Blocked Users",
   "no_blocked_users": "You haven't blocked any users yet.",
-
   "termsOfUseTitle": "Terms of Use",
   "termsLastUpdated": "Last updated: November 12, 2025",
   "termsIntroduction": "Welcome to MPD. By accessing or using our application, you agree to be bound by these Terms of Use.",
@@ -411,7 +380,6 @@
   "termsLimitationLiabilityTitle": "6. Limitation of Liability",
   "termsLimitationLiabilityContent": "In no event shall MPD be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of the application.",
   "termsContactUs": "If you have any questions about these Terms, please contact us at support@mpdinfo.uz",
-
   "profile_following_doctors_empty_title": "You are not following anyone yet",
   "profile_following_doctors_empty_description": "Follow doctors and avail their services easily",
   "common_loading": "Loading...",
@@ -437,5 +405,22 @@
   "error_no_data_available": "No data available",
   "error_not_selected": "Not selected",
   "no_data_available": "No data available",
-  "not_specified": "Not specified"
+  "not_specified": "Not specified",
+  "profile_my_documents": "My documents",
+  "profile_no_documents": "No documents available",
+  "profile_upload_new_document": "Upload new document",
+  "profile_diploma": "Diploma",
+  "profile_course_certificate": "Course certificate",
+  "profile_upload_document": "Upload document",
+  "profile_document_format_hint": "Document (PDF, JPEG, etc.)",
+  "profile_pinfl": "PINFL",
+  "profile_residence_address": "Residence address",
+  "profile_bio": "Bio",
+  "profile_education": "Education",
+  "education_high": "Higher",
+  "education_medium_special": "Secondary special",
+  "education_medium": "Secondary",
+  "education_unfinished_high": "Incomplete higher",
+  "education_none": "None",
+  "profile_patronymic": "Patronymic"
 }

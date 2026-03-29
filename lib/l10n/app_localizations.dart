@@ -2457,6 +2457,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Not specified'**
   String get not_specified;
+
+  /// No description provided for @profile_my_documents.
+  ///
+  /// In en, this message translates to:
+  /// **'My documents'**
+  String get profile_my_documents;
+
+  /// No description provided for @profile_no_documents.
+  ///
+  /// In en, this message translates to:
+  /// **'No documents available'**
+  String get profile_no_documents;
+
+  /// No description provided for @profile_upload_new_document.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload new document'**
+  String get profile_upload_new_document;
+
+  /// No description provided for @profile_diploma.
+  ///
+  /// In en, this message translates to:
+  /// **'Diploma'**
+  String get profile_diploma;
+
+  /// No description provided for @profile_course_certificate.
+  ///
+  /// In en, this message translates to:
+  /// **'Course certificate'**
+  String get profile_course_certificate;
+
+  /// No description provided for @profile_upload_document.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload document'**
+  String get profile_upload_document;
+
+  /// No description provided for @profile_document_format_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Document (PDF, JPEG, etc.)'**
+  String get profile_document_format_hint;
+
+  /// No description provided for @profile_pinfl.
+  ///
+  /// In en, this message translates to:
+  /// **'PINFL'**
+  String get profile_pinfl;
+
+  /// No description provided for @profile_residence_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Residence address'**
+  String get profile_residence_address;
+
+  /// No description provided for @profile_bio.
+  ///
+  /// In en, this message translates to:
+  /// **'Bio'**
+  String get profile_bio;
+
+  /// No description provided for @profile_education.
+  ///
+  /// In en, this message translates to:
+  /// **'Education'**
+  String get profile_education;
+
+  /// No description provided for @education_high.
+  ///
+  /// In en, this message translates to:
+  /// **'Higher'**
+  String get education_high;
+
+  /// No description provided for @education_medium_special.
+  ///
+  /// In en, this message translates to:
+  /// **'Secondary special'**
+  String get education_medium_special;
+
+  /// No description provided for @education_medium.
+  ///
+  /// In en, this message translates to:
+  /// **'Secondary'**
+  String get education_medium;
+
+  /// No description provided for @education_unfinished_high.
+  ///
+  /// In en, this message translates to:
+  /// **'Incomplete higher'**
+  String get education_unfinished_high;
+
+  /// No description provided for @education_none.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get education_none;
+
+  /// No description provided for @profile_patronymic.
+  ///
+  /// In en, this message translates to:
+  /// **'Patronymic'**
+  String get profile_patronymic;
 }
 
 class _AppLocalizationsDelegate

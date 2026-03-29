@@ -16,7 +16,6 @@
   "presentation_four_page": "Favqulodda xizmatlardan foydalanish",
   "presentation_four_page_description": "Foydalanuvchilar MPD ilovasi orqali bir necha marta bosish orqali favqulodda xizmatlarga tezkor kirishlari mumkin",
   "presentation_get_started": "Boshlash",
-
   "login_text": "Salom!\nAkkauntingizga kiring",
   "login_phone": "Telefon raqam yoki foydalanuvchi nomi",
   "login_password": "Mahfiy parol",
@@ -27,11 +26,9 @@
   "login_register": "Ro'yxatdan o'tish",
   "login_error_account": "Akkaunt topilmadi",
   "login_error": "Telefor yo'ki mahfiy son noto'g'ri",
-
   "restore_account": "Akkauntni tiklash uchun telefon raqamingizni kiriting",
   "restore_phone": "Telefon raqam",
   "restore_button_restore": "Akkauntni tiklash",
-
   "register_title": "MPDga xush kelibsiz!\nRo'yxatdan o'ting",
   "register_phone": "Telefon raqam",
   "register_terms_of_use": "Eslatish qoidalarini qabul qilaman",
@@ -40,13 +37,11 @@
   "register_privacy_policy": "Qoida va talablar",
   "register_agree_privacy_and_policy": "Qabul qilaman va davom etish",
   "register_error_number_format": "Telefon formati noto'g'ri",
-
   "register_verify_code": "Tasdiqlash kodi",
   "register_verify_code_description": "6-sonli sonlarni kiriting",
   "register_verify_code_sent_again": "Qayta jo'natish",
   "register_verify_code_from_message": "Kodni SMSdan olish",
   "register_verify_code_error_code_write": "SMS kod noto'g'ri",
-
   "register_create_password": "Mahfiy parol yaratish",
   "register_new_password": "Yangi mahfiy parol",
   "register_new_password_confirm": "Mahfiy parolni tasdiqlash",
@@ -54,7 +49,6 @@
   "register_error_code_password_missmatch": "Mahfiy parollar bir xil emas",
   "register_error_code_password_cant_empty": "Maydon bo'sh bo'lmasin",
   "register_error_code_password_mistake": "Mahfiy parol juda qisqa. 8-ta sondan ortiq bo'lishi shart.",
-
   "register_user_info": "Ro'yxatdan o'tish uchun ma'lumotlarni to'ldiring",
   "register_login": "Akkaunt",
   "register_firstname": "Ism",
@@ -76,12 +70,10 @@
   "register_error_code_text_cant_empty": "Maydon bo'sh bo'lmasin",
   "register_error_code_text_short": "6-ta sonli SMS noto'g'ri",
   "register_error_code_username_exist": "Bunday akkaunt yaratilgan!",
-
   "navbar_home": "Asosiy",
   "navbar_Doctor": "Shifokorlar",
   "navbar_Appointment": "Qaydlarim",
   "navbar_profile": "Profil",
-
   "lenth_hello": "Salom,",
   "lenth_likes": "layklar",
   "lenth_comment": "Kommentlar",
@@ -101,13 +93,11 @@
   "lenth_days_ago": "kunlar oldin",
   "lenth_hours_ago": "soatlar oldin",
   "lenth_minutes_ago": "daqiqalar oldin",
-
   "lenth_create_post": "Post yaratish",
   "lenth_image_add": "Rasm yo'ki video yuklash",
   "lenth_post_description": "Tavsif",
   "lenth_postwrite": "Yo'zing",
   "lenth_publish_post": "Yuklash",
-
   "search_doctor": "Shifokor qidirish",
   "search_doctor_loading": "Yuklanmoqda",
   "search_doctor_showing": "Ko'rsatilmoqda",
@@ -122,7 +112,6 @@
   "search_filter_free": "Sarf xarajatsiz",
   "search_filter_reset": "Tozalash",
   "search_filter_apply": "Qabul qilish",
-
   "book_doctor_follow": "Kuzatish",
   "book_doctor_unfollow": "Kuzatmaslik",
   "book_doctor_book": "Xizmatni band qilish",
@@ -155,9 +144,7 @@
   "book_doctor_reviews_cancel_subtitle": "Hozir band qila olmaysiz, toʻgʻri vaqt va oxirgini yana tanlang",
   "book_doctor_reviews_cancel_first_button": "Qayta bron qilish",
   "book_doctor_reviews_cancel_second_button": "Boshqa uchrashuvni bron qiling",
-
   "select_the_map": "Xaritani tanlang",
-
   "book_appointment_page": "Xizmatni tanlang",
   "book_appointment_select": "Sizni qiziqtirgan xizmatni tanlang",
   "book_appointment_selected": "xizmatlar tanlangan",
@@ -172,7 +159,6 @@
   "book_appointment_comment_write": "Izoh yo'zing",
   "book_appointment_time_error": "Ushbu vaqtni boshqa bemor band qilgan",
   "book_appointment_date_error": "Shifokor bugun ishlamaydi",
-
   "pay_appointment_page": "To'lov",
   "pay_appointment_page_title": "To'lov turini tanlang",
   "pay_appointment_payme_subscribe": "Karta bilan to'lash",
@@ -186,7 +172,6 @@
   "pay_appointment_card_name": "Karta nomi",
   "pay_appointment_card_add": "Karta qo'shish",
   "pay_appointment_card_empty": "Maydon bo'sh bo'lmasin",
-
   "appointment_main_page": "Bandlarim",
   "appointment_upcoming": "Jarayonda",
   "appointment_upcoming_title": "Sizda bandlar yo'q",
@@ -214,7 +199,6 @@
   "appointment_discount_coupons": "Chegirma va kuponlar",
   "appointment_payment_method": "To'lov usuli",
   "appointment_total": "Umumiy summa",
-
   "cancel_appointment": "Bandni bekor qilish",
   "cancel_appointment_are_you_sure": "Siz rostdan xam bekor qilmoqchimisiz?",
   "cancel_appointment_change_my_mind": "Fikrimni o'zgartirish",
@@ -222,7 +206,6 @@
   "cancel_appointment_desctiption": "Qaysi sababga ko'ra bekor qilmoqchisiz",
   "cancel_appointment_confirm": "Xa, bekor qilaman",
   "cancel_appointment_not_want": "Yo'q, bekor qilmayman",
-  
   "specialist_registration_title": "Ma'lumotlaringiz saqlanishiga rozimisiz?",
   "specialist_registration_description": "Rozilik bildirish orqali siz mutaxassis sifatida ro'yxatdan o'tishni tasdiqlaysiz. Agar rozilik bermasangiz, ma'lumotlaringiz saqlanmaydi.",
   "specialist_registration_agree": "Xa, roziman",
@@ -251,7 +234,6 @@
   "sos": "SOS",
   "dtp": "Yo'l-transport hodisasi",
   "my_qr_code": "My QR Code",
-
   "records_title": "Xulosalar",
   "records_seach": "Xizmat qidirish",
   "records_not_found": "Tibbiy xulosalar yo'q",
@@ -260,7 +242,6 @@
   "records_prescription": "Xulosalar",
   "records_record": "Tibbiy xulosa",
   "records_view_doctor_profile": "Shifokor profilini ko'rish",
-
   "profile_language_uz": "Uzbek tili",
   "profile_language_ru": "Rus tili",
   "profile_language_en": "Ingliz tili",
@@ -295,7 +276,6 @@
   "profile_logout_page": "Rostdan chiqmoqchimisiz?",
   "profile_logout_yes": "Chiqish",
   "profile_logout_cancel": "Bekor qilish",
-
   "error_internal_server_title": "Serverdagi ichki xatolik",
   "error_internal_server_subtitle": "U-rent hozirda bu so‘rovni bajara olmaydi. HTTP XATOSI 500.",
   "error_connection_lost_title": "Ulanish uzildi!",
@@ -304,7 +284,6 @@
   "error_pagenot_found_subtitle": "Siz qidirayotgan sahifa mavjud emas",
   "error_try_again": "Qayta urinib ko'ring",
   "error_return_tohome": "Uyga qaytish",
-
   "posts": "Postlar",
   "about": "Haqida",
   "aboutYou": "Siz haqingizda",
@@ -325,30 +304,24 @@
   "search": "Qidirish",
   "notification": "Bildirishnoma",
   "noData": "Ma'lumot yo'q",
-
   "userExists": "Bu foydalanuvchi allaqachon mavjud",
   "well": "Yaxshi",
   "forgotPassword": "Parolni unutdingizmi?",
   "passwordShort": "Parol juda qisqa. U kamida 6 ta belgidan iborat bo‘lishi kerak.",
   "empty": "Bo‘sh bo‘lishi mumkin emas",
   "reset_password_success": "Parol muvaffaqiyatli o'zgartirildi",
-  
   "notification_no_notification": "Bildirishnoma yo'q",
   "notification_no_notification_description": "Sizda xabarnomalar mavjud emas",
   "specialist_status_pending": "Kutilmoqda",
   "specialist_status_approved": "Tasdiqlangan",
-  
   "no_data_title": "Ma'lumot yo'q",
   "no_data_description": "Hech qanday ma'lumot kiritilmagan",
-  
   "chat_not_found_title": "Chat topilmadi",
   "chat_not_found_description": "Siz qidirgan sahifa\nmavjud emas",
-  
   "notification_clear_all": "Barchasini tozalash",
   "notification_clear_all_description": "Barcha bildirishnomalarni tozalashni xohlaysizmi?",
   "notification_clear_all_cancel": "Bekor qilish",
   "notification_clear_all_confirm": "Tozalash",
-  
   "report_title": "Xabar haqida shikoyat",
   "report_description": "Nima uchun ushbu xabar haqida shikoyat qilmoqchisiz?",
   "report_cancel": "Bekor qilish",
@@ -365,7 +338,6 @@
   "report_reason_scam": "Firibgarlik yoki aldash",
   "report_reason_false_info": "Noto'g'ri ma'lumot",
   "report_reason_other": "Boshqa sabab",
-
   "block_user": "Foydalanuvchini bloklash",
   "block_user_title": "Foydalanuvchini bloklash",
   "block_user_message": "Haqiqatan ham {userName} ni bloklamoqchimisiz? Uning xabarlari va postlari endi ko‘rinmaydi.",
@@ -378,7 +350,6 @@
   "unblock_user_confirm": "Blokni yechish",
   "blocked_users": "Bloklangan foydalanuvchilar",
   "no_blocked_users": "Hali hech kimni bloklamagansiz.",
-
   "termsOfUseTitle": "Foydalanish shartlari",
   "termsLastUpdated": "So'nggi yangilanish: 12-noyabr, 2025",
   "termsIntroduction": "MPD ilovasiga xush kelibsiz. Ilovamizdan foydalanish orqali siz ushbu Foydalanish shartlariga rozi bo'lasiz.",
@@ -395,7 +366,6 @@
   "termsLimitationLiabilityTitle": "6. Javobgarlik cheklovi",
   "termsLimitationLiabilityContent": "Hech qanday holatda ham MPD ilovasidan foydalanish natijasida yuzaga kelgan bilvosita, tasodifiy, maxsus, natijaviy yoki jazolovchi zararlar uchun javobgar bo'lmaydi.",
   "termsContactUs": "Agar ushbu Shartlar haqida savollaringiz bo'lsa, iltimos, biz bilan support@mpdinfo.uz orqali bog'laning.",
-
   "profile_following_doctors_empty_title": "Siz hali hech kimni kuzatmaysiz",
   "profile_following_doctors_empty_description": "Shifokorlarni kuzating va ularning xizmatlaridan oson foydalaning",
   "common_loading": "Yuklanmoqda...",
@@ -421,5 +391,22 @@
   "error_no_data_available": "Ma'lumot mavjud emas",
   "error_not_selected": "Tanlanmagan",
   "no_data_available": "Ma'lumot mavjud emas",
-  "not_specified": "Ko'rsatilmagan"
+  "not_specified": "Ko'rsatilmagan",
+  "profile_my_documents": "Mening hujjatlarim",
+  "profile_no_documents": "Hujjatlar mavjud emas",
+  "profile_upload_new_document": "Yangi hujjat yuklash",
+  "profile_diploma": "Diplom",
+  "profile_course_certificate": "Staj hujjatlari (Sertifikat)",
+  "profile_upload_document": "Hujjat yuklash",
+  "profile_document_format_hint": "Hujjat (PDF, JPEG, va h.k.)",
+  "profile_pinfl": "ПИНФЛ",
+  "profile_residence_address": "Yashash manzili",
+  "profile_bio": "Bio",
+  "profile_education": "Ma'lumoti",
+  "education_high": "Oliy",
+  "education_medium_special": "O'rta maxsus",
+  "education_medium": "O'rta",
+  "education_unfinished_high": "Tugallanmagan oliy",
+  "education_none": "Yo'q",
+  "profile_patronymic": "Otasini ismi"
 }

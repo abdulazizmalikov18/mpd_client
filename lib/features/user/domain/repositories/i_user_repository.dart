@@ -11,6 +11,8 @@ import 'package:mpd_client/features/user/data/models/user_info_model.dart';
 import 'package:mpd_client/features/user/data/models/user_info_update_model.dart';
 import 'package:mpd_client/features/user/data/models/user_records_model.dart';
 import 'package:mpd_client/features/user/data/models/user_subscriptions_model.dart';
+import 'package:mpd_client/features/user/data/models/user_document_model.dart';
+import 'package:mpd_client/features/user/data/models/user_document_post_model.dart';
 
 abstract class IUserRepository {
   Future<Either<Failure, UserInfoModel>> getUserInfo();
@@ -42,4 +44,6 @@ abstract class IUserRepository {
     String? query,
   });
   Future<Either<Failure, int>> isAddedSpecialist();
+  Future<Either<Failure, GenericPagination<UserDocumentModel>>> getUserDocuments({int? limit, int? offset});
+  Future<Either<Failure, bool>> postUserDocument(UserDocumentPostModel model);
 }

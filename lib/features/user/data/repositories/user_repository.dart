@@ -17,6 +17,8 @@ import 'package:mpd_client/features/user/data/models/user_info_update_model.dart
 import 'package:mpd_client/features/user/data/models/user_records_model.dart';
 import 'package:mpd_client/features/user/data/models/user_subscriptions_model.dart';
 import 'package:mpd_client/features/user/domain/repositories/i_user_repository.dart';
+import 'package:mpd_client/features/user/data/models/user_document_model.dart';
+import 'package:mpd_client/features/user/data/models/user_document_post_model.dart';
 
 class UserRepository implements IUserRepository {
   final UserRemoteDataSource remoteDataSource;
@@ -231,6 +233,37 @@ class UserRepository implements IUserRepository {
   Future<Either<Failure, List<SpecialistModel>>> getSpecialist() async {
     try {
       final response = await remoteDataSource.getSpecialist();
+      return Right(response);
+    } on DioException {
+      return Left(const DioFailure());
+    } on ParsingException catch (e) {
+      return Left(ParsingFailure(message: e.message));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
+    }
+  }
+
+  @override
+  Future<Either<Failure, GenericPagination<UserDocumentModel>>> getUserDocuments({
+    int? limit,
+    int? offset,
+  }) async {
+    try {
+      final response = await remoteDataSource.getUserDocuments(limit: limit, offset: offset);
+      return Right(response);
+    } on DioException {
+      return Left(const DioFailure());
+    } on ParsingException catch (e) {
+      return Left(ParsingFailure(message: e.message));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> postUserDocument(UserDocumentPostModel model) async {
+    try {
+      final response = await remoteDataSource.postUserDocument(model);
       return Right(response);
     } on DioException {
       return Left(const DioFailure());

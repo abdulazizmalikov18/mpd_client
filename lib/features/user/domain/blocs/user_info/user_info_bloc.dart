@@ -18,6 +18,8 @@ import 'package:mpd_client/features/user/data/models/specialist_position_model.d
 import 'package:mpd_client/features/user/data/models/user_image_update_model.dart';
 import 'package:mpd_client/features/user/data/models/user_info_model.dart';
 import 'package:mpd_client/features/user/data/models/user_info_update_model.dart';
+import 'package:mpd_client/features/user/data/models/user_document_model.dart';
+import 'package:mpd_client/features/user/data/models/user_document_post_model.dart';
 import 'package:mpd_client/features/user/data/repositories/user_repository.dart';
 
 part 'user_info_event.dart';
@@ -41,7 +43,8 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
     on<GetSpecialistCat>(_onGetSpecialistCat);
     on<GetSpecCategory>(_onGetSpecCategory);
     on<GetSpecialistUser>(_onGetSpecialist);
-    on<GetDocumentEvent>(_ongetDocmentEvent);
+    on<GetDocumentEvent>(_onGetDocumentEvent);
+    on<CreateDocumentEvent>(_onCreateDocumentEvent);
     on<PostSpecialist>(_onPostSpecialist);
     on<UpdateUserBirthEvent>((event, emit) {});
     on<IsAddedSpecialist>((event, emit) async {
@@ -365,12 +368,18 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
     final result = await _userRepository.updateUserInfo(
       UserInfoUpdateModel(
         lastname: event.lastname,
+        surname: event.surname,
         name: event.name,
         birthday: event.birthday,
         gender: event.gender.name,
         region: state.region?.id,
         mainCat: state.mainCat?.id,
         bio: event.bio,
+        diplom: event.diplom,
+        pinfl: event.pinfl,
+        course: event.course,
+        education: event.education,
+        currentPlace: event.currentPlace,
       ),
     );
     if (result.isRight) {
@@ -398,5 +407,41 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
     }
   }
 
-  void _ongetDocmentEvent(GetDocumentEvent event, Emitter emit) async {}
+  void _onGetDocumentEvent(
+    GetDocumentEvent event,
+    Emitter<UserInfoState> emit,
+  ) async {
+    emit(state.copyWith(statusDocs: FormzSubmissionStatus.inProgress));
+    final response = await _userRepository.getUserDocuments(limit: 100);
+    if (response.isRight) {
+      emit(
+        state.copyWith(
+          documents: response.right.results,
+          statusDocs: FormzSubmissionStatus.success,
+        ),
+      );
+    } else {
+      emit(state.copyWith(statusDocs: FormzSubmissionStatus.failure));
+    }
+  }
+
+  void _onCreateDocumentEvent(
+    CreateDocumentEvent event,
+    Emitter<UserInfoState> emit,
+  ) async {
+    emit(state.copyWith(statusDocCreate: FormzSubmissionStatus.inProgress));
+    final model = UserDocumentPostModel(
+      filePath: event.filePath,
+      description: event.description,
+    );
+    final response = await _userRepository.postUserDocument(model);
+    if (response.isRight) {
+      emit(state.copyWith(statusDocCreate: FormzSubmissionStatus.success));
+      event.onSuccess();
+      add(const GetDocumentEvent());
+    } else {
+      emit(state.copyWith(statusDocCreate: FormzSubmissionStatus.failure));
+      event.onError();
+    }
+  }
 }

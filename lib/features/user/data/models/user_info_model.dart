@@ -27,6 +27,11 @@ class UserInfoModel extends Equatable {
     this.qrcode,
     this.hasPassword,
     this.backgroundImage,
+    this.diplom,
+    this.pinfl,
+    this.course,
+    this.education,
+    this.currentPlace,
   });
 
   final int? id;
@@ -47,6 +52,11 @@ class UserInfoModel extends Equatable {
   final String? qrcode;
   final bool? hasPassword;
   final String? backgroundImage;
+  final String? diplom;
+  final String? pinfl;
+  final String? course;
+  final String? education;
+  final String? currentPlace;
 
   // ✅ MUHIM: Barcha fieldlarni props'ga qo'shish
   @override
@@ -69,6 +79,11 @@ class UserInfoModel extends Equatable {
     qrcode,
     hasPassword,
     backgroundImage,
+    diplom,
+    pinfl,
+    course,
+    education,
+    currentPlace,
   ];
 
   factory UserInfoModel.fromJson(Map<String, dynamic> json) => UserInfoModel(
@@ -94,6 +109,11 @@ class UserInfoModel extends Equatable {
     qrcode: json["qrcode"],
     hasPassword: json["has_password"],
     backgroundImage: json["background_image"],
+    diplom: json["diplom"],
+    pinfl: json["pinfl"],
+    course: json["course"]?.toString(),
+    education: json["education"],
+    currentPlace: json["current_place"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -117,6 +137,11 @@ class UserInfoModel extends Equatable {
     "qrcode": qrcode,
     "has_password": hasPassword,
     "background_image": backgroundImage,
+    "diplom": diplom,
+    "pinfl": pinfl,
+    "course": course,
+    "education": education,
+    "current_place": currentPlace,
   };
 
   // ✅ copyWith metodi qo'shish (kerak bo'lsa)
@@ -139,6 +164,11 @@ class UserInfoModel extends Equatable {
     String? qrcode,
     bool? hasPassword,
     String? backgroundImage,
+    String? diplom,
+    String? pinfl,
+    String? course,
+    String? education,
+    String? currentPlace,
   }) {
     return UserInfoModel(
       id: id ?? this.id,
@@ -159,6 +189,11 @@ class UserInfoModel extends Equatable {
       qrcode: qrcode ?? this.qrcode,
       hasPassword: hasPassword ?? this.hasPassword,
       backgroundImage: backgroundImage ?? this.backgroundImage,
+      diplom: diplom ?? this.diplom,
+      pinfl: pinfl ?? this.pinfl,
+      course: course ?? this.course,
+      education: education ?? this.education,
+      currentPlace: currentPlace ?? this.currentPlace,
     );
   }
 }

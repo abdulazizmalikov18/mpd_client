@@ -24,6 +24,9 @@ class UserInfoState extends Equatable {
   final List<SpecialistCatModel> specialistCat;
   final List<SpecialistCategoryModel> specialistCategory;
   final List<SpecialistModel> specailistModel;
+  final List<UserDocumentModel> documents;
+  final FormzSubmissionStatus statusDocs;
+  final FormzSubmissionStatus statusDocCreate;
 
   const UserInfoState({
     this.status = FormzSubmissionStatus.initial,
@@ -48,6 +51,9 @@ class UserInfoState extends Equatable {
     this.specialistCat = const [],
     this.specialistCategory = const [],
     this.specailistModel = const [],
+    this.documents = const [],
+    this.statusDocs = FormzSubmissionStatus.initial,
+    this.statusDocCreate = FormzSubmissionStatus.initial,
   });
 
   @override
@@ -74,6 +80,9 @@ class UserInfoState extends Equatable {
     specialistCat,
     specialistCategory,
     specailistModel,
+    documents,
+    statusDocs,
+    statusDocCreate,
   ];
 
   UserInfoState copyWith({
@@ -99,6 +108,9 @@ class UserInfoState extends Equatable {
     List<SpecialistCatModel>? specialistCat,
     List<SpecialistCategoryModel>? specialistCategory,
     List<SpecialistModel>? specailistModel,
+    List<UserDocumentModel>? documents,
+    FormzSubmissionStatus? statusDocs,
+    FormzSubmissionStatus? statusDocCreate,
   }) {
     return UserInfoState(
       userInfo: userInfo ?? this.userInfo,
@@ -123,6 +135,9 @@ class UserInfoState extends Equatable {
       specialistCat: specialistCat ?? this.specialistCat,
       specialistCategory: specialistCategory ?? this.specialistCategory,
       specailistModel: specailistModel ?? this.specailistModel,
+      documents: documents ?? this.documents,
+      statusDocs: statusDocs ?? this.statusDocs,
+      statusDocCreate: statusDocCreate ?? this.statusDocCreate,
     );
   }
 }

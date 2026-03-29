@@ -14,6 +14,8 @@ import 'package:mpd_client/features/user/data/models/user_info_update_model.dart
 import 'package:mpd_client/features/user/data/models/user_subscriptions_model.dart';
 
 import '../models/user_image_update_model.dart';
+import '../models/user_document_model.dart';
+import '../models/user_document_post_model.dart';
 
 abstract class IUserRemoteDataSource {
   Future<UserInfoModel> getUserInfo();
@@ -45,6 +47,8 @@ abstract class IUserRemoteDataSource {
   Future<GenericPagination<SpecialistCategoryModel>> getSpecialistCategory();
   Future<bool> postSpecialist(SpecAddModel model);
   Future<int> isAddedSpecialist();
+  Future<GenericPagination<UserDocumentModel>> getUserDocuments({int? limit, int? offset});
+  Future<bool> postUserDocument(UserDocumentPostModel model);
   // Future<Subscription>> subscribeToDr(String username);
 }
 
@@ -366,4 +370,58 @@ class UserRemoteDataSource implements IUserRemoteDataSource {
   //   }
   //   return ResponseHandler()..data = subscription;
   // }
+
+  @override
+  Future<GenericPagination<UserDocumentModel>> getUserDocuments({
+    int? limit,
+    int? offset,
+  }) {
+    return _handle.apiControl(
+      request: () {
+        return _client.get(
+          "/UMS/api/v1.0/account/media/documents/",
+          queryParameters: {
+            "limit": ?limit,
+            "offset": ?offset,
+          },
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
+        );
+      },
+      body: (response) {
+        return GenericPagination.fromJson(
+          response,
+          (p0) => UserDocumentModel.fromJson(p0 as Map<String, dynamic>),
+        );
+      },
+    );
+  }
+
+  @override
+  Future<bool> postUserDocument(UserDocumentPostModel model) async {
+    final data = await model.toFormData();
+    return _handle.apiControl(
+      request: () {
+        return _client.post(
+          "/UMS/api/v1.0/account/media/documents/",
+          data: data,
+          options: Options(
+            headers: {
+              if (StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty)
+                'Authorization':
+                    'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}',
+            },
+          ),
+        );
+      },
+      body: (response) {
+        return true;
+      },
+    );
+  }
 }

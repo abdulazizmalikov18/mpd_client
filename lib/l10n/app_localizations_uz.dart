@@ -1249,4 +1249,55 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get not_specified => 'Ko\'rsatilmagan';
+
+  @override
+  String get profile_my_documents => 'Mening hujjatlarim';
+
+  @override
+  String get profile_no_documents => 'Hujjatlar mavjud emas';
+
+  @override
+  String get profile_upload_new_document => 'Yangi hujjat yuklash';
+
+  @override
+  String get profile_diploma => 'Diplom';
+
+  @override
+  String get profile_course_certificate => 'Staj hujjatlari (Sertifikat)';
+
+  @override
+  String get profile_upload_document => 'Hujjat yuklash';
+
+  @override
+  String get profile_document_format_hint => 'Hujjat (PDF, JPEG, va h.k.)';
+
+  @override
+  String get profile_pinfl => 'ПИНФЛ';
+
+  @override
+  String get profile_residence_address => 'Yashash manzili';
+
+  @override
+  String get profile_bio => 'Bio';
+
+  @override
+  String get profile_education => 'Ma\'lumoti';
+
+  @override
+  String get education_high => 'Oliy';
+
+  @override
+  String get education_medium_special => 'O\'rta maxsus';
+
+  @override
+  String get education_medium => 'O\'rta';
+
+  @override
+  String get education_unfinished_high => 'Tugallanmagan oliy';
+
+  @override
+  String get education_none => 'Yo\'q';
+
+  @override
+  String get profile_patronymic => 'Otasini ismi';
 }

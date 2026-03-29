@@ -16,7 +16,6 @@
   "presentation_four_page": "Экстренная помощь",
   "presentation_four_page_description": "Быстрый доступ к экстренным службам.",
   "presentation_get_started": "Начать",
-
   "login_text": "С возвращением!\nВойдите в аккаунт",
   "login_phone": "Телефон или логин",
   "login_password": "Пароль",
@@ -27,11 +26,9 @@
   "login_register": "Регистрация",
   "login_error_account": "Пользователь не найден",
   "login_error": "Неверные данные",
-
   "restore_account": "Восстановление аккаунта",
   "restore_phone": "Введите телефон",
   "restore_button_restore": "Восстановить",
-
   "register_title": "Добро пожаловать в MPD!\nЗарегистрируйтесь",
   "register_phone": "Телефон",
   "register_terms_of_use": "Я согласен с условиями",
@@ -40,13 +37,11 @@
   "register_privacy_policy": "Политика конфиденциальности",
   "register_agree_privacy_and_policy": "Я согласен",
   "register_error_number_format": "Неверный номер",
-
   "register_verify_code": "Код подтверждения",
   "register_verify_code_description": "Введите 6-значный код из SMS",
   "register_verify_code_sent_again": "Отправить снова",
   "register_verify_code_from_message": "Вставить из SMS",
   "register_verify_code_error_code_write": "Неверный код",
-
   "register_create_password": "Создайте пароль",
   "register_new_password": "Новый пароль",
   "register_new_password_confirm": "Подтвердите пароль",
@@ -54,7 +49,6 @@
   "register_error_code_password_missmatch": "Пароли не совпадают",
   "register_error_code_password_cant_empty": "Поле не может быть пустым",
   "register_error_code_password_mistake": "Пароль должен быть от 8 символов",
-
   "register_user_info": "Заполните профиль",
   "register_login": "Логин",
   "register_firstname": "Имя",
@@ -76,12 +70,10 @@
   "register_error_code_text_cant_empty": "Поле не может быть пустым",
   "register_error_code_text_short": "Минимум 6 символов",
   "register_error_code_username_exist": "Логин уже занят!",
-
   "navbar_home": "Главная",
   "navbar_Doctor": "Врачи",
   "navbar_Appointment": "Записи",
   "navbar_profile": "Профиль",
-
   "lenth_hello": "Привет",
   "lenth_likes": "Лайки",
   "lenth_comment": "Комментарии",
@@ -101,13 +93,11 @@
   "lenth_days_ago": "дня назад",
   "lenth_hours_ago": "часа назад",
   "lenth_minutes_ago": "минуты назад",
-
   "lenth_create_post": "Создать пост",
   "lenth_image_add": "Добавить фото/видео",
   "lenth_post_description": "Описание",
   "lenth_postwrite": "Написать что-то...",
   "lenth_publish_post": "Опубликовать",
-
   "search_doctor": "Найти врача",
   "search_doctor_loading": "Загрузка...",
   "search_doctor_showing": "Результаты поиска",
@@ -122,7 +112,6 @@
   "search_filter_free": "Бесплатно",
   "search_filter_reset": "Сбросить",
   "search_filter_apply": "Применить",
-
   "book_doctor_follow": "Подписаться",
   "book_doctor_unfollow": "Отписаться",
   "book_doctor_book": "Записаться",
@@ -155,9 +144,7 @@
   "book_doctor_reviews_cancel_subtitle": "Запись отменена. Выберите новое время.",
   "book_doctor_reviews_cancel_first_button": "Перезаписаться",
   "book_doctor_reviews_cancel_second_button": "Выбрать другое",
-
   "select_the_map": "Выбрать на карте",
-
   "book_appointment_page": "Выбор услуги",
   "book_appointment_select": "Выберите нужную услугу",
   "book_appointment_selected": "услуг выбрано",
@@ -172,7 +159,6 @@
   "book_appointment_comment_write": "Добавить примечание",
   "book_appointment_time_error": "Время занято",
   "book_appointment_date_error": "В этот день врач не работает",
-
   "pay_appointment_page": "Оплата",
   "pay_appointment_page_title": "Способ оплаты",
   "pay_appointment_payme_subscribe": "Оплата картой",
@@ -186,7 +172,6 @@
   "pay_appointment_card_name": "Имя владельца",
   "pay_appointment_card_add": "Добавить",
   "pay_appointment_card_empty": "Поле не может быть пустым",
-
   "appointment_main_page": "Мои записи",
   "appointment_upcoming": "Предстоящие",
   "appointment_upcoming_title": "Нет записей",
@@ -214,7 +199,6 @@
   "appointment_discount_coupons": "Скидки и купоны",
   "appointment_payment_method": "Способ оплаты",
   "appointment_total": "Итого",
-
   "cancel_appointment": "Отменить запись",
   "cancel_appointment_are_you_sure": "Вы уверены?",
   "cancel_appointment_change_my_mind": "Передумал",
@@ -222,7 +206,6 @@
   "cancel_appointment_desctiption": "Причина отмены",
   "cancel_appointment_confirm": "Да, отменить",
   "cancel_appointment_not_want": "Нет, оставить",
-  
   "my_qr_code": "Мой QR-код",
   "sos": "SOS",
   "dtp": "ДТП",
@@ -251,9 +234,6 @@
   "no_posts": "Нет постов",
   "refresh": "Обновить",
   "notAvailable": "--",
-  "sos": "SOS",
-  "dtp": "ДТП",
-
   "records_title": "Медкарта",
   "records_seach": "Поиск записей",
   "records_not_found": "Записей нет",
@@ -262,7 +242,6 @@
   "records_prescription": "Рецепты",
   "records_record": "Записи",
   "records_view_doctor_profile": "Профиль врача",
-
   "profile_language_uz": "Узбекский",
   "profile_language_ru": "Русский",
   "profile_language_en": "Английский",
@@ -297,7 +276,6 @@
   "profile_logout_page": "Выйти из аккаунта?",
   "profile_logout_yes": "Выйти",
   "profile_logout_cancel": "Отмена",
-
   "error_internal_server_title": "Ошибка сервера",
   "error_internal_server_subtitle": "MPD временно недоступен. Попробуйте позже.",
   "error_connection_lost_title": "Нет интернета",
@@ -306,7 +284,6 @@
   "error_pagenot_found_subtitle": "Запрошенная страница не существует",
   "error_try_again": "Попробовать снова",
   "error_return_tohome": "На главную",
-
   "posts": "Посты",
   "about": "О себе",
   "aboutYou": "О вас",
@@ -327,14 +304,12 @@
   "search": "Поиск",
   "notification": "Уведомление",
   "noData": "Нет данных",
-
   "userExists": "Этот пользователь уже существует",
   "well": "Хорошо",
   "forgotPassword": "Забыли пароль?",
   "passwordShort": "Пароль слишком короткий. Минимум 6 символов.",
   "empty": "Поле не может быть пустым",
   "reset_password_success": "Пароль успешно изменен",
-  
   "notification_no_notification": "Нет уведомлений",
   "notification_no_notification_description": "У вас нет уведомлений",
   "no_data_title": "Нет данных",
@@ -345,7 +320,6 @@
   "notification_clear_all_description": "Вы уверены, что хотите очистить все уведомления?",
   "notification_clear_all_cancel": "Отмена",
   "notification_clear_all_confirm": "Очистить все",
-  
   "report_title": "Пожаловаться на сообщение",
   "report_description": "Почему вы жалуетесь на это сообщение?",
   "report_cancel": "Отмена",
@@ -362,7 +336,6 @@
   "report_reason_scam": "Мошенничество или обман",
   "report_reason_false_info": "Ложная информация",
   "report_reason_other": "Другая причина",
-
   "block_user": "Заблокировать",
   "block_user_title": "Заблокировать пользователя",
   "block_user_message": "Вы уверены, что хотите заблокировать {userName}? Вы больше не увидите сообщения и публикации этого пользователя.",
@@ -375,10 +348,8 @@
   "unblock_user_confirm": "Разблокировать",
   "blocked_users": "Заблокированные",
   "no_blocked_users": "Вы ещё никого не заблокировали.",
-
   "chat_not_found_title": "Чат не найден",
   "chat_not_found_description": "Страница, которую вы ищете,\nне существует",
-
   "termsOfUseTitle": "Условия использования",
   "termsLastUpdated": "Последнее обновление: 12 ноября 2025",
   "termsIntroduction": "Добро пожаловать в MPD. Используя наше приложение, вы соглашаетесь с настоящими Условиями использования.",
@@ -395,7 +366,6 @@
   "termsLimitationLiabilityTitle": "6. Ограничение ответственности",
   "termsLimitationLiabilityContent": "Ни при каких обстоятельствах MPD не несет ответственности за любые косвенные, случайные, специальные, косвенные или карательные убытки, возникшие в результате использования вами приложения.",
   "termsContactUs": "Если у вас есть вопросы по этим Условиям, пожалуйста, свяжитесь с нами по адресу support@mpdinfo.uz",
-
   "profile_following_doctors_empty_title": "Вы еще ни на кого не подписаны",
   "profile_following_doctors_empty_description": "Подпишитесь на врачей и легко пользуйтесь их услугами",
   "common_loading": "Загрузка...",
@@ -421,5 +391,22 @@
   "error_no_data_available": "Нет доступных данных",
   "error_not_selected": "Не выбрано",
   "no_data_available": "Нет доступных данных",
-  "not_specified": "Не указано"
+  "not_specified": "Не указано",
+  "profile_my_documents": "Мои документы",
+  "profile_no_documents": "Документы отсутствуют",
+  "profile_upload_new_document": "Загрузить новый документ",
+  "profile_diploma": "Диплом",
+  "profile_course_certificate": "Документ о стаже (Сертификат)",
+  "profile_upload_document": "Загрузить документ",
+  "profile_document_format_hint": "Документ (PDF, JPEG и т.д.)",
+  "profile_pinfl": "ПИНФЛ",
+  "profile_residence_address": "Адрес проживания",
+  "profile_bio": "Био",
+  "profile_education": "Образование",
+  "education_high": "Высшее",
+  "education_medium_special": "Среднее специальное",
+  "education_medium": "Среднее",
+  "education_unfinished_high": "Неоконченное высшее",
+  "education_none": "Нет",
+  "profile_patronymic": "Отчество"
 }

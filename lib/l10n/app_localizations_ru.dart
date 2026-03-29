@@ -1230,4 +1230,55 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get not_specified => 'Не указано';
+
+  @override
+  String get profile_my_documents => 'Мои документы';
+
+  @override
+  String get profile_no_documents => 'Документы отсутствуют';
+
+  @override
+  String get profile_upload_new_document => 'Загрузить новый документ';
+
+  @override
+  String get profile_diploma => 'Диплом';
+
+  @override
+  String get profile_course_certificate => 'Документ о стаже (Сертификат)';
+
+  @override
+  String get profile_upload_document => 'Загрузить документ';
+
+  @override
+  String get profile_document_format_hint => 'Документ (PDF, JPEG и т.д.)';
+
+  @override
+  String get profile_pinfl => 'ПИНФЛ';
+
+  @override
+  String get profile_residence_address => 'Адрес проживания';
+
+  @override
+  String get profile_bio => 'Био';
+
+  @override
+  String get profile_education => 'Образование';
+
+  @override
+  String get education_high => 'Высшее';
+
+  @override
+  String get education_medium_special => 'Среднее специальное';
+
+  @override
+  String get education_medium => 'Среднее';
+
+  @override
+  String get education_unfinished_high => 'Неоконченное высшее';
+
+  @override
+  String get education_none => 'Нет';
+
+  @override
+  String get profile_patronymic => 'Отчество';
 }

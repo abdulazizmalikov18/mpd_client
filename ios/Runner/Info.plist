@@ -70,6 +70,10 @@
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>This app accesses your photo library so you can upload profile images or
 			health-related documents and reports.</string>
+		<key>UISupportsDocumentBrowser</key>
+		<true/>
+		<key>LSSupportsOpeningDocumentsInPlace</key>
+		<true/>
 		<key>UIApplicationSceneManifest</key>
 		<dict>
 			<key>UIApplicationSupportsMultipleScenes</key>

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mpd_client/app/app_colors.dart';
+import 'package:mpd_client/app/app_images.dart';
 import 'package:mpd_client/app/colors.dart';
 import 'package:mpd_client/features/chat/domain/models/chat_group.dart';
 
@@ -44,7 +45,10 @@ class WUserChatButton extends StatelessWidget {
             CircleAvatar(
               radius: 28,
               backgroundColor: mainBlue.withValues(alpha: 0.1),
-              backgroundImage: CachedNetworkImageProvider(group.avatar),
+              backgroundImage: CachedNetworkImageProvider(
+                AppImages.networkAvatar,
+              ),
+              foregroundImage: CachedNetworkImageProvider(group.avatar),
             ),
             Align(
               alignment: Alignment.bottomRight,

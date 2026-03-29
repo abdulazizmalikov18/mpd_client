@@ -35,6 +35,11 @@ class Formatters {
   static final pnflFormat = FilteringTextInputFormatter.allow(
     RegExp(r'[+0-9]'),
   );
+  static final pnflFormat2 = MaskTextInputFormatter(
+    mask: '##############',
+    filter: {"#": RegExp(r'[0-9]')},
+    type: MaskAutoCompletionType.lazy,
+  );
   static final innFormat = MaskTextInputFormatter(
     mask: '#########',
     filter: {"#": RegExp(r'[0-9]')},

@@ -53,19 +53,31 @@ class UpdateUserBirthEvent extends UserInfoEvent {
 
 class UpdateUserProfessionEvent extends UserInfoEvent {
   final String lastname;
+  final String surname;
   final String name;
   final String birthday;
   final String bio;
   final Gender gender;
+  final String? diplom;
+  final String? pinfl;
+  final String? course;
+  final String? education;
+  final String? currentPlace;
   final Function onSuccess;
   final Function onError;
 
   const UpdateUserProfessionEvent({
     required this.lastname,
+    required this.surname,
     required this.name,
     required this.birthday,
     required this.gender,
     required this.bio,
+    this.diplom,
+    this.pinfl,
+    this.course,
+    this.education,
+    this.currentPlace,
     required this.onSuccess,
     required this.onError,
   });
@@ -105,7 +117,17 @@ class HasChangesEvent extends UserInfoEvent {
 }
 
 class CreateDocumentEvent extends UserInfoEvent {
-  const CreateDocumentEvent();
+  final String filePath;
+  final String description;
+  final Function onSuccess;
+  final Function onError;
+
+  const CreateDocumentEvent({
+    required this.filePath,
+    required this.description,
+    required this.onSuccess,
+    required this.onError,
+  });
 }
 
 class UpdateDocumentEvent extends UserInfoEvent {

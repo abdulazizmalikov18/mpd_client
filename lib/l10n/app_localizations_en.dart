@@ -1231,4 +1231,55 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get not_specified => 'Not specified';
+
+  @override
+  String get profile_my_documents => 'My documents';
+
+  @override
+  String get profile_no_documents => 'No documents available';
+
+  @override
+  String get profile_upload_new_document => 'Upload new document';
+
+  @override
+  String get profile_diploma => 'Diploma';
+
+  @override
+  String get profile_course_certificate => 'Course certificate';
+
+  @override
+  String get profile_upload_document => 'Upload document';
+
+  @override
+  String get profile_document_format_hint => 'Document (PDF, JPEG, etc.)';
+
+  @override
+  String get profile_pinfl => 'PINFL';
+
+  @override
+  String get profile_residence_address => 'Residence address';
+
+  @override
+  String get profile_bio => 'Bio';
+
+  @override
+  String get profile_education => 'Education';
+
+  @override
+  String get education_high => 'Higher';
+
+  @override
+  String get education_medium_special => 'Secondary special';
+
+  @override
+  String get education_medium => 'Secondary';
+
+  @override
+  String get education_unfinished_high => 'Incomplete higher';
+
+  @override
+  String get education_none => 'None';
+
+  @override
+  String get profile_patronymic => 'Patronymic';
 }

@@ -147,38 +147,27 @@ class ChatVMController {
 
   // ─────────────────────────── Fayl tanlash ───────────────────────────
 
-  /// Fayl tanlash:
-  /// - Simulatorda: ImagePicker (FilePicker simulatorda ishlamaydi)
-  /// - Real qurilmada: FilePicker
+  /// Fayl tanlash
   void sendMedia(BuildContext context, String slugName) async {
     if (_isPickerBusy) return;
     _pickerCompleter = Completer<void>();
 
     try {
-      final isPhysical = await _isPhysicalDevice();
       final hasPermission = await _requestPermission(context);
       if (!hasPermission) return;
       if (!context.mounted) return;
 
       await Future.delayed(const Duration(milliseconds: 150));
 
-      if (!isPhysical) {
-        // ✅ SIMULYATOR: FilePicker ishlamaydi, ImagePicker ishlatamiz
-        Log.w("Simulyator: FilePicker o'rniga ImagePicker ishlatilmoqda.");
-        final XFile? result = await ImagePicker().pickMedia();
-        if (result != null) {
-          _addFile(File(result.path));
-        }
-      } else {
-        // ✅ REAL QURILMA: FilePicker — faqat bitta fayl
-        final result = await FilePicker.platform.pickFiles(
-          type: FileType.any,
-          allowMultiple: false,
-        );
-        if (result != null && result.files.isNotEmpty) {
-          final path = result.files.first.path;
-          if (path != null) _addFile(File(path));
-        }
+      // ✅ Har doim FilePicker ishlatamiz
+      final result = await FilePicker.platform.pickFiles(
+        type: FileType.any,
+        allowMultiple: false,
+      );
+
+      if (result != null && result.files.isNotEmpty) {
+        final path = result.files.first.path;
+        if (path != null) _addFile(File(path));
       }
     } on PlatformException catch (e) {
       if (e.code == 'multiple_request') {
